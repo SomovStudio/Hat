@@ -64,7 +64,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 109);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(459, 378);
+            this.panel2.Size = new System.Drawing.Size(509, 377);
             this.panel2.TabIndex = 8;
             // 
             // groupBox1
@@ -75,7 +75,7 @@
             this.groupBox1.Controls.Add(this.richTextBox1);
             this.groupBox1.Location = new System.Drawing.Point(12, 81);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(435, 199);
+            this.groupBox1.Size = new System.Drawing.Size(485, 198);
             this.groupBox1.TabIndex = 17;
             this.groupBox1.TabStop = false;
             // 
@@ -87,7 +87,7 @@
             this.richTextBox1.Location = new System.Drawing.Point(3, 16);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.ReadOnly = true;
-            this.richTextBox1.Size = new System.Drawing.Size(429, 180);
+            this.richTextBox1.Size = new System.Drawing.Size(479, 179);
             this.richTextBox1.TabIndex = 1;
             this.richTextBox1.Text = resources.GetString("richTextBox1.Text");
             // 
@@ -194,7 +194,7 @@
             this.label2.ForeColor = System.Drawing.Color.MediumSlateBlue;
             this.label2.Location = new System.Drawing.Point(0, 76);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(459, 33);
+            this.label2.Size = new System.Drawing.Size(509, 33);
             this.label2.TabIndex = 7;
             this.label2.Text = "Somov Studio";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -207,7 +207,7 @@
             this.label1.Image = ((System.Drawing.Image)(resources.GetObject("label1.Image")));
             this.label1.Location = new System.Drawing.Point(0, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(459, 76);
+            this.label1.Size = new System.Drawing.Size(509, 76);
             this.label1.TabIndex = 6;
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -215,11 +215,12 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(459, 487);
+            this.ClientSize = new System.Drawing.Size(509, 486);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "AboutForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "О программе Hat";

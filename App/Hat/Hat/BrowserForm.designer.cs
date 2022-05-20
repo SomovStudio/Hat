@@ -374,8 +374,8 @@
             // 
             this.оПрограммеCrackerToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("оПрограммеCrackerToolStripMenuItem.Image")));
             this.оПрограммеCrackerToolStripMenuItem.Name = "оПрограммеCrackerToolStripMenuItem";
-            this.оПрограммеCrackerToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
-            this.оПрограммеCrackerToolStripMenuItem.Text = "О программе Cracker";
+            this.оПрограммеCrackerToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.оПрограммеCrackerToolStripMenuItem.Text = "О программе Hat";
             this.оПрограммеCrackerToolStripMenuItem.Click += new System.EventHandler(this.оПрограммеCrackerToolStripMenuItem_Click);
             // 
             // statusStrip1
@@ -1597,7 +1597,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "BrowserForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Hat";
+            this.Text = "Hat (version 1.0.0)";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.BrowserForm_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.BrowserForm_FormClosed);

@@ -21,8 +21,6 @@ namespace Hat
     public static class Config
     {
         public static BrowserForm browserForm;
-        public static IntPtr consoleHandle;
-
 
         public static bool commandLineMode = false;         // флаг показывающий запуск приложения из командной строки
         public static string projectPath = "(не открыть)";  // полный путь к папке проекта
@@ -37,7 +35,7 @@ namespace Hat
             "HatFramework.dll",
             "Microsoft.Web.WebView2.Core.dll",
             "Microsoft.Web.WebView2.WinForms.dll",
-            "Microsoft.Web.WebView2.Wpf.dll",
+            //"Microsoft.Web.WebView2.Wpf.dll",
             "Newtonsoft.Json.dll",
             "System.dll",
             "System.ComponentModel.DataAnnotations.dll",

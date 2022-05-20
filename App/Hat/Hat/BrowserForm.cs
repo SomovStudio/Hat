@@ -907,9 +907,12 @@ namespace Hat
         {
             try
             {
-                Config.selectName = treeViewProject.SelectedNode.Text;
-                Config.selectValue = treeViewProject.SelectedNode.Name;
-                fileOpen();
+                if (treeViewProject.SelectedNode != null)
+                {
+                    Config.selectName = treeViewProject.SelectedNode.Text;
+                    Config.selectValue = treeViewProject.SelectedNode.Name;
+                    fileOpen();
+                }
             }
             catch (Exception ex)
             {
@@ -921,9 +924,12 @@ namespace Hat
         {
             try
             {
-                Config.selectName = treeViewProject.SelectedNode.Text;
-                Config.selectValue = treeViewProject.SelectedNode.Name;
-                toolStripStatusLabelProjectFolderFile.Text = Config.selectName;
+                if (treeViewProject.SelectedNode != null)
+                { 
+                    Config.selectName = treeViewProject.SelectedNode.Text;
+                    Config.selectValue = treeViewProject.SelectedNode.Name;
+                    toolStripStatusLabelProjectFolderFile.Text = Config.selectName;
+                }
             }
             catch (Exception ex)
             {
