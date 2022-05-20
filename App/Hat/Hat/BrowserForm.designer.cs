@@ -805,10 +805,11 @@
             // 
             this.imageListProject.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageListProject.ImageStream")));
             this.imageListProject.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageListProject.Images.SetKeyName(0, "folder.png");
+            this.imageListProject.Images.SetKeyName(0, "folder_black.png");
             this.imageListProject.Images.SetKeyName(1, "page_white_csharp.png");
             this.imageListProject.Images.SetKeyName(2, "page_white_text.png");
             this.imageListProject.Images.SetKeyName(3, "page_gear.png");
+            this.imageListProject.Images.SetKeyName(4, "folder.png");
             // 
             // toolStripProject
             // 
@@ -958,7 +959,7 @@
             // 
             this.создатьПапкуToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("создатьПапкуToolStripMenuItem.Image")));
             this.создатьПапкуToolStripMenuItem.Name = "создатьПапкуToolStripMenuItem";
-            this.создатьПапкуToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
+            this.создатьПапкуToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.создатьПапкуToolStripMenuItem.Text = "Создать папку";
             this.создатьПапкуToolStripMenuItem.Click += new System.EventHandler(this.создатьПапкуToolStripMenuItem_Click);
             // 
@@ -966,7 +967,7 @@
             // 
             this.удалитьПапкуToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("удалитьПапкуToolStripMenuItem.Image")));
             this.удалитьПапкуToolStripMenuItem.Name = "удалитьПапкуToolStripMenuItem";
-            this.удалитьПапкуToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
+            this.удалитьПапкуToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.удалитьПапкуToolStripMenuItem.Text = "Удалить папку";
             this.удалитьПапкуToolStripMenuItem.Click += new System.EventHandler(this.удалитьПапкуToolStripMenuItem_Click);
             // 
@@ -1167,7 +1168,7 @@
             this.toolStripMenuItem3,
             this.остановитьТестToolStripMenuItem1});
             this.contextMenuStripTest.Name = "contextMenuStripTest";
-            this.contextMenuStripTest.Size = new System.Drawing.Size(253, 98);
+            this.contextMenuStripTest.Size = new System.Drawing.Size(253, 76);
             // 
             // подробнаяИнформацияОШагеToolStripMenuItem
             // 
