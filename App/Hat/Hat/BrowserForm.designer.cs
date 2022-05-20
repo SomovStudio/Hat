@@ -110,11 +110,9 @@
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripDropDownButton2 = new System.Windows.Forms.ToolStripDropDownButton();
             this.создатьПапкуToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.переименоватьПапкуToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.удалитьПапкуToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripDropDownButton3 = new System.Windows.Forms.ToolStripDropDownButton();
             this.создатьФайлCToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.переименоватьФайлToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.удалитьФайлToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.открытьФайлToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -374,7 +372,7 @@
             // 
             this.оПрограммеCrackerToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("оПрограммеCrackerToolStripMenuItem.Image")));
             this.оПрограммеCrackerToolStripMenuItem.Name = "оПрограммеCrackerToolStripMenuItem";
-            this.оПрограммеCrackerToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.оПрограммеCrackerToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
             this.оПрограммеCrackerToolStripMenuItem.Text = "О программе Hat";
             this.оПрограммеCrackerToolStripMenuItem.Click += new System.EventHandler(this.оПрограммеCrackerToolStripMenuItem_Click);
             // 
@@ -808,23 +806,9 @@
             this.imageListProject.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageListProject.ImageStream")));
             this.imageListProject.TransparentColor = System.Drawing.Color.Transparent;
             this.imageListProject.Images.SetKeyName(0, "folder.png");
-            this.imageListProject.Images.SetKeyName(1, "folder_add.png");
-            this.imageListProject.Images.SetKeyName(2, "folder_delete.png");
-            this.imageListProject.Images.SetKeyName(3, "folder_edit.png");
-            this.imageListProject.Images.SetKeyName(4, "folder_page.png");
-            this.imageListProject.Images.SetKeyName(5, "folder_page_white.png");
-            this.imageListProject.Images.SetKeyName(6, "page_white_horizontal.png");
-            this.imageListProject.Images.SetKeyName(7, "page_white_csharp.png");
-            this.imageListProject.Images.SetKeyName(8, "page_white_add.png");
-            this.imageListProject.Images.SetKeyName(9, "page_white_delete.png");
-            this.imageListProject.Images.SetKeyName(10, "page_white_edit.png");
-            this.imageListProject.Images.SetKeyName(11, "page_white_gear.png");
-            this.imageListProject.Images.SetKeyName(12, "page.png");
-            this.imageListProject.Images.SetKeyName(13, "page_code.png");
-            this.imageListProject.Images.SetKeyName(14, "page_add.png");
-            this.imageListProject.Images.SetKeyName(15, "page_delete.png");
-            this.imageListProject.Images.SetKeyName(16, "page_edit.png");
-            this.imageListProject.Images.SetKeyName(17, "page_gear.png");
+            this.imageListProject.Images.SetKeyName(1, "page_white_csharp.png");
+            this.imageListProject.Images.SetKeyName(2, "page_white_text.png");
+            this.imageListProject.Images.SetKeyName(3, "page_gear.png");
             // 
             // toolStripProject
             // 
@@ -963,7 +947,6 @@
             this.toolStripDropDownButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.toolStripDropDownButton2.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.создатьПапкуToolStripMenuItem,
-            this.переименоватьПапкуToolStripMenuItem,
             this.удалитьПапкуToolStripMenuItem});
             this.toolStripDropDownButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripDropDownButton2.Image")));
             this.toolStripDropDownButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -975,24 +958,15 @@
             // 
             this.создатьПапкуToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("создатьПапкуToolStripMenuItem.Image")));
             this.создатьПапкуToolStripMenuItem.Name = "создатьПапкуToolStripMenuItem";
-            this.создатьПапкуToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
+            this.создатьПапкуToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
             this.создатьПапкуToolStripMenuItem.Text = "Создать папку";
             this.создатьПапкуToolStripMenuItem.Click += new System.EventHandler(this.создатьПапкуToolStripMenuItem_Click);
-            // 
-            // переименоватьПапкуToolStripMenuItem
-            // 
-            this.переименоватьПапкуToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("переименоватьПапкуToolStripMenuItem.Image")));
-            this.переименоватьПапкуToolStripMenuItem.Name = "переименоватьПапкуToolStripMenuItem";
-            this.переименоватьПапкуToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
-            this.переименоватьПапкуToolStripMenuItem.Text = "Переименовать папку";
-            this.переименоватьПапкуToolStripMenuItem.Visible = false;
-            this.переименоватьПапкуToolStripMenuItem.Click += new System.EventHandler(this.переименоватьПапкуToolStripMenuItem_Click);
             // 
             // удалитьПапкуToolStripMenuItem
             // 
             this.удалитьПапкуToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("удалитьПапкуToolStripMenuItem.Image")));
             this.удалитьПапкуToolStripMenuItem.Name = "удалитьПапкуToolStripMenuItem";
-            this.удалитьПапкуToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
+            this.удалитьПапкуToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
             this.удалитьПапкуToolStripMenuItem.Text = "Удалить папку";
             this.удалитьПапкуToolStripMenuItem.Click += new System.EventHandler(this.удалитьПапкуToolStripMenuItem_Click);
             // 
@@ -1001,7 +975,6 @@
             this.toolStripDropDownButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.toolStripDropDownButton3.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.создатьФайлCToolStripMenuItem,
-            this.переименоватьФайлToolStripMenuItem,
             this.удалитьФайлToolStripMenuItem,
             this.toolStripSeparator5,
             this.открытьФайлToolStripMenuItem});
@@ -1018,15 +991,6 @@
             this.создатьФайлCToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
             this.создатьФайлCToolStripMenuItem.Text = "Создать файл автотеста";
             this.создатьФайлCToolStripMenuItem.Click += new System.EventHandler(this.создатьФайлCToolStripMenuItem_Click);
-            // 
-            // переименоватьФайлToolStripMenuItem
-            // 
-            this.переименоватьФайлToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("переименоватьФайлToolStripMenuItem.Image")));
-            this.переименоватьФайлToolStripMenuItem.Name = "переименоватьФайлToolStripMenuItem";
-            this.переименоватьФайлToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
-            this.переименоватьФайлToolStripMenuItem.Text = "Переименовать файл";
-            this.переименоватьФайлToolStripMenuItem.Visible = false;
-            this.переименоватьФайлToolStripMenuItem.Click += new System.EventHandler(this.переименоватьФайлToolStripMenuItem_Click);
             // 
             // удалитьФайлToolStripMenuItem
             // 
@@ -1203,7 +1167,7 @@
             this.toolStripMenuItem3,
             this.остановитьТестToolStripMenuItem1});
             this.contextMenuStripTest.Name = "contextMenuStripTest";
-            this.contextMenuStripTest.Size = new System.Drawing.Size(253, 76);
+            this.contextMenuStripTest.Size = new System.Drawing.Size(253, 98);
             // 
             // подробнаяИнформацияОШагеToolStripMenuItem
             // 
@@ -1581,8 +1545,8 @@
             // 
             // openFileProjectDialog
             // 
-            this.openFileProjectDialog.FileName = "project.cracker";
-            this.openFileProjectDialog.Filter = "project.cracker|project.cracker";
+            this.openFileProjectDialog.FileName = "project.hat";
+            this.openFileProjectDialog.Filter = "project.hat|project.hat";
             // 
             // BrowserForm
             // 
@@ -1732,11 +1696,9 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton2;
         private System.Windows.Forms.ToolStripMenuItem создатьПапкуToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem переименоватьПапкуToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem удалитьПапкуToolStripMenuItem;
         private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton3;
         private System.Windows.Forms.ToolStripMenuItem создатьФайлCToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem переименоватьФайлToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem удалитьФайлToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         private System.Windows.Forms.ToolStripMenuItem открытьФайлToolStripMenuItem;

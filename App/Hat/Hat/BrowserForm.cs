@@ -22,6 +22,7 @@ namespace Hat
             toolStripStatusLabelFileEncoding.Text = Config.encoding;
             Config.browserForm = this;
             consoleMsg("Программа Hat версия 0.1");
+            systemConsoleMsg("Программа Hat версия 0.1", default, default, default, true);
         }
 
         private bool stopTest = false;
@@ -41,15 +42,15 @@ namespace Hat
 
                 if (Config.commandLineMode == true)
                 {
-                    systemConsoleMsg("Запуск браузера Cracker...", default, ConsoleColor.DarkGray, ConsoleColor.White, true);
-                    consoleMsg("Запуск браузера Cracker из командной строки");
+                    systemConsoleMsg("Запуск браузера Hat...", default, ConsoleColor.DarkGray, ConsoleColor.White, true);
+                    consoleMsg("Запуск браузера Hat из командной строки");
                     toolStripStatusLabelProjectPath.Text = Config.projectPath;
                     // Строится дерево папок и файлов
                     treeViewProject.Nodes.Clear();
                     treeViewProject.Nodes.Add(Config.projectPath, getFolderName(Config.projectPath), 0, 0);
                     openProjectFolder(Config.projectPath, treeViewProject.Nodes);
                     // Чтение файла конфигурации
-                    Config.readConfigJson(Config.projectPath + "/project.cracker");
+                    Config.readConfigJson(Config.projectPath + "/project.hat");
                     showLibs();
                     changeEncoding();
                     changeEditorTopMost();
@@ -400,8 +401,7 @@ namespace Hat
                     }
 
                     // создание файлов
-                    string fileProject = "/project.cracker";
-                    //string fileSupportTester = "/support/Tester.cs";
+                    string fileProject = "/project.hat";
                     string fileSupportHelper = "/support/Helper.cs";
                     string fileSupportPageObjectsExample = "/support/PageObjects/ExamplePage.cs";
                     string fileSupportStepObjectsExample = "/support/StepObjects/ExampleSteps.cs";
@@ -409,7 +409,6 @@ namespace Hat
 
                     WorkOnFiles writer = new WorkOnFiles();
                     if (!File.Exists(Config.projectPath + fileProject)) writer.writeFile(Config.getConfig(), WorkOnFiles.UTF_8_BOM, Config.projectPath + fileProject);
-                    //if (!File.Exists(projectPath + fileSupportTester)) writer.writeFile(Autotests.getContentFileTester(), Config.encoding, projectPath + fileSupportTester);
                     if (!File.Exists(Config.projectPath + fileSupportHelper)) writer.writeFile(Autotests.getContentFileHelper(), Config.encoding, Config.projectPath + fileSupportHelper);
                     if (!File.Exists(Config.projectPath + fileSupportPageObjectsExample)) writer.writeFile(Autotests.getContentFileExamplePage(), Config.encoding, Config.projectPath + fileSupportPageObjectsExample);
                     if (!File.Exists(Config.projectPath + fileSupportStepObjectsExample)) writer.writeFile(Autotests.getContentFileExampleSteps(), Config.encoding, Config.projectPath + fileSupportStepObjectsExample);
@@ -482,12 +481,13 @@ namespace Hat
                     openProjectFolder(Config.projectPath, treeViewProject.Nodes);
 
                     // Чтение файла конфигурации
-                    Config.readConfigJson(Config.projectPath + "/project.cracker");
+                    Config.readConfigJson(Config.projectPath + "/project.hat");
                     showLibs();
 ;                   changeEncoding();
                     changeEditorTopMost();
 
                     consoleMsg("Открытие проекта: успешно завершено (версия проекта: " + Config.version + ")");
+                    systemConsoleMsg($"Открытие проекта: успешно завершено (версия проекта: {Config.version})", default, ConsoleColor.DarkGray, ConsoleColor.White, true);
                 }
              }
             catch (Exception ex)
@@ -609,15 +609,15 @@ namespace Hat
                 {
                     if (currentNode == true)
                     {
-                        if (getFileName(file) == "project.cracker") nodes.Add(file, getFileName(file), 11, 11);
-                        else if ((file[file.Length - 3].ToString() + file[file.Length - 2].ToString() + file[file.Length - 1].ToString()) == ".cs") nodes.Add(file, getFileName(file), 7, 7);
-                        else nodes.Add(file, getFileName(file), 6, 6);
+                        if (getFileName(file) == "project.hat") nodes.Add(file, getFileName(file), 3, 3);
+                        else if ((file[file.Length - 3].ToString() + file[file.Length - 2].ToString() + file[file.Length - 1].ToString()) == ".cs") nodes.Add(file, getFileName(file), 1, 1);
+                        else nodes.Add(file, getFileName(file), 2, 2);
                     }
                     else
                     {
-                        if (getFileName(file) == "project.cracker") nodes[0].Nodes.Add(file, getFileName(file), 11, 11);
-                        else if ((file[file.Length - 3].ToString() + file[file.Length - 2].ToString() + file[file.Length - 1].ToString()) == ".cs") nodes[0].Nodes.Add(file, getFileName(file), 7, 7);
-                        else nodes[0].Nodes.Add(file, getFileName(file), 6, 6);
+                        if (getFileName(file) == "project.hat") nodes[0].Nodes.Add(file, getFileName(file), 3, 3);
+                        else if ((file[file.Length - 3].ToString() + file[file.Length - 2].ToString() + file[file.Length - 1].ToString()) == ".cs") nodes[0].Nodes.Add(file, getFileName(file), 1, 1);
+                        else nodes[0].Nodes.Add(file, getFileName(file), 2, 2);
                     }
                 }
 

@@ -183,9 +183,9 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(12, 14);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(109, 13);
+            this.label3.Size = new System.Drawing.Size(89, 13);
             this.label3.TabIndex = 6;
-            this.label3.Text = "Программа: Cracker";
+            this.label3.Text = "Программа: Hat";
             // 
             // label2
             // 
