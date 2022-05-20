@@ -91,7 +91,7 @@ await tester.TestEnd();
 
 -----------------------------------------------------------------------------
 Запуск из командной строки:
-C:\Git\SomovStudio\Hat\App\Hat\Hat\bin\Debug>Hat.exe C:\Users\Catfish\Desktop\project ExampleTest.cs
+C:\Git\SomovStudio\Hat\App\Hat\Hat\bin\Debug>Hat.exe ExampleTest.cs C:\Users\Catfish\Desktop\project
 
 
 

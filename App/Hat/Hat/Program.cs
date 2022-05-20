@@ -17,8 +17,8 @@ namespace Hat
             if (args.Length == 2)
             {
                 Config.commandLineMode = true;
-                Config.projectPath = args[0];
-                Config.selectName = args[1];
+                Config.selectName = args[0];
+                Config.projectPath = args[1];
             }
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
