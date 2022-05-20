@@ -81,13 +81,19 @@
     <Compile Include="Autotests\Autotests.cs" />
     <Compile Include="Autotests\HTMLElement.cs" />
     <Compile Include="Autotests\Tester.cs" />
-    <Compile Include="Config\Config.cs" />
-    <Compile Include="Config\WorkOnFiles.cs" />
-    <Compile Include="Form1.cs">
+    <Compile Include="BrowserForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="BrowserForm.designer.cs">
+      <DependentUpon>BrowserForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Config\Config.cs" />
+    <Compile Include="Config\WorkOnFiles.cs" />
+    <Compile Include="Editor\EditorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Editor\EditorForm.designer.cs">
+      <DependentUpon>EditorForm.cs</DependentUpon>
     </Compile>
     <Compile Include="InputBoxForm.cs">
       <SubType>Form</SubType>
@@ -105,6 +111,12 @@
     </Compile>
     <EmbeddedResource Include="AboutForm.resx">
       <DependentUpon>AboutForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BrowserForm.resx">
+      <DependentUpon>BrowserForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editor\EditorForm.resx">
+      <DependentUpon>EditorForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="InputBoxForm.resx">
       <DependentUpon>InputBoxForm.cs</DependentUpon>
@@ -138,9 +150,7 @@
   <ItemGroup>
     <Content Include="hat.ico" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Editor\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Microsoft.Web.WebView2.1.0.1210.39\build\Microsoft.Web.WebView2.targets" Condition="Exists('..\packages\Microsoft.Web.WebView2.1.0.1210.39\build\Microsoft.Web.WebView2.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
