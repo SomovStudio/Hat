@@ -12,8 +12,14 @@ namespace Hat
         /// Главная точка входа для приложения.
         /// </summary>
         [STAThread]
-        static void Main()
+        static void Main(String[] args)
         {
+            if (args.Length == 2)
+            {
+                Config.commandLineMode = true;
+                Config.projectPath = args[0];
+                Config.selectName = args[1];
+            }
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new BrowserForm());

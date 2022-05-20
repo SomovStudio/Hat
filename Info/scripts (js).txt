@@ -1,0 +1,97 @@
+private async void Form1_Load(object sender, EventArgs e)
+{
+	await this.webView21.EnsureCoreWebView2Async();
+}
+private async void button1_Click(object sender, EventArgs e)
+{
+	var result = await webView21.ExecuteScriptAsync("Math.sin(Math.PI/2)");
+	MessageBox.Show(result);
+}
+
+-----------------------------------------------------------------------------
+
+webView21.ExecuteScriptAsync("document.getElementsByClassName('return ussd_send()').click();");
+webView21.ExecuteScriptAsync("document.getElementsByName('send')[0].click();");
+
+string inputButtonValue = "Send";
+var func = $"document.querySelectorAll('input[value="{inputButtonValue}"]')[0].click();";
+var result = await webView21.CoreWebView2.ExecuteScriptAsync(func);
+
+-----------------------------------------------------------------------------
+
+СПРАВОЧНИК https://somov-qa.github.io/library/webdev/index.html
+ОБЪЕКТ: https://www.w3schools.com/jsref/dom_obj_all.asp
+
+
+document.querySelector('#buttonLogin');
+document.querySelectorAll('#buttonLogin');
+
+const orgObject = { company: 'ABC Corp' }
+
+(function(){
+   var button = document.getElementById('mybutton');
+   button.addEventListener('click', function(){
+       alert('CLICK!');
+   });
+}());
+
+(function(){ var element = document.querySelector('#buttonLogin'); return element; }());
+
+-----------------------------------------------------------------------------
+
+ПРИМЕРЫ
+
+var result = await browserView.CoreWebView2.ExecuteScriptAsync("document.querySelector('#buttonLogin123');");
+var result = await browserView.CoreWebView2.ExecuteScriptAsync("(function(){ var element = document.querySelector('#buttonLogin'); return element; }());");
+var result = await browserView.CoreWebView2.ExecuteScriptAsync("(function(){ var element = { id: 'id_button', name: 'name_button' }; return element; }());");
+var result = await browserView.CoreWebView2.ExecuteScriptAsync("(function(){ var element = document.querySelector('#buttonLogin'); return element.outerHTML; }());");
+var result = await browserView.CoreWebView2.ExecuteScriptAsync("(function(){ var element = document.querySelector('#buttonLogin'); return element.innerText; }());");
+var result = await browserView.CoreWebView2.ExecuteScriptAsync("(function(){ var element = document.querySelector('#buttonLogin'); return element.innerHTML; }());");
+
+var result = await browserView.CoreWebView2.ExecuteScriptAsync("(function(){ var element = document.querySelector('#buttonLogin'); var obj = { id: element.id, name: element.name }; return obj; }());");
+var result = await browserView.CoreWebView2.ExecuteScriptAsync("(function(locatorCss = '"+locator+"'){ var element = document.querySelector('#buttonLogin'); var obj = { locator: locatorCss, id: element.id, name: element.name }; return obj; }());");
+
+var el = document.getElementById('login');
+el.value = "test";
+
+-----------------------------------------------------------------------------
+
+ПРИМЕРЫ АВТОТЕСТОВ
+
+Tester tester = new Tester(Config.browserForm);
+await tester.TestBegin();
+await tester.BrowserSize(800, 600);
+await tester.GoToUrl("https://somovstudio.github.io/test.html", 5);
+await tester.FindElementById("result", 5);
+await tester.SetValueInElementById("login", "admin");
+await tester.Wait(2);
+await tester.SetValueInElementById("pass", "00001");
+await tester.Wait(2);
+await tester.ClickElementById("buttonLogin");
+await tester.Wait(2);
+string actual = await tester.GetValueFromElementById("textarea");
+string expected = "\"PASSED\"";
+await tester.FindElementById("result", 5);
+await tester.AssertEquals(expected, actual);
+await tester.TestEnd();
+
+
+Tester tester = new Tester(Config.browserForm);
+await tester.TestBegin();
+await tester.GoToUrl("https://somovstudio.github.io/test.html", 5);
+await tester.Wait(2);
+await tester.GetURL();
+HTMLElement element = await tester.GetHtmlElement("#buttonLogin");
+await tester.Wait(2);
+Config.browserForm.consoleMsg(element.Locator + " | " + element.Id + " | " + element.Name + " | " + element.Class + " | " + element.Value);
+await element.Click();
+await tester.Wait(2);
+await tester.TestEnd();
+
+
+-----------------------------------------------------------------------------
+Запуск из командной строки:
+C:\Git\SomovStudio\Hat\App\Hat\Hat\bin\Debug>Hat.exe C:\Users\Catfish\Desktop\project ExampleTest.cs
+
+
+

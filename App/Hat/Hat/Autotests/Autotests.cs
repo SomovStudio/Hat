@@ -52,13 +52,13 @@ namespace Hat
                 {
                     if (testFilename.Contains(".cs"))
                     {
-                        object classObj = results.CompiledAssembly.CreateInstance("Cracker." + testFilename.Remove(testFilename.Count() - 3, 3));
+                        object classObj = results.CompiledAssembly.CreateInstance("Hat." + testFilename.Remove(testFilename.Count() - 3, 3));
                         MethodInfo funcMain = classObj.GetType().GetMethod("Main");
                         funcMain.Invoke(classObj, new object[] { Config.browserForm });
                     }
                     else // это будет для папки с автотестами (пока в разработке)
                     {
-                        object classObj = results.CompiledAssembly.CreateInstance("Cracker.ExampleTest");
+                        object classObj = results.CompiledAssembly.CreateInstance("Hat.ExampleTest");
                         MethodInfo funcMain = classObj.GetType().GetMethod("Main");
                         funcMain.Invoke(classObj, new object[] { Config.browserForm });
                     }
@@ -150,7 +150,7 @@ namespace Hat
 @"
 using System;
 
-namespace Cracker
+namespace Hat
 {
     public static class Helper
     {
@@ -167,7 +167,7 @@ namespace Cracker
 @"
 using System;
 
-namespace Cracker
+namespace Hat
 {
     public static class ExamplePage
     {
@@ -193,7 +193,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
-namespace Cracker
+namespace Hat
 {
     public class ExampleSteps
     {
@@ -222,9 +222,9 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using CrackerFramework;
+using HatFramework;
 
-namespace Cracker
+namespace Hat
 {
     public class ExampleTest
     {
@@ -285,9 +285,9 @@ namespace Cracker
             content += "using System.Threading;" + Environment.NewLine;
             content += "using System.Threading.Tasks;" + Environment.NewLine;
             content += "using System.Windows.Forms;" + Environment.NewLine;
-            content += "using CrackerFramework;" + Environment.NewLine;
+            content += "using HatFramework;" + Environment.NewLine;
             content += "" + Environment.NewLine;
-            content += "namespace Cracker" + Environment.NewLine;
+            content += "namespace Hat" + Environment.NewLine;
             content += "{" + Environment.NewLine;
             content += "    public class " + filename + Environment.NewLine;
             content += "    {" + Environment.NewLine;

@@ -1,0 +1,195 @@
+Подробная информация об использовании оперативной 
+(JIT) отладки вместо данного диалогового 
+окна содержится в конце этого сообщения.
+
+************** Текст исключения **************
+System.IO.FileNotFoundException: Не удается найти указанный файл. (Исключение из HRESULT: 0x80070002)
+
+
+************** Загруженные сборки **************
+mscorlib
+    Версия сборки: 4.0.0.0
+    Версия Win32: 4.8.4341.0 built by: NET48REL1LAST_C
+    CodeBase: file:///C:/Windows/Microsoft.NET/Framework/v4.0.30319/mscorlib.dll
+----------------------------------------
+Cracker
+    Версия сборки: 1.0.0.0
+    Версия Win32: 1.0.0.0
+    CodeBase: file:///F:/Git/SomovStudio/Cracker/desktop_version/Cracker/Cracker/bin/Debug/Cracker.exe
+----------------------------------------
+System.Windows.Forms
+    Версия сборки: 4.0.0.0
+    Версия Win32: 4.8.4341.0 built by: NET48REL1LAST_C
+    CodeBase: file:///C:/WINDOWS/Microsoft.Net/assembly/GAC_MSIL/System.Windows.Forms/v4.0_4.0.0.0__b77a5c561934e089/System.Windows.Forms.dll
+----------------------------------------
+System
+    Версия сборки: 4.0.0.0
+    Версия Win32: 4.8.4300.0 built by: NET48REL1LAST_C
+    CodeBase: file:///C:/WINDOWS/Microsoft.Net/assembly/GAC_MSIL/System/v4.0_4.0.0.0__b77a5c561934e089/System.dll
+----------------------------------------
+System.Drawing
+    Версия сборки: 4.0.0.0
+    Версия Win32: 4.8.4084.0 built by: NET48REL1
+    CodeBase: file:///C:/WINDOWS/Microsoft.Net/assembly/GAC_MSIL/System.Drawing/v4.0_4.0.0.0__b03f5f7f11d50a3a/System.Drawing.dll
+----------------------------------------
+System.Configuration
+    Версия сборки: 4.0.0.0
+    Версия Win32: 4.8.4190.0 built by: NET48REL1LAST_B
+    CodeBase: file:///C:/WINDOWS/Microsoft.Net/assembly/GAC_MSIL/System.Configuration/v4.0_4.0.0.0__b03f5f7f11d50a3a/System.Configuration.dll
+----------------------------------------
+System.Core
+    Версия сборки: 4.0.0.0
+    Версия Win32: 4.8.4341.0 built by: NET48REL1LAST_C
+    CodeBase: file:///C:/WINDOWS/Microsoft.Net/assembly/GAC_MSIL/System.Core/v4.0_4.0.0.0__b77a5c561934e089/System.Core.dll
+----------------------------------------
+System.Xml
+    Версия сборки: 4.0.0.0
+    Версия Win32: 4.8.4084.0 built by: NET48REL1
+    CodeBase: file:///C:/WINDOWS/Microsoft.Net/assembly/GAC_MSIL/System.Xml/v4.0_4.0.0.0__b77a5c561934e089/System.Xml.dll
+----------------------------------------
+Microsoft.Web.WebView2.WinForms
+    Версия сборки: 1.0.1210.30
+    Версия Win32: 1.0.1210.30
+    CodeBase: file:///F:/Git/SomovStudio/Cracker/desktop_version/Cracker/Cracker/bin/Debug/Microsoft.Web.WebView2.WinForms.DLL
+----------------------------------------
+Microsoft.Web.WebView2.Core
+    Версия сборки: 1.0.1210.30
+    Версия Win32: 1.0.1210.30
+    CodeBase: file:///F:/Git/SomovStudio/Cracker/desktop_version/Cracker/Cracker/bin/Debug/Microsoft.Web.WebView2.Core.DLL
+----------------------------------------
+mscorlib.resources
+    Версия сборки: 4.0.0.0
+    Версия Win32: 4.8.4084.0 built by: NET48REL1
+    CodeBase: file:///C:/WINDOWS/Microsoft.Net/assembly/GAC_MSIL/mscorlib.resources/v4.0_4.0.0.0_ru_b77a5c561934e089/mscorlib.resources.dll
+----------------------------------------
+Accessibility
+    Версия сборки: 4.0.0.0
+    Версия Win32: 4.8.4084.0 built by: NET48REL1
+    CodeBase: file:///C:/WINDOWS/Microsoft.Net/assembly/GAC_MSIL/Accessibility/v4.0_4.0.0.0__b03f5f7f11d50a3a/Accessibility.dll
+----------------------------------------
+System.Text.Json
+    Версия сборки: 6.0.0.3
+    Версия Win32: 6.0.422.16404
+    CodeBase: file:///F:/Git/SomovStudio/Cracker/desktop_version/Cracker/Cracker/bin/Debug/System.Text.Json.DLL
+----------------------------------------
+System.Memory
+    Версия сборки: 4.0.1.1
+    Версия Win32: 4.6.28619.01
+    CodeBase: file:///F:/Git/SomovStudio/Cracker/desktop_version/Cracker/Cracker/bin/Debug/System.Memory.DLL
+----------------------------------------
+System.ValueTuple
+    Версия сборки: 4.0.3.0
+    Версия Win32: 4.6.26515.06
+    CodeBase: file:///F:/Git/SomovStudio/Cracker/desktop_version/Cracker/Cracker/bin/Debug/System.ValueTuple.DLL
+----------------------------------------
+Microsoft.Bcl.AsyncInterfaces
+    Версия сборки: 6.0.0.0
+    Версия Win32: 6.0.21.52210
+    CodeBase: file:///F:/Git/SomovStudio/Cracker/desktop_version/Cracker/Cracker/bin/Debug/Microsoft.Bcl.AsyncInterfaces.DLL
+----------------------------------------
+System.Text.Encodings.Web
+    Версия сборки: 6.0.0.0
+    Версия Win32: 6.0.21.52210
+    CodeBase: file:///F:/Git/SomovStudio/Cracker/desktop_version/Cracker/Cracker/bin/Debug/System.Text.Encodings.Web.DLL
+----------------------------------------
+System.Runtime.CompilerServices.Unsafe
+    Версия сборки: 6.0.0.0
+    Версия Win32: 6.0.21.52210
+    CodeBase: file:///F:/Git/SomovStudio/Cracker/desktop_version/Cracker/Cracker/bin/Debug/System.Runtime.CompilerServices.Unsafe.DLL
+----------------------------------------
+System.Threading.Tasks.Extensions
+    Версия сборки: 4.2.0.1
+    Версия Win32: 4.6.28619.01
+    CodeBase: file:///F:/Git/SomovStudio/Cracker/desktop_version/Cracker/Cracker/bin/Debug/System.Threading.Tasks.Extensions.DLL
+----------------------------------------
+System.Buffers
+    Версия сборки: 4.0.3.0
+    Версия Win32: 4.6.28619.01
+    CodeBase: file:///F:/Git/SomovStudio/Cracker/desktop_version/Cracker/Cracker/bin/Debug/System.Buffers.DLL
+----------------------------------------
+System.Numerics.Vectors
+    Версия сборки: 4.1.4.0
+    Версия Win32: 4.6.26515.06
+    CodeBase: file:///F:/Git/SomovStudio/Cracker/desktop_version/Cracker/Cracker/bin/Debug/System.Numerics.Vectors.DLL
+----------------------------------------
+ICSharpCode.TextEditor
+    Версия сборки: 3.2.1.6466
+    Версия Win32: 3.2.1.6466
+    CodeBase: file:///F:/Git/SomovStudio/Cracker/desktop_version/Cracker/Cracker/bin/Debug/ICSharpCode.TextEditor.DLL
+----------------------------------------
+u2iuba5m
+    Версия сборки: 0.0.0.0
+    Версия Win32: 4.8.4300.0 built by: NET48REL1LAST_C
+    CodeBase: file:///C:/WINDOWS/Microsoft.Net/assembly/GAC_MSIL/System/v4.0_4.0.0.0__b77a5c561934e089/System.dll
+----------------------------------------
+CrackerFramework
+    Версия сборки: 1.0.0.0
+    Версия Win32: 1.0.0.0
+    CodeBase: file:///F:/Git/SomovStudio/Cracker/desktop_version/Cracker/Cracker/bin/Debug/CrackerFramework.DLL
+----------------------------------------
+WebView2.DevTools.Dom
+    Версия сборки: 2.0.2.0
+    Версия Win32: 2.0.2.0
+    CodeBase: file:///F:/Git/SomovStudio/Cracker/desktop_version/Cracker/Cracker/bin/Debug/WebView2.DevTools.Dom.DLL
+----------------------------------------
+Microsoft.Extensions.Logging.Abstractions
+    Версия сборки: 6.0.0.1
+    Версия Win32: 6.0.322.12309
+    CodeBase: file:///F:/Git/SomovStudio/Cracker/desktop_version/Cracker/Cracker/bin/Debug/Microsoft.Extensions.Logging.Abstractions.DLL
+----------------------------------------
+System.Windows.Forms.resources
+    Версия сборки: 4.0.0.0
+    Версия Win32: 4.8.4084.0 built by: NET48REL1
+    CodeBase: file:///C:/WINDOWS/Microsoft.Net/assembly/GAC_MSIL/System.Windows.Forms.resources/v4.0_4.0.0.0_ru_b77a5c561934e089/System.Windows.Forms.resources.dll
+----------------------------------------
+
+************** Оперативная отладка (JIT) **************
+Для подключения оперативной (JIT) отладки файл .config данного
+приложения или компьютера (machine.config) должен иметь
+значение jitDebugging, установленное в секции system.windows.forms.
+Приложение также должно быть скомпилировано с включенной
+отладкой.
+
+Например:
+
+<configuration>
+    <system.windows.forms jitDebugging="true" />
+</configuration>
+
+При включенной отладке JIT любое необрабатываемое исключение
+пересылается отладчику JIT, зарегистрированному на данном компьютере,
+вместо того чтобы обрабатываться данным диалоговым окном.
+
+----------------------------------------
+
+[14.05.2022 10:33:00] Ошибка: Microsoft.Web.WebView2.Core.WebView2RuntimeNotFoundException: Couldn't find a compatible Webview2 Runtime installation to host WebViews. ---> System.IO.FileNotFoundException: Не удается найти указанный файл. (Исключение из HRESULT: 0x80070002)
+   --- Конец трассировки внутреннего стека исключений ---
+   в Microsoft.Web.WebView2.Core.CoreWebView2Environment.<CreateAsync>d__3.MoveNext()
+--- Конец трассировка стека из предыдущего расположения, где возникло исключение ---
+   в System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   в System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   в System.Runtime.CompilerServices.TaskAwaiter.ValidateEnd(Task task)
+   в Microsoft.Web.WebView2.WinForms.WebView2.<InitCoreWebView2Async>d__18.MoveNext()
+--- Конец трассировка стека из предыдущего расположения, где возникло исключение ---
+   в System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   в System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   в System.Runtime.CompilerServices.TaskAwaiter.GetResult()
+   в CrackerFrameworkDev.Tester.<testBegin>d__28.MoveNext() в C:\Git\SomovStudio\Cracker\desktop_version\Cracker\Cracker\autotests\Tester.cs:строка 144
+
+----------------------------------------
+
+РЕШЕНИЕ ПРОБЛЕМЫ
+
+Microsoft.Web.WebView2.Core.WebView2RuntimeNotFoundException: 
+не удалось найти совместимую установку среды выполнения Webview2 для размещения WebView
+
+Чтобы это исправить, нам нужно:
+
+Проверьте, установлена ​​ли среда выполнения WebView2.
+Проверьте и убедитесь, что версия среды выполнения достаточно высока
+Если ссылка не установлена ​​или устарела, запустите загрузку установщика WebView Runtime.
+Ссылка для загрузки и установки: https://developer.microsoft.com/en-us/microsoft-edge/webview2/
+Другие примечания
+В будущих версиях Windows среда выполнения может поставляться с Windows 10, 
+но на данный момент среда выполнения WebView должна быть установлена ​​явно. 
+Он также устанавливается вместе с пакетами WebView2 NuGet и Canary, поэтому он может уже присутствовать.
