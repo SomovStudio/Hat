@@ -609,15 +609,15 @@ namespace Hat
                 {
                     if (currentNode == true)
                     {
-                        if (getFileName(file) == "project.cracker") nodes.Add(file, getFileName(file), 11, 11);
-                        else if ((file[file.Length - 3].ToString() + file[file.Length - 2].ToString() + file[file.Length - 1].ToString()) == ".cs") nodes.Add(file, getFileName(file), 7, 7);
-                        else nodes.Add(file, getFileName(file), 6, 6);
+                        if (getFileName(file) == "project.hat") nodes.Add(file, getFileName(file), 3, 3);
+                        else if ((file[file.Length - 3].ToString() + file[file.Length - 2].ToString() + file[file.Length - 1].ToString()) == ".cs") nodes.Add(file, getFileName(file), 1, 1);
+                        else nodes.Add(file, getFileName(file), 2, 2);
                     }
                     else
                     {
-                        if (getFileName(file) == "project.cracker") nodes[0].Nodes.Add(file, getFileName(file), 11, 11);
-                        else if ((file[file.Length - 3].ToString() + file[file.Length - 2].ToString() + file[file.Length - 1].ToString()) == ".cs") nodes[0].Nodes.Add(file, getFileName(file), 7, 7);
-                        else nodes[0].Nodes.Add(file, getFileName(file), 6, 6);
+                        if (getFileName(file) == "project.hat") nodes[0].Nodes.Add(file, getFileName(file), 3, 3);
+                        else if ((file[file.Length - 3].ToString() + file[file.Length - 2].ToString() + file[file.Length - 1].ToString()) == ".cs") nodes[0].Nodes.Add(file, getFileName(file), 1, 1);
+                        else nodes[0].Nodes.Add(file, getFileName(file), 2, 2);
                     }
                 }
 
