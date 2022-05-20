@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "b66f2eb4-3e87-43c6-bb7d-e6da8a138475": {
+      "ProjectGuid": "b66f2eb4-3e87-43c6-bb7d-e6da8a138475",
+      "DisplayName": "Hat",
+      "ColorIndex": 0
+    }
+  },
+  "NextColorIndex": 1
+}
