@@ -374,7 +374,7 @@
             // 
             this.оПрограммеCrackerToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("оПрограммеCrackerToolStripMenuItem.Image")));
             this.оПрограммеCrackerToolStripMenuItem.Name = "оПрограммеCrackerToolStripMenuItem";
-            this.оПрограммеCrackerToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.оПрограммеCrackerToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
             this.оПрограммеCrackerToolStripMenuItem.Text = "О программе Hat";
             this.оПрограммеCrackerToolStripMenuItem.Click += new System.EventHandler(this.оПрограммеCrackerToolStripMenuItem_Click);
             // 
@@ -1581,8 +1581,8 @@
             // 
             // openFileProjectDialog
             // 
-            this.openFileProjectDialog.FileName = "project.cracker";
-            this.openFileProjectDialog.Filter = "project.cracker|project.cracker";
+            this.openFileProjectDialog.FileName = "project.hat";
+            this.openFileProjectDialog.Filter = "project.hat|project.hat";
             // 
             // BrowserForm
             // 
