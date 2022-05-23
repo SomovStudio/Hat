@@ -35,7 +35,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>hat.ico</ApplicationIcon>
+    <ApplicationIcon>hat2.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject />
@@ -149,6 +149,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="hat.ico" />
+    <Content Include="hat2.ico" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -92,6 +92,7 @@ namespace Hat
             await tester.AssertEquals(expected, actual);
             await tester.TestEnd();
             */
+
             HatFrameworkDev.Tester tester = new HatFrameworkDev.Tester(Config.browserForm);
             await tester.TestBegin();
             await tester.GoToUrl("https://mgts.ru/", 5);
