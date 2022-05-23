@@ -101,6 +101,39 @@ document.getElementsByClassName('popup_input-block')[5].innerHTML = '<input id="
 document.getElementById('SUBMIT_ORDER').click();
 
 
+document.getElementById('popup_name').focus();
+document.getElementById('popup_name').value = 'Тестирование Зионек';
+document.getElementById('popup_phone').focus();
+document.getElementById('popup_phone').value = '9999999999';
+document.getElementById('SUBMIT_ORDER').click();
+
+document.getElementById('popup_name').blur();
+document.getElementById('popup_name').setAttribute('disabled', '');
+document.getElementById('popup_name').value = 'Тестирование Зионек';
+document.getElementById('popup_phone').blur();
+document.getElementById('popup_phone').setAttribute('disabled', '');
+document.getElementById('popup_phone').value = '9999999999';
+document.getElementById('SUBMIT_ORDER').click();
+
+РЕШЕНИЕ ПРОБЛЕМЫ (прападали данные из input после нажатия на кнопку)
+
+input = document.querySelector('#popup_phone');
+input.value = '9999999999';
+input.dispatchEvent(new KeyboardEvent('keydown', { bubbles: true }));
+input.dispatchEvent(new KeyboardEvent('keypress', { bubbles: true }));
+input.dispatchEvent(new KeyboardEvent('keyup', { bubbles: true }));
+input.dispatchEvent(new Event('input', { bubbles: true }));
+input.dispatchEvent(new Event('change', { bubbles: true }));
+
+input = document.querySelector('#popup_name');
+input.value = 'Тестирование Зионек';
+input.dispatchEvent(new KeyboardEvent('keydown', { bubbles: true }));
+input.dispatchEvent(new KeyboardEvent('keypress', { bubbles: true }));
+input.dispatchEvent(new KeyboardEvent('keyup', { bubbles: true }));
+input.dispatchEvent(new Event('input', { bubbles: true }));
+input.dispatchEvent(new Event('change', { bubbles: true }));
+
+document.getElementById('SUBMIT_ORDER').click();
 
 -----------------------------------------------------------------------------
 
