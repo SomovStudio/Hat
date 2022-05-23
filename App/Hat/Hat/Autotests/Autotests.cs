@@ -98,14 +98,14 @@ namespace Hat
             await tester.WaitVisibleElementById("headerPartMGTS", 25);
             await tester.ClickElementByCSS("#header > div.header_second-row.header_desktop > div > div > div.header_action-btn > button");
             await tester.WaitVisibleElementById("popup", 5);
-            await tester.SetValueInElementById("popup_name", "Тестирование Зионек");
+            await tester.SetValueInElementByCSS("#popup_name", "Тестирование Зионек");
             await tester.Wait(2);
-            await tester.SetValueInElementById("popup_phone", "9999999999");
+            await tester.SetValueInElementByCSS("#popup_phone", "9999999999");
             await tester.Wait(2);
             await tester.ClickElementById("SUBMIT_ORDER");
-            await tester.Wait(2);
+            await tester.Wait(5);
             string order = await tester.GetValueFromElementById("last_order_sended");
-            await tester.AssertNotEquals(order, "");
+            await tester.AssertNotEquals(order, "\"\"");
             await tester.TestEnd();
         }
 

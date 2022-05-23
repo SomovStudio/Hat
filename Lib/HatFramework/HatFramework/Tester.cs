@@ -761,16 +761,28 @@ namespace HatFramework
 
             try
             {
-                string script = "(function(){ var element = document.querySelector('" + locator + "'); element.value = '" + value + "'; return element; }());";
+                //string script = "(function(){ var element = document.querySelector('" + locator + "'); element.value = '" + value + "'; return element; }());";
+                string script = "(function(){";
+                script += "var element = document.querySelector('" + locator + "');";
+                script += "element.value = '" + value + "';";
+                script += "element.dispatchEvent(new KeyboardEvent('keydown', { bubbles: true }));";
+                script += "element.dispatchEvent(new KeyboardEvent('keypress', { bubbles: true }));";
+                script += "element.dispatchEvent(new KeyboardEvent('keyup', { bubbles: true }));";
+                script += "element.dispatchEvent(new Event('input', { bubbles: true }));";
+                script += "element.dispatchEvent(new Event('change', { bubbles: true }));";
+                script += "return element.value";
+                script += "}());";
+
                 string result = await ExecuteJS(script);
-                if (result == "null" || result == null)
+                ConsoleMsg($"SetValueInElementByCSS - результат: {result}");
+                if (result == "null" || result == null || result == "")
                 {
-                    EditMessage(step, null, Tester.FAILED, $"Не удалось найти элемент по локатору: {locator}", Tester.IMAGE_STATUS_FAILED);
+                    EditMessage(step, null, Tester.FAILED, $"Не удалось найти или ввести значение в элемент по локатору: {locator}", Tester.IMAGE_STATUS_FAILED);
                     TestStop();
                 }
                 else
                 {
-                    EditMessage(step, null, PASSED, "Значение введено в элемент", IMAGE_STATUS_PASSED);
+                    EditMessage(step, null, PASSED, $"Значение {result} - введено в элемент", IMAGE_STATUS_PASSED);
                 }
             }
             catch (Exception ex)
@@ -791,9 +803,10 @@ namespace HatFramework
             {
                 string script = "(function(){ var element = document.getElementById('" + id + "'); return element.value; }());";
                 string result = await ExecuteJS(script);
-                if (result == "null" || result == null)
+                ConsoleMsg($"GetValueFromElementById - результат: {result}");
+                if (result == "null" || result == null || result == "")
                 {
-                    EditMessage(step, null, Tester.FAILED, $"Не удалось найти элемент с ID: {id}", Tester.IMAGE_STATUS_FAILED);
+                    EditMessage(step, null, Tester.FAILED, $"Не удалось найти или получить данные из элемента с ID: {id}", Tester.IMAGE_STATUS_FAILED);
                     TestStop();
                 }
                 else
