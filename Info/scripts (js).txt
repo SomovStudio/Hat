@@ -115,7 +115,7 @@ document.getElementById('popup_phone').setAttribute('disabled', '');
 document.getElementById('popup_phone').value = '9999999999';
 document.getElementById('SUBMIT_ORDER').click();
 
-РЕШЕНИЕ ПРОБЛЕМЫ (прападали данные из input после нажатия на кнопку)
+РЕШЕНИЕ ПРОБЛЕМЫ (прападали данные из input после нажатия на кнопку) https://learn.javascript.ru/dispatch-events
 
 input = document.querySelector('#popup_phone');
 input.value = '9999999999';
