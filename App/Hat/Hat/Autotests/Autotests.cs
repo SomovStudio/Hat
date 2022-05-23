@@ -73,6 +73,7 @@ namespace Hat
 
         public static async Task devTestStutsAsync()
         {
+            /*
             HatFrameworkDev.Tester tester = new HatFrameworkDev.Tester(Config.browserForm);
             await tester.TestBegin();
             await tester.BrowserSize(800, 600);
@@ -89,6 +90,22 @@ namespace Hat
             await tester.FindElementById("result", 5);
             await tester.WaitVisibleElementById("result", 5);
             await tester.AssertEquals(expected, actual);
+            await tester.TestEnd();
+            */
+            HatFrameworkDev.Tester tester = new HatFrameworkDev.Tester(Config.browserForm);
+            await tester.TestBegin();
+            await tester.GoToUrl("https://mgts.ru/", 5);
+            await tester.WaitVisibleElementById("headerPartMGTS", 25);
+            await tester.ClickElementByCSS("#header > div.header_second-row.header_desktop > div > div > div.header_action-btn > button");
+            await tester.WaitVisibleElementById("popup", 5);
+            await tester.SetValueInElementById("popup_name", "Тестирование Зионек");
+            await tester.Wait(2);
+            await tester.SetValueInElementById("popup_phone", "9999999999");
+            await tester.Wait(2);
+            await tester.ClickElementById("SUBMIT_ORDER");
+            await tester.Wait(2);
+            string order = await tester.GetValueFromElementById("last_order_sended");
+            await tester.AssertNotEquals(order, "");
             await tester.TestEnd();
         }
 

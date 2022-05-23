@@ -54,6 +54,54 @@ var result = await browserView.CoreWebView2.ExecuteScriptAsync("(function(locato
 var el = document.getElementById('login');
 el.value = "test";
 
+Тестирование Зионек
+9999999999
+
+(function(){ var element = document.getElementById('popup_name'); element.value = 'Тестирование Зионек'; return element.value; }());
+(function(){ var element = document.getElementById('popup_phone'); element.value = '9999999999'; return element.value; }());
+(function(){ var element = document.getElementById('SUBMIT_ORDER'); element.click(); return element; }());
+
+document.getElementById('popup_name').value = 'Тестирование Зионек';
+document.getElementById('popup_name').innerText = 'Тестирование Зионек';
+document.getElementById('popup_phone').value = '9999999999';
+document.getElementById('popup_phone').innerText = '9999999999';
+document.getElementById('SUBMIT_ORDER').click();
+
+
+document.getElementById('popup_name').setAttribute('value', 'Тестирование Зионек');
+document.getElementById('popup_name').value = 'Тестирование Зионек';
+document.getElementById('popup_phone').setAttribute('value', '9999999999');
+document.getElementById('popup_phone').value = '9999999999';
+document.getElementById('SUBMIT_ORDER').click();
+
+document.getElementById('popup_name').setAttribute('value', 'Тестирование Зионек');
+document.getElementById('popup_name').innerHTML = 'Тестирование Зионек';
+document.getElementById('popup_phone').setAttribute('value', '9999999999');
+document.getElementById('popup_phone').innerHTML = '9999999999';
+document.getElementById('SUBMIT_ORDER').click();
+
+document.getElementById("popup_name").remove();
+document.getElementById("popup_phone").remove();
+document.getElementById("SUBMIT_ORDER").remove();
+document.getElementsByTagName('form')[4].createElement('<input id="popup_name" name="FIO">');
+document.getElementsByTagName('form')[4].createElement('<input id="popup_phone" name="PHONE">');
+document.querySelector('#popup > div > div.popup_col.popup_content.main_order_body > form > p').createElement('<button id="BUTTON_TEST">Test</button>');
+document.getElementById('BUTTON_TEST').click();
+
+var newEl = document.createElement("div")
+document.body.appendChild(newEl)
+
+document.getElementById("popup_name").innerHTML = '<input id="popup_name" name="FIO" value="Тестирование Зионек">';
+document.getElementById("popup_phone").innerHTML = '<input id="popup_phone" name="PHONE" value="9999999999">';
+document.getElementById('SUBMIT_ORDER').innerHTML = '<button id="SUBMIT_ORDER">Подключить</button>';
+document.getElementById('SUBMIT_ORDER').click();
+
+document.getElementsByClassName('popup_input-block')[4].innerHTML = '<input id="popup_name" name="FIO" value="Тестирование Зионек">';
+document.getElementsByClassName('popup_input-block')[5].innerHTML = '<input id="popup_phone" name="PHONE" value="9999999999">';
+document.getElementById('SUBMIT_ORDER').click();
+
+
+
 -----------------------------------------------------------------------------
 
 ПРИМЕРЫ АВТОТЕСТОВ
