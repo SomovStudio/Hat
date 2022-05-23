@@ -701,6 +701,196 @@ namespace HatFrameworkDev
                 string script = "";
                 script += "(function(){ ";
                 script += $"var elem = document.getElementById('{id}');";
+                script += "return elem;";
+                script += "}());";
+
+                string result = null;
+                for (int i = 0; i < sec; i++)
+                {
+                    result = await ExecuteJS(script);
+                    if (result != "null" && result != null)
+                    {
+                        found = true;
+                        break;
+                    }
+                    await Task.Delay(1000);
+                }
+
+                if (found == true) EditMessage(step, null, PASSED, "Поиск элемента - завершен (элемент найден)", IMAGE_STATUS_PASSED);
+                else EditMessage(step, null, WARNING, "Поиск элемента - завершен (элемент не найден)", IMAGE_STATUS_WARNING);
+            }
+            catch (Exception ex)
+            {
+                ConsoleMsg("Ошибка: " + ex.ToString());
+                EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
+                TestStop();
+            }
+            return found;
+        }
+
+        public async Task<bool> FindElementByClass(string _class, int index, int sec)
+        {
+            int step = SendMessage($"FindElementByClass({_class}, {index}, {sec})", PROCESS, "Поиск элемента", IMAGE_STATUS_PROCESS);
+            if (CheckTestStop(step) == true) return false;
+
+            bool found = false;
+            try
+            {
+                string script = "";
+                script += "(function(){ ";
+                script += $"var elem = document.getElementsByClassName('{_class}')[{index}];";
+                script += "return elem;";
+                script += "}());";
+
+                string result = null;
+                for (int i = 0; i < sec; i++)
+                {
+                    result = await ExecuteJS(script);
+                    if (result != "null" && result != null)
+                    {
+                        found = true;
+                        break;
+                    }
+                    await Task.Delay(1000);
+                }
+
+                if (found == true) EditMessage(step, null, PASSED, "Поиск элемента - завершен (элемент найден)", IMAGE_STATUS_PASSED);
+                else EditMessage(step, null, WARNING, "Поиск элемента - завершен (элемент не найден)", IMAGE_STATUS_WARNING);
+            }
+            catch (Exception ex)
+            {
+                ConsoleMsg("Ошибка: " + ex.ToString());
+                EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
+                TestStop();
+            }
+            return found;
+        }
+
+        public async Task<bool> FindElementByName(string name, int index, int sec)
+        {
+            int step = SendMessage($"FindElementByName({name}, {index}, {sec})", PROCESS, "Поиск элемента", IMAGE_STATUS_PROCESS);
+            if (CheckTestStop(step) == true) return false;
+
+            bool found = false;
+            try
+            {
+                string script = "";
+                script += "(function(){ ";
+                script += $"var elem = document.getElementsByName('{name}')[{index}];";
+                script += "return elem;";
+                script += "}());";
+
+                string result = null;
+                for (int i = 0; i < sec; i++)
+                {
+                    result = await ExecuteJS(script);
+                    if (result != "null" && result != null)
+                    {
+                        found = true;
+                        break;
+                    }
+                    await Task.Delay(1000);
+                }
+
+                if (found == true) EditMessage(step, null, PASSED, "Поиск элемента - завершен (элемент найден)", IMAGE_STATUS_PASSED);
+                else EditMessage(step, null, WARNING, "Поиск элемента - завершен (элемент не найден)", IMAGE_STATUS_WARNING);
+            }
+            catch (Exception ex)
+            {
+                ConsoleMsg("Ошибка: " + ex.ToString());
+                EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
+                TestStop();
+            }
+            return found;
+        }
+
+        public async Task<bool> FindElementByTag(string tag, int index, int sec)
+        {
+            int step = SendMessage($"FindElementByTag({tag}, {index}, {sec})", PROCESS, "Поиск элемента", IMAGE_STATUS_PROCESS);
+            if (CheckTestStop(step) == true) return false;
+
+            bool found = false;
+            try
+            {
+                string script = "";
+                script += "(function(){ ";
+                script += $"var elem = document.getElementsByTagName('{tag}')[{index}];";
+                script += "return elem;";
+                script += "}());";
+
+                string result = null;
+                for (int i = 0; i < sec; i++)
+                {
+                    result = await ExecuteJS(script);
+                    if (result != "null" && result != null)
+                    {
+                        found = true;
+                        break;
+                    }
+                    await Task.Delay(1000);
+                }
+
+                if (found == true) EditMessage(step, null, PASSED, "Поиск элемента - завершен (элемент найден)", IMAGE_STATUS_PASSED);
+                else EditMessage(step, null, WARNING, "Поиск элемента - завершен (элемент не найден)", IMAGE_STATUS_WARNING);
+            }
+            catch (Exception ex)
+            {
+                ConsoleMsg("Ошибка: " + ex.ToString());
+                EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
+                TestStop();
+            }
+            return found;
+        }
+
+        public async Task<bool> FindElementByCSS(string locator, int sec)
+        {
+            int step = SendMessage($"FindElementByCSS({locator}, {sec})", PROCESS, "Поиск элемента", IMAGE_STATUS_PROCESS);
+            if (CheckTestStop(step) == true) return false;
+
+            bool found = false;
+            try
+            {
+                string script = "";
+                script += "(function(){ ";
+                script += $"var elem = document.querySelector('{locator}');";
+                script += "return elem;";
+                script += "}());";
+
+                string result = null;
+                for (int i = 0; i < sec; i++)
+                {
+                    result = await ExecuteJS(script);
+                    if (result != "null" && result != null)
+                    {
+                        found = true;
+                        break;
+                    }
+                    await Task.Delay(1000);
+                }
+
+                if (found == true) EditMessage(step, null, PASSED, "Поиск элемента - завершен (элемент найден)", IMAGE_STATUS_PASSED);
+                else EditMessage(step, null, WARNING, "Поиск элемента - завершен (элемент не найден)", IMAGE_STATUS_WARNING);
+            }
+            catch (Exception ex)
+            {
+                ConsoleMsg("Ошибка: " + ex.ToString());
+                EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
+                TestStop();
+            }
+            return found;
+        }
+
+        public async Task<bool> FindVisibleElementById(string id, int sec)
+        {
+            int step = SendMessage($"FindVisibleElementById({id}, {sec})", PROCESS, "Поиск элемента", IMAGE_STATUS_PROCESS);
+            if (CheckTestStop(step) == true) return false;
+
+            bool found = false;
+            try
+            {
+                string script = "";
+                script += "(function(){ ";
+                script += $"var elem = document.getElementById('{id}');";
                 script += "";
                 script += "if (!(elem instanceof Element)) throw Error('DomUtil: elem is not an element.');";
                 script += "const style = getComputedStyle(elem);";

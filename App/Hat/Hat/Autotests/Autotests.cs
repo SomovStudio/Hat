@@ -73,12 +73,11 @@ namespace Hat
 
         public static async Task devTestStutsAsync()
         {
-            /*
             HatFrameworkDev.Tester tester = new HatFrameworkDev.Tester(Config.browserForm);
             await tester.TestBegin();
             await tester.BrowserSize(800, 600);
             await tester.GoToUrl("https://somovstudio.github.io/test.html", 5);
-            await tester.FindElementById("result", 5);
+            await tester.FindVisibleElementById("result", 5);
             await tester.SetValueInElementById("login", "admin");
             await tester.Wait(2);
             await tester.SetValueInElementById("pass", "0000");
@@ -87,12 +86,12 @@ namespace Hat
             await tester.Wait(2);
             string actual = await tester.GetValueFromElementById("textarea");
             string expected = "\"PASSED\"";
-            await tester.FindElementById("result", 5);
+            await tester.FindVisibleElementById("result", 5);
             await tester.WaitVisibleElementById("result", 5);
             await tester.AssertEquals(expected, actual);
             await tester.TestEnd();
-            */
 
+            /*
             HatFrameworkDev.Tester tester = new HatFrameworkDev.Tester(Config.browserForm);
             await tester.TestBegin();
             await tester.GoToUrl("https://mgts.ru/", 5);
@@ -108,6 +107,7 @@ namespace Hat
             string order = await tester.GetValueFromElementById("last_order_sended");
             await tester.AssertNotEquals(order, "\"\"");
             await tester.TestEnd();
+            */
         }
 
         public static void readNodes(TreeNodeCollection _nodes)
