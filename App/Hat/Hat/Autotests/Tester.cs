@@ -283,6 +283,42 @@ namespace HatFrameworkDev
         /* 
          * Методы для выполнения действий ============================================================
          * */
+        public async Task<HTMLElement> GetHtmlElement(string locator)
+        {
+            int step = SendMessage($"GetHtmlElement({locator})", PROCESS, "Полечить элемента", IMAGE_STATUS_PROCESS);
+            if (CheckTestStop(step) == true) return null;
+
+            HTMLElement htmlElement = new HTMLElement(this);
+            try
+            {
+                HTMLElement el = null;
+                var obj = await BrowserView.CoreWebView2.ExecuteScriptAsync("(function(locatorCss = '" + locator + "'){ var el = document.querySelector(locatorCss); var obj = { Locator: locatorCss, Id: el.id, Class: el.class, Name: el.name, Value: el.value }; return obj; }());");
+                el = JsonConvert.DeserializeObject<HTMLElement>(obj);
+                if (el == null)
+                {
+                    EditMessage(step, null, Tester.FAILED, $"Не удалось получить элемент {locator}", Tester.IMAGE_STATUS_FAILED);
+                    TestStop();
+                }
+                else
+                {
+                    htmlElement = new HTMLElement(this);
+                    htmlElement.Locator = el.Locator;
+                    htmlElement.Id = el.Id;
+                    htmlElement.Name = el.Name;
+                    htmlElement.Class = el.Class;
+                    htmlElement.Value = el.Value;
+                    EditMessage(step, null, PASSED, "Элемент получен", IMAGE_STATUS_PASSED);
+                }
+            }
+            catch (Exception ex)
+            {
+                ConsoleMsg("Ошибка: " + ex.ToString());
+                EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
+                TestStop();
+            }
+            return htmlElement;
+        }
+
         public async Task GoToUrl(string url, int sec)
         {
             statusPageLoad = false;
@@ -418,31 +454,55 @@ namespace HatFrameworkDev
             }
         }
 
-        public async Task<HTMLElement> GetHtmlElement(string locator)
+        public async Task WaitVisibleElementByClass(string _class, int index, int sec)
         {
-            int step = SendMessage($"GetHtmlElement({locator})", PROCESS, "Полечить элемента", IMAGE_STATUS_PROCESS);
-            if (CheckTestStop(step) == true) return null;
-
-            HTMLElement htmlElement = new HTMLElement(this);
+            int step = SendMessage($"WaitVisibleElementByClass({_class}, {index}, {sec.ToString()})", PROCESS, $"Ожидание элемента {sec.ToString()} секунд", IMAGE_STATUS_PROCESS);
+            if (CheckTestStop(step) == true) return;
             try
             {
-                HTMLElement el = null;
-                var obj = await BrowserView.CoreWebView2.ExecuteScriptAsync("(function(locatorCss = '" + locator + "'){ var el = document.querySelector(locatorCss); var obj = { Locator: locatorCss, Id: el.id, Class: el.class, Name: el.name, Value: el.value }; return obj; }());");
-                el = JsonConvert.DeserializeObject<HTMLElement>(obj);
-                if (el == null)
+                bool found = false;
+                string script = "";
+                script += "(function(){ ";
+                script += $"var elem = document.getElementsByClassName('{_class}')[{index}];";
+                script += "";
+                script += "if (!(elem instanceof Element)) throw Error('DomUtil: elem is not an element.');";
+                script += "const style = getComputedStyle(elem);";
+                script += "if (style.display === 'none') return false;";
+                script += "if (style.visibility !== 'visible') return false;";
+                script += "if (style.opacity < 0.1) return false;";
+                script += "if (elem.offsetWidth + elem.offsetHeight + elem.getBoundingClientRect().height + elem.getBoundingClientRect().width === 0) return false;";
+                script += "const elemCenter = {";
+                script += "x: elem.getBoundingClientRect().left + elem.offsetWidth / 2,";
+                script += "y: elem.getBoundingClientRect().top + elem.offsetHeight / 2";
+                script += "};";
+                script += "if (elemCenter.x < 0) return false;";
+                script += "if (elemCenter.x > (document.documentElement.clientWidth || window.innerWidth)) return false;";
+                script += "if (elemCenter.y < 0) return false;";
+                script += "if (elemCenter.y > (document.documentElement.clientHeight || window.innerHeight)) return false;";
+                script += "let pointContainer = document.elementFromPoint(elemCenter.x, elemCenter.y);";
+                script += "do {";
+                script += "if (pointContainer === elem) return true;";
+                script += "} while (pointContainer = pointContainer.parentNode);";
+                script += "return false;";
+                script += "}());";
+
+                string result = null;
+                for (int i = 0; i < sec; i++)
                 {
-                    EditMessage(step, null, Tester.FAILED, $"Не удалось получить элемент {locator}", Tester.IMAGE_STATUS_FAILED);
-                    TestStop();
+                    result = await ExecuteJS(script);
+                    if (result != "null" && result != null && result == "true")
+                    {
+                        found = true;
+                        break;
+                    }
+                    await Task.Delay(1000);
                 }
+
+                if (found == true) EditMessage(step, null, PASSED, $"Ожидание элемента - завершено (элемент отображается)", IMAGE_STATUS_PASSED);
                 else
                 {
-                    htmlElement = new HTMLElement(this);
-                    htmlElement.Locator = el.Locator;
-                    htmlElement.Id = el.Id;
-                    htmlElement.Name = el.Name;
-                    htmlElement.Class = el.Class;
-                    htmlElement.Value = el.Value;
-                    EditMessage(step, null, PASSED, "Элемент получен", IMAGE_STATUS_PASSED);
+                    EditMessage(step, null, FAILED, $"Ожидание элемента - завершено (элемент не отображается)", IMAGE_STATUS_FAILED);
+                    TestStop();
                 }
             }
             catch (Exception ex)
@@ -451,7 +511,183 @@ namespace HatFrameworkDev
                 EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
                 TestStop();
             }
-            return htmlElement;
+        }
+
+        public async Task WaitVisibleElementByName(string name, int index, int sec)
+        {
+            int step = SendMessage($"WaitVisibleElementByName({name}, {index}, {sec.ToString()})", PROCESS, $"Ожидание элемента {sec.ToString()} секунд", IMAGE_STATUS_PROCESS);
+            if (CheckTestStop(step) == true) return;
+            try
+            {
+                bool found = false;
+                string script = "";
+                script += "(function(){ ";
+                script += $"var elem = document.getElementsByName('{name}')[{index}];";
+                script += "";
+                script += "if (!(elem instanceof Element)) throw Error('DomUtil: elem is not an element.');";
+                script += "const style = getComputedStyle(elem);";
+                script += "if (style.display === 'none') return false;";
+                script += "if (style.visibility !== 'visible') return false;";
+                script += "if (style.opacity < 0.1) return false;";
+                script += "if (elem.offsetWidth + elem.offsetHeight + elem.getBoundingClientRect().height + elem.getBoundingClientRect().width === 0) return false;";
+                script += "const elemCenter = {";
+                script += "x: elem.getBoundingClientRect().left + elem.offsetWidth / 2,";
+                script += "y: elem.getBoundingClientRect().top + elem.offsetHeight / 2";
+                script += "};";
+                script += "if (elemCenter.x < 0) return false;";
+                script += "if (elemCenter.x > (document.documentElement.clientWidth || window.innerWidth)) return false;";
+                script += "if (elemCenter.y < 0) return false;";
+                script += "if (elemCenter.y > (document.documentElement.clientHeight || window.innerHeight)) return false;";
+                script += "let pointContainer = document.elementFromPoint(elemCenter.x, elemCenter.y);";
+                script += "do {";
+                script += "if (pointContainer === elem) return true;";
+                script += "} while (pointContainer = pointContainer.parentNode);";
+                script += "return false;";
+                script += "}());";
+
+                string result = null;
+                for (int i = 0; i < sec; i++)
+                {
+                    result = await ExecuteJS(script);
+                    if (result != "null" && result != null && result == "true")
+                    {
+                        found = true;
+                        break;
+                    }
+                    await Task.Delay(1000);
+                }
+
+                if (found == true) EditMessage(step, null, PASSED, $"Ожидание элемента - завершено (элемент отображается)", IMAGE_STATUS_PASSED);
+                else
+                {
+                    EditMessage(step, null, FAILED, $"Ожидание элемента - завершено (элемент не отображается)", IMAGE_STATUS_FAILED);
+                    TestStop();
+                }
+            }
+            catch (Exception ex)
+            {
+                ConsoleMsg("Ошибка: " + ex.ToString());
+                EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
+                TestStop();
+            }
+        }
+
+        public async Task WaitVisibleElementByTag(string tag, int index, int sec)
+        {
+            int step = SendMessage($"WaitVisibleElementByTag({tag}, {index}, {sec.ToString()})", PROCESS, $"Ожидание элемента {sec.ToString()} секунд", IMAGE_STATUS_PROCESS);
+            if (CheckTestStop(step) == true) return;
+            try
+            {
+                bool found = false;
+                string script = "";
+                script += "(function(){ ";
+                script += $"var elem = document.getElementsByTagName('{tag}')[{index}];";
+                script += "";
+                script += "if (!(elem instanceof Element)) throw Error('DomUtil: elem is not an element.');";
+                script += "const style = getComputedStyle(elem);";
+                script += "if (style.display === 'none') return false;";
+                script += "if (style.visibility !== 'visible') return false;";
+                script += "if (style.opacity < 0.1) return false;";
+                script += "if (elem.offsetWidth + elem.offsetHeight + elem.getBoundingClientRect().height + elem.getBoundingClientRect().width === 0) return false;";
+                script += "const elemCenter = {";
+                script += "x: elem.getBoundingClientRect().left + elem.offsetWidth / 2,";
+                script += "y: elem.getBoundingClientRect().top + elem.offsetHeight / 2";
+                script += "};";
+                script += "if (elemCenter.x < 0) return false;";
+                script += "if (elemCenter.x > (document.documentElement.clientWidth || window.innerWidth)) return false;";
+                script += "if (elemCenter.y < 0) return false;";
+                script += "if (elemCenter.y > (document.documentElement.clientHeight || window.innerHeight)) return false;";
+                script += "let pointContainer = document.elementFromPoint(elemCenter.x, elemCenter.y);";
+                script += "do {";
+                script += "if (pointContainer === elem) return true;";
+                script += "} while (pointContainer = pointContainer.parentNode);";
+                script += "return false;";
+                script += "}());";
+
+                string result = null;
+                for (int i = 0; i < sec; i++)
+                {
+                    result = await ExecuteJS(script);
+                    if (result != "null" && result != null && result == "true")
+                    {
+                        found = true;
+                        break;
+                    }
+                    await Task.Delay(1000);
+                }
+
+                if (found == true) EditMessage(step, null, PASSED, $"Ожидание элемента - завершено (элемент отображается)", IMAGE_STATUS_PASSED);
+                else
+                {
+                    EditMessage(step, null, FAILED, $"Ожидание элемента - завершено (элемент не отображается)", IMAGE_STATUS_FAILED);
+                    TestStop();
+                }
+            }
+            catch (Exception ex)
+            {
+                ConsoleMsg("Ошибка: " + ex.ToString());
+                EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
+                TestStop();
+            }
+        }
+
+        public async Task WaitVisibleElementByCSS(string locator, int sec)
+        {
+            int step = SendMessage($"WaitVisibleElementByCSS({locator}, {sec.ToString()})", PROCESS, $"Ожидание элемента {sec.ToString()} секунд", IMAGE_STATUS_PROCESS);
+            if (CheckTestStop(step) == true) return;
+            try
+            {
+                bool found = false;
+                string script = "";
+                script += "(function(){ ";
+                script += $"var elem = document.querySelector('{locator}');";
+                script += "";
+                script += "if (!(elem instanceof Element)) throw Error('DomUtil: elem is not an element.');";
+                script += "const style = getComputedStyle(elem);";
+                script += "if (style.display === 'none') return false;";
+                script += "if (style.visibility !== 'visible') return false;";
+                script += "if (style.opacity < 0.1) return false;";
+                script += "if (elem.offsetWidth + elem.offsetHeight + elem.getBoundingClientRect().height + elem.getBoundingClientRect().width === 0) return false;";
+                script += "const elemCenter = {";
+                script += "x: elem.getBoundingClientRect().left + elem.offsetWidth / 2,";
+                script += "y: elem.getBoundingClientRect().top + elem.offsetHeight / 2";
+                script += "};";
+                script += "if (elemCenter.x < 0) return false;";
+                script += "if (elemCenter.x > (document.documentElement.clientWidth || window.innerWidth)) return false;";
+                script += "if (elemCenter.y < 0) return false;";
+                script += "if (elemCenter.y > (document.documentElement.clientHeight || window.innerHeight)) return false;";
+                script += "let pointContainer = document.elementFromPoint(elemCenter.x, elemCenter.y);";
+                script += "do {";
+                script += "if (pointContainer === elem) return true;";
+                script += "} while (pointContainer = pointContainer.parentNode);";
+                script += "return false;";
+                script += "}());";
+
+                string result = null;
+                for (int i = 0; i < sec; i++)
+                {
+                    result = await ExecuteJS(script);
+                    if (result != "null" && result != null && result == "true")
+                    {
+                        found = true;
+                        break;
+                    }
+                    await Task.Delay(1000);
+                }
+
+                if (found == true) EditMessage(step, null, PASSED, $"Ожидание элемента - завершено (элемент отображается)", IMAGE_STATUS_PASSED);
+                else
+                {
+                    EditMessage(step, null, FAILED, $"Ожидание элемента - завершено (элемент не отображается)", IMAGE_STATUS_FAILED);
+                    TestStop();
+                }
+            }
+            catch (Exception ex)
+            {
+                ConsoleMsg("Ошибка: " + ex.ToString());
+                EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
+                TestStop();
+            }
         }
 
         public async Task<bool> FindElementById(string id, int sec)
