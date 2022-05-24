@@ -57,7 +57,6 @@ FindVisibleElementByClassAsync() - найти визуально отображ�
 FindVisibleElementByNameAsync() - найти визуально отображаемый элемент с ожиданием в секундах
 FindVisibleElementByTagAsync() - найти визуально отображаемый элемент с ожиданием в секундах
 FindVisibleElementByCssAsync()  - найти визуально отображаемый элемент с ожиданием в секундах
-... (!)
 ClickElementByIdAsync() - нажать на элемент
 ClickElementByClassAsync() - нажать на элемент
 ClickElementByNameAsync() - нажать на элемент
@@ -72,7 +71,7 @@ GetValueFromElementByIdAsync() - получить значение из элем
 GetValueFromElementByClassAsync() - получить значение из элемент input
 GetValueFromElementByNameAsync() - получить значение из элемент input
 GetValueFromElementByTagAsync() - получить значение из элемент input
-GetValueFromElementByCSSAsync() - получить значение из элемент input
+GetValueFromElementByCssAsync() - получить значение из элемент input
 
 
 

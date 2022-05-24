@@ -325,6 +325,7 @@ namespace HatFrameworkDev
             try
             {
                 result = await BrowserView.CoreWebView2.ExecuteScriptAsync(script);
+                ConsoleMsg($"Метод ExecuteJavaScriptAsync вернул значение: {result}");
             }
             catch (Exception ex)
             {
@@ -1061,16 +1062,25 @@ namespace HatFrameworkDev
 
             try
             {
-                string script = "(function(){ var element = document.getElementById('" + id + "'); element.value = '" + value + "'; return element; }());";
+                string script = "(function(){";
+                script += "var element = document.getElementById('" + id + "');";
+                script += "element.value = '" + value + "';";
+                script += "element.dispatchEvent(new KeyboardEvent('keydown', { bubbles: true }));";
+                script += "element.dispatchEvent(new KeyboardEvent('keypress', { bubbles: true }));";
+                script += "element.dispatchEvent(new KeyboardEvent('keyup', { bubbles: true }));";
+                script += "element.dispatchEvent(new Event('input', { bubbles: true }));";
+                script += "element.dispatchEvent(new Event('change', { bubbles: true }));";
+                script += "return element.value";
+                script += "}());";
                 string result = await ExecuteJavaScriptAsync(script);
                 if (result == "null" || result == null)
                 {
-                    EditMessage(step, null, Tester.FAILED, $"Не удалось найти элемент с ID: {id}", Tester.IMAGE_STATUS_FAILED);
+                    EditMessage(step, null, Tester.FAILED, $"Не удалось найти или ввести значение в элемент с ID: {id}", Tester.IMAGE_STATUS_FAILED);
                     TestStopAsync();
                 }
                 else
                 {
-                    EditMessage(step, null, PASSED, "Значение введено в элемент", IMAGE_STATUS_PASSED);
+                    EditMessage(step, null, PASSED, $"Значение {result} - введено в элемент", IMAGE_STATUS_PASSED);
                 }
             }
             catch (Exception ex)
@@ -1088,16 +1098,25 @@ namespace HatFrameworkDev
 
             try
             {
-                string script = "(function(){ var element = document.getElementsByClassName('" + _class + "')[" + index + "]; element.value = '" + value + "'; return element; }());";
+                string script = "(function(){";
+                script += "var element = document.getElementsByClassName('" + _class + "')[" + index + "];";
+                script += "element.value = '" + value + "';";
+                script += "element.dispatchEvent(new KeyboardEvent('keydown', { bubbles: true }));";
+                script += "element.dispatchEvent(new KeyboardEvent('keypress', { bubbles: true }));";
+                script += "element.dispatchEvent(new KeyboardEvent('keyup', { bubbles: true }));";
+                script += "element.dispatchEvent(new Event('input', { bubbles: true }));";
+                script += "element.dispatchEvent(new Event('change', { bubbles: true }));";
+                script += "return element.value";
+                script += "}());";
                 string result = await ExecuteJavaScriptAsync(script);
                 if (result == "null" || result == null)
                 {
-                    EditMessage(step, null, Tester.FAILED, $"Не удалось найти элемент по Class: {_class} (Index: {index})", Tester.IMAGE_STATUS_FAILED);
+                    EditMessage(step, null, Tester.FAILED, $"Не удалось найти или ввести значение в элемент по Class: {_class} (Index: {index})", Tester.IMAGE_STATUS_FAILED);
                     TestStopAsync();
                 }
                 else
                 {
-                    EditMessage(step, null, PASSED, "Значение введено в элемент", IMAGE_STATUS_PASSED);
+                    EditMessage(step, null, PASSED, $"Значение {result} - введено в элемент", IMAGE_STATUS_PASSED);
                 }
             }
             catch (Exception ex)
@@ -1115,16 +1134,25 @@ namespace HatFrameworkDev
 
             try
             {
-                string script = "(function(){ var element = document.getElementsByName('" + name + "')[" + index + "]; element.value = '" + value + "'; return element; }());";
+                string script = "(function(){";
+                script += "var element = document.getElementsByName('" + name + "')[" + index + "];";
+                script += "element.value = '" + value + "';";
+                script += "element.dispatchEvent(new KeyboardEvent('keydown', { bubbles: true }));";
+                script += "element.dispatchEvent(new KeyboardEvent('keypress', { bubbles: true }));";
+                script += "element.dispatchEvent(new KeyboardEvent('keyup', { bubbles: true }));";
+                script += "element.dispatchEvent(new Event('input', { bubbles: true }));";
+                script += "element.dispatchEvent(new Event('change', { bubbles: true }));";
+                script += "return element.value";
+                script += "}());";
                 string result = await ExecuteJavaScriptAsync(script);
                 if (result == "null" || result == null)
                 {
-                    EditMessage(step, null, Tester.FAILED, $"Не удалось найти элемент по Name: {name} (Index: {index})", Tester.IMAGE_STATUS_FAILED);
+                    EditMessage(step, null, Tester.FAILED, $"Не удалось найти или ввести значение в элемент по Name: {name} (Index: {index})", Tester.IMAGE_STATUS_FAILED);
                     TestStopAsync();
                 }
                 else
                 {
-                    EditMessage(step, null, PASSED, "Значение введено в элемент", IMAGE_STATUS_PASSED);
+                    EditMessage(step, null, PASSED, $"Значение {result} - введено в элемент", IMAGE_STATUS_PASSED);
                 }
             }
             catch (Exception ex)
@@ -1142,16 +1170,25 @@ namespace HatFrameworkDev
 
             try
             {
-                string script = "(function(){ var element = document.getElementsByTagName('" + tag + "')[" + index + "]; element.value = '" + value + "'; return element; }());";
+                string script = "(function(){";
+                script += "var element = document.getElementsByTagName('" + tag + "')[" + index + "];";
+                script += "element.value = '" + value + "';";
+                script += "element.dispatchEvent(new KeyboardEvent('keydown', { bubbles: true }));";
+                script += "element.dispatchEvent(new KeyboardEvent('keypress', { bubbles: true }));";
+                script += "element.dispatchEvent(new KeyboardEvent('keyup', { bubbles: true }));";
+                script += "element.dispatchEvent(new Event('input', { bubbles: true }));";
+                script += "element.dispatchEvent(new Event('change', { bubbles: true }));";
+                script += "return element.value";
+                script += "}());";
                 string result = await ExecuteJavaScriptAsync(script);
                 if (result == "null" || result == null)
                 {
-                    EditMessage(step, null, Tester.FAILED, $"Не удалось найти элемент по Tag: {tag} (Index: {index})", Tester.IMAGE_STATUS_FAILED);
+                    EditMessage(step, null, Tester.FAILED, $"Не удалось найти или ввести значение в элемент по Tag: {tag} (Index: {index})", Tester.IMAGE_STATUS_FAILED);
                     TestStopAsync();
                 }
                 else
                 {
-                    EditMessage(step, null, PASSED, "Значение введено в элемент", IMAGE_STATUS_PASSED);
+                    EditMessage(step, null, PASSED, $"Значение {result} - введено в элемент", IMAGE_STATUS_PASSED);
                 }
             }
             catch (Exception ex)
@@ -1169,7 +1206,6 @@ namespace HatFrameworkDev
 
             try
             {
-                //string script = "(function(){ var element = document.querySelector('" + locator + "'); element.value = '" + value + "'; return element; }());";
                 string script = "(function(){";
                 script += "var element = document.querySelector('" + locator + "');";
                 script += "element.value = '" + value + "';";
@@ -1182,7 +1218,6 @@ namespace HatFrameworkDev
                 script += "}());";
 
                 string result = await ExecuteJavaScriptAsync(script);
-                ConsoleMsg($"SetValueInElementByCSS - результат: {result}");
                 if (result == "null" || result == null || result == "")
                 {
                     EditMessage(step, null, Tester.FAILED, $"Не удалось найти или ввести значение в элемент по локатору: {locator}", Tester.IMAGE_STATUS_FAILED);
@@ -1211,7 +1246,6 @@ namespace HatFrameworkDev
             {
                 string script = "(function(){ var element = document.getElementById('" + id + "'); return element.value; }());";
                 string result = await ExecuteJavaScriptAsync(script);
-                ConsoleMsg($"GetValueFromElementById - результат: {result}");
                 if (result == "null" || result == null || result == "")
                 {
                     EditMessage(step, null, Tester.FAILED, $"Не удалось найти или получить данные из элемента с ID: {id}", Tester.IMAGE_STATUS_FAILED);
@@ -1220,7 +1254,7 @@ namespace HatFrameworkDev
                 else
                 {
                     value = result;
-                    EditMessage(step, null, PASSED, "Получено значение из элемента", IMAGE_STATUS_PASSED);
+                    EditMessage(step, null, PASSED, $"Получено значение {result} из элемента", IMAGE_STATUS_PASSED);
                 }
             }
             catch (Exception ex)
@@ -1250,7 +1284,7 @@ namespace HatFrameworkDev
                 else
                 {
                     value = result;
-                    EditMessage(step, null, PASSED, "Получено значение из элемента", IMAGE_STATUS_PASSED);
+                    EditMessage(step, null, PASSED, $"Получено значение {result} из элемента", IMAGE_STATUS_PASSED);
                 }
             }
             catch (Exception ex)
@@ -1280,7 +1314,7 @@ namespace HatFrameworkDev
                 else
                 {
                     value = result;
-                    EditMessage(step, null, PASSED, "Получено значение из элемента", IMAGE_STATUS_PASSED);
+                    EditMessage(step, null, PASSED, $"Получено значение {result} из элемента", IMAGE_STATUS_PASSED);
                 }
             }
             catch (Exception ex)
@@ -1310,7 +1344,7 @@ namespace HatFrameworkDev
                 else
                 {
                     value = result;
-                    EditMessage(step, null, PASSED, "Получено значение из элемента", IMAGE_STATUS_PASSED);
+                    EditMessage(step, null, PASSED, $"Получено значение {result} из элемента", IMAGE_STATUS_PASSED);
                 }
             }
             catch (Exception ex)
@@ -1322,7 +1356,7 @@ namespace HatFrameworkDev
             return value;
         }
 
-        public async Task<string> GetValueFromElementByCSSAsync(string locator)
+        public async Task<string> GetValueFromElementByCssAsync(string locator)
         {
             int step = SendMessage($"GetValueFromElementByCSSAsync({locator})", PROCESS, "Получение значения из элемент", IMAGE_STATUS_PROCESS);
             if (CheckTestStop(step) == true) return "";
@@ -1340,7 +1374,7 @@ namespace HatFrameworkDev
                 else
                 {
                     value = result;
-                    EditMessage(step, null, PASSED, "Получено значение из элемента", IMAGE_STATUS_PASSED);
+                    EditMessage(step, null, PASSED, $"Получено значение {result} из элемента", IMAGE_STATUS_PASSED);
                 }
             }
             catch (Exception ex)
@@ -1351,9 +1385,6 @@ namespace HatFrameworkDev
             }
             return value;
         }
-
-
-
 
 
 
