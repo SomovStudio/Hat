@@ -420,8 +420,8 @@
             // toolStripStatusLabelProjectPath
             // 
             this.toolStripStatusLabelProjectPath.Name = "toolStripStatusLabelProjectPath";
-            this.toolStripStatusLabelProjectPath.Size = new System.Drawing.Size(76, 17);
-            this.toolStripStatusLabelProjectPath.Text = "(не открыть)";
+            this.toolStripStatusLabelProjectPath.Size = new System.Drawing.Size(70, 17);
+            this.toolStripStatusLabelProjectPath.Text = "(не открыт)";
             // 
             // toolStripStatusLabel1
             // 
@@ -959,7 +959,7 @@
             // 
             this.создатьПапкуToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("создатьПапкуToolStripMenuItem.Image")));
             this.создатьПапкуToolStripMenuItem.Name = "создатьПапкуToolStripMenuItem";
-            this.создатьПапкуToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.создатьПапкуToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
             this.создатьПапкуToolStripMenuItem.Text = "Создать папку";
             this.создатьПапкуToolStripMenuItem.Click += new System.EventHandler(this.создатьПапкуToolStripMenuItem_Click);
             // 
@@ -967,7 +967,7 @@
             // 
             this.удалитьПапкуToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("удалитьПапкуToolStripMenuItem.Image")));
             this.удалитьПапкуToolStripMenuItem.Name = "удалитьПапкуToolStripMenuItem";
-            this.удалитьПапкуToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.удалитьПапкуToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
             this.удалитьПапкуToolStripMenuItem.Text = "Удалить папку";
             this.удалитьПапкуToolStripMenuItem.Click += new System.EventHandler(this.удалитьПапкуToolStripMenuItem_Click);
             // 

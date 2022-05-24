@@ -36,6 +36,17 @@ private async void button1_Click(object sender, EventArgs e)
 webView21.ExecuteScriptAsync("document.getElementsByClassName('return ussd_send()').click();");
 webView21.ExecuteScriptAsync("document.getElementsByName('send')[0].click();");
 
+document.getElementById
+document.getElementsByClassName
+document.getElementsByName
+document.getElementsByTagName
+document.getElementsByTagNameNS
+document.querySelector
+document.querySelectorAll
+document.documentElement
+document.documentURI
+
+
 string inputButtonValue = "Send";
 var func = $"document.querySelectorAll('input[value="{inputButtonValue}"]')[0].click();";
 var result = await webView21.CoreWebView2.ExecuteScriptAsync(func);

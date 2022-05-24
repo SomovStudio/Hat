@@ -13,11 +13,12 @@ namespace HatFrameworkDev
 {
     public class Tester
     {
-        public const int IMAGE_STATUS_PROCESS = 0;
-        public const int IMAGE_STATUS_PASSED = 1;
-        public const int IMAGE_STATUS_FAILED = 2;
-        public const int IMAGE_STATUS_MESSAGE = 3;
-        public const int IMAGE_STATUS_WARNING = 4;
+        /* Глобальные константы и переменные */
+        public const int IMAGE_STATUS_PROCESS = 0;          // изображение "в процессе"
+        public const int IMAGE_STATUS_PASSED = 1;           // изображение "успешно"
+        public const int IMAGE_STATUS_FAILED = 2;           // изображение "провально"
+        public const int IMAGE_STATUS_MESSAGE = 3;          // изображение "сообщение"
+        public const int IMAGE_STATUS_WARNING = 4;          // изображение "предупреждение"
         public const string PASSED = "Успешно";
         public const string FAILED = "Провально";
         public const string STOPPED = "Остановлено";
@@ -25,8 +26,15 @@ namespace HatFrameworkDev
         public const string COMPLETED = "Выполнено";
         public const string WARNING = "Предупреждение";
 
-        public Form BrowserWindow;                                      // объект: окно приложения
+        public Form BrowserWindow;      // объект: окно приложения
         public WebView2 BrowserView;    // объект: браузер
+
+        /* Локальные константы и переменные */
+        private const string BY_ID = "BY_ID";
+        private const string BY_CLASS = "BY_CLASS";
+        private const string BY_NAME = "BY_NAME";
+        private const string BY_TAG = "BY_TAG";
+        private const string BY_CSS = "BY_CSS";
 
         private MethodInfo browserConsoleMsg;       // функция: consoleMsg - вывод сообщения в консоль приложения
         private MethodInfo browserSystemConsoleMsg; // функция: systemConsoleMsg - вывод сообщения в системную консоль
@@ -36,6 +44,7 @@ namespace HatFrameworkDev
         private MethodInfo browserResize;           // функция: browserResize - изменить размер браузера
         private MethodInfo checkStopTest;           // функция: checkStopTest - получить статус остановки процесса тестирования
         private MethodInfo resultAutotest;          // функция: resultAutotest - устанавливает флаг общего результата выполнения теста
+        
         private bool statusPageLoad = false;    // флаг: статус загрузки страницы
         private bool testStop = false;          // флаг: остановка теста
         private string assertStatus = null;     // флаг: рузельтат проверки
@@ -82,6 +91,51 @@ namespace HatFrameworkDev
             }
         }
 
+        private async Task<bool> defineVisibleElementAsync(string by, string target)
+        {
+            bool found = false;
+            try
+            {
+                string script = "";
+                script += "(function(){ ";
+                if (by == BY_ID) script += $"var elem = document.getElementById('{target}');";
+                if (by == BY_CLASS) script += $"var elem = document.getElementsByClassName('{target}');";
+                if (by == BY_NAME) script += $"var elem = document.getElementsByName('{target}');";
+                if (by == BY_TAG) script += $"var elem = document.getElementsByTagName('{target}');";
+                if (by == BY_CSS) script += $"var elem = document.querySelector('{target}');";
+                script += "if (!(elem instanceof Element)) throw Error('DomUtil: elem is not an element.');";
+                script += "const style = getComputedStyle(elem);";
+                script += "if (style.display === 'none') return false;";
+                script += "if (style.visibility !== 'visible') return false;";
+                script += "if (style.opacity < 0.1) return false;";
+                script += "if (elem.offsetWidth + elem.offsetHeight + elem.getBoundingClientRect().height + elem.getBoundingClientRect().width === 0) return false;";
+                script += "const elemCenter = {";
+                script += "x: elem.getBoundingClientRect().left + elem.offsetWidth / 2,";
+                script += "y: elem.getBoundingClientRect().top + elem.offsetHeight / 2";
+                script += "};";
+                script += "if (elemCenter.x < 0) return false;";
+                script += "if (elemCenter.x > (document.documentElement.clientWidth || window.innerWidth)) return false;";
+                script += "if (elemCenter.y < 0) return false;";
+                script += "if (elemCenter.y > (document.documentElement.clientHeight || window.innerHeight)) return false;";
+                script += "let pointContainer = document.elementFromPoint(elemCenter.x, elemCenter.y);";
+                script += "do {";
+                script += "if (pointContainer === elem) return true;";
+                script += "} while (pointContainer = pointContainer.parentNode);";
+                script += "return false;";
+                script += "}());";
+
+                string result = await ExecuteJS(script);
+                if (result != "null" && result != null && result == "true") found = true;
+                else found = false;
+            }
+            catch (Exception ex)
+            {
+                ConsoleMsg("Ошибка: " + ex.ToString());
+                TestStop();
+            }
+            return found;
+        }
+        
         /* 
          * Методы для вывода сообщений о ходе тестирования ==========================================
          * */
@@ -937,6 +991,10 @@ namespace HatFrameworkDev
             return found;
         }
 
+        
+        
+        
+        
         public async Task ClickElementById(string id)
         {
             int step = SendMessage($"ClickElementById({id})", PROCESS, "Нажатие на элемент", IMAGE_STATUS_PROCESS);
@@ -1369,12 +1427,6 @@ namespace HatFrameworkDev
             }
             return value;
         }
-
-
-
-
-
-
 
 
 

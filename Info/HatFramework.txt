@@ -7,35 +7,104 @@ Craker Framework
 ------------------------------------------------------------------------
 ПУБЛИЧНЫЕ МЕТОДЫ И КОНСТАНТЫ
 
+IMAGE_STATUS_PROCESS
+IMAGE_STATUS_PASSED
+IMAGE_STATUS_FAILED
+IMAGE_STATUS_MESSAGE
+IMAGE_STATUS_WARNING
 
-consoleMsg(string message) - отправить сообщение в консоль
-clearMessage() - очистить сообщения в таблице теста
-sendMessage(string step, string status, string comment, int image) - отправить сообщение в таблицу теста
-editMessage(int index, string step, string status, string comment, int image) - изменить сообщение в таблице теста
+PASSED
+FAILED
+STOPPED
+PROCESS
+COMPLETED
+WARNING
 
-testBegin() - подготовка теста
-testEnd() - завершение теста
+BrowserWindow
+BrowserView
 
-goToUrl(string url) - загрузить страницу
-getURL() - получить текущий url страницы
-getHtmlElement(string locator) - получить элемент
-clickHtmlElement(string locator) - нажать на элемент
-setValueFromInput(string locator, string value) - вставить значение в input
-getValueFromInput(string locator) - получить значение из input
-getValueFromTextarea(string locator) - получить значение из textarea
-getTextFromHtmlElement(string locator) - получить текст из элемента
-wait(int sec) - ожидание
+Tester() - конструктор класса
+ConsoleMsg() - отправить сообщение в консоль
+ClearMessage() - очистить сообщения в таблице теста
+SendMessage() - отправить сообщение в таблицу теста
+EditMessage() - изменить сообщение в таблице теста
 
-assertEquals(string expected, string actual)
-assertNotEquals(string expected, string actual)
-assertTrue(bool condition)
-assertFalse(bool condition)
+TestBegin() - подготовка теста
+TestEnd() - завершение теста
+TestStop() - остановка теста
+CheckTestStop() - проверка остановки теста
+BrowserClose() - закрыть окно браузера
+BrowserSize() - установить размер браузера
+BrowserSizeFullScreen() - установить размер браузера на весь экран
+ExecuteJS() - выполнить JavaScript код
+
+GetHtmlElement() - получить элемент веб страницы
+GoToUrl() - загрузить страницу
+GetURL() - получить url страницы
+Wait() - ожидание в секундах
+WaitVisibleElementById() - ждать появления элемента в секундах
+WaitVisibleElementByClass() - ждать появления элемента в секундах
+WaitVisibleElementByName() - ждать появления элемента в секундах
+WaitVisibleElementByTag() - ждать появления элемента в секундах
+WaitVisibleElementByCSS() - ждать появления элемента в секундах
+FindElementById() - найти элемент с ожиданием в секундах
+FindElementByClass() - найти элемент в DOM с ожиданием в секундах
+FindElementByName() - найти элемент в DOM с ожиданием в секундах
+FindElementByTag() - найти элемент в DOM с ожиданием в секундах
+FindElementByCSS() - найти элемент в DOM с ожиданием в секундах
+FindVisibleElementById() - найти визуально отображаемый элемент с ожиданием в секундах
+... (!)
+ClickElementById() - нажать на элемент
+ClickElementByClass() - нажать на элемент
+ClickElementByName() - нажать на элемент
+ClickElementByTag() - нажать на элемент
+ClickElementByCSS() - нажать на элемент
+SetValueInElementById() - ввести значение в элемент input (!)
+SetValueInElementByClass() - ввести значение в элемент input
+SetValueInElementByName() - ввести значение в элемент input
+SetValueInElementByTag() - ввести значение в элемент input
+SetValueInElementByCSS() - ввести значение в элемент input
+GetValueFromElementById() - получить значение из элемент input
+GetValueFromElementByClass() - получить значение из элемент input
+GetValueFromElementByName() - получить значение из элемент input
+GetValueFromElementByTag() - получить значение из элемент input
+GetValueFromElementByCSS() - получить значение из элемент input
+
+
+
+
+
+AssertEquals() - проверка результата
+AssertNotEquals() - проверка результата
+AssertTrue() - проверка результата
+AssertFalse() - проверка результата
 
 ------------------------------------------------------------------------
 
+ЛОКАЛЬНЫЕ МЕТОДЫ И КОНСТАНТЫ
 
+BY_ID
+BY_CLASS
+BY_NAME
+BY_TAG
+BY_CSS
 
+browserConsoleMsg
+browserSystemConsoleMsg
+browserCleadMessageStep
+browserSendMessageStep
+browserEditMessageStep
+browserResize
+checkStopTest
+resultAutotest
 
+statusPageLoad
+testStop
+assertStatus
+
+contentLoading() - событие при завершении загрузки страницы
+resultAutotestSuccess() - отправить результат проверки автотеста
+findVisibleElementAsync() - определить визуальное отображение элемента
 
 
 

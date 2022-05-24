@@ -502,7 +502,7 @@ namespace Hat
             try
             {
                 treeViewProject.Nodes.Clear();
-                if (Config.projectPath != "(не открыть)")
+                if (Config.projectPath != "(не открыт)")
                 {
                     treeViewProject.Nodes.Add(Config.projectPath, getFolderName(Config.projectPath), 0, 0);
                     openProjectFolder(Config.projectPath, treeViewProject.Nodes);
@@ -794,7 +794,8 @@ namespace Hat
         {
             try
             {
-                Process.Start(Config.projectPath);
+                if (Config.projectPath != "(не открыт)") Process.Start(Config.projectPath);
+                else consoleMsg("Проект не открыт");
             }
             catch (Exception ex)
             {
