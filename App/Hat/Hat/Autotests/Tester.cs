@@ -37,6 +37,7 @@ namespace HatFrameworkDev
         private const string BY_CSS = "BY_CSS";
 
         private MethodInfo browserConsoleMsg;       // функция: consoleMsg - вывод сообщения в консоль приложения
+        private MethodInfo browserConsoleMsgError;  // функция: consoleMsgError - вывод сообщения об ошибке в консоль приложения
         private MethodInfo browserSystemConsoleMsg; // функция: systemConsoleMsg - вывод сообщения в системную консоль
         private MethodInfo browserCleadMessageStep; // функция: cleadMessageStep - очистка всех шагов в таблице "тест"
         private MethodInfo browserSendMessageStep;  // функция: sendMessageStep - вывести сообщение в таблицу "тест"
@@ -55,6 +56,7 @@ namespace HatFrameworkDev
             {
                 BrowserWindow = browserForm;
                 browserConsoleMsg = BrowserWindow.GetType().GetMethod("consoleMsg");
+                browserConsoleMsgError = BrowserWindow.GetType().GetMethod("consoleMsgError");
                 browserSystemConsoleMsg = BrowserWindow.GetType().GetMethod("systemConsoleMsg");
                 browserCleadMessageStep = BrowserWindow.GetType().GetMethod("cleadMessageStep");
                 browserSendMessageStep = BrowserWindow.GetType().GetMethod("sendMessageStep");
@@ -144,6 +146,18 @@ namespace HatFrameworkDev
             try
             {
                 browserConsoleMsg.Invoke(BrowserWindow, new object[] { message });
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        public void ConsoleMsgError(string message)
+        {
+            try
+            {
+                browserConsoleMsgError.Invoke(BrowserWindow, new object[] { message });
             }
             catch (Exception ex)
             {

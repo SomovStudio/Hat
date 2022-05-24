@@ -69,27 +69,7 @@ namespace Hat
 
         private void BrowserForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            /*
-            try
-            {
-                if (testSuccess == false)
-                {
-                    throw new Exception("Tests ended. Finished: FAILURE");
-                }
-                else
-                {
-                    systemConsoleMsg(Environment.NewLine + "==============================");
-                    systemConsoleMsg("Tests ended. Finished: SUCCESS");
-                    Environment.Exit(0);
-                }
-            }
-            finally
-            {
-                systemConsoleMsg(Environment.NewLine + "==============================");
-                systemConsoleMsg("Tests ended. Finished: FAILURE");
-                Environment.Exit(1);
-            }
-            */
+            
         }
 
         private void BrowserForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -123,6 +103,19 @@ namespace Hat
                 MessageBox.Show(message);
             }
         }
+
+        public void consoleMsgError(string message)
+        {
+            richTextBoxConsole.AppendText("[" + DateTime.Now.ToString() + "] ОШИБКА: " + message + Environment.NewLine);
+            richTextBoxConsole.ScrollToCaret();
+            systemConsoleMsg("- - - - - - - - - - - - - - - - - - - - - - - - - - - -", default, default, default, true);
+            systemConsoleMsg("Произошла ошибка:", default, ConsoleColor.Black, ConsoleColor.Red, true);
+            systemConsoleMsg(message, default, default, default, true);
+            systemConsoleMsg("- - - - - - - - - - - - - - - - - - - - - - - - - - - -", default, default, default, true);
+            resultAutotest(false);
+            if (Config.commandLineMode == true) Close();
+        }
+
 
         public void systemConsoleMsg(string message, Encoding encoding, ConsoleColor backgroundColor, ConsoleColor foregroundColor, bool newLine)
         {

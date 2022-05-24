@@ -25,6 +25,7 @@ BrowserView - область отображения страницы
 
 Tester() - конструктор класса
 ConsoleMsg() - отправить сообщение в консоль
+ConsoleMsgError() - отправить сообщение об ошибке в консоль
 ClearMessage() - очистить сообщения в таблице теста
 SendMessage() - отправить сообщение в таблицу теста
 EditMessage() - изменить сообщение в таблице теста
@@ -41,12 +42,14 @@ ExecuteJavaScriptAsync() - выполнить JavaScript код
 GetHtmlElementAsync() - получить элемент веб страницы
 GoToUrlAsync() - загрузить страницу
 GetUrlAsync() - получить url страницы
+
 WaitAsync() - ожидание в секундах
 WaitVisibleElementByIdAsync() - ждать появления элемента в секундах
 WaitVisibleElementByClassAsync() - ждать появления элемента в секундах
 WaitVisibleElementByNameAsync() - ждать появления элемента в секундах
 WaitVisibleElementByTagAsync() - ждать появления элемента в секундах
 WaitVisibleElementByCssAsync() - ждать появления элемента в секундах
+
 FindElementByIdAsync() - найти элемент с ожиданием в секундах
 FindElementByClassAsync() - найти элемент в DOM с ожиданием в секундах
 FindElementByNameAsync() - найти элемент в DOM с ожиданием в секундах
@@ -57,11 +60,13 @@ FindVisibleElementByClassAsync() - найти визуально отображ�
 FindVisibleElementByNameAsync() - найти визуально отображаемый элемент с ожиданием в секундах
 FindVisibleElementByTagAsync() - найти визуально отображаемый элемент с ожиданием в секундах
 FindVisibleElementByCssAsync()  - найти визуально отображаемый элемент с ожиданием в секундах
+
 ClickElementByIdAsync() - нажать на элемент
 ClickElementByClassAsync() - нажать на элемент
 ClickElementByNameAsync() - нажать на элемент
 ClickElementByTagAsync() - нажать на элемент
 ClickElementByCssAsync() - нажать на элемент
+
 SetValueInElementByIdAsync() - ввести значение в элемент input (!)
 SetValueInElementByClassAsync() - ввести значение в элемент input
 SetValueInElementByNameAsync() - ввести значение в элемент input
@@ -93,6 +98,7 @@ BY_TAG
 BY_CSS
 
 browserConsoleMsg
+browserConsoleMsgError
 browserSystemConsoleMsg
 browserCleadMessageStep
 browserSendMessageStep
