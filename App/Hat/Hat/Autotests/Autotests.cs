@@ -74,22 +74,41 @@ namespace Hat
         public static async Task devTestStutsAsync()
         {
             HatFrameworkDev.Tester tester = new HatFrameworkDev.Tester(Config.browserForm);
-            await tester.TestBegin();
-            await tester.BrowserSize(800, 600);
-            await tester.GoToUrl("https://somovstudio.github.io/test.html", 5);
-            await tester.FindElementById("result", 5);
-            await tester.SetValueInElementById("login", "admin");
-            await tester.Wait(2);
-            await tester.SetValueInElementById("pass", "0000");
-            await tester.Wait(2);
-            await tester.ClickElementById("buttonLogin");
-            await tester.Wait(2);
-            string actual = await tester.GetValueFromElementById("textarea");
+            await tester.TestBeginAsync();
+            await tester.BrowserSizeAsync(800, 600);
+            await tester.GoToUrlAsync("https://somovstudio.github.io/test.html", 5);
+            await tester.FindVisibleElementByIdAsync("result", 5);
+            await tester.SetValueInElementByIdAsync("login", "admin");
+            await tester.WaitAsync(2);
+            await tester.SetValueInElementByIdAsync("pass", "0000");
+            await tester.WaitAsync(2);
+            await tester.ClickElementByIdAsync("buttonLogin");
+            await tester.WaitAsync(2);
+            string actual = await tester.GetValueFromElementByIdAsync("textarea");
             string expected = "\"PASSED\"";
-            await tester.FindElementById("result", 5);
-            await tester.WaitVisibleElementById("result", 5);
-            await tester.AssertEquals(expected, actual);
+            await tester.FindVisibleElementByIdAsync("result", 5);
+            await tester.WaitVisibleElementByIdAsync("result", 5);
+            await tester.AssertEqualsAsync(expected, actual);
+            await tester.TestEndAsync();
+
+            
+            /*
+            HatFrameworkDev.Tester tester = new HatFrameworkDev.Tester(Config.browserForm);
+            await tester.TestBegin();
+            await tester.GoToUrl("https://mgts.ru/", 5);
+            await tester.WaitVisibleElementById("headerPartMGTS", 25);
+            await tester.ClickElementByCSS("#header > div.header_second-row.header_desktop > div > div > div.header_action-btn > button");
+            await tester.WaitVisibleElementById("popup", 5);
+            await tester.SetValueInElementByCSS("#popup_name", "Тестирование Зионек");
+            await tester.Wait(2);
+            await tester.SetValueInElementByCSS("#popup_phone", "9999999999");
+            await tester.Wait(2);
+            await tester.ClickElementById("SUBMIT_ORDER");
+            await tester.Wait(5);
+            string order = await tester.GetValueFromElementById("last_order_sended");
+            await tester.AssertNotEquals(order, "\"\"");
             await tester.TestEnd();
+            */
         }
 
         public static void readNodes(TreeNodeCollection _nodes)
@@ -172,8 +191,9 @@ namespace Hat
 {
     public static class ExamplePage
     {
-        public static string inputSearchName = ""//input[@name='q']"";
-        public static string searchResultsClass = ""//div[@class='g']"";
+        public static string URL = ""https://somovstudio.github.io/test.html"";        
+        public static string inputLogin = ""#login"";
+        public static string inputPass = ""#pass"";
     }
 }
 ";
@@ -200,7 +220,7 @@ namespace Hat
     {
         public void check()
         {
-            MessageBox.Show(ExamplePage.inputSearchName);
+            MessageBox.Show(ExamplePage.URL);
         }
     }
 }
@@ -241,30 +261,29 @@ namespace Hat
 
         public async Task setUp()
         {
-            await tester.BrowserSize(800, 600);
+            await tester.BrowserSizeAsync(800, 600);
         }
 
         public async Task test()
         {
-            await tester.TestBegin();
-            await tester.GoToUrl(""https://somovstudio.github.io/test.html"", 5);
-            await tester.FindElementById(""result"", 5);
-            await tester.SetValueInElementById(""login"", ""admin"");
-            await tester.Wait(2);
-            await tester.SetValueInElementById(""pass"", ""0000"");
-            await tester.Wait(2);
-            await tester.ClickElementById(""buttonLogin"");
-            await tester.Wait(2);
-            string actual = await tester.GetValueFromElementById(""textarea"");
+            await tester.TestBeginAsync();
+            await tester.GoToUrlAsync(""https://somovstudio.github.io/test.html"", 5);
+            await tester.WaitVisibleElementByIdAsync(""login"", 15);
+            await tester.SetValueInElementByIdAsync(""login"", ""admin"");
+            await tester.WaitAsync(2);
+            await tester.SetValueInElementByIdAsync(""pass"", ""0000"");
+            await tester.WaitAsync(2);
+            await tester.ClickElementByIdAsync(""buttonLogin"");
+            await tester.WaitVisibleElementByIdAsync(""result"", 5);
+            string actual = await tester.GetValueFromElementByIdAsync(""textarea"");
             string expected = ""\""PASSED\"""";
-            await tester.FindElementById(""result"", 5);
-            await tester.AssertEquals(expected, actual);
-            await tester.TestEnd();
+            await tester.AssertEqualsAsync(expected, actual);
+            await tester.TestEndAsync();
         }
 
         public async Task tearDown()
         {
-            await tester.BrowserClose();
+            await tester.BrowserCloseAsync();
         }
     }
 }

@@ -420,8 +420,8 @@
             // toolStripStatusLabelProjectPath
             // 
             this.toolStripStatusLabelProjectPath.Name = "toolStripStatusLabelProjectPath";
-            this.toolStripStatusLabelProjectPath.Size = new System.Drawing.Size(76, 17);
-            this.toolStripStatusLabelProjectPath.Text = "(не открыть)";
+            this.toolStripStatusLabelProjectPath.Size = new System.Drawing.Size(70, 17);
+            this.toolStripStatusLabelProjectPath.Text = "(не открыт)";
             // 
             // toolStripStatusLabel1
             // 
@@ -805,10 +805,11 @@
             // 
             this.imageListProject.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageListProject.ImageStream")));
             this.imageListProject.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageListProject.Images.SetKeyName(0, "folder.png");
+            this.imageListProject.Images.SetKeyName(0, "folder_black.png");
             this.imageListProject.Images.SetKeyName(1, "page_white_csharp.png");
             this.imageListProject.Images.SetKeyName(2, "page_white_text.png");
             this.imageListProject.Images.SetKeyName(3, "page_gear.png");
+            this.imageListProject.Images.SetKeyName(4, "folder.png");
             // 
             // toolStripProject
             // 
@@ -1167,7 +1168,7 @@
             this.toolStripMenuItem3,
             this.остановитьТестToolStripMenuItem1});
             this.contextMenuStripTest.Name = "contextMenuStripTest";
-            this.contextMenuStripTest.Size = new System.Drawing.Size(253, 98);
+            this.contextMenuStripTest.Size = new System.Drawing.Size(253, 76);
             // 
             // подробнаяИнформацияОШагеToolStripMenuItem
             // 
@@ -1525,10 +1526,11 @@
             this.textBoxUserAgent.Location = new System.Drawing.Point(165, 16);
             this.textBoxUserAgent.Name = "textBoxUserAgent";
             this.textBoxUserAgent.ReadOnly = true;
-            this.textBoxUserAgent.Size = new System.Drawing.Size(747, 20);
+            this.textBoxUserAgent.Size = new System.Drawing.Size(689, 20);
             this.textBoxUserAgent.TabIndex = 1;
             this.textBoxUserAgent.Text = "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/14.0.83" +
     "5.202 Safari/535.1";
+            this.textBoxUserAgent.TextChanged += new System.EventHandler(this.textBoxUserAgent_TextChanged);
             // 
             // checkBoxUserAgent
             // 

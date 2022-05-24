@@ -1,65 +1,119 @@
 Craker Framework
 =========================================================
 
-consoleMsg(string message) - отправить сообщение в консоль
-clearMessage() - очистить сообщения в таблице теста
-sendMessage(string step, string status, string comment, int image) - отправить сообщение в таблицу теста
-editMessage(int index, string step, string status, string comment, int image) - изменить сообщение в таблице теста
+Справочник по HTML: http://htmlbook.ru/html
+Универсальные атрибуты: http://htmlbook.ru/html/attr/common
 
-testBegin() - подготовка теста
-testEnd() - завершение теста
+------------------------------------------------------------------------
+ПУБЛИЧНЫЕ МЕТОДЫ И КОНСТАНТЫ
 
-goToUrl(string url) - загрузить страницу
-getURL() - получить текущий url страницы
-getHtmlElement(string locator) - получить элемент
-clickHtmlElement(string locator) - нажать на элемент
-setValueFromInput(string locator, string value) - вставить значение в input
-getValueFromInput(string locator) - получить значение из input
-getValueFromTextarea(string locator) - получить значение из textarea
-getTextFromHtmlElement(string locator) - получить текст из элемента
-wait(int sec) - ожидание
+IMAGE_STATUS_PROCESS
+IMAGE_STATUS_PASSED
+IMAGE_STATUS_FAILED
+IMAGE_STATUS_MESSAGE
+IMAGE_STATUS_WARNING
 
-assertEquals(string expected, string actual)
-assertNotEquals(string expected, string actual)
-assertTrue(bool condition)
-assertFalse(bool condition)
+PASSED
+FAILED
+STOPPED
+PROCESS
+COMPLETED
+WARNING
 
-Правила
-1. файл с расширением .cs
-2. имя файла такое же как имя класса
-3. имена не должны повторятся в рамках одного проекта
+BrowserWindow - окно браузера
+BrowserView - область отображения страницы
+
+Tester() - конструктор класса
+ConsoleMsg() - отправить сообщение в консоль
+ConsoleMsgError() - отправить сообщение об ошибке в консоль
+ClearMessage() - очистить сообщения в таблице теста
+SendMessage() - отправить сообщение в таблицу теста
+EditMessage() - изменить сообщение в таблице теста
+
+TestBeginAsync() - подготовка теста
+TestEndAsync() - завершение теста
+TestStopAsync() - остановка теста
+CheckTestStop() - проверка остановки теста
+BrowserCloseAsync() - закрыть окно браузера
+BrowserSizeAsync() - установить размер браузера
+BrowserFullScreenAsync() - установить размер браузера на весь экран
+ExecuteJavaScriptAsync() - выполнить JavaScript код
+
+GetHtmlElementAsync() - получить элемент веб страницы
+GoToUrlAsync() - загрузить страницу
+GetUrlAsync() - получить url страницы
+
+WaitAsync() - ожидание в секундах
+WaitVisibleElementByIdAsync() - ждать появления элемента в секундах
+WaitVisibleElementByClassAsync() - ждать появления элемента в секундах
+WaitVisibleElementByNameAsync() - ждать появления элемента в секундах
+WaitVisibleElementByTagAsync() - ждать появления элемента в секундах
+WaitVisibleElementByCssAsync() - ждать появления элемента в секундах
+
+FindElementByIdAsync() - найти элемент с ожиданием в секундах
+FindElementByClassAsync() - найти элемент в DOM с ожиданием в секундах
+FindElementByNameAsync() - найти элемент в DOM с ожиданием в секундах
+FindElementByTagAsync() - найти элемент в DOM с ожиданием в секундах
+FindElementByCssAsync() - найти элемент в DOM с ожиданием в секундах
+FindVisibleElementByIdAsync() - найти визуально отображаемый элемент с ожиданием в секундах
+FindVisibleElementByClassAsync() - найти визуально отображаемый элемент с ожиданием в секундах
+FindVisibleElementByNameAsync() - найти визуально отображаемый элемент с ожиданием в секундах
+FindVisibleElementByTagAsync() - найти визуально отображаемый элемент с ожиданием в секундах
+FindVisibleElementByCssAsync()  - найти визуально отображаемый элемент с ожиданием в секундах
+
+ClickElementByIdAsync() - нажать на элемент
+ClickElementByClassAsync() - нажать на элемент
+ClickElementByNameAsync() - нажать на элемент
+ClickElementByTagAsync() - нажать на элемент
+ClickElementByCssAsync() - нажать на элемент
+
+SetValueInElementByIdAsync() - ввести значение в элемент input (!)
+SetValueInElementByClassAsync() - ввести значение в элемент input
+SetValueInElementByNameAsync() - ввести значение в элемент input
+SetValueInElementByTagAsync() - ввести значение в элемент input
+SetValueInElementByCssAsync() - ввести значение в элемент input
+GetValueFromElementByIdAsync() - получить значение из элемент input
+GetValueFromElementByClassAsync() - получить значение из элемент input
+GetValueFromElementByNameAsync() - получить значение из элемент input
+GetValueFromElementByTagAsync() - получить значение из элемент input
+GetValueFromElementByCssAsync() - получить значение из элемент input
+
+
+
+
+
+AssertEqualsAsync() - проверка результата
+AssertNotEqualsAsync() - проверка результата
+AssertTrueAsync() - проверка результата
+AssertFalseAsync() - проверка результата
 
 ------------------------------------------------------------------------
 
-Запуск из командной строки:
+ЛОКАЛЬНЫЕ МЕТОДЫ И КОНСТАНТЫ
 
-C:\Git\SomovStudio\Hat\App\Hat\Hat\bin\Debug>Hat.exe ExampleTest.cs C:\Users\Catfish\Desktop\project
+BY_ID
+BY_CLASS
+BY_NAME
+BY_TAG
+BY_CSS
 
-------------------------------------------------------------------------
+browserConsoleMsg
+browserConsoleMsgError
+browserSystemConsoleMsg
+browserCleadMessageStep
+browserSendMessageStep
+browserEditMessageStep
+browserResize
+checkStopTest
+resultAutotest
 
-try
-{
+statusPageLoad
+testStop
+assertStatus
 
-}
-catch (Exception ex)
-{
-	editMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
-	testStop = true;
-}
+contentLoading() - событие при завершении загрузки страницы
+resultAutotestSuccess() - отправить результат проверки автотеста
+findVisibleElementAsync() - определить визуальное отображение элемента
 
-try
-{
 
-}
-catch (Exception ex)
-{
-	consoleMsg("Ошибка: " + ex.ToString());
-}
 
-------------------------------------------------------------------------
-
-{ 
-"Version": "1.0.0",
-"Encoding": "UTF-8 BOM",
-"EditorTopMost": true
-}

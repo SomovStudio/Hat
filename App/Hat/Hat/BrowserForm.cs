@@ -21,8 +21,8 @@ namespace Hat
             Config.encoding = WorkOnFiles.UTF_8_BOM;
             toolStripStatusLabelFileEncoding.Text = Config.encoding;
             Config.browserForm = this;
-            consoleMsg("Программа Hat версия 0.1");
-            systemConsoleMsg("Программа Hat версия 0.1", default, default, default, true);
+            consoleMsg("Программа Hat версия 1.0");
+            systemConsoleMsg("Программа Hat версия 1.0", default, default, default, true);
         }
 
         private bool stopTest = false;
@@ -69,27 +69,7 @@ namespace Hat
 
         private void BrowserForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            /*
-            try
-            {
-                if (testSuccess == false)
-                {
-                    throw new Exception("Tests ended. Finished: FAILURE");
-                }
-                else
-                {
-                    systemConsoleMsg(Environment.NewLine + "==============================");
-                    systemConsoleMsg("Tests ended. Finished: SUCCESS");
-                    Environment.Exit(0);
-                }
-            }
-            finally
-            {
-                systemConsoleMsg(Environment.NewLine + "==============================");
-                systemConsoleMsg("Tests ended. Finished: FAILURE");
-                Environment.Exit(1);
-            }
-            */
+            
         }
 
         private void BrowserForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -123,6 +103,19 @@ namespace Hat
                 MessageBox.Show(message);
             }
         }
+
+        public void consoleMsgError(string message)
+        {
+            richTextBoxConsole.AppendText("[" + DateTime.Now.ToString() + "] ОШИБКА: " + message + Environment.NewLine);
+            richTextBoxConsole.ScrollToCaret();
+            systemConsoleMsg("- - - - - - - - - - - - - - - - - - - - - - - - - - - -", default, default, default, true);
+            systemConsoleMsg("Произошла ошибка:", default, ConsoleColor.Black, ConsoleColor.Red, true);
+            systemConsoleMsg(message, default, default, default, true);
+            systemConsoleMsg("- - - - - - - - - - - - - - - - - - - - - - - - - - - -", default, default, default, true);
+            resultAutotest(false);
+            if (Config.commandLineMode == true) Close();
+        }
+
 
         public void systemConsoleMsg(string message, Encoding encoding, ConsoleColor backgroundColor, ConsoleColor foregroundColor, bool newLine)
         {
@@ -221,33 +214,39 @@ namespace Hat
         }
 
         /* Настройка UserAgent */
-        public void UserAgent(string value)
+        public void userAgent(string value)
         {
-            if (value != null)
+            if (Config.defaultUserAgent == "" && webView2.CoreWebView2.Settings.UserAgent != null)
             {
-                checkBoxUserAgent.Checked = false;
-                textBoxUserAgent.ReadOnly = false;
-                textBoxUserAgent.Text = value;
+                Config.defaultUserAgent = webView2.CoreWebView2.Settings.UserAgent;
             }
-            else
-            {
-                checkBoxUserAgent.Checked = true;
-            }
-            consoleMsg("Выполнена настройка User Agent");
+            
+            textBoxUserAgent.Text = value;
+            webView2.CoreWebView2.Settings.UserAgent = textBoxUserAgent.Text;
+            checkBoxUserAgent.Checked = false;
+            textBoxUserAgent.ReadOnly = false;
         }
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
             if (checkBoxUserAgent.Checked)
             {
-                textBoxUserAgent.Text = "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/14.0.835.202 Safari/535.1";
                 textBoxUserAgent.ReadOnly = true;
+                textBoxUserAgent.Text = Config.defaultUserAgent;
             }
             else
             {
                 textBoxUserAgent.ReadOnly = false;
             }
-            consoleMsg("Выполнена настройка User Agent");
+            webView2.CoreWebView2.Settings.UserAgent = textBoxUserAgent.Text;
+        }
+
+        private void textBoxUserAgent_TextChanged(object sender, EventArgs e)
+        {
+            if (checkBoxUserAgent.Checked == false && textBoxUserAgent.ReadOnly == false)
+            {
+                webView2.CoreWebView2.Settings.UserAgent = textBoxUserAgent.Text;
+            }
         }
 
         private void toolStripButtonBack_Click(object sender, EventArgs e)
@@ -306,6 +305,12 @@ namespace Hat
             {
                 toolStripComboBoxUrl.Text = webView2.Source.ToString();
                 consoleMsg("Загружена страница: " + webView2.Source.ToString());
+                if (webView2.CoreWebView2.Settings.UserAgent != null && Config.defaultUserAgent == "")
+                {
+                    Config.defaultUserAgent = webView2.CoreWebView2.Settings.UserAgent;
+                    textBoxUserAgent.Text = Config.defaultUserAgent;
+                }
+                consoleMsg("Текущий User-Agent: " + webView2.CoreWebView2.Settings.UserAgent);
             }
             catch (Exception ex)
             {
@@ -502,7 +507,7 @@ namespace Hat
             try
             {
                 treeViewProject.Nodes.Clear();
-                if (Config.projectPath != "(не открыть)")
+                if (Config.projectPath != "(не открыт)")
                 {
                     treeViewProject.Nodes.Add(Config.projectPath, getFolderName(Config.projectPath), 0, 0);
                     openProjectFolder(Config.projectPath, treeViewProject.Nodes);
@@ -794,7 +799,8 @@ namespace Hat
         {
             try
             {
-                Process.Start(Config.projectPath);
+                if (Config.projectPath != "(не открыт)") Process.Start(Config.projectPath);
+                else consoleMsg("Проект не открыт");
             }
             catch (Exception ex)
             {
@@ -1628,7 +1634,8 @@ namespace Hat
 
         private void toolStripButton13_Click(object sender, EventArgs e)
         {
-            Autotests.devTestStutsAsync();
+            //Autotests.devTestStutsAsync();
+            consoleMsg(webView2.CoreWebView2.Settings.UserAgent + " [" + Config.defaultUserAgent + "]");
         }
 
         

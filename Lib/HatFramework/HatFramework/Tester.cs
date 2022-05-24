@@ -13,11 +13,12 @@ namespace HatFramework
 {
     public class Tester
     {
-        public const int IMAGE_STATUS_PROCESS = 0;
-        public const int IMAGE_STATUS_PASSED = 1;
-        public const int IMAGE_STATUS_FAILED = 2;
-        public const int IMAGE_STATUS_MESSAGE = 3;
-        public const int IMAGE_STATUS_WARNING = 4;
+        /* Глобальные константы и переменные */
+        public const int IMAGE_STATUS_PROCESS = 0;          // изображение "в процессе"
+        public const int IMAGE_STATUS_PASSED = 1;           // изображение "успешно"
+        public const int IMAGE_STATUS_FAILED = 2;           // изображение "провально"
+        public const int IMAGE_STATUS_MESSAGE = 3;          // изображение "сообщение"
+        public const int IMAGE_STATUS_WARNING = 4;          // изображение "предупреждение"
         public const string PASSED = "Успешно";
         public const string FAILED = "Провально";
         public const string STOPPED = "Остановлено";
@@ -25,8 +26,15 @@ namespace HatFramework
         public const string COMPLETED = "Выполнено";
         public const string WARNING = "Предупреждение";
 
-        public Form BrowserWindow;                                      // объект: окно приложения
+        public Form BrowserWindow;      // объект: окно приложения
         public WebView2 BrowserView;    // объект: браузер
+
+        /* Локальные константы и переменные */
+        private const string BY_ID = "BY_ID";
+        private const string BY_CLASS = "BY_CLASS";
+        private const string BY_NAME = "BY_NAME";
+        private const string BY_TAG = "BY_TAG";
+        private const string BY_CSS = "BY_CSS";
 
         private MethodInfo browserConsoleMsg;       // функция: consoleMsg - вывод сообщения в консоль приложения
         private MethodInfo browserSystemConsoleMsg; // функция: systemConsoleMsg - вывод сообщения в системную консоль
@@ -36,6 +44,7 @@ namespace HatFramework
         private MethodInfo browserResize;           // функция: browserResize - изменить размер браузера
         private MethodInfo checkStopTest;           // функция: checkStopTest - получить статус остановки процесса тестирования
         private MethodInfo resultAutotest;          // функция: resultAutotest - устанавливает флаг общего результата выполнения теста
+
         private bool statusPageLoad = false;    // флаг: статус загрузки страницы
         private bool testStop = false;          // флаг: остановка теста
         private string assertStatus = null;     // флаг: рузельтат проверки
@@ -80,6 +89,51 @@ namespace HatFramework
             {
                 ConsoleMsg("Ошибка: " + ex.ToString());
             }
+        }
+
+        private async Task<bool> defineVisibleElementAsync(string by, string target)
+        {
+            bool found = false;
+            try
+            {
+                string script = "";
+                script += "(function(){ ";
+                if (by == BY_ID) script += $"var elem = document.getElementById('{target}');";
+                if (by == BY_CLASS) script += $"var elem = document.getElementsByClassName('{target}');";
+                if (by == BY_NAME) script += $"var elem = document.getElementsByName('{target}');";
+                if (by == BY_TAG) script += $"var elem = document.getElementsByTagName('{target}');";
+                if (by == BY_CSS) script += $"var elem = document.querySelector('{target}');";
+                script += "if (!(elem instanceof Element)) throw Error('DomUtil: elem is not an element.');";
+                script += "const style = getComputedStyle(elem);";
+                script += "if (style.display === 'none') return false;";
+                script += "if (style.visibility !== 'visible') return false;";
+                script += "if (style.opacity < 0.1) return false;";
+                script += "if (elem.offsetWidth + elem.offsetHeight + elem.getBoundingClientRect().height + elem.getBoundingClientRect().width === 0) return false;";
+                script += "const elemCenter = {";
+                script += "x: elem.getBoundingClientRect().left + elem.offsetWidth / 2,";
+                script += "y: elem.getBoundingClientRect().top + elem.offsetHeight / 2";
+                script += "};";
+                script += "if (elemCenter.x < 0) return false;";
+                script += "if (elemCenter.x > (document.documentElement.clientWidth || window.innerWidth)) return false;";
+                script += "if (elemCenter.y < 0) return false;";
+                script += "if (elemCenter.y > (document.documentElement.clientHeight || window.innerHeight)) return false;";
+                script += "let pointContainer = document.elementFromPoint(elemCenter.x, elemCenter.y);";
+                script += "do {";
+                script += "if (pointContainer === elem) return true;";
+                script += "} while (pointContainer = pointContainer.parentNode);";
+                script += "return false;";
+                script += "}());";
+
+                string result = await ExecuteJavaScriptAsync(script);
+                if (result != "null" && result != null && result == "true") found = true;
+                else found = false;
+            }
+            catch (Exception ex)
+            {
+                ConsoleMsg("Ошибка: " + ex.ToString());
+                TestStopAsync();
+            }
+            return found;
         }
 
         /* 
@@ -172,14 +226,14 @@ namespace HatFramework
         /* 
          * Методы для подготовки к тестированию и его завершению ====================================
          * */
-        public async Task TestBegin()
+        public async Task TestBeginAsync()
         {
             try
             {
                 testStop = false;
                 assertStatus = null;
                 ClearMessage();
-                int step = SendMessage("TestBegin()", PROCESS, "Инициализация теста", IMAGE_STATUS_PROCESS);
+                int step = SendMessage("TestBeginAsync()", PROCESS, "Инициализация теста", IMAGE_STATUS_PROCESS);
                 await BrowserView.EnsureCoreWebView2Async();
                 EditMessage(step, null, PASSED, "Выполнена инициализация теста", IMAGE_STATUS_PASSED);
                 ConsoleMsg("Тест запущен");
@@ -190,11 +244,11 @@ namespace HatFramework
             }
         }
 
-        public async Task TestEnd()
+        public async Task TestEndAsync()
         {
             try
             {
-                int step = SendMessage("TestEnd()", PROCESS, "Завершение теста", IMAGE_STATUS_PROCESS);
+                int step = SendMessage("TestEndAsync()", PROCESS, "Завершение теста", IMAGE_STATUS_PROCESS);
                 if (assertStatus == FAILED)
                 {
                     EditMessage(step, null, FAILED, "Тест завершен - шаги теста выполнены неуспешно", IMAGE_STATUS_FAILED);
@@ -213,7 +267,7 @@ namespace HatFramework
             }
         }
 
-        public async Task TestStop()
+        public async Task TestStopAsync()
         {
             testStop = true;
             assertStatus = FAILED;
@@ -236,12 +290,12 @@ namespace HatFramework
             return testStop;
         }
 
-        public async Task BrowserClose()
+        public async Task BrowserCloseAsync()
         {
             BrowserWindow.Close();
         }
 
-        public async Task BrowserSize(int width, int height)
+        public async Task BrowserSizeAsync(int width, int height)
         {
             try
             {
@@ -253,7 +307,7 @@ namespace HatFramework
             }
         }
 
-        public async Task BrowserSizeFullScreen()
+        public async Task BrowserFullScreenAsync()
         {
             try
             {
@@ -265,7 +319,7 @@ namespace HatFramework
             }
         }
 
-        public async Task<string> ExecuteJS(string script)
+        public async Task<string> ExecuteJavaScriptAsync(string script)
         {
             string result = null;
             try
@@ -283,10 +337,46 @@ namespace HatFramework
         /* 
          * Методы для выполнения действий ============================================================
          * */
-        public async Task GoToUrl(string url, int sec)
+        public async Task<HTMLElement> GetHtmlElementAsync(string locator)
+        {
+            int step = SendMessage($"GetHtmlElementAsync({locator})", PROCESS, "Полечить элемента", IMAGE_STATUS_PROCESS);
+            if (CheckTestStop(step) == true) return null;
+
+            HTMLElement htmlElement = new HTMLElement(this);
+            try
+            {
+                HTMLElement el = null;
+                var obj = await BrowserView.CoreWebView2.ExecuteScriptAsync("(function(locatorCss = '" + locator + "'){ var el = document.querySelector(locatorCss); var obj = { Locator: locatorCss, Id: el.id, Class: el.class, Name: el.name, Value: el.value }; return obj; }());");
+                el = JsonConvert.DeserializeObject<HTMLElement>(obj);
+                if (el == null)
+                {
+                    EditMessage(step, null, Tester.FAILED, $"Не удалось получить элемент {locator}", Tester.IMAGE_STATUS_FAILED);
+                    TestStopAsync();
+                }
+                else
+                {
+                    htmlElement = new HTMLElement(this);
+                    htmlElement.Locator = el.Locator;
+                    htmlElement.Id = el.Id;
+                    htmlElement.Name = el.Name;
+                    htmlElement.Class = el.Class;
+                    htmlElement.Value = el.Value;
+                    EditMessage(step, null, PASSED, "Элемент получен", IMAGE_STATUS_PASSED);
+                }
+            }
+            catch (Exception ex)
+            {
+                ConsoleMsg("Ошибка: " + ex.ToString());
+                EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
+                TestStopAsync();
+            }
+            return htmlElement;
+        }
+
+        public async Task GoToUrlAsync(string url, int sec)
         {
             statusPageLoad = false;
-            int step = SendMessage($"GoToUrl({url}, {sec})", PROCESS, "Загрузка страницы", IMAGE_STATUS_PROCESS);
+            int step = SendMessage($"GoToUrlAsync({url}, {sec})", PROCESS, "Загрузка страницы", IMAGE_STATUS_PROCESS);
             if (CheckTestStop(step) == true) return;
 
             try
@@ -312,20 +402,20 @@ namespace HatFramework
                 else
                 {
                     EditMessage(step, null, FAILED, "Страница не загружена", IMAGE_STATUS_FAILED);
-                    TestStop();
+                    TestStopAsync();
                 }
             }
             catch (Exception ex)
             {
                 ConsoleMsg("Ошибка: " + ex.ToString());
                 EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
-                TestStop();
+                TestStopAsync();
             }
         }
 
-        public async Task<string> GetURL()
+        public async Task<string> GetUrlAsync()
         {
-            int step = SendMessage("GetURL()", PROCESS, "Запрашивается текущий URL", IMAGE_STATUS_PROCESS);
+            int step = SendMessage("GetUrlAsync()", PROCESS, "Запрашивается текущий URL", IMAGE_STATUS_PROCESS);
             if (CheckTestStop(step) == true) return null;
             string url = null;
             try
@@ -337,14 +427,14 @@ namespace HatFramework
             {
                 ConsoleMsg("Ошибка: " + ex.ToString());
                 EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
-                TestStop();
+                TestStopAsync();
             }
             return url;
         }
 
-        public async Task Wait(int sec)
+        public async Task WaitAsync(int sec)
         {
-            int step = SendMessage($"Wait({sec.ToString()})", PROCESS, $"Ожидание {sec.ToString()} секунд", IMAGE_STATUS_PROCESS);
+            int step = SendMessage($"WaitAsync({sec.ToString()})", PROCESS, $"Ожидание {sec.ToString()} секунд", IMAGE_STATUS_PROCESS);
             if (CheckTestStop(step) == true) return;
             try
             {
@@ -355,13 +445,13 @@ namespace HatFramework
             {
                 ConsoleMsg("Ошибка: " + ex.ToString());
                 EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
-                TestStop();
+                TestStopAsync();
             }
         }
 
-        public async Task WaitVisibleElementById(string id, int sec)
+        public async Task WaitVisibleElementByIdAsync(string id, int sec)
         {
-            int step = SendMessage($"WaitVisibleElementById({id}, {sec.ToString()})", PROCESS, $"Ожидание элемента {sec.ToString()} секунд", IMAGE_STATUS_PROCESS);
+            int step = SendMessage($"WaitVisibleElementByIdAsync({id}, {sec.ToString()})", PROCESS, $"Ожидание элемента {sec.ToString()} секунд", IMAGE_STATUS_PROCESS);
             if (CheckTestStop(step) == true) return;
             try
             {
@@ -394,7 +484,7 @@ namespace HatFramework
                 string result = null;
                 for (int i = 0; i < sec; i++)
                 {
-                    result = await ExecuteJS(script);
+                    result = await ExecuteJavaScriptAsync(script);
                     if (result != "null" && result != null && result == "true")
                     {
                         found = true;
@@ -407,56 +497,446 @@ namespace HatFramework
                 else
                 {
                     EditMessage(step, null, FAILED, $"Ожидание элемента - завершено (элемент не отображается)", IMAGE_STATUS_FAILED);
-                    TestStop();
+                    TestStopAsync();
                 }
             }
             catch (Exception ex)
             {
                 ConsoleMsg("Ошибка: " + ex.ToString());
                 EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
-                TestStop();
+                TestStopAsync();
             }
         }
 
-        public async Task<HTMLElement> GetHtmlElement(string locator)
+        public async Task WaitVisibleElementByClassAsync(string _class, int index, int sec)
         {
-            int step = SendMessage($"GetHtmlElement({locator})", PROCESS, "Полечить элемента", IMAGE_STATUS_PROCESS);
-            if (CheckTestStop(step) == true) return null;
-
-            HTMLElement htmlElement = new HTMLElement(this);
+            int step = SendMessage($"WaitVisibleElementByClassAsync({_class}, {index}, {sec.ToString()})", PROCESS, $"Ожидание элемента {sec.ToString()} секунд", IMAGE_STATUS_PROCESS);
+            if (CheckTestStop(step) == true) return;
             try
             {
-                HTMLElement el = null;
-                var obj = await BrowserView.CoreWebView2.ExecuteScriptAsync("(function(locatorCss = '" + locator + "'){ var el = document.querySelector(locatorCss); var obj = { Locator: locatorCss, Id: el.id, Class: el.class, Name: el.name, Value: el.value }; return obj; }());");
-                el = JsonConvert.DeserializeObject<HTMLElement>(obj);
-                if (el == null)
+                bool found = false;
+                string script = "";
+                script += "(function(){ ";
+                script += $"var elem = document.getElementsByClassName('{_class}')[{index}];";
+                script += "";
+                script += "if (!(elem instanceof Element)) throw Error('DomUtil: elem is not an element.');";
+                script += "const style = getComputedStyle(elem);";
+                script += "if (style.display === 'none') return false;";
+                script += "if (style.visibility !== 'visible') return false;";
+                script += "if (style.opacity < 0.1) return false;";
+                script += "if (elem.offsetWidth + elem.offsetHeight + elem.getBoundingClientRect().height + elem.getBoundingClientRect().width === 0) return false;";
+                script += "const elemCenter = {";
+                script += "x: elem.getBoundingClientRect().left + elem.offsetWidth / 2,";
+                script += "y: elem.getBoundingClientRect().top + elem.offsetHeight / 2";
+                script += "};";
+                script += "if (elemCenter.x < 0) return false;";
+                script += "if (elemCenter.x > (document.documentElement.clientWidth || window.innerWidth)) return false;";
+                script += "if (elemCenter.y < 0) return false;";
+                script += "if (elemCenter.y > (document.documentElement.clientHeight || window.innerHeight)) return false;";
+                script += "let pointContainer = document.elementFromPoint(elemCenter.x, elemCenter.y);";
+                script += "do {";
+                script += "if (pointContainer === elem) return true;";
+                script += "} while (pointContainer = pointContainer.parentNode);";
+                script += "return false;";
+                script += "}());";
+
+                string result = null;
+                for (int i = 0; i < sec; i++)
                 {
-                    EditMessage(step, null, Tester.FAILED, $"Не удалось получить элемент {locator}", Tester.IMAGE_STATUS_FAILED);
-                    TestStop();
+                    result = await ExecuteJavaScriptAsync(script);
+                    if (result != "null" && result != null && result == "true")
+                    {
+                        found = true;
+                        break;
+                    }
+                    await Task.Delay(1000);
                 }
+
+                if (found == true) EditMessage(step, null, PASSED, $"Ожидание элемента - завершено (элемент отображается)", IMAGE_STATUS_PASSED);
                 else
                 {
-                    htmlElement = new HTMLElement(this);
-                    htmlElement.Locator = el.Locator;
-                    htmlElement.Id = el.Id;
-                    htmlElement.Name = el.Name;
-                    htmlElement.Class = el.Class;
-                    htmlElement.Value = el.Value;
-                    EditMessage(step, null, PASSED, "Элемент получен", IMAGE_STATUS_PASSED);
+                    EditMessage(step, null, FAILED, $"Ожидание элемента - завершено (элемент не отображается)", IMAGE_STATUS_FAILED);
+                    TestStopAsync();
                 }
             }
             catch (Exception ex)
             {
                 ConsoleMsg("Ошибка: " + ex.ToString());
                 EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
-                TestStop();
+                TestStopAsync();
             }
-            return htmlElement;
         }
 
-        public async Task<bool> FindElementById(string id, int sec)
+        public async Task WaitVisibleElementByNameAsync(string name, int index, int sec)
         {
-            int step = SendMessage($"FindElementById({id}, {sec})", PROCESS, "Поиск элемента", IMAGE_STATUS_PROCESS);
+            int step = SendMessage($"WaitVisibleElementByNameAsync({name}, {index}, {sec.ToString()})", PROCESS, $"Ожидание элемента {sec.ToString()} секунд", IMAGE_STATUS_PROCESS);
+            if (CheckTestStop(step) == true) return;
+            try
+            {
+                bool found = false;
+                string script = "";
+                script += "(function(){ ";
+                script += $"var elem = document.getElementsByName('{name}')[{index}];";
+                script += "";
+                script += "if (!(elem instanceof Element)) throw Error('DomUtil: elem is not an element.');";
+                script += "const style = getComputedStyle(elem);";
+                script += "if (style.display === 'none') return false;";
+                script += "if (style.visibility !== 'visible') return false;";
+                script += "if (style.opacity < 0.1) return false;";
+                script += "if (elem.offsetWidth + elem.offsetHeight + elem.getBoundingClientRect().height + elem.getBoundingClientRect().width === 0) return false;";
+                script += "const elemCenter = {";
+                script += "x: elem.getBoundingClientRect().left + elem.offsetWidth / 2,";
+                script += "y: elem.getBoundingClientRect().top + elem.offsetHeight / 2";
+                script += "};";
+                script += "if (elemCenter.x < 0) return false;";
+                script += "if (elemCenter.x > (document.documentElement.clientWidth || window.innerWidth)) return false;";
+                script += "if (elemCenter.y < 0) return false;";
+                script += "if (elemCenter.y > (document.documentElement.clientHeight || window.innerHeight)) return false;";
+                script += "let pointContainer = document.elementFromPoint(elemCenter.x, elemCenter.y);";
+                script += "do {";
+                script += "if (pointContainer === elem) return true;";
+                script += "} while (pointContainer = pointContainer.parentNode);";
+                script += "return false;";
+                script += "}());";
+
+                string result = null;
+                for (int i = 0; i < sec; i++)
+                {
+                    result = await ExecuteJavaScriptAsync(script);
+                    if (result != "null" && result != null && result == "true")
+                    {
+                        found = true;
+                        break;
+                    }
+                    await Task.Delay(1000);
+                }
+
+                if (found == true) EditMessage(step, null, PASSED, $"Ожидание элемента - завершено (элемент отображается)", IMAGE_STATUS_PASSED);
+                else
+                {
+                    EditMessage(step, null, FAILED, $"Ожидание элемента - завершено (элемент не отображается)", IMAGE_STATUS_FAILED);
+                    TestStopAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                ConsoleMsg("Ошибка: " + ex.ToString());
+                EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
+                TestStopAsync();
+            }
+        }
+
+        public async Task WaitVisibleElementByTagAsync(string tag, int index, int sec)
+        {
+            int step = SendMessage($"WaitVisibleElementByTagAsync({tag}, {index}, {sec.ToString()})", PROCESS, $"Ожидание элемента {sec.ToString()} секунд", IMAGE_STATUS_PROCESS);
+            if (CheckTestStop(step) == true) return;
+            try
+            {
+                bool found = false;
+                string script = "";
+                script += "(function(){ ";
+                script += $"var elem = document.getElementsByTagName('{tag}')[{index}];";
+                script += "";
+                script += "if (!(elem instanceof Element)) throw Error('DomUtil: elem is not an element.');";
+                script += "const style = getComputedStyle(elem);";
+                script += "if (style.display === 'none') return false;";
+                script += "if (style.visibility !== 'visible') return false;";
+                script += "if (style.opacity < 0.1) return false;";
+                script += "if (elem.offsetWidth + elem.offsetHeight + elem.getBoundingClientRect().height + elem.getBoundingClientRect().width === 0) return false;";
+                script += "const elemCenter = {";
+                script += "x: elem.getBoundingClientRect().left + elem.offsetWidth / 2,";
+                script += "y: elem.getBoundingClientRect().top + elem.offsetHeight / 2";
+                script += "};";
+                script += "if (elemCenter.x < 0) return false;";
+                script += "if (elemCenter.x > (document.documentElement.clientWidth || window.innerWidth)) return false;";
+                script += "if (elemCenter.y < 0) return false;";
+                script += "if (elemCenter.y > (document.documentElement.clientHeight || window.innerHeight)) return false;";
+                script += "let pointContainer = document.elementFromPoint(elemCenter.x, elemCenter.y);";
+                script += "do {";
+                script += "if (pointContainer === elem) return true;";
+                script += "} while (pointContainer = pointContainer.parentNode);";
+                script += "return false;";
+                script += "}());";
+
+                string result = null;
+                for (int i = 0; i < sec; i++)
+                {
+                    result = await ExecuteJavaScriptAsync(script);
+                    if (result != "null" && result != null && result == "true")
+                    {
+                        found = true;
+                        break;
+                    }
+                    await Task.Delay(1000);
+                }
+
+                if (found == true) EditMessage(step, null, PASSED, $"Ожидание элемента - завершено (элемент отображается)", IMAGE_STATUS_PASSED);
+                else
+                {
+                    EditMessage(step, null, FAILED, $"Ожидание элемента - завершено (элемент не отображается)", IMAGE_STATUS_FAILED);
+                    TestStopAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                ConsoleMsg("Ошибка: " + ex.ToString());
+                EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
+                TestStopAsync();
+            }
+        }
+
+        public async Task WaitVisibleElementByCssAsync(string locator, int sec)
+        {
+            int step = SendMessage($"WaitVisibleElementByCssAsync({locator}, {sec.ToString()})", PROCESS, $"Ожидание элемента {sec.ToString()} секунд", IMAGE_STATUS_PROCESS);
+            if (CheckTestStop(step) == true) return;
+            try
+            {
+                bool found = false;
+                string script = "";
+                script += "(function(){ ";
+                script += $"var elem = document.querySelector('{locator}');";
+                script += "";
+                script += "if (!(elem instanceof Element)) throw Error('DomUtil: elem is not an element.');";
+                script += "const style = getComputedStyle(elem);";
+                script += "if (style.display === 'none') return false;";
+                script += "if (style.visibility !== 'visible') return false;";
+                script += "if (style.opacity < 0.1) return false;";
+                script += "if (elem.offsetWidth + elem.offsetHeight + elem.getBoundingClientRect().height + elem.getBoundingClientRect().width === 0) return false;";
+                script += "const elemCenter = {";
+                script += "x: elem.getBoundingClientRect().left + elem.offsetWidth / 2,";
+                script += "y: elem.getBoundingClientRect().top + elem.offsetHeight / 2";
+                script += "};";
+                script += "if (elemCenter.x < 0) return false;";
+                script += "if (elemCenter.x > (document.documentElement.clientWidth || window.innerWidth)) return false;";
+                script += "if (elemCenter.y < 0) return false;";
+                script += "if (elemCenter.y > (document.documentElement.clientHeight || window.innerHeight)) return false;";
+                script += "let pointContainer = document.elementFromPoint(elemCenter.x, elemCenter.y);";
+                script += "do {";
+                script += "if (pointContainer === elem) return true;";
+                script += "} while (pointContainer = pointContainer.parentNode);";
+                script += "return false;";
+                script += "}());";
+
+                string result = null;
+                for (int i = 0; i < sec; i++)
+                {
+                    result = await ExecuteJavaScriptAsync(script);
+                    if (result != "null" && result != null && result == "true")
+                    {
+                        found = true;
+                        break;
+                    }
+                    await Task.Delay(1000);
+                }
+
+                if (found == true) EditMessage(step, null, PASSED, $"Ожидание элемента - завершено (элемент отображается)", IMAGE_STATUS_PASSED);
+                else
+                {
+                    EditMessage(step, null, FAILED, $"Ожидание элемента - завершено (элемент не отображается)", IMAGE_STATUS_FAILED);
+                    TestStopAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                ConsoleMsg("Ошибка: " + ex.ToString());
+                EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
+                TestStopAsync();
+            }
+        }
+
+        public async Task<bool> FindElementByIdAsync(string id, int sec)
+        {
+            int step = SendMessage($"FindElementByIdAsync({id}, {sec})", PROCESS, "Поиск элемента", IMAGE_STATUS_PROCESS);
+            if (CheckTestStop(step) == true) return false;
+
+            bool found = false;
+            try
+            {
+                string script = "";
+                script += "(function(){ ";
+                script += $"var elem = document.getElementById('{id}');";
+                script += "return elem;";
+                script += "}());";
+
+                string result = null;
+                for (int i = 0; i < sec; i++)
+                {
+                    result = await ExecuteJavaScriptAsync(script);
+                    if (result != "null" && result != null)
+                    {
+                        found = true;
+                        break;
+                    }
+                    await Task.Delay(1000);
+                }
+
+                if (found == true) EditMessage(step, null, PASSED, "Поиск элемента - завершен (элемент найден)", IMAGE_STATUS_PASSED);
+                else EditMessage(step, null, WARNING, "Поиск элемента - завершен (элемент не найден)", IMAGE_STATUS_WARNING);
+            }
+            catch (Exception ex)
+            {
+                ConsoleMsg("Ошибка: " + ex.ToString());
+                EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
+                TestStopAsync();
+            }
+            return found;
+        }
+
+        public async Task<bool> FindElementByClassAsync(string _class, int index, int sec)
+        {
+            int step = SendMessage($"FindElementByClassAsync({_class}, {index}, {sec})", PROCESS, "Поиск элемента", IMAGE_STATUS_PROCESS);
+            if (CheckTestStop(step) == true) return false;
+
+            bool found = false;
+            try
+            {
+                string script = "";
+                script += "(function(){ ";
+                script += $"var elem = document.getElementsByClassName('{_class}')[{index}];";
+                script += "return elem;";
+                script += "}());";
+
+                string result = null;
+                for (int i = 0; i < sec; i++)
+                {
+                    result = await ExecuteJavaScriptAsync(script);
+                    if (result != "null" && result != null)
+                    {
+                        found = true;
+                        break;
+                    }
+                    await Task.Delay(1000);
+                }
+
+                if (found == true) EditMessage(step, null, PASSED, "Поиск элемента - завершен (элемент найден)", IMAGE_STATUS_PASSED);
+                else EditMessage(step, null, WARNING, "Поиск элемента - завершен (элемент не найден)", IMAGE_STATUS_WARNING);
+            }
+            catch (Exception ex)
+            {
+                ConsoleMsg("Ошибка: " + ex.ToString());
+                EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
+                TestStopAsync();
+            }
+            return found;
+        }
+
+        public async Task<bool> FindElementByNameAsync(string name, int index, int sec)
+        {
+            int step = SendMessage($"FindElementByNameAsync({name}, {index}, {sec})", PROCESS, "Поиск элемента", IMAGE_STATUS_PROCESS);
+            if (CheckTestStop(step) == true) return false;
+
+            bool found = false;
+            try
+            {
+                string script = "";
+                script += "(function(){ ";
+                script += $"var elem = document.getElementsByName('{name}')[{index}];";
+                script += "return elem;";
+                script += "}());";
+
+                string result = null;
+                for (int i = 0; i < sec; i++)
+                {
+                    result = await ExecuteJavaScriptAsync(script);
+                    if (result != "null" && result != null)
+                    {
+                        found = true;
+                        break;
+                    }
+                    await Task.Delay(1000);
+                }
+
+                if (found == true) EditMessage(step, null, PASSED, "Поиск элемента - завершен (элемент найден)", IMAGE_STATUS_PASSED);
+                else EditMessage(step, null, WARNING, "Поиск элемента - завершен (элемент не найден)", IMAGE_STATUS_WARNING);
+            }
+            catch (Exception ex)
+            {
+                ConsoleMsg("Ошибка: " + ex.ToString());
+                EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
+                TestStopAsync();
+            }
+            return found;
+        }
+
+        public async Task<bool> FindElementByTagAsync(string tag, int index, int sec)
+        {
+            int step = SendMessage($"FindElementByTagAsync({tag}, {index}, {sec})", PROCESS, "Поиск элемента", IMAGE_STATUS_PROCESS);
+            if (CheckTestStop(step) == true) return false;
+
+            bool found = false;
+            try
+            {
+                string script = "";
+                script += "(function(){ ";
+                script += $"var elem = document.getElementsByTagName('{tag}')[{index}];";
+                script += "return elem;";
+                script += "}());";
+
+                string result = null;
+                for (int i = 0; i < sec; i++)
+                {
+                    result = await ExecuteJavaScriptAsync(script);
+                    if (result != "null" && result != null)
+                    {
+                        found = true;
+                        break;
+                    }
+                    await Task.Delay(1000);
+                }
+
+                if (found == true) EditMessage(step, null, PASSED, "Поиск элемента - завершен (элемент найден)", IMAGE_STATUS_PASSED);
+                else EditMessage(step, null, WARNING, "Поиск элемента - завершен (элемент не найден)", IMAGE_STATUS_WARNING);
+            }
+            catch (Exception ex)
+            {
+                ConsoleMsg("Ошибка: " + ex.ToString());
+                EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
+                TestStopAsync();
+            }
+            return found;
+        }
+
+        public async Task<bool> FindElementByCssAsync(string locator, int sec)
+        {
+            int step = SendMessage($"FindElementByCssAsync({locator}, {sec})", PROCESS, "Поиск элемента", IMAGE_STATUS_PROCESS);
+            if (CheckTestStop(step) == true) return false;
+
+            bool found = false;
+            try
+            {
+                string script = "";
+                script += "(function(){ ";
+                script += $"var elem = document.querySelector('{locator}');";
+                script += "return elem;";
+                script += "}());";
+
+                string result = null;
+                for (int i = 0; i < sec; i++)
+                {
+                    result = await ExecuteJavaScriptAsync(script);
+                    if (result != "null" && result != null)
+                    {
+                        found = true;
+                        break;
+                    }
+                    await Task.Delay(1000);
+                }
+
+                if (found == true) EditMessage(step, null, PASSED, "Поиск элемента - завершен (элемент найден)", IMAGE_STATUS_PASSED);
+                else EditMessage(step, null, WARNING, "Поиск элемента - завершен (элемент не найден)", IMAGE_STATUS_WARNING);
+            }
+            catch (Exception ex)
+            {
+                ConsoleMsg("Ошибка: " + ex.ToString());
+                EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
+                TestStopAsync();
+            }
+            return found;
+        }
+
+        public async Task<bool> FindVisibleElementByIdAsync(string id, int sec)
+        {
+            int step = SendMessage($"FindVisibleElementByIdAsync({id}, {sec})", PROCESS, "Поиск элемента", IMAGE_STATUS_PROCESS);
             if (CheckTestStop(step) == true) return false;
 
             bool found = false;
@@ -490,7 +970,7 @@ namespace HatFramework
                 string result = null;
                 for (int i = 0; i < sec; i++)
                 {
-                    result = await ExecuteJS(script);
+                    result = await ExecuteJavaScriptAsync(script);
                     if (result != "null" && result != null && result == "true")
                     {
                         found = true;
@@ -506,24 +986,28 @@ namespace HatFramework
             {
                 ConsoleMsg("Ошибка: " + ex.ToString());
                 EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
-                TestStop();
+                TestStopAsync();
             }
             return found;
         }
 
-        public async Task ClickElementById(string id)
+
+
+
+
+        public async Task ClickElementByIdAsync(string id)
         {
-            int step = SendMessage($"ClickElementById({id})", PROCESS, "Нажатие на элемент", IMAGE_STATUS_PROCESS);
+            int step = SendMessage($"ClickElementByIdAsync({id})", PROCESS, "Нажатие на элемент", IMAGE_STATUS_PROCESS);
             if (CheckTestStop(step) == true) return;
 
             try
             {
                 string script = "(function(){ var element = document.getElementById('" + id + "'); element.click(); return element; }());";
-                string result = await ExecuteJS(script);
+                string result = await ExecuteJavaScriptAsync(script);
                 if (result == "null" || result == null)
                 {
                     EditMessage(step, null, Tester.FAILED, $"Не удалось найти элемент с ID: {id}", Tester.IMAGE_STATUS_FAILED);
-                    TestStop();
+                    TestStopAsync();
                 }
                 else
                 {
@@ -534,23 +1018,23 @@ namespace HatFramework
             {
                 ConsoleMsg("Ошибка: " + ex.ToString());
                 EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
-                TestStop();
+                TestStopAsync();
             }
         }
 
-        public async Task ClickElementByClass(string _class, int index)
+        public async Task ClickElementByClassAsync(string _class, int index)
         {
-            int step = SendMessage($"ClickElementByClass({_class}, {index})", PROCESS, "Нажатие на элемент", IMAGE_STATUS_PROCESS);
+            int step = SendMessage($"ClickElementByClassAsync({_class}, {index})", PROCESS, "Нажатие на элемент", IMAGE_STATUS_PROCESS);
             if (CheckTestStop(step) == true) return;
 
             try
             {
                 string script = "(function(){ var element = document.getElementsByClassName('" + _class + "')[" + index + "]; element.click(); return element; }());";
-                string result = await ExecuteJS(script);
+                string result = await ExecuteJavaScriptAsync(script);
                 if (result == "null" || result == null)
                 {
                     EditMessage(step, null, Tester.FAILED, $"Не удалось нажать на элемент по Class: {_class} (Index: {index})", Tester.IMAGE_STATUS_FAILED);
-                    TestStop();
+                    TestStopAsync();
                 }
                 else
                 {
@@ -561,23 +1045,23 @@ namespace HatFramework
             {
                 ConsoleMsg("Ошибка: " + ex.ToString());
                 EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
-                TestStop();
+                TestStopAsync();
             }
         }
 
-        public async Task ClickElementByName(string name, int index)
+        public async Task ClickElementByNameAsync(string name, int index)
         {
-            int step = SendMessage($"ClickElementByName({name}, {index})", PROCESS, "Нажатие на элемент", IMAGE_STATUS_PROCESS);
+            int step = SendMessage($"ClickElementByNameAsync({name}, {index})", PROCESS, "Нажатие на элемент", IMAGE_STATUS_PROCESS);
             if (CheckTestStop(step) == true) return;
 
             try
             {
                 string script = "(function(){ var element = document.getElementsByName('" + name + "')[" + index + "]; element.click(); return element; }());";
-                string result = await ExecuteJS(script);
+                string result = await ExecuteJavaScriptAsync(script);
                 if (result == "null" || result == null)
                 {
                     EditMessage(step, null, Tester.FAILED, $"Не удалось найти элемент по Name: {name} (Index: {index})", Tester.IMAGE_STATUS_FAILED);
-                    TestStop();
+                    TestStopAsync();
                 }
                 else
                 {
@@ -588,23 +1072,23 @@ namespace HatFramework
             {
                 ConsoleMsg("Ошибка: " + ex.ToString());
                 EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
-                TestStop();
+                TestStopAsync();
             }
         }
 
-        public async Task ClickElementByTag(string tag, int index)
+        public async Task ClickElementByTagAsync(string tag, int index)
         {
-            int step = SendMessage($"ClickElementByTag({tag}, {index})", PROCESS, "Нажатие на элемент", IMAGE_STATUS_PROCESS);
+            int step = SendMessage($"ClickElementByTagAsync({tag}, {index})", PROCESS, "Нажатие на элемент", IMAGE_STATUS_PROCESS);
             if (CheckTestStop(step) == true) return;
 
             try
             {
                 string script = "(function(){ var element = document.getElementsByTagName('" + tag + "')[" + index + "]; element.click(); return element; }());";
-                string result = await ExecuteJS(script);
+                string result = await ExecuteJavaScriptAsync(script);
                 if (result == "null" || result == null)
                 {
                     EditMessage(step, null, Tester.FAILED, $"Не удалось найти элемент по Tag: {tag} (Index: {index})", Tester.IMAGE_STATUS_FAILED);
-                    TestStop();
+                    TestStopAsync();
                 }
                 else
                 {
@@ -615,23 +1099,23 @@ namespace HatFramework
             {
                 ConsoleMsg("Ошибка: " + ex.ToString());
                 EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
-                TestStop();
+                TestStopAsync();
             }
         }
 
-        public async Task ClickElementByCSS(string locator)
+        public async Task ClickElementByCssAsync(string locator)
         {
-            int step = SendMessage($"ClickElementByCSS({locator})", PROCESS, "Нажатие на элемент", IMAGE_STATUS_PROCESS);
+            int step = SendMessage($"ClickElementByCssAsync({locator})", PROCESS, "Нажатие на элемент", IMAGE_STATUS_PROCESS);
             if (CheckTestStop(step) == true) return;
 
             try
             {
                 string script = "(function(){ var element = document.querySelector('" + locator + "'); element.click(); return element; }());";
-                string result = await ExecuteJS(script);
+                string result = await ExecuteJavaScriptAsync(script);
                 if (result == "null" || result == null)
                 {
                     EditMessage(step, null, Tester.FAILED, $"Не удалось найти элемент по локатору: {locator}", Tester.IMAGE_STATUS_FAILED);
-                    TestStop();
+                    TestStopAsync();
                 }
                 else
                 {
@@ -642,23 +1126,23 @@ namespace HatFramework
             {
                 ConsoleMsg("Ошибка: " + ex.ToString());
                 EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
-                TestStop();
+                TestStopAsync();
             }
         }
 
-        public async Task SetValueInElementById(string id, string value)
+        public async Task SetValueInElementByIdAsync(string id, string value)
         {
-            int step = SendMessage($"SetValueInElementById({id}, {value})", PROCESS, "Ввод значения в элемент", IMAGE_STATUS_PROCESS);
+            int step = SendMessage($"SetValueInElementByIdAsync({id}, {value})", PROCESS, "Ввод значения в элемент", IMAGE_STATUS_PROCESS);
             if (CheckTestStop(step) == true) return;
 
             try
             {
                 string script = "(function(){ var element = document.getElementById('" + id + "'); element.value = '" + value + "'; return element; }());";
-                string result = await ExecuteJS(script);
+                string result = await ExecuteJavaScriptAsync(script);
                 if (result == "null" || result == null)
                 {
                     EditMessage(step, null, Tester.FAILED, $"Не удалось найти элемент с ID: {id}", Tester.IMAGE_STATUS_FAILED);
-                    TestStop();
+                    TestStopAsync();
                 }
                 else
                 {
@@ -669,23 +1153,23 @@ namespace HatFramework
             {
                 ConsoleMsg("Ошибка: " + ex.ToString());
                 EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
-                TestStop();
+                TestStopAsync();
             }
         }
 
-        public async Task SetValueInElementByClass(string _class, int index, string value)
+        public async Task SetValueInElementByClassAsync(string _class, int index, string value)
         {
-            int step = SendMessage($"SetValueInElementByClass({_class}, {index}, {value})", PROCESS, "Ввод значения в элемент", IMAGE_STATUS_PROCESS);
+            int step = SendMessage($"SetValueInElementByClassAsync({_class}, {index}, {value})", PROCESS, "Ввод значения в элемент", IMAGE_STATUS_PROCESS);
             if (CheckTestStop(step) == true) return;
 
             try
             {
                 string script = "(function(){ var element = document.getElementsByClassName('" + _class + "')[" + index + "]; element.value = '" + value + "'; return element; }());";
-                string result = await ExecuteJS(script);
+                string result = await ExecuteJavaScriptAsync(script);
                 if (result == "null" || result == null)
                 {
                     EditMessage(step, null, Tester.FAILED, $"Не удалось найти элемент по Class: {_class} (Index: {index})", Tester.IMAGE_STATUS_FAILED);
-                    TestStop();
+                    TestStopAsync();
                 }
                 else
                 {
@@ -696,23 +1180,23 @@ namespace HatFramework
             {
                 ConsoleMsg("Ошибка: " + ex.ToString());
                 EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
-                TestStop();
+                TestStopAsync();
             }
         }
 
-        public async Task SetValueInElementByName(string name, int index, string value)
+        public async Task SetValueInElementByNameAsync(string name, int index, string value)
         {
-            int step = SendMessage($"SetValueInElementByName({name}, {index}, {value})", PROCESS, "Ввод значения в элемент", IMAGE_STATUS_PROCESS);
+            int step = SendMessage($"SetValueInElementByNameAsync({name}, {index}, {value})", PROCESS, "Ввод значения в элемент", IMAGE_STATUS_PROCESS);
             if (CheckTestStop(step) == true) return;
 
             try
             {
                 string script = "(function(){ var element = document.getElementsByName('" + name + "')[" + index + "]; element.value = '" + value + "'; return element; }());";
-                string result = await ExecuteJS(script);
+                string result = await ExecuteJavaScriptAsync(script);
                 if (result == "null" || result == null)
                 {
                     EditMessage(step, null, Tester.FAILED, $"Не удалось найти элемент по Name: {name} (Index: {index})", Tester.IMAGE_STATUS_FAILED);
-                    TestStop();
+                    TestStopAsync();
                 }
                 else
                 {
@@ -723,23 +1207,23 @@ namespace HatFramework
             {
                 ConsoleMsg("Ошибка: " + ex.ToString());
                 EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
-                TestStop();
+                TestStopAsync();
             }
         }
 
-        public async Task SetValueInElementByTag(string tag, int index, string value)
+        public async Task SetValueInElementByTagAsync(string tag, int index, string value)
         {
-            int step = SendMessage($"SetValueInElementByTag({tag}, {index}, {value})", PROCESS, "Ввод значения в элемент", IMAGE_STATUS_PROCESS);
+            int step = SendMessage($"SetValueInElementByTagAsync({tag}, {index}, {value})", PROCESS, "Ввод значения в элемент", IMAGE_STATUS_PROCESS);
             if (CheckTestStop(step) == true) return;
 
             try
             {
                 string script = "(function(){ var element = document.getElementsByTagName('" + tag + "')[" + index + "]; element.value = '" + value + "'; return element; }());";
-                string result = await ExecuteJS(script);
+                string result = await ExecuteJavaScriptAsync(script);
                 if (result == "null" || result == null)
                 {
                     EditMessage(step, null, Tester.FAILED, $"Не удалось найти элемент по Tag: {tag} (Index: {index})", Tester.IMAGE_STATUS_FAILED);
-                    TestStop();
+                    TestStopAsync();
                 }
                 else
                 {
@@ -750,51 +1234,64 @@ namespace HatFramework
             {
                 ConsoleMsg("Ошибка: " + ex.ToString());
                 EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
-                TestStop();
+                TestStopAsync();
             }
         }
 
-        public async Task SetValueInElementByCSS(string locator, string value)
+        public async Task SetValueInElementByCssAsync(string locator, string value)
         {
-            int step = SendMessage($"SetValueInElementByCSS({locator}, {value})", PROCESS, "Ввод значения в элемент", IMAGE_STATUS_PROCESS);
+            int step = SendMessage($"SetValueInElementByCssAsync({locator}, {value})", PROCESS, "Ввод значения в элемент", IMAGE_STATUS_PROCESS);
             if (CheckTestStop(step) == true) return;
 
             try
             {
-                string script = "(function(){ var element = document.querySelector('" + locator + "'); element.value = '" + value + "'; return element; }());";
-                string result = await ExecuteJS(script);
-                if (result == "null" || result == null)
+                //string script = "(function(){ var element = document.querySelector('" + locator + "'); element.value = '" + value + "'; return element; }());";
+                string script = "(function(){";
+                script += "var element = document.querySelector('" + locator + "');";
+                script += "element.value = '" + value + "';";
+                script += "element.dispatchEvent(new KeyboardEvent('keydown', { bubbles: true }));";
+                script += "element.dispatchEvent(new KeyboardEvent('keypress', { bubbles: true }));";
+                script += "element.dispatchEvent(new KeyboardEvent('keyup', { bubbles: true }));";
+                script += "element.dispatchEvent(new Event('input', { bubbles: true }));";
+                script += "element.dispatchEvent(new Event('change', { bubbles: true }));";
+                script += "return element.value";
+                script += "}());";
+
+                string result = await ExecuteJavaScriptAsync(script);
+                ConsoleMsg($"SetValueInElementByCSS - результат: {result}");
+                if (result == "null" || result == null || result == "")
                 {
-                    EditMessage(step, null, Tester.FAILED, $"Не удалось найти элемент по локатору: {locator}", Tester.IMAGE_STATUS_FAILED);
-                    TestStop();
+                    EditMessage(step, null, Tester.FAILED, $"Не удалось найти или ввести значение в элемент по локатору: {locator}", Tester.IMAGE_STATUS_FAILED);
+                    TestStopAsync();
                 }
                 else
                 {
-                    EditMessage(step, null, PASSED, "Значение введено в элемент", IMAGE_STATUS_PASSED);
+                    EditMessage(step, null, PASSED, $"Значение {result} - введено в элемент", IMAGE_STATUS_PASSED);
                 }
             }
             catch (Exception ex)
             {
                 ConsoleMsg("Ошибка: " + ex.ToString());
                 EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
-                TestStop();
+                TestStopAsync();
             }
         }
 
-        public async Task<string> GetValueFromElementById(string id)
+        public async Task<string> GetValueFromElementByIdAsync(string id)
         {
-            int step = SendMessage($"GetValueFromElementById({id})", PROCESS, "Получение значения из элемент", IMAGE_STATUS_PROCESS);
+            int step = SendMessage($"GetValueFromElementByIdAsync({id})", PROCESS, "Получение значения из элемент", IMAGE_STATUS_PROCESS);
             if (CheckTestStop(step) == true) return "";
 
             string value = "";
             try
             {
                 string script = "(function(){ var element = document.getElementById('" + id + "'); return element.value; }());";
-                string result = await ExecuteJS(script);
-                if (result == "null" || result == null)
+                string result = await ExecuteJavaScriptAsync(script);
+                ConsoleMsg($"GetValueFromElementById - результат: {result}");
+                if (result == "null" || result == null || result == "")
                 {
-                    EditMessage(step, null, Tester.FAILED, $"Не удалось найти элемент с ID: {id}", Tester.IMAGE_STATUS_FAILED);
-                    TestStop();
+                    EditMessage(step, null, Tester.FAILED, $"Не удалось найти или получить данные из элемента с ID: {id}", Tester.IMAGE_STATUS_FAILED);
+                    TestStopAsync();
                 }
                 else
                 {
@@ -806,25 +1303,25 @@ namespace HatFramework
             {
                 ConsoleMsg("Ошибка: " + ex.ToString());
                 EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
-                TestStop();
+                TestStopAsync();
             }
             return value;
         }
 
-        public async Task<string> GetValueFromElementByClass(string _class, int index)
+        public async Task<string> GetValueFromElementByClassAsync(string _class, int index)
         {
-            int step = SendMessage($"GetValueFromElementByClass({_class}, {index})", PROCESS, "Получение значения из элемент", IMAGE_STATUS_PROCESS);
+            int step = SendMessage($"GetValueFromElementByClassAsync({_class}, {index})", PROCESS, "Получение значения из элемент", IMAGE_STATUS_PROCESS);
             if (CheckTestStop(step) == true) return "";
 
             string value = "";
             try
             {
                 string script = "(function(){ var element = document.getElementsByClassName('" + _class + "')[" + index + "]; return element.value; }());";
-                string result = await ExecuteJS(script);
+                string result = await ExecuteJavaScriptAsync(script);
                 if (result == "null" || result == null)
                 {
                     EditMessage(step, null, Tester.FAILED, $"Не удалось найти элемент по Class: {_class} (Index: {index})", Tester.IMAGE_STATUS_FAILED);
-                    TestStop();
+                    TestStopAsync();
                 }
                 else
                 {
@@ -836,25 +1333,25 @@ namespace HatFramework
             {
                 ConsoleMsg("Ошибка: " + ex.ToString());
                 EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
-                TestStop();
+                TestStopAsync();
             }
             return value;
         }
 
-        public async Task<string> GetValueFromElementByName(string name, int index)
+        public async Task<string> GetValueFromElementByNameAsync(string name, int index)
         {
-            int step = SendMessage($"GetValueFromElementByName({name}, {index})", PROCESS, "Получение значения из элемент", IMAGE_STATUS_PROCESS);
+            int step = SendMessage($"GetValueFromElementByNameAsync({name}, {index})", PROCESS, "Получение значения из элемент", IMAGE_STATUS_PROCESS);
             if (CheckTestStop(step) == true) return "";
 
             string value = "";
             try
             {
                 string script = "(function(){ var element = document.getElementsByName('" + name + "')[" + index + "]; return element.value; }());";
-                string result = await ExecuteJS(script);
+                string result = await ExecuteJavaScriptAsync(script);
                 if (result == "null" || result == null)
                 {
                     EditMessage(step, null, Tester.FAILED, $"Не удалось найти элемент по Name: {name} (Index: {index})", Tester.IMAGE_STATUS_FAILED);
-                    TestStop();
+                    TestStopAsync();
                 }
                 else
                 {
@@ -866,25 +1363,25 @@ namespace HatFramework
             {
                 ConsoleMsg("Ошибка: " + ex.ToString());
                 EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
-                TestStop();
+                TestStopAsync();
             }
             return value;
         }
 
-        public async Task<string> GetValueFromElementByTag(string tag, int index)
+        public async Task<string> GetValueFromElementByTagAsync(string tag, int index)
         {
-            int step = SendMessage($"GetValueFromElementByName({tag}, {index})", PROCESS, "Получение значения из элемент", IMAGE_STATUS_PROCESS);
+            int step = SendMessage($"GetValueFromElementByTagAsync({tag}, {index})", PROCESS, "Получение значения из элемент", IMAGE_STATUS_PROCESS);
             if (CheckTestStop(step) == true) return "";
 
             string value = "";
             try
             {
                 string script = "(function(){ var element = document.getElementsByTagName('" + tag + "')[" + index + "]; return element.value; }());";
-                string result = await ExecuteJS(script);
+                string result = await ExecuteJavaScriptAsync(script);
                 if (result == "null" || result == null)
                 {
                     EditMessage(step, null, Tester.FAILED, $"Не удалось найти элемент по Tag: {tag} (Index: {index})", Tester.IMAGE_STATUS_FAILED);
-                    TestStop();
+                    TestStopAsync();
                 }
                 else
                 {
@@ -896,25 +1393,25 @@ namespace HatFramework
             {
                 ConsoleMsg("Ошибка: " + ex.ToString());
                 EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
-                TestStop();
+                TestStopAsync();
             }
             return value;
         }
 
-        public async Task<string> GetValueFromElementByCSS(string locator)
+        public async Task<string> GetValueFromElementByCSSAsync(string locator)
         {
-            int step = SendMessage($"GetValueFromElementByCSS({locator})", PROCESS, "Получение значения из элемент", IMAGE_STATUS_PROCESS);
+            int step = SendMessage($"GetValueFromElementByCSSAsync({locator})", PROCESS, "Получение значения из элемент", IMAGE_STATUS_PROCESS);
             if (CheckTestStop(step) == true) return "";
 
             string value = "";
             try
             {
                 string script = "(function(){ var element = document.querySelector('" + locator + "'); return element.value; }());";
-                string result = await ExecuteJS(script);
+                string result = await ExecuteJavaScriptAsync(script);
                 if (result == "null" || result == null)
                 {
                     EditMessage(step, null, Tester.FAILED, $"Не удалось найти элемент по локатору: {locator}", Tester.IMAGE_STATUS_FAILED);
-                    TestStop();
+                    TestStopAsync();
                 }
                 else
                 {
@@ -926,16 +1423,10 @@ namespace HatFramework
             {
                 ConsoleMsg("Ошибка: " + ex.ToString());
                 EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
-                TestStop();
+                TestStopAsync();
             }
             return value;
         }
-
-
-
-
-
-
 
 
 
@@ -953,9 +1444,9 @@ namespace HatFramework
          * Методы для проверки результата ===========================================================
          * https://junit.org/junit4/javadoc/4.8/org/junit/Assert.html
          * */
-        public async Task<bool> AssertEquals(string expected, string actual)
+        public async Task<bool> AssertEqualsAsync(string expected, string actual)
         {
-            int step = SendMessage("AssertEquals(" + expected + ", " + actual + ")", PROCESS, "Проверка совпадения ожидаемого и актуального значения", IMAGE_STATUS_PROCESS);
+            int step = SendMessage("AssertEqualsAsync(" + expected + ", " + actual + ")", PROCESS, "Проверка совпадения ожидаемого и актуального значения", IMAGE_STATUS_PROCESS);
             if (expected == actual)
             {
                 EditMessage(step, null, PASSED, "Ожидаемое и актуальное значение совпадают", IMAGE_STATUS_PASSED);
@@ -970,9 +1461,9 @@ namespace HatFramework
             }
         }
 
-        public async Task<bool> AssertNotEquals(string expected, string actual)
+        public async Task<bool> AssertNotEqualsAsync(string expected, string actual)
         {
-            int step = SendMessage("AssertNotEquals(" + expected + ", " + actual + ")", PROCESS, "Проверка не совпадения ожидаемого и актуального значения", IMAGE_STATUS_PROCESS);
+            int step = SendMessage("AssertNotEqualsAsync(" + expected + ", " + actual + ")", PROCESS, "Проверка не совпадения ожидаемого и актуального значения", IMAGE_STATUS_PROCESS);
             if (expected != actual)
             {
                 EditMessage(step, null, PASSED, "Ожидаемое и актуальное значение не совпадают", IMAGE_STATUS_PASSED);
@@ -987,9 +1478,9 @@ namespace HatFramework
             }
         }
 
-        public async Task<bool> AssertTrue(bool condition)
+        public async Task<bool> AssertTrueAsync(bool condition)
         {
-            int step = SendMessage("AssertTrue(" + condition.ToString() + ")", PROCESS, "Проверка значения которое должно быть true", IMAGE_STATUS_PROCESS);
+            int step = SendMessage("AssertTrueAsync(" + condition.ToString() + ")", PROCESS, "Проверка значения которое должно быть true", IMAGE_STATUS_PROCESS);
             if (condition == true)
             {
                 EditMessage(step, null, PASSED, "Проверенное значение соответствует true", IMAGE_STATUS_PASSED);
@@ -1004,9 +1495,9 @@ namespace HatFramework
             }
         }
 
-        public async Task<bool> AssertFalse(bool condition)
+        public async Task<bool> AssertFalseAsync(bool condition)
         {
-            int step = SendMessage("AssertFalse(" + condition.ToString() + ")", PROCESS, "Проверка значения которое должно быть false", IMAGE_STATUS_PROCESS);
+            int step = SendMessage("AssertFalseAsync(" + condition.ToString() + ")", PROCESS, "Проверка значения которое должно быть false", IMAGE_STATUS_PROCESS);
             if (condition == false)
             {
                 EditMessage(step, null, PASSED, "Проверенное значение соответствует false", IMAGE_STATUS_PASSED);

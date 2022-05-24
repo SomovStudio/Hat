@@ -20,9 +20,9 @@ namespace HatFramework
             tester = _tester;
         }
 
-        public async Task Click()
+        public async Task ClickAsync()
         {
-            int step = tester.SendMessage("Click()", Tester.PROCESS, $"Нажатие на элемент {Locator}", Tester.IMAGE_STATUS_PROCESS);
+            int step = tester.SendMessage("ClickAsync()", Tester.PROCESS, $"Нажатие на элемент {Locator}", Tester.IMAGE_STATUS_PROCESS);
             if (tester.CheckTestStop(step) == true) return;
 
             try
@@ -32,14 +32,14 @@ namespace HatFramework
                 if (result == null)
                 {
                     tester.EditMessage(step, null, Tester.FAILED, $"Не удалось нажать на элемент {Locator}", Tester.IMAGE_STATUS_FAILED);
-                    tester.TestStop();
+                    tester.TestStopAsync();
                 }
             }
             catch (Exception ex)
             {
                 tester.ConsoleMsg("Ошибка: " + ex.ToString());
                 tester.EditMessage(step, null, Tester.FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), Tester.IMAGE_STATUS_FAILED);
-                tester.TestStop();
+                tester.TestStopAsync();
             }
         }
     }
