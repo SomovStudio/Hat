@@ -174,21 +174,22 @@ document.getElementById('SUBMIT_ORDER').click();
 ПРИМЕРЫ АВТОТЕСТОВ
 
 Tester tester = new Tester(Config.browserForm);
-await tester.TestBegin();
-await tester.BrowserSize(800, 600);
-await tester.GoToUrl("https://somovstudio.github.io/test.html", 5);
-await tester.FindElementById("result", 5);
-await tester.SetValueInElementById("login", "admin");
-await tester.Wait(2);
-await tester.SetValueInElementById("pass", "00001");
-await tester.Wait(2);
-await tester.ClickElementById("buttonLogin");
-await tester.Wait(2);
-string actual = await tester.GetValueFromElementById("textarea");
+await tester.TestBeginAsync();
+await tester.BrowserSizeAsync(800, 600);
+await tester.GoToUrlAsync("https://somovstudio.github.io/test.html", 5);
+await tester.FindVisibleElementByIdAsync("result", 5);
+await tester.SetValueInElementByIdAsync("login", "admin");
+await tester.WaitAsync(2);
+await tester.SetValueInElementByIdAsync("pass", "0000");
+await tester.WaitAsync(2);
+await tester.ClickElementByIdAsync("buttonLogin");
+await tester.WaitAsync(2);
+string actual = await tester.GetValueFromElementByIdAsync("textarea");
 string expected = "\"PASSED\"";
-await tester.FindElementById("result", 5);
-await tester.AssertEquals(expected, actual);
-await tester.TestEnd();
+await tester.FindVisibleElementByIdAsync("result", 5);
+await tester.WaitVisibleElementByIdAsync("result", 5);
+await tester.AssertEqualsAsync(expected, actual);
+await tester.TestEndAsync();
 
 
 Tester tester = new Tester(Config.browserForm);
