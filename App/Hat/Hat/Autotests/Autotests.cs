@@ -91,8 +91,7 @@ namespace Hat
             await tester.AssertEqualsAsync(expected, actual);
             await tester.TestEndAsync();
 
-            Config.browserForm.consoleMsgError("Ошибка при выполнении автотеста в строка 789");
-
+            
             /*
             HatFrameworkDev.Tester tester = new HatFrameworkDev.Tester(Config.browserForm);
             await tester.TestBegin();

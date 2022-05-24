@@ -21,9 +21,10 @@ namespace Hat
     public static class Config
     {
         public static BrowserForm browserForm;
+        public static string defaultUserAgent = "";         // значение user-agent по умолчанию
 
         public static bool commandLineMode = false;         // флаг показывающий запуск приложения из командной строки
-        public static string projectPath = "(не открыт)";  // полный путь к папке проекта
+        public static string projectPath = "(не открыт)";   // полный путь к папке проекта
         public static string selectName = "";               // имя выбранного файла или папки
         public static string selectValue = "";              // полный путь к выбранному файлу или папке
 

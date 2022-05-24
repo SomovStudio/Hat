@@ -1526,10 +1526,11 @@
             this.textBoxUserAgent.Location = new System.Drawing.Point(165, 16);
             this.textBoxUserAgent.Name = "textBoxUserAgent";
             this.textBoxUserAgent.ReadOnly = true;
-            this.textBoxUserAgent.Size = new System.Drawing.Size(747, 20);
+            this.textBoxUserAgent.Size = new System.Drawing.Size(689, 20);
             this.textBoxUserAgent.TabIndex = 1;
             this.textBoxUserAgent.Text = "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/14.0.83" +
     "5.202 Safari/535.1";
+            this.textBoxUserAgent.TextChanged += new System.EventHandler(this.textBoxUserAgent_TextChanged);
             // 
             // checkBoxUserAgent
             // 

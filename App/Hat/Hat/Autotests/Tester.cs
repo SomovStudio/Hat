@@ -43,6 +43,7 @@ namespace HatFrameworkDev
         private MethodInfo browserSendMessageStep;  // функция: sendMessageStep - вывести сообщение в таблицу "тест"
         private MethodInfo browserEditMessageStep;  // функция: editMessageStep - изменить уже выведенное сообщение в таблице "тест"
         private MethodInfo browserResize;           // функция: browserResize - изменить размер браузера
+        private MethodInfo browserUserAgent;        // функция: userAgent - настройка user-agent параметра
         private MethodInfo checkStopTest;           // функция: checkStopTest - получить статус остановки процесса тестирования
         private MethodInfo resultAutotest;          // функция: resultAutotest - устанавливает флаг общего результата выполнения теста
         
@@ -62,6 +63,7 @@ namespace HatFrameworkDev
                 browserSendMessageStep = BrowserWindow.GetType().GetMethod("sendMessageStep");
                 browserEditMessageStep = BrowserWindow.GetType().GetMethod("editMessageStep");
                 browserResize = BrowserWindow.GetType().GetMethod("browserResize");
+                browserUserAgent = BrowserWindow.GetType().GetMethod("userAgent");
                 checkStopTest = BrowserWindow.GetType().GetMethod("checkStopTest");
                 resultAutotest = BrowserWindow.GetType().GetMethod("resultAutotest");
 
@@ -326,6 +328,18 @@ namespace HatFrameworkDev
             try
             {
                 browserResize.Invoke(BrowserWindow, new object[] { -1, -1 });
+            }
+            catch (Exception ex)
+            {
+                ConsoleMsgError(ex.ToString());
+            }
+        }
+
+        public async Task BrowserUserAgent(string value)
+        {
+            try
+            {
+                browserUserAgent.Invoke(BrowserWindow, new object[] { value });
             }
             catch (Exception ex)
             {
