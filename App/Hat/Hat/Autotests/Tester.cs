@@ -72,7 +72,7 @@ namespace HatFrameworkDev
             }
             catch (Exception ex)
             {
-                ConsoleMsg("Ошибка: " + ex.ToString());
+                ConsoleMsgError(ex.ToString());
             }
         }
 
@@ -89,7 +89,7 @@ namespace HatFrameworkDev
             }
             catch (Exception ex)
             {
-                ConsoleMsg("Ошибка: " + ex.ToString());
+                ConsoleMsgError(ex.ToString());
             }
         }
 
@@ -132,8 +132,8 @@ namespace HatFrameworkDev
             }
             catch (Exception ex)
             {
-                ConsoleMsg("Ошибка: " + ex.ToString());
                 TestStopAsync();
+                ConsoleMsgError(ex.ToString());
             }
             return found;
         }
@@ -173,7 +173,7 @@ namespace HatFrameworkDev
             }
             catch (Exception ex)
             {
-                ConsoleMsg("Ошибка: " + ex.ToString());
+                ConsoleMsgError(ex.ToString());
             }
         }
 
@@ -203,7 +203,7 @@ namespace HatFrameworkDev
             }
             catch (Exception ex)
             {
-                ConsoleMsg("Ошибка: " + ex.ToString());
+                ConsoleMsgError(ex.ToString());
             }
             return -1;
         }
@@ -233,7 +233,7 @@ namespace HatFrameworkDev
             }
             catch (Exception ex)
             {
-                ConsoleMsg("Ошибка: " + ex.ToString());
+                ConsoleMsgError(ex.ToString());
             }
         }
 
@@ -254,7 +254,7 @@ namespace HatFrameworkDev
             }
             catch (Exception ex)
             {
-                ConsoleMsg("Ошибка: " + ex.ToString());
+                ConsoleMsgError(ex.ToString());
             }
         }
 
@@ -277,7 +277,7 @@ namespace HatFrameworkDev
             }
             catch (Exception ex)
             {
-                ConsoleMsg("Ошибка: " + ex.ToString());
+                ConsoleMsgError(ex.ToString());
             }
         }
 
@@ -299,7 +299,7 @@ namespace HatFrameworkDev
             }
             catch (Exception ex)
             {
-                ConsoleMsg("Ошибка: " + ex.ToString());
+                ConsoleMsgError(ex.ToString());
             }
             return testStop;
         }
@@ -317,7 +317,7 @@ namespace HatFrameworkDev
             }
             catch (Exception ex)
             {
-                ConsoleMsg("Ошибка: " + ex.ToString());
+                ConsoleMsgError(ex.ToString());
             }
         }
 
@@ -329,7 +329,7 @@ namespace HatFrameworkDev
             }
             catch (Exception ex)
             {
-                ConsoleMsg("Ошибка: " + ex.ToString());
+                ConsoleMsgError(ex.ToString());
             }
         }
 
@@ -343,7 +343,7 @@ namespace HatFrameworkDev
             }
             catch (Exception ex)
             {
-                ConsoleMsg("Ошибка: " + ex.ToString());
+                ConsoleMsgError(ex.ToString());
             }
             return result;
         }
@@ -381,9 +381,9 @@ namespace HatFrameworkDev
             }
             catch (Exception ex)
             {
-                ConsoleMsg("Ошибка: " + ex.ToString());
                 EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
                 TestStopAsync();
+                ConsoleMsgError(ex.ToString());
             }
             return htmlElement;
         }
@@ -422,9 +422,9 @@ namespace HatFrameworkDev
             }
             catch (Exception ex)
             {
-                ConsoleMsg("Ошибка: " + ex.ToString());
                 EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
                 TestStopAsync();
+                ConsoleMsgError(ex.ToString());
             }
         }
 
@@ -440,9 +440,9 @@ namespace HatFrameworkDev
             }
             catch (Exception ex)
             {
-                ConsoleMsg("Ошибка: " + ex.ToString());
                 EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
                 TestStopAsync();
+                ConsoleMsgError(ex.ToString());
             }
             return url;
         }
@@ -458,9 +458,9 @@ namespace HatFrameworkDev
             }
             catch (Exception ex)
             {
-                ConsoleMsg("Ошибка: " + ex.ToString());
                 EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
                 TestStopAsync();
+                ConsoleMsgError(ex.ToString());
             }
         }
 
@@ -487,9 +487,9 @@ namespace HatFrameworkDev
             }
             catch (Exception ex)
             {
-                ConsoleMsg("Ошибка: " + ex.ToString());
                 EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
                 TestStopAsync();
+                ConsoleMsgError(ex.ToString());
             }
         }
 
@@ -516,9 +516,9 @@ namespace HatFrameworkDev
             }
             catch (Exception ex)
             {
-                ConsoleMsg("Ошибка: " + ex.ToString());
                 EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
                 TestStopAsync();
+                ConsoleMsgError(ex.ToString());
             }
         }
 
@@ -545,9 +545,9 @@ namespace HatFrameworkDev
             }
             catch (Exception ex)
             {
-                ConsoleMsg("Ошибка: " + ex.ToString());
                 EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
                 TestStopAsync();
+                ConsoleMsgError(ex.ToString());
             }
         }
 
@@ -574,9 +574,9 @@ namespace HatFrameworkDev
             }
             catch (Exception ex)
             {
-                ConsoleMsg("Ошибка: " + ex.ToString());
                 EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
                 TestStopAsync();
+                ConsoleMsgError(ex.ToString());
             }
         }
 
@@ -603,9 +603,9 @@ namespace HatFrameworkDev
             }
             catch (Exception ex)
             {
-                ConsoleMsg("Ошибка: " + ex.ToString());
                 EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
                 TestStopAsync();
+                ConsoleMsgError(ex.ToString());
             }
         }
 
@@ -640,9 +640,9 @@ namespace HatFrameworkDev
             }
             catch (Exception ex)
             {
-                ConsoleMsg("Ошибка: " + ex.ToString());
                 EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
                 TestStopAsync();
+                ConsoleMsgError(ex.ToString());
             }
             return found;
         }
@@ -678,9 +678,9 @@ namespace HatFrameworkDev
             }
             catch (Exception ex)
             {
-                ConsoleMsg("Ошибка: " + ex.ToString());
                 EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
                 TestStopAsync();
+                ConsoleMsgError(ex.ToString());
             }
             return found;
         }
@@ -716,9 +716,9 @@ namespace HatFrameworkDev
             }
             catch (Exception ex)
             {
-                ConsoleMsg("Ошибка: " + ex.ToString());
                 EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
                 TestStopAsync();
+                ConsoleMsgError(ex.ToString());
             }
             return found;
         }
@@ -754,9 +754,9 @@ namespace HatFrameworkDev
             }
             catch (Exception ex)
             {
-                ConsoleMsg("Ошибка: " + ex.ToString());
                 EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
                 TestStopAsync();
+                ConsoleMsgError(ex.ToString());
             }
             return found;
         }
@@ -792,9 +792,9 @@ namespace HatFrameworkDev
             }
             catch (Exception ex)
             {
-                ConsoleMsg("Ошибка: " + ex.ToString());
                 EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
                 TestStopAsync();
+                ConsoleMsgError(ex.ToString());
             }
             return found;
         }
@@ -819,9 +819,9 @@ namespace HatFrameworkDev
             }
             catch (Exception ex)
             {
-                ConsoleMsg("Ошибка: " + ex.ToString());
                 EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
                 TestStopAsync();
+                ConsoleMsgError(ex.ToString());
             }
             return found;
         }
@@ -846,9 +846,9 @@ namespace HatFrameworkDev
             }
             catch (Exception ex)
             {
-                ConsoleMsg("Ошибка: " + ex.ToString());
                 EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
                 TestStopAsync();
+                ConsoleMsgError(ex.ToString());
             }
             return found;
         }
@@ -873,9 +873,9 @@ namespace HatFrameworkDev
             }
             catch (Exception ex)
             {
-                ConsoleMsg("Ошибка: " + ex.ToString());
                 EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
                 TestStopAsync();
+                ConsoleMsgError(ex.ToString());
             }
             return found;
         }
@@ -900,9 +900,9 @@ namespace HatFrameworkDev
             }
             catch (Exception ex)
             {
-                ConsoleMsg("Ошибка: " + ex.ToString());
                 EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
                 TestStopAsync();
+                ConsoleMsgError(ex.ToString());
             }
             return found;
         }
@@ -927,9 +927,9 @@ namespace HatFrameworkDev
             }
             catch (Exception ex)
             {
-                ConsoleMsg("Ошибка: " + ex.ToString());
                 EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
                 TestStopAsync();
+                ConsoleMsgError(ex.ToString());
             }
             return found;
         }
@@ -955,9 +955,9 @@ namespace HatFrameworkDev
             }
             catch (Exception ex)
             {
-                ConsoleMsg("Ошибка: " + ex.ToString());
                 EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
                 TestStopAsync();
+                ConsoleMsgError(ex.ToString());
             }
         }
 
@@ -982,9 +982,9 @@ namespace HatFrameworkDev
             }
             catch (Exception ex)
             {
-                ConsoleMsg("Ошибка: " + ex.ToString());
                 EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
                 TestStopAsync();
+                ConsoleMsgError(ex.ToString());
             }
         }
 
@@ -1009,9 +1009,9 @@ namespace HatFrameworkDev
             }
             catch (Exception ex)
             {
-                ConsoleMsg("Ошибка: " + ex.ToString());
                 EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
                 TestStopAsync();
+                ConsoleMsgError(ex.ToString());
             }
         }
 
@@ -1036,9 +1036,9 @@ namespace HatFrameworkDev
             }
             catch (Exception ex)
             {
-                ConsoleMsg("Ошибка: " + ex.ToString());
                 EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
                 TestStopAsync();
+                ConsoleMsgError(ex.ToString());
             }
         }
 
@@ -1063,9 +1063,9 @@ namespace HatFrameworkDev
             }
             catch (Exception ex)
             {
-                ConsoleMsg("Ошибка: " + ex.ToString());
                 EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
                 TestStopAsync();
+                ConsoleMsgError(ex.ToString());
             }
         }
 
@@ -1099,9 +1099,9 @@ namespace HatFrameworkDev
             }
             catch (Exception ex)
             {
-                ConsoleMsg("Ошибка: " + ex.ToString());
                 EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
                 TestStopAsync();
+                ConsoleMsgError(ex.ToString());
             }
         }
 
@@ -1135,9 +1135,9 @@ namespace HatFrameworkDev
             }
             catch (Exception ex)
             {
-                ConsoleMsg("Ошибка: " + ex.ToString());
                 EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
                 TestStopAsync();
+                ConsoleMsgError(ex.ToString());
             }
         }
 
@@ -1171,9 +1171,9 @@ namespace HatFrameworkDev
             }
             catch (Exception ex)
             {
-                ConsoleMsg("Ошибка: " + ex.ToString());
                 EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
                 TestStopAsync();
+                ConsoleMsgError(ex.ToString());
             }
         }
 
@@ -1207,9 +1207,9 @@ namespace HatFrameworkDev
             }
             catch (Exception ex)
             {
-                ConsoleMsg("Ошибка: " + ex.ToString());
                 EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
                 TestStopAsync();
+                ConsoleMsgError(ex.ToString());
             }
         }
 
@@ -1244,9 +1244,9 @@ namespace HatFrameworkDev
             }
             catch (Exception ex)
             {
-                ConsoleMsg("Ошибка: " + ex.ToString());
                 EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
                 TestStopAsync();
+                ConsoleMsgError(ex.ToString());
             }
         }
 
@@ -1273,9 +1273,9 @@ namespace HatFrameworkDev
             }
             catch (Exception ex)
             {
-                ConsoleMsg("Ошибка: " + ex.ToString());
                 EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
                 TestStopAsync();
+                ConsoleMsgError(ex.ToString());
             }
             return value;
         }
@@ -1303,9 +1303,9 @@ namespace HatFrameworkDev
             }
             catch (Exception ex)
             {
-                ConsoleMsg("Ошибка: " + ex.ToString());
                 EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
                 TestStopAsync();
+                ConsoleMsgError(ex.ToString());
             }
             return value;
         }
@@ -1333,9 +1333,9 @@ namespace HatFrameworkDev
             }
             catch (Exception ex)
             {
-                ConsoleMsg("Ошибка: " + ex.ToString());
                 EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
                 TestStopAsync();
+                ConsoleMsgError(ex.ToString());
             }
             return value;
         }
@@ -1363,9 +1363,9 @@ namespace HatFrameworkDev
             }
             catch (Exception ex)
             {
-                ConsoleMsg("Ошибка: " + ex.ToString());
                 EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
                 TestStopAsync();
+                ConsoleMsgError(ex.ToString());
             }
             return value;
         }
@@ -1393,9 +1393,9 @@ namespace HatFrameworkDev
             }
             catch (Exception ex)
             {
-                ConsoleMsg("Ошибка: " + ex.ToString());
                 EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
                 TestStopAsync();
+                ConsoleMsgError(ex.ToString());
             }
             return value;
         }
