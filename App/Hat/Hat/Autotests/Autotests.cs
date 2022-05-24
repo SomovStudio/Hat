@@ -74,22 +74,22 @@ namespace Hat
         public static async Task devTestStutsAsync()
         {
             HatFrameworkDev.Tester tester = new HatFrameworkDev.Tester(Config.browserForm);
-            await tester.TestBegin();
-            await tester.BrowserSize(800, 600);
-            await tester.GoToUrl("https://somovstudio.github.io/test.html", 5);
-            await tester.FindVisibleElementById("result", 5);
-            await tester.SetValueInElementById("login", "admin");
-            await tester.Wait(2);
-            await tester.SetValueInElementById("pass", "0000");
-            await tester.Wait(2);
-            await tester.ClickElementById("buttonLogin");
-            await tester.Wait(2);
-            string actual = await tester.GetValueFromElementById("textarea");
+            await tester.TestBeginAsync();
+            await tester.BrowserSizeAsync(800, 600);
+            await tester.GoToUrlAsync("https://somovstudio.github.io/test.html", 5);
+            await tester.FindVisibleElementByIdAsync("result", 5);
+            await tester.SetValueInElementByIdAsync("login", "admin");
+            await tester.WaitAsync(2);
+            await tester.SetValueInElementByIdAsync("pass", "0000");
+            await tester.WaitAsync(2);
+            await tester.ClickElementByIdAsync("buttonLogin");
+            await tester.WaitAsync(2);
+            string actual = await tester.GetValueFromElementByIdAsync("textarea");
             string expected = "\"PASSED\"";
-            await tester.FindVisibleElementById("result", 5);
-            await tester.WaitVisibleElementById("result", 5);
-            await tester.AssertEquals(expected, actual);
-            await tester.TestEnd();
+            await tester.FindVisibleElementByIdAsync("result", 5);
+            await tester.WaitVisibleElementByIdAsync("result", 5);
+            await tester.AssertEqualsAsync(expected, actual);
+            await tester.TestEndAsync();
 
             /*
             HatFrameworkDev.Tester tester = new HatFrameworkDev.Tester(Config.browserForm);
