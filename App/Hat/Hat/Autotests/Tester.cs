@@ -91,7 +91,7 @@ namespace HatFrameworkDev
             }
         }
 
-        private async Task<bool> defineVisibleElementAsync(string by, string target)
+        private async Task<bool> defineVisibleElementAsync(string by, string target, int index = default)
         {
             bool found = false;
             try
@@ -99,9 +99,9 @@ namespace HatFrameworkDev
                 string script = "";
                 script += "(function(){ ";
                 if (by == BY_ID) script += $"var elem = document.getElementById('{target}');";
-                if (by == BY_CLASS) script += $"var elem = document.getElementsByClassName('{target}');";
-                if (by == BY_NAME) script += $"var elem = document.getElementsByName('{target}');";
-                if (by == BY_TAG) script += $"var elem = document.getElementsByTagName('{target}');";
+                if (by == BY_CLASS) script += $"var elem = document.getElementsByClassName('{target}')[{index}];";
+                if (by == BY_NAME) script += $"var elem = document.getElementsByName('{target}')[{index}];";
+                if (by == BY_TAG) script += $"var elem = document.getElementsByTagName('{target}')[{index}];";
                 if (by == BY_CSS) script += $"var elem = document.querySelector('{target}');";
                 script += "if (!(elem instanceof Element)) throw Error('DomUtil: elem is not an element.');";
                 script += "const style = getComputedStyle(elem);";
@@ -456,40 +456,10 @@ namespace HatFrameworkDev
             try
             {
                 bool found = false;
-                string script = "";
-                script += "(function(){ ";
-                script += $"var elem = document.getElementById('{id}');";
-                script += "";
-                script += "if (!(elem instanceof Element)) throw Error('DomUtil: elem is not an element.');";
-                script += "const style = getComputedStyle(elem);";
-                script += "if (style.display === 'none') return false;";
-                script += "if (style.visibility !== 'visible') return false;";
-                script += "if (style.opacity < 0.1) return false;";
-                script += "if (elem.offsetWidth + elem.offsetHeight + elem.getBoundingClientRect().height + elem.getBoundingClientRect().width === 0) return false;";
-                script += "const elemCenter = {";
-                script += "x: elem.getBoundingClientRect().left + elem.offsetWidth / 2,";
-                script += "y: elem.getBoundingClientRect().top + elem.offsetHeight / 2";
-                script += "};";
-                script += "if (elemCenter.x < 0) return false;";
-                script += "if (elemCenter.x > (document.documentElement.clientWidth || window.innerWidth)) return false;";
-                script += "if (elemCenter.y < 0) return false;";
-                script += "if (elemCenter.y > (document.documentElement.clientHeight || window.innerHeight)) return false;";
-                script += "let pointContainer = document.elementFromPoint(elemCenter.x, elemCenter.y);";
-                script += "do {";
-                script += "if (pointContainer === elem) return true;";
-                script += "} while (pointContainer = pointContainer.parentNode);";
-                script += "return false;";
-                script += "}());";
-
-                string result = null;
                 for (int i = 0; i < sec; i++)
                 {
-                    result = await ExecuteJavaScriptAsync(script);
-                    if (result != "null" && result != null && result == "true")
-                    {
-                        found = true;
-                        break;
-                    }
+                    found = await defineVisibleElementAsync(BY_ID, id);
+                    if (found) break;
                     await Task.Delay(1000);
                 }
 
@@ -515,40 +485,10 @@ namespace HatFrameworkDev
             try
             {
                 bool found = false;
-                string script = "";
-                script += "(function(){ ";
-                script += $"var elem = document.getElementsByClassName('{_class}')[{index}];";
-                script += "";
-                script += "if (!(elem instanceof Element)) throw Error('DomUtil: elem is not an element.');";
-                script += "const style = getComputedStyle(elem);";
-                script += "if (style.display === 'none') return false;";
-                script += "if (style.visibility !== 'visible') return false;";
-                script += "if (style.opacity < 0.1) return false;";
-                script += "if (elem.offsetWidth + elem.offsetHeight + elem.getBoundingClientRect().height + elem.getBoundingClientRect().width === 0) return false;";
-                script += "const elemCenter = {";
-                script += "x: elem.getBoundingClientRect().left + elem.offsetWidth / 2,";
-                script += "y: elem.getBoundingClientRect().top + elem.offsetHeight / 2";
-                script += "};";
-                script += "if (elemCenter.x < 0) return false;";
-                script += "if (elemCenter.x > (document.documentElement.clientWidth || window.innerWidth)) return false;";
-                script += "if (elemCenter.y < 0) return false;";
-                script += "if (elemCenter.y > (document.documentElement.clientHeight || window.innerHeight)) return false;";
-                script += "let pointContainer = document.elementFromPoint(elemCenter.x, elemCenter.y);";
-                script += "do {";
-                script += "if (pointContainer === elem) return true;";
-                script += "} while (pointContainer = pointContainer.parentNode);";
-                script += "return false;";
-                script += "}());";
-
-                string result = null;
                 for (int i = 0; i < sec; i++)
                 {
-                    result = await ExecuteJavaScriptAsync(script);
-                    if (result != "null" && result != null && result == "true")
-                    {
-                        found = true;
-                        break;
-                    }
+                    found = await defineVisibleElementAsync(BY_CLASS, _class, index);
+                    if (found) break;
                     await Task.Delay(1000);
                 }
 
@@ -574,40 +514,10 @@ namespace HatFrameworkDev
             try
             {
                 bool found = false;
-                string script = "";
-                script += "(function(){ ";
-                script += $"var elem = document.getElementsByName('{name}')[{index}];";
-                script += "";
-                script += "if (!(elem instanceof Element)) throw Error('DomUtil: elem is not an element.');";
-                script += "const style = getComputedStyle(elem);";
-                script += "if (style.display === 'none') return false;";
-                script += "if (style.visibility !== 'visible') return false;";
-                script += "if (style.opacity < 0.1) return false;";
-                script += "if (elem.offsetWidth + elem.offsetHeight + elem.getBoundingClientRect().height + elem.getBoundingClientRect().width === 0) return false;";
-                script += "const elemCenter = {";
-                script += "x: elem.getBoundingClientRect().left + elem.offsetWidth / 2,";
-                script += "y: elem.getBoundingClientRect().top + elem.offsetHeight / 2";
-                script += "};";
-                script += "if (elemCenter.x < 0) return false;";
-                script += "if (elemCenter.x > (document.documentElement.clientWidth || window.innerWidth)) return false;";
-                script += "if (elemCenter.y < 0) return false;";
-                script += "if (elemCenter.y > (document.documentElement.clientHeight || window.innerHeight)) return false;";
-                script += "let pointContainer = document.elementFromPoint(elemCenter.x, elemCenter.y);";
-                script += "do {";
-                script += "if (pointContainer === elem) return true;";
-                script += "} while (pointContainer = pointContainer.parentNode);";
-                script += "return false;";
-                script += "}());";
-
-                string result = null;
                 for (int i = 0; i < sec; i++)
                 {
-                    result = await ExecuteJavaScriptAsync(script);
-                    if (result != "null" && result != null && result == "true")
-                    {
-                        found = true;
-                        break;
-                    }
+                    found = await defineVisibleElementAsync(BY_NAME, name, index);
+                    if (found) break;
                     await Task.Delay(1000);
                 }
 
@@ -633,40 +543,10 @@ namespace HatFrameworkDev
             try
             {
                 bool found = false;
-                string script = "";
-                script += "(function(){ ";
-                script += $"var elem = document.getElementsByTagName('{tag}')[{index}];";
-                script += "";
-                script += "if (!(elem instanceof Element)) throw Error('DomUtil: elem is not an element.');";
-                script += "const style = getComputedStyle(elem);";
-                script += "if (style.display === 'none') return false;";
-                script += "if (style.visibility !== 'visible') return false;";
-                script += "if (style.opacity < 0.1) return false;";
-                script += "if (elem.offsetWidth + elem.offsetHeight + elem.getBoundingClientRect().height + elem.getBoundingClientRect().width === 0) return false;";
-                script += "const elemCenter = {";
-                script += "x: elem.getBoundingClientRect().left + elem.offsetWidth / 2,";
-                script += "y: elem.getBoundingClientRect().top + elem.offsetHeight / 2";
-                script += "};";
-                script += "if (elemCenter.x < 0) return false;";
-                script += "if (elemCenter.x > (document.documentElement.clientWidth || window.innerWidth)) return false;";
-                script += "if (elemCenter.y < 0) return false;";
-                script += "if (elemCenter.y > (document.documentElement.clientHeight || window.innerHeight)) return false;";
-                script += "let pointContainer = document.elementFromPoint(elemCenter.x, elemCenter.y);";
-                script += "do {";
-                script += "if (pointContainer === elem) return true;";
-                script += "} while (pointContainer = pointContainer.parentNode);";
-                script += "return false;";
-                script += "}());";
-
-                string result = null;
                 for (int i = 0; i < sec; i++)
                 {
-                    result = await ExecuteJavaScriptAsync(script);
-                    if (result != "null" && result != null && result == "true")
-                    {
-                        found = true;
-                        break;
-                    }
+                    found = await defineVisibleElementAsync(BY_TAG, tag, index);
+                    if (found) break;
                     await Task.Delay(1000);
                 }
 
@@ -692,40 +572,10 @@ namespace HatFrameworkDev
             try
             {
                 bool found = false;
-                string script = "";
-                script += "(function(){ ";
-                script += $"var elem = document.querySelector('{locator}');";
-                script += "";
-                script += "if (!(elem instanceof Element)) throw Error('DomUtil: elem is not an element.');";
-                script += "const style = getComputedStyle(elem);";
-                script += "if (style.display === 'none') return false;";
-                script += "if (style.visibility !== 'visible') return false;";
-                script += "if (style.opacity < 0.1) return false;";
-                script += "if (elem.offsetWidth + elem.offsetHeight + elem.getBoundingClientRect().height + elem.getBoundingClientRect().width === 0) return false;";
-                script += "const elemCenter = {";
-                script += "x: elem.getBoundingClientRect().left + elem.offsetWidth / 2,";
-                script += "y: elem.getBoundingClientRect().top + elem.offsetHeight / 2";
-                script += "};";
-                script += "if (elemCenter.x < 0) return false;";
-                script += "if (elemCenter.x > (document.documentElement.clientWidth || window.innerWidth)) return false;";
-                script += "if (elemCenter.y < 0) return false;";
-                script += "if (elemCenter.y > (document.documentElement.clientHeight || window.innerHeight)) return false;";
-                script += "let pointContainer = document.elementFromPoint(elemCenter.x, elemCenter.y);";
-                script += "do {";
-                script += "if (pointContainer === elem) return true;";
-                script += "} while (pointContainer = pointContainer.parentNode);";
-                script += "return false;";
-                script += "}());";
-
-                string result = null;
                 for (int i = 0; i < sec; i++)
                 {
-                    result = await ExecuteJavaScriptAsync(script);
-                    if (result != "null" && result != null && result == "true")
-                    {
-                        found = true;
-                        break;
-                    }
+                    found = await defineVisibleElementAsync(BY_CSS, locator);
+                    if (found) break;
                     await Task.Delay(1000);
                 }
 
@@ -942,40 +792,10 @@ namespace HatFrameworkDev
             bool found = false;
             try
             {
-                string script = "";
-                script += "(function(){ ";
-                script += $"var elem = document.getElementById('{id}');";
-                script += "";
-                script += "if (!(elem instanceof Element)) throw Error('DomUtil: elem is not an element.');";
-                script += "const style = getComputedStyle(elem);";
-                script += "if (style.display === 'none') return false;";
-                script += "if (style.visibility !== 'visible') return false;";
-                script += "if (style.opacity < 0.1) return false;";
-                script += "if (elem.offsetWidth + elem.offsetHeight + elem.getBoundingClientRect().height + elem.getBoundingClientRect().width === 0) return false;";
-                script += "const elemCenter = {";
-                script += "x: elem.getBoundingClientRect().left + elem.offsetWidth / 2,";
-                script += "y: elem.getBoundingClientRect().top + elem.offsetHeight / 2";
-                script += "};";
-                script += "if (elemCenter.x < 0) return false;";
-                script += "if (elemCenter.x > (document.documentElement.clientWidth || window.innerWidth)) return false;";
-                script += "if (elemCenter.y < 0) return false;";
-                script += "if (elemCenter.y > (document.documentElement.clientHeight || window.innerHeight)) return false;";
-                script += "let pointContainer = document.elementFromPoint(elemCenter.x, elemCenter.y);";
-                script += "do {";
-                script += "if (pointContainer === elem) return true;";
-                script += "} while (pointContainer = pointContainer.parentNode);";
-                script += "return false;";
-                script += "}());";
-
-                string result = null;
                 for (int i = 0; i < sec; i++)
                 {
-                    result = await ExecuteJavaScriptAsync(script);
-                    if (result != "null" && result != null && result == "true")
-                    {
-                        found = true;
-                        break;
-                    }
+                    found = await defineVisibleElementAsync(BY_ID, id);
+                    if (found) break;
                     await Task.Delay(1000);
                 }
 
@@ -991,10 +811,114 @@ namespace HatFrameworkDev
             return found;
         }
 
-        
-        
-        
-        
+        public async Task<bool> FindVisibleElementByClassAsync(string _class, int index, int sec)
+        {
+            int step = SendMessage($"FindVisibleElementByClassAsync({_class}, {index}, {sec})", PROCESS, "Поиск элемента", IMAGE_STATUS_PROCESS);
+            if (CheckTestStop(step) == true) return false;
+
+            bool found = false;
+            try
+            {
+                for (int i = 0; i < sec; i++)
+                {
+                    found = await defineVisibleElementAsync(BY_CLASS, _class, index);
+                    if (found) break;
+                    await Task.Delay(1000);
+                }
+
+                if (found == true) EditMessage(step, null, PASSED, "Поиск элемента - завершен (элемент найден)", IMAGE_STATUS_PASSED);
+                else EditMessage(step, null, WARNING, "Поиск элемента - завершен (элемент не найден)", IMAGE_STATUS_WARNING);
+            }
+            catch (Exception ex)
+            {
+                ConsoleMsg("Ошибка: " + ex.ToString());
+                EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
+                TestStopAsync();
+            }
+            return found;
+        }
+
+        public async Task<bool> FindVisibleElementByNameAsync(string name, int index, int sec)
+        {
+            int step = SendMessage($"FindVisibleElementByNameAsync({name}, {index}, {sec})", PROCESS, "Поиск элемента", IMAGE_STATUS_PROCESS);
+            if (CheckTestStop(step) == true) return false;
+
+            bool found = false;
+            try
+            {
+                for (int i = 0; i < sec; i++)
+                {
+                    found = await defineVisibleElementAsync(BY_NAME, name, index);
+                    if (found) break;
+                    await Task.Delay(1000);
+                }
+
+                if (found == true) EditMessage(step, null, PASSED, "Поиск элемента - завершен (элемент найден)", IMAGE_STATUS_PASSED);
+                else EditMessage(step, null, WARNING, "Поиск элемента - завершен (элемент не найден)", IMAGE_STATUS_WARNING);
+            }
+            catch (Exception ex)
+            {
+                ConsoleMsg("Ошибка: " + ex.ToString());
+                EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
+                TestStopAsync();
+            }
+            return found;
+        }
+
+        public async Task<bool> FindVisibleElementByTagAsync(string tag, int index, int sec)
+        {
+            int step = SendMessage($"FindVisibleElementByTagAsync({tag}, {index}, {sec})", PROCESS, "Поиск элемента", IMAGE_STATUS_PROCESS);
+            if (CheckTestStop(step) == true) return false;
+
+            bool found = false;
+            try
+            {
+                for (int i = 0; i < sec; i++)
+                {
+                    found = await defineVisibleElementAsync(BY_TAG, tag, index);
+                    if (found) break;
+                    await Task.Delay(1000);
+                }
+
+                if (found == true) EditMessage(step, null, PASSED, "Поиск элемента - завершен (элемент найден)", IMAGE_STATUS_PASSED);
+                else EditMessage(step, null, WARNING, "Поиск элемента - завершен (элемент не найден)", IMAGE_STATUS_WARNING);
+            }
+            catch (Exception ex)
+            {
+                ConsoleMsg("Ошибка: " + ex.ToString());
+                EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
+                TestStopAsync();
+            }
+            return found;
+        }
+
+        public async Task<bool> FindVisibleElementByCssAsync(string locator, int sec)
+        {
+            int step = SendMessage($"FindVisibleElementByCssAsync({locator}, {sec})", PROCESS, "Поиск элемента", IMAGE_STATUS_PROCESS);
+            if (CheckTestStop(step) == true) return false;
+
+            bool found = false;
+            try
+            {
+                for (int i = 0; i < sec; i++)
+                {
+                    found = await defineVisibleElementAsync(BY_CSS, locator);
+                    if (found) break;
+                    await Task.Delay(1000);
+                }
+
+                if (found == true) EditMessage(step, null, PASSED, "Поиск элемента - завершен (элемент найден)", IMAGE_STATUS_PASSED);
+                else EditMessage(step, null, WARNING, "Поиск элемента - завершен (элемент не найден)", IMAGE_STATUS_WARNING);
+            }
+            catch (Exception ex)
+            {
+                ConsoleMsg("Ошибка: " + ex.ToString());
+                EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
+                TestStopAsync();
+            }
+            return found;
+        }
+
         public async Task ClickElementByIdAsync(string id)
         {
             int step = SendMessage($"ClickElementByIdAsync({id})", PROCESS, "Нажатие на элемент", IMAGE_STATUS_PROCESS);
