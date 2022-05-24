@@ -1,6 +1,13 @@
 Craker Framework
 =========================================================
 
+Справочник по HTML: http://htmlbook.ru/html
+Универсальные атрибуты: http://htmlbook.ru/html/attr/common
+
+------------------------------------------------------------------------
+ПУБЛИЧНЫЕ МЕТОДЫ И КОНСТАНТЫ
+
+
 consoleMsg(string message) - отправить сообщение в консоль
 clearMessage() - очистить сообщения в таблице теста
 sendMessage(string step, string status, string comment, int image) - отправить сообщение в таблицу теста
@@ -24,42 +31,11 @@ assertNotEquals(string expected, string actual)
 assertTrue(bool condition)
 assertFalse(bool condition)
 
-Правила
-1. файл с расширением .cs
-2. имя файла такое же как имя класса
-3. имена не должны повторятся в рамках одного проекта
-
 ------------------------------------------------------------------------
 
-Запуск из командной строки:
 
-C:\Git\SomovStudio\Hat\App\Hat\Hat\bin\Debug>Hat.exe ExampleTest.cs C:\Users\Catfish\Desktop\project
 
-------------------------------------------------------------------------
 
-try
-{
 
-}
-catch (Exception ex)
-{
-	editMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
-	testStop = true;
-}
 
-try
-{
 
-}
-catch (Exception ex)
-{
-	consoleMsg("Ошибка: " + ex.ToString());
-}
-
-------------------------------------------------------------------------
-
-{ 
-"Version": "1.0.0",
-"Encoding": "UTF-8 BOM",
-"EditorTopMost": true
-}

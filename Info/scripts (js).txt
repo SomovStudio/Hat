@@ -1,3 +1,26 @@
+ПЕРЕХВАТ ОШИБОК
+
+try
+{
+
+}
+catch (Exception ex)
+{
+	editMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
+	testStop = true;
+}
+
+try
+{
+
+}
+catch (Exception ex)
+{
+	consoleMsg("Ошибка: " + ex.ToString());
+}
+
+------------------------------------------------------------------------
+
 private async void Form1_Load(object sender, EventArgs e)
 {
 	await this.webView21.EnsureCoreWebView2Async();
