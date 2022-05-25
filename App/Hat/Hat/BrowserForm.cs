@@ -21,8 +21,8 @@ namespace Hat
             Config.encoding = WorkOnFiles.UTF_8_BOM;
             toolStripStatusLabelFileEncoding.Text = Config.encoding;
             Config.browserForm = this;
-            consoleMsg("Программа Hat версия 1.0");
-            systemConsoleMsg("Программа Hat версия 1.0", default, default, default, true);
+            consoleMsg("Браузер Hat версия 1.0");
+            systemConsoleMsg("Браузер Hat версия 1.0", default, ConsoleColor.DarkGray, ConsoleColor.White, true);
         }
 
         private bool stopTest = false;
@@ -42,7 +42,7 @@ namespace Hat
 
                 if (Config.commandLineMode == true)
                 {
-                    systemConsoleMsg("Запуск браузера Hat...", default, ConsoleColor.DarkGray, ConsoleColor.White, true);
+                    systemConsoleMsg("Запуск браузера...", default, ConsoleColor.DarkGray, ConsoleColor.White, true);
                     consoleMsg("Запуск браузера Hat из командной строки");
                     toolStripStatusLabelProjectPath.Text = Config.projectPath;
                     // Строится дерево папок и файлов
@@ -54,8 +54,8 @@ namespace Hat
                     showLibs();
                     changeEncoding();
                     changeEditorTopMost();
-                    systemConsoleMsg($"Открытие проекта: успешно завершено (версия проекта: {Config.version})", default, ConsoleColor.DarkGray, ConsoleColor.White, true);
-                    consoleMsg($"Открытие проекта: успешно завершено (версия проекта: {Config.version})");
+                    systemConsoleMsg($"Проект успешно открыт (версия проекта: {Config.version})", default, ConsoleColor.DarkGray, ConsoleColor.White, true);
+                    consoleMsg($"Проект успешно открыт (версия проекта: {Config.version})");
                     toolStripStatusLabelProjectFolderFile.Text = Config.selectName;
                     systemConsoleMsg($"Запуск автотеста: {Config.selectName}", default, ConsoleColor.DarkCyan, ConsoleColor.White, true);
                     PlayTest(Config.selectName);
@@ -63,7 +63,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsg("Ошибка: " + ex.ToString());
+                consoleMsgError(ex.ToString());
             }
         }
 
@@ -99,8 +99,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
-                MessageBox.Show(message);
+                consoleMsgError(ex.ToString());
             }
         }
 
@@ -112,6 +111,7 @@ namespace Hat
             systemConsoleMsg("Произошла ошибка:", default, ConsoleColor.Black, ConsoleColor.Red, true);
             systemConsoleMsg(message, default, default, default, true);
             systemConsoleMsg("- - - - - - - - - - - - - - - - - - - - - - - - - - - -", default, default, default, true);
+            systemConsoleMsg("", default, default, default, true);
             resultAutotest(false);
             if (Config.commandLineMode == true) Close();
         }
@@ -155,7 +155,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsg("Ошибка: " + ex.ToString());
+                consoleMsgError(ex.ToString());
             }
         }
 
@@ -190,7 +190,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsg("Ошибка: " + ex.ToString());
+                consoleMsgError(ex.ToString());
             }
         }
 
@@ -257,7 +257,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsg("Ошибка: " + ex.ToString());
+                consoleMsgError(ex.ToString());
             }
         }
 
@@ -269,7 +269,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsg("Ошибка: " + ex.ToString());
+                consoleMsgError(ex.ToString());
             }
         }
 
@@ -283,7 +283,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsg("Ошибка: " + ex.ToString());
+                consoleMsgError(ex.ToString());
             }
         }
 
@@ -295,7 +295,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsg("Ошибка: " + ex.ToString());
+                consoleMsgError(ex.ToString());
             }
         }
 
@@ -314,7 +314,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsg("Ошибка: " + ex.ToString());
+                consoleMsgError(ex.ToString());
             }
         }
 
@@ -352,7 +352,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsg("Ошибка: " + ex.ToString());
+                consoleMsgError(ex.ToString());
             }
         }
 
@@ -449,7 +449,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsg("Ошибка: " + ex.ToString());
+                consoleMsgError(ex.ToString());
             }
         }
 
@@ -491,13 +491,13 @@ namespace Hat
 ;                   changeEncoding();
                     changeEditorTopMost();
 
-                    consoleMsg("Открытие проекта: успешно завершено (версия проекта: " + Config.version + ")");
-                    systemConsoleMsg($"Открытие проекта: успешно завершено (версия проекта: {Config.version})", default, ConsoleColor.DarkGray, ConsoleColor.White, true);
+                    consoleMsg("Проект успешно открыт (версия проекта: " + Config.version + ")");
+                    systemConsoleMsg($"Проект успешно открыт (версия проекта: {Config.version})", default, ConsoleColor.DarkGray, ConsoleColor.White, true);
                 }
              }
             catch (Exception ex)
             {
-                consoleMsg("Ошибка: " + ex.ToString());
+                consoleMsgError(ex.ToString());
             }
         }
 
@@ -516,7 +516,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsg("Ошибка: " + ex.ToString());
+                consoleMsgError(ex.ToString());
             }
         }
 
@@ -535,7 +535,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsg("Ошибка: " + ex.ToString());
+                consoleMsgError(ex.ToString());
             }
         }
 
@@ -577,7 +577,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsg("Ошибка: " + ex.ToString());
+                consoleMsgError(ex.ToString());
             }
         }
 
@@ -592,7 +592,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsg("Ошибка: " + ex.ToString());
+                consoleMsgError(ex.ToString());
             }
         }
 
@@ -636,7 +636,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsg("Ошибка: " + ex.ToString());
+                consoleMsgError(ex.ToString());
             }
         }
 
@@ -676,7 +676,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsg("Ошибка: " + ex.ToString());
+                consoleMsgError(ex.ToString());
             }
         }
 
@@ -701,7 +701,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsg("Ошибка: " + ex.ToString());
+                consoleMsgError(ex.ToString());
             }
         }
 
@@ -726,7 +726,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsg("Ошибка: " + ex.ToString());
+                consoleMsgError(ex.ToString());
             }
         }
 
@@ -751,7 +751,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsg("Ошибка: " + ex.ToString());
+                consoleMsgError(ex.ToString());
             }
         }
 
@@ -776,7 +776,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsg("Ошибка: " + ex.ToString());
+                consoleMsgError(ex.ToString());
             }
         }
 
@@ -790,7 +790,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsg("Ошибка: " + ex.ToString());
+                consoleMsgError(ex.ToString());
             }
 
         }
@@ -804,7 +804,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsg("Ошибка: " + ex.ToString());
+                consoleMsgError(ex.ToString());
             }
         }
 
@@ -830,7 +830,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsg("Ошибка: " + ex.ToString());
+                consoleMsgError(ex.ToString());
             }
         }
 
@@ -855,7 +855,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsg("Ошибка: " + ex.ToString());
+                consoleMsgError(ex.ToString());
             }
         }
 
@@ -880,7 +880,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsg("Ошибка: " + ex.ToString());
+                consoleMsgError(ex.ToString());
             }
         }
 
@@ -905,7 +905,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsg("Ошибка: " + ex.ToString());
+                consoleMsgError(ex.ToString());
             }
         }
 
@@ -922,7 +922,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsg("Ошибка: " + ex.ToString());
+                consoleMsgError(ex.ToString());
             }
         }
 
@@ -939,7 +939,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsg("Ошибка: " + ex.ToString());
+                consoleMsgError(ex.ToString());
             }
         }
 
@@ -982,7 +982,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsg("Ошибка: " + ex.ToString());
+                consoleMsgError(ex.ToString());
             }
         }
 
@@ -1045,7 +1045,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsg("Ошибка: " + ex.ToString());
+                consoleMsgError(ex.ToString());
             }
         }
 
@@ -1077,7 +1077,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsg("Ошибка: " + ex.ToString());
+                consoleMsgError(ex.ToString());
             }
         }
 
@@ -1111,7 +1111,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsg("Ошибка: " + ex.ToString());
+                consoleMsgError(ex.ToString());
             }
         }
 
@@ -1149,7 +1149,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsg("Ошибка: " + ex.ToString());
+                consoleMsgError(ex.ToString());
             }
         }
 
@@ -1193,7 +1193,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsg("Ошибка: " + ex.ToString());
+                consoleMsgError(ex.ToString());
             }
         }
 
@@ -1254,7 +1254,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsg("Ошибка: " + ex.ToString());
+                consoleMsgError(ex.ToString());
             }
         }
 
@@ -1304,7 +1304,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsg("Ошибка: " + ex.ToString());
+                consoleMsgError(ex.ToString());
             }
         }
 
@@ -1328,7 +1328,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsg("Ошибка: " + ex.ToString());
+                consoleMsgError(ex.ToString());
             }
         }
 
@@ -1351,7 +1351,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsg("Ошибка: " + ex.ToString());
+                consoleMsgError(ex.ToString());
             }
         }
 
@@ -1374,7 +1374,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsg("Ошибка: " + ex.ToString());
+                consoleMsgError(ex.ToString());
             }
         }
 
@@ -1394,7 +1394,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsg("Ошибка: " + ex.ToString());
+                consoleMsgError(ex.ToString());
             }
         }
 
@@ -1459,7 +1459,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsg("Ошибка: " + ex.ToString());
+                consoleMsgError(ex.ToString());
             }
         }
 
@@ -1519,7 +1519,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsg("Ошибка: " + ex.ToString());
+                consoleMsgError(ex.ToString());
             }
         }
 
@@ -1547,7 +1547,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsg("Ошибка: " + ex.ToString());
+                consoleMsgError(ex.ToString());
             }
         }
 
@@ -1567,7 +1567,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsg("Ошибка: " + ex.ToString());
+                consoleMsgError(ex.ToString());
             }
         }
 
@@ -1587,7 +1587,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsg("Ошибка: " + ex.ToString());
+                consoleMsgError(ex.ToString());
             }
         }
 
@@ -1604,7 +1604,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsg("Ошибка: " + ex.ToString());
+                consoleMsgError(ex.ToString());
             }
         }
 
@@ -1616,7 +1616,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsg("Ошибка: " + ex.ToString());
+                consoleMsgError(ex.ToString());
             }
         }
 
@@ -1628,7 +1628,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsg("Ошибка: " + ex.ToString());
+                consoleMsgError(ex.ToString());
             }
         }
 

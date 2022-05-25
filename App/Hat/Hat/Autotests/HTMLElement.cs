@@ -37,9 +37,9 @@ namespace HatFrameworkDev
             }
             catch (Exception ex)
             {
-                tester.ConsoleMsg("Ошибка: " + ex.ToString());
                 tester.EditMessage(step, null, Tester.FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), Tester.IMAGE_STATUS_FAILED);
                 tester.TestStopAsync();
+                tester.ConsoleMsgError(ex.ToString());
             }
         }
     }

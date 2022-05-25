@@ -67,7 +67,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                Config.browserForm.consoleMsg("Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString());
+                Config.browserForm.consoleMsgError(ex.ToString());
             }
         }
 
@@ -129,7 +129,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                Config.browserForm.consoleMsg("Ошибка: " + ex.ToString());
+                Config.browserForm.consoleMsgError(ex.ToString());
             }
         }
 
@@ -145,7 +145,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                Config.browserForm.consoleMsg("Ошибка: " + ex.ToString());
+                Config.browserForm.consoleMsgError(ex.ToString());
             }
 
             string[] result = new string[files.Count];
@@ -158,7 +158,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                Config.browserForm.consoleMsg("Ошибка: " + ex.ToString());
+                Config.browserForm.consoleMsgError(ex.ToString());
             }
 
             return result;
