@@ -1677,11 +1677,9 @@ namespace Hat
             Autotests.devTestStutsAsync();
         }
 
-        
-
-        private void toolStripButton14_Click(object sender, EventArgs e)
+        private void toolStripButton18_Click(object sender, EventArgs e)
         {
-            // удалить
+            richTextBoxConsoleErrors.Text = "";
         }
 
         private async void toolStripButton16_Click(object sender, EventArgs e)
@@ -1698,7 +1696,7 @@ namespace Hat
                 }());";
                 string jsonText = await webView2.CoreWebView2.ExecuteScriptAsync(script);
                 dynamic result = JsonConvert.DeserializeObject(jsonText);
-                textBoxEvents.Text = result;
+                richTextBoxEvents.Text = result;
             }
             catch (Exception ex)
             {
@@ -1713,7 +1711,58 @@ namespace Hat
 
         private void toolStripButton14_Click_1(object sender, EventArgs e)
         {
-            textBoxEvents.Text = "";
+            richTextBoxEvents.Text = "";
+        }
+
+        private void выводToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                saveFileLogDialog.FileName = "";
+                if (saveFileLogDialog.ShowDialog() == DialogResult.OK)
+                {
+                    richTextBoxConsole.SaveFile(saveFileLogDialog.FileName, RichTextBoxStreamType.PlainText);
+                    consoleMsg($"Лог вывода сохранён в файл: {saveFileLogDialog.FileName}");
+                }
+            }
+            catch (Exception ex)
+            {
+                consoleMsgError(ex.ToString());
+            }
+        }
+
+        private void ошибкиНаСтраницеToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                saveFileLogDialog.FileName = "";
+                if (saveFileLogDialog.ShowDialog() == DialogResult.OK)
+                {
+                    richTextBoxConsoleErrors.SaveFile(saveFileLogDialog.FileName, RichTextBoxStreamType.PlainText);
+                    consoleMsg($"Лог ошибок на странице сохранён в файл: {saveFileLogDialog.FileName}");
+                }
+            }
+            catch (Exception ex)
+            {
+                consoleMsgError(ex.ToString());
+            }
+        }
+
+        private void событияНаСтраницеToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                saveFileLogDialog.FileName = "";
+                if (saveFileLogDialog.ShowDialog() == DialogResult.OK)
+                {
+                    richTextBoxEvents.SaveFile(saveFileLogDialog.FileName, RichTextBoxStreamType.PlainText);
+                    consoleMsg($"Лог событий на странице сохранён в файл: {saveFileLogDialog.FileName}");
+                }
+            }
+            catch (Exception ex)
+            {
+                consoleMsgError(ex.ToString());
+            }
         }
     }
 }
