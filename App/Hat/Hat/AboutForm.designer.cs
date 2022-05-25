@@ -101,19 +101,19 @@
             // 
             this.linkLabel3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.linkLabel3.AutoSize = true;
-            this.linkLabel3.Location = new System.Drawing.Point(318, 65);
+            this.linkLabel3.Location = new System.Drawing.Point(279, 65);
             this.linkLabel3.Name = "linkLabel3";
-            this.linkLabel3.Size = new System.Drawing.Size(109, 13);
+            this.linkLabel3.Size = new System.Drawing.Size(145, 13);
             this.linkLabel3.TabIndex = 15;
             this.linkLabel3.TabStop = true;
-            this.linkLabel3.Text = "somovstudio.github.io";
+            this.linkLabel3.Text = "https://somovstudio.github.io";
             this.linkLabel3.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel3_LinkClicked);
             // 
             // label9
             // 
             this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(272, 65);
+            this.label9.Location = new System.Drawing.Point(239, 65);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(34, 13);
             this.label9.TabIndex = 14;
