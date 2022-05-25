@@ -9,6 +9,8 @@ using System.Text;
 using System.Windows.Forms;
 using System.Text.RegularExpressions;
 using System.Diagnostics;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace Hat
 {
@@ -65,6 +67,11 @@ namespace Hat
             {
                 consoleMsgError(ex.ToString());
             }
+        }
+
+        private void закрытьToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Close();
         }
 
         private void BrowserForm_FormClosed(object sender, FormClosedEventArgs e)
@@ -1637,6 +1644,32 @@ namespace Hat
             Autotests.devTestStutsAsync();
         }
 
-        
+        private void toolStripButton14_Click(object sender, EventArgs e)
+        {
+
+        }
+
+
+        private async void toolStripButton16_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                await webView2.EnsureCoreWebView2Async();
+                string script =
+                @"(function(){
+                var performance = window.performance || window.mozPerformance || window.msPerformance || window.webkitPerformance || {};
+                var network = performance.getEntriesByType('resource') || {};
+                var result = JSON.stringify(network);
+                return result;
+                }());";
+                string jsonText = await webView2.CoreWebView2.ExecuteScriptAsync(script);
+                dynamic result = JsonConvert.DeserializeObject(jsonText);
+                textBoxEvents.Text = result;
+            }
+            catch (Exception ex)
+            {
+                consoleMsgError(ex.ToString());
+            }
+        }
     }
 }

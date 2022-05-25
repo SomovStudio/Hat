@@ -32,6 +32,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BrowserForm));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.файлToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.сохранитьЛогиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator16 = new System.Windows.Forms.ToolStripSeparator();
             this.закрытьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.проектToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.создатьПроектToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -121,10 +123,6 @@
             this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton6 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton13 = new System.Windows.Forms.ToolStripButton();
-            this.tabPage7 = new System.Windows.Forms.TabPage();
-            this.textBoxLibs = new System.Windows.Forms.TextBox();
-            this.toolStripLibs = new System.Windows.Forms.ToolStrip();
-            this.toolStripButton12 = new System.Windows.Forms.ToolStripButton();
             this.tabPage6 = new System.Windows.Forms.TabPage();
             this.listViewTest = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -145,6 +143,10 @@
             this.toolStripButton10 = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButton11 = new System.Windows.Forms.ToolStripButton();
+            this.tabPage7 = new System.Windows.Forms.TabPage();
+            this.textBoxLibs = new System.Windows.Forms.TextBox();
+            this.toolStripLibs = new System.Windows.Forms.ToolStrip();
+            this.toolStripButton12 = new System.Windows.Forms.ToolStripButton();
             this.panel7 = new System.Windows.Forms.Panel();
             this.panel8 = new System.Windows.Forms.Panel();
             this.label5 = new System.Windows.Forms.Label();
@@ -156,7 +158,19 @@
             this.contextMenuStripConsole = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.очиститьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.textBoxErrors = new System.Windows.Forms.TextBox();
+            this.toolStrip2 = new System.Windows.Forms.ToolStrip();
+            this.toolStripButton14 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator14 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripTextBoxFindError = new System.Windows.Forms.ToolStripTextBox();
+            this.toolStripButton15 = new System.Windows.Forms.ToolStripButton();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.textBoxEvents = new System.Windows.Forms.TextBox();
+            this.toolStrip3 = new System.Windows.Forms.ToolStrip();
+            this.toolStripButton16 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator15 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripTextBoxFindEvent = new System.Windows.Forms.ToolStripTextBox();
+            this.toolStripButton17 = new System.Windows.Forms.ToolStripButton();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -170,18 +184,6 @@
             this.checkBoxUserAgent = new System.Windows.Forms.CheckBox();
             this.folderBrowserDialogProjectCreate = new System.Windows.Forms.FolderBrowserDialog();
             this.openFileProjectDialog = new System.Windows.Forms.OpenFileDialog();
-            this.toolStrip2 = new System.Windows.Forms.ToolStrip();
-            this.toolStripButton14 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator14 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripTextBox1 = new System.Windows.Forms.ToolStripTextBox();
-            this.toolStripButton15 = new System.Windows.Forms.ToolStripButton();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.toolStrip3 = new System.Windows.Forms.ToolStrip();
-            this.toolStripButton16 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator15 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripTextBox2 = new System.Windows.Forms.ToolStripTextBox();
-            this.toolStripButton17 = new System.Windows.Forms.ToolStripButton();
-            this.textBox2 = new System.Windows.Forms.TextBox();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -204,11 +206,11 @@
             this.tabPage5.SuspendLayout();
             this.contextMenuStripTreeFolders.SuspendLayout();
             this.toolStripProject.SuspendLayout();
-            this.tabPage7.SuspendLayout();
-            this.toolStripLibs.SuspendLayout();
             this.tabPage6.SuspendLayout();
             this.contextMenuStripTest.SuspendLayout();
             this.toolStripTest.SuspendLayout();
+            this.tabPage7.SuspendLayout();
+            this.toolStripLibs.SuspendLayout();
             this.panel7.SuspendLayout();
             this.panel8.SuspendLayout();
             this.panel9.SuspendLayout();
@@ -216,14 +218,14 @@
             this.tabPage1.SuspendLayout();
             this.contextMenuStripConsole.SuspendLayout();
             this.tabPage3.SuspendLayout();
+            this.toolStrip2.SuspendLayout();
             this.tabPage4.SuspendLayout();
+            this.toolStrip3.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownBrowserHeight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownBrowserWidth)).BeginInit();
-            this.toolStrip2.SuspendLayout();
-            this.toolStrip3.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -241,16 +243,31 @@
             // файлToolStripMenuItem
             // 
             this.файлToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.сохранитьЛогиToolStripMenuItem,
+            this.toolStripSeparator16,
             this.закрытьToolStripMenuItem});
             this.файлToolStripMenuItem.Name = "файлToolStripMenuItem";
             this.файлToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
             this.файлToolStripMenuItem.Text = "Файл";
             // 
+            // сохранитьЛогиToolStripMenuItem
+            // 
+            this.сохранитьЛогиToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("сохранитьЛогиToolStripMenuItem.Image")));
+            this.сохранитьЛогиToolStripMenuItem.Name = "сохранитьЛогиToolStripMenuItem";
+            this.сохранитьЛогиToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
+            this.сохранитьЛогиToolStripMenuItem.Text = "Сохранить логи:";
+            // 
+            // toolStripSeparator16
+            // 
+            this.toolStripSeparator16.Name = "toolStripSeparator16";
+            this.toolStripSeparator16.Size = new System.Drawing.Size(162, 6);
+            // 
             // закрытьToolStripMenuItem
             // 
             this.закрытьToolStripMenuItem.Name = "закрытьToolStripMenuItem";
-            this.закрытьToolStripMenuItem.Size = new System.Drawing.Size(120, 22);
+            this.закрытьToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
             this.закрытьToolStripMenuItem.Text = "Закрыть";
+            this.закрытьToolStripMenuItem.Click += new System.EventHandler(this.закрытьToolStripMenuItem_Click);
             // 
             // проектToolStripMenuItem
             // 
@@ -1075,49 +1092,6 @@
             this.toolStripButton13.Text = "для теста";
             this.toolStripButton13.Click += new System.EventHandler(this.toolStripButton13_Click);
             // 
-            // tabPage7
-            // 
-            this.tabPage7.Controls.Add(this.textBoxLibs);
-            this.tabPage7.Controls.Add(this.toolStripLibs);
-            this.tabPage7.Location = new System.Drawing.Point(4, 4);
-            this.tabPage7.Name = "tabPage7";
-            this.tabPage7.Size = new System.Drawing.Size(522, 177);
-            this.tabPage7.TabIndex = 2;
-            this.tabPage7.Text = "Библиотеки";
-            this.tabPage7.UseVisualStyleBackColor = true;
-            // 
-            // textBoxLibs
-            // 
-            this.textBoxLibs.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBoxLibs.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBoxLibs.Location = new System.Drawing.Point(0, 25);
-            this.textBoxLibs.Multiline = true;
-            this.textBoxLibs.Name = "textBoxLibs";
-            this.textBoxLibs.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBoxLibs.Size = new System.Drawing.Size(522, 152);
-            this.textBoxLibs.TabIndex = 1;
-            this.textBoxLibs.WordWrap = false;
-            // 
-            // toolStripLibs
-            // 
-            this.toolStripLibs.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripButton12});
-            this.toolStripLibs.Location = new System.Drawing.Point(0, 0);
-            this.toolStripLibs.Name = "toolStripLibs";
-            this.toolStripLibs.Size = new System.Drawing.Size(522, 25);
-            this.toolStripLibs.TabIndex = 0;
-            this.toolStripLibs.Text = "toolStrip2";
-            // 
-            // toolStripButton12
-            // 
-            this.toolStripButton12.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton12.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton12.Image")));
-            this.toolStripButton12.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton12.Name = "toolStripButton12";
-            this.toolStripButton12.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton12.Text = "Сохранить";
-            this.toolStripButton12.Click += new System.EventHandler(this.toolStripButton12_Click);
-            // 
             // tabPage6
             // 
             this.tabPage6.Controls.Add(this.listViewTest);
@@ -1296,6 +1270,49 @@
             this.toolStripButton11.Text = "Подробная информация о шаге";
             this.toolStripButton11.Click += new System.EventHandler(this.toolStripButton11_Click);
             // 
+            // tabPage7
+            // 
+            this.tabPage7.Controls.Add(this.textBoxLibs);
+            this.tabPage7.Controls.Add(this.toolStripLibs);
+            this.tabPage7.Location = new System.Drawing.Point(4, 4);
+            this.tabPage7.Name = "tabPage7";
+            this.tabPage7.Size = new System.Drawing.Size(522, 177);
+            this.tabPage7.TabIndex = 2;
+            this.tabPage7.Text = "Библиотеки";
+            this.tabPage7.UseVisualStyleBackColor = true;
+            // 
+            // textBoxLibs
+            // 
+            this.textBoxLibs.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBoxLibs.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBoxLibs.Location = new System.Drawing.Point(0, 25);
+            this.textBoxLibs.Multiline = true;
+            this.textBoxLibs.Name = "textBoxLibs";
+            this.textBoxLibs.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.textBoxLibs.Size = new System.Drawing.Size(522, 152);
+            this.textBoxLibs.TabIndex = 1;
+            this.textBoxLibs.WordWrap = false;
+            // 
+            // toolStripLibs
+            // 
+            this.toolStripLibs.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripButton12});
+            this.toolStripLibs.Location = new System.Drawing.Point(0, 0);
+            this.toolStripLibs.Name = "toolStripLibs";
+            this.toolStripLibs.Size = new System.Drawing.Size(522, 25);
+            this.toolStripLibs.TabIndex = 0;
+            this.toolStripLibs.Text = "toolStrip2";
+            // 
+            // toolStripButton12
+            // 
+            this.toolStripButton12.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton12.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton12.Image")));
+            this.toolStripButton12.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton12.Name = "toolStripButton12";
+            this.toolStripButton12.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButton12.Text = "Сохранить";
+            this.toolStripButton12.Click += new System.EventHandler(this.toolStripButton12_Click);
+            // 
             // panel7
             // 
             this.panel7.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -1408,7 +1425,7 @@
             // 
             // tabPage3
             // 
-            this.tabPage3.Controls.Add(this.textBox1);
+            this.tabPage3.Controls.Add(this.textBoxErrors);
             this.tabPage3.Controls.Add(this.toolStrip2);
             this.tabPage3.Location = new System.Drawing.Point(4, 4);
             this.tabPage3.Name = "tabPage3";
@@ -1417,9 +1434,63 @@
             this.tabPage3.Text = "Ошибки на странице";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
+            // textBoxErrors
+            // 
+            this.textBoxErrors.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBoxErrors.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBoxErrors.Location = new System.Drawing.Point(0, 25);
+            this.textBoxErrors.Multiline = true;
+            this.textBoxErrors.Name = "textBoxErrors";
+            this.textBoxErrors.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.textBoxErrors.Size = new System.Drawing.Size(866, 152);
+            this.textBoxErrors.TabIndex = 1;
+            // 
+            // toolStrip2
+            // 
+            this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripButton14,
+            this.toolStripSeparator14,
+            this.toolStripTextBoxFindError,
+            this.toolStripButton15});
+            this.toolStrip2.Location = new System.Drawing.Point(0, 0);
+            this.toolStrip2.Name = "toolStrip2";
+            this.toolStrip2.Size = new System.Drawing.Size(866, 25);
+            this.toolStrip2.TabIndex = 0;
+            this.toolStrip2.Text = "toolStrip2";
+            // 
+            // toolStripButton14
+            // 
+            this.toolStripButton14.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton14.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton14.Image")));
+            this.toolStripButton14.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton14.Name = "toolStripButton14";
+            this.toolStripButton14.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButton14.Text = "Проверить ошибки";
+            this.toolStripButton14.Click += new System.EventHandler(this.toolStripButton14_Click);
+            // 
+            // toolStripSeparator14
+            // 
+            this.toolStripSeparator14.Name = "toolStripSeparator14";
+            this.toolStripSeparator14.Size = new System.Drawing.Size(6, 25);
+            // 
+            // toolStripTextBoxFindError
+            // 
+            this.toolStripTextBoxFindError.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.toolStripTextBoxFindError.Name = "toolStripTextBoxFindError";
+            this.toolStripTextBoxFindError.Size = new System.Drawing.Size(200, 25);
+            // 
+            // toolStripButton15
+            // 
+            this.toolStripButton15.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton15.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton15.Image")));
+            this.toolStripButton15.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton15.Name = "toolStripButton15";
+            this.toolStripButton15.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButton15.Text = "Поиск";
+            // 
             // tabPage4
             // 
-            this.tabPage4.Controls.Add(this.textBox2);
+            this.tabPage4.Controls.Add(this.textBoxEvents);
             this.tabPage4.Controls.Add(this.toolStrip3);
             this.tabPage4.Location = new System.Drawing.Point(4, 4);
             this.tabPage4.Name = "tabPage4";
@@ -1427,6 +1498,60 @@
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "События на странице";
             this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // textBoxEvents
+            // 
+            this.textBoxEvents.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBoxEvents.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBoxEvents.Location = new System.Drawing.Point(0, 25);
+            this.textBoxEvents.Multiline = true;
+            this.textBoxEvents.Name = "textBoxEvents";
+            this.textBoxEvents.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.textBoxEvents.Size = new System.Drawing.Size(866, 152);
+            this.textBoxEvents.TabIndex = 2;
+            // 
+            // toolStrip3
+            // 
+            this.toolStrip3.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripButton16,
+            this.toolStripSeparator15,
+            this.toolStripTextBoxFindEvent,
+            this.toolStripButton17});
+            this.toolStrip3.Location = new System.Drawing.Point(0, 0);
+            this.toolStrip3.Name = "toolStrip3";
+            this.toolStrip3.Size = new System.Drawing.Size(866, 25);
+            this.toolStrip3.TabIndex = 1;
+            this.toolStrip3.Text = "toolStrip3";
+            // 
+            // toolStripButton16
+            // 
+            this.toolStripButton16.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton16.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton16.Image")));
+            this.toolStripButton16.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton16.Name = "toolStripButton16";
+            this.toolStripButton16.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButton16.Text = "Выгрузить события";
+            this.toolStripButton16.Click += new System.EventHandler(this.toolStripButton16_Click);
+            // 
+            // toolStripSeparator15
+            // 
+            this.toolStripSeparator15.Name = "toolStripSeparator15";
+            this.toolStripSeparator15.Size = new System.Drawing.Size(6, 25);
+            // 
+            // toolStripTextBoxFindEvent
+            // 
+            this.toolStripTextBoxFindEvent.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.toolStripTextBoxFindEvent.Name = "toolStripTextBoxFindEvent";
+            this.toolStripTextBoxFindEvent.Size = new System.Drawing.Size(200, 25);
+            // 
+            // toolStripButton17
+            // 
+            this.toolStripButton17.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton17.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton17.Image")));
+            this.toolStripButton17.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton17.Name = "toolStripButton17";
+            this.toolStripButton17.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButton17.Text = "Поиск";
             // 
             // tabPage2
             // 
@@ -1572,110 +1697,6 @@
             this.openFileProjectDialog.FileName = "project.hat";
             this.openFileProjectDialog.Filter = "project.hat|project.hat";
             // 
-            // toolStrip2
-            // 
-            this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripButton14,
-            this.toolStripSeparator14,
-            this.toolStripTextBox1,
-            this.toolStripButton15});
-            this.toolStrip2.Location = new System.Drawing.Point(0, 0);
-            this.toolStrip2.Name = "toolStrip2";
-            this.toolStrip2.Size = new System.Drawing.Size(866, 25);
-            this.toolStrip2.TabIndex = 0;
-            this.toolStrip2.Text = "toolStrip2";
-            // 
-            // toolStripButton14
-            // 
-            this.toolStripButton14.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton14.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton14.Image")));
-            this.toolStripButton14.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton14.Name = "toolStripButton14";
-            this.toolStripButton14.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton14.Text = "Проверить ошибки";
-            // 
-            // toolStripSeparator14
-            // 
-            this.toolStripSeparator14.Name = "toolStripSeparator14";
-            this.toolStripSeparator14.Size = new System.Drawing.Size(6, 25);
-            // 
-            // toolStripTextBox1
-            // 
-            this.toolStripTextBox1.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.toolStripTextBox1.Name = "toolStripTextBox1";
-            this.toolStripTextBox1.Size = new System.Drawing.Size(200, 25);
-            // 
-            // toolStripButton15
-            // 
-            this.toolStripButton15.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton15.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton15.Image")));
-            this.toolStripButton15.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton15.Name = "toolStripButton15";
-            this.toolStripButton15.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton15.Text = "Поиск";
-            // 
-            // textBox1
-            // 
-            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox1.Location = new System.Drawing.Point(0, 25);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(866, 152);
-            this.textBox1.TabIndex = 1;
-            // 
-            // toolStrip3
-            // 
-            this.toolStrip3.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripButton16,
-            this.toolStripSeparator15,
-            this.toolStripTextBox2,
-            this.toolStripButton17});
-            this.toolStrip3.Location = new System.Drawing.Point(0, 0);
-            this.toolStrip3.Name = "toolStrip3";
-            this.toolStrip3.Size = new System.Drawing.Size(866, 25);
-            this.toolStrip3.TabIndex = 1;
-            this.toolStrip3.Text = "toolStrip3";
-            // 
-            // toolStripButton16
-            // 
-            this.toolStripButton16.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton16.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton16.Image")));
-            this.toolStripButton16.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton16.Name = "toolStripButton16";
-            this.toolStripButton16.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton16.Text = "Проверить ошибки";
-            // 
-            // toolStripSeparator15
-            // 
-            this.toolStripSeparator15.Name = "toolStripSeparator15";
-            this.toolStripSeparator15.Size = new System.Drawing.Size(6, 25);
-            // 
-            // toolStripTextBox2
-            // 
-            this.toolStripTextBox2.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.toolStripTextBox2.Name = "toolStripTextBox2";
-            this.toolStripTextBox2.Size = new System.Drawing.Size(200, 25);
-            // 
-            // toolStripButton17
-            // 
-            this.toolStripButton17.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton17.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton17.Image")));
-            this.toolStripButton17.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton17.Name = "toolStripButton17";
-            this.toolStripButton17.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton17.Text = "Поиск";
-            // 
-            // textBox2
-            // 
-            this.textBox2.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox2.Location = new System.Drawing.Point(0, 25);
-            this.textBox2.Multiline = true;
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(866, 152);
-            this.textBox2.TabIndex = 2;
-            // 
             // BrowserForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1721,15 +1742,15 @@
             this.contextMenuStripTreeFolders.ResumeLayout(false);
             this.toolStripProject.ResumeLayout(false);
             this.toolStripProject.PerformLayout();
-            this.tabPage7.ResumeLayout(false);
-            this.tabPage7.PerformLayout();
-            this.toolStripLibs.ResumeLayout(false);
-            this.toolStripLibs.PerformLayout();
             this.tabPage6.ResumeLayout(false);
             this.tabPage6.PerformLayout();
             this.contextMenuStripTest.ResumeLayout(false);
             this.toolStripTest.ResumeLayout(false);
             this.toolStripTest.PerformLayout();
+            this.tabPage7.ResumeLayout(false);
+            this.tabPage7.PerformLayout();
+            this.toolStripLibs.ResumeLayout(false);
+            this.toolStripLibs.PerformLayout();
             this.panel7.ResumeLayout(false);
             this.panel8.ResumeLayout(false);
             this.panel9.ResumeLayout(false);
@@ -1738,8 +1759,12 @@
             this.contextMenuStripConsole.ResumeLayout(false);
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
+            this.toolStrip2.ResumeLayout(false);
+            this.toolStrip2.PerformLayout();
             this.tabPage4.ResumeLayout(false);
             this.tabPage4.PerformLayout();
+            this.toolStrip3.ResumeLayout(false);
+            this.toolStrip3.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -1747,10 +1772,6 @@
             this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownBrowserHeight)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownBrowserWidth)).EndInit();
-            this.toolStrip2.ResumeLayout(false);
-            this.toolStrip2.PerformLayout();
-            this.toolStrip3.ResumeLayout(false);
-            this.toolStrip3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1901,15 +1922,17 @@
         private System.Windows.Forms.ToolStrip toolStrip2;
         private System.Windows.Forms.ToolStripButton toolStripButton14;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator14;
-        private System.Windows.Forms.ToolStripTextBox toolStripTextBox1;
+        private System.Windows.Forms.ToolStripTextBox toolStripTextBoxFindError;
         private System.Windows.Forms.ToolStripButton toolStripButton15;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox textBoxErrors;
+        private System.Windows.Forms.TextBox textBoxEvents;
         private System.Windows.Forms.ToolStrip toolStrip3;
         private System.Windows.Forms.ToolStripButton toolStripButton16;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator15;
-        private System.Windows.Forms.ToolStripTextBox toolStripTextBox2;
+        private System.Windows.Forms.ToolStripTextBox toolStripTextBoxFindEvent;
         private System.Windows.Forms.ToolStripButton toolStripButton17;
+        private System.Windows.Forms.ToolStripMenuItem сохранитьЛогиToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator16;
     }
 }
 
