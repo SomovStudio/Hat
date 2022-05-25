@@ -75,10 +75,12 @@
             // 
             // label11
             // 
+            this.label11.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.label11.Image = ((System.Drawing.Image)(resources.GetObject("label11.Image")));
-            this.label11.Location = new System.Drawing.Point(95, 321);
+            this.label11.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.label11.Location = new System.Drawing.Point(0, 317);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(249, 38);
+            this.label11.Size = new System.Drawing.Size(442, 60);
             this.label11.TabIndex = 20;
             // 
             // linkLabel4
