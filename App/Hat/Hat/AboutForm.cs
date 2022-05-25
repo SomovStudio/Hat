@@ -52,5 +52,17 @@ namespace Hat
                 MessageBox.Show(ex.Message, "Ошибка");
             }
         }
+
+        private void linkLabel4_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            try
+            {
+                System.Diagnostics.Process.Start(@"https://zionec.ru/");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка");
+            }
+        }
     }
 }

@@ -248,7 +248,6 @@ namespace HatFrameworkDev
             {
                 testStop = false;
                 assertStatus = null;
-                ClearMessage();
                 int step = SendMessage("TestBeginAsync()", PROCESS, "Инициализация теста", IMAGE_STATUS_PROCESS);
                 await BrowserView.EnsureCoreWebView2Async();
                 EditMessage(step, null, PASSED, "Выполнена инициализация теста", IMAGE_STATUS_PASSED);

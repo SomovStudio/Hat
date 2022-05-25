@@ -74,8 +74,11 @@ namespace Hat
         public static async Task devTestStutsAsync()
         {
             HatFrameworkDev.Tester tester = new HatFrameworkDev.Tester(Config.browserForm);
-            await tester.TestBeginAsync();
+            tester.ClearMessage();
+            tester.SendMessage("Запуск автотеста", "", "Файл: ExampleTest.cs", Tester.IMAGE_STATUS_MESSAGE);
             await tester.BrowserSizeAsync(800, 600);
+            
+            await tester.TestBeginAsync();
             await tester.GoToUrlAsync("https://somovstudio.github.io/test.html", 5);
             await tester.FindVisibleElementByIdAsync("result", 5);
             await tester.SetValueInElementByIdAsync("login", "admin");
@@ -91,24 +94,6 @@ namespace Hat
             await tester.AssertEqualsAsync(expected, actual);
             await tester.TestEndAsync();
 
-            
-            /*
-            HatFrameworkDev.Tester tester = new HatFrameworkDev.Tester(Config.browserForm);
-            await tester.TestBegin();
-            await tester.GoToUrl("https://mgts.ru/", 5);
-            await tester.WaitVisibleElementById("headerPartMGTS", 25);
-            await tester.ClickElementByCSS("#header > div.header_second-row.header_desktop > div > div > div.header_action-btn > button");
-            await tester.WaitVisibleElementById("popup", 5);
-            await tester.SetValueInElementByCSS("#popup_name", "Тестирование Зионек");
-            await tester.Wait(2);
-            await tester.SetValueInElementByCSS("#popup_phone", "9999999999");
-            await tester.Wait(2);
-            await tester.ClickElementById("SUBMIT_ORDER");
-            await tester.Wait(5);
-            string order = await tester.GetValueFromElementById("last_order_sended");
-            await tester.AssertNotEquals(order, "\"\"");
-            await tester.TestEnd();
-            */
         }
 
         public static void readNodes(TreeNodeCollection _nodes)

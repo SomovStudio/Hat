@@ -1634,8 +1634,7 @@ namespace Hat
 
         private void toolStripButton13_Click(object sender, EventArgs e)
         {
-            //Autotests.devTestStutsAsync();
-            consoleMsg(webView2.CoreWebView2.Settings.UserAgent + " [" + Config.defaultUserAgent + "]");
+            Autotests.devTestStutsAsync();
         }
 
         
