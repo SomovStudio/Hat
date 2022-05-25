@@ -119,14 +119,14 @@ namespace Hat
         {
             if (e != null && e.ParameterObjectAsJson != null)
             {
-                richTextBoxConsoleErrors.AppendText(e.ParameterObjectAsJson + Environment.NewLine);
-                richTextBoxConsoleErrors.ScrollToCaret();
+                richTextBoxErrors.AppendText(e.ParameterObjectAsJson + Environment.NewLine);
+                richTextBoxErrors.ScrollToCaret();
             }
         }
 
         private void webView2_SourceChanged(object sender, Microsoft.Web.WebView2.Core.CoreWebView2SourceChangedEventArgs e)
         {
-            richTextBoxConsoleErrors.Text = "";
+            richTextBoxErrors.Text = "";
         }
 
         /* Сообщение в консоль */
@@ -1679,7 +1679,7 @@ namespace Hat
 
         private void toolStripButton18_Click(object sender, EventArgs e)
         {
-            richTextBoxConsoleErrors.Text = "";
+            richTextBoxErrors.Text = "";
         }
 
         private async void toolStripButton16_Click(object sender, EventArgs e)
@@ -1738,7 +1738,7 @@ namespace Hat
                 saveFileLogDialog.FileName = "";
                 if (saveFileLogDialog.ShowDialog() == DialogResult.OK)
                 {
-                    richTextBoxConsoleErrors.SaveFile(saveFileLogDialog.FileName, RichTextBoxStreamType.PlainText);
+                    richTextBoxErrors.SaveFile(saveFileLogDialog.FileName, RichTextBoxStreamType.PlainText);
                     consoleMsg($"Лог ошибок на странице сохранён в файл: {saveFileLogDialog.FileName}");
                 }
             }
@@ -1763,6 +1763,65 @@ namespace Hat
             {
                 consoleMsgError(ex.ToString());
             }
+        }
+
+        /* Поиск по тексту */
+        int _findIndex = 0;
+        int _findLast = 0;
+        String _findText = "";
+        private void findText(ToolStripComboBox _cbox, RichTextBox _richTextBox)
+        {
+            try
+            {
+                bool resolution = true;
+                for (int k = 0; k < _cbox.Items.Count; k++)
+                    if (_cbox.Items[k].ToString() == _cbox.Text) resolution = false;
+                if (resolution) _cbox.Items.Add(_cbox.Text);
+                if (_findText != _cbox.Text)
+                {
+                    _findIndex = 0;
+                    _findLast = 0;
+                    _findText = _cbox.Text;
+                }
+                if (_richTextBox.Find(_cbox.Text, _findIndex, _richTextBox.TextLength - 1, RichTextBoxFinds.None) >= 0)
+                {
+                    _richTextBox.Select();
+                    _findIndex = _richTextBox.SelectionStart + _richTextBox.SelectionLength;
+                    if (_findLast == _richTextBox.SelectionStart)
+                    {
+                        MessageBox.Show("Поиск завершен");
+                        _findIndex = 0;
+                        _findLast = 0;
+                        _findText = _cbox.Text;
+                    }
+                    else
+                    {
+                        _findLast = _richTextBox.SelectionStart;
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Поиск завершен");
+                    _findIndex = 0;
+                    _findLast = 0;
+                    _findText = _cbox.Text;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                consoleMsgError(ex.Message);
+            }
+        }
+
+        private void toolStripButton15_Click(object sender, EventArgs e)
+        {
+            findText(toolStripComboBoxErrors, richTextBoxErrors);
+        }
+
+        private void toolStripButton17_Click(object sender, EventArgs e)
+        {
+            findText(toolStripComboBoxEvents, richTextBoxEvents);
         }
     }
 }
