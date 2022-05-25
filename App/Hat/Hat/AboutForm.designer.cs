@@ -30,6 +30,9 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AboutForm));
             this.panel2 = new System.Windows.Forms.Panel();
+            this.label11 = new System.Windows.Forms.Label();
+            this.linkLabel4 = new System.Windows.Forms.LinkLabel();
+            this.label10 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.linkLabel3 = new System.Windows.Forms.LinkLabel();
@@ -44,9 +47,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.linkLabel4 = new System.Windows.Forms.LinkLabel();
-            this.label11 = new System.Windows.Forms.Label();
             this.panel2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -72,6 +72,34 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(442, 377);
             this.panel2.TabIndex = 8;
+            // 
+            // label11
+            // 
+            this.label11.Image = ((System.Drawing.Image)(resources.GetObject("label11.Image")));
+            this.label11.Location = new System.Drawing.Point(95, 321);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(249, 38);
+            this.label11.TabIndex = 20;
+            // 
+            // linkLabel4
+            // 
+            this.linkLabel4.AutoSize = true;
+            this.linkLabel4.Location = new System.Drawing.Point(339, 292);
+            this.linkLabel4.Name = "linkLabel4";
+            this.linkLabel4.Size = new System.Drawing.Size(91, 13);
+            this.linkLabel4.TabIndex = 19;
+            this.linkLabel4.TabStop = true;
+            this.linkLabel4.Text = "https://zionec.ru/";
+            this.linkLabel4.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel4_LinkClicked);
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(12, 292);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(307, 13);
+            this.label10.TabIndex = 18;
+            this.label10.Text = "Программа разработана при поддержке компании Зионек";
             // 
             // groupBox1
             // 
@@ -222,34 +250,6 @@
             this.label1.Size = new System.Drawing.Size(442, 76);
             this.label1.TabIndex = 6;
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(12, 292);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(303, 13);
-            this.label10.TabIndex = 18;
-            this.label10.Text = "Программа разработана при поддержке компании Zionec";
-            // 
-            // linkLabel4
-            // 
-            this.linkLabel4.AutoSize = true;
-            this.linkLabel4.Location = new System.Drawing.Point(321, 292);
-            this.linkLabel4.Name = "linkLabel4";
-            this.linkLabel4.Size = new System.Drawing.Size(91, 13);
-            this.linkLabel4.TabIndex = 19;
-            this.linkLabel4.TabStop = true;
-            this.linkLabel4.Text = "https://zionec.ru/";
-            this.linkLabel4.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel4_LinkClicked);
-            // 
-            // label11
-            // 
-            this.label11.Image = ((System.Drawing.Image)(resources.GetObject("label11.Image")));
-            this.label11.Location = new System.Drawing.Point(95, 321);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(249, 38);
-            this.label11.TabIndex = 20;
             // 
             // AboutForm
             // 
