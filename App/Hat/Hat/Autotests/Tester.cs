@@ -335,7 +335,7 @@ namespace HatFrameworkDev
             }
         }
 
-        public async Task BrowserUserAgent(string value)
+        public async Task BrowserSetUserAgent(string value)
         {
             try
             {
@@ -345,6 +345,20 @@ namespace HatFrameworkDev
             {
                 ConsoleMsgError(ex.ToString());
             }
+        }
+
+        public async Task<string> BrowserGetUserAgent()
+        {
+            string userAgent = null;
+            try
+            {
+                userAgent = BrowserView.CoreWebView2.Settings.UserAgent;
+            }
+            catch (Exception ex)
+            {
+                ConsoleMsgError(ex.ToString());
+            }
+            return userAgent;
         }
 
         public async Task<string> ExecuteJavaScriptAsync(string script)

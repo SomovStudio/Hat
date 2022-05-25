@@ -37,6 +37,8 @@ CheckTestStop() - проверка остановки теста
 BrowserCloseAsync() - закрыть окно браузера
 BrowserSizeAsync() - установить размер браузера
 BrowserFullScreenAsync() - установить размер браузера на весь экран
+BrowserSetUserAgent() - установить User-Agent
+BrowserGetUserAgent() - получить User-Agent
 ExecuteJavaScriptAsync() - выполнить JavaScript код
 
 GetHtmlElementAsync() - получить элемент веб страницы
