@@ -62,6 +62,8 @@ namespace Hat
                     systemConsoleMsg($"Запуск автотеста: {Config.selectName}", default, ConsoleColor.DarkCyan, ConsoleColor.White, true);
                     PlayTest(Config.selectName);
                 }
+
+                startMonitorConsoleErrors();
             }
             catch (Exception ex)
             {
@@ -94,6 +96,37 @@ namespace Hat
                 systemConsoleMsg("Tests ended. Finished: SUCCESS", default, ConsoleColor.DarkGreen, ConsoleColor.White, true);
                 Environment.Exit(0);
             }
+        }
+
+        /* Мониторинг ошибок на загруженной странице */
+        private async void startMonitorConsoleErrors()
+        {
+            try
+            {
+                await webView2.EnsureCoreWebView2Async();
+                webView2.CoreWebView2.GetDevToolsProtocolEventReceiver("Log.entryAdded").DevToolsProtocolEventReceived += showMessageConsoleErrors;
+                await webView2.CoreWebView2.CallDevToolsProtocolMethodAsync("Log.enable", "{}");
+                //webView2.CoreWebView2.OpenDevToolsWindow();
+                //webView2.CoreWebView2.Navigate("https://stackoverflow.com");
+            }
+            catch (Exception ex)
+            {
+                consoleMsgError(ex.ToString());
+            }
+        }
+
+        private void showMessageConsoleErrors(object sender, Microsoft.Web.WebView2.Core.CoreWebView2DevToolsProtocolEventReceivedEventArgs e)
+        {
+            if (e != null && e.ParameterObjectAsJson != null)
+            {
+                richTextBoxConsoleErrors.AppendText(e.ParameterObjectAsJson + Environment.NewLine);
+                richTextBoxConsoleErrors.ScrollToCaret();
+            }
+        }
+
+        private void webView2_SourceChanged(object sender, Microsoft.Web.WebView2.Core.CoreWebView2SourceChangedEventArgs e)
+        {
+            richTextBoxConsoleErrors.Text = "";
         }
 
         /* Сообщение в консоль */
@@ -1644,11 +1677,12 @@ namespace Hat
             Autotests.devTestStutsAsync();
         }
 
+        
+
         private void toolStripButton14_Click(object sender, EventArgs e)
         {
-
+            // удалить
         }
-
 
         private async void toolStripButton16_Click(object sender, EventArgs e)
         {
@@ -1670,6 +1704,16 @@ namespace Hat
             {
                 consoleMsgError(ex.ToString());
             }
+        }
+
+        private void средстваРазработкиToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            webView2.CoreWebView2.OpenDevToolsWindow();
+        }
+
+        private void toolStripButton14_Click_1(object sender, EventArgs e)
+        {
+            textBoxEvents.Text = "";
         }
     }
 }

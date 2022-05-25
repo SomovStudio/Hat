@@ -171,6 +171,16 @@ document.getElementById('SUBMIT_ORDER').click();
 
 -----------------------------------------------------------------------------
 
+получить события из браузера
+(function(){
+var performance = window.performance || window.mozPerformance || window.msPerformance || window.webkitPerformance || {};
+var network = performance.getEntriesByType('resource') || {};
+var result = JSON.stringify(network);
+return result;
+}());
+
+-----------------------------------------------------------------------------
+
 ПРИМЕРЫ АВТОТЕСТОВ
 
 Tester tester = new Tester(Config.browserForm);
