@@ -755,7 +755,7 @@ namespace Hat
 
                 Config.encoding = WorkOnFiles.DEFAULT;
                 toolStripStatusLabelFileEncoding.Text = Config.encoding;
-                if (Config.projectPath != "(не открыть)") Config.saveConfigJson(Config.projectPath + "/project.cracker");
+                if (Config.projectPath != "(не открыт)") Config.saveConfigJson(Config.projectPath + "/project.hat");
                 consoleMsg("Кодировка файлов - изменена");
             }
             catch (Exception ex)
@@ -780,7 +780,7 @@ namespace Hat
 
                 Config.encoding = WorkOnFiles.UTF_8;
                 toolStripStatusLabelFileEncoding.Text = Config.encoding;
-                if (Config.projectPath != "(не открыть)") Config.saveConfigJson(Config.projectPath + "/project.cracker");
+                if (Config.projectPath != "(не открыт)") Config.saveConfigJson(Config.projectPath + "/project.hat");
                 consoleMsg("Кодировка файлов - изменена");
             }
             catch (Exception ex)
@@ -805,7 +805,7 @@ namespace Hat
 
                 Config.encoding = WorkOnFiles.UTF_8_BOM;
                 toolStripStatusLabelFileEncoding.Text = Config.encoding;
-                if (Config.projectPath != "(не открыть)") Config.saveConfigJson(Config.projectPath + "/project.cracker");
+                if (Config.projectPath != "(не открыт)") Config.saveConfigJson(Config.projectPath + "/project.hat");
                 consoleMsg("Кодировка файлов - изменена");
             }
             catch (Exception ex)
@@ -830,7 +830,7 @@ namespace Hat
 
                 Config.encoding = WorkOnFiles.WINDOWS_1251;
                 toolStripStatusLabelFileEncoding.Text = Config.encoding;
-                if (Config.projectPath != "(не открыть)") Config.saveConfigJson(Config.projectPath + "/project.cracker");
+                if (Config.projectPath != "(не открыт)") Config.saveConfigJson(Config.projectPath + "/project.hat");
                 consoleMsg("Кодировка файлов - изменена");
             }
             catch (Exception ex)
@@ -884,7 +884,7 @@ namespace Hat
                 Config.encoding = WorkOnFiles.DEFAULT;
                 toolStripStatusLabelFileEncoding.Text = Config.encoding;
 
-                if (Config.projectPath != "(не открыть)") Config.saveConfigJson(Config.projectPath + "/project.cracker");
+                if (Config.projectPath != "(не открыт)") Config.saveConfigJson(Config.projectPath + "/project.hat");
                 consoleMsg("Кодировка файлов - изменена");
             }
             catch (Exception ex)
@@ -909,7 +909,7 @@ namespace Hat
 
                 Config.encoding = WorkOnFiles.UTF_8;
                 toolStripStatusLabelFileEncoding.Text = Config.encoding;
-                if (Config.projectPath != "(не открыть)") Config.saveConfigJson(Config.projectPath + "/project.cracker");
+                if (Config.projectPath != "(не открыт)") Config.saveConfigJson(Config.projectPath + "/project.hat");
                 consoleMsg("Кодировка файлов - изменена");
             }
             catch (Exception ex)
@@ -934,7 +934,7 @@ namespace Hat
 
                 Config.encoding = WorkOnFiles.UTF_8_BOM;
                 toolStripStatusLabelFileEncoding.Text = Config.encoding;
-                if (Config.projectPath != "(не открыть)") Config.saveConfigJson(Config.projectPath + "/project.cracker");
+                if (Config.projectPath != "(не открыт)") Config.saveConfigJson(Config.projectPath + "/project.hat");
                 consoleMsg("Кодировка файлов - изменена");
             }
             catch (Exception ex)
@@ -959,7 +959,7 @@ namespace Hat
 
                 Config.encoding = WorkOnFiles.WINDOWS_1251;
                 toolStripStatusLabelFileEncoding.Text = Config.encoding;
-                if (Config.projectPath != "(не открыть)") Config.saveConfigJson(Config.projectPath + "/project.cracker");
+                if (Config.projectPath != "(не открыт)") Config.saveConfigJson(Config.projectPath + "/project.hat");
                 consoleMsg("Кодировка файлов - изменена");
             }
             catch (Exception ex)
@@ -1014,7 +1014,7 @@ namespace Hat
                     openProjectFolder(Config.projectPath, treeViewProject.Nodes);
 
                     // Чтение файла конфигурации
-                    Config.readConfigJson(Config.projectPath + "/project.cracker");
+                    Config.readConfigJson(Config.projectPath + "/project.hat");
                     showLibs();
                     changeEncoding();
                     changeEditorTopMost();
@@ -1232,7 +1232,7 @@ namespace Hat
         {
             try
             {
-                if (Config.projectPath != "(не открыть)")
+                if (Config.projectPath != "(не открыт)")
                 {
                     if (File.Exists(Config.selectValue))
                     {
@@ -1277,7 +1277,7 @@ namespace Hat
         {
             try
             {
-                if (Config.projectPath != "(не открыть)")
+                if (Config.projectPath != "(не открыт)")
                 {
                     InputBoxForm inputBox = new InputBoxForm();
                     inputBox.label.Text = "Введите пожалуйста имя файла (расширение файла добавляется автоматически, его указывать специально не нужно)";
@@ -1344,7 +1344,7 @@ namespace Hat
         {
             try
             {
-                if (Config.projectPath != "(не открыть)")
+                if (Config.projectPath != "(не открыт)")
                 {
 
                     if (Directory.Exists(Config.selectValue) == true) return;
@@ -1390,13 +1390,13 @@ namespace Hat
         {
             try
             {
-                if (Config.projectPath != "(не открыть)")
+                if (Config.projectPath != "(не открыт)")
                 {
                     string[] delimiter = { Environment.NewLine };
                     Config.libraries = textBoxLibs.Text.Split(delimiter, StringSplitOptions.None);
-                    Config.saveConfigJson(Config.projectPath + "/project.cracker");
+                    Config.saveConfigJson(Config.projectPath + "/project.hat");
                     showLibs();
-                    consoleMsg("Скисок библиотек успешно сохранён в файл project.cracker");
+                    consoleMsg("Скисок библиотек успешно сохранён в файл project.hat");
                 }
             }
             catch (Exception ex)
@@ -1420,7 +1420,7 @@ namespace Hat
                     toolStripMenuItemEditorTopMost.Checked = true;
                 }
                 Config.editorTopMost = editorTopMostToolStripMenuItem.Checked;
-                if (Config.projectPath != "(не открыть)") Config.saveConfigJson(Config.projectPath + "/project.cracker");
+                if (Config.projectPath != "(не открыт)") Config.saveConfigJson(Config.projectPath + "/project.hat");
             }
             catch (Exception ex)
             {
@@ -1443,7 +1443,7 @@ namespace Hat
                     toolStripMenuItemEditorTopMost.Checked = true;
                 }
                 Config.editorTopMost = editorTopMostToolStripMenuItem.Checked;
-                if (Config.projectPath != "(не открыть)") Config.saveConfigJson(Config.projectPath + "/project.cracker");
+                if (Config.projectPath != "(не открыт)") Config.saveConfigJson(Config.projectPath + "/project.hat");
             }
             catch (Exception ex)
             {

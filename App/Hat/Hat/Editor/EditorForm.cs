@@ -186,6 +186,15 @@ namespace Hat
             toolStripStatusLabel6.Text = "(изменения не сохранены) |";
         }
 
-        
+        private void EditorForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if(toolStripStatusLabel6.Text == "(изменения не сохранены) |")
+            {
+                if(MessageBox.Show("Изменения не сохранены, всё равно закрыть редактор?", "Вопрос", MessageBoxButtons.YesNo) == DialogResult.No)
+                {
+                    e.Cancel = true;
+                }
+            }
+        }
     }
 }
