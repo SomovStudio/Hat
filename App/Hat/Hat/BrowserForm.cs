@@ -11,6 +11,7 @@ using System.Text.RegularExpressions;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using Microsoft.Web.WebView2.Core;
 
 namespace Hat
 {
@@ -35,6 +36,9 @@ namespace Hat
         {
             try
             {
+                clearBrowserCache();
+                startMonitorConsoleErrors();
+
                 this.Width = 1440;
                 this.Height = 900;
                 numericUpDownBrowserWidth.Value = panel1.Width;
@@ -63,7 +67,7 @@ namespace Hat
                     PlayTest(Config.selectName);
                 }
 
-                startMonitorConsoleErrors();
+                
             }
             catch (Exception ex)
             {
@@ -95,6 +99,27 @@ namespace Hat
                 systemConsoleMsg(Environment.NewLine + "==============================", default, default, default, true);
                 systemConsoleMsg("Tests ended. Finished: SUCCESS", default, ConsoleColor.DarkGreen, ConsoleColor.White, true);
                 Environment.Exit(0);
+            }
+        }
+
+        /* Очистка кэша */
+        private async void clearBrowserCache()
+        {
+            try
+            {
+                await webView2.EnsureCoreWebView2Async();
+                if (webView2.CoreWebView2 != null)
+                {
+
+                }
+                await webView2.CoreWebView2.CallDevToolsProtocolMethodAsync("Network.clearBrowserCache", "{}");
+                await webView2.CoreWebView2.CallDevToolsProtocolMethodAsync("Network.setCacheDisabled", @"{""cacheDisabled"":true}");
+                
+
+            }
+            catch (Exception ex)
+            {
+                consoleMsgError(ex.ToString());
             }
         }
 
