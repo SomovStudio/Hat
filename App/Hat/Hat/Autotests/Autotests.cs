@@ -100,8 +100,8 @@ namespace Hat
             tester.ClearMessage();
             await tester.TestBeginAsync();
             await tester.GoToUrlAsync(@"https://somovstudio.github.io/test2.html", 5);
-            //await tester.ClickElementByIdAsync("MyRadioNo");
-            //await tester.ClickElementByIdAsync("MyCheckboxYes");
+            await tester.ClickElementByIdAsync("MyRadioNo");
+            await tester.ClickElementByIdAsync("MyCheckboxYes");
             await tester.SetTextInElementByCssAsync("#test > h1", "Тест 13");
             await tester.TestEndAsync();
 
