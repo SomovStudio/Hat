@@ -3,6 +3,7 @@ Craker Framework
 
 Справочник по HTML: http://htmlbook.ru/html
 Универсальные атрибуты: http://htmlbook.ru/html/attr/common
+Элемент Input: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/radio
 
 ------------------------------------------------------------------------
 ПУБЛИЧНЫЕ МЕТОДЫ И КОНСТАНТЫ
@@ -33,10 +34,12 @@ EditMessage() - изменить сообщение в таблице теста
 TestBeginAsync() - подготовка теста
 TestEndAsync() - завершение теста
 TestStopAsync() - остановка теста
-CheckTestStop() - проверка остановки теста
+DefineTestStop() - проверка остановки теста
 BrowserCloseAsync() - закрыть окно браузера
 BrowserSizeAsync() - установить размер браузера
 BrowserFullScreenAsync() - установить размер браузера на весь экран
+BrowserSetUserAgent() - установить User-Agent
+BrowserGetUserAgent() - получить User-Agent
 ExecuteJavaScriptAsync() - выполнить JavaScript код
 
 GetHtmlElementAsync() - получить элемент веб страницы
@@ -49,6 +52,12 @@ WaitVisibleElementByClassAsync() - ждать появления элемент�
 WaitVisibleElementByNameAsync() - ждать появления элемента в секундах
 WaitVisibleElementByTagAsync() - ждать появления элемента в секундах
 WaitVisibleElementByCssAsync() - ждать появления элемента в секундах
+
+WaitNotVisibleElementByIdAsync() - ждать скрытия элемента в секундах
+WaitNotVisibleElementByClassAsync() - ждать скрытия элемента в секундах
+WaitNotVisibleElementByNameAsync() - ждать скрытия элемента в секундах
+WaitNotVisibleElementByTagAsync() - ждать скрытия элемента в секундах
+WaitNotVisibleElementByCssAsync() - ждать скрытия элемента в секундах
 
 FindElementByIdAsync() - найти элемент с ожиданием в секундах
 FindElementByClassAsync() - найти элемент в DOM с ожиданием в секундах

@@ -9,6 +9,9 @@ using System.Text;
 using System.Windows.Forms;
 using System.Text.RegularExpressions;
 using System.Diagnostics;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
+using Microsoft.Web.WebView2.Core;
 
 namespace Hat
 {
@@ -21,8 +24,8 @@ namespace Hat
             Config.encoding = WorkOnFiles.UTF_8_BOM;
             toolStripStatusLabelFileEncoding.Text = Config.encoding;
             Config.browserForm = this;
-            consoleMsg("Программа Hat версия 1.0");
-            systemConsoleMsg("Программа Hat версия 1.0", default, default, default, true);
+            consoleMsg("Браузер Hat версия 1.0");
+            systemConsoleMsg("Браузер Hat версия 1.0", default, ConsoleColor.DarkGray, ConsoleColor.White, true);
         }
 
         private bool stopTest = false;
@@ -33,6 +36,9 @@ namespace Hat
         {
             try
             {
+                clearBrowserCache();
+                startMonitorConsoleErrors();
+
                 this.Width = 1440;
                 this.Height = 900;
                 numericUpDownBrowserWidth.Value = panel1.Width;
@@ -42,7 +48,7 @@ namespace Hat
 
                 if (Config.commandLineMode == true)
                 {
-                    systemConsoleMsg("Запуск браузера Hat...", default, ConsoleColor.DarkGray, ConsoleColor.White, true);
+                    systemConsoleMsg("Запуск браузера...", default, ConsoleColor.DarkGray, ConsoleColor.White, true);
                     consoleMsg("Запуск браузера Hat из командной строки");
                     toolStripStatusLabelProjectPath.Text = Config.projectPath;
                     // Строится дерево папок и файлов
@@ -54,17 +60,24 @@ namespace Hat
                     showLibs();
                     changeEncoding();
                     changeEditorTopMost();
-                    systemConsoleMsg($"Открытие проекта: успешно завершено (версия проекта: {Config.version})", default, ConsoleColor.DarkGray, ConsoleColor.White, true);
-                    consoleMsg($"Открытие проекта: успешно завершено (версия проекта: {Config.version})");
+                    systemConsoleMsg($"Проект успешно открыт (версия проекта: {Config.version})", default, ConsoleColor.DarkGray, ConsoleColor.White, true);
+                    consoleMsg($"Проект успешно открыт (версия проекта: {Config.version})");
                     toolStripStatusLabelProjectFolderFile.Text = Config.selectName;
                     systemConsoleMsg($"Запуск автотеста: {Config.selectName}", default, ConsoleColor.DarkCyan, ConsoleColor.White, true);
                     PlayTest(Config.selectName);
                 }
+
+                
             }
             catch (Exception ex)
             {
-                consoleMsg("Ошибка: " + ex.ToString());
+                consoleMsgError(ex.ToString());
             }
+        }
+
+        private void закрытьToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Close();
         }
 
         private void BrowserForm_FormClosed(object sender, FormClosedEventArgs e)
@@ -89,6 +102,52 @@ namespace Hat
             }
         }
 
+        /* Очистка кэша */
+        private async void clearBrowserCache()
+        {
+            try
+            {
+                await webView2.EnsureCoreWebView2Async();
+                await webView2.CoreWebView2.CallDevToolsProtocolMethodAsync("Network.clearBrowserCache", "{}");
+                await webView2.CoreWebView2.CallDevToolsProtocolMethodAsync("Network.setCacheDisabled", @"{""cacheDisabled"":true}");
+            }
+            catch (Exception ex)
+            {
+                consoleMsgError(ex.ToString());
+            }
+        }
+
+        /* Мониторинг ошибок на загруженной странице */
+        private async void startMonitorConsoleErrors()
+        {
+            try
+            {
+                await webView2.EnsureCoreWebView2Async();
+                webView2.CoreWebView2.GetDevToolsProtocolEventReceiver("Log.entryAdded").DevToolsProtocolEventReceived += showMessageConsoleErrors;
+                await webView2.CoreWebView2.CallDevToolsProtocolMethodAsync("Log.enable", "{}");
+                //webView2.CoreWebView2.OpenDevToolsWindow();
+                //webView2.CoreWebView2.Navigate("https://stackoverflow.com");
+            }
+            catch (Exception ex)
+            {
+                consoleMsgError(ex.ToString());
+            }
+        }
+
+        private void showMessageConsoleErrors(object sender, Microsoft.Web.WebView2.Core.CoreWebView2DevToolsProtocolEventReceivedEventArgs e)
+        {
+            if (e != null && e.ParameterObjectAsJson != null)
+            {
+                richTextBoxErrors.AppendText(e.ParameterObjectAsJson + Environment.NewLine);
+                richTextBoxErrors.ScrollToCaret();
+            }
+        }
+
+        private void webView2_SourceChanged(object sender, Microsoft.Web.WebView2.Core.CoreWebView2SourceChangedEventArgs e)
+        {
+            richTextBoxErrors.Text = "";
+        }
+
         /* Сообщение в консоль */
         public void consoleMsg(string message)
         {
@@ -99,8 +158,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
-                MessageBox.Show(message);
+                consoleMsgError(ex.ToString());
             }
         }
 
@@ -112,6 +170,7 @@ namespace Hat
             systemConsoleMsg("Произошла ошибка:", default, ConsoleColor.Black, ConsoleColor.Red, true);
             systemConsoleMsg(message, default, default, default, true);
             systemConsoleMsg("- - - - - - - - - - - - - - - - - - - - - - - - - - - -", default, default, default, true);
+            systemConsoleMsg("", default, default, default, true);
             resultAutotest(false);
             if (Config.commandLineMode == true) Close();
         }
@@ -155,7 +214,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsg("Ошибка: " + ex.ToString());
+                consoleMsgError(ex.ToString());
             }
         }
 
@@ -190,7 +249,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsg("Ошибка: " + ex.ToString());
+                consoleMsgError(ex.ToString());
             }
         }
 
@@ -257,7 +316,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsg("Ошибка: " + ex.ToString());
+                consoleMsgError(ex.ToString());
             }
         }
 
@@ -269,7 +328,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsg("Ошибка: " + ex.ToString());
+                consoleMsgError(ex.ToString());
             }
         }
 
@@ -283,7 +342,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsg("Ошибка: " + ex.ToString());
+                consoleMsgError(ex.ToString());
             }
         }
 
@@ -295,7 +354,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsg("Ошибка: " + ex.ToString());
+                consoleMsgError(ex.ToString());
             }
         }
 
@@ -314,7 +373,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsg("Ошибка: " + ex.ToString());
+                consoleMsgError(ex.ToString());
             }
         }
 
@@ -352,7 +411,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsg("Ошибка: " + ex.ToString());
+                consoleMsgError(ex.ToString());
             }
         }
 
@@ -449,7 +508,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsg("Ошибка: " + ex.ToString());
+                consoleMsgError(ex.ToString());
             }
         }
 
@@ -491,13 +550,13 @@ namespace Hat
 ;                   changeEncoding();
                     changeEditorTopMost();
 
-                    consoleMsg("Открытие проекта: успешно завершено (версия проекта: " + Config.version + ")");
-                    systemConsoleMsg($"Открытие проекта: успешно завершено (версия проекта: {Config.version})", default, ConsoleColor.DarkGray, ConsoleColor.White, true);
+                    consoleMsg("Проект успешно открыт (версия проекта: " + Config.version + ")");
+                    systemConsoleMsg($"Проект успешно открыт (версия проекта: {Config.version})", default, ConsoleColor.DarkGray, ConsoleColor.White, true);
                 }
              }
             catch (Exception ex)
             {
-                consoleMsg("Ошибка: " + ex.ToString());
+                consoleMsgError(ex.ToString());
             }
         }
 
@@ -516,7 +575,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsg("Ошибка: " + ex.ToString());
+                consoleMsgError(ex.ToString());
             }
         }
 
@@ -535,7 +594,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsg("Ошибка: " + ex.ToString());
+                consoleMsgError(ex.ToString());
             }
         }
 
@@ -577,7 +636,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsg("Ошибка: " + ex.ToString());
+                consoleMsgError(ex.ToString());
             }
         }
 
@@ -592,7 +651,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsg("Ошибка: " + ex.ToString());
+                consoleMsgError(ex.ToString());
             }
         }
 
@@ -636,7 +695,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsg("Ошибка: " + ex.ToString());
+                consoleMsgError(ex.ToString());
             }
         }
 
@@ -676,7 +735,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsg("Ошибка: " + ex.ToString());
+                consoleMsgError(ex.ToString());
             }
         }
 
@@ -701,7 +760,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsg("Ошибка: " + ex.ToString());
+                consoleMsgError(ex.ToString());
             }
         }
 
@@ -726,7 +785,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsg("Ошибка: " + ex.ToString());
+                consoleMsgError(ex.ToString());
             }
         }
 
@@ -751,7 +810,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsg("Ошибка: " + ex.ToString());
+                consoleMsgError(ex.ToString());
             }
         }
 
@@ -776,7 +835,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsg("Ошибка: " + ex.ToString());
+                consoleMsgError(ex.ToString());
             }
         }
 
@@ -790,7 +849,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsg("Ошибка: " + ex.ToString());
+                consoleMsgError(ex.ToString());
             }
 
         }
@@ -804,7 +863,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsg("Ошибка: " + ex.ToString());
+                consoleMsgError(ex.ToString());
             }
         }
 
@@ -830,7 +889,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsg("Ошибка: " + ex.ToString());
+                consoleMsgError(ex.ToString());
             }
         }
 
@@ -855,7 +914,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsg("Ошибка: " + ex.ToString());
+                consoleMsgError(ex.ToString());
             }
         }
 
@@ -880,7 +939,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsg("Ошибка: " + ex.ToString());
+                consoleMsgError(ex.ToString());
             }
         }
 
@@ -905,7 +964,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsg("Ошибка: " + ex.ToString());
+                consoleMsgError(ex.ToString());
             }
         }
 
@@ -922,7 +981,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsg("Ошибка: " + ex.ToString());
+                consoleMsgError(ex.ToString());
             }
         }
 
@@ -939,7 +998,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsg("Ошибка: " + ex.ToString());
+                consoleMsgError(ex.ToString());
             }
         }
 
@@ -982,7 +1041,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsg("Ошибка: " + ex.ToString());
+                consoleMsgError(ex.ToString());
             }
         }
 
@@ -1045,7 +1104,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsg("Ошибка: " + ex.ToString());
+                consoleMsgError(ex.ToString());
             }
         }
 
@@ -1077,7 +1136,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsg("Ошибка: " + ex.ToString());
+                consoleMsgError(ex.ToString());
             }
         }
 
@@ -1111,7 +1170,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsg("Ошибка: " + ex.ToString());
+                consoleMsgError(ex.ToString());
             }
         }
 
@@ -1149,7 +1208,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsg("Ошибка: " + ex.ToString());
+                consoleMsgError(ex.ToString());
             }
         }
 
@@ -1193,7 +1252,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsg("Ошибка: " + ex.ToString());
+                consoleMsgError(ex.ToString());
             }
         }
 
@@ -1254,7 +1313,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsg("Ошибка: " + ex.ToString());
+                consoleMsgError(ex.ToString());
             }
         }
 
@@ -1304,7 +1363,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsg("Ошибка: " + ex.ToString());
+                consoleMsgError(ex.ToString());
             }
         }
 
@@ -1328,7 +1387,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsg("Ошибка: " + ex.ToString());
+                consoleMsgError(ex.ToString());
             }
         }
 
@@ -1351,7 +1410,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsg("Ошибка: " + ex.ToString());
+                consoleMsgError(ex.ToString());
             }
         }
 
@@ -1374,7 +1433,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsg("Ошибка: " + ex.ToString());
+                consoleMsgError(ex.ToString());
             }
         }
 
@@ -1394,7 +1453,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsg("Ошибка: " + ex.ToString());
+                consoleMsgError(ex.ToString());
             }
         }
 
@@ -1459,7 +1518,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsg("Ошибка: " + ex.ToString());
+                consoleMsgError(ex.ToString());
             }
         }
 
@@ -1519,7 +1578,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsg("Ошибка: " + ex.ToString());
+                consoleMsgError(ex.ToString());
             }
         }
 
@@ -1547,7 +1606,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsg("Ошибка: " + ex.ToString());
+                consoleMsgError(ex.ToString());
             }
         }
 
@@ -1567,7 +1626,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsg("Ошибка: " + ex.ToString());
+                consoleMsgError(ex.ToString());
             }
         }
 
@@ -1587,7 +1646,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsg("Ошибка: " + ex.ToString());
+                consoleMsgError(ex.ToString());
             }
         }
 
@@ -1604,7 +1663,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsg("Ошибка: " + ex.ToString());
+                consoleMsgError(ex.ToString());
             }
         }
 
@@ -1616,7 +1675,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsg("Ошибка: " + ex.ToString());
+                consoleMsgError(ex.ToString());
             }
         }
 
@@ -1628,16 +1687,165 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsg("Ошибка: " + ex.ToString());
+                consoleMsgError(ex.ToString());
             }
         }
 
         private void toolStripButton13_Click(object sender, EventArgs e)
         {
-            //Autotests.devTestStutsAsync();
-            consoleMsg(webView2.CoreWebView2.Settings.UserAgent + " [" + Config.defaultUserAgent + "]");
+            Autotests.devTestStutsAsync();
+            /*
+            EditorForm editorForm = new EditorForm();
+            editorForm.TopMost = Config.editorTopMost;
+            editorForm.Show();
+            */
         }
 
-        
+        private void toolStripButton18_Click(object sender, EventArgs e)
+        {
+            richTextBoxErrors.Text = "";
+        }
+
+        private async void toolStripButton16_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                await webView2.EnsureCoreWebView2Async();
+                string script =
+                @"(function(){
+                var performance = window.performance || window.mozPerformance || window.msPerformance || window.webkitPerformance || {};
+                var network = performance.getEntriesByType('resource') || {};
+                var result = JSON.stringify(network);
+                return result;
+                }());";
+                string jsonText = await webView2.CoreWebView2.ExecuteScriptAsync(script);
+                dynamic result = JsonConvert.DeserializeObject(jsonText);
+                richTextBoxEvents.Text = result;
+            }
+            catch (Exception ex)
+            {
+                consoleMsgError(ex.ToString());
+            }
+        }
+
+        private void средстваРазработкиToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            webView2.CoreWebView2.OpenDevToolsWindow();
+        }
+
+        private void toolStripButton14_Click_1(object sender, EventArgs e)
+        {
+            richTextBoxEvents.Text = "";
+        }
+
+        private void выводToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                saveFileLogDialog.FileName = "";
+                if (saveFileLogDialog.ShowDialog() == DialogResult.OK)
+                {
+                    richTextBoxConsole.SaveFile(saveFileLogDialog.FileName, RichTextBoxStreamType.PlainText);
+                    consoleMsg($"Лог вывода сохранён в файл: {saveFileLogDialog.FileName}");
+                }
+            }
+            catch (Exception ex)
+            {
+                consoleMsgError(ex.ToString());
+            }
+        }
+
+        private void ошибкиНаСтраницеToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                saveFileLogDialog.FileName = "";
+                if (saveFileLogDialog.ShowDialog() == DialogResult.OK)
+                {
+                    richTextBoxErrors.SaveFile(saveFileLogDialog.FileName, RichTextBoxStreamType.PlainText);
+                    consoleMsg($"Лог ошибок на странице сохранён в файл: {saveFileLogDialog.FileName}");
+                }
+            }
+            catch (Exception ex)
+            {
+                consoleMsgError(ex.ToString());
+            }
+        }
+
+        private void событияНаСтраницеToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                saveFileLogDialog.FileName = "";
+                if (saveFileLogDialog.ShowDialog() == DialogResult.OK)
+                {
+                    richTextBoxEvents.SaveFile(saveFileLogDialog.FileName, RichTextBoxStreamType.PlainText);
+                    consoleMsg($"Лог событий на странице сохранён в файл: {saveFileLogDialog.FileName}");
+                }
+            }
+            catch (Exception ex)
+            {
+                consoleMsgError(ex.ToString());
+            }
+        }
+
+        /* Поиск по тексту */
+        int _findIndex = 0;
+        int _findLast = 0;
+        String _findText = "";
+        private void findText(ToolStripComboBox _cbox, RichTextBox _richTextBox)
+        {
+            try
+            {
+                bool resolution = true;
+                for (int k = 0; k < _cbox.Items.Count; k++)
+                    if (_cbox.Items[k].ToString() == _cbox.Text) resolution = false;
+                if (resolution) _cbox.Items.Add(_cbox.Text);
+                if (_findText != _cbox.Text)
+                {
+                    _findIndex = 0;
+                    _findLast = 0;
+                    _findText = _cbox.Text;
+                }
+                if (_richTextBox.Find(_cbox.Text, _findIndex, _richTextBox.TextLength - 1, RichTextBoxFinds.None) >= 0)
+                {
+                    _richTextBox.Select();
+                    _findIndex = _richTextBox.SelectionStart + _richTextBox.SelectionLength;
+                    if (_findLast == _richTextBox.SelectionStart)
+                    {
+                        MessageBox.Show("Поиск завершен");
+                        _findIndex = 0;
+                        _findLast = 0;
+                        _findText = _cbox.Text;
+                    }
+                    else
+                    {
+                        _findLast = _richTextBox.SelectionStart;
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Поиск завершен");
+                    _findIndex = 0;
+                    _findLast = 0;
+                    _findText = _cbox.Text;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                consoleMsgError(ex.Message);
+            }
+        }
+
+        private void toolStripButton15_Click(object sender, EventArgs e)
+        {
+            findText(toolStripComboBoxErrors, richTextBoxErrors);
+        }
+
+        private void toolStripButton17_Click(object sender, EventArgs e)
+        {
+            findText(toolStripComboBoxEvents, richTextBoxEvents);
+        }
     }
 }

@@ -67,7 +67,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                browserForm.consoleMsg("Ошибка: " + ex.ToString());
+                browserForm.consoleMsgError(ex.ToString());
             }
             return content;
         }
@@ -81,7 +81,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                browserForm.consoleMsg("Ошибка: " + ex.ToString());
+                browserForm.consoleMsgError(ex.ToString());
             }
         }
 
@@ -103,7 +103,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                browserForm.consoleMsg("Ошибка: " + ex.ToString());
+                browserForm.consoleMsgError(ex.ToString());
             }
         }
 

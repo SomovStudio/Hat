@@ -51,7 +51,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                Config.browserForm.consoleMsg("Ошибка: " + ex.ToString());
+                Config.browserForm.consoleMsgError(ex.ToString());
             }
             return content;
         }
@@ -86,7 +86,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                Config.browserForm.consoleMsg("Ошибка: " + ex.ToString());
+                Config.browserForm.consoleMsgError(ex.ToString());
             }
         }
 
@@ -104,7 +104,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                Config.browserForm.consoleMsg("Ошибка: " + ex.ToString());
+                Config.browserForm.consoleMsgError(ex.ToString());
             }
             return false;
         }
@@ -127,7 +127,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                Config.browserForm.consoleMsg("Ошибка: " + ex.ToString());
+                Config.browserForm.consoleMsgError(ex.ToString());
             }
             return false;
         }
@@ -144,7 +144,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                Config.browserForm.consoleMsg("Ошибка: " + ex.ToString());
+                Config.browserForm.consoleMsgError(ex.ToString());
             }
             return false;
         }

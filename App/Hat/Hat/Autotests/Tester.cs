@@ -248,7 +248,6 @@ namespace HatFrameworkDev
             {
                 testStop = false;
                 assertStatus = null;
-                ClearMessage();
                 int step = SendMessage("TestBeginAsync()", PROCESS, "Инициализация теста", IMAGE_STATUS_PROCESS);
                 await BrowserView.EnsureCoreWebView2Async();
                 EditMessage(step, null, PASSED, "Выполнена инициализация теста", IMAGE_STATUS_PASSED);
@@ -290,7 +289,7 @@ namespace HatFrameworkDev
             resultAutotestSuccess(false);
         }
 
-        public bool CheckTestStop(int stepIndex)
+        public bool DefineTestStop(int stepIndex)
         {
             try
             {
@@ -335,7 +334,7 @@ namespace HatFrameworkDev
             }
         }
 
-        public async Task BrowserUserAgent(string value)
+        public async Task BrowserSetUserAgent(string value)
         {
             try
             {
@@ -347,13 +346,27 @@ namespace HatFrameworkDev
             }
         }
 
+        public async Task<string> BrowserGetUserAgent()
+        {
+            string userAgent = null;
+            try
+            {
+                userAgent = BrowserView.CoreWebView2.Settings.UserAgent;
+            }
+            catch (Exception ex)
+            {
+                ConsoleMsgError(ex.ToString());
+            }
+            return userAgent;
+        }
+
         public async Task<string> ExecuteJavaScriptAsync(string script)
         {
             string result = null;
             try
             {
                 result = await BrowserView.CoreWebView2.ExecuteScriptAsync(script);
-                ConsoleMsg($"Метод ExecuteJavaScriptAsync вернул значение: {result}");
+                //ConsoleMsg($"Метод ExecuteJavaScriptAsync вернул значение: {result}");
             }
             catch (Exception ex)
             {
@@ -369,7 +382,7 @@ namespace HatFrameworkDev
         public async Task<HTMLElement> GetHtmlElementAsync(string locator)
         {
             int step = SendMessage($"GetHtmlElementAsync({locator})", PROCESS, "Полечить элемента", IMAGE_STATUS_PROCESS);
-            if (CheckTestStop(step) == true) return null;
+            if (DefineTestStop(step) == true) return null;
 
             HTMLElement htmlElement = new HTMLElement(this);
             try
@@ -406,7 +419,7 @@ namespace HatFrameworkDev
         {
             statusPageLoad = false;
             int step = SendMessage($"GoToUrlAsync({url}, {sec})", PROCESS, "Загрузка страницы", IMAGE_STATUS_PROCESS);
-            if (CheckTestStop(step) == true) return;
+            if (DefineTestStop(step) == true) return;
 
             try
             {
@@ -424,7 +437,7 @@ namespace HatFrameworkDev
                 {
                     await Task.Delay(1000);
                     if (statusPageLoad == true) break;
-                    if (CheckTestStop(step) == true) return;
+                    if (DefineTestStop(step) == true) return;
                 }
 
                 if (statusPageLoad == true) EditMessage(step, null, PASSED, "Страница загружена", IMAGE_STATUS_PASSED);
@@ -445,7 +458,7 @@ namespace HatFrameworkDev
         public async Task<string> GetUrlAsync()
         {
             int step = SendMessage("GetUrlAsync()", PROCESS, "Запрашивается текущий URL", IMAGE_STATUS_PROCESS);
-            if (CheckTestStop(step) == true) return null;
+            if (DefineTestStop(step) == true) return null;
             string url = null;
             try
             {
@@ -464,7 +477,7 @@ namespace HatFrameworkDev
         public async Task WaitAsync(int sec)
         {
             int step = SendMessage($"WaitAsync({sec.ToString()})", PROCESS, $"Ожидание {sec.ToString()} секунд", IMAGE_STATUS_PROCESS);
-            if (CheckTestStop(step) == true) return;
+            if (DefineTestStop(step) == true) return;
             try
             {
                 await Task.Delay(sec * 1000);
@@ -481,7 +494,7 @@ namespace HatFrameworkDev
         public async Task WaitVisibleElementByIdAsync(string id, int sec)
         {
             int step = SendMessage($"WaitVisibleElementByIdAsync({id}, {sec.ToString()})", PROCESS, $"Ожидание элемента {sec.ToString()} секунд", IMAGE_STATUS_PROCESS);
-            if (CheckTestStop(step) == true) return;
+            if (DefineTestStop(step) == true) return;
             try
             {
                 bool found = false;
@@ -510,7 +523,7 @@ namespace HatFrameworkDev
         public async Task WaitVisibleElementByClassAsync(string _class, int index, int sec)
         {
             int step = SendMessage($"WaitVisibleElementByClassAsync({_class}, {index}, {sec.ToString()})", PROCESS, $"Ожидание элемента {sec.ToString()} секунд", IMAGE_STATUS_PROCESS);
-            if (CheckTestStop(step) == true) return;
+            if (DefineTestStop(step) == true) return;
             try
             {
                 bool found = false;
@@ -539,7 +552,7 @@ namespace HatFrameworkDev
         public async Task WaitVisibleElementByNameAsync(string name, int index, int sec)
         {
             int step = SendMessage($"WaitVisibleElementByNameAsync({name}, {index}, {sec.ToString()})", PROCESS, $"Ожидание элемента {sec.ToString()} секунд", IMAGE_STATUS_PROCESS);
-            if (CheckTestStop(step) == true) return;
+            if (DefineTestStop(step) == true) return;
             try
             {
                 bool found = false;
@@ -568,7 +581,7 @@ namespace HatFrameworkDev
         public async Task WaitVisibleElementByTagAsync(string tag, int index, int sec)
         {
             int step = SendMessage($"WaitVisibleElementByTagAsync({tag}, {index}, {sec.ToString()})", PROCESS, $"Ожидание элемента {sec.ToString()} секунд", IMAGE_STATUS_PROCESS);
-            if (CheckTestStop(step) == true) return;
+            if (DefineTestStop(step) == true) return;
             try
             {
                 bool found = false;
@@ -597,7 +610,7 @@ namespace HatFrameworkDev
         public async Task WaitVisibleElementByCssAsync(string locator, int sec)
         {
             int step = SendMessage($"WaitVisibleElementByCssAsync({locator}, {sec.ToString()})", PROCESS, $"Ожидание элемента {sec.ToString()} секунд", IMAGE_STATUS_PROCESS);
-            if (CheckTestStop(step) == true) return;
+            if (DefineTestStop(step) == true) return;
             try
             {
                 bool found = false;
@@ -623,10 +636,155 @@ namespace HatFrameworkDev
             }
         }
 
+        public async Task WaitNotVisibleElementByIdAsync(string id, int sec)
+        {
+            int step = SendMessage($"WaitNotVisibleElementByIdAsync({id}, {sec.ToString()})", PROCESS, $"Ожидание скрытия элемента {sec.ToString()} секунд", IMAGE_STATUS_PROCESS);
+            if (DefineTestStop(step) == true) return;
+            try
+            {
+                bool found = true;
+                for (int i = 0; i < sec; i++)
+                {
+                    found = await defineVisibleElementAsync(BY_ID, id);
+                    if (found == false) break;
+                    await Task.Delay(1000);
+                }
+
+                if (found == false) EditMessage(step, null, PASSED, $"Ожидание скрытия элемента - завершено (элемент не отображается)", IMAGE_STATUS_PASSED);
+                else
+                {
+                    EditMessage(step, null, FAILED, $"Ожидание скрытия элемента - завершено (элемент отображается)", IMAGE_STATUS_FAILED);
+                    TestStopAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
+                TestStopAsync();
+                ConsoleMsgError(ex.ToString());
+            }
+        }
+
+        public async Task WaitNotVisibleElementByClassAsync(string _class, int index, int sec)
+        {
+            int step = SendMessage($"WaitNotVisibleElementByClassAsync({_class}, {index}, {sec.ToString()})", PROCESS, $"Ожидание скрытия элемента {sec.ToString()} секунд", IMAGE_STATUS_PROCESS);
+            if (DefineTestStop(step) == true) return;
+            try
+            {
+                bool found = true;
+                for (int i = 0; i < sec; i++)
+                {
+                    found = await defineVisibleElementAsync(BY_CLASS, _class, index);
+                    if (found == false) break;
+                    await Task.Delay(1000);
+                }
+
+                if (found == false) EditMessage(step, null, PASSED, $"Ожидание скрытия элемента - завершено (элемент не отображается)", IMAGE_STATUS_PASSED);
+                else
+                {
+                    EditMessage(step, null, FAILED, $"Ожидание скрытия элемента - завершено (элемент отображается)", IMAGE_STATUS_FAILED);
+                    TestStopAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
+                TestStopAsync();
+                ConsoleMsgError(ex.ToString());
+            }
+        }
+
+        public async Task WaitNotVisibleElementByNameAsync(string name, int index, int sec)
+        {
+            int step = SendMessage($"WaitNotVisibleElementByNameAsync({name}, {index}, {sec.ToString()})", PROCESS, $"Ожидание скрытия элемента {sec.ToString()} секунд", IMAGE_STATUS_PROCESS);
+            if (DefineTestStop(step) == true) return;
+            try
+            {
+                bool found = true;
+                for (int i = 0; i < sec; i++)
+                {
+                    found = await defineVisibleElementAsync(BY_NAME, name, index);
+                    if (found == false) break;
+                    await Task.Delay(1000);
+                }
+
+                if (found == false) EditMessage(step, null, PASSED, $"Ожидание скрытия элемента - завершено (элемент не отображается)", IMAGE_STATUS_PASSED);
+                else
+                {
+                    EditMessage(step, null, FAILED, $"Ожидание скрытия элемента - завершено (элемент отображается)", IMAGE_STATUS_FAILED);
+                    TestStopAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
+                TestStopAsync();
+                ConsoleMsgError(ex.ToString());
+            }
+        }
+
+        public async Task WaitNotVisibleElementByTagAsync(string tag, int index, int sec)
+        {
+            int step = SendMessage($"WaitNotVisibleElementByTagAsync({tag}, {index}, {sec.ToString()})", PROCESS, $"Ожидание скрытия элемента {sec.ToString()} секунд", IMAGE_STATUS_PROCESS);
+            if (DefineTestStop(step) == true) return;
+            try
+            {
+                bool found = true;
+                for (int i = 0; i < sec; i++)
+                {
+                    found = await defineVisibleElementAsync(BY_TAG, tag, index);
+                    if (found == false) break;
+                    await Task.Delay(1000);
+                }
+
+                if (found == false) EditMessage(step, null, PASSED, $"Ожидание скрытия элемента - завершено (элемент не отображается)", IMAGE_STATUS_PASSED);
+                else
+                {
+                    EditMessage(step, null, FAILED, $"Ожидание скрытия элемента - завершено (элемент отображается)", IMAGE_STATUS_FAILED);
+                    TestStopAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
+                TestStopAsync();
+                ConsoleMsgError(ex.ToString());
+            }
+        }
+
+        public async Task WaitNotVisibleElementByCssAsync(string locator, int sec)
+        {
+            int step = SendMessage($"WaitNotVisibleElementByCssAsync({locator}, {sec.ToString()})", PROCESS, $"Ожидание скрытия элемента {sec.ToString()} секунд", IMAGE_STATUS_PROCESS);
+            if (DefineTestStop(step) == true) return;
+            try
+            {
+                bool found = true;
+                for (int i = 0; i < sec; i++)
+                {
+                    found = await defineVisibleElementAsync(BY_CSS, locator);
+                    if (found == false) break;
+                    await Task.Delay(1000);
+                }
+
+                if (found == false) EditMessage(step, null, PASSED, $"Ожидание скрытия элемента - завершено (элемент не отображается)", IMAGE_STATUS_PASSED);
+                else
+                {
+                    EditMessage(step, null, FAILED, $"Ожидание скрытия элемента - завершено (элемент отображается)", IMAGE_STATUS_FAILED);
+                    TestStopAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
+                TestStopAsync();
+                ConsoleMsgError(ex.ToString());
+            }
+        }
+
         public async Task<bool> FindElementByIdAsync(string id, int sec)
         {
             int step = SendMessage($"FindElementByIdAsync({id}, {sec})", PROCESS, "Поиск элемента", IMAGE_STATUS_PROCESS);
-            if (CheckTestStop(step) == true) return false;
+            if (DefineTestStop(step) == true) return false;
 
             bool found = false;
             try
@@ -664,7 +822,7 @@ namespace HatFrameworkDev
         public async Task<bool> FindElementByClassAsync(string _class, int index, int sec)
         {
             int step = SendMessage($"FindElementByClassAsync({_class}, {index}, {sec})", PROCESS, "Поиск элемента", IMAGE_STATUS_PROCESS);
-            if (CheckTestStop(step) == true) return false;
+            if (DefineTestStop(step) == true) return false;
 
             bool found = false;
             try
@@ -702,7 +860,7 @@ namespace HatFrameworkDev
         public async Task<bool> FindElementByNameAsync(string name, int index, int sec)
         {
             int step = SendMessage($"FindElementByNameAsync({name}, {index}, {sec})", PROCESS, "Поиск элемента", IMAGE_STATUS_PROCESS);
-            if (CheckTestStop(step) == true) return false;
+            if (DefineTestStop(step) == true) return false;
 
             bool found = false;
             try
@@ -740,7 +898,7 @@ namespace HatFrameworkDev
         public async Task<bool> FindElementByTagAsync(string tag, int index, int sec)
         {
             int step = SendMessage($"FindElementByTagAsync({tag}, {index}, {sec})", PROCESS, "Поиск элемента", IMAGE_STATUS_PROCESS);
-            if (CheckTestStop(step) == true) return false;
+            if (DefineTestStop(step) == true) return false;
 
             bool found = false;
             try
@@ -778,7 +936,7 @@ namespace HatFrameworkDev
         public async Task<bool> FindElementByCssAsync(string locator, int sec)
         {
             int step = SendMessage($"FindElementByCssAsync({locator}, {sec})", PROCESS, "Поиск элемента", IMAGE_STATUS_PROCESS);
-            if (CheckTestStop(step) == true) return false;
+            if (DefineTestStop(step) == true) return false;
 
             bool found = false;
             try
@@ -816,7 +974,7 @@ namespace HatFrameworkDev
         public async Task<bool> FindVisibleElementByIdAsync(string id, int sec)
         {
             int step = SendMessage($"FindVisibleElementByIdAsync({id}, {sec})", PROCESS, "Поиск элемента", IMAGE_STATUS_PROCESS);
-            if (CheckTestStop(step) == true) return false;
+            if (DefineTestStop(step) == true) return false;
 
             bool found = false;
             try
@@ -843,7 +1001,7 @@ namespace HatFrameworkDev
         public async Task<bool> FindVisibleElementByClassAsync(string _class, int index, int sec)
         {
             int step = SendMessage($"FindVisibleElementByClassAsync({_class}, {index}, {sec})", PROCESS, "Поиск элемента", IMAGE_STATUS_PROCESS);
-            if (CheckTestStop(step) == true) return false;
+            if (DefineTestStop(step) == true) return false;
 
             bool found = false;
             try
@@ -870,7 +1028,7 @@ namespace HatFrameworkDev
         public async Task<bool> FindVisibleElementByNameAsync(string name, int index, int sec)
         {
             int step = SendMessage($"FindVisibleElementByNameAsync({name}, {index}, {sec})", PROCESS, "Поиск элемента", IMAGE_STATUS_PROCESS);
-            if (CheckTestStop(step) == true) return false;
+            if (DefineTestStop(step) == true) return false;
 
             bool found = false;
             try
@@ -897,7 +1055,7 @@ namespace HatFrameworkDev
         public async Task<bool> FindVisibleElementByTagAsync(string tag, int index, int sec)
         {
             int step = SendMessage($"FindVisibleElementByTagAsync({tag}, {index}, {sec})", PROCESS, "Поиск элемента", IMAGE_STATUS_PROCESS);
-            if (CheckTestStop(step) == true) return false;
+            if (DefineTestStop(step) == true) return false;
 
             bool found = false;
             try
@@ -924,7 +1082,7 @@ namespace HatFrameworkDev
         public async Task<bool> FindVisibleElementByCssAsync(string locator, int sec)
         {
             int step = SendMessage($"FindVisibleElementByCssAsync({locator}, {sec})", PROCESS, "Поиск элемента", IMAGE_STATUS_PROCESS);
-            if (CheckTestStop(step) == true) return false;
+            if (DefineTestStop(step) == true) return false;
 
             bool found = false;
             try
@@ -951,7 +1109,7 @@ namespace HatFrameworkDev
         public async Task ClickElementByIdAsync(string id)
         {
             int step = SendMessage($"ClickElementByIdAsync({id})", PROCESS, "Нажатие на элемент", IMAGE_STATUS_PROCESS);
-            if (CheckTestStop(step) == true) return;
+            if (DefineTestStop(step) == true) return;
 
             try
             {
@@ -978,7 +1136,7 @@ namespace HatFrameworkDev
         public async Task ClickElementByClassAsync(string _class, int index)
         {
             int step = SendMessage($"ClickElementByClassAsync({_class}, {index})", PROCESS, "Нажатие на элемент", IMAGE_STATUS_PROCESS);
-            if (CheckTestStop(step) == true) return;
+            if (DefineTestStop(step) == true) return;
 
             try
             {
@@ -1005,7 +1163,7 @@ namespace HatFrameworkDev
         public async Task ClickElementByNameAsync(string name, int index)
         {
             int step = SendMessage($"ClickElementByNameAsync({name}, {index})", PROCESS, "Нажатие на элемент", IMAGE_STATUS_PROCESS);
-            if (CheckTestStop(step) == true) return;
+            if (DefineTestStop(step) == true) return;
 
             try
             {
@@ -1032,7 +1190,7 @@ namespace HatFrameworkDev
         public async Task ClickElementByTagAsync(string tag, int index)
         {
             int step = SendMessage($"ClickElementByTagAsync({tag}, {index})", PROCESS, "Нажатие на элемент", IMAGE_STATUS_PROCESS);
-            if (CheckTestStop(step) == true) return;
+            if (DefineTestStop(step) == true) return;
 
             try
             {
@@ -1059,7 +1217,7 @@ namespace HatFrameworkDev
         public async Task ClickElementByCssAsync(string locator)
         {
             int step = SendMessage($"ClickElementByCssAsync({locator})", PROCESS, "Нажатие на элемент", IMAGE_STATUS_PROCESS);
-            if (CheckTestStop(step) == true) return;
+            if (DefineTestStop(step) == true) return;
 
             try
             {
@@ -1086,7 +1244,7 @@ namespace HatFrameworkDev
         public async Task SetValueInElementByIdAsync(string id, string value)
         {
             int step = SendMessage($"SetValueInElementByIdAsync({id}, {value})", PROCESS, "Ввод значения в элемент", IMAGE_STATUS_PROCESS);
-            if (CheckTestStop(step) == true) return;
+            if (DefineTestStop(step) == true) return;
 
             try
             {
@@ -1122,7 +1280,7 @@ namespace HatFrameworkDev
         public async Task SetValueInElementByClassAsync(string _class, int index, string value)
         {
             int step = SendMessage($"SetValueInElementByClassAsync({_class}, {index}, {value})", PROCESS, "Ввод значения в элемент", IMAGE_STATUS_PROCESS);
-            if (CheckTestStop(step) == true) return;
+            if (DefineTestStop(step) == true) return;
 
             try
             {
@@ -1158,7 +1316,7 @@ namespace HatFrameworkDev
         public async Task SetValueInElementByNameAsync(string name, int index, string value)
         {
             int step = SendMessage($"SetValueInElementByNameAsync({name}, {index}, {value})", PROCESS, "Ввод значения в элемент", IMAGE_STATUS_PROCESS);
-            if (CheckTestStop(step) == true) return;
+            if (DefineTestStop(step) == true) return;
 
             try
             {
@@ -1194,7 +1352,7 @@ namespace HatFrameworkDev
         public async Task SetValueInElementByTagAsync(string tag, int index, string value)
         {
             int step = SendMessage($"SetValueInElementByTagAsync({tag}, {index}, {value})", PROCESS, "Ввод значения в элемент", IMAGE_STATUS_PROCESS);
-            if (CheckTestStop(step) == true) return;
+            if (DefineTestStop(step) == true) return;
 
             try
             {
@@ -1230,7 +1388,7 @@ namespace HatFrameworkDev
         public async Task SetValueInElementByCssAsync(string locator, string value)
         {
             int step = SendMessage($"SetValueInElementByCssAsync({locator}, {value})", PROCESS, "Ввод значения в элемент", IMAGE_STATUS_PROCESS);
-            if (CheckTestStop(step) == true) return;
+            if (DefineTestStop(step) == true) return;
 
             try
             {
@@ -1267,7 +1425,7 @@ namespace HatFrameworkDev
         public async Task<string> GetValueFromElementByIdAsync(string id)
         {
             int step = SendMessage($"GetValueFromElementByIdAsync({id})", PROCESS, "Получение значения из элемент", IMAGE_STATUS_PROCESS);
-            if (CheckTestStop(step) == true) return "";
+            if (DefineTestStop(step) == true) return "";
 
             string value = "";
             try
@@ -1297,7 +1455,7 @@ namespace HatFrameworkDev
         public async Task<string> GetValueFromElementByClassAsync(string _class, int index)
         {
             int step = SendMessage($"GetValueFromElementByClassAsync({_class}, {index})", PROCESS, "Получение значения из элемент", IMAGE_STATUS_PROCESS);
-            if (CheckTestStop(step) == true) return "";
+            if (DefineTestStop(step) == true) return "";
 
             string value = "";
             try
@@ -1327,7 +1485,7 @@ namespace HatFrameworkDev
         public async Task<string> GetValueFromElementByNameAsync(string name, int index)
         {
             int step = SendMessage($"GetValueFromElementByNameAsync({name}, {index})", PROCESS, "Получение значения из элемент", IMAGE_STATUS_PROCESS);
-            if (CheckTestStop(step) == true) return "";
+            if (DefineTestStop(step) == true) return "";
 
             string value = "";
             try
@@ -1357,7 +1515,7 @@ namespace HatFrameworkDev
         public async Task<string> GetValueFromElementByTagAsync(string tag, int index)
         {
             int step = SendMessage($"GetValueFromElementByTagAsync({tag}, {index})", PROCESS, "Получение значения из элемент", IMAGE_STATUS_PROCESS);
-            if (CheckTestStop(step) == true) return "";
+            if (DefineTestStop(step) == true) return "";
 
             string value = "";
             try
@@ -1387,7 +1545,7 @@ namespace HatFrameworkDev
         public async Task<string> GetValueFromElementByCssAsync(string locator)
         {
             int step = SendMessage($"GetValueFromElementByCSSAsync({locator})", PROCESS, "Получение значения из элемент", IMAGE_STATUS_PROCESS);
-            if (CheckTestStop(step) == true) return "";
+            if (DefineTestStop(step) == true) return "";
 
             string value = "";
             try
