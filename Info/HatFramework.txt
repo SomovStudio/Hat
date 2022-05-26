@@ -3,6 +3,7 @@ Craker Framework
 
 Справочник по HTML: http://htmlbook.ru/html
 Универсальные атрибуты: http://htmlbook.ru/html/attr/common
+Элемент Input: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/radio
 
 ------------------------------------------------------------------------
 ПУБЛИЧНЫЕ МЕТОДЫ И КОНСТАНТЫ

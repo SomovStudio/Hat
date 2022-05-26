@@ -781,9 +781,6 @@ namespace HatFrameworkDev
             }
         }
 
-
-
-
         public async Task<bool> FindElementByIdAsync(string id, int sec)
         {
             int step = SendMessage($"FindElementByIdAsync({id}, {sec})", PROCESS, "Поиск элемента", IMAGE_STATUS_PROCESS);
