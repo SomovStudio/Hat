@@ -18,6 +18,7 @@ namespace Hat
         public static void play(string testFilename)
         {
             Config.browserForm.consoleMsg("Запускается тест из файла " + testFilename);
+            Config.browserForm.systemConsoleMsg("", default, default, default, true);
             Config.browserForm.systemConsoleMsg($"Запуск автотеста: {testFilename}", default, ConsoleColor.DarkCyan, ConsoleColor.White, true);
 
             try
@@ -73,11 +74,11 @@ namespace Hat
 
         public static async Task devTestStutsAsync()
         {
+            /*
             HatFrameworkDev.Tester tester = new HatFrameworkDev.Tester(Config.browserForm);
             tester.ClearMessage();
             tester.SendMessage("Запуск автотеста", "", "Файл: ExampleTest.cs", Tester.IMAGE_STATUS_MESSAGE);
             await tester.BrowserSizeAsync(800, 600);
-            
             await tester.TestBeginAsync();
             await tester.GoToUrlAsync("https://somovstudio.github.io/test.html", 5);
             await tester.FindVisibleElementByIdAsync("result", 5);
@@ -93,6 +94,16 @@ namespace Hat
             await tester.FindVisibleElementByIdAsync("result", 5);
             await tester.WaitVisibleElementByIdAsync("result", 5);
             await tester.AssertEqualsAsync(expected, actual);
+            await tester.TestEndAsync();
+            */
+
+            HatFrameworkDev.Tester tester = new HatFrameworkDev.Tester(Config.browserForm);
+            tester.ClearMessage();
+            await tester.TestBeginAsync();
+            await tester.GoToUrlAsync(@"https://somovstudio.github.io/test2.html", 5);
+            await tester.ClickElementByIdAsync("MyRadioNo");
+            await tester.ClickElementByIdAsync("MyCheckboxYes");
+            await tester.SetTextInElementByCssAsync("#test > h1", "Тест 13");
             await tester.TestEndAsync();
 
         }

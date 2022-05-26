@@ -25,6 +25,7 @@ namespace Hat
             toolStripStatusLabelFileEncoding.Text = Config.encoding;
             Config.browserForm = this;
             consoleMsg("Браузер Hat версия 1.0");
+            systemConsoleMsg("", default, default, default, true);
             systemConsoleMsg("Браузер Hat версия 1.0", default, ConsoleColor.DarkGray, ConsoleColor.White, true);
         }
 
@@ -63,7 +64,6 @@ namespace Hat
                     systemConsoleMsg($"Проект успешно открыт (версия проекта: {Config.version})", default, ConsoleColor.DarkGray, ConsoleColor.White, true);
                     consoleMsg($"Проект успешно открыт (версия проекта: {Config.version})");
                     toolStripStatusLabelProjectFolderFile.Text = Config.selectName;
-                    systemConsoleMsg($"Запуск автотеста: {Config.selectName}", default, ConsoleColor.DarkCyan, ConsoleColor.White, true);
                     PlayTest(Config.selectName);
                 }
 
@@ -1006,17 +1006,25 @@ namespace Hat
         {
             try
             {
-                // Строится дерево папок и файлов
-                treeViewProject.Nodes.Clear();
-                treeViewProject.Nodes.Add(Config.projectPath, getFolderName(Config.projectPath), 0, 0);
-                openProjectFolder(Config.projectPath, treeViewProject.Nodes);
+                if (Config.projectPath != "(не открыт)")
+                {
+                    // Строится дерево папок и файлов
+                    treeViewProject.Nodes.Clear();
+                    treeViewProject.Nodes.Add(Config.projectPath, getFolderName(Config.projectPath), 0, 0);
+                    openProjectFolder(Config.projectPath, treeViewProject.Nodes);
 
-                // Чтение файла конфигурации
-                Config.readConfigJson(Config.projectPath + "/project.cracker");
-                showLibs();
-                changeEncoding();
-                changeEditorTopMost();
-                consoleMsg("Обновлено дерево папок и файлов в окне проекта");
+                    // Чтение файла конфигурации
+                    Config.readConfigJson(Config.projectPath + "/project.cracker");
+                    showLibs();
+                    changeEncoding();
+                    changeEditorTopMost();
+                    consoleMsg("Обновлено дерево папок и файлов в окне проекта");
+                }
+                else
+                {
+                    consoleMsg("Проект не открыт");
+                }
+                
             }
             catch (Exception ex)
             {
@@ -1176,7 +1184,8 @@ namespace Hat
 
         private void создатьПапкуToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            createFolder();
+            if (Config.projectPath != "(не открыт)") createFolder();
+            else consoleMsg("Проект не открыт");
         }
 
         private void переименоватьПапкуToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1214,7 +1223,9 @@ namespace Hat
 
         private void удалитьПапкуToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            deleteFolder();
+            
+            if (Config.projectPath != "(не открыт)") deleteFolder();
+            else consoleMsg("Проект не открыт");
         }
 
         private void fileOpen()
@@ -1258,7 +1269,8 @@ namespace Hat
 
         private void открытьФайлToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            fileOpen();
+            if (Config.projectPath != "(не открыт)") fileOpen();
+            else consoleMsg("Проект не открыт");
         }
 
         private void createFile()
@@ -1319,7 +1331,8 @@ namespace Hat
 
         private void создатьФайлCToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            createFile();
+            if (Config.projectPath != "(не открыт)") createFile();
+            else consoleMsg("Проект не открыт");
         }
 
         private void переименоватьФайлToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1369,7 +1382,8 @@ namespace Hat
 
         private void удалитьФайлToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            deleteFile();
+            if (Config.projectPath != "(не открыт)") deleteFile();
+            else consoleMsg("Проект не открыт");
         }
 
         private void toolStripButton12_Click(object sender, EventArgs e)
@@ -1534,27 +1548,32 @@ namespace Hat
 
         private void toolStripMenuItem9_Click(object sender, EventArgs e)
         {
-            fileOpen();
+            if (Config.projectPath != "(не открыт)") fileOpen();
+            else consoleMsg("Проект не открыт");
         }
 
         private void toolStripMenuItem6_Click(object sender, EventArgs e)
         {
-            createFile();
+            if (Config.projectPath != "(не открыт)") createFile();
+            else consoleMsg("Проект не открыт");
         }
 
         private void toolStripMenuItem8_Click(object sender, EventArgs e)
         {
-            deleteFile();
+            if (Config.projectPath != "(не открыт)") deleteFile();
+            else consoleMsg("Проект не открыт");
         }
 
         private void toolStripMenuItem2_Click(object sender, EventArgs e)
         {
-            createFolder();
+            if (Config.projectPath != "(не открыт)") createFolder();
+            else consoleMsg("Проект не открыт");
         }
 
         private void toolStripMenuItem5_Click(object sender, EventArgs e)
         {
-            deleteFolder();
+            if (Config.projectPath != "(не открыт)") deleteFolder();
+            else consoleMsg("Проект не открыт");
         }
 
         private void подробнаяИнформацияОШагеToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1846,6 +1865,28 @@ namespace Hat
         private void toolStripButton17_Click(object sender, EventArgs e)
         {
             findText(toolStripComboBoxEvents, richTextBoxEvents);
+        }
+
+        private void toolStripButton21_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (Config.projectPath != "(не открыт)")
+                {
+                    CreateCmdForm createCmdForm = new CreateCmdForm();
+                    createCmdForm.textBox.Text = $"cd {Directory.GetCurrentDirectory()}" + Environment.NewLine;
+                    createCmdForm.textBox.Text += $"Hat.exe {toolStripStatusLabelProjectFolderFile.Text} {toolStripStatusLabelProjectPath.Text}";
+                    createCmdForm.ShowDialog();
+                }
+                else
+                {
+                    consoleMsg("Проект не открыт");
+                }
+            }
+            catch (Exception ex)
+            {
+                consoleMsgError(ex.ToString());
+            }
         }
     }
 }

@@ -381,7 +381,7 @@ namespace HatFrameworkDev
          * */
         public async Task<HTMLElement> GetHtmlElementAsync(string locator)
         {
-            int step = SendMessage($"GetHtmlElementAsync({locator})", PROCESS, "Полечить элемента", IMAGE_STATUS_PROCESS);
+            int step = SendMessage($"GetHtmlElementAsync('{locator}')", PROCESS, "Полечить элемента", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return null;
 
             HTMLElement htmlElement = new HTMLElement(this);
@@ -418,7 +418,7 @@ namespace HatFrameworkDev
         public async Task GoToUrlAsync(string url, int sec)
         {
             statusPageLoad = false;
-            int step = SendMessage($"GoToUrlAsync({url}, {sec})", PROCESS, "Загрузка страницы", IMAGE_STATUS_PROCESS);
+            int step = SendMessage($"GoToUrlAsync('{url}', {sec})", PROCESS, "Загрузка страницы", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return;
 
             try
@@ -476,7 +476,7 @@ namespace HatFrameworkDev
 
         public async Task WaitAsync(int sec)
         {
-            int step = SendMessage($"WaitAsync({sec.ToString()})", PROCESS, $"Ожидание {sec.ToString()} секунд", IMAGE_STATUS_PROCESS);
+            int step = SendMessage($"WaitAsync({sec})", PROCESS, $"Ожидание {sec.ToString()} секунд", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return;
             try
             {
@@ -493,7 +493,7 @@ namespace HatFrameworkDev
 
         public async Task WaitVisibleElementByIdAsync(string id, int sec)
         {
-            int step = SendMessage($"WaitVisibleElementByIdAsync({id}, {sec.ToString()})", PROCESS, $"Ожидание элемента {sec.ToString()} секунд", IMAGE_STATUS_PROCESS);
+            int step = SendMessage($"WaitVisibleElementByIdAsync('{id}', {sec})", PROCESS, $"Ожидание элемента {sec.ToString()} секунд", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return;
             try
             {
@@ -522,7 +522,7 @@ namespace HatFrameworkDev
 
         public async Task WaitVisibleElementByClassAsync(string _class, int index, int sec)
         {
-            int step = SendMessage($"WaitVisibleElementByClassAsync({_class}, {index}, {sec.ToString()})", PROCESS, $"Ожидание элемента {sec.ToString()} секунд", IMAGE_STATUS_PROCESS);
+            int step = SendMessage($"WaitVisibleElementByClassAsync('{_class}', {index}, {sec})", PROCESS, $"Ожидание элемента {sec.ToString()} секунд", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return;
             try
             {
@@ -551,7 +551,7 @@ namespace HatFrameworkDev
 
         public async Task WaitVisibleElementByNameAsync(string name, int index, int sec)
         {
-            int step = SendMessage($"WaitVisibleElementByNameAsync({name}, {index}, {sec.ToString()})", PROCESS, $"Ожидание элемента {sec.ToString()} секунд", IMAGE_STATUS_PROCESS);
+            int step = SendMessage($"WaitVisibleElementByNameAsync('{name}', {index}, {sec})", PROCESS, $"Ожидание элемента {sec.ToString()} секунд", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return;
             try
             {
@@ -580,7 +580,7 @@ namespace HatFrameworkDev
 
         public async Task WaitVisibleElementByTagAsync(string tag, int index, int sec)
         {
-            int step = SendMessage($"WaitVisibleElementByTagAsync({tag}, {index}, {sec.ToString()})", PROCESS, $"Ожидание элемента {sec.ToString()} секунд", IMAGE_STATUS_PROCESS);
+            int step = SendMessage($"WaitVisibleElementByTagAsync('{tag}', {index}, {sec})", PROCESS, $"Ожидание элемента {sec.ToString()} секунд", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return;
             try
             {
@@ -609,7 +609,7 @@ namespace HatFrameworkDev
 
         public async Task WaitVisibleElementByCssAsync(string locator, int sec)
         {
-            int step = SendMessage($"WaitVisibleElementByCssAsync({locator}, {sec.ToString()})", PROCESS, $"Ожидание элемента {sec.ToString()} секунд", IMAGE_STATUS_PROCESS);
+            int step = SendMessage($"WaitVisibleElementByCssAsync('{locator}', {sec})", PROCESS, $"Ожидание элемента {sec.ToString()} секунд", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return;
             try
             {
@@ -638,7 +638,7 @@ namespace HatFrameworkDev
 
         public async Task WaitNotVisibleElementByIdAsync(string id, int sec)
         {
-            int step = SendMessage($"WaitNotVisibleElementByIdAsync({id}, {sec.ToString()})", PROCESS, $"Ожидание скрытия элемента {sec.ToString()} секунд", IMAGE_STATUS_PROCESS);
+            int step = SendMessage($"WaitNotVisibleElementByIdAsync('{id}', {sec})", PROCESS, $"Ожидание скрытия элемента {sec.ToString()} секунд", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return;
             try
             {
@@ -667,7 +667,7 @@ namespace HatFrameworkDev
 
         public async Task WaitNotVisibleElementByClassAsync(string _class, int index, int sec)
         {
-            int step = SendMessage($"WaitNotVisibleElementByClassAsync({_class}, {index}, {sec.ToString()})", PROCESS, $"Ожидание скрытия элемента {sec.ToString()} секунд", IMAGE_STATUS_PROCESS);
+            int step = SendMessage($"WaitNotVisibleElementByClassAsync('{_class}', {index}, {sec})", PROCESS, $"Ожидание скрытия элемента {sec.ToString()} секунд", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return;
             try
             {
@@ -696,7 +696,7 @@ namespace HatFrameworkDev
 
         public async Task WaitNotVisibleElementByNameAsync(string name, int index, int sec)
         {
-            int step = SendMessage($"WaitNotVisibleElementByNameAsync({name}, {index}, {sec.ToString()})", PROCESS, $"Ожидание скрытия элемента {sec.ToString()} секунд", IMAGE_STATUS_PROCESS);
+            int step = SendMessage($"WaitNotVisibleElementByNameAsync('{name}', {index}, {sec})", PROCESS, $"Ожидание скрытия элемента {sec.ToString()} секунд", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return;
             try
             {
@@ -725,7 +725,7 @@ namespace HatFrameworkDev
 
         public async Task WaitNotVisibleElementByTagAsync(string tag, int index, int sec)
         {
-            int step = SendMessage($"WaitNotVisibleElementByTagAsync({tag}, {index}, {sec.ToString()})", PROCESS, $"Ожидание скрытия элемента {sec.ToString()} секунд", IMAGE_STATUS_PROCESS);
+            int step = SendMessage($"WaitNotVisibleElementByTagAsync('{tag}', {index}, {sec})", PROCESS, $"Ожидание скрытия элемента {sec.ToString()} секунд", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return;
             try
             {
@@ -754,7 +754,7 @@ namespace HatFrameworkDev
 
         public async Task WaitNotVisibleElementByCssAsync(string locator, int sec)
         {
-            int step = SendMessage($"WaitNotVisibleElementByCssAsync({locator}, {sec.ToString()})", PROCESS, $"Ожидание скрытия элемента {sec.ToString()} секунд", IMAGE_STATUS_PROCESS);
+            int step = SendMessage($"WaitNotVisibleElementByCssAsync('{locator}', {sec})", PROCESS, $"Ожидание скрытия элемента {sec.ToString()} секунд", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return;
             try
             {
@@ -783,7 +783,7 @@ namespace HatFrameworkDev
 
         public async Task<bool> FindElementByIdAsync(string id, int sec)
         {
-            int step = SendMessage($"FindElementByIdAsync({id}, {sec})", PROCESS, "Поиск элемента", IMAGE_STATUS_PROCESS);
+            int step = SendMessage($"FindElementByIdAsync('{id}', {sec})", PROCESS, "Поиск элемента", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return false;
 
             bool found = false;
@@ -821,7 +821,7 @@ namespace HatFrameworkDev
 
         public async Task<bool> FindElementByClassAsync(string _class, int index, int sec)
         {
-            int step = SendMessage($"FindElementByClassAsync({_class}, {index}, {sec})", PROCESS, "Поиск элемента", IMAGE_STATUS_PROCESS);
+            int step = SendMessage($"FindElementByClassAsync('{_class}', {index}, {sec})", PROCESS, "Поиск элемента", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return false;
 
             bool found = false;
@@ -859,7 +859,7 @@ namespace HatFrameworkDev
 
         public async Task<bool> FindElementByNameAsync(string name, int index, int sec)
         {
-            int step = SendMessage($"FindElementByNameAsync({name}, {index}, {sec})", PROCESS, "Поиск элемента", IMAGE_STATUS_PROCESS);
+            int step = SendMessage($"FindElementByNameAsync('{name}', {index}, {sec})", PROCESS, "Поиск элемента", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return false;
 
             bool found = false;
@@ -897,7 +897,7 @@ namespace HatFrameworkDev
 
         public async Task<bool> FindElementByTagAsync(string tag, int index, int sec)
         {
-            int step = SendMessage($"FindElementByTagAsync({tag}, {index}, {sec})", PROCESS, "Поиск элемента", IMAGE_STATUS_PROCESS);
+            int step = SendMessage($"FindElementByTagAsync('{tag}', {index}, {sec})", PROCESS, "Поиск элемента", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return false;
 
             bool found = false;
@@ -935,7 +935,7 @@ namespace HatFrameworkDev
 
         public async Task<bool> FindElementByCssAsync(string locator, int sec)
         {
-            int step = SendMessage($"FindElementByCssAsync({locator}, {sec})", PROCESS, "Поиск элемента", IMAGE_STATUS_PROCESS);
+            int step = SendMessage($"FindElementByCssAsync('{locator}', {sec})", PROCESS, "Поиск элемента", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return false;
 
             bool found = false;
@@ -973,7 +973,7 @@ namespace HatFrameworkDev
 
         public async Task<bool> FindVisibleElementByIdAsync(string id, int sec)
         {
-            int step = SendMessage($"FindVisibleElementByIdAsync({id}, {sec})", PROCESS, "Поиск элемента", IMAGE_STATUS_PROCESS);
+            int step = SendMessage($"FindVisibleElementByIdAsync('{id}', {sec})", PROCESS, "Поиск элемента", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return false;
 
             bool found = false;
@@ -1000,7 +1000,7 @@ namespace HatFrameworkDev
 
         public async Task<bool> FindVisibleElementByClassAsync(string _class, int index, int sec)
         {
-            int step = SendMessage($"FindVisibleElementByClassAsync({_class}, {index}, {sec})", PROCESS, "Поиск элемента", IMAGE_STATUS_PROCESS);
+            int step = SendMessage($"FindVisibleElementByClassAsync('{_class}', {index}, {sec})", PROCESS, "Поиск элемента", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return false;
 
             bool found = false;
@@ -1027,7 +1027,7 @@ namespace HatFrameworkDev
 
         public async Task<bool> FindVisibleElementByNameAsync(string name, int index, int sec)
         {
-            int step = SendMessage($"FindVisibleElementByNameAsync({name}, {index}, {sec})", PROCESS, "Поиск элемента", IMAGE_STATUS_PROCESS);
+            int step = SendMessage($"FindVisibleElementByNameAsync('{name}', {index}, {sec})", PROCESS, "Поиск элемента", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return false;
 
             bool found = false;
@@ -1054,7 +1054,7 @@ namespace HatFrameworkDev
 
         public async Task<bool> FindVisibleElementByTagAsync(string tag, int index, int sec)
         {
-            int step = SendMessage($"FindVisibleElementByTagAsync({tag}, {index}, {sec})", PROCESS, "Поиск элемента", IMAGE_STATUS_PROCESS);
+            int step = SendMessage($"FindVisibleElementByTagAsync('{tag}', {index}, {sec})", PROCESS, "Поиск элемента", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return false;
 
             bool found = false;
@@ -1081,7 +1081,7 @@ namespace HatFrameworkDev
 
         public async Task<bool> FindVisibleElementByCssAsync(string locator, int sec)
         {
-            int step = SendMessage($"FindVisibleElementByCssAsync({locator}, {sec})", PROCESS, "Поиск элемента", IMAGE_STATUS_PROCESS);
+            int step = SendMessage($"FindVisibleElementByCssAsync('{locator}', {sec})", PROCESS, "Поиск элемента", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return false;
 
             bool found = false;
@@ -1108,7 +1108,7 @@ namespace HatFrameworkDev
 
         public async Task ClickElementByIdAsync(string id)
         {
-            int step = SendMessage($"ClickElementByIdAsync({id})", PROCESS, "Нажатие на элемент", IMAGE_STATUS_PROCESS);
+            int step = SendMessage($"ClickElementByIdAsync('{id}')", PROCESS, "Нажатие на элемент", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return;
 
             try
@@ -1135,7 +1135,7 @@ namespace HatFrameworkDev
 
         public async Task ClickElementByClassAsync(string _class, int index)
         {
-            int step = SendMessage($"ClickElementByClassAsync({_class}, {index})", PROCESS, "Нажатие на элемент", IMAGE_STATUS_PROCESS);
+            int step = SendMessage($"ClickElementByClassAsync('{_class}', {index})", PROCESS, "Нажатие на элемент", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return;
 
             try
@@ -1162,7 +1162,7 @@ namespace HatFrameworkDev
 
         public async Task ClickElementByNameAsync(string name, int index)
         {
-            int step = SendMessage($"ClickElementByNameAsync({name}, {index})", PROCESS, "Нажатие на элемент", IMAGE_STATUS_PROCESS);
+            int step = SendMessage($"ClickElementByNameAsync('{name}', {index})", PROCESS, "Нажатие на элемент", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return;
 
             try
@@ -1189,7 +1189,7 @@ namespace HatFrameworkDev
 
         public async Task ClickElementByTagAsync(string tag, int index)
         {
-            int step = SendMessage($"ClickElementByTagAsync({tag}, {index})", PROCESS, "Нажатие на элемент", IMAGE_STATUS_PROCESS);
+            int step = SendMessage($"ClickElementByTagAsync('{tag}', {index})", PROCESS, "Нажатие на элемент", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return;
 
             try
@@ -1216,7 +1216,7 @@ namespace HatFrameworkDev
 
         public async Task ClickElementByCssAsync(string locator)
         {
-            int step = SendMessage($"ClickElementByCssAsync({locator})", PROCESS, "Нажатие на элемент", IMAGE_STATUS_PROCESS);
+            int step = SendMessage($"ClickElementByCssAsync('{locator}')", PROCESS, "Нажатие на элемент", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return;
 
             try
@@ -1243,7 +1243,7 @@ namespace HatFrameworkDev
 
         public async Task SetValueInElementByIdAsync(string id, string value)
         {
-            int step = SendMessage($"SetValueInElementByIdAsync({id}, {value})", PROCESS, "Ввод значения в элемент", IMAGE_STATUS_PROCESS);
+            int step = SendMessage($"SetValueInElementByIdAsync('{id}', '{value}')", PROCESS, "Ввод значения в элемент", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return;
 
             try
@@ -1256,7 +1256,7 @@ namespace HatFrameworkDev
                 script += "element.dispatchEvent(new KeyboardEvent('keyup', { bubbles: true }));";
                 script += "element.dispatchEvent(new Event('input', { bubbles: true }));";
                 script += "element.dispatchEvent(new Event('change', { bubbles: true }));";
-                script += "return element.value";
+                script += "return element.value;";
                 script += "}());";
                 string result = await ExecuteJavaScriptAsync(script);
                 if (result == "null" || result == null)
@@ -1279,7 +1279,7 @@ namespace HatFrameworkDev
 
         public async Task SetValueInElementByClassAsync(string _class, int index, string value)
         {
-            int step = SendMessage($"SetValueInElementByClassAsync({_class}, {index}, {value})", PROCESS, "Ввод значения в элемент", IMAGE_STATUS_PROCESS);
+            int step = SendMessage($"SetValueInElementByClassAsync('{_class}', {index}, '{value}')", PROCESS, "Ввод значения в элемент", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return;
 
             try
@@ -1292,7 +1292,7 @@ namespace HatFrameworkDev
                 script += "element.dispatchEvent(new KeyboardEvent('keyup', { bubbles: true }));";
                 script += "element.dispatchEvent(new Event('input', { bubbles: true }));";
                 script += "element.dispatchEvent(new Event('change', { bubbles: true }));";
-                script += "return element.value";
+                script += "return element.value;";
                 script += "}());";
                 string result = await ExecuteJavaScriptAsync(script);
                 if (result == "null" || result == null)
@@ -1315,7 +1315,7 @@ namespace HatFrameworkDev
 
         public async Task SetValueInElementByNameAsync(string name, int index, string value)
         {
-            int step = SendMessage($"SetValueInElementByNameAsync({name}, {index}, {value})", PROCESS, "Ввод значения в элемент", IMAGE_STATUS_PROCESS);
+            int step = SendMessage($"SetValueInElementByNameAsync('{name}', {index}, '{value}')", PROCESS, "Ввод значения в элемент", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return;
 
             try
@@ -1328,7 +1328,7 @@ namespace HatFrameworkDev
                 script += "element.dispatchEvent(new KeyboardEvent('keyup', { bubbles: true }));";
                 script += "element.dispatchEvent(new Event('input', { bubbles: true }));";
                 script += "element.dispatchEvent(new Event('change', { bubbles: true }));";
-                script += "return element.value";
+                script += "return element.value;";
                 script += "}());";
                 string result = await ExecuteJavaScriptAsync(script);
                 if (result == "null" || result == null)
@@ -1351,7 +1351,7 @@ namespace HatFrameworkDev
 
         public async Task SetValueInElementByTagAsync(string tag, int index, string value)
         {
-            int step = SendMessage($"SetValueInElementByTagAsync({tag}, {index}, {value})", PROCESS, "Ввод значения в элемент", IMAGE_STATUS_PROCESS);
+            int step = SendMessage($"SetValueInElementByTagAsync('{tag}', {index}, '{value}')", PROCESS, "Ввод значения в элемент", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return;
 
             try
@@ -1364,7 +1364,7 @@ namespace HatFrameworkDev
                 script += "element.dispatchEvent(new KeyboardEvent('keyup', { bubbles: true }));";
                 script += "element.dispatchEvent(new Event('input', { bubbles: true }));";
                 script += "element.dispatchEvent(new Event('change', { bubbles: true }));";
-                script += "return element.value";
+                script += "return element.value;";
                 script += "}());";
                 string result = await ExecuteJavaScriptAsync(script);
                 if (result == "null" || result == null)
@@ -1387,7 +1387,7 @@ namespace HatFrameworkDev
 
         public async Task SetValueInElementByCssAsync(string locator, string value)
         {
-            int step = SendMessage($"SetValueInElementByCssAsync({locator}, {value})", PROCESS, "Ввод значения в элемент", IMAGE_STATUS_PROCESS);
+            int step = SendMessage($"SetValueInElementByCssAsync('{locator}', '{value}')", PROCESS, "Ввод значения в элемент", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return;
 
             try
@@ -1400,7 +1400,7 @@ namespace HatFrameworkDev
                 script += "element.dispatchEvent(new KeyboardEvent('keyup', { bubbles: true }));";
                 script += "element.dispatchEvent(new Event('input', { bubbles: true }));";
                 script += "element.dispatchEvent(new Event('change', { bubbles: true }));";
-                script += "return element.value";
+                script += "return element.value;";
                 script += "}());";
 
                 string result = await ExecuteJavaScriptAsync(script);
@@ -1424,7 +1424,7 @@ namespace HatFrameworkDev
 
         public async Task<string> GetValueFromElementByIdAsync(string id)
         {
-            int step = SendMessage($"GetValueFromElementByIdAsync({id})", PROCESS, "Получение значения из элемент", IMAGE_STATUS_PROCESS);
+            int step = SendMessage($"GetValueFromElementByIdAsync('{id})'", PROCESS, "Получение значения из элемент", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return "";
 
             string value = "";
@@ -1454,7 +1454,7 @@ namespace HatFrameworkDev
 
         public async Task<string> GetValueFromElementByClassAsync(string _class, int index)
         {
-            int step = SendMessage($"GetValueFromElementByClassAsync({_class}, {index})", PROCESS, "Получение значения из элемент", IMAGE_STATUS_PROCESS);
+            int step = SendMessage($"GetValueFromElementByClassAsync('{_class}', {index})", PROCESS, "Получение значения из элемент", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return "";
 
             string value = "";
@@ -1484,7 +1484,7 @@ namespace HatFrameworkDev
 
         public async Task<string> GetValueFromElementByNameAsync(string name, int index)
         {
-            int step = SendMessage($"GetValueFromElementByNameAsync({name}, {index})", PROCESS, "Получение значения из элемент", IMAGE_STATUS_PROCESS);
+            int step = SendMessage($"GetValueFromElementByNameAsync('{name}', {index})", PROCESS, "Получение значения из элемент", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return "";
 
             string value = "";
@@ -1514,7 +1514,7 @@ namespace HatFrameworkDev
 
         public async Task<string> GetValueFromElementByTagAsync(string tag, int index)
         {
-            int step = SendMessage($"GetValueFromElementByTagAsync({tag}, {index})", PROCESS, "Получение значения из элемент", IMAGE_STATUS_PROCESS);
+            int step = SendMessage($"GetValueFromElementByTagAsync('{tag}', {index})", PROCESS, "Получение значения из элемент", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return "";
 
             string value = "";
@@ -1544,7 +1544,7 @@ namespace HatFrameworkDev
 
         public async Task<string> GetValueFromElementByCssAsync(string locator)
         {
-            int step = SendMessage($"GetValueFromElementByCSSAsync({locator})", PROCESS, "Получение значения из элемент", IMAGE_STATUS_PROCESS);
+            int step = SendMessage($"GetValueFromElementByCSSAsync('{locator}')", PROCESS, "Получение значения из элемент", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return "";
 
             string value = "";
@@ -1572,6 +1572,160 @@ namespace HatFrameworkDev
             return value;
         }
 
+        public async Task SetTextInElementByIdAsync(string id, string text)
+        {
+            int step = SendMessage($"SetTextInElementByIdAsync('{id}', '{text}')", PROCESS, "Ввод текста в элемент", IMAGE_STATUS_PROCESS);
+            if (DefineTestStop(step) == true) return;
+
+            try
+            {
+                string script = "(function(){";
+                script += $"var element = document.getElementById('{id}');";
+                script += $"element.innerText = '{text}';";
+                script += "return element.innerText;";
+                script += "}());";
+                string result = await ExecuteJavaScriptAsync(script);
+                if (result == "null" || result == null)
+                {
+                    EditMessage(step, null, Tester.FAILED, $"Не удалось найти или ввести текст в элемент с ID: {id}", Tester.IMAGE_STATUS_FAILED);
+                    TestStopAsync();
+                }
+                else
+                {
+                    EditMessage(step, null, PASSED, $"Текст '{result}' - введен в элемент", IMAGE_STATUS_PASSED);
+                }
+            }
+            catch (Exception ex)
+            {
+                EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
+                TestStopAsync();
+                ConsoleMsgError(ex.ToString());
+            }
+        }
+
+        public async Task SetTextInElementByClassAsync(string _class, int index, string text)
+        {
+            int step = SendMessage($"SetTextInElementByClassAsync('{_class}', {index}, '{text}')", PROCESS, "Ввод текста в элемент", IMAGE_STATUS_PROCESS);
+            if (DefineTestStop(step) == true) return;
+
+            try
+            {
+                string script = "(function(){";
+                script += $"var element = document.getElementsByClassName('{_class}')[{index}];";
+                script += $"element.innerText = '{text}';";
+                script += "return element.innerText;";
+                script += "}());";
+                string result = await ExecuteJavaScriptAsync(script);
+                if (result == "null" || result == null)
+                {
+                    EditMessage(step, null, Tester.FAILED, $"Не удалось найти или ввести текста в элемент по Class: {_class} (Index: {index})", Tester.IMAGE_STATUS_FAILED);
+                    TestStopAsync();
+                }
+                else
+                {
+                    EditMessage(step, null, PASSED, $"Текст '{result}' - введен в элемент", IMAGE_STATUS_PASSED);
+                }
+            }
+            catch (Exception ex)
+            {
+                EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
+                TestStopAsync();
+                ConsoleMsgError(ex.ToString());
+            }
+        }
+
+        public async Task SetTextInElementByNameAsync(string name, int index, string text)
+        {
+            int step = SendMessage($"SetTextInElementByNameAsync('{name}', {index}, '{text}')", PROCESS, "Ввод текста в элемент", IMAGE_STATUS_PROCESS);
+            if (DefineTestStop(step) == true) return;
+
+            try
+            {
+                string script = "(function(){";
+                script += $"var element = document.getElementsByName('{name}')[{index}];";
+                script += $"element.innerText = '{text}';";
+                script += "return element.innerText;";
+                script += "}());";
+                string result = await ExecuteJavaScriptAsync(script);
+                if (result == "null" || result == null)
+                {
+                    EditMessage(step, null, Tester.FAILED, $"Не удалось найти или ввести текста в элемент по Name: {name} (Index: {index})", Tester.IMAGE_STATUS_FAILED);
+                    TestStopAsync();
+                }
+                else
+                {
+                    EditMessage(step, null, PASSED, $"Текст '{result}' - введен в элемент", IMAGE_STATUS_PASSED);
+                }
+            }
+            catch (Exception ex)
+            {
+                EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
+                TestStopAsync();
+                ConsoleMsgError(ex.ToString());
+            }
+        }
+
+        public async Task SetTextInElementByTagAsync(string tag, int index, string text)
+        {
+            int step = SendMessage($"SetTextInElementByTagAsync('{tag}', {index}, '{text}')", PROCESS, "Ввод текста в элемент", IMAGE_STATUS_PROCESS);
+            if (DefineTestStop(step) == true) return;
+
+            try
+            {
+                string script = "(function(){";
+                script += $"var element = document.getElementsByTagName('{tag}')[{index}];";
+                script += $"element.innerText = '{text}';";
+                script += "return element.innerText;";
+                script += "}());";
+                string result = await ExecuteJavaScriptAsync(script);
+                if (result == "null" || result == null)
+                {
+                    EditMessage(step, null, Tester.FAILED, $"Не удалось найти или ввести текста в элемент по Tag: {tag} (Index: {index})", Tester.IMAGE_STATUS_FAILED);
+                    TestStopAsync();
+                }
+                else
+                {
+                    EditMessage(step, null, PASSED, $"Текст '{result}' - введен в элемент", IMAGE_STATUS_PASSED);
+                }
+            }
+            catch (Exception ex)
+            {
+                EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
+                TestStopAsync();
+                ConsoleMsgError(ex.ToString());
+            }
+        }
+
+        public async Task SetTextInElementByCssAsync(string locator, string text)
+        {
+            int step = SendMessage($"SetTextInElementByCssAsync('{locator}', '{text}')", PROCESS, "Ввод текста в элемент", IMAGE_STATUS_PROCESS);
+            if (DefineTestStop(step) == true) return;
+
+            try
+            {
+                string script = "(function(){";
+                script += $"var element = document.querySelector('{locator}');";
+                script += $"element.innerText = '{text}';";
+                script += "return element.innerText;";
+                script += "}());";
+                string result = await ExecuteJavaScriptAsync(script);
+                if (result == "null" || result == null)
+                {
+                    EditMessage(step, null, Tester.FAILED, $"Не удалось найти или ввести текст в элемент по локатору: {locator}", Tester.IMAGE_STATUS_FAILED);
+                    TestStopAsync();
+                }
+                else
+                {
+                    EditMessage(step, null, PASSED, $"Текст '{result}' - введен в элемент", IMAGE_STATUS_PASSED);
+                }
+            }
+            catch (Exception ex)
+            {
+                EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
+                TestStopAsync();
+                ConsoleMsgError(ex.ToString());
+            }
+        }
 
 
 

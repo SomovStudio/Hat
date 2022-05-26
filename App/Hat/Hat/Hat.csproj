@@ -89,6 +89,12 @@
     </Compile>
     <Compile Include="Config\Config.cs" />
     <Compile Include="Config\WorkOnFiles.cs" />
+    <Compile Include="Editor\CreateCmdForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Editor\CreateCmdForm.Designer.cs">
+      <DependentUpon>CreateCmdForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Editor\EditorForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -114,6 +120,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="BrowserForm.resx">
       <DependentUpon>BrowserForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editor\CreateCmdForm.resx">
+      <DependentUpon>CreateCmdForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Editor\EditorForm.resx">
       <DependentUpon>EditorForm.cs</DependentUpon>
