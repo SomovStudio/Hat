@@ -18,9 +18,38 @@ namespace Hat
             InitializeComponent();
         }
 
-        /*
-         * https://www.codeproject.com/Articles/42490/Using-AvalonEdit-WPF-Text-Editor
-         */
+        private string[] handbook = new string[] {
+@"Tester
+Описание: Конструктор класса
+Параметры: Form browserForm
+Пример: Tester tester tester = new Tester(browserWindow);",
+
+@"IMAGE_STATUS_PROCESS
+Описание: Индекс картинки которая обозначает статус в процессе.
+Значение константы: 0",
+
+@"IMAGE_STATUS_PASSED
+Описание: Индекс картинки которая обозначает статус успешно.
+Значение константы: 1",
+
+@"IMAGE_STATUS_FAILED
+Описание: Индекс картинки которая обозначает статус провально.
+Значение константы: 2",
+
+@"IMAGE_STATUS_MESSAGE
+Описание: Индекс картинки которая обозначает статус сообщение.
+Значение константы: 3",
+
+@"IMAGE_STATUS_MESSAGE
+Описание: Индекс картинки которая обозначает статус предупреждение.
+Значение константы: 4",
+
+@"",
+@"",
+@"",
+@"",
+@"",
+        };
 
         private void EditorForm_Load(object sender, EventArgs e)
         {
@@ -33,6 +62,7 @@ namespace Hat
                 textEditorControl1.Text = reader.readFile(Config.encoding, Config.selectValue);
                 toolStripStatusLabel2.Text = Config.encoding;
                 toolStripStatusLabel5.Text = Config.selectValue;
+                toolStripStatusLabel6.Text = "";
             }
             catch (Exception ex)
             {
@@ -42,11 +72,13 @@ namespace Hat
 
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
+            if (this.Text == "") return;
             try
             {
                 WorkOnFiles write = new WorkOnFiles();
                 write.writeFile(textEditorControl1.Text, toolStripStatusLabel2.Text, toolStripStatusLabel5.Text);
                 Config.browserForm.consoleMsg($"Файл {this.Text} - сохранён");
+                toolStripStatusLabel6.Text = "";
             }
             catch (Exception ex)
             {
@@ -77,7 +109,7 @@ namespace Hat
 
         private void toolStripButton3_Click(object sender, EventArgs e)
         {
-            Config.browserForm.PlayTest(this.Text);
+            if(this.Text != "") Config.browserForm.PlayTest(this.Text);
         }
 
         private void toolStripButton4_Click(object sender, EventArgs e)
@@ -108,32 +140,28 @@ namespace Hat
         {
             try
             {
+                richTextBox1.Text = "";
                 if (treeView1.SelectedNode != null)
                 {
-                    switch (treeView1.SelectedNode.Text)
-                    {
-                        case "Tester":
-                            richTextBox1.Text =
-@"
-Tester(Form browserForm)
-Описание: Конструктор класса
-Параметры: Form browserForm
-Пример: Tester tester tester = new Tester(browserWindow);
-";
-                            break;
-                        case "2":
+                    string value = treeView1.SelectedNode.Text;
+                    if (value == "Tester") richTextBox1.Text = handbook[0];
+                    if (value == "IMAGE_STATUS_PROCESS") richTextBox1.Text = handbook[1];
+                    if (value == "IMAGE_STATUS_PASSED") richTextBox1.Text = handbook[2];
+                    if (value == "IMAGE_STATUS_FAILED") richTextBox1.Text = handbook[3];
+                    if (value == "IMAGE_STATUS_MESSAGE") richTextBox1.Text = handbook[4];
+                    if (value == "IMAGE_STATUS_WARNING") richTextBox1.Text = handbook[5];
 
-                            break;
-                        case "3":
-
-                            break;
-                    }
                 }
             }
             catch (Exception ex)
             {
                 Config.browserForm.consoleMsgError(ex.ToString());
             }
+        }
+
+        private void textEditorControl1_TextChanged(object sender, EventArgs e)
+        {
+            toolStripStatusLabel6.Text = "(изменения не сохранены) |";
         }
     }
 }
