@@ -128,6 +128,7 @@
             this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel6 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
@@ -135,29 +136,31 @@
             this.toolStripStatusLabel5 = new System.Windows.Forms.ToolStripStatusLabel();
             this.textEditorControl1 = new ICSharpCode.TextEditor.TextEditorControl();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.treeView1 = new System.Windows.Forms.TreeView();
-            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.imageList2 = new System.Windows.Forms.ImageList(this.components);
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.panel5 = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.imageList2 = new System.Windows.Forms.ImageList(this.components);
-            this.toolStripStatusLabel6 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.вставитьВКодToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
+            this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
             this.panel5.SuspendLayout();
-            this.panel1.SuspendLayout();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // toolStrip1
@@ -234,6 +237,12 @@
             this.statusStrip1.TabIndex = 2;
             this.statusStrip1.Text = "statusStrip1";
             // 
+            // toolStripStatusLabel6
+            // 
+            this.toolStripStatusLabel6.Name = "toolStripStatusLabel6";
+            this.toolStripStatusLabel6.Size = new System.Drawing.Size(16, 17);
+            this.toolStripStatusLabel6.Text = "...";
+            // 
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
@@ -292,6 +301,16 @@
             this.splitContainer1.SplitterDistance = 561;
             this.splitContainer1.TabIndex = 4;
             // 
+            // panel1
+            // 
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.splitContainer2);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(0, 21);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(219, 393);
+            this.panel1.TabIndex = 5;
+            // 
             // splitContainer2
             // 
             this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -313,6 +332,7 @@
             // treeView1
             // 
             this.treeView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.treeView1.ContextMenuStrip = this.contextMenuStrip1;
             this.treeView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeView1.ImageIndex = 0;
             this.treeView1.ImageList = this.imageList2;
@@ -492,28 +512,15 @@
             this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
             this.treeView1.DoubleClick += new System.EventHandler(this.treeView1_DoubleClick);
             // 
-            // imageList1
+            // imageList2
             // 
-            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
-            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageList1.Images.SetKeyName(0, "folder.png");
-            this.imageList1.Images.SetKeyName(1, "folder_add.png");
-            this.imageList1.Images.SetKeyName(2, "folder_delete.png");
-            this.imageList1.Images.SetKeyName(3, "folder_edit.png");
-            this.imageList1.Images.SetKeyName(4, "folder_page.png");
-            this.imageList1.Images.SetKeyName(5, "folder_page_white.png");
-            this.imageList1.Images.SetKeyName(6, "page_white_horizontal.png");
-            this.imageList1.Images.SetKeyName(7, "page_white_csharp.png");
-            this.imageList1.Images.SetKeyName(8, "page_white_add.png");
-            this.imageList1.Images.SetKeyName(9, "page_white_delete.png");
-            this.imageList1.Images.SetKeyName(10, "page_white_edit.png");
-            this.imageList1.Images.SetKeyName(11, "page_white_gear.png");
-            this.imageList1.Images.SetKeyName(12, "page.png");
-            this.imageList1.Images.SetKeyName(13, "page_code.png");
-            this.imageList1.Images.SetKeyName(14, "page_add.png");
-            this.imageList1.Images.SetKeyName(15, "page_delete.png");
-            this.imageList1.Images.SetKeyName(16, "page_edit.png");
-            this.imageList1.Images.SetKeyName(17, "page_gear.png");
+            this.imageList2.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList2.ImageStream")));
+            this.imageList2.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageList2.Images.SetKeyName(0, "folder_black.png");
+            this.imageList2.Images.SetKeyName(1, "page_white.png");
+            this.imageList2.Images.SetKeyName(2, "page_white_text.png");
+            this.imageList2.Images.SetKeyName(3, "page_gear.png");
+            this.imageList2.Images.SetKeyName(4, "page_white_gear.png");
             // 
             // richTextBox1
             // 
@@ -526,10 +533,6 @@
             this.richTextBox1.Size = new System.Drawing.Size(217, 211);
             this.richTextBox1.TabIndex = 0;
             this.richTextBox1.Text = "";
-            // 
-            // saveFileDialog1
-            // 
-            this.saveFileDialog1.Filter = "*.cs|*.cs|*.*|*.*";
             // 
             // panel5
             // 
@@ -565,31 +568,46 @@
             this.label4.Text = "Справочник";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // panel1
+            // imageList1
             // 
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.splitContainer2);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(0, 21);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(219, 393);
-            this.panel1.TabIndex = 5;
+            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
+            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageList1.Images.SetKeyName(0, "folder.png");
+            this.imageList1.Images.SetKeyName(1, "folder_add.png");
+            this.imageList1.Images.SetKeyName(2, "folder_delete.png");
+            this.imageList1.Images.SetKeyName(3, "folder_edit.png");
+            this.imageList1.Images.SetKeyName(4, "folder_page.png");
+            this.imageList1.Images.SetKeyName(5, "folder_page_white.png");
+            this.imageList1.Images.SetKeyName(6, "page_white_horizontal.png");
+            this.imageList1.Images.SetKeyName(7, "page_white_csharp.png");
+            this.imageList1.Images.SetKeyName(8, "page_white_add.png");
+            this.imageList1.Images.SetKeyName(9, "page_white_delete.png");
+            this.imageList1.Images.SetKeyName(10, "page_white_edit.png");
+            this.imageList1.Images.SetKeyName(11, "page_white_gear.png");
+            this.imageList1.Images.SetKeyName(12, "page.png");
+            this.imageList1.Images.SetKeyName(13, "page_code.png");
+            this.imageList1.Images.SetKeyName(14, "page_add.png");
+            this.imageList1.Images.SetKeyName(15, "page_delete.png");
+            this.imageList1.Images.SetKeyName(16, "page_edit.png");
+            this.imageList1.Images.SetKeyName(17, "page_gear.png");
             // 
-            // imageList2
+            // saveFileDialog1
             // 
-            this.imageList2.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList2.ImageStream")));
-            this.imageList2.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageList2.Images.SetKeyName(0, "folder_black.png");
-            this.imageList2.Images.SetKeyName(1, "page_white.png");
-            this.imageList2.Images.SetKeyName(2, "page_white_text.png");
-            this.imageList2.Images.SetKeyName(3, "page_gear.png");
-            this.imageList2.Images.SetKeyName(4, "page_white_gear.png");
+            this.saveFileDialog1.Filter = "*.cs|*.cs|*.*|*.*";
             // 
-            // toolStripStatusLabel6
+            // contextMenuStrip1
             // 
-            this.toolStripStatusLabel6.Name = "toolStripStatusLabel6";
-            this.toolStripStatusLabel6.Size = new System.Drawing.Size(16, 17);
-            this.toolStripStatusLabel6.Text = "...";
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.вставитьВКодToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(181, 48);
+            // 
+            // вставитьВКодToolStripMenuItem
+            // 
+            this.вставитьВКодToolStripMenuItem.Name = "вставитьВКодToolStripMenuItem";
+            this.вставитьВКодToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.вставитьВКодToolStripMenuItem.Text = "Вставить в код";
+            this.вставитьВКодToolStripMenuItem.Click += new System.EventHandler(this.вставитьВКодToolStripMenuItem_Click);
             // 
             // EditorForm
             // 
@@ -610,12 +628,13 @@
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
             this.splitContainer2.Panel1.ResumeLayout(false);
             this.splitContainer2.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
             this.panel5.ResumeLayout(false);
-            this.panel1.ResumeLayout(false);
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -648,5 +667,7 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.ImageList imageList2;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel6;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem вставитьВКодToolStripMenuItem;
     }
 }

@@ -40,7 +40,7 @@ namespace Hat
 Описание: Индекс картинки которая обозначает статус сообщение.
 Значение константы: 3",
 
-@"IMAGE_STATUS_MESSAGE
+@"IMAGE_STATUS_WARNING
 Описание: Индекс картинки которая обозначает статус предупреждение.
 Значение константы: 4",
 
@@ -117,12 +117,22 @@ namespace Hat
             Config.browserForm.StopTest();
         }
 
-        private void treeView1_DoubleClick(object sender, EventArgs e)
+        private void setValueInCode()
         {
             try
             {
                 if (treeView1.SelectedNode != null)
                 {
+                    if (treeView1.SelectedNode.Text == "Класс: Tester") return;
+                    if (treeView1.SelectedNode.Text == "Конструктор") return;
+                    if (treeView1.SelectedNode.Text == "Константы") return;
+                    if (treeView1.SelectedNode.Text == "Переменные") return;
+                    if (treeView1.SelectedNode.Text == "Методы для работы с браузером") return;
+                    if (treeView1.SelectedNode.Text == "Методы для вывода сообщений") return;
+                    if (treeView1.SelectedNode.Text == "Методы для подготовки и завершению тестирования") return;
+                    if (treeView1.SelectedNode.Text == "Методы выполнения действий") return;
+                    if (treeView1.SelectedNode.Text == "Методы для проверки результата") return;
+
                     Clipboard.SetText(treeView1.SelectedNode.Text);
                     textEditorControl1.Focus();
                     SendKeys.Send("^{v}");
@@ -134,6 +144,16 @@ namespace Hat
             {
                 Config.browserForm.consoleMsgError(ex.ToString());
             }
+        }
+
+        private void treeView1_DoubleClick(object sender, EventArgs e)
+        {
+            setValueInCode();
+        }
+
+        private void вставитьВКодToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            setValueInCode();
         }
 
         private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
@@ -163,5 +183,7 @@ namespace Hat
         {
             toolStripStatusLabel6.Text = "(изменения не сохранены) |";
         }
+
+        
     }
 }
