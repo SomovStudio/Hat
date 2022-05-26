@@ -18,6 +18,7 @@ namespace Hat
         public static void play(string testFilename)
         {
             Config.browserForm.consoleMsg("Запускается тест из файла " + testFilename);
+            Config.browserForm.systemConsoleMsg("", default, default, default, true);
             Config.browserForm.systemConsoleMsg($"Запуск автотеста: {testFilename}", default, ConsoleColor.DarkCyan, ConsoleColor.White, true);
 
             try

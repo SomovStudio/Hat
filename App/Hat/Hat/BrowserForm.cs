@@ -25,6 +25,7 @@ namespace Hat
             toolStripStatusLabelFileEncoding.Text = Config.encoding;
             Config.browserForm = this;
             consoleMsg("Браузер Hat версия 1.0");
+            systemConsoleMsg("", default, default, default, true);
             systemConsoleMsg("Браузер Hat версия 1.0", default, ConsoleColor.DarkGray, ConsoleColor.White, true);
         }
 
@@ -63,7 +64,6 @@ namespace Hat
                     systemConsoleMsg($"Проект успешно открыт (версия проекта: {Config.version})", default, ConsoleColor.DarkGray, ConsoleColor.White, true);
                     consoleMsg($"Проект успешно открыт (версия проекта: {Config.version})");
                     toolStripStatusLabelProjectFolderFile.Text = Config.selectName;
-                    systemConsoleMsg($"Запуск автотеста: {Config.selectName}", default, ConsoleColor.DarkCyan, ConsoleColor.White, true);
                     PlayTest(Config.selectName);
                 }
 
@@ -1865,6 +1865,28 @@ namespace Hat
         private void toolStripButton17_Click(object sender, EventArgs e)
         {
             findText(toolStripComboBoxEvents, richTextBoxEvents);
+        }
+
+        private void toolStripButton21_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (Config.projectPath != "(не открыт)")
+                {
+                    CreateCmdForm createCmdForm = new CreateCmdForm();
+                    createCmdForm.textBox.Text = $"cd {Directory.GetCurrentDirectory()}" + Environment.NewLine;
+                    createCmdForm.textBox.Text += $"Hat.exe {toolStripStatusLabelProjectFolderFile.Text} {toolStripStatusLabelProjectPath.Text}";
+                    createCmdForm.ShowDialog();
+                }
+                else
+                {
+                    consoleMsg("Проект не открыт");
+                }
+            }
+            catch (Exception ex)
+            {
+                consoleMsgError(ex.ToString());
+            }
         }
     }
 }

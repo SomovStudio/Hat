@@ -99,6 +99,8 @@ SetTextInElementByCssAsync() - ввести текст в элемент
 
 
 
+
+
 AssertEqualsAsync() - проверка результата
 AssertNotEqualsAsync() - проверка результата
 AssertTrueAsync() - проверка результата
