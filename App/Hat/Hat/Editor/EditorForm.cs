@@ -136,7 +136,8 @@ namespace Hat
                     
                     Clipboard.SetText(treeView1.SelectedNode.Text);
                     textEditorControl1.Focus();
-                    SendKeys.Send("^{v}");
+                    SendKeys.Send("+{INSERT}");
+                    //SendKeys.Send("^{v}");
                     //SendKeys.Send("^v");
                     //SendKeys.Send("^(v)");
                 }
