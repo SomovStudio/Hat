@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ICSharpCode.TextEditor;
 
 namespace Hat
 {
@@ -86,7 +87,53 @@ namespace Hat
 
         private void treeView1_DoubleClick(object sender, EventArgs e)
         {
+            try
+            {
+                if (treeView1.SelectedNode != null)
+                {
+                    Clipboard.SetText(treeView1.SelectedNode.Text);
+                    textEditorControl1.Focus();
+                    SendKeys.Send("^{v}");
+                    //SendKeys.Send("^v");
+                    //SendKeys.Send("^(v)");
+                }
+            }
+            catch (Exception ex)
+            {
+                Config.browserForm.consoleMsgError(ex.ToString());
+            }
+        }
 
+        private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            try
+            {
+                if (treeView1.SelectedNode != null)
+                {
+                    switch (treeView1.SelectedNode.Text)
+                    {
+                        case "Tester":
+                            richTextBox1.Text =
+@"
+Tester(Form browserForm)
+Описание: Конструктор класса
+Параметры: Form browserForm
+Пример: Tester tester tester = new Tester(browserWindow);
+";
+                            break;
+                        case "2":
+
+                            break;
+                        case "3":
+
+                            break;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Config.browserForm.consoleMsgError(ex.ToString());
+            }
         }
     }
 }

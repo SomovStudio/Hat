@@ -30,89 +30,97 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EditorForm));
-            System.Windows.Forms.TreeNode treeNode43 = new System.Windows.Forms.TreeNode("IMAGE_STATUS_PROCESS", 12, 17);
-            System.Windows.Forms.TreeNode treeNode44 = new System.Windows.Forms.TreeNode("IMAGE_STATUS_PASSED", 12, 17);
-            System.Windows.Forms.TreeNode treeNode45 = new System.Windows.Forms.TreeNode("IMAGE_STATUS_FAILED", 12, 17);
-            System.Windows.Forms.TreeNode treeNode46 = new System.Windows.Forms.TreeNode("IMAGE_STATUS_MESSAGE", 12, 17);
-            System.Windows.Forms.TreeNode treeNode47 = new System.Windows.Forms.TreeNode("IMAGE_STATUS_WARNING", 12, 17);
-            System.Windows.Forms.TreeNode treeNode48 = new System.Windows.Forms.TreeNode("PASSED", 12, 17);
-            System.Windows.Forms.TreeNode treeNode49 = new System.Windows.Forms.TreeNode("FAILED", 12, 17);
-            System.Windows.Forms.TreeNode treeNode50 = new System.Windows.Forms.TreeNode("STOPPED", 12, 17);
-            System.Windows.Forms.TreeNode treeNode51 = new System.Windows.Forms.TreeNode("PROCESS", 12, 17);
-            System.Windows.Forms.TreeNode treeNode52 = new System.Windows.Forms.TreeNode("Константы", new System.Windows.Forms.TreeNode[] {
-            treeNode43,
-            treeNode44,
-            treeNode45,
-            treeNode46,
-            treeNode47,
-            treeNode48,
+            System.Windows.Forms.TreeNode treeNode47 = new System.Windows.Forms.TreeNode("Tester", 2, 2);
+            System.Windows.Forms.TreeNode treeNode48 = new System.Windows.Forms.TreeNode("Конструктор", new System.Windows.Forms.TreeNode[] {
+            treeNode47});
+            System.Windows.Forms.TreeNode treeNode49 = new System.Windows.Forms.TreeNode("IMAGE_STATUS_PROCESS", 4, 4);
+            System.Windows.Forms.TreeNode treeNode50 = new System.Windows.Forms.TreeNode("IMAGE_STATUS_PASSED", 4, 4);
+            System.Windows.Forms.TreeNode treeNode51 = new System.Windows.Forms.TreeNode("IMAGE_STATUS_FAILED", 4, 4);
+            System.Windows.Forms.TreeNode treeNode52 = new System.Windows.Forms.TreeNode("IMAGE_STATUS_MESSAGE", 4, 4);
+            System.Windows.Forms.TreeNode treeNode53 = new System.Windows.Forms.TreeNode("IMAGE_STATUS_WARNING", 4, 4);
+            System.Windows.Forms.TreeNode treeNode54 = new System.Windows.Forms.TreeNode("PASSED", 4, 4);
+            System.Windows.Forms.TreeNode treeNode55 = new System.Windows.Forms.TreeNode("FAILED", 4, 4);
+            System.Windows.Forms.TreeNode treeNode56 = new System.Windows.Forms.TreeNode("STOPPED", 4, 4);
+            System.Windows.Forms.TreeNode treeNode57 = new System.Windows.Forms.TreeNode("PROCESS", 4, 4);
+            System.Windows.Forms.TreeNode treeNode58 = new System.Windows.Forms.TreeNode("COMPLETED", 4, 4);
+            System.Windows.Forms.TreeNode treeNode59 = new System.Windows.Forms.TreeNode("WARNING", 4, 4);
+            System.Windows.Forms.TreeNode treeNode60 = new System.Windows.Forms.TreeNode("Константы", new System.Windows.Forms.TreeNode[] {
             treeNode49,
             treeNode50,
-            treeNode51});
-            System.Windows.Forms.TreeNode treeNode53 = new System.Windows.Forms.TreeNode("browserForm", 12, 17);
-            System.Windows.Forms.TreeNode treeNode54 = new System.Windows.Forms.TreeNode("browserView", 12, 17);
-            System.Windows.Forms.TreeNode treeNode55 = new System.Windows.Forms.TreeNode("browserContext", 12, 17);
-            System.Windows.Forms.TreeNode treeNode56 = new System.Windows.Forms.TreeNode("Переменные", new System.Windows.Forms.TreeNode[] {
+            treeNode51,
+            treeNode52,
             treeNode53,
             treeNode54,
-            treeNode55});
-            System.Windows.Forms.TreeNode treeNode57 = new System.Windows.Forms.TreeNode("browserClose", 6, 11);
-            System.Windows.Forms.TreeNode treeNode58 = new System.Windows.Forms.TreeNode("browserSize", 6, 11);
-            System.Windows.Forms.TreeNode treeNode59 = new System.Windows.Forms.TreeNode("browserSizeFullScreen", 6, 11);
-            System.Windows.Forms.TreeNode treeNode60 = new System.Windows.Forms.TreeNode("Методы для работы с браузером", new System.Windows.Forms.TreeNode[] {
+            treeNode55,
+            treeNode56,
             treeNode57,
             treeNode58,
             treeNode59});
-            System.Windows.Forms.TreeNode treeNode61 = new System.Windows.Forms.TreeNode("consoleMsg", 6, 11);
-            System.Windows.Forms.TreeNode treeNode62 = new System.Windows.Forms.TreeNode("sendMessage", 6, 11);
-            System.Windows.Forms.TreeNode treeNode63 = new System.Windows.Forms.TreeNode("editMessage", 6, 11);
-            System.Windows.Forms.TreeNode treeNode64 = new System.Windows.Forms.TreeNode("clearMessage", 6, 11);
-            System.Windows.Forms.TreeNode treeNode65 = new System.Windows.Forms.TreeNode("Методы для вывода сообщений", new System.Windows.Forms.TreeNode[] {
+            System.Windows.Forms.TreeNode treeNode61 = new System.Windows.Forms.TreeNode("browserForm", 12, 17);
+            System.Windows.Forms.TreeNode treeNode62 = new System.Windows.Forms.TreeNode("browserView", 12, 17);
+            System.Windows.Forms.TreeNode treeNode63 = new System.Windows.Forms.TreeNode("browserContext", 12, 17);
+            System.Windows.Forms.TreeNode treeNode64 = new System.Windows.Forms.TreeNode("Переменные", new System.Windows.Forms.TreeNode[] {
             treeNode61,
             treeNode62,
-            treeNode63,
-            treeNode64});
-            System.Windows.Forms.TreeNode treeNode66 = new System.Windows.Forms.TreeNode("testBegin", 6, 11);
-            System.Windows.Forms.TreeNode treeNode67 = new System.Windows.Forms.TreeNode("testEnd", 6, 11);
-            System.Windows.Forms.TreeNode treeNode68 = new System.Windows.Forms.TreeNode("Методы для подготовки и завершению тестирования", new System.Windows.Forms.TreeNode[] {
+            treeNode63});
+            System.Windows.Forms.TreeNode treeNode65 = new System.Windows.Forms.TreeNode("browserClose", 6, 11);
+            System.Windows.Forms.TreeNode treeNode66 = new System.Windows.Forms.TreeNode("browserSize", 6, 11);
+            System.Windows.Forms.TreeNode treeNode67 = new System.Windows.Forms.TreeNode("browserSizeFullScreen", 6, 11);
+            System.Windows.Forms.TreeNode treeNode68 = new System.Windows.Forms.TreeNode("Методы для работы с браузером", new System.Windows.Forms.TreeNode[] {
+            treeNode65,
             treeNode66,
             treeNode67});
-            System.Windows.Forms.TreeNode treeNode69 = new System.Windows.Forms.TreeNode("goToUrl", 6, 11);
-            System.Windows.Forms.TreeNode treeNode70 = new System.Windows.Forms.TreeNode("getURL", 6, 11);
-            System.Windows.Forms.TreeNode treeNode71 = new System.Windows.Forms.TreeNode("getHtmlElement", 6, 11);
-            System.Windows.Forms.TreeNode treeNode72 = new System.Windows.Forms.TreeNode("clickHtmlElement", 6, 11);
-            System.Windows.Forms.TreeNode treeNode73 = new System.Windows.Forms.TreeNode("setValueFromInput", 6, 11);
-            System.Windows.Forms.TreeNode treeNode74 = new System.Windows.Forms.TreeNode("getValueFromInput", 6, 11);
-            System.Windows.Forms.TreeNode treeNode75 = new System.Windows.Forms.TreeNode("getValueFromTextarea", 6, 11);
-            System.Windows.Forms.TreeNode treeNode76 = new System.Windows.Forms.TreeNode("getTextFromHtmlElement", 6, 11);
-            System.Windows.Forms.TreeNode treeNode77 = new System.Windows.Forms.TreeNode("wait", 6, 11);
-            System.Windows.Forms.TreeNode treeNode78 = new System.Windows.Forms.TreeNode("Методы выполнения действий", new System.Windows.Forms.TreeNode[] {
+            System.Windows.Forms.TreeNode treeNode69 = new System.Windows.Forms.TreeNode("consoleMsg", 6, 11);
+            System.Windows.Forms.TreeNode treeNode70 = new System.Windows.Forms.TreeNode("sendMessage", 6, 11);
+            System.Windows.Forms.TreeNode treeNode71 = new System.Windows.Forms.TreeNode("editMessage", 6, 11);
+            System.Windows.Forms.TreeNode treeNode72 = new System.Windows.Forms.TreeNode("clearMessage", 6, 11);
+            System.Windows.Forms.TreeNode treeNode73 = new System.Windows.Forms.TreeNode("Методы для вывода сообщений", new System.Windows.Forms.TreeNode[] {
             treeNode69,
             treeNode70,
             treeNode71,
-            treeNode72,
-            treeNode73,
+            treeNode72});
+            System.Windows.Forms.TreeNode treeNode74 = new System.Windows.Forms.TreeNode("testBegin", 6, 11);
+            System.Windows.Forms.TreeNode treeNode75 = new System.Windows.Forms.TreeNode("testEnd", 6, 11);
+            System.Windows.Forms.TreeNode treeNode76 = new System.Windows.Forms.TreeNode("Методы для подготовки и завершению тестирования", new System.Windows.Forms.TreeNode[] {
             treeNode74,
-            treeNode75,
-            treeNode76,
-            treeNode77});
-            System.Windows.Forms.TreeNode treeNode79 = new System.Windows.Forms.TreeNode("assertEquals", 6, 11);
-            System.Windows.Forms.TreeNode treeNode80 = new System.Windows.Forms.TreeNode("assertNotEquals", 6, 11);
-            System.Windows.Forms.TreeNode treeNode81 = new System.Windows.Forms.TreeNode("assertTrue", 6, 11);
-            System.Windows.Forms.TreeNode treeNode82 = new System.Windows.Forms.TreeNode("assertFalse", 6, 11);
-            System.Windows.Forms.TreeNode treeNode83 = new System.Windows.Forms.TreeNode("Методы для проверки результата", new System.Windows.Forms.TreeNode[] {
+            treeNode75});
+            System.Windows.Forms.TreeNode treeNode77 = new System.Windows.Forms.TreeNode("goToUrl", 6, 11);
+            System.Windows.Forms.TreeNode treeNode78 = new System.Windows.Forms.TreeNode("getURL", 6, 11);
+            System.Windows.Forms.TreeNode treeNode79 = new System.Windows.Forms.TreeNode("getHtmlElement", 6, 11);
+            System.Windows.Forms.TreeNode treeNode80 = new System.Windows.Forms.TreeNode("clickHtmlElement", 6, 11);
+            System.Windows.Forms.TreeNode treeNode81 = new System.Windows.Forms.TreeNode("setValueFromInput", 6, 11);
+            System.Windows.Forms.TreeNode treeNode82 = new System.Windows.Forms.TreeNode("getValueFromInput", 6, 11);
+            System.Windows.Forms.TreeNode treeNode83 = new System.Windows.Forms.TreeNode("getValueFromTextarea", 6, 11);
+            System.Windows.Forms.TreeNode treeNode84 = new System.Windows.Forms.TreeNode("getTextFromHtmlElement", 6, 11);
+            System.Windows.Forms.TreeNode treeNode85 = new System.Windows.Forms.TreeNode("wait", 6, 11);
+            System.Windows.Forms.TreeNode treeNode86 = new System.Windows.Forms.TreeNode("Методы выполнения действий", new System.Windows.Forms.TreeNode[] {
+            treeNode77,
+            treeNode78,
             treeNode79,
             treeNode80,
             treeNode81,
-            treeNode82});
-            System.Windows.Forms.TreeNode treeNode84 = new System.Windows.Forms.TreeNode("Класс: Tester", new System.Windows.Forms.TreeNode[] {
-            treeNode52,
-            treeNode56,
+            treeNode82,
+            treeNode83,
+            treeNode84,
+            treeNode85});
+            System.Windows.Forms.TreeNode treeNode87 = new System.Windows.Forms.TreeNode("assertEquals", 6, 11);
+            System.Windows.Forms.TreeNode treeNode88 = new System.Windows.Forms.TreeNode("assertNotEquals", 6, 11);
+            System.Windows.Forms.TreeNode treeNode89 = new System.Windows.Forms.TreeNode("assertTrue", 6, 11);
+            System.Windows.Forms.TreeNode treeNode90 = new System.Windows.Forms.TreeNode("assertFalse", 6, 11);
+            System.Windows.Forms.TreeNode treeNode91 = new System.Windows.Forms.TreeNode("Методы для проверки результата", new System.Windows.Forms.TreeNode[] {
+            treeNode87,
+            treeNode88,
+            treeNode89,
+            treeNode90});
+            System.Windows.Forms.TreeNode treeNode92 = new System.Windows.Forms.TreeNode("Класс: Tester", new System.Windows.Forms.TreeNode[] {
+            treeNode48,
             treeNode60,
-            treeNode65,
+            treeNode64,
             treeNode68,
-            treeNode78,
-            treeNode83});
+            treeNode73,
+            treeNode76,
+            treeNode86,
+            treeNode91});
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
@@ -132,6 +140,11 @@
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.imageList2 = new System.Windows.Forms.ImageList(this.components);
             this.toolStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -142,6 +155,8 @@
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
+            this.panel5.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // toolStrip1
@@ -253,7 +268,7 @@
             this.textEditorControl1.IsReadOnly = false;
             this.textEditorControl1.Location = new System.Drawing.Point(0, 0);
             this.textEditorControl1.Name = "textEditorControl1";
-            this.textEditorControl1.Size = new System.Drawing.Size(520, 414);
+            this.textEditorControl1.Size = new System.Drawing.Size(561, 414);
             this.textEditorControl1.TabIndex = 3;
             // 
             // splitContainer1
@@ -268,9 +283,10 @@
             // 
             // splitContainer1.Panel2
             // 
-            this.splitContainer1.Panel2.Controls.Add(this.splitContainer2);
+            this.splitContainer1.Panel2.Controls.Add(this.panel1);
+            this.splitContainer1.Panel2.Controls.Add(this.panel5);
             this.splitContainer1.Size = new System.Drawing.Size(784, 414);
-            this.splitContainer1.SplitterDistance = 520;
+            this.splitContainer1.SplitterDistance = 561;
             this.splitContainer1.TabIndex = 4;
             // 
             // splitContainer2
@@ -287,174 +303,190 @@
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.Controls.Add(this.richTextBox1);
-            this.splitContainer2.Size = new System.Drawing.Size(260, 414);
-            this.splitContainer2.SplitterDistance = 187;
+            this.splitContainer2.Size = new System.Drawing.Size(217, 391);
+            this.splitContainer2.SplitterDistance = 176;
             this.splitContainer2.TabIndex = 0;
             // 
             // treeView1
             // 
+            this.treeView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.treeView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeView1.ImageIndex = 0;
-            this.treeView1.ImageList = this.imageList1;
+            this.treeView1.ImageList = this.imageList2;
             this.treeView1.Location = new System.Drawing.Point(0, 0);
             this.treeView1.Name = "treeView1";
-            treeNode43.ImageIndex = 12;
-            treeNode43.Name = "Узел2";
-            treeNode43.SelectedImageIndex = 17;
-            treeNode43.Text = "IMAGE_STATUS_PROCESS";
-            treeNode44.ImageIndex = 12;
-            treeNode44.Name = "Узел3";
-            treeNode44.SelectedImageIndex = 17;
-            treeNode44.Text = "IMAGE_STATUS_PASSED";
-            treeNode45.ImageIndex = 12;
-            treeNode45.Name = "Узел4";
-            treeNode45.SelectedImageIndex = 17;
-            treeNode45.Text = "IMAGE_STATUS_FAILED";
-            treeNode46.ImageIndex = 12;
-            treeNode46.Name = "Узел5";
-            treeNode46.SelectedImageIndex = 17;
-            treeNode46.Text = "IMAGE_STATUS_MESSAGE";
-            treeNode47.ImageIndex = 12;
-            treeNode47.Name = "Узел6";
-            treeNode47.SelectedImageIndex = 17;
-            treeNode47.Text = "IMAGE_STATUS_WARNING";
-            treeNode48.ImageIndex = 12;
-            treeNode48.Name = "Узел7";
-            treeNode48.SelectedImageIndex = 17;
-            treeNode48.Text = "PASSED";
-            treeNode49.ImageIndex = 12;
-            treeNode49.Name = "Узел8";
-            treeNode49.SelectedImageIndex = 17;
-            treeNode49.Text = "FAILED";
-            treeNode50.ImageIndex = 12;
-            treeNode50.Name = "Узел9";
-            treeNode50.SelectedImageIndex = 17;
-            treeNode50.Text = "STOPPED";
-            treeNode51.ImageIndex = 12;
-            treeNode51.Name = "Узел10";
-            treeNode51.SelectedImageIndex = 17;
-            treeNode51.Text = "PROCESS";
-            treeNode52.Name = "Узел1";
-            treeNode52.Text = "Константы";
-            treeNode53.ImageIndex = 12;
-            treeNode53.Name = "Узел12";
-            treeNode53.SelectedImageIndex = 17;
-            treeNode53.Text = "browserForm";
-            treeNode54.ImageIndex = 12;
-            treeNode54.Name = "Узел13";
-            treeNode54.SelectedImageIndex = 17;
-            treeNode54.Text = "browserView";
-            treeNode55.ImageIndex = 12;
-            treeNode55.Name = "Узел14";
-            treeNode55.SelectedImageIndex = 17;
-            treeNode55.Text = "browserContext";
-            treeNode56.Name = "Узел11";
-            treeNode56.Text = "Переменные";
-            treeNode57.ImageIndex = 6;
-            treeNode57.Name = "Узел23";
-            treeNode57.SelectedImageIndex = 11;
-            treeNode57.Text = "browserClose";
-            treeNode58.ImageIndex = 6;
-            treeNode58.Name = "Узел24";
-            treeNode58.SelectedImageIndex = 11;
-            treeNode58.Text = "browserSize";
-            treeNode59.ImageIndex = 6;
-            treeNode59.Name = "Узел25";
-            treeNode59.SelectedImageIndex = 11;
-            treeNode59.Text = "browserSizeFullScreen";
-            treeNode60.Name = "Узел26";
-            treeNode60.Text = "Методы для работы с браузером";
-            treeNode61.ImageIndex = 6;
-            treeNode61.Name = "Узел16";
-            treeNode61.SelectedImageIndex = 11;
-            treeNode61.Text = "consoleMsg";
-            treeNode62.ImageIndex = 6;
-            treeNode62.Name = "Узел18";
-            treeNode62.SelectedImageIndex = 11;
-            treeNode62.Text = "sendMessage";
-            treeNode63.ImageIndex = 6;
-            treeNode63.Name = "Узел19";
-            treeNode63.SelectedImageIndex = 11;
-            treeNode63.Text = "editMessage";
-            treeNode64.ImageIndex = 6;
-            treeNode64.Name = "Узел17";
-            treeNode64.SelectedImageIndex = 11;
-            treeNode64.Text = "clearMessage";
-            treeNode65.Name = "Узел15";
-            treeNode65.Text = "Методы для вывода сообщений";
+            treeNode47.ImageIndex = 2;
+            treeNode47.Name = "Узел3";
+            treeNode47.SelectedImageIndex = 2;
+            treeNode47.Text = "Tester";
+            treeNode48.Name = "Узел2";
+            treeNode48.Text = "Конструктор";
+            treeNode49.ImageIndex = 4;
+            treeNode49.Name = "Узел2";
+            treeNode49.SelectedImageIndex = 4;
+            treeNode49.Text = "IMAGE_STATUS_PROCESS";
+            treeNode50.ImageIndex = 4;
+            treeNode50.Name = "Узел3";
+            treeNode50.SelectedImageIndex = 4;
+            treeNode50.Text = "IMAGE_STATUS_PASSED";
+            treeNode51.ImageIndex = 4;
+            treeNode51.Name = "Узел4";
+            treeNode51.SelectedImageIndex = 4;
+            treeNode51.Text = "IMAGE_STATUS_FAILED";
+            treeNode52.ImageIndex = 4;
+            treeNode52.Name = "Узел5";
+            treeNode52.SelectedImageIndex = 4;
+            treeNode52.Text = "IMAGE_STATUS_MESSAGE";
+            treeNode53.ImageIndex = 4;
+            treeNode53.Name = "Узел6";
+            treeNode53.SelectedImageIndex = 4;
+            treeNode53.Text = "IMAGE_STATUS_WARNING";
+            treeNode54.ImageIndex = 4;
+            treeNode54.Name = "Узел7";
+            treeNode54.SelectedImageIndex = 4;
+            treeNode54.Text = "PASSED";
+            treeNode55.ImageIndex = 4;
+            treeNode55.Name = "Узел8";
+            treeNode55.SelectedImageIndex = 4;
+            treeNode55.Text = "FAILED";
+            treeNode56.ImageIndex = 4;
+            treeNode56.Name = "Узел9";
+            treeNode56.SelectedImageIndex = 4;
+            treeNode56.Text = "STOPPED";
+            treeNode57.ImageIndex = 4;
+            treeNode57.Name = "Узел10";
+            treeNode57.SelectedImageIndex = 4;
+            treeNode57.Text = "PROCESS";
+            treeNode58.ImageIndex = 4;
+            treeNode58.Name = "Узел0";
+            treeNode58.SelectedImageIndex = 4;
+            treeNode58.Text = "COMPLETED";
+            treeNode59.ImageIndex = 4;
+            treeNode59.Name = "Узел1";
+            treeNode59.SelectedImageIndex = 4;
+            treeNode59.Text = "WARNING";
+            treeNode60.Name = "Узел1";
+            treeNode60.Text = "Константы";
+            treeNode61.ImageIndex = 12;
+            treeNode61.Name = "Узел12";
+            treeNode61.SelectedImageIndex = 17;
+            treeNode61.Text = "browserForm";
+            treeNode62.ImageIndex = 12;
+            treeNode62.Name = "Узел13";
+            treeNode62.SelectedImageIndex = 17;
+            treeNode62.Text = "browserView";
+            treeNode63.ImageIndex = 12;
+            treeNode63.Name = "Узел14";
+            treeNode63.SelectedImageIndex = 17;
+            treeNode63.Text = "browserContext";
+            treeNode64.Name = "Узел11";
+            treeNode64.Text = "Переменные";
+            treeNode65.ImageIndex = 6;
+            treeNode65.Name = "Узел23";
+            treeNode65.SelectedImageIndex = 11;
+            treeNode65.Text = "browserClose";
             treeNode66.ImageIndex = 6;
-            treeNode66.Name = "Узел21";
+            treeNode66.Name = "Узел24";
             treeNode66.SelectedImageIndex = 11;
-            treeNode66.Text = "testBegin";
+            treeNode66.Text = "browserSize";
             treeNode67.ImageIndex = 6;
-            treeNode67.Name = "Узел22";
+            treeNode67.Name = "Узел25";
             treeNode67.SelectedImageIndex = 11;
-            treeNode67.Text = "testEnd";
-            treeNode68.Name = "Узел20";
-            treeNode68.Text = "Методы для подготовки и завершению тестирования";
+            treeNode67.Text = "browserSizeFullScreen";
+            treeNode68.Name = "Узел26";
+            treeNode68.Text = "Методы для работы с браузером";
             treeNode69.ImageIndex = 6;
-            treeNode69.Name = "Узел28";
+            treeNode69.Name = "Узел16";
             treeNode69.SelectedImageIndex = 11;
-            treeNode69.Text = "goToUrl";
+            treeNode69.Text = "consoleMsg";
             treeNode70.ImageIndex = 6;
-            treeNode70.Name = "Узел29";
+            treeNode70.Name = "Узел18";
             treeNode70.SelectedImageIndex = 11;
-            treeNode70.Text = "getURL";
+            treeNode70.Text = "sendMessage";
             treeNode71.ImageIndex = 6;
-            treeNode71.Name = "Узел30";
+            treeNode71.Name = "Узел19";
             treeNode71.SelectedImageIndex = 11;
-            treeNode71.Text = "getHtmlElement";
+            treeNode71.Text = "editMessage";
             treeNode72.ImageIndex = 6;
-            treeNode72.Name = "Узел31";
+            treeNode72.Name = "Узел17";
             treeNode72.SelectedImageIndex = 11;
-            treeNode72.Text = "clickHtmlElement";
-            treeNode73.ImageIndex = 6;
-            treeNode73.Name = "Узел32";
-            treeNode73.SelectedImageIndex = 11;
-            treeNode73.Text = "setValueFromInput";
+            treeNode72.Text = "clearMessage";
+            treeNode73.Name = "Узел15";
+            treeNode73.Text = "Методы для вывода сообщений";
             treeNode74.ImageIndex = 6;
-            treeNode74.Name = "Узел33";
+            treeNode74.Name = "Узел21";
             treeNode74.SelectedImageIndex = 11;
-            treeNode74.Text = "getValueFromInput";
+            treeNode74.Text = "testBegin";
             treeNode75.ImageIndex = 6;
-            treeNode75.Name = "Узел34";
+            treeNode75.Name = "Узел22";
             treeNode75.SelectedImageIndex = 11;
-            treeNode75.Text = "getValueFromTextarea";
-            treeNode76.ImageIndex = 6;
-            treeNode76.Name = "Узел35";
-            treeNode76.SelectedImageIndex = 11;
-            treeNode76.Text = "getTextFromHtmlElement";
+            treeNode75.Text = "testEnd";
+            treeNode76.Name = "Узел20";
+            treeNode76.Text = "Методы для подготовки и завершению тестирования";
             treeNode77.ImageIndex = 6;
-            treeNode77.Name = "Узел36";
+            treeNode77.Name = "Узел28";
             treeNode77.SelectedImageIndex = 11;
-            treeNode77.Text = "wait";
-            treeNode78.Name = "Узел27";
-            treeNode78.Text = "Методы выполнения действий";
+            treeNode77.Text = "goToUrl";
+            treeNode78.ImageIndex = 6;
+            treeNode78.Name = "Узел29";
+            treeNode78.SelectedImageIndex = 11;
+            treeNode78.Text = "getURL";
             treeNode79.ImageIndex = 6;
-            treeNode79.Name = "Узел38";
+            treeNode79.Name = "Узел30";
             treeNode79.SelectedImageIndex = 11;
-            treeNode79.Text = "assertEquals";
+            treeNode79.Text = "getHtmlElement";
             treeNode80.ImageIndex = 6;
-            treeNode80.Name = "Узел39";
+            treeNode80.Name = "Узел31";
             treeNode80.SelectedImageIndex = 11;
-            treeNode80.Text = "assertNotEquals";
+            treeNode80.Text = "clickHtmlElement";
             treeNode81.ImageIndex = 6;
-            treeNode81.Name = "Узел40";
+            treeNode81.Name = "Узел32";
             treeNode81.SelectedImageIndex = 11;
-            treeNode81.Text = "assertTrue";
+            treeNode81.Text = "setValueFromInput";
             treeNode82.ImageIndex = 6;
-            treeNode82.Name = "Узел41";
+            treeNode82.Name = "Узел33";
             treeNode82.SelectedImageIndex = 11;
-            treeNode82.Text = "assertFalse";
-            treeNode83.Name = "Узел37";
-            treeNode83.Text = "Методы для проверки результата";
-            treeNode84.Name = "Узел0";
-            treeNode84.Text = "Класс: Tester";
+            treeNode82.Text = "getValueFromInput";
+            treeNode83.ImageIndex = 6;
+            treeNode83.Name = "Узел34";
+            treeNode83.SelectedImageIndex = 11;
+            treeNode83.Text = "getValueFromTextarea";
+            treeNode84.ImageIndex = 6;
+            treeNode84.Name = "Узел35";
+            treeNode84.SelectedImageIndex = 11;
+            treeNode84.Text = "getTextFromHtmlElement";
+            treeNode85.ImageIndex = 6;
+            treeNode85.Name = "Узел36";
+            treeNode85.SelectedImageIndex = 11;
+            treeNode85.Text = "wait";
+            treeNode86.Name = "Узел27";
+            treeNode86.Text = "Методы выполнения действий";
+            treeNode87.ImageIndex = 6;
+            treeNode87.Name = "Узел38";
+            treeNode87.SelectedImageIndex = 11;
+            treeNode87.Text = "assertEquals";
+            treeNode88.ImageIndex = 6;
+            treeNode88.Name = "Узел39";
+            treeNode88.SelectedImageIndex = 11;
+            treeNode88.Text = "assertNotEquals";
+            treeNode89.ImageIndex = 6;
+            treeNode89.Name = "Узел40";
+            treeNode89.SelectedImageIndex = 11;
+            treeNode89.Text = "assertTrue";
+            treeNode90.ImageIndex = 6;
+            treeNode90.Name = "Узел41";
+            treeNode90.SelectedImageIndex = 11;
+            treeNode90.Text = "assertFalse";
+            treeNode91.Name = "Узел37";
+            treeNode91.Text = "Методы для проверки результата";
+            treeNode92.Name = "Узел0";
+            treeNode92.Text = "Класс: Tester";
             this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode84});
+            treeNode92});
             this.treeView1.SelectedImageIndex = 0;
-            this.treeView1.Size = new System.Drawing.Size(260, 187);
+            this.treeView1.Size = new System.Drawing.Size(217, 176);
             this.treeView1.TabIndex = 0;
+            this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
             this.treeView1.DoubleClick += new System.EventHandler(this.treeView1_DoubleClick);
             // 
             // imageList1
@@ -482,16 +514,73 @@
             // 
             // richTextBox1
             // 
+            this.richTextBox1.BackColor = System.Drawing.Color.White;
+            this.richTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.richTextBox1.Location = new System.Drawing.Point(0, 0);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(260, 223);
+            this.richTextBox1.ReadOnly = true;
+            this.richTextBox1.Size = new System.Drawing.Size(217, 211);
             this.richTextBox1.TabIndex = 0;
             this.richTextBox1.Text = "";
             // 
             // saveFileDialog1
             // 
             this.saveFileDialog1.Filter = "*.cs|*.cs|*.*|*.*";
+            // 
+            // panel5
+            // 
+            this.panel5.Controls.Add(this.label3);
+            this.panel5.Controls.Add(this.label4);
+            this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel5.Location = new System.Drawing.Point(0, 0);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(219, 21);
+            this.panel5.TabIndex = 4;
+            // 
+            // label3
+            // 
+            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.label3.Location = new System.Drawing.Point(0, 19);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(220, 2);
+            this.label3.TabIndex = 2;
+            this.label3.Text = "label7";
+            // 
+            // label4
+            // 
+            this.label4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label4.ForeColor = System.Drawing.Color.White;
+            this.label4.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.label4.Location = new System.Drawing.Point(0, 0);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(150, 20);
+            this.label4.TabIndex = 1;
+            this.label4.Text = "Справочник";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // panel1
+            // 
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.splitContainer2);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(0, 21);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(219, 393);
+            this.panel1.TabIndex = 5;
+            // 
+            // imageList2
+            // 
+            this.imageList2.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList2.ImageStream")));
+            this.imageList2.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageList2.Images.SetKeyName(0, "folder_black.png");
+            this.imageList2.Images.SetKeyName(1, "page_white.png");
+            this.imageList2.Images.SetKeyName(2, "page_white_text.png");
+            this.imageList2.Images.SetKeyName(3, "page_gear.png");
+            this.imageList2.Images.SetKeyName(4, "page_white_gear.png");
             // 
             // EditorForm
             // 
@@ -517,6 +606,8 @@
             this.splitContainer2.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
+            this.panel5.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -543,5 +634,10 @@
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel5;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.ImageList imageList1;
+        private System.Windows.Forms.Panel panel5;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.ImageList imageList2;
     }
 }
