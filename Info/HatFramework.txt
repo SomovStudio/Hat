@@ -33,7 +33,7 @@ EditMessage() - изменить сообщение в таблице теста
 TestBeginAsync() - подготовка теста
 TestEndAsync() - завершение теста
 TestStopAsync() - остановка теста
-CheckTestStop() - проверка остановки теста
+DefineTestStop() - проверка остановки теста
 BrowserCloseAsync() - закрыть окно браузера
 BrowserSizeAsync() - установить размер браузера
 BrowserFullScreenAsync() - установить размер браузера на весь экран

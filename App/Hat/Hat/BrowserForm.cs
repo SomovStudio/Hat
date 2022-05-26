@@ -108,14 +108,8 @@ namespace Hat
             try
             {
                 await webView2.EnsureCoreWebView2Async();
-                if (webView2.CoreWebView2 != null)
-                {
-
-                }
                 await webView2.CoreWebView2.CallDevToolsProtocolMethodAsync("Network.clearBrowserCache", "{}");
                 await webView2.CoreWebView2.CallDevToolsProtocolMethodAsync("Network.setCacheDisabled", @"{""cacheDisabled"":true}");
-                
-
             }
             catch (Exception ex)
             {
@@ -1699,10 +1693,12 @@ namespace Hat
 
         private void toolStripButton13_Click(object sender, EventArgs e)
         {
-            //Autotests.devTestStutsAsync();
+            Autotests.devTestStutsAsync();
+            /*
             EditorForm editorForm = new EditorForm();
             editorForm.TopMost = Config.editorTopMost;
             editorForm.Show();
+            */
         }
 
         private void toolStripButton18_Click(object sender, EventArgs e)

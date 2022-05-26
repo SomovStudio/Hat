@@ -23,7 +23,7 @@ namespace HatFrameworkDev
         public async Task ClickAsync()
         {
             int step = tester.SendMessage("ClickAsync()", Tester.PROCESS, $"Нажатие на элемент {Locator}", Tester.IMAGE_STATUS_PROCESS);
-            if (tester.CheckTestStop(step) == true) return;
+            if (tester.DefineTestStop(step) == true) return;
 
             try
             {
