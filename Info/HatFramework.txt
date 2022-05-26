@@ -52,6 +52,12 @@ WaitVisibleElementByNameAsync() - ждать появления элемента
 WaitVisibleElementByTagAsync() - ждать появления элемента в секундах
 WaitVisibleElementByCssAsync() - ждать появления элемента в секундах
 
+WaitNotVisibleElementByIdAsync() - ждать скрытия элемента в секундах
+WaitNotVisibleElementByClassAsync() - ждать скрытия элемента в секундах
+WaitNotVisibleElementByNameAsync() - ждать скрытия элемента в секундах
+WaitNotVisibleElementByTagAsync() - ждать скрытия элемента в секундах
+WaitNotVisibleElementByCssAsync() - ждать скрытия элемента в секундах
+
 FindElementByIdAsync() - найти элемент с ожиданием в секундах
 FindElementByClassAsync() - найти элемент в DOM с ожиданием в секундах
 FindElementByNameAsync() - найти элемент в DOM с ожиданием в секундах

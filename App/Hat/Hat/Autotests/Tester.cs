@@ -636,6 +636,151 @@ namespace HatFrameworkDev
             }
         }
 
+        public async Task WaitNotVisibleElementByIdAsync(string id, int sec)
+        {
+            int step = SendMessage($"WaitNotVisibleElementByIdAsync({id}, {sec.ToString()})", PROCESS, $"Ожидание скрытия элемента {sec.ToString()} секунд", IMAGE_STATUS_PROCESS);
+            if (DefineTestStop(step) == true) return;
+            try
+            {
+                bool found = true;
+                for (int i = 0; i < sec; i++)
+                {
+                    found = await defineVisibleElementAsync(BY_ID, id);
+                    if (found == false) break;
+                    await Task.Delay(1000);
+                }
+
+                if (found == false) EditMessage(step, null, PASSED, $"Ожидание скрытия элемента - завершено (элемент не отображается)", IMAGE_STATUS_PASSED);
+                else
+                {
+                    EditMessage(step, null, FAILED, $"Ожидание скрытия элемента - завершено (элемент отображается)", IMAGE_STATUS_FAILED);
+                    TestStopAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
+                TestStopAsync();
+                ConsoleMsgError(ex.ToString());
+            }
+        }
+
+        public async Task WaitNotVisibleElementByClassAsync(string _class, int index, int sec)
+        {
+            int step = SendMessage($"WaitNotVisibleElementByClassAsync({_class}, {index}, {sec.ToString()})", PROCESS, $"Ожидание скрытия элемента {sec.ToString()} секунд", IMAGE_STATUS_PROCESS);
+            if (DefineTestStop(step) == true) return;
+            try
+            {
+                bool found = true;
+                for (int i = 0; i < sec; i++)
+                {
+                    found = await defineVisibleElementAsync(BY_CLASS, _class, index);
+                    if (found == false) break;
+                    await Task.Delay(1000);
+                }
+
+                if (found == false) EditMessage(step, null, PASSED, $"Ожидание скрытия элемента - завершено (элемент не отображается)", IMAGE_STATUS_PASSED);
+                else
+                {
+                    EditMessage(step, null, FAILED, $"Ожидание скрытия элемента - завершено (элемент отображается)", IMAGE_STATUS_FAILED);
+                    TestStopAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
+                TestStopAsync();
+                ConsoleMsgError(ex.ToString());
+            }
+        }
+
+        public async Task WaitNotVisibleElementByNameAsync(string name, int index, int sec)
+        {
+            int step = SendMessage($"WaitNotVisibleElementByNameAsync({name}, {index}, {sec.ToString()})", PROCESS, $"Ожидание скрытия элемента {sec.ToString()} секунд", IMAGE_STATUS_PROCESS);
+            if (DefineTestStop(step) == true) return;
+            try
+            {
+                bool found = true;
+                for (int i = 0; i < sec; i++)
+                {
+                    found = await defineVisibleElementAsync(BY_NAME, name, index);
+                    if (found == false) break;
+                    await Task.Delay(1000);
+                }
+
+                if (found == false) EditMessage(step, null, PASSED, $"Ожидание скрытия элемента - завершено (элемент не отображается)", IMAGE_STATUS_PASSED);
+                else
+                {
+                    EditMessage(step, null, FAILED, $"Ожидание скрытия элемента - завершено (элемент отображается)", IMAGE_STATUS_FAILED);
+                    TestStopAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
+                TestStopAsync();
+                ConsoleMsgError(ex.ToString());
+            }
+        }
+
+        public async Task WaitNotVisibleElementByTagAsync(string tag, int index, int sec)
+        {
+            int step = SendMessage($"WaitNotVisibleElementByTagAsync({tag}, {index}, {sec.ToString()})", PROCESS, $"Ожидание скрытия элемента {sec.ToString()} секунд", IMAGE_STATUS_PROCESS);
+            if (DefineTestStop(step) == true) return;
+            try
+            {
+                bool found = true;
+                for (int i = 0; i < sec; i++)
+                {
+                    found = await defineVisibleElementAsync(BY_TAG, tag, index);
+                    if (found == false) break;
+                    await Task.Delay(1000);
+                }
+
+                if (found == false) EditMessage(step, null, PASSED, $"Ожидание скрытия элемента - завершено (элемент не отображается)", IMAGE_STATUS_PASSED);
+                else
+                {
+                    EditMessage(step, null, FAILED, $"Ожидание скрытия элемента - завершено (элемент отображается)", IMAGE_STATUS_FAILED);
+                    TestStopAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
+                TestStopAsync();
+                ConsoleMsgError(ex.ToString());
+            }
+        }
+
+        public async Task WaitNotVisibleElementByCssAsync(string locator, int sec)
+        {
+            int step = SendMessage($"WaitNotVisibleElementByCssAsync({locator}, {sec.ToString()})", PROCESS, $"Ожидание скрытия элемента {sec.ToString()} секунд", IMAGE_STATUS_PROCESS);
+            if (DefineTestStop(step) == true) return;
+            try
+            {
+                bool found = true;
+                for (int i = 0; i < sec; i++)
+                {
+                    found = await defineVisibleElementAsync(BY_CSS, locator);
+                    if (found == false) break;
+                    await Task.Delay(1000);
+                }
+
+                if (found == false) EditMessage(step, null, PASSED, $"Ожидание скрытия элемента - завершено (элемент не отображается)", IMAGE_STATUS_PASSED);
+                else
+                {
+                    EditMessage(step, null, FAILED, $"Ожидание скрытия элемента - завершено (элемент отображается)", IMAGE_STATUS_FAILED);
+                    TestStopAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
+                TestStopAsync();
+                ConsoleMsgError(ex.ToString());
+            }
+        }
+
 
 
 

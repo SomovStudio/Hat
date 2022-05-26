@@ -81,6 +81,7 @@ namespace Hat
             await tester.TestBeginAsync();
             await tester.GoToUrlAsync("https://somovstudio.github.io/test.html", 5);
             await tester.FindVisibleElementByIdAsync("result", 5);
+            await tester.WaitNotVisibleElementByIdAsync("result", 5);
             await tester.SetValueInElementByIdAsync("login", "admin");
             await tester.WaitAsync(2);
             await tester.SetValueInElementByIdAsync("pass", "0000");
