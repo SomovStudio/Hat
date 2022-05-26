@@ -1256,7 +1256,7 @@ namespace HatFrameworkDev
                 script += "element.dispatchEvent(new KeyboardEvent('keyup', { bubbles: true }));";
                 script += "element.dispatchEvent(new Event('input', { bubbles: true }));";
                 script += "element.dispatchEvent(new Event('change', { bubbles: true }));";
-                script += "return element.value";
+                script += "return element.value;";
                 script += "}());";
                 string result = await ExecuteJavaScriptAsync(script);
                 if (result == "null" || result == null)
@@ -1292,7 +1292,7 @@ namespace HatFrameworkDev
                 script += "element.dispatchEvent(new KeyboardEvent('keyup', { bubbles: true }));";
                 script += "element.dispatchEvent(new Event('input', { bubbles: true }));";
                 script += "element.dispatchEvent(new Event('change', { bubbles: true }));";
-                script += "return element.value";
+                script += "return element.value;";
                 script += "}());";
                 string result = await ExecuteJavaScriptAsync(script);
                 if (result == "null" || result == null)
@@ -1328,7 +1328,7 @@ namespace HatFrameworkDev
                 script += "element.dispatchEvent(new KeyboardEvent('keyup', { bubbles: true }));";
                 script += "element.dispatchEvent(new Event('input', { bubbles: true }));";
                 script += "element.dispatchEvent(new Event('change', { bubbles: true }));";
-                script += "return element.value";
+                script += "return element.value;";
                 script += "}());";
                 string result = await ExecuteJavaScriptAsync(script);
                 if (result == "null" || result == null)
@@ -1364,7 +1364,7 @@ namespace HatFrameworkDev
                 script += "element.dispatchEvent(new KeyboardEvent('keyup', { bubbles: true }));";
                 script += "element.dispatchEvent(new Event('input', { bubbles: true }));";
                 script += "element.dispatchEvent(new Event('change', { bubbles: true }));";
-                script += "return element.value";
+                script += "return element.value;";
                 script += "}());";
                 string result = await ExecuteJavaScriptAsync(script);
                 if (result == "null" || result == null)
@@ -1400,7 +1400,7 @@ namespace HatFrameworkDev
                 script += "element.dispatchEvent(new KeyboardEvent('keyup', { bubbles: true }));";
                 script += "element.dispatchEvent(new Event('input', { bubbles: true }));";
                 script += "element.dispatchEvent(new Event('change', { bubbles: true }));";
-                script += "return element.value";
+                script += "return element.value;";
                 script += "}());";
 
                 string result = await ExecuteJavaScriptAsync(script);
@@ -1572,9 +1572,160 @@ namespace HatFrameworkDev
             return value;
         }
 
+        public async Task SetTextInElementByIdAsync(string id, string text)
+        {
+            int step = SendMessage($"SetTextInElementByIdAsync({id}, {text})", PROCESS, "Ввод текста в элемент", IMAGE_STATUS_PROCESS);
+            if (DefineTestStop(step) == true) return;
 
+            try
+            {
+                string script = "(function(){";
+                script += $"var element = document.getElementById('{id}');";
+                script += $"element.innerText = '{text}';";
+                script += "return element.innerText;";
+                script += "}());";
+                string result = await ExecuteJavaScriptAsync(script);
+                if (result == "null" || result == null)
+                {
+                    EditMessage(step, null, Tester.FAILED, $"Не удалось найти или ввести текст в элемент с ID: {id}", Tester.IMAGE_STATUS_FAILED);
+                    TestStopAsync();
+                }
+                else
+                {
+                    EditMessage(step, null, PASSED, $"Текст '{result}' - введен в элемент", IMAGE_STATUS_PASSED);
+                }
+            }
+            catch (Exception ex)
+            {
+                EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
+                TestStopAsync();
+                ConsoleMsgError(ex.ToString());
+            }
+        }
 
+        public async Task SetTextInElementByClassAsync(string _class, int index, string text)
+        {
+            int step = SendMessage($"SetTextInElementByClassAsync({_class}, {index}, {text})", PROCESS, "Ввод текста в элемент", IMAGE_STATUS_PROCESS);
+            if (DefineTestStop(step) == true) return;
 
+            try
+            {
+                string script = "(function(){";
+                script += $"var element = document.getElementsByClassName('{_class}')[{index}];";
+                script += $"element.innerText = '{text}';";
+                script += "return element.innerText;";
+                script += "}());";
+                string result = await ExecuteJavaScriptAsync(script);
+                if (result == "null" || result == null)
+                {
+                    EditMessage(step, null, Tester.FAILED, $"Не удалось найти или ввести текста в элемент по Class: {_class} (Index: {index})", Tester.IMAGE_STATUS_FAILED);
+                    TestStopAsync();
+                }
+                else
+                {
+                    EditMessage(step, null, PASSED, $"Текст '{result}' - введен в элемент", IMAGE_STATUS_PASSED);
+                }
+            }
+            catch (Exception ex)
+            {
+                EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
+                TestStopAsync();
+                ConsoleMsgError(ex.ToString());
+            }
+        }
+
+        public async Task SetTextInElementByNameAsync(string name, int index, string text)
+        {
+            int step = SendMessage($"SetTextInElementByNameAsync({name}, {index}, {text})", PROCESS, "Ввод текста в элемент", IMAGE_STATUS_PROCESS);
+            if (DefineTestStop(step) == true) return;
+
+            try
+            {
+                string script = "(function(){";
+                script += $"var element = document.getElementsByName('{name}')[{index}];";
+                script += $"element.innerText = '{text}';";
+                script += "return element.innerText;";
+                script += "}());";
+                string result = await ExecuteJavaScriptAsync(script);
+                if (result == "null" || result == null)
+                {
+                    EditMessage(step, null, Tester.FAILED, $"Не удалось найти или ввести текста в элемент по Name: {name} (Index: {index})", Tester.IMAGE_STATUS_FAILED);
+                    TestStopAsync();
+                }
+                else
+                {
+                    EditMessage(step, null, PASSED, $"Текст '{result}' - введен в элемент", IMAGE_STATUS_PASSED);
+                }
+            }
+            catch (Exception ex)
+            {
+                EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
+                TestStopAsync();
+                ConsoleMsgError(ex.ToString());
+            }
+        }
+
+        public async Task SetTextInElementByTagAsync(string tag, int index, string text)
+        {
+            int step = SendMessage($"SetTextInElementByTagAsync({tag}, {index}, {text})", PROCESS, "Ввод текста в элемент", IMAGE_STATUS_PROCESS);
+            if (DefineTestStop(step) == true) return;
+
+            try
+            {
+                string script = "(function(){";
+                script += $"var element = document.getElementsByTagName('{tag}')[{index}];";
+                script += $"element.innerText = '{text}';";
+                script += "return element.innerText;";
+                script += "}());";
+                string result = await ExecuteJavaScriptAsync(script);
+                if (result == "null" || result == null)
+                {
+                    EditMessage(step, null, Tester.FAILED, $"Не удалось найти или ввести текста в элемент по Tag: {tag} (Index: {index})", Tester.IMAGE_STATUS_FAILED);
+                    TestStopAsync();
+                }
+                else
+                {
+                    EditMessage(step, null, PASSED, $"Текст '{result}' - введен в элемент", IMAGE_STATUS_PASSED);
+                }
+            }
+            catch (Exception ex)
+            {
+                EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
+                TestStopAsync();
+                ConsoleMsgError(ex.ToString());
+            }
+        }
+
+        public async Task SetTextInElementByCssAsync(string locator, string text)
+        {
+            int step = SendMessage($"SetTextInElementByCssAsync('{locator}', '{text}')", PROCESS, "Ввод текста в элемент", IMAGE_STATUS_PROCESS);
+            if (DefineTestStop(step) == true) return;
+
+            try
+            {
+                string script = "(function(){";
+                script += $"var element = document.querySelector('{locator}');";
+                script += $"element.innerText = '{text}';";
+                script += "return element.innerText;";
+                script += "}());";
+                string result = await ExecuteJavaScriptAsync(script);
+                if (result == "null" || result == null)
+                {
+                    EditMessage(step, null, Tester.FAILED, $"Не удалось найти или ввести текст в элемент по локатору: {locator}", Tester.IMAGE_STATUS_FAILED);
+                    TestStopAsync();
+                }
+                else
+                {
+                    EditMessage(step, null, PASSED, $"Текст '{result}' - введен в элемент", IMAGE_STATUS_PASSED);
+                }
+            }
+            catch (Exception ex)
+            {
+                EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
+                TestStopAsync();
+                ConsoleMsgError(ex.ToString());
+            }
+        }
 
 
 
