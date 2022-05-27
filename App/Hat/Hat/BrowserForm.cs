@@ -132,6 +132,20 @@ namespace Hat
 
         }
 
+        /* Игнорирование сертификата */
+        private async void ignorCertificateErrors()
+        {
+            try
+            {
+                await webView2.CoreWebView2.CallDevToolsProtocolMethodAsync("Security.setIgnoreCertificateErrors", "{\"ignore\": true}");
+                consoleMsg("Опция Security.setIgnoreCertificateErrors - включен параметр ignore: true");
+            }
+            catch (Exception ex)
+            {
+                consoleMsgError(ex.ToString());
+            }
+        }
+
         /* Очистка кэша */
         private async void clearBrowserCache()
         {
