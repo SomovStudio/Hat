@@ -166,6 +166,7 @@ namespace Hat
             string content =
 @"
 using System;
+using HatFramework;
 
 namespace Hat
 {
@@ -183,6 +184,7 @@ namespace Hat
             string content =
 @"
 using System;
+using HatFramework;
 
 namespace Hat
 {
@@ -213,6 +215,7 @@ using System.Drawing;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using HatFramework;
 
 namespace Hat
 {
