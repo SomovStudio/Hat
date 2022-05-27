@@ -37,8 +37,7 @@ namespace Hat
         {
             try
             {
-                clearBrowserCache();
-                startMonitorConsoleErrors();
+                initWebView();
 
                 this.Width = 1440;
                 this.Height = 900;
@@ -102,6 +101,37 @@ namespace Hat
             }
         }
 
+        /* Инициализация WevView */
+        private void initWebView()
+        {
+            webView2.CoreWebView2InitializationCompleted += WebView_CoreWebView2InitializationCompleted;
+        }
+
+        private void WebView_CoreWebView2InitializationCompleted(object sender, CoreWebView2InitializationCompletedEventArgs e)
+        {
+            try
+            {
+                consoleMsg("Инициализация WebView завершена");
+                webView2.EnsureCoreWebView2Async();
+                webView2.CoreWebView2.CallDevToolsProtocolMethodAsync("Network.clearBrowserCache", "{}");
+                webView2.CoreWebView2.CallDevToolsProtocolMethodAsync("Network.setCacheDisabled", @"{""cacheDisabled"":true}");
+                consoleMsg("Выполнена очистка кэша");
+                webView2.EnsureCoreWebView2Async();
+                webView2.CoreWebView2.GetDevToolsProtocolEventReceiver("Log.entryAdded").DevToolsProtocolEventReceived += showMessageConsoleErrors;
+                webView2.CoreWebView2.CallDevToolsProtocolMethodAsync("Log.enable", "{}");
+                consoleMsg("Запусщен монитор ошибок на страницах");
+                webView2.CoreWebView2.CallDevToolsProtocolMethodAsync("Security.setIgnoreCertificateErrors", "{\"ignore\": true}");
+                consoleMsg("Опция Security.setIgnoreCertificateErrors - включен параметр ignore: true");
+                if (Config.defaultUserAgent == "") Config.defaultUserAgent = webView2.CoreWebView2.Settings.UserAgent;
+                consoleMsg($"Опция User-Agent по умолчанию {Config.defaultUserAgent}");
+            }
+            catch (Exception ex)
+            {
+                consoleMsgError(ex.ToString());
+            }
+
+        }
+
         /* Очистка кэша */
         private async void clearBrowserCache()
         {
@@ -110,6 +140,7 @@ namespace Hat
                 await webView2.EnsureCoreWebView2Async();
                 await webView2.CoreWebView2.CallDevToolsProtocolMethodAsync("Network.clearBrowserCache", "{}");
                 await webView2.CoreWebView2.CallDevToolsProtocolMethodAsync("Network.setCacheDisabled", @"{""cacheDisabled"":true}");
+                consoleMsg("Выполнена очистка кэша");
             }
             catch (Exception ex)
             {
@@ -127,6 +158,7 @@ namespace Hat
                 await webView2.CoreWebView2.CallDevToolsProtocolMethodAsync("Log.enable", "{}");
                 //webView2.CoreWebView2.OpenDevToolsWindow();
                 //webView2.CoreWebView2.Navigate("https://stackoverflow.com");
+                consoleMsg("Запусщен монитор ошибок на страницах");
             }
             catch (Exception ex)
             {
@@ -369,7 +401,7 @@ namespace Hat
                     Config.defaultUserAgent = webView2.CoreWebView2.Settings.UserAgent;
                     textBoxUserAgent.Text = Config.defaultUserAgent;
                 }
-                consoleMsg("Текущий User-Agent: " + webView2.CoreWebView2.Settings.UserAgent);
+                if (Config.defaultUserAgent != webView2.CoreWebView2.Settings.UserAgent) consoleMsg("Текущий User-Agent: " + webView2.CoreWebView2.Settings.UserAgent);
             }
             catch (Exception ex)
             {
