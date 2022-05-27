@@ -110,9 +110,10 @@ namespace Hat
 
             HatFrameworkDev.Tester tester = new HatFrameworkDev.Tester(Config.browserForm);
             await tester.TestBeginAsync();
-            await tester.GoToUrlAsync("https://somovstudio.github.io/test2.html", 5);
+            await tester.GoToUrlAsync("https://somovstudio.github.io/test.html", 5);
             await tester.WaitAsync(2);
-            await tester.GetAttributeFromElementByCssAsync("#myInput", "placeholder");
+            string json = await tester.GetAttributeFromElementsByCssAsync("input", "name");
+            Config.browserForm.consoleMsg(json);
             await tester.TestEndAsync();
         }
 

@@ -232,6 +232,7 @@ await tester.TestEnd();
 
 await tester.GetAttributeFromElementByTagAsync("a", 0, "href");
 await tester.GetAttributeFromElementByCssAsync("#myInput", "placeholder");
+string json = await tester.GetAttributeFromElementsByCssAsync("input", "name"); // в результате ["login","pass","null"]
 
 -----------------------------------------------------------------------------
 Запуск из командной строки:

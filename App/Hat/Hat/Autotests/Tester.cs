@@ -2008,7 +2008,7 @@ namespace HatFrameworkDev
                 if (behaviorSmooth == true) script = "(function(){ var element = document.querySelector('" + locator + "'); element.scrollIntoView({behavior: 'smooth'}); }());";
                 else script = "(function(){ var element = document.querySelector('" + locator + "'); element.scrollIntoView(); return element; }());";
                 string result = await ExecuteJavaScriptAsync(script);
-                EditMessage(step, null, COMPLETED, "Прокрутил к элементу выполнена", IMAGE_STATUS_PASSED);
+                EditMessage(step, null, PASSED, "Прокрутил к элементу выполнена", IMAGE_STATUS_PASSED);
             }
             catch (Exception ex)
             {
@@ -2198,7 +2198,47 @@ namespace HatFrameworkDev
             return value;
         }
 
+        public async Task<string> GetAttributeFromElementsByCssAsync(string locator, string attribute)
+        {
+            int step = SendMessage($"GetAttributeFromElementsByCssAsync('{locator}', '{attribute}')", PROCESS, $"Получение аттрибутов {attribute} из элементов", IMAGE_STATUS_PROCESS);
+            if (DefineTestStop(step) == true) return "";
 
+            string value = "";
+            try
+            {
+                string script = "(function(){";
+                script += $"var element = document.querySelectorAll('{locator}');";
+                script += "var json = '[';";
+                script += "var attr = '';";
+                script += "for (var i = 0; i < element.length; i++){";
+                script += $"attr = element[i].getAttribute('{attribute}');";
+                script += "json += '\"' + attr + '\",';";
+                script += "}";
+                script += "json = json.slice(0, -1);";
+                script += "json += ']';";
+                script += "return json;";
+                script += "}());";
+                string result = await ExecuteJavaScriptAsync(script);
+                if (result == "null" || result == null)
+                {
+                    EditMessage(step, null, Tester.FAILED, $"Не удалось найти или получить аттрибуты из элементов по локатору: {locator}", Tester.IMAGE_STATUS_FAILED);
+                    TestStopAsync();
+                }
+                else
+                {
+                    result = JsonConvert.DeserializeObject(result).ToString();
+                    value = result;
+                    EditMessage(step, null, PASSED, $"Получен json {result} из аттрибутов {attribute}", IMAGE_STATUS_PASSED);
+                }
+            }
+            catch (Exception ex)
+            {
+                EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
+                TestStopAsync();
+                ConsoleMsgError(ex.ToString());
+            }
+            return value;
+        }
 
 
 

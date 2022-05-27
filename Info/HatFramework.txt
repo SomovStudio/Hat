@@ -118,7 +118,7 @@ GetAttributeFromElementByNameAsync() - получить значение атт�
 GetAttributeFromElementByTagAsync() - получить значение аттрибута из элемента
 GetAttributeFromElementByCssAsync() - получить значение аттрибута из элемента
 
-
+GetAttributeFromElementsByCssAsync() - получить список атрибутов из множества элементов
 
 
 
