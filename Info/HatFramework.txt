@@ -97,7 +97,34 @@ SetTextInElementByNameAsync() - ввести текст в элемент
 SetTextInElementByTagAsync() - ввести текст в элемент
 SetTextInElementByCssAsync() - ввести текст в элемент
 
+GetTextFromElementByIdAsync() - прочитать текст из элемента
+GetTextFromElementByClassAsync() - прочитать текст из элемента
+GetTextFromElementByNameAsync() - прочитать текст из элемента
+GetTextFromElementByTagAsync() - прочитать текст из элемента
+GetTextFromElementByCssAsync() - прочитать текст из элемента
 
+GetCountElementsByClassAsync() - получить количество элементов на страницу
+GetCountElementsByNameAsync() - получить количество элементов на страницу
+GetCountElementsByTagAsync() - получить количество элементов на страницу
+GetCountElementsByCssAsync() - получить количество элементов на страницу
+
+ScrollToElementByCssAsync() - Прокрутить к элементу
+
+GetTitleAsync() - Прочитать текст заголовка
+
+GetAttributeFromElementByIdAsync() - получить значение аттрибута из элемента
+GetAttributeFromElementByClassAsync() - получить значение аттрибута из элемента
+GetAttributeFromElementByNameAsync() - получить значение аттрибута из элемента
+GetAttributeFromElementByTagAsync() - получить значение аттрибута из элемента
+GetAttributeFromElementByCssAsync() - получить значение аттрибута из элемента
+
+GetAttributeFromElementsByCssAsync() - получить список атрибутов из множества элементов
+
+SetAttributeInElementByIdAsync() - вставить атрибут со значением
+SetAttributeInElementByClassAsync() - вставить атрибут со значением
+SetAttributeInElementByNameAsync() - вставить атрибут со значением
+SetAttributeInElementByTagAsync() - вставить атрибут со значением
+SetAttributeInElementByCssAsync() - вставить атрибут со значением
 
 
 

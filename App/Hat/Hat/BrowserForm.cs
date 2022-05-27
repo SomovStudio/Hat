@@ -37,8 +37,7 @@ namespace Hat
         {
             try
             {
-                clearBrowserCache();
-                startMonitorConsoleErrors();
+                initWebView();
 
                 this.Width = 1440;
                 this.Height = 900;
@@ -102,6 +101,51 @@ namespace Hat
             }
         }
 
+        /* Инициализация WevView */
+        private void initWebView()
+        {
+            webView2.CoreWebView2InitializationCompleted += WebView_CoreWebView2InitializationCompleted;
+        }
+
+        private void WebView_CoreWebView2InitializationCompleted(object sender, CoreWebView2InitializationCompletedEventArgs e)
+        {
+            try
+            {
+                consoleMsg("Инициализация WebView завершена");
+                webView2.EnsureCoreWebView2Async();
+                webView2.CoreWebView2.CallDevToolsProtocolMethodAsync("Network.clearBrowserCache", "{}");
+                webView2.CoreWebView2.CallDevToolsProtocolMethodAsync("Network.setCacheDisabled", @"{""cacheDisabled"":true}");
+                consoleMsg("Выполнена очистка кэша");
+                webView2.EnsureCoreWebView2Async();
+                webView2.CoreWebView2.GetDevToolsProtocolEventReceiver("Log.entryAdded").DevToolsProtocolEventReceived += showMessageConsoleErrors;
+                webView2.CoreWebView2.CallDevToolsProtocolMethodAsync("Log.enable", "{}");
+                consoleMsg("Запусщен монитор ошибок на страницах");
+                webView2.CoreWebView2.CallDevToolsProtocolMethodAsync("Security.setIgnoreCertificateErrors", "{\"ignore\": true}");
+                consoleMsg("Опция Security.setIgnoreCertificateErrors - включен параметр ignore: true");
+                if (Config.defaultUserAgent == "") Config.defaultUserAgent = webView2.CoreWebView2.Settings.UserAgent;
+                consoleMsg($"Опция User-Agent по умолчанию {Config.defaultUserAgent}");
+            }
+            catch (Exception ex)
+            {
+                consoleMsgError(ex.ToString());
+            }
+
+        }
+
+        /* Игнорирование сертификата */
+        private async void ignorCertificateErrors()
+        {
+            try
+            {
+                await webView2.CoreWebView2.CallDevToolsProtocolMethodAsync("Security.setIgnoreCertificateErrors", "{\"ignore\": true}");
+                consoleMsg("Опция Security.setIgnoreCertificateErrors - включен параметр ignore: true");
+            }
+            catch (Exception ex)
+            {
+                consoleMsgError(ex.ToString());
+            }
+        }
+
         /* Очистка кэша */
         private async void clearBrowserCache()
         {
@@ -110,6 +154,7 @@ namespace Hat
                 await webView2.EnsureCoreWebView2Async();
                 await webView2.CoreWebView2.CallDevToolsProtocolMethodAsync("Network.clearBrowserCache", "{}");
                 await webView2.CoreWebView2.CallDevToolsProtocolMethodAsync("Network.setCacheDisabled", @"{""cacheDisabled"":true}");
+                consoleMsg("Выполнена очистка кэша");
             }
             catch (Exception ex)
             {
@@ -127,6 +172,7 @@ namespace Hat
                 await webView2.CoreWebView2.CallDevToolsProtocolMethodAsync("Log.enable", "{}");
                 //webView2.CoreWebView2.OpenDevToolsWindow();
                 //webView2.CoreWebView2.Navigate("https://stackoverflow.com");
+                consoleMsg("Запусщен монитор ошибок на страницах");
             }
             catch (Exception ex)
             {
@@ -369,7 +415,7 @@ namespace Hat
                     Config.defaultUserAgent = webView2.CoreWebView2.Settings.UserAgent;
                     textBoxUserAgent.Text = Config.defaultUserAgent;
                 }
-                consoleMsg("Текущий User-Agent: " + webView2.CoreWebView2.Settings.UserAgent);
+                if (Config.defaultUserAgent != webView2.CoreWebView2.Settings.UserAgent) consoleMsg("Текущий User-Agent: " + webView2.CoreWebView2.Settings.UserAgent);
             }
             catch (Exception ex)
             {
@@ -469,20 +515,23 @@ namespace Hat
                     string fileSupportHelper = "/support/Helper.cs";
                     string fileSupportPageObjectsExample = "/support/PageObjects/ExamplePage.cs";
                     string fileSupportStepObjectsExample = "/support/StepObjects/ExampleSteps.cs";
-                    string fileTestsExample = "/tests/ExampleTest.cs";
+                    string fileTestsExample1 = "/tests/ExampleTest1.cs";
+                    string fileTestsExample2 = "/tests/ExampleTest2.cs";
 
                     WorkOnFiles writer = new WorkOnFiles();
                     if (!File.Exists(Config.projectPath + fileProject)) writer.writeFile(Config.getConfig(), WorkOnFiles.UTF_8_BOM, Config.projectPath + fileProject);
                     if (!File.Exists(Config.projectPath + fileSupportHelper)) writer.writeFile(Autotests.getContentFileHelper(), Config.encoding, Config.projectPath + fileSupportHelper);
                     if (!File.Exists(Config.projectPath + fileSupportPageObjectsExample)) writer.writeFile(Autotests.getContentFileExamplePage(), Config.encoding, Config.projectPath + fileSupportPageObjectsExample);
                     if (!File.Exists(Config.projectPath + fileSupportStepObjectsExample)) writer.writeFile(Autotests.getContentFileExampleSteps(), Config.encoding, Config.projectPath + fileSupportStepObjectsExample);
-                    if (!File.Exists(Config.projectPath + fileTestsExample)) writer.writeFile(Autotests.getContentFileExampleTest(), Config.encoding, Config.projectPath + fileTestsExample);
-                    
+                    if (!File.Exists(Config.projectPath + fileTestsExample1)) writer.writeFile(Autotests.getContentFileExampleTest1(), Config.encoding, Config.projectPath + fileTestsExample1);
+                    if (!File.Exists(Config.projectPath + fileTestsExample2)) writer.writeFile(Autotests.getContentFileExampleTest2(), Config.encoding, Config.projectPath + fileTestsExample2);
+
                     if (File.Exists(Config.projectPath + fileProject) && 
                         File.Exists(Config.projectPath + fileSupportHelper) && 
                         File.Exists(Config.projectPath + fileSupportPageObjectsExample) && 
                         File.Exists(Config.projectPath + fileSupportStepObjectsExample) && 
-                        File.Exists(Config.projectPath + fileTestsExample))
+                        File.Exists(Config.projectPath + fileTestsExample1) &&
+                        File.Exists(Config.projectPath + fileTestsExample2))
                     {
                         consoleMsg("Создание проекта: все необходимые файлы созданы");
                     }
@@ -1712,12 +1761,10 @@ namespace Hat
 
         private void toolStripButton13_Click(object sender, EventArgs e)
         {
-            Autotests.devTestStutsAsync();
-            /*
+            //Autotests.devTestStutsAsync();
             EditorForm editorForm = new EditorForm();
             editorForm.TopMost = Config.editorTopMost;
             editorForm.Show();
-            */
         }
 
         private void toolStripButton18_Click(object sender, EventArgs e)

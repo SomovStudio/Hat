@@ -90,22 +90,45 @@ namespace Hat
             await tester.ClickElementByIdAsync("buttonLogin");
             await tester.WaitAsync(2);
             string actual = await tester.GetValueFromElementByIdAsync("textarea");
-            string expected = "\"PASSED\"";
+            string expected = "\"Вы успешно авторизованы\"";
             await tester.FindVisibleElementByIdAsync("result", 5);
             await tester.WaitVisibleElementByIdAsync("result", 5);
             await tester.AssertEqualsAsync(expected, actual);
             await tester.TestEndAsync();
             */
 
+            /*
             HatFrameworkDev.Tester tester = new HatFrameworkDev.Tester(Config.browserForm);
-            tester.ClearMessage();
+            tester.ClearMessages();
             await tester.TestBeginAsync();
             await tester.GoToUrlAsync(@"https://somovstudio.github.io/test2.html", 5);
             await tester.ClickElementByIdAsync("MyRadioNo");
             await tester.ClickElementByIdAsync("MyCheckboxYes");
             await tester.SetTextInElementByCssAsync("#test > h1", "Тест 13");
             await tester.TestEndAsync();
+            */
 
+            /*
+            HatFrameworkDev.Tester tester = new HatFrameworkDev.Tester(Config.browserForm);
+            await tester.TestBeginAsync();
+            await tester.GoToUrlAsync("https://somovstudio.github.io/test.html", 5);
+            await tester.WaitAsync(2);
+            List<string> Json_Array = await tester.GetAttributeFromElementsByCssAsync("input", "name");
+            foreach (string Json_String in Json_Array)
+            {
+                Config.browserForm.consoleMsg(Json_String);
+            }            
+            await tester.TestEndAsync();
+            */
+
+            /*
+            HatFrameworkDev.Tester tester = new HatFrameworkDev.Tester(Config.browserForm);
+            await tester.TestBeginAsync();
+            await tester.GoToUrlAsync("https://somovstudio.github.io/test.html", 5);
+            await tester.WaitAsync(2);
+            await tester.SetAttributeInElementByCssAsync("#login", "value", "admin3");
+            await tester.TestEndAsync();
+            */
         }
 
         public static void readNodes(TreeNodeCollection _nodes)
@@ -164,8 +187,8 @@ namespace Hat
         public static string getContentFileHelper()
         {
             string content =
-@"
-using System;
+@"using System;
+using HatFramework;
 
 namespace Hat
 {
@@ -181,16 +204,19 @@ namespace Hat
         public static string getContentFileExamplePage()
         {
             string content =
-@"
-using System;
+@"using System;
+using HatFramework;
 
 namespace Hat
 {
     public static class ExamplePage
     {
-        public static string URL = ""https://somovstudio.github.io/test.html"";        
-        public static string inputLogin = ""#login"";
-        public static string inputPass = ""#pass"";
+        public static string URL = @""https://somovstudio.github.io/test.html"";        
+        public static string InputLogin = ""login"";
+        public static string InputPass = ""pass"";
+        public static string ButtonLogin = ""buttonLogin"";
+        public static string Result = ""result"";
+        public static string Textarea = ""textarea"";
     }
 }
 ";
@@ -200,8 +226,7 @@ namespace Hat
         public static string getContentFileExampleSteps()
         {
             string content =
-@"
-using System;
+@"using System;
 using System.IO;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -210,14 +235,22 @@ using System.Drawing;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using System.Threading.Tasks;
+using HatFramework;
 
 namespace Hat
 {
-    public class ExampleSteps
+    public class ExampleSteps : Tester
     {
-        public void check()
+        public ExampleSteps(Form browserWindow): base(browserWindow) {}
+
+        public async Task FillForm()
         {
-            MessageBox.Show(ExamplePage.URL);
+            await this.WaitVisibleElementByIdAsync(ExamplePage.InputLogin, 15);
+            await this.SetValueInElementByIdAsync(ExamplePage.InputLogin, ""admin"");
+            await this.WaitAsync(2);
+            await this.SetValueInElementByIdAsync(ExamplePage.InputPass, ""0000"");
+            await this.WaitAsync(2);
         }
     }
 }
@@ -225,11 +258,10 @@ namespace Hat
             return content;
         }
 
-        public static string getContentFileExampleTest()
+        public static string getContentFileExampleTest1()
         {
             string content =
-@"
-using System;
+@"using System;
 using System.IO;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -244,13 +276,16 @@ using HatFramework;
 
 namespace Hat
 {
-    public class ExampleTest
+    public class ExampleTest1
     {
         Tester tester;
 
         public async void Main(Form browserWindow)
         {
             tester = new Tester(browserWindow);
+            tester.ClearMessages();
+            tester.SendMessage(""Выполнение автотеста"", """", ""Файл: ExampleTest.cs"", Tester.IMAGE_STATUS_MESSAGE);
+
             await setUp();
             await test();
             await tearDown();
@@ -258,7 +293,7 @@ namespace Hat
 
         public async Task setUp()
         {
-            await tester.BrowserSizeAsync(800, 600);
+            await tester.BrowserFullScreenAsync();
         }
 
         public async Task test()
@@ -273,7 +308,68 @@ namespace Hat
             await tester.ClickElementByIdAsync(""buttonLogin"");
             await tester.WaitVisibleElementByIdAsync(""result"", 5);
             string actual = await tester.GetValueFromElementByIdAsync(""textarea"");
-            string expected = ""\""PASSED\"""";
+            string expected = ""\""Вы успешно авторизованы\"""";
+            await tester.AssertEqualsAsync(expected, actual);
+            await tester.TestEndAsync();
+        }
+
+        public async Task tearDown()
+        {
+            await tester.BrowserCloseAsync();
+        }
+    }
+}
+";
+            return content;
+        }
+
+        public static string getContentFileExampleTest2()
+        {
+            string content =
+@"using System;
+using System.IO;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Text;
+using System.Text.RegularExpressions;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using HatFramework;
+
+namespace Hat
+{
+    public class ExampleTest2
+    {
+        ExampleSteps tester;
+
+        public async void Main(Form browserWindow)
+        {
+            tester = new ExampleSteps(browserWindow);
+            tester.ClearMessages();
+            tester.SendMessage(""Выполнение автотеста"", """", ""Файл: ExampleTest.cs"", Tester.IMAGE_STATUS_MESSAGE);
+
+            await setUp();
+            await test();
+            await tearDown();
+        }
+
+        public async Task setUp()
+        {
+            await tester.BrowserFullScreenAsync();
+        }
+
+        public async Task test()
+        {
+            await tester.TestBeginAsync();
+            await tester.GoToUrlAsync(ExamplePage.URL, 5);
+            await tester.FillForm();
+            await tester.ClickElementByIdAsync(ExamplePage.ButtonLogin);
+            await tester.WaitVisibleElementByIdAsync(ExamplePage.Result, 5);
+            string actual = await tester.GetValueFromElementByIdAsync(ExamplePage.Textarea);
+            string expected = ""\""Вы успешно авторизованы\"""";
             await tester.AssertEqualsAsync(expected, actual);
             await tester.TestEndAsync();
         }
