@@ -1727,8 +1727,155 @@ namespace HatFrameworkDev
             }
         }
 
+        public async Task<string> GetTextFromElementByIdAsync(string id)
+        {
+            int step = SendMessage($"GetTextFromElementByIdAsync('{id})'", PROCESS, "Получение текста из элемент", IMAGE_STATUS_PROCESS);
+            if (DefineTestStop(step) == true) return "";
 
+            string value = "";
+            try
+            {
+                string script = "(function(){ var element = document.getElementById('" + id + "'); return element.innerText; }());";
+                string result = await ExecuteJavaScriptAsync(script);
+                if (result == "null" || result == null || result == "")
+                {
+                    EditMessage(step, null, Tester.FAILED, $"Не удалось найти или получить текст из элемента с ID: {id}", Tester.IMAGE_STATUS_FAILED);
+                    TestStopAsync();
+                }
+                else
+                {
+                    value = result;
+                    EditMessage(step, null, PASSED, $"Получен текст {result} из элемента", IMAGE_STATUS_PASSED);
+                }
+            }
+            catch (Exception ex)
+            {
+                EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
+                TestStopAsync();
+                ConsoleMsgError(ex.ToString());
+            }
+            return value;
+        }
 
+        public async Task<string> GetTextFromElementByClassAsync(string _class, int index)
+        {
+            int step = SendMessage($"GetTextFromElementByClassAsync('{_class}', {index})", PROCESS, "Получение текста из элемент", IMAGE_STATUS_PROCESS);
+            if (DefineTestStop(step) == true) return "";
+
+            string value = "";
+            try
+            {
+                string script = "(function(){ var element = document.getElementsByClassName('" + _class + "')[" + index + "]; return element.innerText; }());";
+                string result = await ExecuteJavaScriptAsync(script);
+                if (result == "null" || result == null)
+                {
+                    EditMessage(step, null, Tester.FAILED, $"Не удалось найти или получить текст из элемента по Class: {_class} (Index: {index})", Tester.IMAGE_STATUS_FAILED);
+                    TestStopAsync();
+                }
+                else
+                {
+                    value = result;
+                    EditMessage(step, null, PASSED, $"Получен текст {result} из элемента", IMAGE_STATUS_PASSED);
+                }
+            }
+            catch (Exception ex)
+            {
+                EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
+                TestStopAsync();
+                ConsoleMsgError(ex.ToString());
+            }
+            return value;
+        }
+
+        public async Task<string> GetTextFromElementByNameAsync(string name, int index)
+        {
+            int step = SendMessage($"GetTextFromElementByNameAsync('{name}', {index})", PROCESS, "Получение текста из элемент", IMAGE_STATUS_PROCESS);
+            if (DefineTestStop(step) == true) return "";
+
+            string value = "";
+            try
+            {
+                string script = "(function(){ var element = document.getElementsByName('" + name + "')[" + index + "]; return element.innerText; }());";
+                string result = await ExecuteJavaScriptAsync(script);
+                if (result == "null" || result == null)
+                {
+                    EditMessage(step, null, Tester.FAILED, $"Не удалось найти или получить текст из элемента по Name: {name} (Index: {index})", Tester.IMAGE_STATUS_FAILED);
+                    TestStopAsync();
+                }
+                else
+                {
+                    value = result;
+                    EditMessage(step, null, PASSED, $"Получен текст {result} из элемента", IMAGE_STATUS_PASSED);
+                }
+            }
+            catch (Exception ex)
+            {
+                EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
+                TestStopAsync();
+                ConsoleMsgError(ex.ToString());
+            }
+            return value;
+        }
+
+        public async Task<string> GetTextFromElementByTagAsync(string tag, int index)
+        {
+            int step = SendMessage($"GetTextFromElementByTagAsync('{tag}', {index})", PROCESS, "Получение текста из элемент", IMAGE_STATUS_PROCESS);
+            if (DefineTestStop(step) == true) return "";
+
+            string value = "";
+            try
+            {
+                string script = "(function(){ var element = document.getElementsByTagName('" + tag + "')[" + index + "]; return element.innerText; }());";
+                string result = await ExecuteJavaScriptAsync(script);
+                if (result == "null" || result == null)
+                {
+                    EditMessage(step, null, Tester.FAILED, $"Не удалось найти или получить текст из элемента по Tag: {tag} (Index: {index})", Tester.IMAGE_STATUS_FAILED);
+                    TestStopAsync();
+                }
+                else
+                {
+                    value = result;
+                    EditMessage(step, null, PASSED, $"Получен текст {result} из элемента", IMAGE_STATUS_PASSED);
+                }
+            }
+            catch (Exception ex)
+            {
+                EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
+                TestStopAsync();
+                ConsoleMsgError(ex.ToString());
+            }
+            return value;
+        }
+
+        public async Task<string> GetTextFromElementByCssAsync(string locator)
+        {
+            int step = SendMessage($"GetTextFromElementByCssAsync('{locator}')", PROCESS, "Получение текста из элемент", IMAGE_STATUS_PROCESS);
+            if (DefineTestStop(step) == true) return "";
+
+            string value = "";
+            try
+            {
+                string script = "(function(){ var element = document.querySelector('" + locator + "'); return element.innerText; }());";
+                string result = await ExecuteJavaScriptAsync(script);
+                if (result == "null" || result == null)
+                {
+                    EditMessage(step, null, Tester.FAILED, $"Не удалось найти или получить текст из элемента по локатору: {locator}", Tester.IMAGE_STATUS_FAILED);
+                    TestStopAsync();
+                }
+                else
+                {
+                    value = result;
+                    EditMessage(step, null, PASSED, $"Получен текст {result} из элемента", IMAGE_STATUS_PASSED);
+                }
+            }
+            catch (Exception ex)
+            {
+                EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
+                TestStopAsync();
+                ConsoleMsgError(ex.ToString());
+            }
+            return value;
+        }
 
 
 

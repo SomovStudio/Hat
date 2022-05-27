@@ -97,8 +97,11 @@ SetTextInElementByNameAsync() - ввести текст в элемент
 SetTextInElementByTagAsync() - ввести текст в элемент
 SetTextInElementByCssAsync() - ввести текст в элемент
 
-
-
+GetTextFromElementByIdAsync()
+GetTextFromElementByClassAsync()
+GetTextFromElementByNameAsync()
+GetTextFromElementByTagAsync()
+GetTextFromElementByCssAsync
 
 
 AssertEqualsAsync() - проверка результата
