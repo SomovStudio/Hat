@@ -97,6 +97,7 @@ namespace Hat
             await tester.TestEndAsync();
             */
 
+            /*
             HatFrameworkDev.Tester tester = new HatFrameworkDev.Tester(Config.browserForm);
             tester.ClearMessages();
             await tester.TestBeginAsync();
@@ -105,7 +106,16 @@ namespace Hat
             await tester.ClickElementByIdAsync("MyCheckboxYes");
             await tester.SetTextInElementByCssAsync("#test > h1", "Тест 13");
             await tester.TestEndAsync();
+            */
 
+            HatFrameworkDev.Tester tester = new HatFrameworkDev.Tester(Config.browserForm);
+            await tester.TestBeginAsync();
+            await tester.GoToUrlAsync("https://somovstudio.github.io/test.html", 5);
+            await tester.WaitVisibleElementByIdAsync("login", 5);
+            int actual = await tester.GetCountElementsByCssAsync("label");
+            int expected = 0;
+            await tester.AssertNotEqualsAsync(expected.ToString(), actual.ToString());
+            await tester.TestEndAsync();
         }
 
         public static void readNodes(TreeNodeCollection _nodes)

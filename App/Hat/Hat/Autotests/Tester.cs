@@ -1877,6 +1877,125 @@ namespace HatFrameworkDev
             return value;
         }
 
+        public async Task<int> GetCountElementsByClassAsync(string _class)
+        {
+            int step = SendMessage($"GetCountElementsByIdAsync('{_class}')", PROCESS, "Получение количество элементов", IMAGE_STATUS_PROCESS);
+            if (DefineTestStop(step) == true) return 0;
+
+            int value = 0;
+            try
+            {
+                string script = "(function(){ var element = document.getElementsByClassName('" + _class + "'); return element.length; }());";
+                string result = await ExecuteJavaScriptAsync(script);
+                if (result == "null" || result == null || result == "")
+                {
+                    EditMessage(step, null, Tester.FAILED, $"Не удалось найти или получить количество элементов по Class: {_class}", Tester.IMAGE_STATUS_FAILED);
+                    TestStopAsync();
+                }
+                else
+                {
+                    value = Int32.Parse(result);
+                    EditMessage(step, null, PASSED, $"Количество элементов {result}", IMAGE_STATUS_PASSED);
+                }
+            }
+            catch (Exception ex)
+            {
+                EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
+                TestStopAsync();
+                ConsoleMsgError(ex.ToString());
+            }
+            return value;
+        }
+
+        public async Task<int> GetCountElementsByNameAsync(string name)
+        {
+            int step = SendMessage($"GetCountElementsByNameAsync('{name}')", PROCESS, "Получение количество элементов", IMAGE_STATUS_PROCESS);
+            if (DefineTestStop(step) == true) return 0;
+
+            int value = 0;
+            try
+            {
+                string script = "(function(){ var element = document.getElementsByName('" + name + "'); return element.length; }());";
+                string result = await ExecuteJavaScriptAsync(script);
+                if (result == "null" || result == null || result == "")
+                {
+                    EditMessage(step, null, Tester.FAILED, $"Не удалось найти или получить количество элементов по Name: {name}", Tester.IMAGE_STATUS_FAILED);
+                    TestStopAsync();
+                }
+                else
+                {
+                    value = Int32.Parse(result);
+                    EditMessage(step, null, PASSED, $"Количество элементов {result}", IMAGE_STATUS_PASSED);
+                }
+            }
+            catch (Exception ex)
+            {
+                EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
+                TestStopAsync();
+                ConsoleMsgError(ex.ToString());
+            }
+            return value;
+        }
+
+        public async Task<int> GetCountElementsByTagAsync(string tag)
+        {
+            int step = SendMessage($"GetCountElementsByTagAsync('{tag}')", PROCESS, "Получение количество элементов", IMAGE_STATUS_PROCESS);
+            if (DefineTestStop(step) == true) return 0;
+
+            int value = 0;
+            try
+            {
+                string script = "(function(){ var element = document.getElementsByTagName('" + tag + "'); return element.length; }());";
+                string result = await ExecuteJavaScriptAsync(script);
+                if (result == "null" || result == null || result == "")
+                {
+                    EditMessage(step, null, Tester.FAILED, $"Не удалось найти или получить количество элементов по Tag: {tag}", Tester.IMAGE_STATUS_FAILED);
+                    TestStopAsync();
+                }
+                else
+                {
+                    value = Int32.Parse(result);
+                    EditMessage(step, null, PASSED, $"Количество элементов {result}", IMAGE_STATUS_PASSED);
+                }
+            }
+            catch (Exception ex)
+            {
+                EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
+                TestStopAsync();
+                ConsoleMsgError(ex.ToString());
+            }
+            return value;
+        }
+
+        public async Task<int> GetCountElementsByCssAsync(string locator)
+        {
+            int step = SendMessage($"GetCountElementsByCssAsync('{locator}')", PROCESS, "Получение количество элементов", IMAGE_STATUS_PROCESS);
+            if (DefineTestStop(step) == true) return 0;
+
+            int value = 0;
+            try
+            {
+                string script = "(function(){ var element = document.querySelectorAll('" + locator + "'); return element.length; }());";
+                string result = await ExecuteJavaScriptAsync(script);
+                if (result == "null" || result == null || result == "")
+                {
+                    EditMessage(step, null, Tester.FAILED, $"Не удалось найти или получить количество элементов по локатору: {locator}", Tester.IMAGE_STATUS_FAILED);
+                    TestStopAsync();
+                }
+                else
+                {
+                    value = Int32.Parse(result);
+                    EditMessage(step, null, PASSED, $"Количество элементов {result}", IMAGE_STATUS_PASSED);
+                }
+            }
+            catch (Exception ex)
+            {
+                EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
+                TestStopAsync();
+                ConsoleMsgError(ex.ToString());
+            }
+            return value;
+        }
 
 
 
