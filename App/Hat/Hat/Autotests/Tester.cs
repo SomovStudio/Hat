@@ -1424,7 +1424,7 @@ namespace HatFrameworkDev
 
         public async Task<string> GetValueFromElementByIdAsync(string id)
         {
-            int step = SendMessage($"GetValueFromElementByIdAsync('{id})'", PROCESS, "Получение значения из элемент", IMAGE_STATUS_PROCESS);
+            int step = SendMessage($"GetValueFromElementByIdAsync('{id}')", PROCESS, "Получение значения из элемент", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return "";
 
             string value = "";
@@ -1729,7 +1729,7 @@ namespace HatFrameworkDev
 
         public async Task<string> GetTextFromElementByIdAsync(string id)
         {
-            int step = SendMessage($"GetTextFromElementByIdAsync('{id})'", PROCESS, "Чтение текста из элемент", IMAGE_STATUS_PROCESS);
+            int step = SendMessage($"GetTextFromElementByIdAsync('{id}')", PROCESS, "Чтение текста из элемент", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return "";
 
             string value = "";
@@ -2047,6 +2047,160 @@ namespace HatFrameworkDev
             }
             return value;
         }
+
+        public async Task<string> GetAttributeFromElementByIdAsync(string id, string attribute)
+        {
+            int step = SendMessage($"GetAttributeFromElementByIdAsync('{id}', '{attribute}')", PROCESS, $"Получение аттрибута {attribute} из элемент", IMAGE_STATUS_PROCESS);
+            if (DefineTestStop(step) == true) return "";
+
+            string value = "";
+            try
+            {
+                string script = "(function(){ var element = document.getElementById('" + id + "'); return element.getAttribute('" + attribute + "'); }());";
+                string result = await ExecuteJavaScriptAsync(script);
+                if (result == "null" || result == null)
+                {
+                    EditMessage(step, null, Tester.FAILED, $"Не удалось найти или получить аттрибут из элемента с ID: {id}", Tester.IMAGE_STATUS_FAILED);
+                    TestStopAsync();
+                }
+                else
+                {
+                    value = result;
+                    EditMessage(step, null, PASSED, $"Получено значение '{result}' из аттрибута {attribute}", IMAGE_STATUS_PASSED);
+                }
+            }
+            catch (Exception ex)
+            {
+                EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
+                TestStopAsync();
+                ConsoleMsgError(ex.ToString());
+            }
+            return value;
+        }
+
+        public async Task<string> GetAttributeFromElementByClassAsync(string _class, int index, string attribute)
+        {
+            int step = SendMessage($"GetAttributeFromElementByClassAsync('{_class}', {index}, '{attribute}')", PROCESS, $"Получение аттрибута {attribute} из элемент", IMAGE_STATUS_PROCESS);
+            if (DefineTestStop(step) == true) return "";
+
+            string value = "";
+            try
+            {
+                string script = "(function(){ var element = document.getElementsByClassName('" + _class + "')[" + index + "]; return element.getAttribute('" + attribute + "'); }());";
+                string result = await ExecuteJavaScriptAsync(script);
+                if (result == "null" || result == null)
+                {
+                    EditMessage(step, null, Tester.FAILED, $"Не удалось найти или получить аттрибут из элемента по Class: {_class} (Index: {index})", Tester.IMAGE_STATUS_FAILED);
+                    TestStopAsync();
+                }
+                else
+                {
+                    value = result;
+                    EditMessage(step, null, PASSED, $"Получено значение '{result}' из аттрибута {attribute}", IMAGE_STATUS_PASSED);
+                }
+            }
+            catch (Exception ex)
+            {
+                EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
+                TestStopAsync();
+                ConsoleMsgError(ex.ToString());
+            }
+            return value;
+        }
+
+        public async Task<string> GetAttributeFromElementByNameAsync(string name, int index, string attribute)
+        {
+            int step = SendMessage($"GetAttributeFromElementByNameAsync('{name}', {index}, '{attribute}')", PROCESS, $"Получение аттрибута {attribute} из элемент", IMAGE_STATUS_PROCESS);
+            if (DefineTestStop(step) == true) return "";
+
+            string value = "";
+            try
+            {
+                string script = "(function(){ var element = document.getElementsByName('" + name + "')[" + index + "]; return element.getAttribute('" + attribute + "'); }());";
+                string result = await ExecuteJavaScriptAsync(script);
+                if (result == "null" || result == null)
+                {
+                    EditMessage(step, null, Tester.FAILED, $"Не удалось найти или получить аттрибут из элемента по Name: {name} (Index: {index})", Tester.IMAGE_STATUS_FAILED);
+                    TestStopAsync();
+                }
+                else
+                {
+                    value = result;
+                    EditMessage(step, null, PASSED, $"Получено значение '{result}' из аттрибута {attribute}", IMAGE_STATUS_PASSED);
+                }
+            }
+            catch (Exception ex)
+            {
+                EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
+                TestStopAsync();
+                ConsoleMsgError(ex.ToString());
+            }
+            return value;
+        }
+
+        public async Task<string> GetAttributeFromElementByTagAsync(string tag, int index, string attribute)
+        {
+            int step = SendMessage($"GetAttributeFromElementByTagAsync('{tag}', {index}, '{attribute}')", PROCESS, $"Получение аттрибута {attribute} из элемент", IMAGE_STATUS_PROCESS);
+            if (DefineTestStop(step) == true) return "";
+
+            string value = "";
+            try
+            {
+                string script = "(function(){ var element = document.getElementsByTagName('" + tag + "')[" + index + "]; return element.getAttribute('" + attribute + "'); }());";
+                string result = await ExecuteJavaScriptAsync(script);
+                if (result == "null" || result == null)
+                {
+                    EditMessage(step, null, Tester.FAILED, $"Не удалось найти или получить аттрибут из элемента по Tag: {tag} (Index: {index})", Tester.IMAGE_STATUS_FAILED);
+                    TestStopAsync();
+                }
+                else
+                {
+                    value = result;
+                    EditMessage(step, null, PASSED, $"Получено значение '{result}' из аттрибута {attribute}", IMAGE_STATUS_PASSED);
+                }
+            }
+            catch (Exception ex)
+            {
+                EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
+                TestStopAsync();
+                ConsoleMsgError(ex.ToString());
+            }
+            return value;
+        }
+
+        public async Task<string> GetAttributeFromElementByCssAsync(string locator, string attribute)
+        {
+            int step = SendMessage($"GetAttributeFromElementByCssAsync('{locator}', '{attribute}')", PROCESS, $"Получение аттрибута {attribute} из элемент", IMAGE_STATUS_PROCESS);
+            if (DefineTestStop(step) == true) return "";
+
+            string value = "";
+            try
+            {
+                string script = "(function(){ var element = document.querySelector('" + locator + "'); return element.getAttribute('" + attribute + "'); }());";
+                string result = await ExecuteJavaScriptAsync(script);
+                if (result == "null" || result == null)
+                {
+                    EditMessage(step, null, Tester.FAILED, $"Не удалось найти или получить аттрибут из элемента по локатору: {locator}", Tester.IMAGE_STATUS_FAILED);
+                    TestStopAsync();
+                }
+                else
+                {
+                    value = result;
+                    EditMessage(step, null, PASSED, $"Получено значение '{result}' из аттрибута {attribute}", IMAGE_STATUS_PASSED);
+                }
+            }
+            catch (Exception ex)
+            {
+                EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
+                TestStopAsync();
+                ConsoleMsgError(ex.ToString());
+            }
+            return value;
+        }
+
+
+
+
 
 
 

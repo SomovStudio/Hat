@@ -230,6 +230,9 @@ string order = await tester.GetValueFromElementById("last_order_sended");
 await tester.AssertNotEquals(order, "\"\"");
 await tester.TestEnd();
 
+await tester.GetAttributeFromElementByTagAsync("a", 0, "href");
+await tester.GetAttributeFromElementByCssAsync("#myInput", "placeholder");
+
 -----------------------------------------------------------------------------
 Запуск из командной строки:
 C:\Git\SomovStudio\Hat\App\Hat\Hat\bin\Debug>Hat.exe ExampleTest.cs C:\Users\Catfish\Desktop\project

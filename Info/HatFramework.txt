@@ -112,6 +112,15 @@ ScrollToElementByCssAsync() - Прокрутить к элементу
 
 GetTitleAsync() - Прочитать текст заголовка
 
+GetAttributeFromElementByIdAsync() - получить значение аттрибута из элемента
+GetAttributeFromElementByClassAsync() - получить значение аттрибута из элемента
+GetAttributeFromElementByNameAsync() - получить значение аттрибута из элемента
+GetAttributeFromElementByTagAsync() - получить значение аттрибута из элемента
+GetAttributeFromElementByCssAsync() - получить значение аттрибута из элемента
+
+
+
+
 
 AssertEqualsAsync() - проверка результата
 AssertNotEqualsAsync() - проверка результата
