@@ -164,8 +164,7 @@ namespace Hat
         public static string getContentFileHelper()
         {
             string content =
-@"
-using System;
+@"using System;
 using HatFramework;
 
 namespace Hat
@@ -182,8 +181,7 @@ namespace Hat
         public static string getContentFileExamplePage()
         {
             string content =
-@"
-using System;
+@"using System;
 using HatFramework;
 
 namespace Hat
@@ -205,8 +203,7 @@ namespace Hat
         public static string getContentFileExampleSteps()
         {
             string content =
-@"
-using System;
+@"using System;
 using System.IO;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -215,13 +212,16 @@ using System.Drawing;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using System.Threading.Tasks;
 using HatFramework;
 
 namespace Hat
 {
     public class ExampleSteps : Tester
     {
-        public async void FillForm()
+        public ExampleSteps(Form browserWindow): base(browserWindow) {}
+
+        public async Task FillForm()
         {
             await this.WaitVisibleElementByIdAsync(ExamplePage.InputLogin, 15);
             await this.SetValueInElementByIdAsync(ExamplePage.InputLogin, ""admin"");
@@ -235,11 +235,10 @@ namespace Hat
             return content;
         }
 
-        public static string getContentFileExampleTest()
+        public static string getContentFileExampleTest1()
         {
             string content =
-@"
-using System;
+@"using System;
 using System.IO;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -254,7 +253,7 @@ using HatFramework;
 
 namespace Hat
 {
-    public class ExampleTest
+    public class ExampleTest1
     {
         Tester tester;
 
@@ -304,8 +303,7 @@ namespace Hat
         public static string getContentFileExampleTest2()
         {
             string content =
-@"
-using System;
+@"using System;
 using System.IO;
 using System.Collections.Generic;
 using System.ComponentModel;
