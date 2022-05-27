@@ -108,6 +108,7 @@ namespace Hat
             await tester.TestEndAsync();
             */
 
+            /*
             HatFrameworkDev.Tester tester = new HatFrameworkDev.Tester(Config.browserForm);
             await tester.TestBeginAsync();
             await tester.GoToUrlAsync("https://somovstudio.github.io/test.html", 5);
@@ -117,6 +118,14 @@ namespace Hat
             {
                 Config.browserForm.consoleMsg(Json_String);
             }            
+            await tester.TestEndAsync();
+            */
+
+            HatFrameworkDev.Tester tester = new HatFrameworkDev.Tester(Config.browserForm);
+            await tester.TestBeginAsync();
+            await tester.GoToUrlAsync("https://somovstudio.github.io/test.html", 5);
+            await tester.WaitAsync(2);
+            await tester.SetAttributeInElementByCssAsync("#login", "value", "admin3");
             await tester.TestEndAsync();
         }
 

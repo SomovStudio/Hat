@@ -246,7 +246,7 @@ foreach (string Json_String in Json_Array)
 			ConsoleMsg(Json_String);
 		}
 
-
+await tester.SetAttributeInElementByIdAsync("login", "value", "admin");
 
 -----------------------------------------------------------------------------
 Запуск из командной строки:

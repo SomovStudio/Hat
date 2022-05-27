@@ -120,6 +120,12 @@ GetAttributeFromElementByCssAsync() - получить значение аттр
 
 GetAttributeFromElementsByCssAsync() - получить список атрибутов из множества элементов
 
+SetAttributeInElementByIdAsync() - вставить атрибут со значением
+SetAttributeInElementByClassAsync() - вставить атрибут со значением
+SetAttributeInElementByNameAsync() - вставить атрибут со значением
+SetAttributeInElementByTagAsync() - вставить атрибут со значением
+SetAttributeInElementByCssAsync() - вставить атрибут со значением
+
 
 
 AssertEqualsAsync() - проверка результата
