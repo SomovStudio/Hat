@@ -167,7 +167,7 @@ namespace HatFrameworkDev
             }
         }
 
-        public void ClearMessage()
+        public void ClearMessages()
         {
             try
             {

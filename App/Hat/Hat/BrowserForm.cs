@@ -516,6 +516,7 @@ namespace Hat
                     string fileSupportPageObjectsExample = "/support/PageObjects/ExamplePage.cs";
                     string fileSupportStepObjectsExample = "/support/StepObjects/ExampleSteps.cs";
                     string fileTestsExample = "/tests/ExampleTest.cs";
+                    string fileTestsExample2 = "/tests/ExampleTest2.cs";
 
                     WorkOnFiles writer = new WorkOnFiles();
                     if (!File.Exists(Config.projectPath + fileProject)) writer.writeFile(Config.getConfig(), WorkOnFiles.UTF_8_BOM, Config.projectPath + fileProject);
@@ -523,12 +524,14 @@ namespace Hat
                     if (!File.Exists(Config.projectPath + fileSupportPageObjectsExample)) writer.writeFile(Autotests.getContentFileExamplePage(), Config.encoding, Config.projectPath + fileSupportPageObjectsExample);
                     if (!File.Exists(Config.projectPath + fileSupportStepObjectsExample)) writer.writeFile(Autotests.getContentFileExampleSteps(), Config.encoding, Config.projectPath + fileSupportStepObjectsExample);
                     if (!File.Exists(Config.projectPath + fileTestsExample)) writer.writeFile(Autotests.getContentFileExampleTest(), Config.encoding, Config.projectPath + fileTestsExample);
-                    
+                    if (!File.Exists(Config.projectPath + fileTestsExample2)) writer.writeFile(Autotests.getContentFileExampleTest2(), Config.encoding, Config.projectPath + fileTestsExample2);
+
                     if (File.Exists(Config.projectPath + fileProject) && 
                         File.Exists(Config.projectPath + fileSupportHelper) && 
                         File.Exists(Config.projectPath + fileSupportPageObjectsExample) && 
                         File.Exists(Config.projectPath + fileSupportStepObjectsExample) && 
-                        File.Exists(Config.projectPath + fileTestsExample))
+                        File.Exists(Config.projectPath + fileTestsExample) &&
+                        File.Exists(Config.projectPath + fileTestsExample2))
                     {
                         consoleMsg("Создание проекта: все необходимые файлы созданы");
                     }
