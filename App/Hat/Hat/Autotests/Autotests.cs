@@ -110,11 +110,9 @@ namespace Hat
 
             HatFrameworkDev.Tester tester = new HatFrameworkDev.Tester(Config.browserForm);
             await tester.TestBeginAsync();
-            await tester.GoToUrlAsync("https://somovstudio.github.io/test.html", 5);
-            await tester.WaitVisibleElementByIdAsync("login", 5);
-            int actual = await tester.GetCountElementsByCssAsync("label");
-            int expected = 0;
-            await tester.AssertNotEqualsAsync(expected.ToString(), actual.ToString());
+            await tester.GoToUrlAsync("https://mgts.ru/", 5);
+            await tester.WaitAsync(2);
+            await tester.ScrollToElementByCssAsync("#services", true);
             await tester.TestEndAsync();
         }
 

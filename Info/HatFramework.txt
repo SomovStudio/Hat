@@ -108,6 +108,10 @@ GetCountElementsByNameAsync() - получить количество элеме
 GetCountElementsByTagAsync() - получить количество элементов на страницу
 GetCountElementsByCssAsync() - получить количество элементов на страницу
 
+ScrollToElementByCssAsync() - Прокрутить к элементу
+
+
+
 
 AssertEqualsAsync() - проверка результата
 AssertNotEqualsAsync() - проверка результата

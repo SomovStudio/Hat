@@ -1997,7 +1997,26 @@ namespace HatFrameworkDev
             return value;
         }
 
+        public async Task ScrollToElementByCssAsync(string locator, bool behaviorSmooth = false)
+        {
+            int step = SendMessage($"ScrollToElementByCssAsync('{locator}')", PROCESS, "Прокрутить к элементу", IMAGE_STATUS_PROCESS);
+            if (DefineTestStop(step) == true) return;
 
+            try
+            {
+                string script = "";
+                if (behaviorSmooth == true) script = "(function(){ var element = document.querySelector('" + locator + "'); element.scrollIntoView({behavior: 'smooth'}); }());";
+                else script = "(function(){ var element = document.querySelector('" + locator + "'); element.scrollIntoView(); return element; }());";
+                string result = await ExecuteJavaScriptAsync(script);
+                EditMessage(step, null, COMPLETED, "Прокрутил к элементу выполнена", IMAGE_STATUS_PASSED);
+            }
+            catch (Exception ex)
+            {
+                EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
+                TestStopAsync();
+                ConsoleMsgError(ex.ToString());
+            }
+        }
 
 
 
