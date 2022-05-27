@@ -232,7 +232,21 @@ await tester.TestEnd();
 
 await tester.GetAttributeFromElementByTagAsync("a", 0, "href");
 await tester.GetAttributeFromElementByCssAsync("#myInput", "placeholder");
-string json = await tester.GetAttributeFromElementsByCssAsync("input", "name"); // в результате ["login","pass","null"]
+List<string> Json_Array = await tester.GetAttributeFromElementsByCssAsync("input", "name"); // в результате ["login","pass","null"]
+foreach (string Json_String in Json_Array)
+{
+	Config.browserForm.consoleMsg(Json_String);
+}
+		Под капотом
+		string result = ""login","pass","null"]";
+		result = JsonConvert.DeserializeObject(result).ToString();
+		List<string> Json_Array = JsonConvert.DeserializeObject<List<string>>(result);
+		foreach (string Json_String in Json_Array)
+		{
+			ConsoleMsg(Json_String);
+		}
+
+
 
 -----------------------------------------------------------------------------
 Запуск из командной строки:

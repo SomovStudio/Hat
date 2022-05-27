@@ -2198,12 +2198,12 @@ namespace HatFrameworkDev
             return value;
         }
 
-        public async Task<string> GetAttributeFromElementsByCssAsync(string locator, string attribute)
+        public async Task<List<string>> GetAttributeFromElementsByCssAsync(string locator, string attribute)
         {
             int step = SendMessage($"GetAttributeFromElementsByCssAsync('{locator}', '{attribute}')", PROCESS, $"Получение аттрибутов {attribute} из элементов", IMAGE_STATUS_PROCESS);
-            if (DefineTestStop(step) == true) return "";
+            if (DefineTestStop(step) == true) return null;
 
-            string value = "";
+            List<string> Json_Array = null;
             try
             {
                 string script = "(function(){";
@@ -2227,7 +2227,7 @@ namespace HatFrameworkDev
                 else
                 {
                     result = JsonConvert.DeserializeObject(result).ToString();
-                    value = result;
+                    Json_Array = JsonConvert.DeserializeObject<List<string>>(result);
                     EditMessage(step, null, PASSED, $"Получен json {result} из аттрибутов {attribute}", IMAGE_STATUS_PASSED);
                 }
             }
@@ -2237,7 +2237,7 @@ namespace HatFrameworkDev
                 TestStopAsync();
                 ConsoleMsgError(ex.ToString());
             }
-            return value;
+            return Json_Array;
         }
 
 

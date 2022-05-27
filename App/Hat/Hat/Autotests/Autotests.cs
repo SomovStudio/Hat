@@ -112,8 +112,11 @@ namespace Hat
             await tester.TestBeginAsync();
             await tester.GoToUrlAsync("https://somovstudio.github.io/test.html", 5);
             await tester.WaitAsync(2);
-            string json = await tester.GetAttributeFromElementsByCssAsync("input", "name");
-            Config.browserForm.consoleMsg(json);
+            List<string> Json_Array = await tester.GetAttributeFromElementsByCssAsync("input", "name");
+            foreach (string Json_String in Json_Array)
+            {
+                Config.browserForm.consoleMsg(Json_String);
+            }            
             await tester.TestEndAsync();
         }
 
