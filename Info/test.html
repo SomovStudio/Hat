@@ -50,7 +50,7 @@
 		}
 		#result {
 			position: relative; 
-			top: 50px;
+			top: -150px;
 			min-width: 350px;
 			max-width: 350px; 
 			margin-left: auto;
@@ -58,7 +58,8 @@
     		padding: 10px;
     		border: 1px solid black; 
     		background-color: white;
-    		opacity: 0;
+    		/*opacity: 0;*/
+    		visibility: hidden;
 		}
 		#textarea {
 			min-width: 345px;
@@ -82,11 +83,12 @@
 		<input type="button" value="Войти" id="buttonLogin" onclick="
 			var inputLogin = document.getElementById('login');
 			var inputPass = document.getElementById('pass');
-			document.getElementById('result').style = 'opacity: 1';
+			/*document.getElementById('result').style = 'opacity: 1';*/
+			document.getElementById('result').style = 'visibility: visible';
 			if(inputLogin.value == 'admin' && inputPass.value == '0000'){
-				document.getElementById('textarea').value = 'PASSED';
+				document.getElementById('textarea').value = 'Вы успешно авторизованы';
 			}else{
-				document.getElementById('textarea').value = 'FAILED';
+				document.getElementById('textarea').value = 'Неверный логин или пароль';
 			}
 		">
 	</div>
