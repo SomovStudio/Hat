@@ -283,8 +283,6 @@ namespace Hat
         public async void Main(Form browserWindow)
         {
             tester = new Tester(browserWindow);
-            tester.ClearMessages();
-            tester.SendMessage(""Выполнение автотеста"", """", ""Файл: ExampleTest.cs"", Tester.IMAGE_STATUS_MESSAGE);
 
             await setUp();
             await test();
@@ -293,6 +291,8 @@ namespace Hat
 
         public async Task setUp()
         {
+            tester.ClearMessages();
+            tester.SendMessage(""Выполнение автотеста"", """", ""Файл: ExampleTest.cs"", Tester.IMAGE_STATUS_MESSAGE);            
             await tester.BrowserFullScreenAsync();
         }
 
@@ -348,8 +348,6 @@ namespace Hat
         public async void Main(Form browserWindow)
         {
             tester = new ExampleSteps(browserWindow);
-            tester.ClearMessages();
-            tester.SendMessage(""Выполнение автотеста"", """", ""Файл: ExampleTest.cs"", Tester.IMAGE_STATUS_MESSAGE);
 
             await setUp();
             await test();
@@ -358,6 +356,8 @@ namespace Hat
 
         public async Task setUp()
         {
+            tester.ClearMessages();
+            tester.SendMessage(""Выполнение автотеста"", """", ""Файл: ExampleTest.cs"", Tester.IMAGE_STATUS_MESSAGE);
             await tester.BrowserFullScreenAsync();
         }
 
