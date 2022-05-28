@@ -384,6 +384,98 @@ catch (Exception ex)\par
 @"",
 @"",
 @"",
+@"",
+@"",
+@"",
+@"",
+@"",
+@"",
+@"",
+@"",
+@"",
+@"",
+@"",
+@"",
+@"",
+@"",
+@"",
+@"",
+@"",
+@"",
+@"",
+@"",
+@"",
+@"",
+@"",
+@"",
+@"",
+@"",
+@"",
+@"",
+@"",
+@"",
+@"",
+@"",
+@"",
+@"",
+@"",
+@"",
+@"",
+@"",
+@"",
+@"",
+@"",
+@"",
+@"",
+@"",
+@"",
+@"",
+@"",
+@"",
+@"",
+@"",
+@"",
+@"",
+@"",
+@"",
+@"",
+@"",
+@"",
+@"",
+@"",
+@"",
+@"",
+@"",
+@"",
+@"",
+@"",
+@"",
+@"",
+@"",
+@"",
+@"",
+@"",
+@"",
+@"",
+@"",
+@"",
+@"",
+@"",
+@"",
+@"",
+@"",
+@"",
+@"",
+@"",
+@"",
+@"",
+@"",
+@"",
+@"",
+@"",
+@"",
+@"",
+@"",
         };
 
         private void EditorForm_Load(object sender, EventArgs e)
@@ -537,7 +629,89 @@ catch (Exception ex)\par
                     if (value == "TestStopAsync") richTextBox1.Rtf = handbook[26];
                     if (value == "DefineTestStop") richTextBox1.Rtf = handbook[27];
 
-
+                    if (value == "ClickElementByClassAsync") richTextBox1.Rtf = handbook[28];
+                    if (value == "ClickElementByCssAsync") richTextBox1.Rtf = handbook[29];
+                    if (value == "ClickElementByIdAsync") richTextBox1.Rtf = handbook[30];
+                    if (value == "ClickElementByNameAsync") richTextBox1.Rtf = handbook[31];
+                    if (value == "ClickElementByTagAsync") richTextBox1.Rtf = handbook[32];
+                    if (value == "FindElementByClassAsync") richTextBox1.Rtf = handbook[33];
+                    if (value == "FindElementByCssAsync") richTextBox1.Rtf = handbook[34];
+                    if (value == "FindElementByIdAsync") richTextBox1.Rtf = handbook[35];
+                    if (value == "FindElementByNameAsync") richTextBox1.Rtf = handbook[36];
+                    if (value == "FindElementByTagAsync") richTextBox1.Rtf = handbook[37];
+                    if (value == "FindVisibleElementByClassAsync") richTextBox1.Rtf = handbook[38];
+                    if (value == "FindVisibleElementByCssAsync") richTextBox1.Rtf = handbook[39];
+                    if (value == "FindVisibleElementByIdAsync") richTextBox1.Rtf = handbook[40];
+                    if (value == "FindVisibleElementByNameAsync") richTextBox1.Rtf = handbook[41];
+                    if (value == "FindVisibleElementByTagAsync") richTextBox1.Rtf = handbook[42];
+                    if (value == "GetAttributeFromElementByClassAsync") richTextBox1.Rtf = handbook[43];
+                    if (value == "GetAttributeFromElementByCssAsync") richTextBox1.Rtf = handbook[44];
+                    if (value == "GetAttributeFromElementByIdAsync") richTextBox1.Rtf = handbook[45];
+                    if (value == "GetAttributeFromElementByNameAsync") richTextBox1.Rtf = handbook[46];
+                    if (value == "GetAttributeFromElementByTagAsync") richTextBox1.Rtf = handbook[47];
+                    if (value == "GetAttributeFromElementsByCssAsync") richTextBox1.Rtf = handbook[48];
+                    if (value == "GetCountElementsByClassAsync") richTextBox1.Rtf = handbook[49];
+                    if (value == "GetCountElementsByCssAsync") richTextBox1.Rtf = handbook[50];
+                    if (value == "GetCountElementsByNameAsync") richTextBox1.Rtf = handbook[51];
+                    if (value == "GetCountElementsByTagAsync") richTextBox1.Rtf = handbook[52];
+                    if (value == "GetHtmlElementAsync") richTextBox1.Rtf = handbook[53];
+                    if (value == "GetTextFromElementByClassAsync") richTextBox1.Rtf = handbook[54];
+                    if (value == "GetTextFromElementByCssAsync") richTextBox1.Rtf = handbook[55];
+                    if (value == "GetTextFromElementByIdAsync") richTextBox1.Rtf = handbook[56];
+                    if (value == "GetTextFromElementByNameAsync") richTextBox1.Rtf = handbook[57];
+                    if (value == "GetTextFromElementByTagAsync") richTextBox1.Rtf = handbook[58];
+                    if (value == "GetTitleAsync") richTextBox1.Rtf = handbook[59];
+                    if (value == "GetUrlAsync") richTextBox1.Rtf = handbook[60];
+                    if (value == "GetValueFromElementByClassAsync") richTextBox1.Rtf = handbook[61];
+                    if (value == "GetValueFromElementByCssAsync") richTextBox1.Rtf = handbook[62];
+                    if (value == "GetValueFromElementByIdAsync") richTextBox1.Rtf = handbook[63];
+                    if (value == "GetValueFromElementByNameAsync") richTextBox1.Rtf = handbook[64];
+                    if (value == "GetValueFromElementByTagAsync") richTextBox1.Rtf = handbook[65];
+                    if (value == "GoToUrlAsync") richTextBox1.Rtf = handbook[66];
+                    if (value == "ScrollToElementByCssAsync") richTextBox1.Rtf = handbook[67];
+                    if (value == "SetAttributeInElementByClassAsync") richTextBox1.Rtf = handbook[68];
+                    if (value == "SetAttributeInElementByCssAsync") richTextBox1.Rtf = handbook[69];
+                    if (value == "SetAttributeInElementByIdAsync") richTextBox1.Rtf = handbook[70];
+                    if (value == "SetAttributeInElementByNameAsync") richTextBox1.Rtf = handbook[71];
+                    if (value == "SetAttributeInElementByTagAsync") richTextBox1.Rtf = handbook[72];
+                    if (value == "SetTextInElementByClassAsync") richTextBox1.Rtf = handbook[73];
+                    if (value == "SetTextInElementByCssAsync") richTextBox1.Rtf = handbook[74];
+                    if (value == "SetTextInElementByIdAsync") richTextBox1.Rtf = handbook[75];
+                    if (value == "SetTextInElementByNameAsync") richTextBox1.Rtf = handbook[76];
+                    if (value == "SetTextInElementByTagAsync") richTextBox1.Rtf = handbook[77];
+                    if (value == "SetValueInElementByClassAsync") richTextBox1.Rtf = handbook[78];
+                    if (value == "SetValueInElementByCssAsync") richTextBox1.Rtf = handbook[79];
+                    if (value == "SetValueInElementByIdAsync") richTextBox1.Rtf = handbook[80];
+                    if (value == "SetValueInElementByNameAsync") richTextBox1.Rtf = handbook[81];
+                    if (value == "SetValueInElementByTagAsync") richTextBox1.Rtf = handbook[82];
+                    if (value == "WaitAsync") richTextBox1.Rtf = handbook[83];
+                    if (value == "WaitNotVisibleElementByClassAsync") richTextBox1.Rtf = handbook[84];
+                    if (value == "WaitNotVisibleElementByCssAsync") richTextBox1.Rtf = handbook[85];
+                    if (value == "WaitNotVisibleElementByIdAsync") richTextBox1.Rtf = handbook[86];
+                    if (value == "WaitNotVisibleElementByNameAsync") richTextBox1.Rtf = handbook[87];
+                    if (value == "WaitNotVisibleElementByTagAsync") richTextBox1.Rtf = handbook[88];
+                    if (value == "WaitVisibleElementByClassAsync") richTextBox1.Rtf = handbook[89];
+                    if (value == "WaitVisibleElementByCssAsync") richTextBox1.Rtf = handbook[90];
+                    if (value == "WaitVisibleElementByIdAsync") richTextBox1.Rtf = handbook[91];
+                    if (value == "WaitVisibleElementByNameAsync") richTextBox1.Rtf = handbook[92];
+                    if (value == "WaitVisibleElementByTagAsync") richTextBox1.Rtf = handbook[93];
+                    if (value == "") richTextBox1.Rtf = handbook[94];
+                    if (value == "") richTextBox1.Rtf = handbook[95];
+                    if (value == "") richTextBox1.Rtf = handbook[96];
+                    if (value == "") richTextBox1.Rtf = handbook[97];
+                    if (value == "") richTextBox1.Rtf = handbook[98];
+                    if (value == "") richTextBox1.Rtf = handbook[99];
+                    if (value == "") richTextBox1.Rtf = handbook[100];
+                    if (value == "") richTextBox1.Rtf = handbook[101];
+                    if (value == "") richTextBox1.Rtf = handbook[102];
+                    if (value == "") richTextBox1.Rtf = handbook[103];
+                    if (value == "") richTextBox1.Rtf = handbook[104];
+                    if (value == "") richTextBox1.Rtf = handbook[105];
+                    if (value == "") richTextBox1.Rtf = handbook[106];
+                    if (value == "") richTextBox1.Rtf = handbook[107];
+                    if (value == "") richTextBox1.Rtf = handbook[108];
+                    if (value == "") richTextBox1.Rtf = handbook[109];
+                    if (value == "") richTextBox1.Rtf = handbook[110];
                 }
             }
             catch (Exception ex)
