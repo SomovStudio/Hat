@@ -25,6 +25,14 @@
 
 <hr>
 
+Видеообзор браузера Hat
+<br>
+<p align="center">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/Dn9UtrNj6EM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</p>
+
+<hr>
+
 Программа разработана при поддержке компании <b>Зионек</b> https://zionec.ru/
 
 <p align="center">
