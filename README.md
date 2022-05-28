@@ -25,7 +25,7 @@
 
 <hr>
 
-Видеообзор браузера Hat: https://www.youtube.com/embed/Dn9UtrNj6EM
+Видеообзор браузера Hat: https://youtu.be/Dn9UtrNj6EM
 
 <hr>
 
