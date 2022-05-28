@@ -25,6 +25,10 @@
 
 <hr>
 
+Видеообзор браузера Hat: https://www.youtube.com/embed/Dn9UtrNj6EM
+
+<hr>
+
 Программа разработана при поддержке компании <b>Зионек</b> https://zionec.ru/
 
 <p align="center">
