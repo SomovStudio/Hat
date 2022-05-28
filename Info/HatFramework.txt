@@ -10,18 +10,18 @@ Craker Framework
 ------------------------------------------------------------------------
 ПУБЛИЧНЫЕ МЕТОДЫ И КОНСТАНТЫ
 
-IMAGE_STATUS_PROCESS
-IMAGE_STATUS_PASSED
-IMAGE_STATUS_FAILED
-IMAGE_STATUS_MESSAGE
-IMAGE_STATUS_WARNING
+IMAGE_STATUS_PROCESS - индекс картинки которая обозначает статус в процессе
+IMAGE_STATUS_PASSED - индекс картинки которая обозначает статус успешно
+IMAGE_STATUS_FAILED - индекс картинки которая обозначает статус провально
+IMAGE_STATUS_MESSAGE - индекс картинки которая обозначает статус сообщение
+IMAGE_STATUS_WARNING - индекс картинки которая обозначает статус предупреждение
 
-PASSED
-FAILED
-STOPPED
-PROCESS
-COMPLETED
-WARNING
+PASSED - константа обозначает статус успешно
+FAILED - константа обозначает статус провально
+STOPPED - константа обозначает статус остановлено
+PROCESS - константа обозначает статус выполняется
+COMPLETED - константа обозначает статус выполнено
+WARNING - константа обозначает статус предупреждение
 
 BrowserWindow - окно браузера
 BrowserView - область отображения страницы
