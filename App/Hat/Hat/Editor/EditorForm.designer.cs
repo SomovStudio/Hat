@@ -86,7 +86,7 @@
             System.Windows.Forms.TreeNode treeNode30 = new System.Windows.Forms.TreeNode("TestBeginAsync", 2, 2);
             System.Windows.Forms.TreeNode treeNode31 = new System.Windows.Forms.TreeNode("TestEndAsync", 2, 2);
             System.Windows.Forms.TreeNode treeNode32 = new System.Windows.Forms.TreeNode("TestStopAsync", 2, 2);
-            System.Windows.Forms.TreeNode treeNode33 = new System.Windows.Forms.TreeNode("_CheckTestStop", 2, 2);
+            System.Windows.Forms.TreeNode treeNode33 = new System.Windows.Forms.TreeNode("DefineTestStop", 2, 2);
             System.Windows.Forms.TreeNode treeNode34 = new System.Windows.Forms.TreeNode("Методы для подготовки и завершению тестирования", new System.Windows.Forms.TreeNode[] {
             treeNode30,
             treeNode31,
@@ -466,7 +466,7 @@
             treeNode33.ImageIndex = 2;
             treeNode33.Name = "Узел4";
             treeNode33.SelectedImageIndex = 2;
-            treeNode33.Text = "_CheckTestStop";
+            treeNode33.Text = "DefineTestStop";
             treeNode34.Name = "Узел20";
             treeNode34.Text = "Методы для подготовки и завершению тестирования";
             treeNode35.ImageIndex = 2;
