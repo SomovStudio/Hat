@@ -252,11 +252,71 @@ public async void Main(Form browserWindow)\par
 \cf0\f0\lang1033 string ua = \f1\lang1049 await tester.BrowserGetUserAgent();\par
 }",
 
-@"",
-@"",
-@"",
-@"",
-@"",
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.22000}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 ConsoleMsg\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'fb\'e2\'ee\'e4\'e8\'f2 \'f1\'ee\'ee\'e1\'f9\'e5\'ed\'e8\'e5 \'e2 \'ea\'ee\'ed\'f1\'ee\'eb\'e8 \'e1\'f0\'e0\'f3\'e7\'e5\'f0\'e0\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : ConsoleMsg(string message)\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0 tester.ConsoleMsg(\f0\lang1033 ""\f1\lang1049\'f2\'e5\'ea\'f1\'f2 \'f1\'ee\'ee\'e1\'f9\'e5\'ed\'e8\'ff\f0\lang1033 ""\f1\lang1049 );\par
+}",
+
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.22000}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 ConsoleMsgError\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'fb\'e2\'ee\'e4\'e8\'f2 \'f1\'ee\'ee\'e1\'f9\'e5\'ed\'e8\'e5 \'ee\'e1 \'ee\'f8\'e8\'e1\'ea\'e5 \'e2 \'f1\'e8\'f1\'f2\'e5\'ec\'ed\'f3\'fe \'ea\'ee\'ed\'f1\'ee\'eb\'fc \'e8 \'ea\'ee\'ed\'f1\'ee\'eb\'fc \'e1\'f0\'e0\'f3\'e7\'e5\'f0\'e0\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : ConsoleMsgError(string message)\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0 try\par
+\{\par
+\tab\par
+\}\par
+catch (Exception ex)\par
+\{\par
+\tab tester.ConsoleMsgError(ex.ToString());\par
+\}\par
+}",
+
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.22000}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 ClearMessage\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'ee\'f7\'e8\'f9\'e0\'e5\'f2 \'f1\'ee\'ee\'e1\'f9\'e5\'ed\'e8\'ff \'e2 \'f2\'e0\'e1\'eb\'e8\'f6\'e5 \'e2\'fb\'e2\'ee\'e4\'e0 \'ef\'f0\'ee\'f6\'e5\'f1\'f1\'e0 \'e2\'fb\'ef\'ee\'eb\'ed\'e5\'ed\'e8\'ff \'f2\'e5\'f1\'f2\'e5\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : ClearMessage()\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0 tester.ClearMessage();\par
+}",
+
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.22000}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 SendMessage\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'fb\'e2\'ee\'e4\'e8\'f2 \'f1\'ee\'ee\'e1\'f9\'e5\'ed\'e8\'ff \'e2 \'f2\'e0\'e1\'eb\'e8\'f6\'e5 \'ef\'f0\'ee\'f6\'e5\'f1\'f1\'e0 \'e2\'fb\'ef\'ee\'eb\'ed\'e5\'ed\'e8\'ff \'f2\'e5\'f1\'f2\'e0\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : SendMessage(string action, string status, string comment, int image)\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0 int step = \f0\lang1033 tester.\f1\lang1049 SendMessage(""\'f2\'e5\'ea\'f1\'f2 \'e4\'e5\'e9\'f1\'f2\'e2\'e8\'ff"", \f0\lang1033 tester.\f1\lang1049 PROCESS, ""\'f2\'e5\'ea\'f1\'f2 \'ea\'ee\'ec\'ec\'e5\'ed\'f2\'e0\'f0\'e8\'ff"", \f0\lang1033 tester.\f1\lang1049 IMAGE_STATUS_PROCESS);\par
+}",
+
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.22000}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 EditMessage\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e8\'e7\'ec\'e5\'ed\'ff\'e5\'f2 \'f0\'e0\'ed\'e5\'e5 \'e2\'fb\'e2\'e5\'e4\'e5\'ed\'ed\'ee\'e5 \'f1\'ee\'ee\'e1\'f9\'e5\'ed\'e8\'ff \'e2 \'f2\'e0\'e1\'eb\'e8\'f6\'e5 \'ef\'f0\'ee\'f6\'e5\'f1\'f1\'e0 \'e2\'fb\'ef\'ee\'eb\'ed\'e5\'ed\'e8\'ff \'f2\'e5\'f1\'f2\'e0\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : EditMessage(int index, string action, string status, string comment, int image)\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0\f0\lang1033 tester.\f1\lang1049 EditMessage(step, ""\'f2\'e5\'ea\'f1\'f2 \'e4\'e5\'e9\'f1\'f2\'e2\'e8\'ff"", \f0\lang1033 tester.\f1\lang1049 PASSED, ""\'f2\'e5\'ea\'f1\'f2 \'ea\'ee\'ec\'ec\'e5\'ed\'f2\'e0\'f0\'e8\'ff"", \f0\lang1033 tester.\f1\lang1049 IMAGE_STATUS_PASSED);\par
+\par
+\f0\lang1033 tester.\f1\lang1049 EditMessage(step, \f0\lang1033 null\f1\lang1049 , \f0\lang1033 tester.\f1\lang1049 FAILED, ""\'f2\'e5\'ea\'f1\'f2 \'ea\'ee\'ec\'ec\'e5\'ed\'f2\'e0\'f0\'e8\'ff"", \f0\lang1033 tester.\f1\lang1049 IMAGE_STATUS_FAILED);\par
+\par
+    }",
+
 @"",
 @"",
 @"",
@@ -425,6 +485,13 @@ public async void Main(Form browserWindow)\par
                     if (value == "BrowserFullScreenAsync") richTextBox1.Rtf = handbook[16];
                     if (value == "BrowserSetUserAgent") richTextBox1.Rtf = handbook[17];
                     if (value == "BrowserGetUserAgent") richTextBox1.Rtf = handbook[18];
+
+                    if (value == "ConsoleMsg") richTextBox1.Rtf = handbook[19];
+                    if (value == "ConsoleMsgError") richTextBox1.Rtf = handbook[20];
+                    if (value == "ClearMessage") richTextBox1.Rtf = handbook[21];
+                    if (value == "SendMessage") richTextBox1.Rtf = handbook[22];
+                    if (value == "EditMessage") richTextBox1.Rtf = handbook[23];
+
                 }
             }
             catch (Exception ex)
