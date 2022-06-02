@@ -27,7 +27,7 @@
 
 Видеообзор браузера Hat: https://youtu.be/Dn9UtrNj6EM
 <br>
-Документация: 
+Документация: https://github.com/SomovStudio/Hat/raw/main/Info/help/help.chm
 
 <hr>
 
