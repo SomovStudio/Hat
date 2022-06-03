@@ -1762,9 +1762,9 @@ namespace Hat
         private void toolStripButton13_Click(object sender, EventArgs e)
         {
             //Autotests.devTestStutsAsync();
-            /*EditorForm editorForm = new EditorForm();
+            EditorForm editorForm = new EditorForm();
             editorForm.TopMost = Config.editorTopMost;
-            editorForm.Show();*/
+            editorForm.Show();
         }
 
         private void toolStripButton18_Click(object sender, EventArgs e)
