@@ -28,7 +28,7 @@ namespace Hat
         public static string selectName = "";               // имя выбранного файла или папки
         public static string selectValue = "";              // полный путь к выбранному файлу или папке
 
-        public static string version = "1.0.0";
+        public static string version = "1.0.1";
         public static string encoding = WorkOnFiles.UTF_8_BOM;
         public static bool editorTopMost = true;
         public static string[] libraries = new string[]

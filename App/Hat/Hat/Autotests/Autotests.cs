@@ -74,6 +74,16 @@ namespace Hat
 
         public static async Task devTestStutsAsync()
         {
+            HatFrameworkDev.Tester tester = new HatFrameworkDev.Tester(Config.browserForm);
+            tester.ClearMessages();
+            tester.SendMessage("Запуск автотеста", "", "Файл: ExampleTest.cs", Tester.IMAGE_STATUS_MESSAGE);
+            await tester.TestBeginAsync();
+            await tester.GoToUrlAsync(@"https://www.nvidia.com/ru-ru/", 5);
+            await tester.WaitAsync(4);
+            string events = await tester.BrowserGetNetwork();
+            tester.ConsoleMsg(events);
+            await tester.TestEndAsync();
+
             /*
             HatFrameworkDev.Tester tester = new HatFrameworkDev.Tester(Config.browserForm);
             tester.ClearMessage();

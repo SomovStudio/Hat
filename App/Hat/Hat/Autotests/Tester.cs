@@ -44,6 +44,7 @@ namespace HatFrameworkDev
         private MethodInfo browserEditMessageStep;  // функция: editMessageStep - изменить уже выведенное сообщение в таблице "тест"
         private MethodInfo browserResize;           // функция: browserResize - изменить размер браузера
         private MethodInfo browserUserAgent;        // функция: userAgent - настройка user-agent параметра
+        private MethodInfo browserGetErrors;        // Функция: getBowserErrors - получить список ошибок и предупреждений браузера
         private MethodInfo checkStopTest;           // функция: checkStopTest - получить статус остановки процесса тестирования
         private MethodInfo resultAutotest;          // функция: resultAutotest - устанавливает флаг общего результата выполнения теста
         
@@ -64,6 +65,7 @@ namespace HatFrameworkDev
                 browserEditMessageStep = BrowserWindow.GetType().GetMethod("editMessageStep");
                 browserResize = BrowserWindow.GetType().GetMethod("browserResize");
                 browserUserAgent = BrowserWindow.GetType().GetMethod("userAgent");
+                browserGetErrors = BrowserWindow.GetType().GetMethod("getBowserErrors");
                 checkStopTest = BrowserWindow.GetType().GetMethod("checkStopTest");
                 resultAutotest = BrowserWindow.GetType().GetMethod("resultAutotest");
 
@@ -358,6 +360,43 @@ namespace HatFrameworkDev
                 ConsoleMsgError(ex.ToString());
             }
             return userAgent;
+        }
+
+        public async Task<List<string>> BrowserGetErrors()
+        {
+            List<string> list = new List<string>();
+            try
+            {
+                list = (List<string>)browserGetErrors.Invoke(BrowserWindow, null);
+            }
+            catch (Exception ex)
+            {
+                ConsoleMsgError(ex.ToString());
+            }
+            return list;
+        }
+
+        public async Task<string> BrowserGetNetwork()
+        {
+            string events = null;
+            try
+            {
+                string script =
+                @"(function(){
+                var performance = window.performance || window.mozPerformance || window.msPerformance || window.webkitPerformance || {};
+                var network = performance.getEntriesByType('resource') || {};
+                var result = JSON.stringify(network);
+                return result;
+                }());";
+                string jsonText = await ExecuteJavaScriptAsync(script);
+                dynamic result = JsonConvert.DeserializeObject(jsonText);
+                events = result;
+            }
+            catch (Exception ex)
+            {
+                ConsoleMsgError(ex.ToString());
+            }
+            return events;
         }
 
         public async Task<string> ExecuteJavaScriptAsync(string script)

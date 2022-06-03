@@ -220,6 +220,8 @@ browserCleadMessageStep
 browserSendMessageStep
 browserEditMessageStep
 browserResize
+browserUserAgent
+browserGetErrors
 checkStopTest
 resultAutotest
 
@@ -231,5 +233,19 @@ contentLoading() - событие при завершении загрузки �
 resultAutotestSuccess() - отправить результат проверки автотеста
 findVisibleElementAsync() - определить визуальное отображение элемента
 
+------------------------------------------------------------------------
 
+Новые методы для обновления 1.0.1
 
+BrowserGetErrors() - получить список ошибок и предупреждений браузера
+
+	List<string> errors = await tester.BrowserGetErrors();
+	foreach (string error in errors)
+	{
+		tester.ConsoleMsg(error);
+	}
+	
+BrowserGetNetwork() - получить в формате json все текущие сообщения из network
+
+	string events = await tester.BrowserGetNetwork();
+	tester.ConsoleMsg(events);

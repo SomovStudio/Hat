@@ -1761,10 +1761,12 @@ namespace Hat
 
         private void toolStripButton13_Click(object sender, EventArgs e)
         {
-            //Autotests.devTestStutsAsync();
+            Autotests.devTestStutsAsync();
+            /*
             EditorForm editorForm = new EditorForm();
             editorForm.TopMost = Config.editorTopMost;
             editorForm.Show();
+            */
         }
 
         private void toolStripButton18_Click(object sender, EventArgs e)
@@ -1935,5 +1937,17 @@ namespace Hat
                 consoleMsgError(ex.ToString());
             }
         }
+
+        /* Возвращает данные из Console браузера (предупреждения и ошибки) */
+        public List<string> getBowserErrors()
+        {
+            List<string> list = new List<string>();
+            foreach (string line in richTextBoxErrors.Lines)
+            {
+                list.Add(line);
+            }
+            return list;
+        }
+
     }
 }
