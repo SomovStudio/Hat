@@ -80,7 +80,7 @@ namespace Hat
             await tester.TestBeginAsync();
             await tester.GoToUrlAsync(@"https://www.nvidia.com/ru-ru/", 5);
             await tester.WaitAsync(4);
-            string events = await tester.BrowserGetNetwork();
+            string events = await tester.BrowserGetNetworkAsync();
             tester.ConsoleMsg(events);
             await tester.TestEndAsync();
 

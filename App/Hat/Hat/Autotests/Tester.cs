@@ -336,7 +336,7 @@ namespace HatFrameworkDev
             }
         }
 
-        public async Task BrowserSetUserAgent(string value)
+        public async Task BrowserSetUserAgentAsync(string value)
         {
             try
             {
@@ -348,7 +348,7 @@ namespace HatFrameworkDev
             }
         }
 
-        public async Task<string> BrowserGetUserAgent()
+        public async Task<string> BrowserGetUserAgentAsync()
         {
             string userAgent = null;
             try
@@ -362,7 +362,7 @@ namespace HatFrameworkDev
             return userAgent;
         }
 
-        public async Task<List<string>> BrowserGetErrors()
+        public async Task<List<string>> BrowserGetErrorsAsync()
         {
             List<string> list = new List<string>();
             try
@@ -376,7 +376,7 @@ namespace HatFrameworkDev
             return list;
         }
 
-        public async Task<string> BrowserGetNetwork()
+        public async Task<string> BrowserGetNetworkAsync()
         {
             string events = null;
             try

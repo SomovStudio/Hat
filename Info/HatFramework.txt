@@ -237,15 +237,15 @@ findVisibleElementAsync() - определить визуальное отобр
 
 Новые методы для обновления 1.0.1
 
-BrowserGetErrors() - получить список ошибок и предупреждений браузера
+BrowserGetErrorsAsync() - получить список ошибок и предупреждений браузера
 
-	List<string> errors = await tester.BrowserGetErrors();
+	List<string> errors = await tester.BrowserGetErrorsAsync();
 	foreach (string error in errors)
 	{
 		tester.ConsoleMsg(error);
 	}
 	
-BrowserGetNetwork() - получить в формате json все текущие сообщения из network
+BrowserGetNetworkAsync() - получить в формате json все текущие сообщения из network
 
-	string events = await tester.BrowserGetNetwork();
+	string events = await tester.BrowserGetNetworkAsync();
 	tester.ConsoleMsg(events);
