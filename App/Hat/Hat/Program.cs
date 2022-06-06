@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -8,6 +10,9 @@ namespace Hat
 {
     internal static class Program
     {
+        [DllImport("user32.dll")]
+        static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
+
         /// <summary>
         /// Главная точка входа для приложения.
         /// </summary>
@@ -20,6 +25,9 @@ namespace Hat
                 Config.selectName = args[0];
                 Config.projectPath = args[1];
             }
+            IntPtr hWnd = Process.GetCurrentProcess().MainWindowHandle;
+            ShowWindow(hWnd, 0);
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new BrowserForm());
