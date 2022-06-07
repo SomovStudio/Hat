@@ -78,10 +78,15 @@ namespace Hat
             tester.ClearMessages();
             tester.SendMessage("Запуск автотеста", "", "Файл: ExampleTest.cs", Tester.IMAGE_STATUS_MESSAGE);
             await tester.TestBeginAsync();
-            await tester.GoToUrlAsync(@"https://www.nvidia.com/ru-ru/", 5);
-            await tester.WaitAsync(4);
-            string events = await tester.BrowserGetNetworkAsync();
-            tester.ConsoleMsg(events);
+            await tester.GoToUrlAsync("https://somovstudio.github.io/test.html", 5);
+            await tester.WaitNotVisibleElementByIdAsync("result", 5);
+
+
+            List<string> values = await tester.SetAttributeInElementsByClassAsync("text-field", "value", "test");
+            foreach (string value in values)
+            {
+                tester.ConsoleMsg(value);
+            }
             await tester.TestEndAsync();
 
             /*
