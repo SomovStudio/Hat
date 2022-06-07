@@ -1242,8 +1242,18 @@ bool result = await tester.AssertFalseAsync(flag);\f1\lang1049\par
                     if (treeView1.SelectedNode.Text == "Методы для работы с браузером") return;
                     if (treeView1.SelectedNode.Text == "Методы для вывода сообщений") return;
                     if (treeView1.SelectedNode.Text == "Методы для подготовки и завершению тестирования") return;
-                    if (treeView1.SelectedNode.Text == "Методы выполнения действий") return;
-                    if (treeView1.SelectedNode.Text == "Методы выполнения JavaScript") return;
+
+                    if (treeView1.SelectedNode.Text == "Методы для выполнения действий") return;
+                    if (treeView1.SelectedNode.Text == "Нажатие") return;
+                    if (treeView1.SelectedNode.Text == "Поиск") return;
+                    if (treeView1.SelectedNode.Text == "Атрибуты") return;
+                    if (treeView1.SelectedNode.Text == "Объекты") return;
+                    if (treeView1.SelectedNode.Text == "Текст") return;
+                    if (treeView1.SelectedNode.Text == "Страница") return;
+                    if (treeView1.SelectedNode.Text == "Значение") return;
+                    if (treeView1.SelectedNode.Text == "Ожидание") return;
+
+                    if (treeView1.SelectedNode.Text == "Методы для выполнения JavaScript") return;
                     if (treeView1.SelectedNode.Text == "Методы для проверки результата") return;
                     
                     Clipboard.SetText(treeView1.SelectedNode.Text);
