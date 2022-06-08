@@ -309,14 +309,25 @@ namespace HatFrameworkDev
 
         public async Task BrowserCloseAsync()
         {
-            BrowserWindow.Close();
+            try
+            {
+                int step = SendMessage("BrowserCloseAsync()", PROCESS, "Браузер закрывается", IMAGE_STATUS_PROCESS);
+                BrowserWindow.Close();
+                EditMessage(step, null, COMPLETED, "Закрытие браузера - выполнено", IMAGE_STATUS_MESSAGE);
+            }
+            catch (Exception ex)
+            {
+                ConsoleMsgError(ex.ToString());
+            }
         }
 
         public async Task BrowserSizeAsync(int width, int height)
         {
             try
             {
+                int step = SendMessage($"BrowserSizeAsync({width}, {height})", PROCESS, "Изменяется размер браузера", IMAGE_STATUS_PROCESS);
                 browserResize.Invoke(BrowserWindow, new object[] { width, height });
+                EditMessage(step, null, COMPLETED, "Размер браузера изменён", IMAGE_STATUS_MESSAGE);
             }
             catch (Exception ex)
             {
@@ -328,7 +339,9 @@ namespace HatFrameworkDev
         {
             try
             {
+                int step = SendMessage($"BrowserFullScreenAsync()", PROCESS, "Изменяется размер браузера", IMAGE_STATUS_PROCESS);
                 browserResize.Invoke(BrowserWindow, new object[] { -1, -1 });
+                EditMessage(step, null, COMPLETED, "Размер браузера изменён", IMAGE_STATUS_MESSAGE);
             }
             catch (Exception ex)
             {
@@ -340,7 +353,9 @@ namespace HatFrameworkDev
         {
             try
             {
+                int step = SendMessage($"BrowserSetUserAgentAsync({value})", PROCESS, "Изменяется значение User-Agent", IMAGE_STATUS_PROCESS);
                 browserUserAgent.Invoke(BrowserWindow, new object[] { value });
+                EditMessage(step, null, COMPLETED, "Значение User-Agent изменено", IMAGE_STATUS_MESSAGE);
             }
             catch (Exception ex)
             {
@@ -353,7 +368,9 @@ namespace HatFrameworkDev
             string userAgent = null;
             try
             {
+                int step = SendMessage($"BrowserGetUserAgentAsync()", PROCESS, "Получение значения User-Agent", IMAGE_STATUS_PROCESS);
                 userAgent = BrowserView.CoreWebView2.Settings.UserAgent;
+                EditMessage(step, null, COMPLETED, $"Из User-Agent получено значение: {userAgent}", IMAGE_STATUS_MESSAGE);
             }
             catch (Exception ex)
             {
@@ -367,7 +384,9 @@ namespace HatFrameworkDev
             List<string> list = new List<string>();
             try
             {
+                int step = SendMessage($"BrowserGetErrorsAsync()", PROCESS, "Получение списка ошибок и предупреждений браузера", IMAGE_STATUS_PROCESS);
                 list = (List<string>)browserGetErrors.Invoke(BrowserWindow, null);
+                EditMessage(step, null, COMPLETED, "Получен список ошибок и предупреждений браузера", IMAGE_STATUS_MESSAGE);
             }
             catch (Exception ex)
             {
@@ -381,6 +400,7 @@ namespace HatFrameworkDev
             string events = null;
             try
             {
+                int step = SendMessage($"BrowserGetNetworkAsync()", PROCESS, "Получение списка событий браузера (network)", IMAGE_STATUS_PROCESS);
                 string script =
                 @"(function(){
                 var performance = window.performance || window.mozPerformance || window.msPerformance || window.webkitPerformance || {};
@@ -391,6 +411,7 @@ namespace HatFrameworkDev
                 string jsonText = await ExecuteJavaScriptAsync(script);
                 dynamic result = JsonConvert.DeserializeObject(jsonText);
                 events = result;
+                EditMessage(step, null, COMPLETED, "Получен список событий браузера (network)", IMAGE_STATUS_MESSAGE);
             }
             catch (Exception ex)
             {

@@ -60,9 +60,9 @@ namespace Hat
                     }
                     else // это будет для папки с автотестами (пока в разработке)
                     {
-                        object classObj = results.CompiledAssembly.CreateInstance("Hat.ExampleTest");
-                        MethodInfo funcMain = classObj.GetType().GetMethod("Main");
-                        funcMain.Invoke(classObj, new object[] { Config.browserForm });
+                        //object classObj = results.CompiledAssembly.CreateInstance("Hat.ExampleTest");
+                        //MethodInfo funcMain = classObj.GetType().GetMethod("Main");
+                        //funcMain.Invoke(classObj, new object[] { Config.browserForm });
                     }
                 }
             }
@@ -77,6 +77,7 @@ namespace Hat
             HatFrameworkDev.Tester tester = new HatFrameworkDev.Tester(Config.browserForm);
             tester.ClearMessages();
             tester.SendMessage("Запуск автотеста", "", "Файл: ExampleTest.cs", Tester.IMAGE_STATUS_MESSAGE);
+            await tester.BrowserSizeAsync(800, 600);
             await tester.TestBeginAsync();
             await tester.GoToUrlAsync("https://somovstudio.github.io/test.html", 5);
             await tester.WaitNotVisibleElementByIdAsync("result", 5);
