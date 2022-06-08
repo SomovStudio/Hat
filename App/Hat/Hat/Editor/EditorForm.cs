@@ -1231,10 +1231,70 @@ foreach (string value in values)\par
 }
 ",
 
-@"",
-@"",
-@"",
-@"",
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.22000}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 SetAttributeInElementsByClassAsync\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'f1\'f2\'e0\'e2\'e8\'f2\'fc \'e0\'f2\'f0\'e8\'e1\'f3\'f2 \'f1 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'fb\'ec \'e7\'ed\'e0\'f7\'e5\'ed\'e8\'e5\'ec \'e2 \'ec\'ed\'ee\'e6\'e5\'f1\'f2\'e2\'ee \'fd\'eb\'e5\'ec\'e5\'ed\'f2\'ee\'e2 \'e8 \'e2 \'f0\'e5\'e7\'f3\'eb\'fc\'f2\'e0\'f2\'e5 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2\f0\lang1033  \f1\lang1049\'f1\'ef\'e8\'f1\'ee\'ea\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \f0\lang1033 SetAttributeInElementsByClassAsync\f1\lang1049 (string \f0\lang1033 _class\f1\lang1049 , string attribute\f0\lang1033 , string value\f1\lang1049 )\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0\f0\lang1033 List<string> values = await tester.SetAttributeInElementsByClassAsync(""text-field"", ""value"", ""test"");\par
+foreach (string value in values)\par
+\{\par
+\tab tester.ConsoleMsg(value);\par
+\}\par
+}
+",
+
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.22000}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 SetAttributeInElementsByCssAsync\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'f1\'f2\'e0\'e2\'e8\'f2\'fc \'e0\'f2\'f0\'e8\'e1\'f3\'f2 \'f1 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'fb\'ec \'e7\'ed\'e0\'f7\'e5\'ed\'e8\'e5\'ec \'e2 \'ec\'ed\'ee\'e6\'e5\'f1\'f2\'e2\'ee \'fd\'eb\'e5\'ec\'e5\'ed\'f2\'ee\'e2 \'e8 \'e2 \'f0\'e5\'e7\'f3\'eb\'fc\'f2\'e0\'f2\'e5 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2\f0\lang1033  \f1\lang1049\'f1\'ef\'e8\'f1\'ee\'ea\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \f0\lang1033 SetAttributeInElementsByCssAsync\f1\lang1049 (string \f0\lang1033 locator\f1\lang1049 , string attribute\f0\lang1033 , string value\f1\lang1049 )\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0\f0\lang1033 List<string> values = await tester.SetAttributeInElementsByCssAsync(""#auth .text-field"", ""value"", ""test"");\par
+foreach (string value in values)\par
+\{\par
+\tab tester.ConsoleMsg(value);\par
+\}\par
+}
+",
+
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;\red0\green0\blue255;}
+{\*\generator Riched20 10.0.22000}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 SetAttributeInElementsByNameAsync\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'f1\'f2\'e0\'e2\'e8\'f2\'fc \'e0\'f2\'f0\'e8\'e1\'f3\'f2 \'f1 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'fb\'ec \'e7\'ed\'e0\'f7\'e5\'ed\'e8\'e5\'ec \'e2 \'ec\'ed\'ee\'e6\'e5\'f1\'f2\'e2\'ee \'fd\'eb\'e5\'ec\'e5\'ed\'f2\'ee\'e2 \'e8 \'e2 \'f0\'e5\'e7\'f3\'eb\'fc\'f2\'e0\'f2\'e5 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2\f0\lang1033  \f1\lang1049\'f1\'ef\'e8\'f1\'ee\'ea\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \f0\lang1033 SetAttributeInElementsByNameAsync\f1\lang1049 (string \f0\lang1033 name\f1\lang1049 , string attribute\f0\lang1033 , string value\f1\lang1049 )\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0\f0\lang1033 List<string> values = await tester.SetAttributeInElementsByNameAsync(""link"", ""href"", ""www.test.ru"");\par
+foreach (string value in values)\par
+\{\par
+\tab tester.ConsoleMsg(value);\par
+\}\par
+}
+",
+
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;\red0\green0\blue255;}
+{\*\generator Riched20 10.0.22000}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 SetAttributeInElementsByTagAsync\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'f1\'f2\'e0\'e2\'e8\'f2\'fc \'e0\'f2\'f0\'e8\'e1\'f3\'f2 \'f1 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'fb\'ec \'e7\'ed\'e0\'f7\'e5\'ed\'e8\'e5\'ec \'e2 \'ec\'ed\'ee\'e6\'e5\'f1\'f2\'e2\'ee \'fd\'eb\'e5\'ec\'e5\'ed\'f2\'ee\'e2 \'e8 \'e2 \'f0\'e5\'e7\'f3\'eb\'fc\'f2\'e0\'f2\'e5 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2\f0\lang1033  \f1\lang1049\'f1\'ef\'e8\'f1\'ee\'ea\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \f0\lang1033 SetAttributeInElementsByTagAsync\f1\lang1049 (string \f0\lang1033 tag\f1\lang1049 , string attribute\f0\lang1033 , string value\f1\lang1049 )\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0\f0\lang1033 List<string> values = await tester.SetAttributeInElementsByTagAsync(""a"", ""href"", ""www.test.ru"");\par
+foreach (string value in values)\par
+\{\par
+\tab tester.ConsoleMsg(value);\par
+\}\par
+}
+",
+
 @"",
 @"",
 @"",
@@ -1485,11 +1545,11 @@ foreach (string value in values)\par
                     if (value == "GetAttributeFromElementsByNameAsync") richTextBox1.Rtf = handbook[102];
                     if (value == "GetAttributeFromElementsByTagAsync") richTextBox1.Rtf = handbook[103];
                     if (value == "SetAttributeInElementsByClassAsync") richTextBox1.Rtf = handbook[104];
-                    if (value == "") richTextBox1.Rtf = handbook[105];
-                    if (value == "") richTextBox1.Rtf = handbook[106];
-                    if (value == "") richTextBox1.Rtf = handbook[107];
-                    if (value == "") richTextBox1.Rtf = handbook[108];
-                    if (value == "") richTextBox1.Rtf = handbook[109];
+                    if (value == "SetAttributeInElementsByCssAsync") richTextBox1.Rtf = handbook[105];
+                    if (value == "SetAttributeInElementsByNameAsync") richTextBox1.Rtf = handbook[106];
+                    if (value == "SetAttributeInElementsByTagAsync") richTextBox1.Rtf = handbook[107];
+                    //if (value == "") richTextBox1.Rtf = handbook[108];
+                    //if (value == "") richTextBox1.Rtf = handbook[109];
                 }
             }
             catch (Exception ex)

@@ -260,7 +260,10 @@ GetAttributeFromElementsByTagAsync() - получить список атриб�
 		tester.ConsoleMsg(value);
 	}
 
-SetAttributeInElementsByClassAsync() - вставить атрибут со значением
+SetAttributeInElementsByClassAsync() - вставить атрибут со значением SetAttributeInElementsByClassAsync(string _class, string attribute, string value)
+SetAttributeInElementsByCssAsync() - вставить атрибут со значением SetAttributeInElementsByCssAsync(string tag, string attribute, string value)
+SetAttributeInElementsByNameAsync() - вставить атрибут со значением SetAttributeInElementsByNameAsync(string name, string attribute, string value)
+SetAttributeInElementsByTagAsync() - вставить атрибут со значением SetAttributeInElementsByTagAsync(string tag, string attribute, string value)
 
 	List<string> values = await tester.SetAttributeInElementsByClassAsync("text-field", "value", "test");
 	foreach (string value in values)
