@@ -1949,5 +1949,17 @@ namespace Hat
             return list;
         }
 
+        private void debugJavaScriptToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (Config.debugJavaScript == true)Config.debugJavaScript = false;
+            else Config.debugJavaScript = true;
+            debugJavaScriptToolStripMenuItem.Checked = Config.debugJavaScript;
+            debugJavaScriptToolStripMenuItem1.Checked = Config.debugJavaScript;
+        }
+
+        public bool getStatusDebugJavaScript()
+        {
+            return Config.debugJavaScript;
+        }
     }
 }

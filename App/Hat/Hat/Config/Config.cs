@@ -27,7 +27,9 @@ namespace Hat
         public static string projectPath = "(не открыт)";   // полный путь к папке проекта
         public static string selectName = "";               // имя выбранного файла или папки
         public static string selectValue = "";              // полный путь к выбранному файлу или папке
+        public static bool debugJavaScript = false;         // отладка javascript при выполнении автотеста
 
+        /* переменные для файла project.hat */
         public static string version = "1.0.1";
         public static string encoding = WorkOnFiles.UTF_8_BOM;
         public static bool editorTopMost = true;

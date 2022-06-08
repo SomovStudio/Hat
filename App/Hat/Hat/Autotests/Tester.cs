@@ -47,6 +47,7 @@ namespace HatFrameworkDev
         private MethodInfo browserGetErrors;        // Функция: getBowserErrors - получить список ошибок и предупреждений браузера
         private MethodInfo checkStopTest;           // функция: checkStopTest - получить статус остановки процесса тестирования
         private MethodInfo resultAutotest;          // функция: resultAutotest - устанавливает флаг общего результата выполнения теста
+        private MethodInfo debugJavaScript;         // функция: getStatusDebugJavaScript - возвращает статус отладки
         
         private bool statusPageLoad = false;    // флаг: статус загрузки страницы
         private bool testStop = false;          // флаг: остановка теста
@@ -68,6 +69,7 @@ namespace HatFrameworkDev
                 browserGetErrors = BrowserWindow.GetType().GetMethod("getBowserErrors");
                 checkStopTest = BrowserWindow.GetType().GetMethod("checkStopTest");
                 resultAutotest = BrowserWindow.GetType().GetMethod("resultAutotest");
+                debugJavaScript = BrowserWindow.GetType().GetMethod("getStatusDebugJavaScript");
 
                 MethodInfo mi = BrowserWindow.GetType().GetMethod("getWebView");
                 BrowserView = (Microsoft.Web.WebView2.WinForms.WebView2)mi.Invoke(BrowserWindow, null);
@@ -426,7 +428,7 @@ namespace HatFrameworkDev
             try
             {
                 result = await BrowserView.CoreWebView2.ExecuteScriptAsync(script);
-                //ConsoleMsg($"Метод ExecuteJavaScriptAsync вернул значение: {result}");
+                if ((bool)debugJavaScript.Invoke(BrowserWindow, null) == true) ConsoleMsg($"Метод ExecuteJavaScriptAsync вернул значение: {result}");
             }
             catch (Exception ex)
             {
