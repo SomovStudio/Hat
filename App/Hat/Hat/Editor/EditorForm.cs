@@ -233,23 +233,23 @@ public async void Main(Form browserWindow)\par
 @"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
-\pard\sl276\slmult1\cf1\f0\fs20\lang9 BrowserSetUserAgent\cf0\par
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 BrowserSetUserAgentAsync\cf0\par
 \cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'f3\'f1\'f2\'e0\'ed\'e0\'e2\'eb\'e8\'e2\'e0\'e5\'f2 \'e7\'ed\'e0\'f7\'e5\'ed\'e8\'e5 \f0\lang1033 User-Agent\f1\lang1049  \'e4\'eb\'ff \'e1\'f0\'e0\'f3\'e7\'e5\'f0\'e0\par
-\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : BrowserSetUserAgent(string value)\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : BrowserSetUserAgentAsync(string value)\par
 \cf3\par
 \cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
-\cf0 await tester.BrowserSetUserAgent(\f0\lang1033 ""my user-agent""\f1\lang1049 );\par
+\cf0 await tester.BrowserSetUserAgentAsync(\f0\lang1033 ""my user-agent""\f1\lang1049 );\par
 }",
 
 @"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
-\pard\sl276\slmult1\cf1\f0\fs20\lang9 BrowserGetUserAgent\cf0\par
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 BrowserGetUserAgentAsync\cf0\par
 \cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2 \'f1\'f2\'f0\'ee\'f7\'ed\'ee\'e5 \'e7\'ed\'e0\'f7\'e5\'ed\'e8\'e5 \f0\lang1033 User-Agent\f1\lang1049  \'e1\'f0\'e0\'f3\'e7\'e5\'f0\'e0\par
-\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : BrowserGetUserAgent()\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : BrowserGetUserAgentAsync()\par
 \cf3\par
 \cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
-\cf0\f0\lang1033 string ua = \f1\lang1049 await tester.BrowserGetUserAgent();\par
+\cf0\f0\lang1033 string ua = \f1\lang1049 await tester.BrowserGetUserAgentAsync();\par
 }",
 
 @"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
@@ -1156,6 +1156,88 @@ bool result = await tester.AssertTrueAsync(flag);\f1\lang1049\par
 bool result = await tester.AssertFalseAsync(flag);\f1\lang1049\par
 }",
 
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.22000}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 BrowserGetErrorsAsync\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2 \'f1\'ef\'e8\'f1\'ee\'ea \'ee\'f8\'e8\'e1\'ee\'ea \'e8 \'ef\'f0\'e5\'e4\'f3\'ef\'f0\'e5\'e6\'e4\'e5\'ed\'e8\'e9 \'e1\'f0\'e0\'f3\'e7\'e5\'f0\'e0\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : BrowserGetErrorsAsync()\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0\f0\lang1033 List<string> errors = await tester.BrowserGetErrorsAsync();\par
+foreach (string error in errors)\par
+\{\par
+\tab tester.ConsoleMsg(error);\par
+\}\par
+}",
+
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.22000}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 BrowserGetNetworkAsync\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2 \'e2 \'f4\'ee\'f0\'ec\'e0\'f2\'e5 json \'e2\'f1\'e5 \'f2\'e5\'ea\'f3\'f9\'e8\'e5 \'f1\'ee\'ee\'e1\'f9\'e5\'ed\'e8\'ff \'e8\'e7 network\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : BrowserGetNetworkAsync()\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0\f0\lang1033 string events = await tester.BrowserGetNetworkAsync();\par
+tester.ConsoleMsg(events);\par
+}",
+
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.22000}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 GetAttributeFromElementsByClassAsync\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2\f0\lang1033  \f1\lang1049\'f1\'ef\'e8\'f1\'ee\'ea \'e7\'ed\'e0\'f7\'e5\'ed\'e8\'e9 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'ee\'e3\'ee \'e0\'f2\'f0\'e8\'e1\'f3\'f2\'e0 \'e8\'e7 \'ec\'ed\'ee\'e6\'e5\'f1\'f2\'e2\'e0 \'fd\'eb\'e5\'ec\'e5\'ed\'f2\'ee\'e2\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : GetAttributeFromElementsByClassAsync(string _class, string attribute)\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0\f0\lang1033 List<string> values = await tester.GetAttributeFromElementsByClassAsync(""text-field"", ""name"");\par
+foreach (string value in values)\par
+\{\par
+\tab tester.ConsoleMsg(value);\par
+\}\fs22\par
+}
+",
+
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.22000}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 GetAttributeFromElementsByNameAsync\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2\f0\lang1033  \f1\lang1049\'f1\'ef\'e8\'f1\'ee\'ea \'e7\'ed\'e0\'f7\'e5\'ed\'e8\'e9 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'ee\'e3\'ee \'e0\'f2\'f0\'e8\'e1\'f3\'f2\'e0 \'e8\'e7 \'ec\'ed\'ee\'e6\'e5\'f1\'f2\'e2\'e0 \'fd\'eb\'e5\'ec\'e5\'ed\'f2\'ee\'e2\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : GetAttributeFromElementsByNameAsync(string \f0\lang1033 name\f1\lang1049 , string attribute)\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0\f0\lang1033 List<string> values = await tester.GetAttributeFromElementsByNameAsync(""link"", ""href"");\par
+foreach (string value in values)\par
+\{\par
+\tab tester.ConsoleMsg(value);\par
+\}\fs22\par
+}
+",
+
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.22000}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 GetAttributeFromElementsByTagAsync\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2\f0\lang1033  \f1\lang1049\'f1\'ef\'e8\'f1\'ee\'ea \'e7\'ed\'e0\'f7\'e5\'ed\'e8\'e9 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'ee\'e3\'ee \'e0\'f2\'f0\'e8\'e1\'f3\'f2\'e0 \'e8\'e7 \'ec\'ed\'ee\'e6\'e5\'f1\'f2\'e2\'e0 \'fd\'eb\'e5\'ec\'e5\'ed\'f2\'ee\'e2\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : GetAttributeFromElementsByTagAsync(string \f0\lang1033 tag\f1\lang1049 , string attribute)\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0\f0\lang1033 List<string> values = await tester.GetAttributeFromElementsByTagAsync(""a"", ""href"");\par
+foreach (string value in values)\par
+\{\par
+\tab tester.ConsoleMsg(value);\par
+\}\fs22\par
+}
+",
+
+@"",
+@"",
+@"",
+@"",
+@"",
+@"",
+@"",
 @"",
 @"",
 @""
@@ -1308,8 +1390,8 @@ bool result = await tester.AssertFalseAsync(flag);\f1\lang1049\par
                     if (value == "BrowserCloseAsync") richTextBox1.Rtf = handbook[14];
                     if (value == "BrowserSizeAsync") richTextBox1.Rtf = handbook[15];
                     if (value == "BrowserFullScreenAsync") richTextBox1.Rtf = handbook[16];
-                    if (value == "BrowserSetUserAgent") richTextBox1.Rtf = handbook[17];
-                    if (value == "BrowserGetUserAgent") richTextBox1.Rtf = handbook[18];
+                    if (value == "BrowserSetUserAgentAsync") richTextBox1.Rtf = handbook[17];
+                    if (value == "BrowserGetUserAgentAsync") richTextBox1.Rtf = handbook[18];
 
                     if (value == "ConsoleMsg") richTextBox1.Rtf = handbook[19];
                     if (value == "ConsoleMsgError") richTextBox1.Rtf = handbook[20];
@@ -1395,6 +1477,19 @@ bool result = await tester.AssertFalseAsync(flag);\f1\lang1049\par
                     if (value == "AssertNotEqualsAsync") richTextBox1.Rtf = handbook[96];
                     if (value == "AssertTrueAsync") richTextBox1.Rtf = handbook[97];
                     if (value == "AssertFalseAsync") richTextBox1.Rtf = handbook[98];
+
+                    if (value == "BrowserGetErrorsAsync") richTextBox1.Rtf = handbook[99];
+                    if (value == "BrowserGetNetworkAsync") richTextBox1.Rtf = handbook[100];
+
+                    if (value == "GetAttributeFromElementsByClassAsync") richTextBox1.Rtf = handbook[101];
+                    if (value == "GetAttributeFromElementsByNameAsync") richTextBox1.Rtf = handbook[102];
+                    if (value == "GetAttributeFromElementsByTagAsync") richTextBox1.Rtf = handbook[103];
+                    if (value == "SetAttributeInElementsByClassAsync") richTextBox1.Rtf = handbook[104];
+                    if (value == "") richTextBox1.Rtf = handbook[105];
+                    if (value == "") richTextBox1.Rtf = handbook[106];
+                    if (value == "") richTextBox1.Rtf = handbook[107];
+                    if (value == "") richTextBox1.Rtf = handbook[108];
+                    if (value == "") richTextBox1.Rtf = handbook[109];
                 }
             }
             catch (Exception ex)

@@ -250,9 +250,9 @@ BrowserGetNetworkAsync() - получить в формате json все тек
 	string events = await tester.BrowserGetNetworkAsync();
 	tester.ConsoleMsg(events);
 
-GetAttributeFromElementsByClassAsync() - получить список атрибутов из множества элементов
-GetAttributeFromElementsByNameAsync() - получить список атрибутов из множества элементов
-GetAttributeFromElementsByTagAsync() - получить список атрибутов из множества элементов
+GetAttributeFromElementsByClassAsync() - получить список атрибутов из множества элементов GetAttributeFromElementsByClassAsync(string _class, string attribute)
+GetAttributeFromElementsByNameAsync() - получить список атрибутов из множества элементов GetAttributeFromElementsByNameAsync(string name, string attribute)
+GetAttributeFromElementsByTagAsync() - получить список атрибутов из множества элементов GetAttributeFromElementsByTagAsync(string tag, string attribute)
 
 	List<string> values = await tester.GetAttributeFromElementsByClassAsync("text-field", "name");
 	foreach (string value in values)
