@@ -281,11 +281,11 @@ GetHtmlFromElementByTagAsync() - получить html элемента GetHtmlF
 	string html = await tester.GetHtmlFromElementByClassAsync("text-field", 0);
 
 
-SetHtmlInElementByClassAsync() - вставить html в элемент
-SetHtmlInElementByCssAsync() - вставить html в элемент
-SetHtmlInElementByIdAsync() - вставить html в элемент
-SetHtmlInElementByNameAsync() - вставить html в элемент
-SetHtmlInElementByTagAsync() - вставить html в элемент
+SetHtmlInElementByClassAsync() - вставить html в элемент SetHtmlInElementByClassAsync(string _class, int index, string html)
+SetHtmlInElementByCssAsync() - вставить html в элемент SetHtmlInElementByCssAsync(string locator, string html)
+SetHtmlInElementByIdAsync() - вставить html в элемент SetHtmlInElementByIdAsync(string id, string html)
+SetHtmlInElementByNameAsync() - вставить html в элемент SetHtmlInElementByNameAsync(string name, int index, string html)
+SetHtmlInElementByTagAsync() - вставить html в элемент SetHtmlInElementByTagAsync(string tag, int index, string html)
 
 	await tester.SetHtmlInElementByClassAsync("text-field", 0, "<h1>это тест</h1>");
 
