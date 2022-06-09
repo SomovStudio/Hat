@@ -2907,6 +2907,161 @@ namespace HatFrameworkDev
             return value;
         }
 
+        public async Task SetHtmlInElementByClassAsync(string _class, int index, string html)
+        {
+            int step = SendMessage($"SetHtmlInElementByClassAsync('{_class}', {index}, '{html}')", PROCESS, "Ввод html в элемент", IMAGE_STATUS_PROCESS);
+            if (DefineTestStop(step) == true) return;
+
+            try
+            {
+                string script = "(function(){";
+                script += $"var element = document.getElementsByClassName('{_class}')[{index}];";
+                script += $"element.innerHTML = '{html}';";
+                script += $"return element.outerHTML;";
+                script += "}());";
+                string result = await ExecuteJavaScriptAsync(script);
+                if (result == "null" || result == null)
+                {
+                    EditMessage(step, null, Tester.FAILED, $"Не удалось найти или ввести html в элемент по Class: {_class} (Index: {index})", Tester.IMAGE_STATUS_FAILED);
+                    TestStopAsync();
+                }
+                else
+                {
+                    EditMessage(step, null, PASSED, $"В элемент введен html {html}", IMAGE_STATUS_PASSED);
+                }
+            }
+            catch (Exception ex)
+            {
+                EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
+                TestStopAsync();
+                ConsoleMsgError(ex.ToString());
+            }
+        }
+
+        public async Task SetHtmlInElementByCssAsync(string locator, string html)
+        {
+            int step = SendMessage($"SetHtmlInElementByCssAsync('{locator}', '{html}')", PROCESS, "Ввод html в элемент", IMAGE_STATUS_PROCESS);
+            if (DefineTestStop(step) == true) return;
+
+            try
+            {
+                string script = "(function(){";
+                script += $"var element = document.querySelector('{locator}');";
+                script += $"element.innerHTML = '{html}';";
+                script += $"return element.outerHTML;";
+                script += "}());";
+                string result = await ExecuteJavaScriptAsync(script);
+                if (result == "null" || result == null)
+                {
+                    EditMessage(step, null, Tester.FAILED, $"Не удалось найти или ввести html в элемент по локатору: {locator}", Tester.IMAGE_STATUS_FAILED);
+                    TestStopAsync();
+                }
+                else
+                {
+                    EditMessage(step, null, PASSED, $"В элемент введен html {html}", IMAGE_STATUS_PASSED);
+                }
+            }
+            catch (Exception ex)
+            {
+                EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
+                TestStopAsync();
+                ConsoleMsgError(ex.ToString());
+            }
+        }
+
+        public async Task SetHtmlInElementByIdAsync(string id, string html)
+        {
+            int step = SendMessage($"SetHtmlInElementByIdAsync('{id}', '{html}')", PROCESS, "Ввод html в элемент", IMAGE_STATUS_PROCESS);
+            if (DefineTestStop(step) == true) return;
+
+            try
+            {
+                string script = "(function(){";
+                script += $"var element = document.getElementById('{id}');";
+                script += $"element.innerHTML = '{html}';";
+                script += $"return element.outerHTML;";
+                script += "}());";
+                string result = await ExecuteJavaScriptAsync(script);
+                if (result == "null" || result == null)
+                {
+                    EditMessage(step, null, Tester.FAILED, $"Не удалось найти или ввести html в элемент с ID: {id}", Tester.IMAGE_STATUS_FAILED);
+                    TestStopAsync();
+                }
+                else
+                {
+                    EditMessage(step, null, PASSED, $"В элемент введен html {html}", IMAGE_STATUS_PASSED);
+                }
+            }
+            catch (Exception ex)
+            {
+                EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
+                TestStopAsync();
+                ConsoleMsgError(ex.ToString());
+            }
+        }
+
+        public async Task SetHtmlInElementByNameAsync(string name, int index, string html)
+        {
+            int step = SendMessage($"SetHtmlInElementByNameAsync('{name}', {index}, '{html}')", PROCESS, "Ввод html в элемент", IMAGE_STATUS_PROCESS);
+            if (DefineTestStop(step) == true) return;
+
+            try
+            {
+                string script = "(function(){";
+                script += $"var element = document.getElementsByName('{name}')[{index}];";
+                script += $"element.innerHTML = '{html}';";
+                script += $"return element.outerHTML;";
+                script += "}());";
+                string result = await ExecuteJavaScriptAsync(script);
+                if (result == "null" || result == null)
+                {
+                    EditMessage(step, null, Tester.FAILED, $"Не удалось найти или ввести html в элемент по Name: {name} (Index: {index})", Tester.IMAGE_STATUS_FAILED);
+                    TestStopAsync();
+                }
+                else
+                {
+                    EditMessage(step, null, PASSED, $"В элемент введен html {html}", IMAGE_STATUS_PASSED);
+                }
+            }
+            catch (Exception ex)
+            {
+                EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
+                TestStopAsync();
+                ConsoleMsgError(ex.ToString());
+            }
+        }
+
+        public async Task SetHtmlInElementByTagAsync(string tag, int index, string html)
+        {
+            int step = SendMessage($"SetHtmlInElementByNameAsync('{tag}', {index}, '{html}')", PROCESS, "Ввод html в элемент", IMAGE_STATUS_PROCESS);
+            if (DefineTestStop(step) == true) return;
+
+            try
+            {
+                string script = "(function(){";
+                script += $"var element = document.getElementsByTagName('{tag}')[{index}];";
+                script += $"element.innerHTML = '{html}';";
+                script += $"return element.outerHTML;";
+                script += "}());";
+                string result = await ExecuteJavaScriptAsync(script);
+                if (result == "null" || result == null)
+                {
+                    EditMessage(step, null, Tester.FAILED, $"Не удалось найти или ввести html в элемент по Tag: {tag} (Index: {index})", Tester.IMAGE_STATUS_FAILED);
+                    TestStopAsync();
+                }
+                else
+                {
+                    EditMessage(step, null, PASSED, $"В элемент введен html {html}", IMAGE_STATUS_PASSED);
+                }
+            }
+            catch (Exception ex)
+            {
+                EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
+                TestStopAsync();
+                ConsoleMsgError(ex.ToString());
+            }
+        }
+
 
 
 

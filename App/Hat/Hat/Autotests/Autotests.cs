@@ -79,8 +79,10 @@ namespace Hat
             tester.SendMessage("Запуск автотеста", "", "Файл: ExampleTest.cs", Tester.IMAGE_STATUS_MESSAGE);
             await tester.TestBeginAsync();
             await tester.GoToUrlAsync("https://somovstudio.github.io/test.html", 5);
-            string html = await tester.GetHtmlFromElementByClassAsync("text-field", 0);
-            tester.ConsoleMsg(html);
+            await tester.WaitAsync(2);
+
+            await tester.SetHtmlInElementByClassAsync("text-field", 0, "<h1>это тест</h1>");
+
             await tester.TestEndAsync();
 
             /*

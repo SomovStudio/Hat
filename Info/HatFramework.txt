@@ -271,9 +271,9 @@ SetAttributeInElementsByTagAsync() - вставить атрибут со зна
 		tester.ConsoleMsg(value);
 	}
 
-GetHtmlFromElementByIdAsync() - получить html элемента GetHtmlFromElementByIdAsync(string id)
 GetHtmlFromElementByClassAsync() - получить html элемента GetHtmlFromElementByClassAsync(string _class, int index)
 GetHtmlFromElementByCssAsync() - получить html элемента GetHtmlFromElementByCssAsync(string locator)
+GetHtmlFromElementByIdAsync() - получить html элемента GetHtmlFromElementByIdAsync(string id)
 GetHtmlFromElementByNameAsync() - получить html элемента GetHtmlFromElementByNameAsync(string name, int index)
 GetHtmlFromElementByTagAsync() - получить html элемента GetHtmlFromElementByTagAsync(string tag, int index)
 
@@ -281,5 +281,12 @@ GetHtmlFromElementByTagAsync() - получить html элемента GetHtmlF
 	string html = await tester.GetHtmlFromElementByClassAsync("text-field", 0);
 
 
+SetHtmlInElementByClassAsync() - вставить html в элемент
+SetHtmlInElementByCssAsync() - вставить html в элемент
+SetHtmlInElementByIdAsync() - вставить html в элемент
+SetHtmlInElementByNameAsync() - вставить html в элемент
+SetHtmlInElementByTagAsync() - вставить html в элемент
+
+	await tester.SetHtmlInElementByClassAsync("text-field", 0, "<h1>это тест</h1>");
 
 
