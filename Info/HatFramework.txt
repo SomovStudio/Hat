@@ -271,4 +271,15 @@ SetAttributeInElementsByTagAsync() - вставить атрибут со зна
 		tester.ConsoleMsg(value);
 	}
 
+GetHtmlFromElementByIdAsync() - получить html элемента GetHtmlFromElementByIdAsync(string id)
+GetHtmlFromElementByClassAsync() - получить html элемента GetHtmlFromElementByClassAsync(string _class, int index)
+GetHtmlFromElementByCssAsync() - получить html элемента GetHtmlFromElementByCssAsync(string locator)
+GetHtmlFromElementByNameAsync() - получить html элемента GetHtmlFromElementByNameAsync(string name, int index)
+GetHtmlFromElementByTagAsync() - получить html элемента GetHtmlFromElementByTagAsync(string tag, int index)
+
+	string html = await tester.GetHtmlFromElementByIdAsync("login");
+	string html = await tester.GetHtmlFromElementByClassAsync("text-field", 0);
+
+
+
 

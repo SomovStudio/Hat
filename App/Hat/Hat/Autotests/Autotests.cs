@@ -77,17 +77,10 @@ namespace Hat
             HatFrameworkDev.Tester tester = new HatFrameworkDev.Tester(Config.browserForm);
             tester.ClearMessages();
             tester.SendMessage("Запуск автотеста", "", "Файл: ExampleTest.cs", Tester.IMAGE_STATUS_MESSAGE);
-            await tester.BrowserSizeAsync(800, 600);
             await tester.TestBeginAsync();
             await tester.GoToUrlAsync("https://somovstudio.github.io/test.html", 5);
-            await tester.WaitNotVisibleElementByIdAsync("result", 5);
-
-
-            List<string> values = await tester.SetAttributeInElementsByClassAsync("text-field", "value", "test");
-            foreach (string value in values)
-            {
-                tester.ConsoleMsg(value);
-            }
+            string html = await tester.GetHtmlFromElementByClassAsync("text-field", 0);
+            tester.ConsoleMsg(html);
             await tester.TestEndAsync();
 
             /*
