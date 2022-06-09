@@ -52,6 +52,7 @@ namespace HatFrameworkDev
         private bool statusPageLoad = false;    // флаг: статус загрузки страницы
         private bool testStop = false;          // флаг: остановка теста
         private string assertStatus = null;     // флаг: рузельтат проверки
+        private bool statusDebugJavaScript = false;   // флаг: режим отладки при выполнении JS скриптов
 
         public Tester(Form browserForm)
         {
@@ -254,6 +255,7 @@ namespace HatFrameworkDev
                 assertStatus = null;
                 int step = SendMessage("TestBeginAsync()", PROCESS, "Инициализация теста", IMAGE_STATUS_PROCESS);
                 await BrowserView.EnsureCoreWebView2Async();
+                statusDebugJavaScript = (bool)debugJavaScript.Invoke(BrowserWindow, null);
                 EditMessage(step, null, PASSED, "Выполнена инициализация теста", IMAGE_STATUS_PASSED);
                 ConsoleMsg("Тест запущен");
             }
@@ -428,7 +430,7 @@ namespace HatFrameworkDev
             try
             {
                 result = await BrowserView.CoreWebView2.ExecuteScriptAsync(script);
-                if ((bool)debugJavaScript.Invoke(BrowserWindow, null) == true) ConsoleMsg($"Метод ExecuteJavaScriptAsync вернул значение: {result}");
+                if (statusDebugJavaScript == true) ConsoleMsg($"Метод ExecuteJavaScriptAsync вернул значение: {result}");
             }
             catch (Exception ex)
             {
