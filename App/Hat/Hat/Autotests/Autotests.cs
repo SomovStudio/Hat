@@ -84,9 +84,16 @@ namespace Hat
             //tester.ConsoleMsg($"ID: {element.Id} | NAME: {element.Name} | CLASS: {element.Class} | TYPE: {element.Type}");
 
             HatFrameworkDev.HTMLElement element = await tester.GetElementAsync(HatFrameworkDev.Tester.BY_XPATH, "//h1");
-            await element.SetTextAsync("TEST");
+            tester.ConsoleMsg($"ID: {element.Id} | NAME: {element.Name} | CLASS: {element.Class} | TYPE: {element.Type}");
+            await element.SetTextAsync("Тестовый заголовок");
             string text = await element.GetTextAsync();
             tester.ConsoleMsg(text);
+
+            element = await tester.GetElementAsync(HatFrameworkDev.Tester.BY_XPATH, "//*[@id='MyInput']");
+            tester.ConsoleMsg($"ID: {element.Id} | NAME: {element.Name} | CLASS: {element.Class} | TYPE: {element.Type}");
+            await element.SetValueAsync("Тестирование");
+            string value = await element.GetValueAsync();
+            tester.ConsoleMsg(value);
 
             await tester.TestEndAsync();
 

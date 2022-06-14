@@ -447,7 +447,9 @@ namespace HatFrameworkDev
          * */
         public async Task<HTMLElement> GetElementAsync(string by, string locator)
         {
-            int step = SendMessage($"GetElementAsync('{by}', '{locator}')", PROCESS, "Полечить элемента", IMAGE_STATUS_PROCESS);
+            int step;
+            if(by == BY_CSS) step = SendMessage($"GetElementAsync(\"{by}\", '{locator}')", PROCESS, "Полечить элемента", IMAGE_STATUS_PROCESS);
+            else step = SendMessage($"GetElementAsync(\"{by}\", \"{locator}\")", PROCESS, "Полечить элемента", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return null;
 
             HTMLElement htmlElement = new HTMLElement(this, by, locator);

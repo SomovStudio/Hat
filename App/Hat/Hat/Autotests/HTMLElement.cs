@@ -56,26 +56,49 @@ namespace HatFrameworkDev
             if (_tester.DefineTestStop(step) == true) return;
 
             string script = null;
-            if (_by == Tester.BY_CSS) script = $"document.querySelector('{_locator}').click();";
-            else if (_by == Tester.BY_XPATH) script = $"document.evaluate('{_locator}', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.click();";
+            if (_by == Tester.BY_CSS)
+            {
+                script = "(function(){";
+                script += $"document.querySelector('{_locator}').click();";
+                script += "}());";
+            }
+            else if (_by == Tester.BY_XPATH)
+            {
+                script = "(function(){";
+                script += $"document.evaluate(\"{_locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.click();";
+                script += "return element.outerText;";
+                script += "}());";
+            }
             await execute(script, step, $"Нажатие на элемент {_locator}");
         }
 
         public async Task<string> GetTextAsync()
         {
             int step = _tester.SendMessage("GetTextAsync()", Tester.PROCESS, "Чтение текста из элемент", Tester.IMAGE_STATUS_PROCESS);
-            if (_tester.DefineTestStop(step) == true) return "";
+            if (_tester.DefineTestStop(step) == true) return null;
 
             string script = null;
-            if (_by == Tester.BY_CSS) script = "(function(){ var element = document.querySelector('" + _locator + "'); return element.outerText; }());";
-            else if (_by == Tester.BY_XPATH) script = "(function(){ var element = document.evaluate('" + _locator + "', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue; return element.outerText; }());";
+            if (_by == Tester.BY_CSS)
+            {
+                script = "(function(){";
+                script += $"var element = document.querySelector('{_locator}');";
+                script += "return element.outerText;";
+                script += "}());";
+            }
+            else if (_by == Tester.BY_XPATH)
+            {
+                script = "(function(){";
+                script += $"var element = document.evaluate(\"{_locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
+                script += "return element.outerText;";
+                script += "}());";
+            }
             string result = await execute(script, step, $"Прочитан текст из элемента");
             return result;
         }
 
         public async Task SetTextAsync(string text)
         {
-            int step = _tester.SendMessage($"SetTextAsync('{text}')", Tester.PROCESS, "Ввод текста в элемент", Tester.IMAGE_STATUS_PROCESS);
+            int step = _tester.SendMessage($"SetTextAsync(\"{text}\")", Tester.PROCESS, "Ввод текста в элемент", Tester.IMAGE_STATUS_PROCESS);
             if (_tester.DefineTestStop(step) == true) return;
 
             string script = null;
@@ -90,7 +113,7 @@ namespace HatFrameworkDev
             else if (_by == Tester.BY_XPATH)
             {
                 script = "(function(){";
-                script += $"var element = document.evaluate('{_locator}', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
+                script += $"var element = document.evaluate(\"{_locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
                 script += $"element.innerText = '{text}';";
                 script += "return element.outerText;";
                 script += "}());";
@@ -100,12 +123,61 @@ namespace HatFrameworkDev
 
         public async Task<string> GetValueAsync()
         {
-            return "";
+            int step = _tester.SendMessage("GetValueAsync()", Tester.PROCESS, "Получение значения из элемент", Tester.IMAGE_STATUS_PROCESS);
+            if (_tester.DefineTestStop(step) == true) return null;
+
+            string script = null;
+            if (_by == Tester.BY_CSS)
+            {
+                script = "(function(){";
+                script += $"var element = document.querySelector('{_locator}');";
+                script += "return element.value;";
+                script += "}());";
+            }
+            else if (_by == Tester.BY_XPATH)
+            {
+                script = "(function(){";
+                script += $"var element = document.evaluate(\"{_locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
+                script += "return element.value;";
+                script += "}());";
+            }
+            string result = await execute(script, step, $"Прочитан текст из элемента");
+            return result;
         }
 
         public async Task SetValueAsync(string value)
         {
+            int step = _tester.SendMessage($"SetValueAsync(\"{value}\")", Tester.PROCESS, "Ввод значения в элемент", Tester.IMAGE_STATUS_PROCESS);
+            if (_tester.DefineTestStop(step) == true) return;
 
+            string script = null;
+            if (_by == Tester.BY_CSS)
+            {
+                script = "(function(){";
+                script += $"var element = document.querySelector('{_locator}');";
+                script += $"element.value = '{value}';";
+                script += "element.dispatchEvent(new KeyboardEvent('keydown', { bubbles: true }));";
+                script += "element.dispatchEvent(new KeyboardEvent('keypress', { bubbles: true }));";
+                script += "element.dispatchEvent(new KeyboardEvent('keyup', { bubbles: true }));";
+                script += "element.dispatchEvent(new Event('input', { bubbles: true }));";
+                script += "element.dispatchEvent(new Event('change', { bubbles: true }));";
+                script += "return element.value;";
+                script += "}());";
+            }
+            else if (_by == Tester.BY_XPATH)
+            {
+                script = "(function(){";
+                script += $"var element = document.evaluate(\"{_locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
+                script += $"element.value = '{value}';";
+                script += "element.dispatchEvent(new KeyboardEvent('keydown', { bubbles: true }));";
+                script += "element.dispatchEvent(new KeyboardEvent('keypress', { bubbles: true }));";
+                script += "element.dispatchEvent(new KeyboardEvent('keyup', { bubbles: true }));";
+                script += "element.dispatchEvent(new Event('input', { bubbles: true }));";
+                script += "element.dispatchEvent(new Event('change', { bubbles: true }));";
+                script += "return element.value;";
+                script += "}());";
+            }
+            await execute(script, step, "Значение введено в элемент");
         }
 
         public async Task<string> GetAttributeAsync(string name)
