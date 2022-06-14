@@ -467,7 +467,6 @@ namespace HatFrameworkDev
                 script += "return obj;";
                 script += "}());";
 
-                ConsoleMsg(script);
                 var obj = await BrowserView.CoreWebView2.ExecuteScriptAsync(script);
                 el = JsonConvert.DeserializeObject<HTMLElement>(obj);
                 if (el == null)

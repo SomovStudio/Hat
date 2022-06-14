@@ -52,8 +52,9 @@ namespace HatFrameworkDev
 
         public async Task ClickAsync()
         {
-            int step = _tester.SendMessage("ClickAsync()", Tester.PROCESS, $"Нажатие на элемент {_locator}", Tester.IMAGE_STATUS_PROCESS);
+            int step = _tester.SendMessage("ClickAsync()", Tester.PROCESS, "Нажатие на элемент", Tester.IMAGE_STATUS_PROCESS);
             if (_tester.DefineTestStop(step) == true) return;
+
             string script = null;
             if (_by == Tester.BY_CSS) script = $"document.querySelector('{_locator}').click();";
             else if (_by == Tester.BY_XPATH) script = $"document.evaluate('{_locator}', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.click();";
@@ -62,7 +63,7 @@ namespace HatFrameworkDev
 
         public async Task<string> GetTextAsync()
         {
-            int step = _tester.SendMessage("GetTextAsync()", Tester.PROCESS, $"Чтение текста из элемент", Tester.IMAGE_STATUS_PROCESS);
+            int step = _tester.SendMessage("GetTextAsync()", Tester.PROCESS, "Чтение текста из элемент", Tester.IMAGE_STATUS_PROCESS);
             if (_tester.DefineTestStop(step) == true) return "";
 
             string script = null;
@@ -74,7 +75,27 @@ namespace HatFrameworkDev
 
         public async Task SetTextAsync(string text)
         {
+            int step = _tester.SendMessage($"SetTextAsync('{text}')", Tester.PROCESS, "Ввод текста в элемент", Tester.IMAGE_STATUS_PROCESS);
+            if (_tester.DefineTestStop(step) == true) return;
 
+            string script = null;
+            if (_by == Tester.BY_CSS)
+            {
+                script = "(function(){";
+                script += $"var element = document.querySelector('{_locator}');";
+                script += $"element.innerText = '{text}';";
+                script += "return element.outerText;";
+                script += "}());";
+            }
+            else if (_by == Tester.BY_XPATH)
+            {
+                script = "(function(){";
+                script += $"var element = document.evaluate('{_locator}', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
+                script += $"element.innerText = '{text}';";
+                script += "return element.outerText;";
+                script += "}());";
+            }
+            await execute(script, step, "Текст введен в элемент");
         }
 
         public async Task<string> GetValueAsync()
