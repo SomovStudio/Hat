@@ -25,7 +25,7 @@ namespace HatFrameworkDev
             _locator = locator;
         }
 
-        private async Task<string> execute(string script, int step, string comment)
+        private async Task<string> execute(string script, int step, string commentPassed, string commentfailed)
         {
             string result = null;
             try
@@ -33,12 +33,12 @@ namespace HatFrameworkDev
                 result = await _tester.BrowserView.CoreWebView2.ExecuteScriptAsync(script);
                 if (result == null)
                 {
-                    _tester.EditMessage(step, null, Tester.FAILED, comment, Tester.IMAGE_STATUS_FAILED);
+                    _tester.EditMessage(step, null, Tester.FAILED, commentfailed, Tester.IMAGE_STATUS_FAILED);
                     _tester.TestStopAsync();
                 }
                 else 
                 {
-                    _tester.EditMessage(step, null, Tester.PASSED, comment, Tester.IMAGE_STATUS_PASSED);
+                    _tester.EditMessage(step, null, Tester.PASSED, commentPassed, Tester.IMAGE_STATUS_PASSED);
                 }
             }
             catch (Exception ex)
@@ -69,7 +69,7 @@ namespace HatFrameworkDev
                 script += "return element.outerText;";
                 script += "}());";
             }
-            await execute(script, step, $"Нажатие на элемент {_locator}");
+            await execute(script, step, "Элемент нажат", "Не удалось нажать на элемент");
         }
 
         public async Task<string> GetTextAsync()
@@ -92,7 +92,7 @@ namespace HatFrameworkDev
                 script += "return element.outerText;";
                 script += "}());";
             }
-            string result = await execute(script, step, $"Прочитан текст из элемента");
+            string result = await execute(script, step, "Текст из элемента прочитан", "Не удалось прочитать текст из элемента");
             return result;
         }
 
@@ -118,12 +118,12 @@ namespace HatFrameworkDev
                 script += "return element.outerText;";
                 script += "}());";
             }
-            await execute(script, step, "Текст введен в элемент");
+            await execute(script, step, "Текст введен в элемент", "Не удалось ввести текст в элемент");
         }
 
         public async Task<string> GetValueAsync()
         {
-            int step = _tester.SendMessage("GetValueAsync()", Tester.PROCESS, "Получение значения из элемент", Tester.IMAGE_STATUS_PROCESS);
+            int step = _tester.SendMessage("GetValueAsync()", Tester.PROCESS, "Чтение значения из элемент", Tester.IMAGE_STATUS_PROCESS);
             if (_tester.DefineTestStop(step) == true) return null;
 
             string script = null;
@@ -141,7 +141,7 @@ namespace HatFrameworkDev
                 script += "return element.value;";
                 script += "}());";
             }
-            string result = await execute(script, step, $"Прочитан текст из элемента");
+            string result = await execute(script, step, "Прочитано значение из элемента", "Не удалось прочитать значение элемента");
             return result;
         }
 
@@ -177,7 +177,7 @@ namespace HatFrameworkDev
                 script += "return element.value;";
                 script += "}());";
             }
-            await execute(script, step, "Значение введено в элемент");
+            await execute(script, step, "Значение введено в элемент", "Не удалось ввести значение в элемент");
         }
 
         public async Task<string> GetAttributeAsync(string name)
