@@ -76,5 +76,50 @@ namespace HatFrameworkDev
         {
 
         }
+
+        public async Task<string> GetValueAsync()
+        {
+            return "";
+        }
+
+        public async Task SetValueAsync(string value)
+        {
+
+        }
+
+        public async Task<string> GetAttributeAsync(string name)
+        {
+            return "";
+        }
+
+        public async Task SetAttributeAsync(string name, string value)
+        {
+
+        }
+
+        public async Task<string> GetHtmlAsync()
+        {
+            return "";
+        }
+
+        public async Task SetHtmlAsync(string html)
+        {
+
+        }
+
+        public async Task ScrollToAsync(bool behaviorSmooth = false)
+        {
+
+        }
+
+        public async Task WaitVisibleAsync(int sec)
+        {
+
+        }
+
+        public async Task WaitNotVisibleAsync(int sec)
+        {
+
+        }
     }
 }
