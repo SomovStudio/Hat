@@ -231,12 +231,51 @@ namespace HatFrameworkDev
 
         public async Task<string> GetHtmlAsync()
         {
-            return "";
+            int step = _tester.SendMessage($"GetHtmlAsync()", Tester.PROCESS, "Получение html из элемент", Tester.IMAGE_STATUS_PROCESS);
+            if (_tester.DefineTestStop(step) == true) return null;
+
+            string script = null;
+            if (_by == Tester.BY_CSS)
+            {
+                script = "(function(){";
+                script += $"var element = document.querySelector('{_locator}');";
+                script += $"return element.outerHTML;";
+                script += "}());";
+            }
+            else if (_by == Tester.BY_XPATH)
+            {
+                script = "(function(){";
+                script += $"var element = document.evaluate(\"{_locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
+                script += $"return element.outerHTML;";
+                script += "}());";
+            }
+            string result = await execute(script, step, "Получен html из элемента", "Не удалось получить html из элемента");
+            return result;
         }
 
         public async Task SetHtmlAsync(string html)
         {
+            int step = _tester.SendMessage($"SetHtmlAsync('{html}')", Tester.PROCESS, "Ввод html в элемент", Tester.IMAGE_STATUS_PROCESS);
+            if (_tester.DefineTestStop(step) == true) return;
 
+            string script = null;
+            if (_by == Tester.BY_CSS)
+            {
+                script = "(function(){";
+                script += $"var element = document.querySelector('{_locator}');";
+                script += $"element.innerHTML = '{html}';";
+                script += "return element.outerHTML;";
+                script += "}());";
+            }
+            else if (_by == Tester.BY_XPATH)
+            {
+                script = "(function(){";
+                script += $"var element = document.evaluate(\"{_locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
+                script += $"element.innerHTML = '{html}';";
+                script += "return element.outerHTML;";
+                script += "}());";
+            }
+            await execute(script, step, "В элемент введен html", "Не удалось ввести html в элемент");
         }
 
         public async Task ScrollToAsync(bool behaviorSmooth = false)

@@ -313,3 +313,14 @@ HTMLElement(Tester tester, string by, string locator) - объект элеме�
 	await element.SetAttributeAsync("class", "my-class");
 	string attrClass = await element.GetAttributeAsync("class");
 	tester.ConsoleMsg(attrClass);
+
+	HTMLElement element = await tester.GetElementAsync(Tester.BY_XPATH, "//h1");
+	string html = await element.GetHtmlAsync();
+	tester.ConsoleMsg(html);
+
+	HTMLElement element = await tester.GetElementAsync(Tester.BY_XPATH, "//h1");
+	await element.SetHtmlAsync("<div>Это тест</div>");
+
+
+
+

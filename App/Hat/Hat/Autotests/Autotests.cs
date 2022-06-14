@@ -81,9 +81,7 @@ namespace Hat
             await tester.GoToUrlAsync("https://somovstudio.github.io/test2.html", 5);
 
             HatFrameworkDev.HTMLElement element = await tester.GetElementAsync(HatFrameworkDev.Tester.BY_XPATH, "//h1");
-            await element.SetAttributeAsync("class", "my-class");
-            string attrClass = await element.GetAttributeAsync("class");
-            tester.ConsoleMsg(attrClass);
+            await element.SetHtmlAsync("<div>Это тест</div>");
             await tester.TestEndAsync();
 
 
