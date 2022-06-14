@@ -25,6 +25,8 @@ namespace HatFrameworkDev
         public const string PROCESS = "Выполняется";
         public const string COMPLETED = "Выполнено";
         public const string WARNING = "Предупреждение";
+        public const string BY_CSS = "BY_CSS";     // тип локатора css
+        public const string BY_XPATH = "BY_XPATH"; // тип локатора xpath
 
         public Form BrowserWindow;      // объект: окно приложения
         public WebView2 BrowserView;    // объект: браузер
@@ -34,7 +36,7 @@ namespace HatFrameworkDev
         private const string BY_CLASS = "BY_CLASS";
         private const string BY_NAME = "BY_NAME";
         private const string BY_TAG = "BY_TAG";
-        private const string BY_CSS = "BY_CSS";
+        
 
         private MethodInfo browserConsoleMsg;       // функция: consoleMsg - вывод сообщения в консоль приложения
         private MethodInfo browserConsoleMsgError;  // функция: consoleMsgError - вывод сообщения об ошибке в консоль приложения
@@ -443,30 +445,43 @@ namespace HatFrameworkDev
         /* 
          * Методы для выполнения действий ============================================================
          * */
-        public async Task<HTMLElement> GetHtmlElementAsync(string locator)
+        public async Task<HTMLElement> GetElementAsync(string by, string locator)
         {
-            int step = SendMessage($"GetHtmlElementAsync('{locator}')", PROCESS, "Полечить элемента", IMAGE_STATUS_PROCESS);
+            int step = SendMessage($"GetElementAsync('{by}', '{locator}')", PROCESS, "Полечить элемента", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return null;
 
-            HTMLElement htmlElement = new HTMLElement(this);
+            HTMLElement htmlElement = new HTMLElement(this, by, locator);
             try
             {
                 HTMLElement el = null;
-                var obj = await BrowserView.CoreWebView2.ExecuteScriptAsync("(function(locatorCss = '" + locator + "'){ var el = document.querySelector(locatorCss); var obj = { Locator: locatorCss, Id: el.id, Class: el.class, Name: el.name, Value: el.value }; return obj; }());");
+                string script = "";
+                script = "(function(locator = '" + locator + "'){";
+                if (by == BY_CSS) script += "var el = document.querySelector(locator);";
+                else if (by == BY_XPATH) script += "var el = document.evaluate(locator, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
+                script += "var obj = {";
+                script += "Id: el.id,";
+                script += "Class: el.getAttribute('class'),";
+                script += "Name: el.name,";
+                script += "Type: el.type";
+                script += "};";
+                script += "return obj;";
+                script += "}());";
+
+                ConsoleMsg(script);
+                var obj = await BrowserView.CoreWebView2.ExecuteScriptAsync(script);
                 el = JsonConvert.DeserializeObject<HTMLElement>(obj);
                 if (el == null)
                 {
-                    EditMessage(step, null, Tester.FAILED, $"Не удалось получить элемент {locator}", Tester.IMAGE_STATUS_FAILED);
+                    EditMessage(step, null, Tester.FAILED, $"Не удалось получить элемент {locator} ({by})", Tester.IMAGE_STATUS_FAILED);
                     TestStopAsync();
                 }
                 else
                 {
-                    htmlElement = new HTMLElement(this);
-                    htmlElement.Locator = el.Locator;
+                    htmlElement = new HTMLElement(this, by, locator);
                     htmlElement.Id = el.Id;
                     htmlElement.Name = el.Name;
                     htmlElement.Class = el.Class;
-                    htmlElement.Value = el.Value;
+                    htmlElement.Type = el.Type;
                     EditMessage(step, null, PASSED, "Элемент получен", IMAGE_STATUS_PASSED);
                 }
             }

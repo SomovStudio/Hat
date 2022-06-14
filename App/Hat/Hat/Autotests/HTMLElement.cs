@@ -8,39 +8,73 @@ namespace HatFrameworkDev
 {
     public class HTMLElement
     {
-        private Tester tester;
-        public string Locator { get; set; }
+        private Tester _tester;
+        private string _by;
+        private string _locator;
+
         public string Id { get; set; }
         public string Name { get; set; }
         public string Class { get; set; }
-        public string Value { get; set; }
+        public string Type { get; set; }
+        
 
-        public HTMLElement(Tester _tester)
+        public HTMLElement(Tester tester, string by, string locator)
         {
-            tester = _tester;
+            _tester = tester;
+            _by = by;
+            _locator = locator;
         }
 
-        public async Task ClickAsync()
+        private async Task<string> execute(string script, int step, string comment)
         {
-            int step = tester.SendMessage("ClickAsync()", Tester.PROCESS, $"Нажатие на элемент {Locator}", Tester.IMAGE_STATUS_PROCESS);
-            if (tester.DefineTestStop(step) == true) return;
-
+            string result = null;
             try
             {
-                var result = await tester.BrowserView.CoreWebView2.ExecuteScriptAsync($"document.querySelector('{Locator}').click();");
-                tester.EditMessage(step, null, Tester.PASSED, $"Нажатие на элемент {Locator}", Tester.IMAGE_STATUS_PASSED);
+                result = await _tester.BrowserView.CoreWebView2.ExecuteScriptAsync(script);
                 if (result == null)
                 {
-                    tester.EditMessage(step, null, Tester.FAILED, $"Не удалось нажать на элемент {Locator}", Tester.IMAGE_STATUS_FAILED);
-                    tester.TestStopAsync();
+                    _tester.EditMessage(step, null, Tester.FAILED, comment, Tester.IMAGE_STATUS_FAILED);
+                    _tester.TestStopAsync();
+                }
+                else 
+                {
+                    _tester.EditMessage(step, null, Tester.PASSED, comment, Tester.IMAGE_STATUS_PASSED);
                 }
             }
             catch (Exception ex)
             {
-                tester.EditMessage(step, null, Tester.FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), Tester.IMAGE_STATUS_FAILED);
-                tester.TestStopAsync();
-                tester.ConsoleMsgError(ex.ToString());
+                _tester.EditMessage(step, null, Tester.FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), Tester.IMAGE_STATUS_FAILED);
+                _tester.TestStopAsync();
+                _tester.ConsoleMsgError(ex.ToString());
             }
+            return result;
+        }
+
+        public async Task ClickAsync()
+        {
+            int step = _tester.SendMessage("ClickAsync()", Tester.PROCESS, $"Нажатие на элемент {_locator}", Tester.IMAGE_STATUS_PROCESS);
+            if (_tester.DefineTestStop(step) == true) return;
+            string script = null;
+            if (_by == Tester.BY_CSS) script = $"document.querySelector('{_locator}').click();";
+            else if (_by == Tester.BY_XPATH) script = $"document.evaluate('{_locator}', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.click();";
+            await execute(script, step, $"Нажатие на элемент {_locator}");
+        }
+
+        public async Task<string> GetTextAsync()
+        {
+            int step = _tester.SendMessage("GetTextAsync()", Tester.PROCESS, $"Чтение текста из элемент", Tester.IMAGE_STATUS_PROCESS);
+            if (_tester.DefineTestStop(step) == true) return "";
+
+            string script = null;
+            if (_by == Tester.BY_CSS) script = "(function(){ var element = document.querySelector('" + _locator + "'); return element.outerText; }());";
+            else if (_by == Tester.BY_XPATH) script = "(function(){ var element = document.evaluate('" + _locator + "', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue; return element.outerText; }());";
+            string result = await execute(script, step, $"Прочитан текст из элемента");
+            return result;
+        }
+
+        public async Task SetTextAsync(string text)
+        {
+
         }
     }
 }

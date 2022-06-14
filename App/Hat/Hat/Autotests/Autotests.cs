@@ -78,10 +78,15 @@ namespace Hat
             tester.ClearMessages();
             tester.SendMessage("Запуск автотеста", "", "Файл: ExampleTest.cs", Tester.IMAGE_STATUS_MESSAGE);
             await tester.TestBeginAsync();
-            await tester.GoToUrlAsync("https://somovstudio.github.io/test.html", 5);
-            await tester.WaitAsync(2);
+            await tester.GoToUrlAsync("https://somovstudio.github.io/test2.html", 5);
 
-            await tester.SetHtmlInElementByClassAsync("text-field", 0, "<h1>это тест</h1>");
+            //HatFrameworkDev.HTMLElement element = await tester.GetElementAsync(HatFrameworkDev.Tester.BY_CSS, "#MyInput");
+            //tester.ConsoleMsg($"ID: {element.Id} | NAME: {element.Name} | CLASS: {element.Class} | TYPE: {element.Type}");
+
+            HatFrameworkDev.HTMLElement element = await tester.GetElementAsync(HatFrameworkDev.Tester.BY_XPATH, "//*[@id='MyFile']");
+            tester.ConsoleMsg($"ID: {element.Id} | NAME: {element.Name} | CLASS: {element.Class} | TYPE: {element.Type}");
+            //string text = await element.GetTextAsync();
+            //tester.ConsoleMsg(text);
 
             await tester.TestEndAsync();
 
