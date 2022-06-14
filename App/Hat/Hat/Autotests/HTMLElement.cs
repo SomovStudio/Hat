@@ -280,7 +280,29 @@ namespace HatFrameworkDev
 
         public async Task ScrollToAsync(bool behaviorSmooth = false)
         {
+            int step = _tester.SendMessage($"ScrollToAsync('{behaviorSmooth}')", Tester.PROCESS, "Прокрутить к элементу", Tester.IMAGE_STATUS_PROCESS);
+            if (_tester.DefineTestStop(step) == true) return;
 
+            string script = null;
+            if (_by == Tester.BY_CSS)
+            {
+                script = "(function(){";
+                script += $"var element = document.querySelector('{_locator}');";
+                if (behaviorSmooth == true) script += "element.scrollIntoView({behavior: 'smooth'});";
+                else script += "element.scrollIntoView();";
+                script += $"return element;";
+                script += "}());";
+            }
+            else if (_by == Tester.BY_XPATH)
+            {
+                script = "(function(){";
+                script += $"var element = document.evaluate(\"{_locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
+                if (behaviorSmooth == true) script += "element.scrollIntoView({behavior: 'smooth'});";
+                else script += "element.scrollIntoView();";
+                script += $"return element;";
+                script += "}());";
+            }
+            await execute(script, step, "Прокрутка к элементу завершена", "Не удалось прокрутить к элементу");
         }
 
         public async Task WaitVisibleAsync(int sec)

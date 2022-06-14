@@ -321,6 +321,7 @@ HTMLElement(Tester tester, string by, string locator) - объект элеме�
 	HTMLElement element = await tester.GetElementAsync(Tester.BY_XPATH, "//h1");
 	await element.SetHtmlAsync("<div>Это тест</div>");
 
-
+	HTMLElement element = await tester.GetElementAsync(HatFrameworkDev.Tester.BY_XPATH, "/html/body/footer");
+	await element.ScrollToAsync();
 
 

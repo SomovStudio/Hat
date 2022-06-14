@@ -78,10 +78,12 @@ namespace Hat
             tester.ClearMessages();
             tester.SendMessage("Запуск автотеста", "", "Файл: ExampleTest.cs", Tester.IMAGE_STATUS_MESSAGE);
             await tester.TestBeginAsync();
-            await tester.GoToUrlAsync("https://somovstudio.github.io/test2.html", 5);
+            //await tester.GoToUrlAsync("https://somovstudio.github.io/test2.html", 5);
+            await tester.GoToUrlAsync("https://somovstudio.github.io/", 5);
 
-            HatFrameworkDev.HTMLElement element = await tester.GetElementAsync(HatFrameworkDev.Tester.BY_XPATH, "//h1");
-            await element.SetHtmlAsync("<div>Это тест</div>");
+            HatFrameworkDev.HTMLElement element = await tester.GetElementAsync(HatFrameworkDev.Tester.BY_XPATH, "/html/body/footer");
+            await tester.WaitAsync(2);
+            await element.ScrollToAsync();
             await tester.TestEndAsync();
 
 
