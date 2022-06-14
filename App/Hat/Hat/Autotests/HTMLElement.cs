@@ -50,6 +50,48 @@ namespace HatFrameworkDev
             return result;
         }
 
+        private async Task<bool> isVisible()
+        {
+            bool found = false;
+            try
+            {
+                string script = "";
+                script += "(function(){ ";
+                if (_by == Tester.BY_CSS) script += $"var elem = document.querySelector('{_locator}');";
+                if (_by == Tester.BY_XPATH) script += $"var elem = document.evaluate(\"{_locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
+                script += "if (!(elem instanceof Element)) throw Error('DomUtil: elem is not an element.');";
+                script += "const style = getComputedStyle(elem);";
+                script += "if (style.display === 'none') return false;";
+                script += "if (style.visibility !== 'visible') return false;";
+                script += "if (style.opacity < 0.1) return false;";
+                script += "if (elem.offsetWidth + elem.offsetHeight + elem.getBoundingClientRect().height + elem.getBoundingClientRect().width === 0) return false;";
+                script += "const elemCenter = {";
+                script += "x: elem.getBoundingClientRect().left + elem.offsetWidth / 2,";
+                script += "y: elem.getBoundingClientRect().top + elem.offsetHeight / 2";
+                script += "};";
+                script += "if (elemCenter.x < 0) return false;";
+                script += "if (elemCenter.x > (document.documentElement.clientWidth || window.innerWidth)) return false;";
+                script += "if (elemCenter.y < 0) return false;";
+                script += "if (elemCenter.y > (document.documentElement.clientHeight || window.innerHeight)) return false;";
+                script += "let pointContainer = document.elementFromPoint(elemCenter.x, elemCenter.y);";
+                script += "do {";
+                script += "if (pointContainer === elem) return true;";
+                script += "} while (pointContainer = pointContainer.parentNode);";
+                script += "return false;";
+                script += "}());";
+
+                string result = await _tester.BrowserView.CoreWebView2.ExecuteScriptAsync(script);
+                if (result != "null" && result != null && result == "true") found = true;
+                else found = false;
+            }
+            catch (Exception ex)
+            {
+                _tester.TestStopAsync();
+                _tester.ConsoleMsgError(ex.ToString());
+            }
+            return found;
+        }
+
         public async Task ClickAsync()
         {
             int step = _tester.SendMessage("ClickAsync()", Tester.PROCESS, "Нажатие на элемент", Tester.IMAGE_STATUS_PROCESS);
@@ -307,12 +349,62 @@ namespace HatFrameworkDev
 
         public async Task WaitVisibleAsync(int sec)
         {
+            int step = _tester.SendMessage($"WaitVisibleAsync({sec})", Tester.PROCESS, $"Ожидание элемента {sec} секунд", Tester.IMAGE_STATUS_PROCESS);
+            if (_tester.DefineTestStop(step) == true) return;
 
+            try
+            {
+                bool found = false;
+                for (int i = 0; i < sec; i++)
+                {
+                    found = await isVisible();
+                    if (found) break;
+                    await Task.Delay(1000);
+                }
+
+                if (found == true) _tester.EditMessage(step, null, Tester.PASSED, $"Ожидание элемента - завершено (элемент отображается)", Tester.IMAGE_STATUS_PASSED);
+                else
+                {
+                    _tester.EditMessage(step, null, Tester.FAILED, $"Ожидание элемента - завершено (элемент не отображается)", Tester.IMAGE_STATUS_FAILED);
+                    _tester.TestStopAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                _tester.EditMessage(step, null, Tester.FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), Tester.IMAGE_STATUS_FAILED);
+                _tester.TestStopAsync();
+                _tester.ConsoleMsgError(ex.ToString());
+            }
         }
 
         public async Task WaitNotVisibleAsync(int sec)
         {
+            int step = _tester.SendMessage($"WaitNotVisibleAsync({sec})", Tester.PROCESS, $"Ожидание скрытия элемента {sec.ToString()} секунд", Tester.IMAGE_STATUS_PROCESS);
+            if (_tester.DefineTestStop(step) == true) return;
 
+            try
+            {
+                bool found = true;
+                for (int i = 0; i < sec; i++)
+                {
+                    found = await isVisible();
+                    if (found == false) break;
+                    await Task.Delay(1000);
+                }
+
+                if (found == false) _tester.EditMessage(step, null, Tester.PASSED, $"Ожидание скрытия элемента - завершено (элемент не отображается)", Tester.IMAGE_STATUS_PASSED);
+                else
+                {
+                    _tester.EditMessage(step, null, Tester.FAILED, $"Ожидание скрытия элемента - завершено (элемент отображается)", Tester.IMAGE_STATUS_FAILED);
+                    _tester.TestStopAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                _tester.EditMessage(step, null, Tester.FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), Tester.IMAGE_STATUS_FAILED);
+                _tester.TestStopAsync();
+                _tester.ConsoleMsgError(ex.ToString());
+            }
         }
     }
 }
