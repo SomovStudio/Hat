@@ -304,7 +304,12 @@ HTMLElement(Tester tester, string by, string locator) - объект элеме�
 	
 	await element.SetTextAsync("TEST");
 
-	HTMLElement element = await tester.GetElementAsync(HatFrameworkDev.Tester.BY_XPATH, "//*[@id='MyInput']");
+	HTMLElement element = await tester.GetElementAsync(Tester.BY_XPATH, "//*[@id='MyInput']");
 	await element.SetValueAsync("Тестирование");
 	string value = await element.GetValueAsync();
 	tester.ConsoleMsg(value);
+
+	HTMLElement element = await tester.GetElementAsync(Tester.BY_XPATH, "//h1");
+	await element.SetAttributeAsync("class", "my-class");
+	string attrClass = await element.GetAttributeAsync("class");
+	tester.ConsoleMsg(attrClass);

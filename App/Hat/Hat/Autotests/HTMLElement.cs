@@ -182,12 +182,51 @@ namespace HatFrameworkDev
 
         public async Task<string> GetAttributeAsync(string name)
         {
-            return "";
+            int step = _tester.SendMessage($"GetAttributeAsync('{name}')", Tester.PROCESS, "Получение атрибута из элемента", Tester.IMAGE_STATUS_PROCESS);
+            if (_tester.DefineTestStop(step) == true) return null;
+
+            string script = null;
+            if (_by == Tester.BY_CSS)
+            {
+                script = "(function(){";
+                script += $"var element = document.querySelector('{_locator}');";
+                script += $"return element.getAttribute('{name}');";
+                script += "}());";
+            }
+            else if (_by == Tester.BY_XPATH)
+            {
+                script = "(function(){";
+                script += $"var element = document.evaluate(\"{_locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
+                script += $"return element.getAttribute('{name}');";
+                script += "}());";
+            }
+            string result = await execute(script, step, "Атрибут из элемента прочитан", "Не удалось прочитать атрибут из элемента");
+            return result;
         }
 
         public async Task SetAttributeAsync(string name, string value)
         {
+            int step = _tester.SendMessage($"SetAttributeAsync('{name}', '{value}')", Tester.PROCESS, "Ввод атрибута в элемент", Tester.IMAGE_STATUS_PROCESS);
+            if (_tester.DefineTestStop(step) == true) return;
 
+            string script = null;
+            if (_by == Tester.BY_CSS)
+            {
+                script = "(function(){";
+                script += $"var element = document.querySelector('{_locator}');";
+                script += $"element.setAttribute('{name}', '{value}');";
+                script += $"return element.getAttribute('{name}');";
+                script += "}());";
+            }
+            else if (_by == Tester.BY_XPATH)
+            {
+                script = "(function(){";
+                script += $"var element = document.evaluate(\"{_locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
+                script += $"element.setAttribute('{name}', '{value}');";
+                script += $"return element.getAttribute('{name}');";
+                script += "}());";
+            }
+            await execute(script, step, "Атрибут введен в элемент", "Не удалось ввести атрибут в элемент");
         }
 
         public async Task<string> GetHtmlAsync()
