@@ -455,7 +455,7 @@ namespace HatFrameworkDev
             {
                 HTMLElement el = null;
                 string script = "";
-                script = "(function(locator = '" + locator + "'){";
+                script = "(function(locator = \"" + locator + "\"){";
                 if (by == BY_CSS) script += "var el = document.querySelector(locator);";
                 else if (by == BY_XPATH) script += "var el = document.evaluate(locator, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
                 script += "var obj = {";

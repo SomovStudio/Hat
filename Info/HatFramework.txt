@@ -292,6 +292,15 @@ SetHtmlInElementByTagAsync() - вставить html в элемент SetHtmlIn
 
 HTMLElement(Tester tester, string by, string locator) - объект элемент
 
-	HatFrameworkDev.HTMLElement element = await tester.GetElementAsync(HatFrameworkDev.Tester.BY_CSS, "#auth #buttonLogin");
+	HTMLElement element = await tester.GetElementAsync(Tester.BY_CSS, "#auth #buttonLogin");
 	await element.ClickAsync();
+
+	HTMLElement element = await tester.GetElementAsync(Tester.BY_XPATH, "//*[@id='MyFile']");
+    tester.ConsoleMsg($"ID: {element.Id} | NAME: {element.Name} | CLASS: {element.Class} | TYPE: {element.Type}");
+	
+	HTMLElement element = await tester.GetElementAsync(Tester.BY_XPATH, "//h1");
+	string text = await element.GetTextAsync();
+	tester.ConsoleMsg(text);
+	
+
 

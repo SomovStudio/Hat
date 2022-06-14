@@ -83,10 +83,9 @@ namespace Hat
             //HatFrameworkDev.HTMLElement element = await tester.GetElementAsync(HatFrameworkDev.Tester.BY_CSS, "#MyInput");
             //tester.ConsoleMsg($"ID: {element.Id} | NAME: {element.Name} | CLASS: {element.Class} | TYPE: {element.Type}");
 
-            HatFrameworkDev.HTMLElement element = await tester.GetElementAsync(HatFrameworkDev.Tester.BY_XPATH, "//*[@id='MyFile']");
-            tester.ConsoleMsg($"ID: {element.Id} | NAME: {element.Name} | CLASS: {element.Class} | TYPE: {element.Type}");
-            //string text = await element.GetTextAsync();
-            //tester.ConsoleMsg(text);
+            HatFrameworkDev.HTMLElement element = await tester.GetElementAsync(HatFrameworkDev.Tester.BY_XPATH, "//h1");
+            string text = await element.GetTextAsync();
+            tester.ConsoleMsg(text);
 
             await tester.TestEndAsync();
 
