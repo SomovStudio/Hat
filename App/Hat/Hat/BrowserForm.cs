@@ -24,9 +24,9 @@ namespace Hat
             Config.encoding = WorkOnFiles.UTF_8_BOM;
             toolStripStatusLabelFileEncoding.Text = Config.encoding;
             Config.browserForm = this;
-            consoleMsg("Браузер Hat версия 1.0");
+            consoleMsg($"Браузер Hat версия {Config.currentBrowserVersion}");
             systemConsoleMsg("", default, default, default, true);
-            systemConsoleMsg("Браузер Hat версия 1.0", default, ConsoleColor.DarkGray, ConsoleColor.White, true);
+            systemConsoleMsg($"Браузер Hat версия {Config.currentBrowserVersion}", default, ConsoleColor.DarkGray, ConsoleColor.White, true);
         }
 
         private bool stopTest = false;
@@ -119,7 +119,7 @@ namespace Hat
                 webView2.EnsureCoreWebView2Async();
                 webView2.CoreWebView2.GetDevToolsProtocolEventReceiver("Log.entryAdded").DevToolsProtocolEventReceived += showMessageConsoleErrors;
                 webView2.CoreWebView2.CallDevToolsProtocolMethodAsync("Log.enable", "{}");
-                consoleMsg("Запусщен монитор ошибок на страницах");
+                consoleMsg("Запущен монитор ошибок на страницах");
                 webView2.CoreWebView2.CallDevToolsProtocolMethodAsync("Security.setIgnoreCertificateErrors", "{\"ignore\": true}");
                 consoleMsg("Опция Security.setIgnoreCertificateErrors - включен параметр ignore: true");
                 if (Config.defaultUserAgent == "") Config.defaultUserAgent = webView2.CoreWebView2.Settings.UserAgent;
@@ -601,6 +601,11 @@ namespace Hat
 
                     consoleMsg("Проект успешно открыт (версия проекта: " + Config.version + ")");
                     systemConsoleMsg($"Проект успешно открыт (версия проекта: {Config.version})", default, ConsoleColor.DarkGray, ConsoleColor.White, true);
+                    if (Config.version != Config.currentBrowserVersion)
+                    {
+                        consoleMsg($"Предупреждение: версия проекта {Config.version} не совпадает с версией браузера {Config.currentBrowserVersion}");
+                        systemConsoleMsg($"Предупреждение: версия проекта {Config.version} не совпадает с версией браузера {Config.currentBrowserVersion}", default, ConsoleColor.DarkGray, ConsoleColor.White, true);
+                    }
                 }
              }
             catch (Exception ex)
