@@ -289,7 +289,7 @@ SetHtmlInElementByTagAsync() - вставить html в элемент SetHtmlIn
 
 	await tester.SetHtmlInElementByClassAsync("text-field", 0, "<h1>это тест</h1>");
 
-GetElementAsync() - получение объекта элемента
+GetElementAsync(string by, string locator) - получение объекта элемента
 HTMLElement(Tester tester, string by, string locator) - объект элемент
 
 	HTMLElement element = await tester.GetElementAsync(Tester.BY_CSS, "#auth #buttonLogin");
