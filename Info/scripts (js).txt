@@ -249,6 +249,20 @@ foreach (string Json_String in Json_Array)
 await tester.SetAttributeInElementByIdAsync("login", "value", "admin");
 
 -----------------------------------------------------------------------------
+
+
+https://developer.mozilla.org/ru/docs/Web/API/Document/evaluate
+https://developer.mozilla.org/en-US/docs/Web/API/XPathResult
+https://developer.mozilla.org/en-US/docs/Web/API/XPathResult/singleNodeValue
+
+var btn = document.evaluate("//*[@id='buttonLogin']", document, null, XPathResult.ANY_TYPE, null);
+var btn = document.evaluate("//*[@id='buttonLogin']", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+btn.click();
+btn.value;
+btn.outerHTML;
+btn.getAttribute('id');
+
+-----------------------------------------------------------------------------
 Запуск из командной строки:
 C:\Git\SomovStudio\Hat\App\Hat\Hat\bin\Debug>Hat.exe ExampleTest.cs C:\Users\Catfish\Desktop\project
 

@@ -48,10 +48,20 @@
 			max-height: 20px;
 			border: 1px solid #5784B2; 
 		}
-		#myTextarea {
+		#MyTextarea {
 			min-width: 345px;
 			max-width: 345px; 
 			border: 1px solid #5784B2; 
+		}
+		#MyFrame {
+			min-width: 550px;
+			max-width: 550px; 
+			min-height: 400px;
+			max-height: 400px;
+		}
+		#MySelect {
+			min-height: 24px;
+			max-height: 24px;
 		}
 	</style>
 </head>
@@ -61,9 +71,18 @@
 		<h1>Заголовок H1</h1>
 		<label for="login">Метка</label>
 		<br>
-		<input type="text" name="myinput" id="myInput" class="text-field" placeholder="Поле" value="">
+		<input type="text" name="myinput" id="MyInput" class="text-field" placeholder="Поле" value="">
+		<select id="MySelect" name="myselect" class="text-field">
+		  <option selected value="Desktop">Desktop</option>
+		  <option value="Mobile">Mobile</option>
+		  <option value="Other" disabled>Other</option>
+		</select>
 		<br><br>
-		<textarea id="myTextarea" readonly="readonly" wrap="off">Многострочное поле</textarea>
+		<textarea id="MyTextarea" readonly="readonly" wrap="off">Многострочное поле</textarea>
+		<br><br>
+		<span name="mybutton" id="MyButton" onclick="document.getElementById('myTextarea').style = 'opacity: 0';">
+		Кнопка Spen
+		</span>
 		<br><br>
 		<input type="radio" name="myradio" id="MyRadioYes"  value="yes" checked>
 		<label for="MyRadio">Да</label>
@@ -79,9 +98,7 @@
 		<br><br>
 		<p><a href="test.html">Это ссылка</a></p>
 		<br><br>
-		<span name="mybutton" id="MyButton" onclick="document.getElementById('myTextarea').style = 'opacity: 0';">
-		Кнопка Spen
-		</span>
+		<iframe id="MyFrame" name="MyFrame" class="my-frame" src="test.html"></iframe>
 	</div>
 	<br>
 	

@@ -20,18 +20,22 @@ namespace Hat
 
     public static class Config
     {
-        public static BrowserForm browserForm;
-        public static string defaultUserAgent = "";         // значение user-agent по умолчанию
+        /* переменные для браузера */
+        public static BrowserForm browserForm;                  // окно браузера (форма)
+        public static string defaultUserAgent = "";             // значение user-agent по умолчанию
+        public static string currentBrowserVersion = "1.0.1";   // текущая версия браузера
 
         public static bool commandLineMode = false;         // флаг показывающий запуск приложения из командной строки
         public static string projectPath = "(не открыт)";   // полный путь к папке проекта
         public static string selectName = "";               // имя выбранного файла или папки
         public static string selectValue = "";              // полный путь к выбранному файлу или папке
+        public static bool debugJavaScript = false;         // отладка javascript при выполнении автотеста
 
-        public static string version = "1.0.0";
-        public static string encoding = WorkOnFiles.UTF_8_BOM;
-        public static bool editorTopMost = true;
-        public static string[] libraries = new string[]
+        /* переменные для файла project.hat */
+        public static string version = "1.0.1";                 // версия проекта
+        public static string encoding = WorkOnFiles.UTF_8_BOM;  // кодировка
+        public static bool editorTopMost = true;                // настройка отображения редактора
+        public static string[] libraries = new string[]         // библиотека подключаемых dll файлов
         {
             "HatFramework.dll",
             "Microsoft.Web.WebView2.Core.dll",

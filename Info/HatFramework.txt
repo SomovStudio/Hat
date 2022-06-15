@@ -220,6 +220,8 @@ browserCleadMessageStep
 browserSendMessageStep
 browserEditMessageStep
 browserResize
+browserUserAgent
+browserGetErrors
 checkStopTest
 resultAutotest
 
@@ -231,5 +233,97 @@ contentLoading() - событие при завершении загрузки �
 resultAutotestSuccess() - отправить результат проверки автотеста
 findVisibleElementAsync() - определить визуальное отображение элемента
 
+------------------------------------------------------------------------
+
+Новые методы для обновления 1.0.1
+
+BrowserGetErrorsAsync() - получить список ошибок и предупреждений браузера
+
+	List<string> errors = await tester.BrowserGetErrorsAsync();
+	foreach (string error in errors)
+	{
+		tester.ConsoleMsg(error);
+	}
+	
+BrowserGetNetworkAsync() - получить в формате json все текущие сообщения из network
+
+	string events = await tester.BrowserGetNetworkAsync();
+	tester.ConsoleMsg(events);
+
+GetAttributeFromElementsByClassAsync() - получить список атрибутов из множества элементов GetAttributeFromElementsByClassAsync(string _class, string attribute)
+GetAttributeFromElementsByNameAsync() - получить список атрибутов из множества элементов GetAttributeFromElementsByNameAsync(string name, string attribute)
+GetAttributeFromElementsByTagAsync() - получить список атрибутов из множества элементов GetAttributeFromElementsByTagAsync(string tag, string attribute)
+
+	List<string> values = await tester.GetAttributeFromElementsByClassAsync("text-field", "name");
+	foreach (string value in values)
+	{
+		tester.ConsoleMsg(value);
+	}
+
+SetAttributeInElementsByClassAsync() - вставить атрибут со значением SetAttributeInElementsByClassAsync(string _class, string attribute, string value)
+SetAttributeInElementsByCssAsync() - вставить атрибут со значением SetAttributeInElementsByCssAsync(string tag, string attribute, string value)
+SetAttributeInElementsByNameAsync() - вставить атрибут со значением SetAttributeInElementsByNameAsync(string name, string attribute, string value)
+SetAttributeInElementsByTagAsync() - вставить атрибут со значением SetAttributeInElementsByTagAsync(string tag, string attribute, string value)
+
+	List<string> values = await tester.SetAttributeInElementsByClassAsync("text-field", "value", "test");
+	foreach (string value in values)
+	{
+		tester.ConsoleMsg(value);
+	}
+
+GetHtmlFromElementByClassAsync() - получить html элемента GetHtmlFromElementByClassAsync(string _class, int index)
+GetHtmlFromElementByCssAsync() - получить html элемента GetHtmlFromElementByCssAsync(string locator)
+GetHtmlFromElementByIdAsync() - получить html элемента GetHtmlFromElementByIdAsync(string id)
+GetHtmlFromElementByNameAsync() - получить html элемента GetHtmlFromElementByNameAsync(string name, int index)
+GetHtmlFromElementByTagAsync() - получить html элемента GetHtmlFromElementByTagAsync(string tag, int index)
+
+	string html = await tester.GetHtmlFromElementByIdAsync("login");
+	string html = await tester.GetHtmlFromElementByClassAsync("text-field", 0);
 
 
+SetHtmlInElementByClassAsync() - вставить html в элемент SetHtmlInElementByClassAsync(string _class, int index, string html)
+SetHtmlInElementByCssAsync() - вставить html в элемент SetHtmlInElementByCssAsync(string locator, string html)
+SetHtmlInElementByIdAsync() - вставить html в элемент SetHtmlInElementByIdAsync(string id, string html)
+SetHtmlInElementByNameAsync() - вставить html в элемент SetHtmlInElementByNameAsync(string name, int index, string html)
+SetHtmlInElementByTagAsync() - вставить html в элемент SetHtmlInElementByTagAsync(string tag, int index, string html)
+
+	await tester.SetHtmlInElementByClassAsync("text-field", 0, "<h1>это тест</h1>");
+
+GetElementAsync(string by, string locator) - получение объекта элемента
+HTMLElement(Tester tester, string by, string locator) - объект элемент
+
+	HTMLElement element = await tester.GetElementAsync(Tester.BY_CSS, "#auth #buttonLogin");
+	await element.ClickAsync();
+
+	HTMLElement element = await tester.GetElementAsync(Tester.BY_XPATH, "//*[@id='MyFile']");
+    tester.ConsoleMsg($"ID: {element.Id} | NAME: {element.Name} | CLASS: {element.Class} | TYPE: {element.Type}");
+	
+	HTMLElement element = await tester.GetElementAsync(Tester.BY_XPATH, "//h1");
+	string text = await element.GetTextAsync();
+	tester.ConsoleMsg(text);
+	
+	await element.SetTextAsync("TEST");
+
+	HTMLElement element = await tester.GetElementAsync(Tester.BY_XPATH, "//*[@id='MyInput']");
+	await element.SetValueAsync("Тестирование");
+	string value = await element.GetValueAsync();
+	tester.ConsoleMsg(value);
+
+	HTMLElement element = await tester.GetElementAsync(Tester.BY_XPATH, "//h1");
+	await element.SetAttributeAsync("class", "my-class");
+	string attrClass = await element.GetAttributeAsync("class");
+	tester.ConsoleMsg(attrClass);
+
+	HTMLElement element = await tester.GetElementAsync(Tester.BY_XPATH, "//h1");
+	string html = await element.GetHtmlAsync();
+	tester.ConsoleMsg(html);
+
+	HTMLElement element = await tester.GetElementAsync(Tester.BY_XPATH, "//h1");
+	await element.SetHtmlAsync("<div>Это тест</div>");
+
+	HTMLElement element = await tester.GetElementAsync(Tester.BY_XPATH, "/html/body/footer");
+	await element.ScrollToAsync();
+
+	HTMLElement element = await tester.GetElementAsync(Tester.BY_XPATH, "//h1");
+	await element.WaitVisibleAsync(2);
+	await element.WaitNotVisibleAsync(2);

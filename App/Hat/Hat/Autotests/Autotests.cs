@@ -60,9 +60,9 @@ namespace Hat
                     }
                     else // это будет для папки с автотестами (пока в разработке)
                     {
-                        object classObj = results.CompiledAssembly.CreateInstance("Hat.ExampleTest");
-                        MethodInfo funcMain = classObj.GetType().GetMethod("Main");
-                        funcMain.Invoke(classObj, new object[] { Config.browserForm });
+                        //object classObj = results.CompiledAssembly.CreateInstance("Hat.ExampleTest");
+                        //MethodInfo funcMain = classObj.GetType().GetMethod("Main");
+                        //funcMain.Invoke(classObj, new object[] { Config.browserForm });
                     }
                 }
             }
@@ -74,6 +74,35 @@ namespace Hat
 
         public static async Task devTestStutsAsync()
         {
+            HatFrameworkDev.Tester tester = new HatFrameworkDev.Tester(Config.browserForm);
+            tester.ClearMessages();
+            tester.SendMessage("Запуск автотеста", "", "Файл: ExampleTest.cs", Tester.IMAGE_STATUS_MESSAGE);
+            await tester.TestBeginAsync();
+            await tester.GoToUrlAsync("https://somovstudio.github.io/test2.html", 5);
+
+            HatFrameworkDev.HTMLElement element = await tester.GetElementAsync(HatFrameworkDev.Tester.BY_XPATH, "//h1");
+            await element.WaitNotVisibleAsync(2);
+            await tester.TestEndAsync();
+
+
+            /*
+            HatFrameworkDev.HTMLElement element = await tester.GetElementAsync(HatFrameworkDev.Tester.BY_CSS, "#MyInput");
+            tester.ConsoleMsg($"ID: {element.Id} | NAME: {element.Name} | CLASS: {element.Class} | TYPE: {element.Type}");
+
+            HatFrameworkDev.HTMLElement element = await tester.GetElementAsync(HatFrameworkDev.Tester.BY_XPATH, "//h1");
+            tester.ConsoleMsg($"ID: {element.Id} | NAME: {element.Name} | CLASS: {element.Class} | TYPE: {element.Type}");
+            await element.SetTextAsync("Тестовый заголовок");
+            string text = await element.GetTextAsync();
+            tester.ConsoleMsg(text);
+
+            element = await tester.GetElementAsync(HatFrameworkDev.Tester.BY_XPATH, "//*[@id='MyInput']");
+            tester.ConsoleMsg($"ID: {element.Id} | NAME: {element.Name} | CLASS: {element.Class} | TYPE: {element.Type}");
+            await element.SetValueAsync("Тестирование");
+            string value = await element.GetValueAsync();
+            tester.ConsoleMsg(value);
+            */
+
+
             /*
             HatFrameworkDev.Tester tester = new HatFrameworkDev.Tester(Config.browserForm);
             tester.ClearMessage();
