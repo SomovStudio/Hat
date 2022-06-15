@@ -644,14 +644,50 @@ foreach (string value in values)\par
 @"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
-\pard\sl276\slmult1\cf1\f0\fs20\lang9 GetHtmlElementAsync\cf0\par
-\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \f0\lang1033 (\f1\lang1049\'e2 \'f0\'e0\'e7\'f0\'e0\'e1\'ee\'f2\'ea\'e5\f0\lang1033 ) \f1\lang1049\'ec\'e5\'f2\'ee\'e4 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2\f0\lang1033  \f1\lang1049\'fd\'eb\'e5\'ec\'e5\'ed\'f2 \'e2 \'e2\'e8\'e4\'e5 \'ee\'e1\'fa\'e5\'ea\'f2 \'ea\'eb\'e0\'f1\'f1 \'ea\'ee\'f2\'ee\'f0\'ee\'e3\'ee \f0\lang1033 HTMLElement\f1\lang1049\par
-\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : GetHtmlElementAsync(string locator)\par
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 GetElementAsync\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2 \'fd\'eb\'e5\'ec\'e5\'ed\'f2 \'e2 \'e2\'e8\'e4\'e5 \'ee\'e1\'fa\'e5\'ea\'f2 \'ea\'eb\'e0\'f1\'f1 \'ea\'ee\'f2\'ee\'f0\'ee\'e3\'ee HTMLElement\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \f0\lang1033 GetElementAsync(string by, string locator)\f1\lang1049\par
 \cf3\par
 \cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
-\cf0\f0\lang1033 HTMLElement element = await tester.GetHtmlElementAsync(""#MyElement"");\par
-await element.ClickAsync();\f1\lang1049\par
-    }",
+\cf0\f0\lang1033 HTMLElement element = await tester.GetElementAsync(Tester.BY_CSS, ""#auth #buttonLogin"");\par
+await element.ClickAsync();\par
+\par
+HTMLElement element = await tester.GetElementAsync(Tester.BY_XPATH, ""//div[@id='auth']//input[@id='buttonLogin']"");\par
+await element.ClickAsync();\par
+\par
+HTMLElement element = await tester.GetElementAsync(Tester.BY_XPATH, ""//*[@id='MyFile']"");\par
+tester.ConsoleMsg($""ID: \{element.Id\} | NAME: \{element.Name\} | CLASS: \{element.Class\} | TYPE: \{element.Type\}"");\par
+\par
+HTMLElement element = await tester.GetElementAsync(Tester.BY_XPATH, ""//h1"");\par
+string text = await element.GetTextAsync();\par
+tester.ConsoleMsg(text);\par
+await element.SetTextAsync(""TEST"");\par
+\par
+HTMLElement element = await tester.GetElementAsync(Tester.BY_XPATH, ""//*[@id='MyInput']"");\par
+await element.SetValueAsync(""\f1\lang1049\'d2\'e5\'f1\'f2\'e8\'f0\'ee\'e2\'e0\'ed\'e8\'e5"");\par
+string value = await element.GetValueAsync();\par
+tester.ConsoleMsg(value);\par
+\par
+HTMLElement element = await tester.GetElementAsync(Tester.BY_XPATH, ""//h1"");\par
+await element.SetAttributeAsync(""class"", ""my-class"");\par
+string attrClass = await element.GetAttributeAsync(""class"");\par
+tester.ConsoleMsg(attrClass);\par
+\par
+HTMLElement element = await tester.GetElementAsync(Tester.BY_XPATH, ""//h1"");\par
+string html = await element.GetHtmlAsync();\par
+tester.ConsoleMsg(html);\par
+\par
+HTMLElement element = await tester.GetElementAsync(Tester.BY_XPATH, ""//h1"");\par
+await element.SetHtmlAsync(""<div>\'dd\'f2\'ee \'f2\'e5\'f1\'f2</div>"");\par
+\par
+HTMLElement element = await tester.GetElementAsync(Tester.BY_XPATH, ""/html/body/footer"");\par
+await element.ScrollToAsync();\par
+\par
+HTMLElement element = await tester.GetElementAsync(Tester.BY_XPATH, ""//h1"");\par
+await element.WaitVisibleAsync(2);\par
+await element.WaitNotVisibleAsync(2);\f0\lang1033\par
+    }
+ ",
 
 @"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
@@ -1604,7 +1640,7 @@ foreach (string value in values)\par
                     if (value == "GetCountElementsByCssAsync") richTextBox1.Rtf = handbook[50];
                     if (value == "GetCountElementsByNameAsync") richTextBox1.Rtf = handbook[51];
                     if (value == "GetCountElementsByTagAsync") richTextBox1.Rtf = handbook[52];
-                    if (value == "GetHtmlElementAsync") richTextBox1.Rtf = handbook[53];
+                    if (value == "GetElementAsync") richTextBox1.Rtf = handbook[53];
                     if (value == "GetTextFromElementByClassAsync") richTextBox1.Rtf = handbook[54];
                     if (value == "GetTextFromElementByCssAsync") richTextBox1.Rtf = handbook[55];
                     if (value == "GetTextFromElementByIdAsync") richTextBox1.Rtf = handbook[56];

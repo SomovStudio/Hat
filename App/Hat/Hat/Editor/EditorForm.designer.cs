@@ -167,7 +167,7 @@
             treeNode70,
             treeNode71,
             treeNode72});
-            System.Windows.Forms.TreeNode treeNode74 = new System.Windows.Forms.TreeNode("GetHtmlElementAsync", 2, 2);
+            System.Windows.Forms.TreeNode treeNode74 = new System.Windows.Forms.TreeNode("GetElementAsync", 2, 2);
             System.Windows.Forms.TreeNode treeNode75 = new System.Windows.Forms.TreeNode("GetCountElementsByClassAsync", 2, 2);
             System.Windows.Forms.TreeNode treeNode76 = new System.Windows.Forms.TreeNode("GetCountElementsByCssAsync", 2, 2);
             System.Windows.Forms.TreeNode treeNode77 = new System.Windows.Forms.TreeNode("GetCountElementsByNameAsync", 2, 2);
@@ -798,7 +798,7 @@
             treeNode74.ImageIndex = 2;
             treeNode74.Name = "Узел20";
             treeNode74.SelectedImageIndex = 2;
-            treeNode74.Text = "GetHtmlElementAsync";
+            treeNode74.Text = "GetElementAsync";
             treeNode75.ImageIndex = 2;
             treeNode75.Name = "Узел16";
             treeNode75.SelectedImageIndex = 2;
