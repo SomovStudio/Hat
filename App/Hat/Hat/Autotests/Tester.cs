@@ -1588,7 +1588,7 @@ namespace HatFrameworkDev
 
             string script = "(function(){";
             if (by == BY_CSS) script += "var element = document.querySelectorAll(\"" + locator + "\"); return element.length;";
-            else script += $"var element = document.evaluate(\"{locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue; return element.length;";
+            else script += $"var element = document.evaluate(\"{locator}\", document, null, XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null); return element.snapshotLength;";
             script += "}());";
             string result = await execute(script, step, $"Получение количества элементов", $"Не удалось найти или получить количество элементов по локатору: {locator}");
             int value = -1;
@@ -1813,18 +1813,39 @@ namespace HatFrameworkDev
             if (DefineTestStop(step) == true) return null;
 
             string script = "(function(){";
-            if (by == BY_CSS) script += $"var element = document.querySelectorAll(\"{locator}\");";
-            else script += $"var element = document.evaluate(\"{locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
-            script += "var json = '[';";
-            script += "var attr = '';";
-            script += "for (var i = 0; i < element.length; i++){";
-            script += $"attr = element[i].getAttribute('{attribute}');";
-            script += "json += '\"' + attr + '\",';";
-            script += "}";
-            script += "json = json.slice(0, -1);";
-            script += "json += ']';";
-            script += "return json;";
+            if (by == BY_CSS)
+            {
+                script += $"var element = document.querySelectorAll(\"{locator}\");";
+                script += "var json = '[';";
+                script += "var attr = '';";
+                script += "var count = element.length;";
+                script += "for (var i = 0; i < count; i++){";
+                script += $"attr = element[i].getAttribute('{attribute}');";
+                script += "json += '\"' + attr + '\",';";
+                script += "}";
+                script += "json = json.slice(0, -1);";
+                script += "json += ']';";
+                script += "return json;";
+                script += "}());";
+            }
+            else if(by == BY_XPATH)
+            {
+                //script += $"var element = document.evaluate(\"{locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
+                script += $"var element = document.evaluate(\"{locator}\", document, null, XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);";
+                script += "var json = '[';";
+                script += "var attr = '';";
+                script += "var count = element.snapshotLength;";
+                script += "for (var i = 0; i < count; i++){";
+                script += $"attr = element[i].getAttribute('{attribute}');";
+                script += "json += '\"' + attr + '\",';";
+                script += "}";
+                script += "json = json.slice(0, -1);";
+                script += "json += ']';";
+                script += "return json;";
+                script += "}());";
+            }
             script += "}());";
+
             string result = await execute(script, step, $"Получение json из аттрибутов {attribute}", $"Не удалось найти или получить аттрибуты из элементов по локатору: {locator}");
             List<string> Json_Array = null;
             if (result != "null" && result != null)
