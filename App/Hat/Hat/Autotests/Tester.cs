@@ -719,16 +719,17 @@ namespace HatFrameworkDev
             }
         }
 
-        public async Task WaitVisibleElementByCssAsync(string locator, int sec)
+        public async Task WaitVisibleElementAsync(string by, string locator, int sec)
         {
-            int step = SendMessage($"WaitVisibleElementByCssAsync('{locator}', {sec})", PROCESS, $"Ожидание элемента {sec.ToString()} секунд", IMAGE_STATUS_PROCESS);
+            int step = SendMessage($"WaitVisibleElementAsync(\"{by}\", \"{locator}\", {sec})", PROCESS, $"Ожидание элемента {sec} секунд", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return;
             try
             {
                 bool found = false;
                 for (int i = 0; i < sec; i++)
                 {
-                    found = await isVisible(BY_CSS, locator);
+                    if (by == BY_CSS) found = await isVisible(BY_CSS, locator);
+                    else found = await isVisible(BY_XPATH, locator);
                     if (found) break;
                     await Task.Delay(1000);
                 }
@@ -864,16 +865,17 @@ namespace HatFrameworkDev
             }
         }
 
-        public async Task WaitNotVisibleElementByCssAsync(string locator, int sec)
+        public async Task WaitNotVisibleElementAsync(string by, string locator, int sec)
         {
-            int step = SendMessage($"WaitNotVisibleElementByCssAsync('{locator}', {sec})", PROCESS, $"Ожидание скрытия элемента {sec.ToString()} секунд", IMAGE_STATUS_PROCESS);
+            int step = SendMessage($"WaitNotVisibleElementAsync(\"{by}\", \"{locator}\", {sec})", PROCESS, $"Ожидание скрытия элемента {sec} секунд", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return;
             try
             {
                 bool found = true;
                 for (int i = 0; i < sec; i++)
                 {
-                    found = await isVisible(BY_CSS, locator);
+                    if (by == BY_CSS) found = await isVisible(BY_CSS, locator);
+                    else found = await isVisible(BY_XPATH, locator);
                     if (found == false) break;
                     await Task.Delay(1000);
                 }
@@ -1045,29 +1047,19 @@ namespace HatFrameworkDev
             return found;
         }
 
-        public async Task<bool> FindElementByCssAsync(string locator, int sec)
+        public async Task<bool> FindElementAsync(string by, string locator, int sec)
         {
-            int step = SendMessage($"FindElementByCssAsync('{locator}', {sec})", PROCESS, "Поиск элемента", IMAGE_STATUS_PROCESS);
+            int step = SendMessage($"FindElementAsync(\"{by}\", \"{locator}\", {sec})", PROCESS, "Поиск элемента", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return false;
 
             bool found = false;
             try
             {
-                string script = "";
-                script += "(function(){ ";
-                script += $"var elem = document.querySelector('{locator}');";
-                script += "return elem;";
-                script += "}());";
-
-                string result = null;
                 for (int i = 0; i < sec; i++)
                 {
-                    result = await ExecuteJavaScriptAsync(script);
-                    if (result != "null" && result != null)
-                    {
-                        found = true;
-                        break;
-                    }
+                    if (by == BY_CSS) found = await isVisible(BY_CSS, locator);
+                    else found = await isVisible(BY_XPATH, locator);
+                    if (found) break;
                     await Task.Delay(1000);
                 }
 
@@ -1191,9 +1183,9 @@ namespace HatFrameworkDev
             return found;
         }
 
-        public async Task<bool> FindVisibleElementByCssAsync(string locator, int sec)
+        public async Task<bool> FindVisibleElementAsync(string by, string locator, int sec)
         {
-            int step = SendMessage($"FindVisibleElementByCssAsync('{locator}', {sec})", PROCESS, "Поиск элемента", IMAGE_STATUS_PROCESS);
+            int step = SendMessage($"FindVisibleElementAsync(\"{by}\", \"{locator}\", {sec})", PROCESS, "Поиск элемента", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return false;
 
             bool found = false;
@@ -1201,7 +1193,8 @@ namespace HatFrameworkDev
             {
                 for (int i = 0; i < sec; i++)
                 {
-                    found = await isVisible(BY_CSS, locator);
+                    if (by == BY_CSS) found = await isVisible(BY_CSS, locator);
+                    else found = await isVisible(BY_XPATH, locator);
                     if (found) break;
                     await Task.Delay(1000);
                 }
@@ -1254,12 +1247,15 @@ namespace HatFrameworkDev
             await execute(script, step, $"Элемент нажат", $"Не удалось найти элемент по Tag: {tag} (Index: {index})");
         }
 
-        public async Task ClickElementByCssAsync(string locator)
+        public async Task ClickElementAsync(string by, string locator)
         {
-            int step = SendMessage($"ClickElementByCssAsync('{locator}')", PROCESS, "Нажатие на элемент", IMAGE_STATUS_PROCESS);
+            int step = SendMessage($"ClickElementAsync(\"{by}\", \"{locator}\")", PROCESS, "Нажатие на элемент", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return;
 
-            string script = "(function(){ var element = document.querySelector('" + locator + "'); element.click(); return element; }());";
+            string script = "(function(){";
+            if (by == BY_CSS) script += $"var element = document.querySelector('{locator}'); element.click(); return element;";
+            else script += $"var element = document.evaluate(\"{locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue; element.click(); return element;";
+            script += "}());";
             await execute(script, step, $"Элемент нажат", $"Не удалось найти элемент по локатору: {locator}");
         }
 
@@ -1335,13 +1331,14 @@ namespace HatFrameworkDev
             await execute(script, step, $"Значение введено в элемент", $"Не удалось найти или ввести значение в элемент по Tag: {tag} (Index: {index})");
         }
 
-        public async Task SetValueInElementByCssAsync(string locator, string value)
+        public async Task SetValueInElementAsync(string by, string locator, string value)
         {
-            int step = SendMessage($"SetValueInElementByCssAsync('{locator}', '{value}')", PROCESS, "Ввод значения в элемент", IMAGE_STATUS_PROCESS);
+            int step = SendMessage($"SetValueInElementAsync(\"{by}\", \"{locator}\", \"{value}\")", PROCESS, "Ввод значения в элемент", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return;
 
             string script = "(function(){";
-            script += "var element = document.querySelector('" + locator + "');";
+            if (by == BY_CSS) script += $"var element = document.querySelector('{locator}');";
+            else script += $"var element = document.evaluate(\"{locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
             script += "element.value = '" + value + "';";
             script += "element.dispatchEvent(new KeyboardEvent('keydown', { bubbles: true }));";
             script += "element.dispatchEvent(new KeyboardEvent('keypress', { bubbles: true }));";
@@ -1393,12 +1390,15 @@ namespace HatFrameworkDev
             return value;
         }
 
-        public async Task<string> GetValueFromElementByCssAsync(string locator)
+        public async Task<string> GetValueFromElementAsync(string by, string locator)
         {
-            int step = SendMessage($"GetValueFromElementByCSSAsync('{locator}')", PROCESS, "Получение значения из элемент", IMAGE_STATUS_PROCESS);
+            int step = SendMessage($"GetValueFromElementAsync(\"{by}\", \"{locator}\")", PROCESS, "Получение значения из элемент", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return "";
 
-            string script = "(function(){ var element = document.querySelector('" + locator + "'); return element.value; }());";
+            string script = "(function(){";
+            if (by == BY_CSS) script += $"var element = document.querySelector('{locator}'); return element.value;";
+            else script += $"var element = document.evaluate(\"{locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue; return element.value;";
+            script += "}());";
             string value = await execute(script, step, $"Получено значение из элемента", $"Не удалось найти или получить данные из элемента по локатору: {locator}");
             return value;
         }
@@ -1455,13 +1455,14 @@ namespace HatFrameworkDev
             await execute(script, step, $"Текст введен в элемент", $"Не удалось найти или ввести текст в элемент по Tag: {tag} (Index: {index})");
         }
 
-        public async Task SetTextInElementByCssAsync(string locator, string text)
+        public async Task SetTextInElementAsync(string by, string locator, string text)
         {
-            int step = SendMessage($"SetTextInElementByCssAsync('{locator}', '{text}')", PROCESS, "Ввод текста в элемент", IMAGE_STATUS_PROCESS);
+            int step = SendMessage($"SetTextInElementAsync(\"{by}\", \"{locator}\", \"{text}\")", PROCESS, "Ввод текста в элемент", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return;
 
             string script = "(function(){";
-            script += $"var element = document.querySelector('{locator}');";
+            if (by == BY_CSS) script += $"var element = document.querySelector('{locator}');";
+            else script += $"var element = document.evaluate(\"{locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
             script += $"element.innerText = '{text}';";
             script += "return element.innerText;";
             script += "}());";
@@ -1508,12 +1509,15 @@ namespace HatFrameworkDev
             return value;
         }
 
-        public async Task<string> GetTextFromElementByCssAsync(string locator)
+        public async Task<string> GetTextFromElementAsync(string by, string locator)
         {
-            int step = SendMessage($"GetTextFromElementByCssAsync('{locator}')", PROCESS, "Чтение текста из элемент", IMAGE_STATUS_PROCESS);
+            int step = SendMessage($"GetTextFromElementAsync(\"{by}\", \"{locator}\")", PROCESS, "Чтение текста из элемент", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return "";
 
-            string script = "(function(){ var element = document.querySelector('" + locator + "'); return element.innerText; }());";
+            string script = "(function(){";
+            if (by == BY_CSS) script += "var element = document.querySelector('" + locator + "'); return element.innerText;";
+            else script += $"var element = document.evaluate(\"{locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue; return element.innerText;";
+            script += "}());";
             string value = await execute(script, step, $"Прочитан текст из элемента", $"Не удалось найти или прочитать текст из элемента по локатору: {locator}");
             return value;
         }
@@ -1566,12 +1570,15 @@ namespace HatFrameworkDev
             return value;
         }
 
-        public async Task<int> GetCountElementsByCssAsync(string locator)
+        public async Task<int> GetCountElementsAsync(string by, string locator)
         {
-            int step = SendMessage($"GetCountElementsByCssAsync('{locator}')", PROCESS, "Получение количества элементов", IMAGE_STATUS_PROCESS);
+            int step = SendMessage($"GetCountElementsAsync(\"{by}\", \"{locator}\")", PROCESS, "Получение количества элементов", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return -1;
 
-            string script = "(function(){ var element = document.querySelectorAll('" + locator + "'); return element.length; }());";
+            string script = "(function(){";
+            if (by == BY_CSS) script += "var element = document.querySelectorAll('" + locator + "'); return element.length;";
+            else script += $"var element = document.evaluate(\"{locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue; return element.length;";
+            script += "}());";
             string result = await execute(script, step, $"Получение количества элементов", $"Не удалось найти или получить количество элементов по локатору: {locator}");
             int value = -1;
             if (result != "null" && result != null && result != "")
@@ -1582,16 +1589,27 @@ namespace HatFrameworkDev
             return value;
         }
 
-        public async Task ScrollToElementByCssAsync(string locator, bool behaviorSmooth = false)
+        public async Task ScrollToElementAsync(string by, string locator, bool behaviorSmooth = false)
         {
-            int step = SendMessage($"ScrollToElementByCssAsync('{locator}')", PROCESS, "Прокрутить к элементу", IMAGE_STATUS_PROCESS);
+            int step = SendMessage($"ScrollToElementAsync(\"{by}\", \"{locator}\", {behaviorSmooth})", PROCESS, "Прокрутить к элементу", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return;
 
             try
             {
-                string script = "";
-                if (behaviorSmooth == true) script = "(function(){ var element = document.querySelector('" + locator + "'); element.scrollIntoView({behavior: 'smooth'}); }());";
-                else script = "(function(){ var element = document.querySelector('" + locator + "'); element.scrollIntoView(); return element; }());";
+                string script = "(function(){";
+                if (by == BY_CSS)
+                {
+                    script += $"var element = document.querySelector('{locator}');";
+                    if (behaviorSmooth == true) script += "element.scrollIntoView({behavior: 'smooth'}); return element;";
+                    else script += "element.scrollIntoView(); return element;";
+                }
+                else
+                {
+                    script += $"var element = document.evaluate(\"{locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
+                    if (behaviorSmooth == true) script += "element.scrollIntoView({behavior: 'smooth'}); return element;";
+                    else script += "element.scrollIntoView(); return element;";
+                }
+                script += "}());";
                 string result = await ExecuteJavaScriptAsync(script);
                 EditMessage(step, null, PASSED, "Прокрутил к элементу выполнена", IMAGE_STATUS_PASSED);
             }
@@ -1653,12 +1671,16 @@ namespace HatFrameworkDev
             return value;
         }
 
-        public async Task<string> GetAttributeFromElementByCssAsync(string locator, string attribute)
+        public async Task<string> GetAttributeFromElementAsync(string by, string locator, string attribute)
         {
-            int step = SendMessage($"GetAttributeFromElementByCssAsync('{locator}', '{attribute}')", PROCESS, $"Получение аттрибута {attribute} из элемент", IMAGE_STATUS_PROCESS);
+            int step = SendMessage($"GetAttributeFromElementAsync(\"{by}\", \"{locator}\", \"{attribute}\")", PROCESS, $"Получение аттрибута {attribute} из элемент", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return "";
 
-            string script = "(function(){ var element = document.querySelector('" + locator + "'); return element.getAttribute('" + attribute + "'); }());";
+            string script = "(function(){";
+            if (by == BY_CSS) script += $"var element = document.querySelector('{locator}');";
+            else script += $"var element = document.evaluate(\"{locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
+            script += $"return element.getAttribute('{attribute}');";
+            script += "}());";
             string value = await execute(script, step, $"Получено значение из аттрибута {attribute}", $"Не удалось найти или получить аттрибут из элемента по локатору: {locator}");
             return value;
         }
@@ -1774,13 +1796,14 @@ namespace HatFrameworkDev
             return Json_Array;
         }
 
-        public async Task<List<string>> GetAttributeFromElementsByCssAsync(string locator, string attribute)
+        public async Task<List<string>> GetAttributeFromElementsAsync(string by, string locator, string attribute)
         {
-            int step = SendMessage($"GetAttributeFromElementsByCssAsync('{locator}', '{attribute}')", PROCESS, $"Получение аттрибутов {attribute} из элементов", IMAGE_STATUS_PROCESS);
+            int step = SendMessage($"GetAttributeFromElementsAsync(\"{by}\", \"{locator}\", \"{attribute}\")", PROCESS, $"Получение аттрибутов {attribute} из элементов", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return null;
 
             string script = "(function(){";
-            script += $"var element = document.querySelectorAll('{locator}');";
+            if (by == BY_CSS) script += $"var element = document.querySelectorAll('{locator}');";
+            else script += $"var element = document.evaluate(\"{locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
             script += "var json = '[';";
             script += "var attr = '';";
             script += "for (var i = 0; i < element.length; i++){";
@@ -1863,13 +1886,14 @@ namespace HatFrameworkDev
             await execute(script, step, $"Аттрибут '{attribute}' добавлен в элемент", $"Не удалось найти или ввести аттрибут в элемент по Tag: {tag} (Index: {index})");
         }
 
-        public async Task SetAttributeInElementByCssAsync(string locator, string attribute, string value)
+        public async Task SetAttributeInElementAsync(string by, string locator, string attribute, string value)
         {
-            int step = SendMessage($"SetAttributeInElementByCssAsync('{locator}', '{attribute}', '{value}')", PROCESS, "Добавление аттрибута в элемент", IMAGE_STATUS_PROCESS);
+            int step = SendMessage($"SetAttributeInElementAsync(\"{by}\", \"{locator}\", \"{attribute}\", \"{value}\")", PROCESS, "Добавление аттрибута в элемент", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return;
 
             string script = "(function(){";
-            script += $"var element = document.querySelector('{locator}');";
+            if (by == BY_CSS) script += $"var element = document.querySelector('{locator}');";
+            else script += $"var element = document.evaluate(\"{locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
             script += $"element.setAttribute('{attribute}', '{value}');";
             script += $"return element.getAttribute('{attribute}');";
             script += "}());";
@@ -1990,13 +2014,14 @@ namespace HatFrameworkDev
             return Json_Array;
         }
 
-        public async Task<List<string>> SetAttributeInElementsByCssAsync(string locator, string attribute, string value)
+        public async Task<List<string>> SetAttributeInElementsAsync(string by, string locator, string attribute, string value)
         {
-            int step = SendMessage($"SetAttributeInElementsByCssAsync('{locator}', '{attribute}', '{value}')", PROCESS, "Добавление аттрибута в элементы", IMAGE_STATUS_PROCESS);
+            int step = SendMessage($"SetAttributeInElementsAsync(\"{by}\", \"{locator}\", \"{attribute}\", \"{value}\")", PROCESS, "Добавление аттрибута в элементы", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return null;
 
             string script = "(function(){";
-            script += $"var element = document.querySelectorAll('{locator}');";
+            if (by == BY_CSS) script += $"var element = document.querySelectorAll('{locator}');";
+            else script += $"var element = document.evaluate(\"{locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
             script += "var json = '[';";
             script += "var attr = '';";
             script += "for (var i = 0; i < element.length; i++){";
@@ -2038,12 +2063,16 @@ namespace HatFrameworkDev
             return value;
         }
 
-        public async Task<string> GetHtmlFromElementByCssAsync(string locator)
+        public async Task<string> GetHtmlFromElementAsync(string by, string locator)
         {
-            int step = SendMessage($"GetHtmlFromElementByCssAsync('{locator}')", PROCESS, $"Получение html из элемент", IMAGE_STATUS_PROCESS);
+            int step = SendMessage($"GetHtmlFromElementAsync(\"{by}\", \"{locator}\")", PROCESS, $"Получение html из элемент", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return "";
 
-            string script = "(function(){ var element = document.querySelector('" + locator + "'); return element.outerHTML; }());";
+            string script = "(function(){";
+            if (by == BY_CSS) script += $"var element = document.querySelector('{locator}'); return element.outerHTML;";
+            else script += $"var element = document.evaluate(\"{locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
+            script += "return element.outerHTML;";
+            script += "}());";
             string value = await execute(script, step, $"Получено html элемента", $"Не удалось найти или получить html из элемента по локатору: {locator}");
             return value;
         }
@@ -2091,13 +2120,14 @@ namespace HatFrameworkDev
             await execute(script, step, $"В элемент введен html {html}", $"Не удалось найти или ввести html в элемент по Class: {_class} (Index: {index})");
         }
 
-        public async Task SetHtmlInElementByCssAsync(string locator, string html)
+        public async Task SetHtmlInElementAsync(string by, string locator, string html)
         {
-            int step = SendMessage($"SetHtmlInElementByCssAsync('{locator}', '{html}')", PROCESS, "Ввод html в элемент", IMAGE_STATUS_PROCESS);
+            int step = SendMessage($"SetHtmlInElementAsync(\"{by}\", \"{locator}\", \"{html}\")", PROCESS, "Ввод html в элемент", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return;
 
             string script = "(function(){";
-            script += $"var element = document.querySelector('{locator}');";
+            if (by == BY_CSS) script += $"var element = document.querySelector('{locator}');";
+            else script += $"var element = document.evaluate(\"{locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
             script += $"element.innerHTML = '{html}';";
             script += $"return element.outerHTML;";
             script += "}());";

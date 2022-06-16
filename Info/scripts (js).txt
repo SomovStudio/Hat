@@ -266,5 +266,95 @@ btn.getAttribute('id');
 Запуск из командной строки:
 C:\Git\SomovStudio\Hat\App\Hat\Hat\bin\Debug>Hat.exe ExampleTest.cs C:\Users\Catfish\Desktop\project
 
+-----------------------------------------------------------------------------
+
+Класс: HTMLElement
+Конструктор
+Переменные
+Методы
+
+HTMLElement
+Id
+Name
+Class
+Type
+
+ClickAsync
+GetAttributeAsync
+GetHtmlAsync
+GetTextAsync
+GetValueAsync
+ScrollToAsync
+SetAttributeAsync
+SetHtmlAsync
+SetTextAsync
+SetValueAsync
+WaitNotVisibleAsync
+WaitVisibleAsync
+
+-----------------------------------------------------------------------------
+Рефакторинг кода
+
+await execute(script, step, $"", $"");
+
+string script = "(function(){  }());";
+string value = await execute(script, step, $"", $"");
+return value;
+
+try
+{
+
+}
+catch (Exception ex)
+{
+	EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
+	TestStopAsync();
+	ConsoleMsgError(ex.ToString());
+}
+
+WaitVisibleElementByCssAsync
+WaitNotVisibleElementByCssAsync
+FindElementByCssAsync
+FindVisibleElementByCssAsync
+ClickElementByCssAsync
+SetValueInElementByCssAsync
+GetValueFromElementByCssAsync
+SetTextInElementByCssAsync
+GetTextFromElementByCssAsync
+GetCountElementsByCssAsync
+ScrollToElementByCssAsync
+GetAttributeFromElementByCssAsync
+GetAttributeFromElementsByCssAsync
+SetAttributeInElementByCssAsync
+SetAttributeInElementsByCssAsync
+GetHtmlFromElementByCssAsync
+SetHtmlInElementByCssAsync
+
+(string by, string locator)
+
+string script = "(function(){";
+if(by == BY_CSS) script += $"var elem = document.querySelector('{locator}');";
+else script += $"var element = document.evaluate(\"{locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
+script += "}());";
 
 
+BY_CSS = "BY_CSS";
+BY_XPATH = "BY_XPATH";
+
+WaitVisibleElementAsync(string by, string locator, int sec)
+WaitNotVisibleElementAsync(string by, string locator, int sec)
+FindElementAsync(string by, string locator, int sec)
+FindVisibleElementAsync(string by, string locator, int sec)
+ClickElementAsync(string by, string locator)
+SetValueInElementAsync(string by, string locator, string value)
+GetValueFromElementAsync(string by, string locator)
+SetTextInElementAsync(string by, string locator, string text)
+GetTextFromElementAsync(string by, string locator)
+GetCountElementsAsync(string by, string locator)
+ScrollToElementAsync(string by, string locator, bool behaviorSmooth = false)
+GetAttributeFromElementAsync(string by, string locator, string attribute)
+GetAttributeFromElementsAsync(string by, string locator, string attribute)
+SetAttributeInElementAsync(string by, string locator, string attribute, string value)
+SetAttributeInElementsAsync(string by, string locator, string attribute, string value)
+GetHtmlFromElementAsync(string by, string locator)
+SetHtmlInElementAsync(string by, string locator, string html)
