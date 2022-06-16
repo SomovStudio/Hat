@@ -113,7 +113,7 @@ namespace HatFrameworkDev
                 if (by == BY_CLASS) script += $"var elem = document.getElementsByClassName('{target}')[{index}];";
                 if (by == BY_NAME) script += $"var elem = document.getElementsByName('{target}')[{index}];";
                 if (by == BY_TAG) script += $"var elem = document.getElementsByTagName('{target}')[{index}];";
-                if (by == BY_CSS) script += $"var elem = document.querySelector('{target}');";
+                if (by == BY_CSS) script += $"var elem = document.querySelector(\"{target}\");";
                 if (by == BY_XPATH) script += $"var elem = document.evaluate(\"{target}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
                 script += "if (!(elem instanceof Element)) throw Error('DomUtil: elem is not an element.');";
                 script += "const style = getComputedStyle(elem);";
@@ -1253,7 +1253,7 @@ namespace HatFrameworkDev
             if (DefineTestStop(step) == true) return;
 
             string script = "(function(){";
-            if (by == BY_CSS) script += $"var element = document.querySelector('{locator}'); element.click(); return element;";
+            if (by == BY_CSS) script += $"var element = document.querySelector(\"{locator}\"); element.click(); return element;";
             else script += $"var element = document.evaluate(\"{locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue; element.click(); return element;";
             script += "}());";
             await execute(script, step, $"Элемент нажат", $"Не удалось найти элемент по локатору: {locator}");
@@ -1337,7 +1337,7 @@ namespace HatFrameworkDev
             if (DefineTestStop(step) == true) return;
 
             string script = "(function(){";
-            if (by == BY_CSS) script += $"var element = document.querySelector('{locator}');";
+            if (by == BY_CSS) script += $"var element = document.querySelector(\"{locator}\");";
             else script += $"var element = document.evaluate(\"{locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
             script += "element.value = '" + value + "';";
             script += "element.dispatchEvent(new KeyboardEvent('keydown', { bubbles: true }));";
@@ -1396,7 +1396,7 @@ namespace HatFrameworkDev
             if (DefineTestStop(step) == true) return "";
 
             string script = "(function(){";
-            if (by == BY_CSS) script += $"var element = document.querySelector('{locator}'); return element.value;";
+            if (by == BY_CSS) script += $"var element = document.querySelector(\"{locator}\"); return element.value;";
             else script += $"var element = document.evaluate(\"{locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue; return element.value;";
             script += "}());";
             string value = await execute(script, step, $"Получено значение из элемента", $"Не удалось найти или получить данные из элемента по локатору: {locator}");
@@ -1461,7 +1461,7 @@ namespace HatFrameworkDev
             if (DefineTestStop(step) == true) return;
 
             string script = "(function(){";
-            if (by == BY_CSS) script += $"var element = document.querySelector('{locator}');";
+            if (by == BY_CSS) script += $"var element = document.querySelector(\"{locator}\");";
             else script += $"var element = document.evaluate(\"{locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
             script += $"element.innerText = '{text}';";
             script += "return element.innerText;";
@@ -1515,7 +1515,7 @@ namespace HatFrameworkDev
             if (DefineTestStop(step) == true) return "";
 
             string script = "(function(){";
-            if (by == BY_CSS) script += "var element = document.querySelector('" + locator + "'); return element.innerText;";
+            if (by == BY_CSS) script += "var element = document.querySelector(\"" + locator + "\"); return element.innerText;";
             else script += $"var element = document.evaluate(\"{locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue; return element.innerText;";
             script += "}());";
             string value = await execute(script, step, $"Прочитан текст из элемента", $"Не удалось найти или прочитать текст из элемента по локатору: {locator}");
@@ -1576,7 +1576,7 @@ namespace HatFrameworkDev
             if (DefineTestStop(step) == true) return -1;
 
             string script = "(function(){";
-            if (by == BY_CSS) script += "var element = document.querySelectorAll('" + locator + "'); return element.length;";
+            if (by == BY_CSS) script += "var element = document.querySelectorAll(\"" + locator + "\"); return element.length;";
             else script += $"var element = document.evaluate(\"{locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue; return element.length;";
             script += "}());";
             string result = await execute(script, step, $"Получение количества элементов", $"Не удалось найти или получить количество элементов по локатору: {locator}");
@@ -1599,7 +1599,7 @@ namespace HatFrameworkDev
                 string script = "(function(){";
                 if (by == BY_CSS)
                 {
-                    script += $"var element = document.querySelector('{locator}');";
+                    script += $"var element = document.querySelector(\"{locator}\");";
                     if (behaviorSmooth == true) script += "element.scrollIntoView({behavior: 'smooth'}); return element;";
                     else script += "element.scrollIntoView(); return element;";
                 }
@@ -1677,7 +1677,7 @@ namespace HatFrameworkDev
             if (DefineTestStop(step) == true) return "";
 
             string script = "(function(){";
-            if (by == BY_CSS) script += $"var element = document.querySelector('{locator}');";
+            if (by == BY_CSS) script += $"var element = document.querySelector(\"{locator}\");";
             else script += $"var element = document.evaluate(\"{locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
             script += $"return element.getAttribute('{attribute}');";
             script += "}());";
@@ -1802,7 +1802,7 @@ namespace HatFrameworkDev
             if (DefineTestStop(step) == true) return null;
 
             string script = "(function(){";
-            if (by == BY_CSS) script += $"var element = document.querySelectorAll('{locator}');";
+            if (by == BY_CSS) script += $"var element = document.querySelectorAll(\"{locator}\");";
             else script += $"var element = document.evaluate(\"{locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
             script += "var json = '[';";
             script += "var attr = '';";
@@ -1892,7 +1892,7 @@ namespace HatFrameworkDev
             if (DefineTestStop(step) == true) return;
 
             string script = "(function(){";
-            if (by == BY_CSS) script += $"var element = document.querySelector('{locator}');";
+            if (by == BY_CSS) script += $"var element = document.querySelector(\"{locator}\");";
             else script += $"var element = document.evaluate(\"{locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
             script += $"element.setAttribute('{attribute}', '{value}');";
             script += $"return element.getAttribute('{attribute}');";
@@ -2020,7 +2020,7 @@ namespace HatFrameworkDev
             if (DefineTestStop(step) == true) return null;
 
             string script = "(function(){";
-            if (by == BY_CSS) script += $"var element = document.querySelectorAll('{locator}');";
+            if (by == BY_CSS) script += $"var element = document.querySelectorAll(\"{locator}\");";
             else script += $"var element = document.evaluate(\"{locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
             script += "var json = '[';";
             script += "var attr = '';";
@@ -2069,7 +2069,7 @@ namespace HatFrameworkDev
             if (DefineTestStop(step) == true) return "";
 
             string script = "(function(){";
-            if (by == BY_CSS) script += $"var element = document.querySelector('{locator}'); return element.outerHTML;";
+            if (by == BY_CSS) script += $"var element = document.querySelector(\"{locator}\"); return element.outerHTML;";
             else script += $"var element = document.evaluate(\"{locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
             script += "return element.outerHTML;";
             script += "}());";
@@ -2126,7 +2126,7 @@ namespace HatFrameworkDev
             if (DefineTestStop(step) == true) return;
 
             string script = "(function(){";
-            if (by == BY_CSS) script += $"var element = document.querySelector('{locator}');";
+            if (by == BY_CSS) script += $"var element = document.querySelector(\"{locator}\");";
             else script += $"var element = document.evaluate(\"{locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
             script += $"element.innerHTML = '{html}';";
             script += $"return element.outerHTML;";

@@ -78,85 +78,17 @@ namespace Hat
             tester.ClearMessages();
             tester.SendMessage("Запуск автотеста", "", "Файл: ExampleTest.cs", Tester.IMAGE_STATUS_MESSAGE);
             await tester.TestBeginAsync();
-            await tester.GoToUrlAsync("https://somovstudio.github.io/test2.html", 5);
-
-
-            await tester.TestEndAsync();
-
-
-            /*
-            HatFrameworkDev.HTMLElement element = await tester.GetElementAsync(HatFrameworkDev.Tester.BY_CSS, "#MyInput");
-            tester.ConsoleMsg($"ID: {element.Id} | NAME: {element.Name} | CLASS: {element.Class} | TYPE: {element.Type}");
-
-            HatFrameworkDev.HTMLElement element = await tester.GetElementAsync(HatFrameworkDev.Tester.BY_XPATH, "//h1");
-            tester.ConsoleMsg($"ID: {element.Id} | NAME: {element.Name} | CLASS: {element.Class} | TYPE: {element.Type}");
-            await element.SetTextAsync("Тестовый заголовок");
-            string text = await element.GetTextAsync();
-            tester.ConsoleMsg(text);
-
-            element = await tester.GetElementAsync(HatFrameworkDev.Tester.BY_XPATH, "//*[@id='MyInput']");
-            tester.ConsoleMsg($"ID: {element.Id} | NAME: {element.Name} | CLASS: {element.Class} | TYPE: {element.Type}");
-            await element.SetValueAsync("Тестирование");
-            string value = await element.GetValueAsync();
-            tester.ConsoleMsg(value);
-            */
-
-
-            /*
-            HatFrameworkDev.Tester tester = new HatFrameworkDev.Tester(Config.browserForm);
-            tester.ClearMessage();
-            tester.SendMessage("Запуск автотеста", "", "Файл: ExampleTest.cs", Tester.IMAGE_STATUS_MESSAGE);
-            await tester.BrowserSizeAsync(800, 600);
-            await tester.TestBeginAsync();
             await tester.GoToUrlAsync("https://somovstudio.github.io/test.html", 5);
-            await tester.FindVisibleElementByIdAsync("result", 5);
-            await tester.WaitNotVisibleElementByIdAsync("result", 5);
-            await tester.SetValueInElementByIdAsync("login", "admin");
-            await tester.WaitAsync(2);
-            await tester.SetValueInElementByIdAsync("pass", "0000");
-            await tester.WaitAsync(2);
-            await tester.ClickElementByIdAsync("buttonLogin");
-            await tester.WaitAsync(2);
-            string actual = await tester.GetValueFromElementByIdAsync("textarea");
-            string expected = "\"Вы успешно авторизованы\"";
-            await tester.FindVisibleElementByIdAsync("result", 5);
-            await tester.WaitVisibleElementByIdAsync("result", 5);
-            await tester.AssertEqualsAsync(expected, actual);
-            await tester.TestEndAsync();
-            */
 
-            /*
-            HatFrameworkDev.Tester tester = new HatFrameworkDev.Tester(Config.browserForm);
-            tester.ClearMessages();
-            await tester.TestBeginAsync();
-            await tester.GoToUrlAsync(@"https://somovstudio.github.io/test2.html", 5);
-            await tester.ClickElementByIdAsync("MyRadioNo");
-            await tester.ClickElementByIdAsync("MyCheckboxYes");
-            await tester.SetTextInElementByCssAsync("#test > h1", "Тест 13");
-            await tester.TestEndAsync();
-            */
+            await tester.WaitVisibleElementAsync(HatFrameworkDev.Tester.BY_CSS, "#auth #buttonLogin", 2);
+            await tester.WaitVisibleElementAsync(HatFrameworkDev.Tester.BY_XPATH, "//div[@id='auth']//input[@id='buttonLogin']", 2);
 
-            /*
-            HatFrameworkDev.Tester tester = new HatFrameworkDev.Tester(Config.browserForm);
-            await tester.TestBeginAsync();
-            await tester.GoToUrlAsync("https://somovstudio.github.io/test.html", 5);
-            await tester.WaitAsync(2);
-            List<string> Json_Array = await tester.GetAttributeFromElementsByCssAsync("input", "name");
-            foreach (string Json_String in Json_Array)
-            {
-                Config.browserForm.consoleMsg(Json_String);
-            }            
-            await tester.TestEndAsync();
-            */
+            await tester.WaitNotVisibleElementAsync(HatFrameworkDev.Tester.BY_CSS, "div[id='result']", 2);
+            await tester.WaitNotVisibleElementAsync(HatFrameworkDev.Tester.BY_XPATH, "//div[@id='result']", 2);
 
-            /*
-            HatFrameworkDev.Tester tester = new HatFrameworkDev.Tester(Config.browserForm);
-            await tester.TestBeginAsync();
-            await tester.GoToUrlAsync("https://somovstudio.github.io/test.html", 5);
-            await tester.WaitAsync(2);
-            await tester.SetAttributeInElementByCssAsync("#login", "value", "admin3");
+
+
             await tester.TestEndAsync();
-            */
         }
 
         public static void readNodes(TreeNodeCollection _nodes)

@@ -59,7 +59,7 @@ namespace HatFrameworkDev
             {
                 string script = "";
                 script += "(function(){ ";
-                if (_by == Tester.BY_CSS) script += $"var elem = document.querySelector('{_locator}');";
+                if (_by == Tester.BY_CSS) script += $"var elem = document.querySelector(\"{_locator}\");";
                 if (_by == Tester.BY_XPATH) script += $"var elem = document.evaluate(\"{_locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
                 script += "if (!(elem instanceof Element)) throw Error('DomUtil: elem is not an element.');";
                 script += "const style = getComputedStyle(elem);";
@@ -104,7 +104,7 @@ namespace HatFrameworkDev
             if (_by == Tester.BY_CSS)
             {
                 script = "(function(){";
-                script += $"document.querySelector('{_locator}').click();";
+                script += $"document.querySelector(\"{_locator}\").click();";
                 script += "}());";
             }
             else if (_by == Tester.BY_XPATH)
@@ -126,7 +126,7 @@ namespace HatFrameworkDev
             if (_by == Tester.BY_CSS)
             {
                 script = "(function(){";
-                script += $"var element = document.querySelector('{_locator}');";
+                script += $"var element = document.querySelector(\"{_locator}\");";
                 script += "return element.outerText;";
                 script += "}());";
             }
@@ -150,7 +150,7 @@ namespace HatFrameworkDev
             if (_by == Tester.BY_CSS)
             {
                 script = "(function(){";
-                script += $"var element = document.querySelector('{_locator}');";
+                script += $"var element = document.querySelector(\"{_locator}\");";
                 script += $"element.innerText = '{text}';";
                 script += "return element.outerText;";
                 script += "}());";
@@ -175,7 +175,7 @@ namespace HatFrameworkDev
             if (_by == Tester.BY_CSS)
             {
                 script = "(function(){";
-                script += $"var element = document.querySelector('{_locator}');";
+                script += $"var element = document.querySelector(\"{_locator}\");";
                 script += "return element.value;";
                 script += "}());";
             }
@@ -199,7 +199,7 @@ namespace HatFrameworkDev
             if (_by == Tester.BY_CSS)
             {
                 script = "(function(){";
-                script += $"var element = document.querySelector('{_locator}');";
+                script += $"var element = document.querySelector(\"{_locator}\");";
                 script += $"element.value = '{value}';";
                 script += "element.dispatchEvent(new KeyboardEvent('keydown', { bubbles: true }));";
                 script += "element.dispatchEvent(new KeyboardEvent('keypress', { bubbles: true }));";
@@ -234,7 +234,7 @@ namespace HatFrameworkDev
             if (_by == Tester.BY_CSS)
             {
                 script = "(function(){";
-                script += $"var element = document.querySelector('{_locator}');";
+                script += $"var element = document.querySelector(\"{_locator}\");";
                 script += $"return element.getAttribute('{name}');";
                 script += "}());";
             }
@@ -258,7 +258,7 @@ namespace HatFrameworkDev
             if (_by == Tester.BY_CSS)
             {
                 script = "(function(){";
-                script += $"var element = document.querySelector('{_locator}');";
+                script += $"var element = document.querySelector(\"{_locator}\");";
                 script += $"element.setAttribute('{name}', '{value}');";
                 script += $"return element.getAttribute('{name}');";
                 script += "}());";
@@ -283,7 +283,7 @@ namespace HatFrameworkDev
             if (_by == Tester.BY_CSS)
             {
                 script = "(function(){";
-                script += $"var element = document.querySelector('{_locator}');";
+                script += $"var element = document.querySelector(\"{_locator}\");";
                 script += $"return element.outerHTML;";
                 script += "}());";
             }
@@ -307,7 +307,7 @@ namespace HatFrameworkDev
             if (_by == Tester.BY_CSS)
             {
                 script = "(function(){";
-                script += $"var element = document.querySelector('{_locator}');";
+                script += $"var element = document.querySelector(\"{_locator}\");";
                 script += $"element.innerHTML = '{html}';";
                 script += "return element.outerHTML;";
                 script += "}());";
@@ -332,7 +332,7 @@ namespace HatFrameworkDev
             if (_by == Tester.BY_CSS)
             {
                 script = "(function(){";
-                script += $"var element = document.querySelector('{_locator}');";
+                script += $"var element = document.querySelector(\"{_locator}\");";
                 if (behaviorSmooth == true) script += "element.scrollIntoView({behavior: 'smooth'});";
                 else script += "element.scrollIntoView();";
                 script += $"return element;";
