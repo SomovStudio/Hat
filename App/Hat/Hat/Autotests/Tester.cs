@@ -55,7 +55,6 @@ namespace HatFrameworkDev
         private bool statusPageLoad = false;    // флаг: статус загрузки страницы
         private bool testStop = false;          // флаг: остановка теста
         private string assertStatus = null;     // флаг: рузельтат проверки
-        
 
         public Tester(Form browserForm)
         {
@@ -73,7 +72,7 @@ namespace HatFrameworkDev
                 browserGetErrors = BrowserWindow.GetType().GetMethod("getBowserErrors");
                 checkStopTest = BrowserWindow.GetType().GetMethod("checkStopTest");
                 resultAutotest = BrowserWindow.GetType().GetMethod("resultAutotest");
-                debugJavaScript = BrowserWindow.GetType().GetMethod("getDebug");
+                debugJavaScript = BrowserWindow.GetType().GetMethod("getStatusDebugJavaScript");
 
                 MethodInfo mi = BrowserWindow.GetType().GetMethod("getWebView");
                 BrowserView = (Microsoft.Web.WebView2.WinForms.WebView2)mi.Invoke(BrowserWindow, null);
@@ -138,6 +137,7 @@ namespace HatFrameworkDev
                 script += "}());";
 
                 string result = await ExecuteJavaScriptAsync(script);
+                if (Debug == true) ConsoleMsg($"[DEBUG] JS результат: {result}");
                 if (result != "null" && result != null && result == "true") found = true;
                 else found = false;
             }
@@ -154,9 +154,9 @@ namespace HatFrameworkDev
             string result = null;
             try
             {
-                if (Debug == true) ConsoleMsg($"JS скрипт: {script}");
+                if (Debug == true) ConsoleMsg($"[DEBUG] JS скрипт: {script}");
                 result = await BrowserView.CoreWebView2.ExecuteScriptAsync(script);
-                if (Debug == true) ConsoleMsg($"JS результат: {result}");
+                if (Debug == true) ConsoleMsg($"[DEBUG] JS результат: {result}");
                 if (result == "null" || result == null)
                 {
                     EditMessage(step, null, Tester.FAILED, commentfailed + Environment.NewLine + $"Результат выполнения скрипта: {result}", Tester.IMAGE_STATUS_FAILED);
@@ -462,9 +462,9 @@ namespace HatFrameworkDev
             string result = null;
             try
             {
-                if (Debug == true) ConsoleMsg($"JS скрипт: {script}");
+                if (Debug == true) ConsoleMsg($"[DEBUG] JS скрипт: {script}");
                 result = await BrowserView.CoreWebView2.ExecuteScriptAsync(script);
-                if (Debug == true) ConsoleMsg($"JS результат: {result}");
+                if (Debug == true) ConsoleMsg($"[DEBUG] JS результат: {result}");
             }
             catch (Exception ex)
             {
