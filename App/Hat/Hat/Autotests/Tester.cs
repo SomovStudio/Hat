@@ -30,6 +30,7 @@ namespace HatFrameworkDev
 
         public Form BrowserWindow;      // объект: окно приложения
         public WebView2 BrowserView;    // объект: браузер
+        public bool Debug = false;      // флаг: режим отладки при выполнении JS скриптов
 
         /* Локальные константы и переменные */
         private const string BY_ID = "BY_ID";
@@ -49,12 +50,12 @@ namespace HatFrameworkDev
         private MethodInfo browserGetErrors;        // Функция: getBowserErrors - получить список ошибок и предупреждений браузера
         private MethodInfo checkStopTest;           // функция: checkStopTest - получить статус остановки процесса тестирования
         private MethodInfo resultAutotest;          // функция: resultAutotest - устанавливает флаг общего результата выполнения теста
-        private MethodInfo debugJavaScript;         // функция: getStatusDebugJavaScript - возвращает статус отладки
+        private MethodInfo debugJavaScript;         // функция: getDebug - возвращает статус отладки
         
         private bool statusPageLoad = false;    // флаг: статус загрузки страницы
         private bool testStop = false;          // флаг: остановка теста
         private string assertStatus = null;     // флаг: рузельтат проверки
-        private bool statusDebugJavaScript = false;   // флаг: режим отладки при выполнении JS скриптов
+        
 
         public Tester(Form browserForm)
         {
@@ -72,7 +73,7 @@ namespace HatFrameworkDev
                 browserGetErrors = BrowserWindow.GetType().GetMethod("getBowserErrors");
                 checkStopTest = BrowserWindow.GetType().GetMethod("checkStopTest");
                 resultAutotest = BrowserWindow.GetType().GetMethod("resultAutotest");
-                debugJavaScript = BrowserWindow.GetType().GetMethod("getStatusDebugJavaScript");
+                debugJavaScript = BrowserWindow.GetType().GetMethod("getDebug");
 
                 MethodInfo mi = BrowserWindow.GetType().GetMethod("getWebView");
                 BrowserView = (Microsoft.Web.WebView2.WinForms.WebView2)mi.Invoke(BrowserWindow, null);
@@ -102,7 +103,7 @@ namespace HatFrameworkDev
             }
         }
 
-        private async Task<bool> defineVisibleElementAsync(string by, string target, int index = default)
+        private async Task<bool> isVisible(string by, string target, int index = default)
         {
             bool found = false;
             try
@@ -147,7 +148,36 @@ namespace HatFrameworkDev
             }
             return found;
         }
-        
+
+        private async Task<string> execute(string script, int step, string commentPassed, string commentfailed)
+        {
+            string result = null;
+            try
+            {
+                if (Debug == true) ConsoleMsg($"JS скрипт: {script}");
+                result = await BrowserView.CoreWebView2.ExecuteScriptAsync(script);
+                if (Debug == true) ConsoleMsg($"JS результат: {result}");
+                if (result == null)
+                {
+                    EditMessage(step, null, Tester.FAILED, commentfailed + Environment.NewLine + $"Результат выполнения скрипта: {result}", Tester.IMAGE_STATUS_FAILED);
+                    TestStopAsync();
+                }
+                else
+                {
+                    EditMessage(step, null, Tester.PASSED, commentPassed + Environment.NewLine + $"Результат выполнения скрипта: {result}", Tester.IMAGE_STATUS_PASSED);
+                }
+            }
+            catch (Exception ex)
+            {
+                EditMessage(step, null, Tester.FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), Tester.IMAGE_STATUS_FAILED);
+                TestStopAsync();
+                ConsoleMsgError(ex.ToString());
+            }
+            return result;
+        }
+
+
+
         /* 
          * Методы для вывода сообщений о ходе тестирования ==========================================
          * */
@@ -258,7 +288,7 @@ namespace HatFrameworkDev
                 assertStatus = null;
                 int step = SendMessage("TestBeginAsync()", PROCESS, "Инициализация теста", IMAGE_STATUS_PROCESS);
                 await BrowserView.EnsureCoreWebView2Async();
-                statusDebugJavaScript = (bool)debugJavaScript.Invoke(BrowserWindow, null);
+                Debug = (bool)debugJavaScript.Invoke(BrowserWindow, null);
                 EditMessage(step, null, PASSED, "Выполнена инициализация теста", IMAGE_STATUS_PASSED);
                 ConsoleMsg("Тест запущен");
             }
@@ -432,8 +462,9 @@ namespace HatFrameworkDev
             string result = null;
             try
             {
+                if (Debug == true) ConsoleMsg($"JS скрипт: {script}");
                 result = await BrowserView.CoreWebView2.ExecuteScriptAsync(script);
-                if (statusDebugJavaScript == true) ConsoleMsg($"Метод ExecuteJavaScriptAsync вернул значение: {result}");
+                if (Debug == true) ConsoleMsg($"JS результат: {result}");
             }
             catch (Exception ex)
             {
@@ -581,7 +612,7 @@ namespace HatFrameworkDev
                 bool found = false;
                 for (int i = 0; i < sec; i++)
                 {
-                    found = await defineVisibleElementAsync(BY_ID, id);
+                    found = await isVisible(BY_ID, id);
                     if (found) break;
                     await Task.Delay(1000);
                 }
@@ -610,7 +641,7 @@ namespace HatFrameworkDev
                 bool found = false;
                 for (int i = 0; i < sec; i++)
                 {
-                    found = await defineVisibleElementAsync(BY_CLASS, _class, index);
+                    found = await isVisible(BY_CLASS, _class, index);
                     if (found) break;
                     await Task.Delay(1000);
                 }
@@ -639,7 +670,7 @@ namespace HatFrameworkDev
                 bool found = false;
                 for (int i = 0; i < sec; i++)
                 {
-                    found = await defineVisibleElementAsync(BY_NAME, name, index);
+                    found = await isVisible(BY_NAME, name, index);
                     if (found) break;
                     await Task.Delay(1000);
                 }
@@ -668,7 +699,7 @@ namespace HatFrameworkDev
                 bool found = false;
                 for (int i = 0; i < sec; i++)
                 {
-                    found = await defineVisibleElementAsync(BY_TAG, tag, index);
+                    found = await isVisible(BY_TAG, tag, index);
                     if (found) break;
                     await Task.Delay(1000);
                 }
@@ -697,7 +728,7 @@ namespace HatFrameworkDev
                 bool found = false;
                 for (int i = 0; i < sec; i++)
                 {
-                    found = await defineVisibleElementAsync(BY_CSS, locator);
+                    found = await isVisible(BY_CSS, locator);
                     if (found) break;
                     await Task.Delay(1000);
                 }
@@ -726,7 +757,7 @@ namespace HatFrameworkDev
                 bool found = true;
                 for (int i = 0; i < sec; i++)
                 {
-                    found = await defineVisibleElementAsync(BY_ID, id);
+                    found = await isVisible(BY_ID, id);
                     if (found == false) break;
                     await Task.Delay(1000);
                 }
@@ -755,7 +786,7 @@ namespace HatFrameworkDev
                 bool found = true;
                 for (int i = 0; i < sec; i++)
                 {
-                    found = await defineVisibleElementAsync(BY_CLASS, _class, index);
+                    found = await isVisible(BY_CLASS, _class, index);
                     if (found == false) break;
                     await Task.Delay(1000);
                 }
@@ -784,7 +815,7 @@ namespace HatFrameworkDev
                 bool found = true;
                 for (int i = 0; i < sec; i++)
                 {
-                    found = await defineVisibleElementAsync(BY_NAME, name, index);
+                    found = await isVisible(BY_NAME, name, index);
                     if (found == false) break;
                     await Task.Delay(1000);
                 }
@@ -813,7 +844,7 @@ namespace HatFrameworkDev
                 bool found = true;
                 for (int i = 0; i < sec; i++)
                 {
-                    found = await defineVisibleElementAsync(BY_TAG, tag, index);
+                    found = await isVisible(BY_TAG, tag, index);
                     if (found == false) break;
                     await Task.Delay(1000);
                 }
@@ -842,7 +873,7 @@ namespace HatFrameworkDev
                 bool found = true;
                 for (int i = 0; i < sec; i++)
                 {
-                    found = await defineVisibleElementAsync(BY_CSS, locator);
+                    found = await isVisible(BY_CSS, locator);
                     if (found == false) break;
                     await Task.Delay(1000);
                 }
@@ -1062,7 +1093,7 @@ namespace HatFrameworkDev
             {
                 for (int i = 0; i < sec; i++)
                 {
-                    found = await defineVisibleElementAsync(BY_ID, id);
+                    found = await isVisible(BY_ID, id);
                     if (found) break;
                     await Task.Delay(1000);
                 }
@@ -1089,7 +1120,7 @@ namespace HatFrameworkDev
             {
                 for (int i = 0; i < sec; i++)
                 {
-                    found = await defineVisibleElementAsync(BY_CLASS, _class, index);
+                    found = await isVisible(BY_CLASS, _class, index);
                     if (found) break;
                     await Task.Delay(1000);
                 }
@@ -1116,7 +1147,7 @@ namespace HatFrameworkDev
             {
                 for (int i = 0; i < sec; i++)
                 {
-                    found = await defineVisibleElementAsync(BY_NAME, name, index);
+                    found = await isVisible(BY_NAME, name, index);
                     if (found) break;
                     await Task.Delay(1000);
                 }
@@ -1143,7 +1174,7 @@ namespace HatFrameworkDev
             {
                 for (int i = 0; i < sec; i++)
                 {
-                    found = await defineVisibleElementAsync(BY_TAG, tag, index);
+                    found = await isVisible(BY_TAG, tag, index);
                     if (found) break;
                     await Task.Delay(1000);
                 }
@@ -1170,7 +1201,7 @@ namespace HatFrameworkDev
             {
                 for (int i = 0; i < sec; i++)
                 {
-                    found = await defineVisibleElementAsync(BY_CSS, locator);
+                    found = await isVisible(BY_CSS, locator);
                     if (found) break;
                     await Task.Delay(1000);
                 }
