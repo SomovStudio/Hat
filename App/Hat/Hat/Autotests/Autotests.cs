@@ -86,6 +86,12 @@ namespace Hat
             await tester.WaitNotVisibleElementAsync(HatFrameworkDev.Tester.BY_CSS, "div[id='result']", 2);
             await tester.WaitNotVisibleElementAsync(HatFrameworkDev.Tester.BY_XPATH, "//div[@id='result']", 2);
 
+            await tester.FindElementAsync(HatFrameworkDev.Tester.BY_CSS, "div[id='result']", 2);
+            await tester.FindElementAsync(HatFrameworkDev.Tester.BY_XPATH, "//div[@id='result']", 2);
+
+            await tester.FindVisibleElementAsync(HatFrameworkDev.Tester.BY_CSS, "#auth #buttonLogin", 2);
+            await tester.FindVisibleElementAsync(HatFrameworkDev.Tester.BY_CSS, "//div[@id='auth']//input[@id='buttonLogin']", 2);
+
 
 
             await tester.TestEndAsync();

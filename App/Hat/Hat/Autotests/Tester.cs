@@ -1055,11 +1055,22 @@ namespace HatFrameworkDev
             bool found = false;
             try
             {
+                string script = "";
+                script += "(function(){ ";
+                if (by == BY_CSS) script += $"var elem = document.querySelector(\"{locator}\");";
+                else script += $"var element = document.evaluate(\"{locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
+                script += "return elem;";
+                script += "}());";
+
+                string result = null;
                 for (int i = 0; i < sec; i++)
                 {
-                    if (by == BY_CSS) found = await isVisible(BY_CSS, locator);
-                    else found = await isVisible(BY_XPATH, locator);
-                    if (found) break;
+                    result = await ExecuteJavaScriptAsync(script);
+                    if (result != "null" && result != null)
+                    {
+                        found = true;
+                        break;
+                    }
                     await Task.Delay(1000);
                 }
 
