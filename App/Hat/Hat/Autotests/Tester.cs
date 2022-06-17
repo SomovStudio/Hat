@@ -2049,18 +2049,35 @@ namespace HatFrameworkDev
             if (DefineTestStop(step) == true) return null;
 
             string script = "(function(){";
-            if (by == BY_CSS) script += $"var element = document.querySelectorAll(\"{locator}\");";
-            else script += $"var element = document.evaluate(\"{locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
-            script += "var json = '[';";
-            script += "var attr = '';";
-            script += "for (var i = 0; i < element.length; i++){";
-            script += $"element[i].setAttribute('{attribute}', '{value}');";
-            script += $"attr = element[i].getAttribute('{attribute}');";
-            script += "json += '\"' + attr + '\",';";
-            script += "}";
-            script += "json = json.slice(0, -1);";
-            script += "json += ']';";
-            script += "return json;";
+            if (by == BY_CSS)
+            {
+                script += $"var element = document.querySelectorAll(\"{locator}\");";
+                script += "var json = '[';";
+                script += "var attr = '';";
+                script += "for (var i = 0; i < element.length; i++){";
+                script += $"element[i].setAttribute('{attribute}', '{value}');";
+                script += $"attr = element[i].getAttribute('{attribute}');";
+                script += "json += '\"' + attr + '\",';";
+                script += "}";
+                script += "json = json.slice(0, -1);";
+                script += "json += ']';";
+                script += "return json;";
+            }
+            else if (by == BY_XPATH)
+            {
+                script += $"var element = document.evaluate(\"{locator}\", document, null, XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);";
+                script += "var json = '[';";
+                script += "var attr = '';";
+                script += "var count = element.snapshotLength;";
+                script += "for (var i = 0; i < count; i++){";
+                script += $"element.snapshotItem(i).setAttribute('{attribute}', '{value}');";
+                script += $"attr = element.snapshotItem(i).getAttribute('{attribute}');";
+                script += "json += '\"' + attr + '\",';";
+                script += "}";
+                script += "json = json.slice(0, -1);";
+                script += "json += ']';";
+                script += "return json;";
+            }
             script += "}());";
             string result = await execute(script, step, $"Аттрибут '{attribute}' добавлен в элементы", $"Не удалось найти или добавить аттрибут в элементы по локатору: {locator}");
             List<string> Json_Array = null;
