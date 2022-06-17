@@ -327,3 +327,27 @@ HTMLElement(Tester tester, string by, string locator) - объект элеме�
 	HTMLElement element = await tester.GetElementAsync(Tester.BY_XPATH, "//h1");
 	await element.WaitVisibleAsync(2);
 	await element.WaitNotVisibleAsync(2);
+
+Поддержка XPath
+
+BY_CSS = "BY_CSS";
+BY_XPATH = "BY_XPATH";
+
+WaitVisibleElementAsync(string by, string locator, int sec)
+WaitNotVisibleElementAsync(string by, string locator, int sec)
+FindElementAsync(string by, string locator, int sec)
+FindVisibleElementAsync(string by, string locator, int sec)
+ClickElementAsync(string by, string locator)
+SetValueInElementAsync(string by, string locator, string value)
+GetValueFromElementAsync(string by, string locator)
+SetTextInElementAsync(string by, string locator, string text)
+GetTextFromElementAsync(string by, string locator)
+GetCountElementsAsync(string by, string locator)
+ScrollToElementAsync(string by, string locator, bool behaviorSmooth = false)
+GetAttributeFromElementAsync(string by, string locator, string attribute)
+GetAttributeFromElementsAsync(string by, string locator, string attribute)
+SetAttributeInElementAsync(string by, string locator, string attribute, string value)
+SetAttributeInElementsAsync(string by, string locator, string attribute, string value)
+GetHtmlFromElementAsync(string by, string locator)
+SetHtmlInElementAsync(string by, string locator, string html)
+
