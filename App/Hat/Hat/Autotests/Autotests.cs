@@ -120,19 +120,21 @@ namespace Hat
             await tester.SetTextInElementAsync(HatFrameworkDev.Tester.BY_XPATH, "//div[@id='auth']//h2", "Тестовый заголовок");
             string text_xpath = await tester.GetTextFromElementAsync(HatFrameworkDev.Tester.BY_XPATH, "//div[@id='auth']//h2");
             tester.ConsoleMsg(text_xpath);
+
+            tester.ConsoleMsg("========================================");
             //int count_xpath = await tester.GetCountElementsAsync(HatFrameworkDev.Tester.BY_XPATH, "//input");
             //tester.ConsoleMsg(count_xpath.ToString());
+            tester.ConsoleMsg("========================================");
 
             string attr_xpath = await tester.GetAttributeFromElementAsync(HatFrameworkDev.Tester.BY_XPATH, "//input", "name");
             tester.ConsoleMsg(attr_xpath);
-            /*
+
             List<string> attrs_xpath = await tester.GetAttributeFromElementsAsync(HatFrameworkDev.Tester.BY_XPATH, "//input", "name");
             if(attrs_xpath != null)
             {
                 foreach (string attr in attrs_xpath)
                     tester.ConsoleMsg(attr);
             }
-            */
 
             await tester.SetAttributeInElementAsync(HatFrameworkDev.Tester.BY_XPATH, "//div[@id='auth']//h2", "name", "textH1");
             //await tester.SetAttributeInElementsAsync(HatFrameworkDev.Tester.BY_CSS, "//input", "class", "test-class");

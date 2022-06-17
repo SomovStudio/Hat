@@ -1826,23 +1826,20 @@ namespace HatFrameworkDev
                 script += "json = json.slice(0, -1);";
                 script += "json += ']';";
                 script += "return json;";
-                script += "}());";
             }
             else if(by == BY_XPATH)
             {
-                //script += $"var element = document.evaluate(\"{locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
                 script += $"var element = document.evaluate(\"{locator}\", document, null, XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);";
                 script += "var json = '[';";
                 script += "var attr = '';";
                 script += "var count = element.snapshotLength;";
                 script += "for (var i = 0; i < count; i++){";
-                script += $"attr = element[i].getAttribute('{attribute}');";
+                script += $"attr = element.snapshotItem(i).getAttribute('{attribute}');";
                 script += "json += '\"' + attr + '\",';";
                 script += "}";
                 script += "json = json.slice(0, -1);";
                 script += "json += ']';";
                 script += "return json;";
-                script += "}());";
             }
             script += "}());";
 
