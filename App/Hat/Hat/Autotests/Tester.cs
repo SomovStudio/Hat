@@ -154,7 +154,7 @@ namespace HatFrameworkDev
                 script += "return false;";
                 script += "}());";
 
-                string result = await ExecuteJavaScriptAsync(script);
+                string result = await executeJS(script);
                 if (Debug == true) ConsoleMsg($"[DEBUG] JS результат: {result}");
                 if (result != "null" && result != null && result == "true") found = true;
                 else found = false;
@@ -194,7 +194,21 @@ namespace HatFrameworkDev
             return result;
         }
 
-
+        private async Task<string> executeJS(string script)
+        {
+            string result = null;
+            try
+            {
+                if (Debug == true) ConsoleMsg($"[DEBUG] JS скрипт: {script}");
+                result = await BrowserView.CoreWebView2.ExecuteScriptAsync(script);
+                if (Debug == true) ConsoleMsg($"[DEBUG] JS результат: {result}");
+            }
+            catch (Exception ex)
+            {
+                ConsoleMsgError(ex.ToString());
+            }
+            return result;
+        }
 
         /* 
          * Методы для вывода сообщений о ходе тестирования ==========================================
@@ -463,7 +477,7 @@ namespace HatFrameworkDev
                 var result = JSON.stringify(network);
                 return result;
                 }());";
-                string jsonText = await ExecuteJavaScriptAsync(script);
+                string jsonText = await executeJS(script);
                 dynamic result = JsonConvert.DeserializeObject(jsonText);
                 events = result;
                 EditMessage(step, null, COMPLETED, "Получен список событий браузера (network)", IMAGE_STATUS_MESSAGE);
@@ -930,7 +944,7 @@ namespace HatFrameworkDev
                 string result = null;
                 for (int i = 0; i < sec; i++)
                 {
-                    result = await ExecuteJavaScriptAsync(script);
+                    result = await executeJS(script);
                     if (result != "null" && result != null)
                     {
                         found = true;
@@ -968,7 +982,7 @@ namespace HatFrameworkDev
                 string result = null;
                 for (int i = 0; i < sec; i++)
                 {
-                    result = await ExecuteJavaScriptAsync(script);
+                    result = await executeJS(script);
                     if (result != "null" && result != null)
                     {
                         found = true;
@@ -1006,7 +1020,7 @@ namespace HatFrameworkDev
                 string result = null;
                 for (int i = 0; i < sec; i++)
                 {
-                    result = await ExecuteJavaScriptAsync(script);
+                    result = await executeJS(script);
                     if (result != "null" && result != null)
                     {
                         found = true;
@@ -1044,7 +1058,7 @@ namespace HatFrameworkDev
                 string result = null;
                 for (int i = 0; i < sec; i++)
                 {
-                    result = await ExecuteJavaScriptAsync(script);
+                    result = await executeJS(script);
                     if (result != "null" && result != null)
                     {
                         found = true;
@@ -1083,7 +1097,7 @@ namespace HatFrameworkDev
                 string result = null;
                 for (int i = 0; i < sec; i++)
                 {
-                    result = await ExecuteJavaScriptAsync(script);
+                    result = await executeJS(script);
                     if (result != "null" && result != null)
                     {
                         found = true;
@@ -1639,7 +1653,7 @@ namespace HatFrameworkDev
                     else script += "element.scrollIntoView(); return element;";
                 }
                 script += "}());";
-                string result = await ExecuteJavaScriptAsync(script);
+                string result = await executeJS(script);
                 EditMessage(step, null, PASSED, "Прокрутил к элементу выполнена", IMAGE_STATUS_PASSED);
             }
             catch (Exception ex)
