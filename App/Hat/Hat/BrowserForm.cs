@@ -1964,8 +1964,16 @@ namespace Hat
 
         private void debugJavaScriptToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (Config.debugJavaScript == true)Config.debugJavaScript = false;
-            else Config.debugJavaScript = true;
+            if (Config.debugJavaScript == true)
+            {
+                Config.debugJavaScript = false;
+                consoleMsg("Отключен режим отладки при выполнении JavaScript кода");
+            }
+            else
+            {
+                Config.debugJavaScript = true;
+                consoleMsg("Включен режим отладки при выполнении JavaScript кода");
+            }
             debugJavaScriptToolStripMenuItem.Checked = Config.debugJavaScript;
             debugJavaScriptToolStripMenuItem1.Checked = Config.debugJavaScript;
         }

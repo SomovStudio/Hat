@@ -81,6 +81,9 @@ namespace Hat
             await tester.SetValueInElementAsync(HatFrameworkDev.Tester.BY_XPATH, "//input[@id='pass']", "0000");
             await tester.ClickElementAsync(HatFrameworkDev.Tester.BY_CSS, "#auth #buttonLogin");
             await tester.WaitVisibleElementAsync(HatFrameworkDev.Tester.BY_CSS, "div[id='result']", 2);
+            string script = "(function(){ var element = document.getElementsByTagName('h2')[0]; return element.innerText; }());";
+            string result = await tester.ExecuteJavaScriptAsync(script);
+            tester.ConsoleMsg(result);
             await tester.TestEndAsync();
 
             /*
@@ -332,7 +335,7 @@ namespace Hat
 
         public async Task tearDown()
         {
-            await tester.BrowserCloseAsync();
+            // await tester.BrowserCloseAsync();
         }
     }
 }
@@ -391,7 +394,7 @@ namespace Hat
 
         public async Task tearDown()
         {
-            await tester.BrowserCloseAsync();
+            // await tester.BrowserCloseAsync();
         }
     }
 }
