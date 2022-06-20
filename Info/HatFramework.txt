@@ -353,3 +353,6 @@ HTMLElement(Tester tester, string by, string locator) - объект элеме�
 
 REST запросы
 
+	string result = await tester.RestGetAsync(@"https://jsonplaceholder.typicode.com/posts/1/");
+	tester.ConsoleMsg(result);
+	

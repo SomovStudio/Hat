@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
@@ -2264,10 +2266,12 @@ namespace HatFrameworkDev
         /*
          * Методы для работы с REST запросами =======================================================
          * https://stackoverflow.com/questions/9620278/how-do-i-make-calls-to-a-rest-api-using-c
+         * https://stackoverflow.com/questions/48977317/httpclient-post-with-parameters-in-body
          * https://docs.microsoft.com/en-us/dotnet/framework/network-programming/how-to-send-data-using-the-webrequest-class
+         * https://zetcode.com/csharp/httpclient/
          * https://jsonplaceholder.typicode.com/
          */
-        public async Task<string> RestGetAsync(string url)
+        private async Task<string> _RestGetAsync(string url)
         {
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
             request.ContentType = "application/json"; // application/json; charset=UTF-8
@@ -2280,17 +2284,77 @@ namespace HatFrameworkDev
             }
         }
 
-        public async Task<string> RestPostAsync(string url)
+        public async Task<string> RestGetAsync(string url, string charset = "UTF-8")
         {
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
-            request.ContentType = "application/json"; // application/json; charset=UTF-8
-            request.Method = "POST";
-            WebResponse response = request.GetResponse();
-            using (var streamReader = new StreamReader(response.GetResponseStream()))
+            int step = SendMessage($"RestGetAsync(\"{url}\")", PROCESS, "Выполнение Get Rest запроса", IMAGE_STATUS_PROCESS);
+            if (DefineTestStop(step) == true) return null;
+
+            string userAgent = BrowserView.CoreWebView2.Settings.UserAgent;
+            string result = null;
+            try
             {
-                var result = streamReader.ReadToEnd();
-                return result;
+                Uri uri = new Uri(url);
+                HttpClient client = new HttpClient();
+                client.BaseAddress = uri;
+                client.DefaultRequestHeaders.Clear();
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                client.DefaultRequestHeaders.Add("charset", charset);
+                client.DefaultRequestHeaders.Add("User-Agent", userAgent);
+                HttpResponseMessage response = await client.GetAsync(url);
+                if (response.IsSuccessStatusCode)
+                {
+                    result = await response.Content.ReadAsStringAsync();
+                    EditMessage(step, null, PASSED, "Get Rest запрос успешно выполнен", IMAGE_STATUS_PASSED);
+                }
+                else
+                {
+                    EditMessage(step, null, FAILED, "Get Rest не выполнен" + Environment.NewLine + "Статус запроса: " + Environment.NewLine + response.StatusCode.ToString(), IMAGE_STATUS_PASSED);
+                }
             }
+            catch (Exception ex)
+            {
+                EditMessage(step, null, Tester.FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), Tester.IMAGE_STATUS_FAILED);
+                TestStopAsync();
+                ConsoleMsgError(ex.ToString());
+            }
+            return result;
+        }
+
+        public async Task<string> RestGetAuthAsync(string url, string login, string pass)
+        {
+            int step = SendMessage($"RestGetAuthAsync(\"{url}\", \"{login}\", \"{pass}\")", PROCESS, "Выполнение Get Rest запроса", IMAGE_STATUS_PROCESS);
+            if (DefineTestStop(step) == true) return null;
+
+            string result = null;
+            try
+            {
+                Uri uri = new Uri(url);
+                HttpClient client = new HttpClient();
+                client.BaseAddress = uri;
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                client.DefaultRequestHeaders.Add("charset", "UTF-8");
+                //client.DefaultRequestHeaders.Add("User-Agent", "C# console program");
+                //client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("", "");
+                HttpResponseMessage response = await client.GetAsync(url);
+                if (response.IsSuccessStatusCode)
+                {
+                    result = await response.Content.ReadAsStringAsync();
+                    EditMessage(step, null, PASSED, "Get Rest запрос успешно выполнен", IMAGE_STATUS_PASSED);
+                }
+                else
+                {
+                    EditMessage(step, null, FAILED, "Get Rest не выполнен" + Environment.NewLine + "Статус запроса: " + Environment.NewLine + response.StatusCode.ToString(), IMAGE_STATUS_PASSED);
+                }
+            }
+            catch (Exception ex)
+            {
+                EditMessage(step, null, Tester.FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), Tester.IMAGE_STATUS_FAILED);
+                TestStopAsync();
+                ConsoleMsgError(ex.ToString());
+            }
+            return result;
         }
 
 
