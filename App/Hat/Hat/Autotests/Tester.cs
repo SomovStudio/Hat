@@ -51,7 +51,8 @@ namespace HatFrameworkDev
         private MethodInfo checkStopTest;           // функция: checkStopTest - получить статус остановки процесса тестирования
         private MethodInfo resultAutotest;          // функция: resultAutotest - устанавливает флаг общего результата выполнения теста
         private MethodInfo debugJavaScript;         // функция: getDebug - возвращает статус отладки
-        
+        private MethodInfo getNameAutotest;         // Функция: getNameAutotest - возвращает имя запущенного автотеста
+
         private bool statusPageLoad = false;    // флаг: статус загрузки страницы
         private bool testStop = false;          // флаг: остановка теста
         private string assertStatus = null;     // флаг: рузельтат проверки
@@ -73,11 +74,14 @@ namespace HatFrameworkDev
                 checkStopTest = BrowserWindow.GetType().GetMethod("checkStopTest");
                 resultAutotest = BrowserWindow.GetType().GetMethod("resultAutotest");
                 debugJavaScript = BrowserWindow.GetType().GetMethod("getStatusDebugJavaScript");
+                getNameAutotest = BrowserWindow.GetType().GetMethod("getNameAutotest");
 
                 MethodInfo mi = BrowserWindow.GetType().GetMethod("getWebView");
                 BrowserView = (Microsoft.Web.WebView2.WinForms.WebView2)mi.Invoke(BrowserWindow, null);
                 BrowserView.ContentLoading += contentLoading;
                 BrowserView.EnsureCoreWebView2Async();
+
+                showNameAutotest();
             }
             catch (Exception ex)
             {
@@ -95,6 +99,20 @@ namespace HatFrameworkDev
             try
             {
                 resultAutotest.Invoke(BrowserWindow, new object[] { success });
+            }
+            catch (Exception ex)
+            {
+                ConsoleMsgError(ex.ToString());
+            }
+        }
+
+        private void showNameAutotest()
+        {
+            try
+            {
+                int step = SendMessage("Сообщение", PROCESS, $"Запуск автотеста", IMAGE_STATUS_MESSAGE);
+                string filename = (string)getNameAutotest.Invoke(BrowserWindow, null);
+                EditMessage(step, null, COMPLETED, $"Запущен автотест из файла: {filename}", IMAGE_STATUS_MESSAGE);
             }
             catch (Exception ex)
             {
