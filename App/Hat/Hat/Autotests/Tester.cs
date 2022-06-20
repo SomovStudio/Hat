@@ -51,7 +51,8 @@ namespace HatFrameworkDev
         private MethodInfo checkStopTest;           // функция: checkStopTest - получить статус остановки процесса тестирования
         private MethodInfo resultAutotest;          // функция: resultAutotest - устанавливает флаг общего результата выполнения теста
         private MethodInfo debugJavaScript;         // функция: getDebug - возвращает статус отладки
-        
+        private MethodInfo getNameAutotest;         // Функция: getNameAutotest - возвращает имя запущенного автотеста
+
         private bool statusPageLoad = false;    // флаг: статус загрузки страницы
         private bool testStop = false;          // флаг: остановка теста
         private string assertStatus = null;     // флаг: рузельтат проверки
@@ -73,11 +74,14 @@ namespace HatFrameworkDev
                 checkStopTest = BrowserWindow.GetType().GetMethod("checkStopTest");
                 resultAutotest = BrowserWindow.GetType().GetMethod("resultAutotest");
                 debugJavaScript = BrowserWindow.GetType().GetMethod("getStatusDebugJavaScript");
+                getNameAutotest = BrowserWindow.GetType().GetMethod("getNameAutotest");
 
                 MethodInfo mi = BrowserWindow.GetType().GetMethod("getWebView");
                 BrowserView = (Microsoft.Web.WebView2.WinForms.WebView2)mi.Invoke(BrowserWindow, null);
                 BrowserView.ContentLoading += contentLoading;
                 BrowserView.EnsureCoreWebView2Async();
+
+                showNameAutotest();
             }
             catch (Exception ex)
             {
@@ -95,6 +99,20 @@ namespace HatFrameworkDev
             try
             {
                 resultAutotest.Invoke(BrowserWindow, new object[] { success });
+            }
+            catch (Exception ex)
+            {
+                ConsoleMsgError(ex.ToString());
+            }
+        }
+
+        private void showNameAutotest()
+        {
+            try
+            {
+                int step = SendMessage("Сообщение", PROCESS, $"Запуск автотеста", IMAGE_STATUS_MESSAGE);
+                string filename = (string)getNameAutotest.Invoke(BrowserWindow, null);
+                EditMessage(step, null, COMPLETED, $"Запущен автотест из файла: {filename}", IMAGE_STATUS_MESSAGE);
             }
             catch (Exception ex)
             {
@@ -136,7 +154,7 @@ namespace HatFrameworkDev
                 script += "return false;";
                 script += "}());";
 
-                string result = await ExecuteJavaScriptAsync(script);
+                string result = await executeJS(script);
                 if (Debug == true) ConsoleMsg($"[DEBUG] JS результат: {result}");
                 if (result != "null" && result != null && result == "true") found = true;
                 else found = false;
@@ -176,7 +194,21 @@ namespace HatFrameworkDev
             return result;
         }
 
-
+        private async Task<string> executeJS(string script)
+        {
+            string result = null;
+            try
+            {
+                if (Debug == true) ConsoleMsg($"[DEBUG] JS скрипт: {script}");
+                result = await BrowserView.CoreWebView2.ExecuteScriptAsync(script);
+                if (Debug == true) ConsoleMsg($"[DEBUG] JS результат: {result}");
+            }
+            catch (Exception ex)
+            {
+                ConsoleMsgError(ex.ToString());
+            }
+            return result;
+        }
 
         /* 
          * Методы для вывода сообщений о ходе тестирования ==========================================
@@ -445,7 +477,7 @@ namespace HatFrameworkDev
                 var result = JSON.stringify(network);
                 return result;
                 }());";
-                string jsonText = await ExecuteJavaScriptAsync(script);
+                string jsonText = await executeJS(script);
                 dynamic result = JsonConvert.DeserializeObject(jsonText);
                 events = result;
                 EditMessage(step, null, COMPLETED, "Получен список событий браузера (network)", IMAGE_STATUS_MESSAGE);
@@ -460,14 +492,20 @@ namespace HatFrameworkDev
         public async Task<string> ExecuteJavaScriptAsync(string script)
         {
             string result = null;
+            int step = SendMessage($"ExecuteJavaScriptAsync('...')", PROCESS, "Выполнение скрипта. " + Environment.NewLine + Environment.NewLine + $"{script}", IMAGE_STATUS_PROCESS);
+            if (DefineTestStop(step) == true) return result;
+
             try
             {
                 if (Debug == true) ConsoleMsg($"[DEBUG] JS скрипт: {script}");
                 result = await BrowserView.CoreWebView2.ExecuteScriptAsync(script);
                 if (Debug == true) ConsoleMsg($"[DEBUG] JS результат: {result}");
+                EditMessage(step, null, PASSED, "Скрипт выполнен. " + Environment.NewLine + Environment.NewLine + $"{script}", IMAGE_STATUS_PASSED);
             }
             catch (Exception ex)
             {
+                EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
+                TestStopAsync();
                 ConsoleMsgError(ex.ToString());
             }
             return result;
@@ -912,7 +950,7 @@ namespace HatFrameworkDev
                 string result = null;
                 for (int i = 0; i < sec; i++)
                 {
-                    result = await ExecuteJavaScriptAsync(script);
+                    result = await executeJS(script);
                     if (result != "null" && result != null)
                     {
                         found = true;
@@ -950,7 +988,7 @@ namespace HatFrameworkDev
                 string result = null;
                 for (int i = 0; i < sec; i++)
                 {
-                    result = await ExecuteJavaScriptAsync(script);
+                    result = await executeJS(script);
                     if (result != "null" && result != null)
                     {
                         found = true;
@@ -988,7 +1026,7 @@ namespace HatFrameworkDev
                 string result = null;
                 for (int i = 0; i < sec; i++)
                 {
-                    result = await ExecuteJavaScriptAsync(script);
+                    result = await executeJS(script);
                     if (result != "null" && result != null)
                     {
                         found = true;
@@ -1026,7 +1064,7 @@ namespace HatFrameworkDev
                 string result = null;
                 for (int i = 0; i < sec; i++)
                 {
-                    result = await ExecuteJavaScriptAsync(script);
+                    result = await executeJS(script);
                     if (result != "null" && result != null)
                     {
                         found = true;
@@ -1065,7 +1103,7 @@ namespace HatFrameworkDev
                 string result = null;
                 for (int i = 0; i < sec; i++)
                 {
-                    result = await ExecuteJavaScriptAsync(script);
+                    result = await executeJS(script);
                     if (result != "null" && result != null)
                     {
                         found = true;
@@ -1621,7 +1659,7 @@ namespace HatFrameworkDev
                     else script += "element.scrollIntoView(); return element;";
                 }
                 script += "}());";
-                string result = await ExecuteJavaScriptAsync(script);
+                string result = await executeJS(script);
                 EditMessage(step, null, PASSED, "Прокрутил к элементу выполнена", IMAGE_STATUS_PASSED);
             }
             catch (Exception ex)

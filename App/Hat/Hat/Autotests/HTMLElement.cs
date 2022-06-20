@@ -35,17 +35,17 @@ namespace HatFrameworkDev
                 if (_tester.Debug == true) _tester.ConsoleMsg($"[DEBUG] JS результат: {result}");
                 if (result == null)
                 {
-                    _tester.EditMessage(step, null, Tester.FAILED, commentfailed + Environment.NewLine + $"Результат выполнения скрипта: {result}", Tester.IMAGE_STATUS_FAILED);
+                    _tester.EditMessage(step, null, Tester.FAILED, $"{commentfailed} " + Environment.NewLine + $"Результат выполнения скрипта: {result}", Tester.IMAGE_STATUS_FAILED);
                     _tester.TestStopAsync();
                 }
                 else 
                 {
-                    _tester.EditMessage(step, null, Tester.PASSED, commentPassed + Environment.NewLine + $"Результат выполнения скрипта: {result}", Tester.IMAGE_STATUS_PASSED);
+                    _tester.EditMessage(step, null, Tester.PASSED, $"{commentPassed} " + Environment.NewLine + $"Результат выполнения скрипта: {result}", Tester.IMAGE_STATUS_PASSED);
                 }
             }
             catch (Exception ex)
             {
-                _tester.EditMessage(step, null, Tester.FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), Tester.IMAGE_STATUS_FAILED);
+                _tester.EditMessage(step, null, Tester.FAILED, "Произошла ошибка: " + ex.Message + " " + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), Tester.IMAGE_STATUS_FAILED);
                 _tester.TestStopAsync();
                 _tester.ConsoleMsgError(ex.ToString());
             }
@@ -104,14 +104,17 @@ namespace HatFrameworkDev
             if (_by == Tester.BY_CSS)
             {
                 script = "(function(){";
-                script += $"document.querySelector(\"{_locator}\").click();";
+                script += $"var element = document.querySelector(\"{_locator}\");";
+                script += "element.click();";
+                script += "return element;";
                 script += "}());";
             }
             else if (_by == Tester.BY_XPATH)
             {
                 script = "(function(){";
-                script += $"document.evaluate(\"{_locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.click();";
-                script += "return element.outerText;";
+                script += $"var element = document.evaluate(\"{_locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
+                script += "element.click();";
+                script += "return element;";
                 script += "}());";
             }
             await execute(script, step, "Элемент нажат", "Не удалось нажать на элемент");
@@ -382,7 +385,7 @@ namespace HatFrameworkDev
 
         public async Task WaitNotVisibleAsync(int sec)
         {
-            int step = _tester.SendMessage($"WaitNotVisibleAsync({sec})", Tester.PROCESS, $"Ожидание скрытия элемента {sec.ToString()} секунд", Tester.IMAGE_STATUS_PROCESS);
+            int step = _tester.SendMessage($"WaitNotVisibleAsync({sec})", Tester.PROCESS, $"Ожидание скрытия элемента {sec} секунд", Tester.IMAGE_STATUS_PROCESS);
             if (_tester.DefineTestStop(step) == true) return;
 
             try

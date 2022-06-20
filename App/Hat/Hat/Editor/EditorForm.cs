@@ -1172,8 +1172,8 @@ await tester.WaitVisibleElementAsync(Tester.BY_XPATH, ""//div[@id='result']"", 2
 \cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : ExecuteJavaScriptAsync(string script)\par
 \cf3\par
 \cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
-\cf0\f0\lang1033 string string = ""(function()\{ var element = document.getElementById('MyElement'); return element.innerText; \}());"";\par
-string result = await tester.ExecuteJavaScriptAsync(string);\f1\lang1049\par
+\cf0\f0\lang1033 string script = ""(function()\{ var element = document.getElementById('MyElement'); return element.innerText; \}());"";\par
+string result = await tester.ExecuteJavaScriptAsync(script);\f1\lang1049\par
 }
 ",
 

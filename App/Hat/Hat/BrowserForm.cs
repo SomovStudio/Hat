@@ -318,6 +318,12 @@ namespace Hat
             testSuccess = success; // true - автотест был выполнен успешно | false - автотест был провелен
         }
 
+        /* Возвращает имя автотеста */
+        public string getNameAutotest()
+        {
+            return Config.selectName;
+        }
+
         /* Настройка UserAgent */
         public void userAgent(string value)
         {
@@ -1090,6 +1096,7 @@ namespace Hat
         {
             try
             {
+                cleadMessageStep();
                 if (Config.selectName.Contains(".cs"))
                 {
                     stopTest = false;
@@ -1766,6 +1773,7 @@ namespace Hat
 
         private void toolStripButton13_Click(object sender, EventArgs e)
         {
+            cleadMessageStep();
             Autotests.devTestStutsAsync();
             /*
             EditorForm editorForm = new EditorForm();
@@ -1956,8 +1964,16 @@ namespace Hat
 
         private void debugJavaScriptToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (Config.debugJavaScript == true)Config.debugJavaScript = false;
-            else Config.debugJavaScript = true;
+            if (Config.debugJavaScript == true)
+            {
+                Config.debugJavaScript = false;
+                consoleMsg("Отключен режим отладки при выполнении JavaScript кода");
+            }
+            else
+            {
+                Config.debugJavaScript = true;
+                consoleMsg("Включен режим отладки при выполнении JavaScript кода");
+            }
             debugJavaScriptToolStripMenuItem.Checked = Config.debugJavaScript;
             debugJavaScriptToolStripMenuItem1.Checked = Config.debugJavaScript;
         }
