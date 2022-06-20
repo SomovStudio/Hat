@@ -2286,13 +2286,14 @@ namespace HatFrameworkDev
 
         public async Task<string> RestGetAsync(string url, string charset = "UTF-8")
         {
-            int step = SendMessage($"RestGetAsync(\"{url}\")", PROCESS, "Выполнение Get Rest запроса", IMAGE_STATUS_PROCESS);
+            int step = SendMessage($"RestGetAsync(\"{url}\", \"{charset}\")", PROCESS, "Выполнение Get Rest запроса", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return null;
 
-            string userAgent = BrowserView.CoreWebView2.Settings.UserAgent;
             string result = null;
             try
             {
+                string userAgent = BrowserView.CoreWebView2.Settings.UserAgent;
+
                 Uri uri = new Uri(url);
                 HttpClient client = new HttpClient();
                 client.BaseAddress = uri;
@@ -2321,22 +2322,26 @@ namespace HatFrameworkDev
             return result;
         }
 
-        public async Task<string> RestGetAuthAsync(string url, string login, string pass)
+        public async Task<string> RestGetBasicAuthAsync(string login, string pass, string url, string charset = "UTF-8")
         {
-            int step = SendMessage($"RestGetAuthAsync(\"{url}\", \"{login}\", \"{pass}\")", PROCESS, "Выполнение Get Rest запроса", IMAGE_STATUS_PROCESS);
+            int step = SendMessage($"RestGetAuthAsync(\"{login}\", \"{pass}\", \"{url}\", \"{charset}\")", PROCESS, "Выполнение Get Rest запроса", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return null;
 
             string result = null;
             try
             {
+                string userAgent = BrowserView.CoreWebView2.Settings.UserAgent;
+                byte[] authToken = Encoding.ASCII.GetBytes($"{login}:{pass}");
+
                 Uri uri = new Uri(url);
                 HttpClient client = new HttpClient();
                 client.BaseAddress = uri;
+                client.DefaultRequestHeaders.Clear();
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                client.DefaultRequestHeaders.Add("charset", "UTF-8");
-                //client.DefaultRequestHeaders.Add("User-Agent", "C# console program");
-                //client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("", "");
+                client.DefaultRequestHeaders.Add("charset", charset);
+                client.DefaultRequestHeaders.Add("User-Agent", userAgent);
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(authToken));
                 HttpResponseMessage response = await client.GetAsync(url);
                 if (response.IsSuccessStatusCode)
                 {
