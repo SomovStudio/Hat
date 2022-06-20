@@ -2,7 +2,9 @@
 using Microsoft.Web.WebView2.WinForms;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
@@ -2259,7 +2261,37 @@ namespace HatFrameworkDev
 
 
 
+        /*
+         * Методы для работы с REST запросами =======================================================
+         * https://stackoverflow.com/questions/9620278/how-do-i-make-calls-to-a-rest-api-using-c
+         * https://docs.microsoft.com/en-us/dotnet/framework/network-programming/how-to-send-data-using-the-webrequest-class
+         * https://jsonplaceholder.typicode.com/
+         */
+        public async Task<string> RestGetAsync(string url)
+        {
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+            request.ContentType = "application/json"; // application/json; charset=UTF-8
+            request.Method = "GET";
+            WebResponse response = request.GetResponse();
+            using (var streamReader = new StreamReader(response.GetResponseStream()))
+            {
+                var result = streamReader.ReadToEnd();
+                return result;
+            }
+        }
 
+        public async Task<string> RestPostAsync(string url)
+        {
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+            request.ContentType = "application/json"; // application/json; charset=UTF-8
+            request.Method = "POST";
+            WebResponse response = request.GetResponse();
+            using (var streamReader = new StreamReader(response.GetResponseStream()))
+            {
+                var result = streamReader.ReadToEnd();
+                return result;
+            }
+        }
 
 
 

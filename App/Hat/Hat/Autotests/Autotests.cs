@@ -77,15 +77,11 @@ namespace Hat
             HatFrameworkDev.Tester tester = new HatFrameworkDev.Tester(Config.browserForm);
             await tester.TestBeginAsync();
             await tester.GoToUrlAsync("https://somovstudio.github.io/test.html", 5);
-            await tester.SetValueInElementAsync(HatFrameworkDev.Tester.BY_XPATH, "//input[@id='login']", "admin");
-            await tester.SetValueInElementAsync(HatFrameworkDev.Tester.BY_XPATH, "//input[@id='pass']", "0000");
-            //await tester.ClickElementAsync(HatFrameworkDev.Tester.BY_CSS, "#auth #buttonLogin");
 
-            //HatFrameworkDev.HTMLElement button = await tester.GetElementAsync(HatFrameworkDev.Tester.BY_XPATH, "//div[@id='auth']//input[@id='buttonLogin']");
-            HatFrameworkDev.HTMLElement button = await tester.GetElementAsync(HatFrameworkDev.Tester.BY_CSS, "#auth #buttonLogin");
-            await button.ClickAsync();
-
-            await tester.WaitVisibleElementAsync(HatFrameworkDev.Tester.BY_CSS, "div[id='result']", 2);
+            //string result = await tester.RestGetAsync(@"https://jsonplaceholder.typicode.com/posts/");
+            string result = await tester.RestPostAsync(@"https://jsonplaceholder.typicode.com/posts/");
+            tester.ConsoleMsg(result);
+            
             await tester.TestEndAsync();
 
             /*
