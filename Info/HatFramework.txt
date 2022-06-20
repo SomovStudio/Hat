@@ -356,3 +356,5 @@ REST запросы
 	string result = await tester.RestGetAsync(@"https://jsonplaceholder.typicode.com/posts/1/");
 	tester.ConsoleMsg(result);
 	
+	RestGetAsync(string url, string charset = "UTF-8")
+	RestGetBasicAuthAsync(string login, string pass, string url, string charset = "UTF-8")

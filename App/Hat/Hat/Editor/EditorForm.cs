@@ -1683,10 +1683,92 @@ await element.ScrollToAsync(false);\par
 \cf0\f0\lang1033 await element.WaitVisibleAsync(2);\par
 }",
 
-@"",
-@"",
-@"",
-@"",
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.22000}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 BY_CSS\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ea\'ee\'ed\'f1\'f2\'e0\'ed\'f2\'e0 \'ee\'e1\'ee\'e7\'ed\'e0\'f7\'e0\'e5\'f2 \'f2\'e8\'ef \'e2\'e2\'ee\'e4\'e8\'ec\'ee\'e3\'ee \'eb\'ee\'ea\'e0\'f2\'ee\'f0\'e0\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \f0\lang1033 BY_CSS = ""BY_CSS""\f1\lang1049\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0\f0\lang1033 Tester.BY_CSS\par
+}",
+
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.22000}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 BY_XPATH\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ea\'ee\'ed\'f1\'f2\'e0\'ed\'f2\'e0 \'ee\'e1\'ee\'e7\'ed\'e0\'f7\'e0\'e5\'f2 \'f2\'e8\'ef \'e2\'e2\'ee\'e4\'e8\'ec\'ee\'e3\'ee \'eb\'ee\'ea\'e0\'f2\'ee\'f0\'e0\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \f0\lang1033 BY_XPATH = ""BY_XPATH""\f1\lang1049\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0\f0\lang1033 Tester.BY_XPATH\par
+}",
+
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.22000}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 RestGetAsync\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'fb\'ef\'ee\'eb\'ed\'ff\'e5\'f2 \f0\lang1033 Get Rest \f1\lang1049\'e7\'e0\'ef\'f0\'ee\'f1 \'e8 \'ef\'ee\'eb\'f3\'f7\'e0\'e5\'f2 \'f0\'e5\'e7\'f3\'eb\'fc\'f2\'e0\'f2 \'e2 \'f4\'ee\'f0\'ec\'e0\'f2\'e5 \f0\lang1033 json\f1\lang1049\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \f0\lang1033 RestGetAsync(string url, string charset = ""UTF-8"")\f1\lang1049\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0\f0\lang1033 string result = await tester.RestGetAsync(""https://jsonplaceholder.typicode.com/posts/1/"");\par
+tester.ConsoleMsg(result);\par
+\f1\lang1049\par
+\cf2\'c4\'e0\'ed\'ed\'fb\'e9 \'ec\'e5\'f2\'ee\'e4 \'e8\'f1\'ef\'ee\'eb\'fc\'e7\'f3\'e5\'f2 \'f1\'f2\'e0\'ed\'e4\'e0\'f0\'f2\'ed\'fb\'e9 \'ef\'ee\'e4\'f5\'ee\'e4\cf3 :\par
+\cf0\f0\lang1033 using System.Net;\par
+using System.Net.Http;\par
+using System.Net.Http.Headers;\par
+\par
+Uri uri = new Uri(url);\par
+HttpClient client = new HttpClient();\par
+client.BaseAddress = uri;\par
+client.DefaultRequestHeaders.Clear();\par
+client.DefaultRequestHeaders.Accept.Clear();\par
+client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(""application/json""));\par
+client.DefaultRequestHeaders.Add(""charset"", ""UTF-8"");\par
+client.DefaultRequestHeaders.Add(""User-Agent"", userAgent);\par
+HttpResponseMessage response = await client.GetAsync(url);\par
+if (response.IsSuccessStatusCode)\par
+\{\par
+\tab return await response.Content.ReadAsStringAsync();\par
+\}\f1\lang1049\par
+}",
+
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;\red0\green0\blue255;}
+{\*\generator Riched20 10.0.22000}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 RestGetBasicAuthAsync\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'fb\'ef\'ee\'eb\'ed\'ff\'e5\'f2 \f0\lang1033 Get Rest \f1\lang1049\'e7\'e0\'ef\'f0\'ee\'f1 \'e8 \'ef\'ee\'eb\'f3\'f7\'e0\'e5\'f2 \'f0\'e5\'e7\'f3\'eb\'fc\'f2\'e0\'f2 \'e2 \'f4\'ee\'f0\'ec\'e0\'f2\'e5 \f0\lang1033 json\f1\lang1049\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \f0\lang1033 RestGetBasicAuthAsync(string login, string pass, string url, string charset = ""UTF-8"")\f1\lang1049\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0\f0\lang1033 string result = await tester.RestGetBasicAuthAsync(""admin"", ""0000"", ""{{\field{\*\fldinst{HYPERLINK https://jsonplaceholder.typicode.com/posts/1/ }}{\fldrslt{https://jsonplaceholder.typicode.com/posts/1/\ul0\cf0}}}}\f0\fs20 "", ""UTF-8"");\par
+tester.ConsoleMsg(result);\par
+\f1\lang1049\par
+\cf2\'c4\'e0\'ed\'ed\'fb\'e9 \'ec\'e5\'f2\'ee\'e4 \'e8\'f1\'ef\'ee\'eb\'fc\'e7\'f3\'e5\'f2 \'f1\'f2\'e0\'ed\'e4\'e0\'f0\'f2\'ed\'fb\'e9 \'ef\'ee\'e4\'f5\'ee\'e4\cf3 :\par
+\cf0\f0\lang1033 using System.Net;\par
+using System.Net.Http;\par
+using System.Net.Http.Headers;\par
+\par
+byte[] authToken = Encoding.ASCII.GetBytes($""\{login\}:\{pass\}"");\par
+Uri uri = new Uri(url);\par
+HttpClient client = new HttpClient();\par
+client.BaseAddress = uri;\par
+client.DefaultRequestHeaders.Clear();\par
+client.DefaultRequestHeaders.Accept.Clear();\par
+client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(""application/json""));\par
+client.DefaultRequestHeaders.Add(""charset"", ""UTF-8"");\par
+client.DefaultRequestHeaders.Add(""User-Agent"", userAgent);\par
+client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(""Basic"", Convert.ToBase64String(authToken));\par
+HttpResponseMessage response = await client.GetAsync(url);\par
+if (response.IsSuccessStatusCode)\par
+\{\par
+\tab return await response.Content.ReadAsStringAsync();\par
+\}\f1\lang1049\par
+}",
+
 @"",
 @"",
 @"",
@@ -1792,6 +1874,7 @@ await element.ScrollToAsync(false);\par
                     if (treeView1.SelectedNode.Text == "Ожидание") return;
 
                     if (treeView1.SelectedNode.Text == "Методы для выполнения JavaScript") return;
+                    if (treeView1.SelectedNode.Text == "Методы для выполнения Rest запросов") return;
                     if (treeView1.SelectedNode.Text == "Методы для проверки результата") return;
 
                     if (treeView1.SelectedNode.Text == "Класс: HTMLElement") return;
@@ -1980,8 +2063,9 @@ await element.ScrollToAsync(false);\par
                     
                     if (value == "BY_CSS") richTextBox1.Rtf = handbook[135];
                     if (value == "BY_XPATH") richTextBox1.Rtf = handbook[136];
-                    //if (value == "") richTextBox1.Rtf = handbook[137];
-                    //if (value == "") richTextBox1.Rtf = handbook[138];
+
+                    if (value == "RestGetAsync") richTextBox1.Rtf = handbook[137];
+                    if (value == "RestGetBasicAuthAsync") richTextBox1.Rtf = handbook[138];
                     //if (value == "") richTextBox1.Rtf = handbook[139];
                     //if (value == "") richTextBox1.Rtf = handbook[140];
                 }
