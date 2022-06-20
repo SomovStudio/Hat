@@ -79,11 +79,13 @@ namespace Hat
             await tester.GoToUrlAsync("https://somovstudio.github.io/test.html", 5);
             await tester.SetValueInElementAsync(HatFrameworkDev.Tester.BY_XPATH, "//input[@id='login']", "admin");
             await tester.SetValueInElementAsync(HatFrameworkDev.Tester.BY_XPATH, "//input[@id='pass']", "0000");
-            await tester.ClickElementAsync(HatFrameworkDev.Tester.BY_CSS, "#auth #buttonLogin");
+            //await tester.ClickElementAsync(HatFrameworkDev.Tester.BY_CSS, "#auth #buttonLogin");
+
+            //HatFrameworkDev.HTMLElement button = await tester.GetElementAsync(HatFrameworkDev.Tester.BY_XPATH, "//div[@id='auth']//input[@id='buttonLogin']");
+            HatFrameworkDev.HTMLElement button = await tester.GetElementAsync(HatFrameworkDev.Tester.BY_CSS, "#auth #buttonLogin");
+            await button.ClickAsync();
+
             await tester.WaitVisibleElementAsync(HatFrameworkDev.Tester.BY_CSS, "div[id='result']", 2);
-            string script = "(function(){ var element = document.getElementsByTagName('h2')[0]; return element.innerText; }());";
-            string result = await tester.ExecuteJavaScriptAsync(script);
-            tester.ConsoleMsg(result);
             await tester.TestEndAsync();
 
             /*
