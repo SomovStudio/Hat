@@ -388,8 +388,7 @@ namespace Hat
         {
             try
             {
-                webView2.Source = new Uri(toolStripComboBoxUrl.Text);
-                webView2.Update();
+                webView2.CoreWebView2.Navigate(toolStripComboBoxUrl.Text);
                 updateToolStripComboBoxUrl();
             }
             catch (Exception ex)
@@ -435,8 +434,7 @@ namespace Hat
             {
                 if (e.KeyChar.GetHashCode().ToString() == "851981")
                 {
-                    webView2.Source = new Uri(toolStripComboBoxUrl.Text);
-                    webView2.Update();
+                    webView2.CoreWebView2.Navigate(toolStripComboBoxUrl.Text);
                     updateToolStripComboBoxUrl();
                 }
             }
@@ -903,8 +901,7 @@ namespace Hat
         {
             try
             {
-                webView2.Source = new Uri(toolStripComboBoxUrl.Text);
-                webView2.Update();
+                webView2.CoreWebView2.Navigate(toolStripComboBoxUrl.Text);
                 updateToolStripComboBoxUrl();
             }
             catch (Exception ex)

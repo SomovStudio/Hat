@@ -75,11 +75,12 @@ namespace Hat
         {
             HatFrameworkDev.Tester tester = new HatFrameworkDev.Tester(Config.browserForm);
             await tester.TestBeginAsync();
-            await tester.GoToUrlAsync("https://somovstudio.github.io/test.html", 5);
+            await tester.GoToUrlAsync("https://jsonplaceholder.typicode.com", 5);
 
-            //string result = await tester.RestGetAsync(@"https://mgts.ru/ajax/api/files.php?key=s82Kuxr2");
             string result = await tester.RestGetAsync(@"https://jsonplaceholder.typicode.com/posts/1/", "UTF-8");
             tester.ConsoleMsg(result);
+
+
             
             await tester.TestEndAsync();
 

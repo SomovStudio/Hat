@@ -587,16 +587,8 @@ namespace HatFrameworkDev
 
             try
             {
-                if (BrowserView.Source.ToString() == url)
-                {
-                    BrowserView.Reload();
-                }
-                else
-                {
-                    BrowserView.Source = new Uri(url);
-                    BrowserView.Update();
-                }
-
+                BrowserView.CoreWebView2.Navigate(url);
+                
                 for (int i = 0; i < sec; i++)
                 {
                     await Task.Delay(1000);
