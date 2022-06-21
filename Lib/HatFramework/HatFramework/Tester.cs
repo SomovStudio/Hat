@@ -326,11 +326,10 @@ namespace HatFramework
                 await BrowserView.EnsureCoreWebView2Async();
                 Debug = (bool)debugJavaScript.Invoke(BrowserWindow, null);
                 EditMessage(step, null, PASSED, "Выполнена инициализация теста", IMAGE_STATUS_PASSED);
-                ConsoleMsg("Тест запущен");
+                ConsoleMsg("Тест начинается...");
 
                 browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { "" + Environment.NewLine, default, default, default, false });
-                browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { "-------------------------------" + Environment.NewLine, default, default, default, false });
-                browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { "Тест запущен", default, ConsoleColor.White, ConsoleColor.DarkBlue, true });
+                browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { "-- Тест начинается ------------", default, ConsoleColor.White, ConsoleColor.DarkBlue, true });
             }
             catch (Exception ex)
             {
@@ -588,15 +587,7 @@ namespace HatFramework
 
             try
             {
-                if (BrowserView.Source.ToString() == url)
-                {
-                    BrowserView.Reload();
-                }
-                else
-                {
-                    BrowserView.Source = new Uri(url);
-                    BrowserView.Update();
-                }
+                BrowserView.CoreWebView2.Navigate(url);
 
                 for (int i = 0; i < sec; i++)
                 {
