@@ -13,16 +13,72 @@
 			margin-left: auto; 
 			margin-right: auto; 
 			position: relative;
-    		min-width: 1000px;
-    		max-width: 1000px;
+    		min-width: 1440px;
+    		max-width: 1440px;
+		}
+		table { 
+			min-width: 100%;
+    		max-width: 100%;
+		}
+		thead { 
+			background-color: #4d545d;
+			color: #FFF;
+		}
+		.table-status {
+			padding: 10px;
+			min-width: 100px;
+			max-width: 100px;
+		}
+		.table-action {
+			padding: 10px;
+			min-width: 550px;
+			max-width: 550px;
+		}
+		.table-comment {
+			padding: 10px;
+			min-width: 750px;
+			max-width: 750px;
+		}
+		.table-row {
+			background-color: #FFF;
+			border-bottom: 1px solid #eaeff2;
 		}
 	</style>
 </head>
 <body>
 	<div class="wrapper">
 		<h2>Отчет</h2>
-		<h3 class="description">Список тестов:</h3>
-		<div class=""></div>
+		<h3>Таблица действий:</h3>
+		<div class="table">
+			<table>
+				<thead>
+					<tr>
+						<th class="table-status">Статус</th>
+						<th class="table-action">Действие</th>
+						<th class="table-comment">Комментарий</th> 
+					</tr> 
+				</thead>
+				<tbody>
+					<tr>
+						<td class="table-status table-row">1</td>
+						<td class="table-action table-row">2</td> 
+						<td class="table-comment table-row">3</td>
+					</tr> 
+					<tr>
+						<td class="table-status table-row">1</td>
+						<td class="table-action table-row">2</td> 
+						<td class="table-comment table-row">3</td>
+					</tr> 
+				</tbody>
+				<tfoot>
+					<tr>
+						<td class="table-status">Результат: </td>
+						<td class="table-action"></td> 
+						<td class="table-comment"></td>
+					</tr>
+				</tfoot>
+			</table>
+		</div>
 	</div>
 </body>
 </html>
