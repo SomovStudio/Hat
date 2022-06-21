@@ -246,15 +246,22 @@ namespace Hat
         {
             string content =
 @"using System;
-using System.IO;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Windows.Forms;
+using System.Threading;
+using System.Threading.Tasks;
+using System.IO;
 using System.Data;
 using System.Drawing;
+using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Windows.Forms;
-using System.Threading.Tasks;
+using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Reflection;
+using Newtonsoft.Json;
 using HatFramework;
 
 namespace Hat
@@ -281,16 +288,22 @@ namespace Hat
         {
             string content =
 @"using System;
-using System.IO;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
-using System.Text.RegularExpressions;
+using System.Windows.Forms;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Windows.Forms;
+using System.IO;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Text.RegularExpressions;
+using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Reflection;
+using Newtonsoft.Json;
 using HatFramework;
 
 namespace Hat
@@ -344,16 +357,22 @@ namespace Hat
         {
             string content =
 @"using System;
-using System.IO;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
-using System.Text.RegularExpressions;
+using System.Windows.Forms;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Windows.Forms;
+using System.IO;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Text.RegularExpressions;
+using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Reflection;
+using Newtonsoft.Json;
 using HatFramework;
 
 namespace Hat
@@ -403,16 +422,22 @@ namespace Hat
         {
             string content = "";
             content += "using System;" + Environment.NewLine;
-            content += "using System.IO;" + Environment.NewLine;
             content += "using System.Collections.Generic;" + Environment.NewLine;
             content += "using System.ComponentModel;" + Environment.NewLine;
-            content += "using System.Data;" + Environment.NewLine;
-            content += "using System.Drawing;" + Environment.NewLine;
-            content += "using System.Text;" + Environment.NewLine;
-            content += "using System.Text.RegularExpressions;" + Environment.NewLine;
+            content += "using System.Windows.Forms;" + Environment.NewLine;
             content += "using System.Threading;" + Environment.NewLine;
             content += "using System.Threading.Tasks;" + Environment.NewLine;
-            content += "using System.Windows.Forms;" + Environment.NewLine;
+            content += "using System.IO" + Environment.NewLine;
+            content += "using System.Data;" + Environment.NewLine;
+            content += "using System.Drawing;" + Environment.NewLine;
+            content += "using System.Linq;" + Environment.NewLine;
+            content += "using System.Text;" + Environment.NewLine;
+            content += "using System.Text.RegularExpressions;" + Environment.NewLine;
+            content += "using System.Net;" + Environment.NewLine;
+            content += "using System.Net.Http;" + Environment.NewLine;
+            content += "using System.Net.Http.Headers;" + Environment.NewLine;
+            content += "using System.Reflection;" + Environment.NewLine;
+            content += "using Newtonsoft.Json;" + Environment.NewLine;
             content += "using HatFramework;" + Environment.NewLine;
             content += "" + Environment.NewLine;
             content += "namespace Hat" + Environment.NewLine;
