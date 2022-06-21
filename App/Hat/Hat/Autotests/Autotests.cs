@@ -17,9 +17,8 @@ namespace Hat
 
         public static void play(string testFilename)
         {
-            Config.browserForm.consoleMsg($"Запущен автотест из файла: {testFilename}");
-            Config.browserForm.systemConsoleMsg("", default, default, default, true);
-            Config.browserForm.systemConsoleMsg($"Запущен автотест из файла: {testFilename}", default, ConsoleColor.DarkCyan, ConsoleColor.White, true);
+            Config.browserForm.consoleMsg($"Запущен файл автотеста: {testFilename}");
+            Config.browserForm.systemConsoleMsg($"Запущен файл автотеста: {testFilename}", default, ConsoleColor.DarkCyan, ConsoleColor.White, true);
 
             try
             {
