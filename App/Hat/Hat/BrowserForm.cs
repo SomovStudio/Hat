@@ -1979,5 +1979,17 @@ namespace Hat
         {
             return Config.debugJavaScript;
         }
+
+        private void documentationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Process.Start("help.chm");
+            }
+            catch (Exception ex)
+            {
+                consoleMsgError(ex.ToString());
+            }
+        }
     }
 }
