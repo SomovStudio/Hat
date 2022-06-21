@@ -181,12 +181,12 @@ namespace HatFrameworkDev
                 if (Debug == true) ConsoleMsg($"[DEBUG] JS результат: {result}");
                 if (result == "null" || result == null)
                 {
-                    EditMessage(step, null, Tester.FAILED, commentfailed + Environment.NewLine + $"Результат выполнения скрипта: {result}", Tester.IMAGE_STATUS_FAILED);
+                    EditMessage(step, null, Tester.FAILED, commentfailed, Tester.IMAGE_STATUS_FAILED);
                     TestStopAsync();
                 }
                 else
                 {
-                    EditMessage(step, null, Tester.PASSED, commentPassed + Environment.NewLine + $"Результат выполнения скрипта: {result}", Tester.IMAGE_STATUS_PASSED);
+                    EditMessage(step, null, Tester.PASSED, commentPassed, Tester.IMAGE_STATUS_PASSED);
                 }
             }
             catch (Exception ex)
@@ -327,6 +327,10 @@ namespace HatFrameworkDev
                 Debug = (bool)debugJavaScript.Invoke(BrowserWindow, null);
                 EditMessage(step, null, PASSED, "Выполнена инициализация теста", IMAGE_STATUS_PASSED);
                 ConsoleMsg("Тест запущен");
+
+                browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { "" + Environment.NewLine, default, default, default, false });
+                browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { "-------------------------------" + Environment.NewLine, default, default, default, false });
+                browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { "Тест запущен", default, ConsoleColor.White, ConsoleColor.DarkBlue, true });
             }
             catch (Exception ex)
             {
@@ -341,15 +345,22 @@ namespace HatFrameworkDev
                 int step = SendMessage("TestEndAsync()", PROCESS, "Завершение теста", IMAGE_STATUS_PROCESS);
                 if (assertStatus == FAILED)
                 {
+                    ConsoleMsg("Тест завершен - провельно");
                     EditMessage(step, null, FAILED, "Тест завершен - шаги теста выполнены неуспешно", IMAGE_STATUS_FAILED);
                     resultAutotestSuccess(false);
+
+                    browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { Environment.NewLine + "Тест завершен - провельно", default, ConsoleColor.DarkRed, ConsoleColor.White, true });
+                    browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { "-------------------------------" + Environment.NewLine, default, default, default, false });
                 }
                 else
                 {
+                    ConsoleMsg("Тест завершен - успешено");
                     EditMessage(step, null, PASSED, "Тест завершен - все шаги выполнены успешно", IMAGE_STATUS_PASSED);
                     resultAutotestSuccess(true);
+
+                    browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { Environment.NewLine + "Тест завершен - успешено", default, ConsoleColor.DarkGreen, ConsoleColor.White, true });
+                    browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { "-------------------------------" + Environment.NewLine, default, default, default, false });
                 }
-                ConsoleMsg("Тест завершен");
             }
             catch (Exception ex)
             {
@@ -2263,6 +2274,8 @@ namespace HatFrameworkDev
 
 
 
+
+
         /*
          * Методы для работы с REST запросами =======================================================
          * https://stackoverflow.com/questions/9620278/how-do-i-make-calls-to-a-rest-api-using-c
@@ -2271,19 +2284,6 @@ namespace HatFrameworkDev
          * https://zetcode.com/csharp/httpclient/
          * https://jsonplaceholder.typicode.com/
          */
-        private async Task<string> _RestGetAsync(string url)
-        {
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
-            request.ContentType = "application/json"; // application/json; charset=UTF-8
-            request.Method = "GET";
-            WebResponse response = request.GetResponse();
-            using (var streamReader = new StreamReader(response.GetResponseStream()))
-            {
-                var result = streamReader.ReadToEnd();
-                return result;
-            }
-        }
-
         public async Task<string> RestGetAsync(string url, string charset = "UTF-8")
         {
             int step = SendMessage($"RestGetAsync(\"{url}\", \"{charset}\")", PROCESS, "Выполнение Get Rest запроса", IMAGE_STATUS_PROCESS);
