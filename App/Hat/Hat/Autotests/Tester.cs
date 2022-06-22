@@ -56,6 +56,7 @@ namespace HatFrameworkDev
         private MethodInfo resultAutotest;          // функция: resultAutotest - устанавливает флаг общего результата выполнения теста
         private MethodInfo debugJavaScript;         // функция: getDebug - возвращает статус отладки
         private MethodInfo getNameAutotest;         // Функция: getNameAutotest - возвращает имя запущенного автотеста
+        private MethodInfo saveReport;              // функция: saveReport - вызывает метод сохранения отчета
 
         private bool statusPageLoad = false;    // флаг: статус загрузки страницы
         private bool testStop = false;          // флаг: остановка теста
@@ -79,6 +80,7 @@ namespace HatFrameworkDev
                 resultAutotest = BrowserWindow.GetType().GetMethod("resultAutotest");
                 debugJavaScript = BrowserWindow.GetType().GetMethod("getStatusDebugJavaScript");
                 getNameAutotest = BrowserWindow.GetType().GetMethod("getNameAutotest");
+                saveReport = BrowserWindow.GetType().GetMethod("saveReport");
 
                 MethodInfo mi = BrowserWindow.GetType().GetMethod("getWebView");
                 BrowserView = (Microsoft.Web.WebView2.WinForms.WebView2)mi.Invoke(BrowserWindow, null);
@@ -360,6 +362,8 @@ namespace HatFrameworkDev
                     browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { Environment.NewLine + "Тест завершен - успешено", default, ConsoleColor.DarkGreen, ConsoleColor.White, true });
                     browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { "-------------------------------" + Environment.NewLine, default, default, default, false });
                 }
+
+                saveReport.Invoke(BrowserWindow, null);
             }
             catch (Exception ex)
             {

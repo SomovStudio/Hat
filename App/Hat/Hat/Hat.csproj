@@ -95,6 +95,7 @@
     </Compile>
     <Compile Include="Autotests\Autotests.cs" />
     <Compile Include="Autotests\HTMLElement.cs" />
+    <Compile Include="Autotests\Report.cs" />
     <Compile Include="Autotests\Tester.cs" />
     <Compile Include="BrowserForm.cs">
       <SubType>Form</SubType>

@@ -210,6 +210,9 @@ namespace Hat
 
         public void consoleMsgError(string message)
         {
+            Report.AddStep(Report.ERROR, "", message);
+            Report.SaveReport();
+
             richTextBoxConsole.AppendText("[" + DateTime.Now.ToString() + "] ОШИБКА: " + message + Environment.NewLine);
             richTextBoxConsole.ScrollToCaret();
             systemConsoleMsg("- - - - - - - - - - - - - - - - - - - - - - - - - - - -", default, default, default, true);
@@ -266,6 +269,8 @@ namespace Hat
 
         public int sendMessageStep(string step, string status, string comment, int image)
         {
+            Report.AddStep(status, step, comment);
+
             ListViewItem item;
             ListViewItem.ListViewSubItem subitem;
             item = new ListViewItem();
@@ -292,11 +297,19 @@ namespace Hat
                 if (step != null) listViewTest.Items[index].SubItems[1].Text = step;
                 if (status != null) listViewTest.Items[index].SubItems[2].Text = status;
                 if (comment != null) listViewTest.Items[index].SubItems[3].Text = comment;
+
+                Report.AddStep(listViewTest.Items[index].SubItems[2].Text, listViewTest.Items[index].SubItems[1].Text, listViewTest.Items[index].SubItems[3].Text);
             }
             catch (Exception ex)
             {
                 consoleMsgError(ex.ToString());
             }
+        }
+
+        /* Сохранить отчет */
+        public void saveReport()
+        {
+            Report.SaveReport();
         }
 
         /* Возвращает браузер */
@@ -1097,6 +1110,7 @@ namespace Hat
                 if (Config.selectName.Contains(".cs"))
                 {
                     stopTest = false;
+                    Report.Init();
                     if (filename == null) Autotests.play(Config.selectName);
                     else Autotests.play(filename);
                 }
