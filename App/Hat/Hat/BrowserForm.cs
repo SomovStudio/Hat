@@ -1072,7 +1072,7 @@ namespace Hat
             }
         }
 
-        private void toolStripButton7_Click(object sender, EventArgs e)
+        public void updateProjectTree()
         {
             try
             {
@@ -1094,12 +1094,17 @@ namespace Hat
                 {
                     consoleMsg("Проект не открыт");
                 }
-                
+
             }
             catch (Exception ex)
             {
                 consoleMsg("Ошибка: " + ex.Message);
             }
+        }
+
+        private void toolStripButton7_Click(object sender, EventArgs e)
+        {
+            updateProjectTree();
         }
 
         public void PlayTest(string filename)

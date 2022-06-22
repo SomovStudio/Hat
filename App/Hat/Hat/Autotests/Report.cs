@@ -28,6 +28,7 @@ namespace Hat
         {
             Report.TestFileName = Config.selectName;
             Report.FileName = $"Report-{Report.TestFileName}.html";
+            Report.FileName = Report.FileName.Replace(".cs", "");
             Report.FolderName = Config.projectPath + "/reports/";
             Report.CountErrors = 0;
             Report.TestSuccess = false;
@@ -50,6 +51,7 @@ namespace Hat
                 {
                     Directory.CreateDirectory(Report.FolderName);
                     Config.browserForm.consoleMsg("Создана папка для отчетов");
+                    Config.browserForm.updateProjectTree();
                 }
                 if (Directory.Exists(Report.FolderName))
                 {
@@ -59,6 +61,7 @@ namespace Hat
                         writer.writeFile(GetHead() + GetBody() + GetFooter(), WorkOnFiles.UTF_8_BOM, Report.FolderName + Report.FileName);
                         if (File.Exists(Report.FolderName + Report.FileName)) Config.browserForm.consoleMsg($"Создан файл отчета {Report.FileName}");
                         else Config.browserForm.consoleMsg($"Не удалось создать файл отчета {Report.FileName} по адресу {Report.FolderName}");
+                        Config.browserForm.updateProjectTree();
                     }
                     else
                     {
