@@ -177,9 +177,9 @@
             this.label7.AutoSize = true;
             this.label7.Location = new System.Drawing.Point(215, 14);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(209, 13);
+            this.label7.Size = new System.Drawing.Size(215, 13);
             this.label7.TabIndex = 11;
-            this.label7.Text = "дата последнего обновления: 1.06.2022";
+            this.label7.Text = "дата последнего обновления: 30.06.2022";
             // 
             // label6
             // 

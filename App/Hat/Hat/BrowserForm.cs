@@ -784,7 +784,6 @@ namespace Hat
             //string pattern = @"\w{1,}.\w{1,}$";
             string pattern = @"[^\\]{1,}\w{1,}$";
             string value = Regex.Match(path, pattern).Value;
-            consoleMsg($"-[{path}]->-[{value}]--------------");
             return value;
         }
 
