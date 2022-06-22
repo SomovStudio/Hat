@@ -34,7 +34,7 @@ namespace Hat
             Report.TestSuccess = false;
             Report.Steps = new List<string[]>();
 
-            SaveReport();
+            SaveReport(Report.TestSuccess);
         }
                 
         public static void AddStep(string status, string action, string comment)
@@ -43,10 +43,12 @@ namespace Hat
             Report.Steps.Add(new string[] { status, action, comment });
         }
 
-        public static void SaveReport()
+        public static void SaveReport(bool testSuccess)
         {
             try
             {
+                Report.TestSuccess = testSuccess;
+                
                 if (!Directory.Exists(Report.FolderName))
                 {
                     Directory.CreateDirectory(Report.FolderName);

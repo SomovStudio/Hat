@@ -211,7 +211,7 @@ namespace Hat
         public void consoleMsgError(string message)
         {
             Report.AddStep(Report.ERROR, "", message);
-            Report.SaveReport();
+            Report.SaveReport(testSuccess);
 
             richTextBoxConsole.AppendText("[" + DateTime.Now.ToString() + "] ОШИБКА: " + message + Environment.NewLine);
             richTextBoxConsole.ScrollToCaret();
@@ -309,7 +309,7 @@ namespace Hat
         /* Сохранить отчет */
         public void saveReport()
         {
-            Report.SaveReport();
+            Report.SaveReport(testSuccess);
         }
 
         /* Возвращает браузер */
@@ -1111,6 +1111,7 @@ namespace Hat
         {
             try
             {
+                testSuccess = true;
                 cleadMessageStep();
                 if (Config.selectName.Contains(".cs"))
                 {

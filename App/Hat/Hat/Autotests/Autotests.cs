@@ -46,7 +46,7 @@ namespace Hat
                 {
                     foreach (var error in results.Errors)
                     {
-                        Config.browserForm.consoleMsg(error.ToString());
+                        Config.browserForm.consoleMsgError(error.ToString());
                     }
                 }
                 else
