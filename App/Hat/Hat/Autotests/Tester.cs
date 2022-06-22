@@ -114,7 +114,7 @@ namespace HatFrameworkDev
         {
             try
             {
-                int step = SendMessage("Сообщение", PROCESS, $"Запуск автотеста", IMAGE_STATUS_MESSAGE);
+                int step = SendMessage("Message", PROCESS, $"Запуск автотеста", IMAGE_STATUS_MESSAGE);
                 string filename = (string)getNameAutotest.Invoke(BrowserWindow, null);
                 EditMessage(step, null, COMPLETED, $"Запущен автотест из файла: {filename}", IMAGE_STATUS_MESSAGE);
             }
