@@ -309,6 +309,7 @@ namespace Hat
         /* Сохранить отчет */
         public void saveReport()
         {
+            Report.AddStep("", "", "");
             Report.SaveReport(testSuccess);
         }
 
@@ -1792,6 +1793,7 @@ namespace Hat
         private void toolStripButton13_Click(object sender, EventArgs e)
         {
             cleadMessageStep();
+            Report.Init();
             Autotests.devTestStutsAsync();
             /*
             EditorForm editorForm = new EditorForm();

@@ -107,6 +107,7 @@ thead { background-color: #4d545d; color: #FFF; }
 .table-action { padding: 10px; min-width: 450px; max-width: 450px; }
 .table-comment { padding: 10px; min-width: 700px; max-width: 700px; }
 .table-row { background-color: #FFF; border-bottom: 1px solid #eaeff2; }
+.table-row-empty { background-color: #F9F7FF;  }
 .status-passed { background-color: #98C900; color: #FFFFFF; }
 .status-failed { background-color: #E94B31; color: #FFFFFF; }
 .status-stopped { background-color: #858585; color: #FFFFFF; }
@@ -158,23 +159,33 @@ thead { background-color: #4d545d; color: #FFF; }
                     foreach (string[] step in Report.Steps)
                     {
                         content += "<tr>" + Environment.NewLine;
-                        if (step[0] == Report.PASSED) content += $"<td class=\"table-status table-row status-passed\">{step[0]}</td>" + Environment.NewLine;
-                        if (step[0] == Report.FAILED) content += $"<td class=\"table-status table-row status-failed\">{step[0]}</td>" + Environment.NewLine;
-                        if (step[0] == Report.STOPPED) content += $"<td class=\"table-status table-row status-stopped\">{step[0]}</td>" + Environment.NewLine;
-                        if (step[0] == Report.PROCESS) content += $"<td class=\"table-status table-row status-process\">{step[0]}</td>" + Environment.NewLine;
-                        if (step[0] == Report.COMPLETED) content += $"<td class=\"table-status table-row status-completed\">{step[0]}</td>" + Environment.NewLine;
-                        if (step[0] == Report.WARNING) content += $"<td class=\"table-status table-row status-warning\">{step[0]}</td>" + Environment.NewLine;
-                        if (step[0] == Report.ERROR) content += $"<td class=\"table-status table-row status-error\">{step[0]}</td>" + Environment.NewLine;
-                        content += $"<td class=\"table-action table-row\">{step[1]}</td>" + Environment.NewLine;
-                        content += $"<td class=\"table-comment table-row\">{step[2]}</td>" + Environment.NewLine;
-                        content += "</tr>" + Environment.NewLine;
+                        if(step[0] == "")
+                        {
+                            content += "<tr>" + Environment.NewLine;
+                            content += $"<td class=\"table-status table-row-empty\">{step[0]}</td>" + Environment.NewLine;
+                            content += $"<td class=\"table-action table-row-empty\">{step[1]}</td>" + Environment.NewLine;
+                            content += $"<td class=\"table-comment table-row-empty\">{step[2]}</td>" + Environment.NewLine;
+                            content += "</tr>" + Environment.NewLine;
+                        }
+                        else
+                        {
+                            if (step[0] == Report.PASSED) content += $"<td class=\"table-status table-row status-passed\">{step[0]}</td>" + Environment.NewLine;
+                            if (step[0] == Report.FAILED) content += $"<td class=\"table-status table-row status-failed\">{step[0]}</td>" + Environment.NewLine;
+                            if (step[0] == Report.STOPPED) content += $"<td class=\"table-status table-row status-stopped\">{step[0]}</td>" + Environment.NewLine;
+                            if (step[0] == Report.PROCESS) content += $"<td class=\"table-status table-row status-process\">{step[0]}</td>" + Environment.NewLine;
+                            if (step[0] == Report.COMPLETED) content += $"<td class=\"table-status table-row status-completed\">{step[0]}</td>" + Environment.NewLine;
+                            if (step[0] == Report.WARNING) content += $"<td class=\"table-status table-row status-warning\">{step[0]}</td>" + Environment.NewLine;
+                            if (step[0] == Report.ERROR) content += $"<td class=\"table-status table-row status-error\">{step[0]}</td>" + Environment.NewLine;
+                            content += $"<td class=\"table-action table-row\">{step[1]}</td>" + Environment.NewLine;
+                            content += $"<td class=\"table-comment table-row\">{step[2]}</td>" + Environment.NewLine;
+                            content += "</tr>" + Environment.NewLine;
+                        }
                     }
                 }
                 catch (Exception ex)
                 {
                     Config.browserForm.consoleMsg(ex.ToString());
                 }
-
                 content += "</tbody>" + Environment.NewLine;
                 content += "<tfoot>" + Environment.NewLine;
                 content += "<td class=\"table-status\">Ошибок: </td>" + Environment.NewLine;
