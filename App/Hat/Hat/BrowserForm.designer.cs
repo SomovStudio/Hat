@@ -2011,7 +2011,6 @@
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialogProjectCreate;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelProjectPath;
         private System.Windows.Forms.ToolStripMenuItem справкаToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem оПрограммеCrackerToolStripMenuItem;
         private System.Windows.Forms.ToolStripButton toolStripButton3;
@@ -2143,6 +2142,7 @@
         private System.Windows.Forms.ToolStripMenuItem debugJavaScriptToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem documentationToolStripMenuItem;
         public System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelProjectFolderFile;
+        public System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelProjectPath;
     }
 }
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -1802,7 +1803,7 @@ if (response.IsSuccessStatusCode)\par
             }
         }
 
-        private void toolStripButton1_Click(object sender, EventArgs e)
+        private void saveFile()
         {
             if (this.Text == "") return;
             try
@@ -1818,7 +1819,12 @@ if (response.IsSuccessStatusCode)\par
             }
         }
 
-        private void toolStripButton2_Click(object sender, EventArgs e)
+        private void toolStripButton1_Click(object sender, EventArgs e)
+        {
+            saveFile();
+        }
+
+        private void saveFileAs()
         {
             try
             {
@@ -1837,6 +1843,11 @@ if (response.IsSuccessStatusCode)\par
             {
                 Config.browserForm.consoleMsgError(ex.ToString());
             }
+        }
+
+        private void toolStripButton2_Click(object sender, EventArgs e)
+        {
+            saveFileAs();
         }
 
         private void toolStripButton3_Click(object sender, EventArgs e)
@@ -2091,10 +2102,46 @@ if (response.IsSuccessStatusCode)\par
         {
             if(toolStripStatusLabel6.Text == "(изменения не сохранены) |")
             {
-                if(MessageBox.Show("Изменения не сохранены, всё равно закрыть редактор?", "Вопрос", MessageBoxButtons.YesNo) == DialogResult.No)
+                // Yes - сохранить и закрыть
+                // No - закрыть без сохранения
+                // Cancel - не закрывать
+                DialogResult dialogResult = MessageBox.Show("Вы хотите сохранить изменения в файле?", "Вопрос", MessageBoxButtons.YesNoCancel);
+
+                if (dialogResult == DialogResult.Cancel)
                 {
                     e.Cancel = true;
                 }
+                else if (dialogResult == DialogResult.No)
+                {
+                    
+                }
+                else if (dialogResult == DialogResult.Yes)
+                {
+                    saveFile();
+                }
+            }
+        }
+
+        private void toolStripButton5_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (Config.projectPath != "(не открыт)")
+                {
+                    CreateCmdForm createCmdForm = new CreateCmdForm();
+                    createCmdForm.textBox.Text = $"cd {Directory.GetCurrentDirectory()}" + Environment.NewLine;
+                    //createCmdForm.textBox.Text += $"Hat.exe {Config.browserForm.toolStripStatusLabelProjectFolderFile.Text} {Config.browserForm.toolStripStatusLabelProjectPath.Text}";
+                    createCmdForm.textBox.Text += $"Hat.exe {this.Text} {Config.projectPath}";
+                    createCmdForm.ShowDialog();
+                }
+                else
+                {
+                    Config.browserForm.consoleMsg("Проект не открыт");
+                }
+            }
+            catch (Exception ex)
+            {
+                Config.browserForm.consoleMsgError(ex.ToString());
             }
         }
     }

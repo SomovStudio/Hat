@@ -424,7 +424,7 @@ namespace Hat
             content += "using System.Windows.Forms;" + Environment.NewLine;
             content += "using System.Threading;" + Environment.NewLine;
             content += "using System.Threading.Tasks;" + Environment.NewLine;
-            content += "using System.IO" + Environment.NewLine;
+            content += "using System.IO;" + Environment.NewLine;
             content += "using System.Data;" + Environment.NewLine;
             content += "using System.Drawing;" + Environment.NewLine;
             content += "using System.Linq;" + Environment.NewLine;
