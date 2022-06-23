@@ -673,7 +673,7 @@ HTMLElement element = await tester.GetElementAsync(Tester.BY_XPATH, ""//div[@id=
 await element.ClickAsync();\par
 \par
 HTMLElement element = await tester.GetElementAsync(Tester.BY_XPATH, ""//*[@id='MyFile']"");\par
-tester.ConsoleMsg($""ID: \{element.Id\} | NAME: \{element.Name\} | CLASS: \{element.Class\} | TYPE: \{element.Type\}"");\par
+tester.ConsoleMsg(""ID: "" + element.Id);\par
 \par
 HTMLElement element = await tester.GetElementAsync(Tester.BY_XPATH, ""//h1"");\par
 string text = await element.GetTextAsync();\par
@@ -1510,7 +1510,7 @@ await element.ClickAsync();\par
 \cf3\par
 \cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
 \cf0\f0\lang1033 HTMLElement element = await tester.GetElementAsync(Tester.BY_XPATH, ""//*[@id='MyInput']"");\par
-tester.ConsoleMsg($""ID: \{element.Id\} | NAME: \{element.Name\} | CLASS: \{element.Class\} | TYPE: \{element.Type\}"");\par
+tester.ConsoleMsg(""ID: "" + element.Id);\par
     }",
 
 @"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
@@ -1522,7 +1522,7 @@ tester.ConsoleMsg($""ID: \{element.Id\} | NAME: \{element.Name\} | CLASS: \{elem
 \cf3\par
 \cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
 \cf0\f0\lang1033 HTMLElement element = await tester.GetElementAsync(Tester.BY_XPATH, ""//*[@id='MyInput']"");\par
-tester.ConsoleMsg($""ID: \{element.Id\} | NAME: \{element.Name\} | CLASS: \{element.Class\} | TYPE: \{element.Type\}"");\par
+tester.ConsoleMsg(""NAME: "" + element.Name);\par
     }",
 
 @"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
@@ -1534,7 +1534,7 @@ tester.ConsoleMsg($""ID: \{element.Id\} | NAME: \{element.Name\} | CLASS: \{elem
 \cf3\par
 \cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
 \cf0\f0\lang1033 HTMLElement element = await tester.GetElementAsync(Tester.BY_XPATH, ""//*[@id='MyInput']"");\par
-tester.ConsoleMsg($""ID: \{element.Id\} | NAME: \{element.Name\} | CLASS: \{element.Class\} | TYPE: \{element.Type\}"");\par
+tester.ConsoleMsg(""CLASS: "" + element.Class);\par
     }",
 
 @"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
@@ -1546,7 +1546,7 @@ tester.ConsoleMsg($""ID: \{element.Id\} | NAME: \{element.Name\} | CLASS: \{elem
 \cf3\par
 \cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
 \cf0\f0\lang1033 HTMLElement element = await tester.GetElementAsync(Tester.BY_XPATH, ""//*[@id='MyInput']"");\par
-tester.ConsoleMsg($""ID: \{element.Id\} | NAME: \{element.Name\} | CLASS: \{element.Class\} | TYPE: \{element.Type\}"");\par
+tester.ConsoleMsg(""TYPE: "" + element.Type);\par
     }",
 
 @"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
