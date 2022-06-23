@@ -1785,13 +1785,13 @@ if (response.IsSuccessStatusCode)\par
         {
             try
             {
-                this.Text = Config.selectName;
+                this.Text = Config.selectName; // имя файла или папки
                 this.TopMost = Config.editorTopMost;
                 WorkOnFiles reader = new WorkOnFiles();
                 textEditorControl1.SetHighlighting("C#");
                 textEditorControl1.Text = reader.readFile(Config.encoding, Config.selectValue);
                 toolStripStatusLabel2.Text = Config.encoding;
-                toolStripStatusLabel5.Text = Config.selectValue;
+                toolStripStatusLabel5.Text = Config.selectValue; // путь к файлу или к папке
                 toolStripStatusLabel6.Text = "";
 
                 
@@ -1841,7 +1841,13 @@ if (response.IsSuccessStatusCode)\par
 
         private void toolStripButton3_Click(object sender, EventArgs e)
         {
-            if(this.Text != "") Config.browserForm.PlayTest(this.Text);
+            if (this.Text != "")
+            {
+                Config.selectName = this.Text; // имя файла или папки
+                Config.selectValue = toolStripStatusLabel5.Text; // путь к файлу или к папке
+                Config.browserForm.toolStripStatusLabelProjectFolderFile.Text = Config.selectName;
+                Config.browserForm.PlayTest(this.Text);
+            }
         }
 
         private void toolStripButton4_Click(object sender, EventArgs e)

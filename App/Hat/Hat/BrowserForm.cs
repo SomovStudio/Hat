@@ -1046,8 +1046,8 @@ namespace Hat
             {
                 if (treeViewProject.SelectedNode != null)
                 {
-                    Config.selectName = treeViewProject.SelectedNode.Text;
-                    Config.selectValue = treeViewProject.SelectedNode.Name;
+                    Config.selectName = treeViewProject.SelectedNode.Text;  // имя файла или папки
+                    Config.selectValue = treeViewProject.SelectedNode.Name; // путь к файлу или к папке
                     fileOpen();
                 }
             }
@@ -1062,9 +1062,9 @@ namespace Hat
             try
             {
                 if (treeViewProject.SelectedNode != null)
-                { 
-                    Config.selectName = treeViewProject.SelectedNode.Text;
-                    Config.selectValue = treeViewProject.SelectedNode.Name;
+                {
+                    Config.selectName = treeViewProject.SelectedNode.Text;  // имя файла или папки
+                    Config.selectValue = treeViewProject.SelectedNode.Name; // путь к файлу или к папке
                     toolStripStatusLabelProjectFolderFile.Text = Config.selectName;
                 }
             }

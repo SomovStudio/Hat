@@ -80,12 +80,6 @@ namespace Hat
             tester.ConsoleMsg(result);
             await tester.TestEndAsync();
 
-            await tester.TestBeginAsync();
-            await tester.GoToUrlAsync("https://jsonplaceholder.typicode.com", 5);
-            string result2 = await tester.RestGetAsync(@"https://jsonplaceholder.typicode.com/posts/1/", "UTF-8");
-            tester.ConsoleMsg(result2);
-            await tester.TestEndAsync();
-
             /*
             await tester.TestBeginAsync();
             await tester.GoToUrlAsync("https://somovstudio.github.io/test.html", 5);

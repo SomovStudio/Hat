@@ -63,6 +63,7 @@
             this.toolStripSeparator17 = new System.Windows.Forms.ToolStripSeparator();
             this.средстваРазработкиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.справкаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.documentationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.оПрограммеCrackerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel5 = new System.Windows.Forms.ToolStripStatusLabel();
@@ -203,7 +204,6 @@
             this.folderBrowserDialogProjectCreate = new System.Windows.Forms.FolderBrowserDialog();
             this.openFileProjectDialog = new System.Windows.Forms.OpenFileDialog();
             this.saveFileLogDialog = new System.Windows.Forms.SaveFileDialog();
-            this.documentationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -279,7 +279,7 @@
             this.событияНаСтраницеToolStripMenuItem});
             this.сохранитьЛогиToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("сохранитьЛогиToolStripMenuItem.Image")));
             this.сохранитьЛогиToolStripMenuItem.Name = "сохранитьЛогиToolStripMenuItem";
-            this.сохранитьЛогиToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.сохранитьЛогиToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
             this.сохранитьЛогиToolStripMenuItem.Text = "Сохранить логи";
             // 
             // выводToolStripMenuItem
@@ -519,11 +519,18 @@
             this.справкаToolStripMenuItem.Size = new System.Drawing.Size(65, 20);
             this.справкаToolStripMenuItem.Text = "Справка";
             // 
+            // documentationToolStripMenuItem
+            // 
+            this.documentationToolStripMenuItem.Name = "documentationToolStripMenuItem";
+            this.documentationToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
+            this.documentationToolStripMenuItem.Text = "Документация";
+            this.documentationToolStripMenuItem.Click += new System.EventHandler(this.documentationToolStripMenuItem_Click);
+            // 
             // оПрограммеCrackerToolStripMenuItem
             // 
             this.оПрограммеCrackerToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("оПрограммеCrackerToolStripMenuItem.Image")));
             this.оПрограммеCrackerToolStripMenuItem.Name = "оПрограммеCrackerToolStripMenuItem";
-            this.оПрограммеCrackerToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.оПрограммеCrackerToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
             this.оПрограммеCrackerToolStripMenuItem.Text = "О программе Hat";
             this.оПрограммеCrackerToolStripMenuItem.Click += new System.EventHandler(this.оПрограммеCrackerToolStripMenuItem_Click);
             // 
@@ -1880,13 +1887,6 @@
             // 
             this.saveFileLogDialog.Filter = "*.txt|*.txt";
             // 
-            // documentationToolStripMenuItem
-            // 
-            this.documentationToolStripMenuItem.Name = "documentationToolStripMenuItem";
-            this.documentationToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.documentationToolStripMenuItem.Text = "Документация";
-            this.documentationToolStripMenuItem.Click += new System.EventHandler(this.documentationToolStripMenuItem_Click);
-            // 
             // BrowserForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2068,7 +2068,6 @@
         private System.Windows.Forms.ToolStripButton toolStripButton9;
         private System.Windows.Forms.ToolStripButton toolStripButton10;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelProjectFolderFile;
         public System.Windows.Forms.TreeView treeViewProject;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel4;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel5;
@@ -2143,6 +2142,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator19;
         private System.Windows.Forms.ToolStripMenuItem debugJavaScriptToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem documentationToolStripMenuItem;
+        public System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelProjectFolderFile;
     }
 }
 
