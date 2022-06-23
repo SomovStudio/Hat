@@ -26,21 +26,35 @@ namespace Hat
 
         public static void Init()
         {
-            Report.TestFileName = Config.selectName;
-            Report.FileName = $"Report-{Report.TestFileName}.html";
-            Report.FileName = Report.FileName.Replace(".cs", "");
-            Report.FolderName = Config.projectPath + "/reports/";
-            Report.CountErrors = 0;
-            Report.TestSuccess = false;
-            Report.Steps = new List<string[]>();
+            try
+            {
+                Report.TestFileName = Config.selectName;
+                Report.FileName = $"Report-{Report.TestFileName}.html";
+                Report.FileName = Report.FileName.Replace(".cs", "");
+                Report.FolderName = Config.projectPath + "/reports/";
+                Report.CountErrors = 0;
+                Report.TestSuccess = false;
+                Report.Steps = new List<string[]>();
 
-            SaveReport(Report.TestSuccess);
+                SaveReport(Report.TestSuccess);
+            }
+            catch (Exception ex)
+            {
+                Config.browserForm.consoleMsg(ex.ToString());
+            }
         }
                 
         public static void AddStep(string status, string action, string comment)
         {
-            if (status == Report.FAILED || status == Report.ERROR) Report.CountErrors++;
-            Report.Steps.Add(new string[] { status, action, comment });
+            try
+            {
+                if (status == Report.FAILED || status == Report.ERROR) Report.CountErrors++;
+                if (Steps != null) Report.Steps.Add(new string[] { status, action, comment });
+            }
+            catch (Exception ex)
+            {
+                Config.browserForm.consoleMsg(ex.ToString());
+            }
         }
 
         public static void SaveReport(bool testSuccess)
