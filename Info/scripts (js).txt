@@ -437,3 +437,13 @@ await tester.ScrollToElementAsync(HatFrameworkDev.Tester.BY_CSS, "body > footer"
 await tester.GoToUrlAsync("https://somovstudio.github.io/", 5);
 await tester.ScrollToElementAsync(HatFrameworkDev.Tester.BY_XPATH, "/html/body/footer", true);
 await tester.TestEndAsync();
+
+--------------------------
+
+REST запросы
+
+https://jsonplaceholder.typicode.com/
+https://jsonplaceholder.typicode.com/posts
+https://jsonplaceholder.typicode.com/posts/1/
+
+

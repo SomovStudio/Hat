@@ -2,7 +2,11 @@
 using Microsoft.Web.WebView2.WinForms;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
@@ -52,6 +56,7 @@ namespace HatFrameworkDev
         private MethodInfo resultAutotest;          // функция: resultAutotest - устанавливает флаг общего результата выполнения теста
         private MethodInfo debugJavaScript;         // функция: getDebug - возвращает статус отладки
         private MethodInfo getNameAutotest;         // Функция: getNameAutotest - возвращает имя запущенного автотеста
+        private MethodInfo saveReport;              // функция: saveReport - вызывает метод сохранения отчета
 
         private bool statusPageLoad = false;    // флаг: статус загрузки страницы
         private bool testStop = false;          // флаг: остановка теста
@@ -75,6 +80,7 @@ namespace HatFrameworkDev
                 resultAutotest = BrowserWindow.GetType().GetMethod("resultAutotest");
                 debugJavaScript = BrowserWindow.GetType().GetMethod("getStatusDebugJavaScript");
                 getNameAutotest = BrowserWindow.GetType().GetMethod("getNameAutotest");
+                saveReport = BrowserWindow.GetType().GetMethod("saveReport");
 
                 MethodInfo mi = BrowserWindow.GetType().GetMethod("getWebView");
                 BrowserView = (Microsoft.Web.WebView2.WinForms.WebView2)mi.Invoke(BrowserWindow, null);
@@ -110,7 +116,7 @@ namespace HatFrameworkDev
         {
             try
             {
-                int step = SendMessage("Сообщение", PROCESS, $"Запуск автотеста", IMAGE_STATUS_MESSAGE);
+                int step = SendMessage("Message", PROCESS, $"Запуск автотеста", IMAGE_STATUS_MESSAGE);
                 string filename = (string)getNameAutotest.Invoke(BrowserWindow, null);
                 EditMessage(step, null, COMPLETED, $"Запущен автотест из файла: {filename}", IMAGE_STATUS_MESSAGE);
             }
@@ -177,12 +183,12 @@ namespace HatFrameworkDev
                 if (Debug == true) ConsoleMsg($"[DEBUG] JS результат: {result}");
                 if (result == "null" || result == null)
                 {
-                    EditMessage(step, null, Tester.FAILED, commentfailed + Environment.NewLine + $"Результат выполнения скрипта: {result}", Tester.IMAGE_STATUS_FAILED);
+                    EditMessage(step, null, Tester.FAILED, commentfailed, Tester.IMAGE_STATUS_FAILED);
                     TestStopAsync();
                 }
                 else
                 {
-                    EditMessage(step, null, Tester.PASSED, commentPassed + Environment.NewLine + $"Результат выполнения скрипта: {result}", Tester.IMAGE_STATUS_PASSED);
+                    EditMessage(step, null, Tester.PASSED, commentPassed, Tester.IMAGE_STATUS_PASSED);
                 }
             }
             catch (Exception ex)
@@ -322,7 +328,10 @@ namespace HatFrameworkDev
                 await BrowserView.EnsureCoreWebView2Async();
                 Debug = (bool)debugJavaScript.Invoke(BrowserWindow, null);
                 EditMessage(step, null, PASSED, "Выполнена инициализация теста", IMAGE_STATUS_PASSED);
-                ConsoleMsg("Тест запущен");
+                ConsoleMsg("Тест начинается...");
+
+                browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { "" + Environment.NewLine, default, default, default, false });
+                browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { "-- Тест начинается ------------", default, ConsoleColor.White, ConsoleColor.DarkBlue, true });
             }
             catch (Exception ex)
             {
@@ -337,15 +346,24 @@ namespace HatFrameworkDev
                 int step = SendMessage("TestEndAsync()", PROCESS, "Завершение теста", IMAGE_STATUS_PROCESS);
                 if (assertStatus == FAILED)
                 {
+                    ConsoleMsg("Тест завершен - провельно");
                     EditMessage(step, null, FAILED, "Тест завершен - шаги теста выполнены неуспешно", IMAGE_STATUS_FAILED);
                     resultAutotestSuccess(false);
+
+                    browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { Environment.NewLine + "Тест завершен - провельно", default, ConsoleColor.DarkRed, ConsoleColor.White, true });
+                    browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { "-------------------------------" + Environment.NewLine, default, default, default, false });
                 }
                 else
                 {
+                    ConsoleMsg("Тест завершен - успешено");
                     EditMessage(step, null, PASSED, "Тест завершен - все шаги выполнены успешно", IMAGE_STATUS_PASSED);
                     resultAutotestSuccess(true);
+
+                    browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { Environment.NewLine + "Тест завершен - успешено", default, ConsoleColor.DarkGreen, ConsoleColor.White, true });
+                    browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { "-------------------------------" + Environment.NewLine, default, default, default, false });
                 }
-                ConsoleMsg("Тест завершен");
+
+                saveReport.Invoke(BrowserWindow, null);
             }
             catch (Exception ex)
             {
@@ -573,16 +591,8 @@ namespace HatFrameworkDev
 
             try
             {
-                if (BrowserView.Source.ToString() == url)
-                {
-                    BrowserView.Reload();
-                }
-                else
-                {
-                    BrowserView.Source = new Uri(url);
-                    BrowserView.Update();
-                }
-
+                BrowserView.CoreWebView2.Navigate(url);
+                
                 for (int i = 0; i < sec; i++)
                 {
                     await Task.Delay(1000);
@@ -2260,6 +2270,92 @@ namespace HatFrameworkDev
 
 
 
+
+        /*
+         * Методы для работы с REST запросами =======================================================
+         * https://stackoverflow.com/questions/9620278/how-do-i-make-calls-to-a-rest-api-using-c
+         * https://stackoverflow.com/questions/48977317/httpclient-post-with-parameters-in-body
+         * https://docs.microsoft.com/en-us/dotnet/framework/network-programming/how-to-send-data-using-the-webrequest-class
+         * https://zetcode.com/csharp/httpclient/
+         * https://jsonplaceholder.typicode.com/
+         */
+        public async Task<string> RestGetAsync(string url, string charset = "UTF-8")
+        {
+            int step = SendMessage($"RestGetAsync(\"{url}\", \"{charset}\")", PROCESS, "Выполнение Get Rest запроса", IMAGE_STATUS_PROCESS);
+            if (DefineTestStop(step) == true) return null;
+
+            string result = null;
+            try
+            {
+                string userAgent = BrowserView.CoreWebView2.Settings.UserAgent;
+
+                Uri uri = new Uri(url);
+                HttpClient client = new HttpClient();
+                client.BaseAddress = uri;
+                client.DefaultRequestHeaders.Clear();
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                client.DefaultRequestHeaders.Add("charset", charset);
+                client.DefaultRequestHeaders.Add("User-Agent", userAgent);
+                HttpResponseMessage response = await client.GetAsync(url);
+                if (response.IsSuccessStatusCode)
+                {
+                    result = await response.Content.ReadAsStringAsync();
+                    EditMessage(step, null, PASSED, "Get Rest запрос успешно выполнен", IMAGE_STATUS_PASSED);
+                }
+                else
+                {
+                    EditMessage(step, null, FAILED, "Get Rest не выполнен" + Environment.NewLine + "Статус запроса: " + Environment.NewLine + response.StatusCode.ToString(), IMAGE_STATUS_PASSED);
+                }
+            }
+            catch (Exception ex)
+            {
+                EditMessage(step, null, Tester.FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), Tester.IMAGE_STATUS_FAILED);
+                TestStopAsync();
+                ConsoleMsgError(ex.ToString());
+            }
+            return result;
+        }
+
+        public async Task<string> RestGetBasicAuthAsync(string login, string pass, string url, string charset = "UTF-8")
+        {
+            int step = SendMessage($"RestGetAuthAsync(\"{login}\", \"{pass}\", \"{url}\", \"{charset}\")", PROCESS, "Выполнение Get Rest запроса", IMAGE_STATUS_PROCESS);
+            if (DefineTestStop(step) == true) return null;
+
+            string result = null;
+            try
+            {
+                string userAgent = BrowserView.CoreWebView2.Settings.UserAgent;
+                byte[] authToken = Encoding.ASCII.GetBytes($"{login}:{pass}");
+
+                Uri uri = new Uri(url);
+                HttpClient client = new HttpClient();
+                client.BaseAddress = uri;
+                client.DefaultRequestHeaders.Clear();
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                client.DefaultRequestHeaders.Add("charset", charset);
+                client.DefaultRequestHeaders.Add("User-Agent", userAgent);
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(authToken));
+                HttpResponseMessage response = await client.GetAsync(url);
+                if (response.IsSuccessStatusCode)
+                {
+                    result = await response.Content.ReadAsStringAsync();
+                    EditMessage(step, null, PASSED, "Get Rest запрос успешно выполнен", IMAGE_STATUS_PASSED);
+                }
+                else
+                {
+                    EditMessage(step, null, FAILED, "Get Rest не выполнен" + Environment.NewLine + "Статус запроса: " + Environment.NewLine + response.StatusCode.ToString(), IMAGE_STATUS_PASSED);
+                }
+            }
+            catch (Exception ex)
+            {
+                EditMessage(step, null, Tester.FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), Tester.IMAGE_STATUS_FAILED);
+                TestStopAsync();
+                ConsoleMsgError(ex.ToString());
+            }
+            return result;
+        }
 
 
 

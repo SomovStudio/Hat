@@ -17,9 +17,8 @@ namespace Hat
 
         public static void play(string testFilename)
         {
-            Config.browserForm.consoleMsg("Запускается тест из файла " + testFilename);
-            Config.browserForm.systemConsoleMsg("", default, default, default, true);
-            Config.browserForm.systemConsoleMsg($"Запуск автотеста: {testFilename}", default, ConsoleColor.DarkCyan, ConsoleColor.White, true);
+            Config.browserForm.consoleMsg($"Запущен файл автотеста: {testFilename}");
+            Config.browserForm.systemConsoleMsg($"Запущен файл автотеста: {testFilename}", default, ConsoleColor.DarkCyan, ConsoleColor.White, true);
 
             try
             {
@@ -47,7 +46,7 @@ namespace Hat
                 {
                     foreach (var error in results.Errors)
                     {
-                        Config.browserForm.consoleMsg(error.ToString());
+                        Config.browserForm.consoleMsgError(error.ToString());
                     }
                 }
                 else
@@ -76,16 +75,9 @@ namespace Hat
         {
             HatFrameworkDev.Tester tester = new HatFrameworkDev.Tester(Config.browserForm);
             await tester.TestBeginAsync();
-            await tester.GoToUrlAsync("https://somovstudio.github.io/test.html", 5);
-            await tester.SetValueInElementAsync(HatFrameworkDev.Tester.BY_XPATH, "//input[@id='login']", "admin");
-            await tester.SetValueInElementAsync(HatFrameworkDev.Tester.BY_XPATH, "//input[@id='pass']", "0000");
-            //await tester.ClickElementAsync(HatFrameworkDev.Tester.BY_CSS, "#auth #buttonLogin");
-
-            //HatFrameworkDev.HTMLElement button = await tester.GetElementAsync(HatFrameworkDev.Tester.BY_XPATH, "//div[@id='auth']//input[@id='buttonLogin']");
-            HatFrameworkDev.HTMLElement button = await tester.GetElementAsync(HatFrameworkDev.Tester.BY_CSS, "#auth #buttonLogin");
-            await button.ClickAsync();
-
-            await tester.WaitVisibleElementAsync(HatFrameworkDev.Tester.BY_CSS, "div[id='result']", 2);
+            await tester.GoToUrlAsync("https://jsonplaceholder.typicode.com", 5);
+            string result = await tester.RestGetAsync(@"https://jsonplaceholder.typicode.com/posts/1/", "UTF-8");
+            tester.ConsoleMsg(result);
             await tester.TestEndAsync();
 
             /*
@@ -251,15 +243,22 @@ namespace Hat
         {
             string content =
 @"using System;
-using System.IO;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Windows.Forms;
+using System.Threading;
+using System.Threading.Tasks;
+using System.IO;
 using System.Data;
 using System.Drawing;
+using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Windows.Forms;
-using System.Threading.Tasks;
+using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Reflection;
+using Newtonsoft.Json;
 using HatFramework;
 
 namespace Hat
@@ -286,16 +285,22 @@ namespace Hat
         {
             string content =
 @"using System;
-using System.IO;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
-using System.Text.RegularExpressions;
+using System.Windows.Forms;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Windows.Forms;
+using System.IO;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Text.RegularExpressions;
+using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Reflection;
+using Newtonsoft.Json;
 using HatFramework;
 
 namespace Hat
@@ -349,16 +354,22 @@ namespace Hat
         {
             string content =
 @"using System;
-using System.IO;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
-using System.Text.RegularExpressions;
+using System.Windows.Forms;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Windows.Forms;
+using System.IO;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Text.RegularExpressions;
+using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Reflection;
+using Newtonsoft.Json;
 using HatFramework;
 
 namespace Hat
@@ -408,16 +419,22 @@ namespace Hat
         {
             string content = "";
             content += "using System;" + Environment.NewLine;
-            content += "using System.IO;" + Environment.NewLine;
             content += "using System.Collections.Generic;" + Environment.NewLine;
             content += "using System.ComponentModel;" + Environment.NewLine;
-            content += "using System.Data;" + Environment.NewLine;
-            content += "using System.Drawing;" + Environment.NewLine;
-            content += "using System.Text;" + Environment.NewLine;
-            content += "using System.Text.RegularExpressions;" + Environment.NewLine;
+            content += "using System.Windows.Forms;" + Environment.NewLine;
             content += "using System.Threading;" + Environment.NewLine;
             content += "using System.Threading.Tasks;" + Environment.NewLine;
-            content += "using System.Windows.Forms;" + Environment.NewLine;
+            content += "using System.IO;" + Environment.NewLine;
+            content += "using System.Data;" + Environment.NewLine;
+            content += "using System.Drawing;" + Environment.NewLine;
+            content += "using System.Linq;" + Environment.NewLine;
+            content += "using System.Text;" + Environment.NewLine;
+            content += "using System.Text.RegularExpressions;" + Environment.NewLine;
+            content += "using System.Net;" + Environment.NewLine;
+            content += "using System.Net.Http;" + Environment.NewLine;
+            content += "using System.Net.Http.Headers;" + Environment.NewLine;
+            content += "using System.Reflection;" + Environment.NewLine;
+            content += "using Newtonsoft.Json;" + Environment.NewLine;
             content += "using HatFramework;" + Environment.NewLine;
             content += "" + Environment.NewLine;
             content += "namespace Hat" + Environment.NewLine;

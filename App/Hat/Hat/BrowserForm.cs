@@ -210,6 +210,9 @@ namespace Hat
 
         public void consoleMsgError(string message)
         {
+            Report.AddStep(Report.ERROR, "", message);
+            Report.SaveReport(testSuccess);
+
             richTextBoxConsole.AppendText("[" + DateTime.Now.ToString() + "] ОШИБКА: " + message + Environment.NewLine);
             richTextBoxConsole.ScrollToCaret();
             systemConsoleMsg("- - - - - - - - - - - - - - - - - - - - - - - - - - - -", default, default, default, true);
@@ -266,6 +269,8 @@ namespace Hat
 
         public int sendMessageStep(string step, string status, string comment, int image)
         {
+            Report.AddStep(status, step, comment);
+
             ListViewItem item;
             ListViewItem.ListViewSubItem subitem;
             item = new ListViewItem();
@@ -292,11 +297,20 @@ namespace Hat
                 if (step != null) listViewTest.Items[index].SubItems[1].Text = step;
                 if (status != null) listViewTest.Items[index].SubItems[2].Text = status;
                 if (comment != null) listViewTest.Items[index].SubItems[3].Text = comment;
+
+                Report.AddStep(listViewTest.Items[index].SubItems[2].Text, listViewTest.Items[index].SubItems[1].Text, listViewTest.Items[index].SubItems[3].Text);
             }
             catch (Exception ex)
             {
                 consoleMsgError(ex.ToString());
             }
+        }
+
+        /* Сохранить отчет */
+        public void saveReport()
+        {
+            Report.AddStep("", "", "");
+            Report.SaveReport(testSuccess);
         }
 
         /* Возвращает браузер */
@@ -388,8 +402,7 @@ namespace Hat
         {
             try
             {
-                webView2.Source = new Uri(toolStripComboBoxUrl.Text);
-                webView2.Update();
+                webView2.CoreWebView2.Navigate(toolStripComboBoxUrl.Text);
                 updateToolStripComboBoxUrl();
             }
             catch (Exception ex)
@@ -435,8 +448,7 @@ namespace Hat
             {
                 if (e.KeyChar.GetHashCode().ToString() == "851981")
                 {
-                    webView2.Source = new Uri(toolStripComboBoxUrl.Text);
-                    webView2.Update();
+                    webView2.CoreWebView2.Navigate(toolStripComboBoxUrl.Text);
                     updateToolStripComboBoxUrl();
                 }
             }
@@ -770,7 +782,8 @@ namespace Hat
 
         public string getFileName(string path)
         {
-            string pattern = @"\w{1,}.\w{1,}$";
+            //string pattern = @"\w{1,}.\w{1,}$";
+            string pattern = @"[^\\]{1,}\w{1,}$";
             string value = Regex.Match(path, pattern).Value;
             return value;
         }
@@ -903,8 +916,7 @@ namespace Hat
         {
             try
             {
-                webView2.Source = new Uri(toolStripComboBoxUrl.Text);
-                webView2.Update();
+                webView2.CoreWebView2.Navigate(toolStripComboBoxUrl.Text);
                 updateToolStripComboBoxUrl();
             }
             catch (Exception ex)
@@ -1034,8 +1046,8 @@ namespace Hat
             {
                 if (treeViewProject.SelectedNode != null)
                 {
-                    Config.selectName = treeViewProject.SelectedNode.Text;
-                    Config.selectValue = treeViewProject.SelectedNode.Name;
+                    Config.selectName = treeViewProject.SelectedNode.Text;  // имя файла или папки
+                    Config.selectValue = treeViewProject.SelectedNode.Name; // путь к файлу или к папке
                     fileOpen();
                 }
             }
@@ -1050,9 +1062,9 @@ namespace Hat
             try
             {
                 if (treeViewProject.SelectedNode != null)
-                { 
-                    Config.selectName = treeViewProject.SelectedNode.Text;
-                    Config.selectValue = treeViewProject.SelectedNode.Name;
+                {
+                    Config.selectName = treeViewProject.SelectedNode.Text;  // имя файла или папки
+                    Config.selectValue = treeViewProject.SelectedNode.Name; // путь к файлу или к папке
                     toolStripStatusLabelProjectFolderFile.Text = Config.selectName;
                 }
             }
@@ -1062,7 +1074,7 @@ namespace Hat
             }
         }
 
-        private void toolStripButton7_Click(object sender, EventArgs e)
+        public void updateProjectTree()
         {
             try
             {
@@ -1084,7 +1096,7 @@ namespace Hat
                 {
                     consoleMsg("Проект не открыт");
                 }
-                
+
             }
             catch (Exception ex)
             {
@@ -1092,14 +1104,21 @@ namespace Hat
             }
         }
 
+        private void toolStripButton7_Click(object sender, EventArgs e)
+        {
+            updateProjectTree();
+        }
+
         public void PlayTest(string filename)
         {
             try
             {
+                testSuccess = true;
                 cleadMessageStep();
                 if (Config.selectName.Contains(".cs"))
                 {
                     stopTest = false;
+                    Report.Init();
                     if (filename == null) Autotests.play(Config.selectName);
                     else Autotests.play(filename);
                 }
@@ -1774,6 +1793,7 @@ namespace Hat
         private void toolStripButton13_Click(object sender, EventArgs e)
         {
             cleadMessageStep();
+            Report.Init();
             Autotests.devTestStutsAsync();
             /*
             EditorForm editorForm = new EditorForm();
@@ -1981,6 +2001,18 @@ namespace Hat
         public bool getStatusDebugJavaScript()
         {
             return Config.debugJavaScript;
+        }
+
+        private void documentationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Process.Start("help.chm");
+            }
+            catch (Exception ex)
+            {
+                consoleMsgError(ex.ToString());
+            }
         }
     }
 }
