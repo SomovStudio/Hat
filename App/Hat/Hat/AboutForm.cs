@@ -67,8 +67,8 @@ namespace Hat
 
         private void AboutForm_Load(object sender, EventArgs e)
         {
-            label6.Text = $"версия: {Config.version}";
-            label7.Text = $"дата последнего обновления: {Config.dateUpdate}";
+            label6.Text = $"версия: {Config.currentBrowserVersion}";
+            label7.Text = $"дата последнего обновления: {Config.dateBrowserUpdate}";
         }
     }
 }
