@@ -177,9 +177,9 @@
             this.label7.AutoSize = true;
             this.label7.Location = new System.Drawing.Point(215, 14);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(215, 13);
+            this.label7.Size = new System.Drawing.Size(203, 13);
             this.label7.TabIndex = 11;
-            this.label7.Text = "дата последнего обновления: 30.06.2022";
+            this.label7.Text = "дата последнего обновления: 1.0.2022";
             // 
             // label6
             // 
@@ -189,7 +189,7 @@
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(73, 13);
             this.label6.TabIndex = 10;
-            this.label6.Text = "версия: 1.0.1";
+            this.label6.Text = "версия: 1.0.0";
             // 
             // linkLabel1
             // 
@@ -266,6 +266,7 @@
             this.Name = "AboutForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "О программе Hat";
+            this.Load += new System.EventHandler(this.AboutForm_Load);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.groupBox1.ResumeLayout(false);

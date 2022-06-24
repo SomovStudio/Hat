@@ -32,7 +32,8 @@ namespace Hat
         public static bool debugJavaScript = false;         // отладка javascript при выполнении автотеста
 
         /* переменные для файла project.hat */
-        public static string version = "1.0.1";                 // версия проекта
+        public static string dateUpdate = "25.06.2022";
+        public static string version = "1.1.0";                 // версия проекта
         public static string encoding = WorkOnFiles.UTF_8_BOM;  // кодировка
         public static bool editorTopMost = true;                // настройка отображения редактора
         public static string[] libraries = new string[]         // библиотека подключаемых dll файлов
