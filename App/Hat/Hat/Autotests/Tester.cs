@@ -2154,6 +2154,8 @@ namespace HatFrameworkDev
 
             string script = "(function(){ var element = document.getElementsByClassName('" + _class + "')[" + index + "]; return element.outerHTML; }());";
             string value = await execute(script, step, $"Получено html элемента", $"Не удалось найти или получить html из элемента Class: {_class} (Index: {index})");
+            value = value.Replace("\\u003C", "<");
+            value = value.Replace("\\u003E", ">");
             return value;
         }
 
@@ -2168,6 +2170,8 @@ namespace HatFrameworkDev
             script += "return element.outerHTML;";
             script += "}());";
             string value = await execute(script, step, $"Получено html элемента", $"Не удалось найти или получить html из элемента по локатору: {locator}");
+            value = value.Replace("\\u003C", "<");
+            value = value.Replace("\\u003E", ">");
             return value;
         }
 
@@ -2178,6 +2182,8 @@ namespace HatFrameworkDev
 
             string script = "(function(){ var element = document.getElementById('" + id + "'); return element.outerHTML; }());";
             string value = await execute(script, step, $"Получено html элемента", $"Не удалось найти или получить html из элемента с ID: {id}");
+            value = value.Replace("\\u003C", "<");
+            value = value.Replace("\\u003E", ">");
             return value;
         }
 
@@ -2188,6 +2194,8 @@ namespace HatFrameworkDev
 
             string script = "(function(){ var element = document.getElementsByName('" + name + "')[" + index + "]; return element.outerHTML; }());";
             string value = await execute(script, step, $"Получено html элемента", $"Не удалось найти или получить html из элемента Name: {name} (Index: {index})");
+            value = value.Replace("\\u003C", "<");
+            value = value.Replace("\\u003E", ">");
             return value;
         }
 
@@ -2198,6 +2206,8 @@ namespace HatFrameworkDev
 
             string script = "(function(){ var element = document.getElementsByTagName('" + tag + "')[" + index + "]; return element.outerHTML; }());";
             string value = await execute(script, step, $"Получено html элемента", $"Не удалось найти или получить html из элемента Tag: {tag} (Index: {index})");
+            value = value.Replace("\\u003C", "<");
+            value = value.Replace("\\u003E", ">");
             return value;
         }
 
