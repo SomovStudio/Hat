@@ -77,7 +77,14 @@ namespace Hat
             await tester.TestBeginAsync();
             await tester.GoToUrlAsync("https://jsonplaceholder.typicode.com", 5);
             string result = await tester.RestGetAsync(@"https://jsonplaceholder.typicode.com/posts/1/", "UTF-8");
-            tester.ConsoleMsg(result);
+            await tester.AssertNotEqualsAsync("", result);
+
+            await tester.GoToUrlAsync("https://somovstudio.github.io/test.html", 5);
+            string script = @"(function(){ var element = document.getElementsByTagName('h2')[0]; return element.outerText; }());";
+            string actual = await tester.ExecuteJavaScriptAsync(script);
+            string expected = "\"Авторизация\"";
+            await tester.AssertEqualsAsync(expected, actual);
+
             await tester.TestEndAsync();
 
             /*

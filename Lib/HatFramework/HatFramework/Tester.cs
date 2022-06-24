@@ -510,7 +510,7 @@ namespace HatFramework
         public async Task<string> ExecuteJavaScriptAsync(string script)
         {
             string result = null;
-            int step = SendMessage($"ExecuteJavaScriptAsync('...')", PROCESS, "Выполнение скрипта. " + Environment.NewLine + Environment.NewLine + $"{script}", IMAGE_STATUS_PROCESS);
+            int step = SendMessage($"ExecuteJavaScriptAsync(\"{script}\")", PROCESS, "Выполнение скрипта", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return result;
 
             try
@@ -518,7 +518,7 @@ namespace HatFramework
                 if (Debug == true) ConsoleMsg($"[DEBUG] JS скрипт: {script}");
                 result = await BrowserView.CoreWebView2.ExecuteScriptAsync(script);
                 if (Debug == true) ConsoleMsg($"[DEBUG] JS результат: {result}");
-                EditMessage(step, null, PASSED, "Скрипт выполнен. " + Environment.NewLine + Environment.NewLine + $"{script}", IMAGE_STATUS_PASSED);
+                EditMessage(step, null, PASSED, "Скрипт выполнен", IMAGE_STATUS_PASSED);
             }
             catch (Exception ex)
             {

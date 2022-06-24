@@ -63,6 +63,8 @@ namespace Hat
             string content = "";
             try
             {
+                version = currentBrowserVersion;
+
                 JsonConfig jsonConfig = new JsonConfig();
                 jsonConfig.Version = version;
                 jsonConfig.Encoding = encoding;
