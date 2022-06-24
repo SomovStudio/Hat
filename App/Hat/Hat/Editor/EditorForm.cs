@@ -1795,7 +1795,7 @@ if (response.IsSuccessStatusCode)\par
                 toolStripStatusLabel5.Text = Config.selectValue; // путь к файлу или к папке
                 toolStripStatusLabel6.Text = "";
 
-                
+                textEditorControl1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textEditorControl1_KeyDown);
             }
             catch (Exception ex)
             {
@@ -2144,5 +2144,16 @@ if (response.IsSuccessStatusCode)\par
                 Config.browserForm.consoleMsgError(ex.ToString());
             }
         }
+
+        private void textEditorControl1_KeyDown(object sender, KeyEventArgs e)
+        {
+            /*
+            Config.browserForm.consoleMsg($"CTRL: {e.Control} | KEY: {e.KeyCode}");
+            if (e.Control == true && e.KeyCode == Keys.S)
+            {
+                MessageBox.Show("SAVE");
+            }*/
+        }
+
     }
 }
