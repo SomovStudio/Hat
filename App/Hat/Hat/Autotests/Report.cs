@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Web.WebView2.Core;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -16,6 +17,7 @@ namespace Hat
         public const string COMPLETED = "Выполнено";
         public const string WARNING = "Предупреждение";
         public const string ERROR = "ОШИБКА";
+        public const string SCREENSHOT = "Скриншот";
 
         public static string TestFileName;
         public static string FileName;
@@ -98,6 +100,32 @@ namespace Hat
             }
         }
 
+        public static async Task SaveReportScreenshotAsync()
+        {
+            try
+            {
+                string filename = $"image-{DateTime.Now.ToString("dd-mm-yyyy-hh-mm-ss")}.jpeg";
+                if (Directory.Exists(Report.FolderName))
+                {
+                    Report.AddStep(Report.SCREENSHOT, $"Файл: <a href=\"{filename}\">{filename}</a>", $"<img src=\"{filename}\" />");
+                    using (System.IO.FileStream file = System.IO.File.Create(Report.FolderName + filename))
+                    {
+                        await Config.browserForm.getWebView().CoreWebView2.CapturePreviewAsync(CoreWebView2CapturePreviewImageFormat.Jpeg, file);
+                        if (File.Exists(Report.FolderName + filename)) Config.browserForm.consoleMsg($"Скриншот {filename} - сохранён");
+                        else Config.browserForm.consoleMsg($"Не удалось сохранить скриншот {filename} по адресу {Report.FolderName}");
+                    }
+                }
+                else
+                {
+                    Config.browserForm.consoleMsg($"Не удалось сохранить скриншот {filename} по адресу {Report.FolderName}");
+                }
+            }
+            catch (Exception ex)
+            {
+                Config.browserForm.consoleMsg(ex.ToString());
+            }
+        }
+
         public static string GetHead()
         {
             string content =
@@ -129,6 +157,8 @@ thead { background-color: #4d545d; color: #FFF; }
 .status-completed { background-color: #0094FF; color: #FFFFFF; }
 .status-warning { background-color: #FFE97F; color: #222222; }
 .status-error { background-color: #F4CCCC; color: #FF0000; }
+.status-screenshot { background-color: #FFFFFF; color: #222222; }
+img { min-width: 700px; max-width: 700px; }
 .result-passed { color: #007F0E; }
 .result-failed { color: #7F0000; }
 </style>
@@ -190,6 +220,7 @@ thead { background-color: #4d545d; color: #FFF; }
                             if (step[0] == Report.COMPLETED) content += $"<td class=\"table-status table-row status-completed\">{step[0]}</td>" + Environment.NewLine;
                             if (step[0] == Report.WARNING) content += $"<td class=\"table-status table-row status-warning\">{step[0]}</td>" + Environment.NewLine;
                             if (step[0] == Report.ERROR) content += $"<td class=\"table-status table-row status-error\">{step[0]}</td>" + Environment.NewLine;
+                            if (step[0] == Report.SCREENSHOT) content += $"<td class=\"table-status table-row status-screenshot\">{step[0]}</td>" + Environment.NewLine;
                             content += $"<td class=\"table-action table-row\">{step[1]}</td>" + Environment.NewLine;
                             content += $"<td class=\"table-comment table-row\">{step[2]}</td>" + Environment.NewLine;
                             content += "</tr>" + Environment.NewLine;

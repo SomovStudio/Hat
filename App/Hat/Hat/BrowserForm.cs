@@ -306,11 +306,16 @@ namespace Hat
             }
         }
 
-        /* Сохранить отчет */
+        /* Сохранить отчет и скриншот */
         public void saveReport()
         {
             Report.AddStep("", "", "");
             Report.SaveReport(testSuccess);
+        }
+
+        public async Task saveReportScreenshotAsync()
+        {
+            await Report.SaveReportScreenshotAsync();
         }
 
         /* Возвращает браузер */

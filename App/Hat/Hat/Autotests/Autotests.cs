@@ -78,15 +78,17 @@ namespace Hat
             await tester.GoToUrlAsync("https://somovstudio.github.io/test.html", 5);
             string html = await tester.GetHtmlFromElementByTagAsync("input", 0);
             tester.ConsoleMsg(html);
+            await tester.AssertTrueAsync(false);
+            await tester.TestEndAsync();
+            await tester.BrowserCloseAsync();
 
+            /*
             using (System.IO.FileStream file = System.IO.File.Create("image.jpeg"))
             {
                 await tester.BrowserView.CoreWebView2.CapturePreviewAsync(
                 Microsoft.Web.WebView2.Core.CoreWebView2CapturePreviewImageFormat.Jpeg, file);
             }
-
-            
-            await tester.TestEndAsync();
+            */ 
 
             /*
             await tester.TestBeginAsync();

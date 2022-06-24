@@ -461,3 +461,8 @@ await tester.AssertEqualsAsync(expected, actual);
 
 await tester.TestEndAsync();
 
+using (System.IO.FileStream file = System.IO.File.Create("image.jpeg"))
+{
+	await tester.BrowserView.CoreWebView2.CapturePreviewAsync(
+	Microsoft.Web.WebView2.Core.CoreWebView2CapturePreviewImageFormat.Jpeg, file);
+}

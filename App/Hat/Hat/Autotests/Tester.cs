@@ -57,6 +57,7 @@ namespace HatFrameworkDev
         private MethodInfo debugJavaScript;         // функция: getDebug - возвращает статус отладки
         private MethodInfo getNameAutotest;         // Функция: getNameAutotest - возвращает имя запущенного автотеста
         private MethodInfo saveReport;              // функция: saveReport - вызывает метод сохранения отчета
+        private MethodInfo saveReportScreenshotAsync; // функция: saveReportScreenshotAsync - сохраняет скриншот текущего состояния браузера
 
         private bool statusPageLoad = false;    // флаг: статус загрузки страницы
         private bool testStop = false;          // флаг: остановка теста
@@ -81,6 +82,7 @@ namespace HatFrameworkDev
                 debugJavaScript = BrowserWindow.GetType().GetMethod("getStatusDebugJavaScript");
                 getNameAutotest = BrowserWindow.GetType().GetMethod("getNameAutotest");
                 saveReport = BrowserWindow.GetType().GetMethod("saveReport");
+                saveReportScreenshotAsync = BrowserWindow.GetType().GetMethod("saveReportScreenshotAsync");
 
                 MethodInfo mi = BrowserWindow.GetType().GetMethod("getWebView");
                 BrowserView = (Microsoft.Web.WebView2.WinForms.WebView2)mi.Invoke(BrowserWindow, null);
@@ -352,6 +354,9 @@ namespace HatFrameworkDev
 
                     browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { Environment.NewLine + "Тест завершен - провельно", default, ConsoleColor.DarkRed, ConsoleColor.White, true });
                     browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { "-------------------------------" + Environment.NewLine, default, default, default, false });
+
+                    Task screenshot = (Task)saveReportScreenshotAsync.Invoke(BrowserWindow, null);
+                    await screenshot;
                 }
                 else
                 {
