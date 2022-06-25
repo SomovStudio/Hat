@@ -23,7 +23,8 @@ namespace Hat
         /* переменные для браузера */
         public static BrowserForm browserForm;                  // окно браузера (форма)
         public static string defaultUserAgent = "";             // значение user-agent по умолчанию
-        public static string currentBrowserVersion = "1.0.1";   // текущая версия браузера
+        public static string currentBrowserVersion = "1.1.0";   // текущая версия браузера
+        public static string dateBrowserUpdate = "25.06.2022";  // дата последнего обновления
 
         public static bool commandLineMode = false;         // флаг показывающий запуск приложения из командной строки
         public static string projectPath = "(не открыт)";   // полный путь к папке проекта
@@ -32,7 +33,7 @@ namespace Hat
         public static bool debugJavaScript = false;         // отладка javascript при выполнении автотеста
 
         /* переменные для файла project.hat */
-        public static string version = "1.0.1";                 // версия проекта
+        public static string version = "1.1.0";                 // версия проекта
         public static string encoding = WorkOnFiles.UTF_8_BOM;  // кодировка
         public static bool editorTopMost = true;                // настройка отображения редактора
         public static string[] libraries = new string[]         // библиотека подключаемых dll файлов
@@ -62,6 +63,8 @@ namespace Hat
             string content = "";
             try
             {
+                version = currentBrowserVersion;
+
                 JsonConfig jsonConfig = new JsonConfig();
                 jsonConfig.Version = version;
                 jsonConfig.Encoding = encoding;

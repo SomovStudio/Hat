@@ -75,10 +75,20 @@ namespace Hat
         {
             HatFrameworkDev.Tester tester = new HatFrameworkDev.Tester(Config.browserForm);
             await tester.TestBeginAsync();
-            await tester.GoToUrlAsync("https://jsonplaceholder.typicode.com", 5);
-            string result = await tester.RestGetAsync(@"https://jsonplaceholder.typicode.com/posts/1/", "UTF-8");
-            tester.ConsoleMsg(result);
+            await tester.GoToUrlAsync("https://somovstudio.github.io/test.html", 5);
+            string html = await tester.GetHtmlFromElementByTagAsync("input", 0);
+            tester.ConsoleMsg(html);
+            await tester.AssertTrueAsync(false);
             await tester.TestEndAsync();
+            await tester.BrowserCloseAsync();
+
+            /*
+            using (System.IO.FileStream file = System.IO.File.Create("image.jpeg"))
+            {
+                await tester.BrowserView.CoreWebView2.CapturePreviewAsync(
+                Microsoft.Web.WebView2.Core.CoreWebView2CapturePreviewImageFormat.Jpeg, file);
+            }
+            */ 
 
             /*
             await tester.TestBeginAsync();

@@ -57,6 +57,7 @@ namespace HatFrameworkDev
         private MethodInfo debugJavaScript;         // функция: getDebug - возвращает статус отладки
         private MethodInfo getNameAutotest;         // Функция: getNameAutotest - возвращает имя запущенного автотеста
         private MethodInfo saveReport;              // функция: saveReport - вызывает метод сохранения отчета
+        private MethodInfo saveReportScreenshotAsync; // функция: saveReportScreenshotAsync - сохраняет скриншот текущего состояния браузера
 
         private bool statusPageLoad = false;    // флаг: статус загрузки страницы
         private bool testStop = false;          // флаг: остановка теста
@@ -81,6 +82,7 @@ namespace HatFrameworkDev
                 debugJavaScript = BrowserWindow.GetType().GetMethod("getStatusDebugJavaScript");
                 getNameAutotest = BrowserWindow.GetType().GetMethod("getNameAutotest");
                 saveReport = BrowserWindow.GetType().GetMethod("saveReport");
+                saveReportScreenshotAsync = BrowserWindow.GetType().GetMethod("saveReportScreenshotAsync");
 
                 MethodInfo mi = BrowserWindow.GetType().GetMethod("getWebView");
                 BrowserView = (Microsoft.Web.WebView2.WinForms.WebView2)mi.Invoke(BrowserWindow, null);
@@ -352,6 +354,9 @@ namespace HatFrameworkDev
 
                     browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { Environment.NewLine + "Тест завершен - провельно", default, ConsoleColor.DarkRed, ConsoleColor.White, true });
                     browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { "-------------------------------" + Environment.NewLine, default, default, default, false });
+
+                    Task screenshot = (Task)saveReportScreenshotAsync.Invoke(BrowserWindow, null);
+                    await screenshot;
                 }
                 else
                 {
@@ -510,7 +515,7 @@ namespace HatFrameworkDev
         public async Task<string> ExecuteJavaScriptAsync(string script)
         {
             string result = null;
-            int step = SendMessage($"ExecuteJavaScriptAsync('...')", PROCESS, "Выполнение скрипта. " + Environment.NewLine + Environment.NewLine + $"{script}", IMAGE_STATUS_PROCESS);
+            int step = SendMessage($"ExecuteJavaScriptAsync(\"{script}\")", PROCESS, "Выполнение скрипта", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return result;
 
             try
@@ -518,7 +523,7 @@ namespace HatFrameworkDev
                 if (Debug == true) ConsoleMsg($"[DEBUG] JS скрипт: {script}");
                 result = await BrowserView.CoreWebView2.ExecuteScriptAsync(script);
                 if (Debug == true) ConsoleMsg($"[DEBUG] JS результат: {result}");
-                EditMessage(step, null, PASSED, "Скрипт выполнен. " + Environment.NewLine + Environment.NewLine + $"{script}", IMAGE_STATUS_PASSED);
+                EditMessage(step, null, PASSED, "Скрипт выполнен", IMAGE_STATUS_PASSED);
             }
             catch (Exception ex)
             {
@@ -2154,6 +2159,8 @@ namespace HatFrameworkDev
 
             string script = "(function(){ var element = document.getElementsByClassName('" + _class + "')[" + index + "]; return element.outerHTML; }());";
             string value = await execute(script, step, $"Получено html элемента", $"Не удалось найти или получить html из элемента Class: {_class} (Index: {index})");
+            value = value.Replace("\\u003C", "<");
+            value = value.Replace("\\u003E", ">");
             return value;
         }
 
@@ -2168,6 +2175,8 @@ namespace HatFrameworkDev
             script += "return element.outerHTML;";
             script += "}());";
             string value = await execute(script, step, $"Получено html элемента", $"Не удалось найти или получить html из элемента по локатору: {locator}");
+            value = value.Replace("\\u003C", "<");
+            value = value.Replace("\\u003E", ">");
             return value;
         }
 
@@ -2178,6 +2187,8 @@ namespace HatFrameworkDev
 
             string script = "(function(){ var element = document.getElementById('" + id + "'); return element.outerHTML; }());";
             string value = await execute(script, step, $"Получено html элемента", $"Не удалось найти или получить html из элемента с ID: {id}");
+            value = value.Replace("\\u003C", "<");
+            value = value.Replace("\\u003E", ">");
             return value;
         }
 
@@ -2188,6 +2199,8 @@ namespace HatFrameworkDev
 
             string script = "(function(){ var element = document.getElementsByName('" + name + "')[" + index + "]; return element.outerHTML; }());";
             string value = await execute(script, step, $"Получено html элемента", $"Не удалось найти или получить html из элемента Name: {name} (Index: {index})");
+            value = value.Replace("\\u003C", "<");
+            value = value.Replace("\\u003E", ">");
             return value;
         }
 
@@ -2198,6 +2211,8 @@ namespace HatFrameworkDev
 
             string script = "(function(){ var element = document.getElementsByTagName('" + tag + "')[" + index + "]; return element.outerHTML; }());";
             string value = await execute(script, step, $"Получено html элемента", $"Не удалось найти или получить html из элемента Tag: {tag} (Index: {index})");
+            value = value.Replace("\\u003C", "<");
+            value = value.Replace("\\u003E", ">");
             return value;
         }
 

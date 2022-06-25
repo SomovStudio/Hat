@@ -24,9 +24,9 @@ namespace Hat
             Config.encoding = WorkOnFiles.UTF_8_BOM;
             toolStripStatusLabelFileEncoding.Text = Config.encoding;
             Config.browserForm = this;
-            consoleMsg($"Браузер Hat версия {Config.currentBrowserVersion}");
+            consoleMsg($"Браузер Hat версия {Config.currentBrowserVersion} ({Config.dateBrowserUpdate})");
             systemConsoleMsg("", default, default, default, true);
-            systemConsoleMsg($"Браузер Hat версия {Config.currentBrowserVersion}", default, ConsoleColor.DarkGray, ConsoleColor.White, true);
+            systemConsoleMsg($"Браузер Hat версия {Config.currentBrowserVersion} ({Config.dateBrowserUpdate})", default, ConsoleColor.DarkGray, ConsoleColor.White, true);
         }
 
         private bool stopTest = false;
@@ -306,11 +306,16 @@ namespace Hat
             }
         }
 
-        /* Сохранить отчет */
+        /* Сохранить отчет и скриншот */
         public void saveReport()
         {
             Report.AddStep("", "", "");
             Report.SaveReport(testSuccess);
+        }
+
+        public async Task saveReportScreenshotAsync()
+        {
+            await Report.SaveReportScreenshotAsync();
         }
 
         /* Возвращает браузер */
@@ -1322,6 +1327,20 @@ namespace Hat
                             editorForm.TopMost = Config.editorTopMost;
                             editorForm.Show();
                         }
+                        else if (Config.selectName.Contains(".jpeg") || 
+                            Config.selectName.Contains(".jpg") || 
+                            Config.selectName.Contains(".png") || 
+                            Config.selectName.Contains(".html"))
+                        {
+                            try
+                            {
+                                Process.Start(Config.selectValue);
+                            }
+                            catch (Exception ex)
+                            {
+                                consoleMsg(ex.Message);
+                            }
+                        }
                         else
                         {
                             try
@@ -2013,6 +2032,11 @@ namespace Hat
             {
                 consoleMsgError(ex.ToString());
             }
+        }
+
+        private void testTableClearToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            cleadMessageStep();
         }
     }
 }
