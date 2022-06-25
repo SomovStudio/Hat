@@ -34,7 +34,7 @@
 <hr>
 <br>Программа разработана при поддержке компании <b>Зионек</b> https://zionec.ru/
 <br>которая занимается автоматизацией и цифровизацией бизнеса на Битрикс 24, 1С-Битрикс 
-<br>
+<br><br>
 <p align="center">
   <img src="https://github.com/SomovStudio/Hat/blob/main/Img/partners/zionec.png">
 </p>
