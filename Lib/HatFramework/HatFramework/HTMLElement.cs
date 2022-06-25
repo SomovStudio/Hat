@@ -298,6 +298,8 @@ namespace HatFramework
                 script += "}());";
             }
             string result = await execute(script, step, "Получен html из элемента", "Не удалось получить html из элемента");
+            result = result.Replace("\\u003C", "<");
+            result = result.Replace("\\u003E", ">");
             return result;
         }
 
