@@ -1327,6 +1327,20 @@ namespace Hat
                             editorForm.TopMost = Config.editorTopMost;
                             editorForm.Show();
                         }
+                        else if (Config.selectName.Contains(".jpeg") || 
+                            Config.selectName.Contains(".jpg") || 
+                            Config.selectName.Contains(".png") || 
+                            Config.selectName.Contains(".html"))
+                        {
+                            try
+                            {
+                                Process.Start(Config.selectValue);
+                            }
+                            catch (Exception ex)
+                            {
+                                consoleMsg(ex.Message);
+                            }
+                        }
                         else
                         {
                             try
@@ -2018,6 +2032,11 @@ namespace Hat
             {
                 consoleMsgError(ex.ToString());
             }
+        }
+
+        private void testTableClearToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            cleadMessageStep();
         }
     }
 }

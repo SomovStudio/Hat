@@ -204,6 +204,8 @@
             this.folderBrowserDialogProjectCreate = new System.Windows.Forms.FolderBrowserDialog();
             this.openFileProjectDialog = new System.Windows.Forms.OpenFileDialog();
             this.saveFileLogDialog = new System.Windows.Forms.SaveFileDialog();
+            this.toolStripSeparator20 = new System.Windows.Forms.ToolStripSeparator();
+            this.testTableClearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -1241,6 +1243,7 @@
             this.toolStripButton13.Name = "toolStripButton13";
             this.toolStripButton13.Size = new System.Drawing.Size(61, 22);
             this.toolStripButton13.Text = "для теста";
+            this.toolStripButton13.Visible = false;
             this.toolStripButton13.Click += new System.EventHandler(this.toolStripButton13_Click);
             // 
             // tabPage6
@@ -1307,9 +1310,11 @@
             this.подробнаяИнформацияОШагеToolStripMenuItem,
             this.toolStripSeparator12,
             this.toolStripMenuItem3,
-            this.остановитьТестToolStripMenuItem1});
+            this.остановитьТестToolStripMenuItem1,
+            this.toolStripSeparator20,
+            this.testTableClearToolStripMenuItem});
             this.contextMenuStripTest.Name = "contextMenuStripTest";
-            this.contextMenuStripTest.Size = new System.Drawing.Size(253, 76);
+            this.contextMenuStripTest.Size = new System.Drawing.Size(253, 126);
             // 
             // подробнаяИнформацияОШагеToolStripMenuItem
             // 
@@ -1887,6 +1892,18 @@
             // 
             this.saveFileLogDialog.Filter = "*.txt|*.txt";
             // 
+            // toolStripSeparator20
+            // 
+            this.toolStripSeparator20.Name = "toolStripSeparator20";
+            this.toolStripSeparator20.Size = new System.Drawing.Size(249, 6);
+            // 
+            // testTableClearToolStripMenuItem
+            // 
+            this.testTableClearToolStripMenuItem.Name = "testTableClearToolStripMenuItem";
+            this.testTableClearToolStripMenuItem.Size = new System.Drawing.Size(252, 22);
+            this.testTableClearToolStripMenuItem.Text = "Очистить таблицу";
+            this.testTableClearToolStripMenuItem.Click += new System.EventHandler(this.testTableClearToolStripMenuItem_Click);
+            // 
             // BrowserForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2143,6 +2160,8 @@
         private System.Windows.Forms.ToolStripMenuItem documentationToolStripMenuItem;
         public System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelProjectFolderFile;
         public System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelProjectPath;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator20;
+        private System.Windows.Forms.ToolStripMenuItem testTableClearToolStripMenuItem;
     }
 }
 
