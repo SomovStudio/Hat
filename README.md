@@ -24,16 +24,17 @@
 <br>Скачать WebView2 Runtime по ссылке: https://developer.microsoft.com/en-us/microsoft-edge/webview2/
 
 <hr>
-<br>Официальная страница приложения: https://somovstudio.github.io/hat.html
+Официальная страница приложения: https://somovstudio.github.io/hat.html
 <br>Документация online:  https://somovstudio.github.io/help/Hat/index.html
 <br>Документация offline: <a href="https://github.com/SomovStudio/Hat/blob/main/Help/help.chm">help.chm</a>
 
 <hr>
-<br>Видеообзор браузера Hat: https://youtu.be/Dn9UtrNj6EM
+Видеообзор браузера Hat: https://youtu.be/Dn9UtrNj6EM
 <br>
 <hr>
-<br>Программа разработана при поддержке компании <b>Зионек</b> которая занимается
-автоматизацией и цифровизацией бизнеса на Битрикс 24, 1С-Битрикс https://zionec.ru/
+<br>Программа разработана при поддержке компании <b>Зионек</b> https://zionec.ru/
+<br>которая занимается автоматизацией и цифровизацией бизнеса на Битрикс 24, 1С-Битрикс 
+<br>
 <p align="center">
   <img src="https://github.com/SomovStudio/Hat/blob/main/Img/partners/zionec.png">
 </p>
