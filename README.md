@@ -7,7 +7,7 @@
 При разработке автотестов используется язык программирования C#. Удобный интерфейс отображает все шаги выполнения теста с подробным описанием событий. Запуск автотестов возможен из командной строки операционной системы Windows это пригодится при использовании автотестов в популярных средствах непрерывной интеграции таких как: Jenkins, TeamCity, GitLab CI/CD.
 <br>
 <br>
-Скачать приложение: https://github.com/SomovStudio/Hat/archive/refs/tags/1.0.0.zip
+Скачать приложение: https://github.com/SomovStudio/Hat/archive/refs/tags/1.1.0.zip
 <hr>
 
 <p align="center">
@@ -24,15 +24,16 @@
 <br>Скачать WebView2 Runtime по ссылке: https://developer.microsoft.com/en-us/microsoft-edge/webview2/
 
 <hr>
-
-Видеообзор браузера Hat: https://youtu.be/Dn9UtrNj6EM
-<br>
-Документация: https://github.com/SomovStudio/Hat/raw/main/Info/help/help.chm
+<br>Официальная страница приложения: https://somovstudio.github.io/hat.html
+<br>Документация online:  https://somovstudio.github.io/help/Hat/index.html
+<br>Документация offline: <a href="https://github.com/SomovStudio/Hat/blob/main/Help/help.chm">help.chm</a>
 
 <hr>
-
-Программа разработана при поддержке компании <b>Зионек</b> https://zionec.ru/
-
+<br>Видеообзор браузера Hat: https://youtu.be/Dn9UtrNj6EM
+<br>
+<hr>
+<br>Программа разработана при поддержке компании <b>Зионек</b> которая занимается
+автоматизацией и цифровизацией бизнеса на Битрикс 24, 1С-Битрикс https://zionec.ru/
 <p align="center">
   <img src="https://github.com/SomovStudio/Hat/blob/main/Img/partners/zionec.png">
 </p>
