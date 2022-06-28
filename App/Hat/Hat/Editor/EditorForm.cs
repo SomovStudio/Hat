@@ -195,6 +195,10 @@ BrowserView.Update();\par
 public async void Main(Form browserWindow)\par
 \{\par
 \tab tester = new Tester(browserWindow);\par
+\tab tester.BrowserWindow.Text = ""Hat"";\par
+\tab tester.BrowserWindow.Width = 800;\par
+\tab tester.BrowserWindow.Height = 600;\par
+\tab tester.BrowserWindow.Close();\par
 \}\f0\fs22\lang9\par
 }",
 
@@ -301,7 +305,7 @@ catch (Exception ex)\par
 \cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : SendMessage(string action, string status, string comment, int image)\par
 \cf3\par
 \cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
-\cf0 int step = \f0\lang1033 tester.\f1\lang1049 SendMessage(""\'f2\'e5\'ea\'f1\'f2 \'e4\'e5\'e9\'f1\'f2\'e2\'e8\'ff"", \f0\lang1033 tester.\f1\lang1049 PROCESS, ""\'f2\'e5\'ea\'f1\'f2 \'ea\'ee\'ec\'ec\'e5\'ed\'f2\'e0\'f0\'e8\'ff"", \f0\lang1033 tester.\f1\lang1049 IMAGE_STATUS_PROCESS);\par
+\cf0 int step = \f0\lang1033 tester.\f1\lang1049 SendMessage(""\'f2\'e5\'ea\'f1\'f2 \'e4\'e5\'e9\'f1\'f2\'e2\'e8\'ff"", \f0\lang1033 Tester.\f1\lang1049 PROCESS, ""\'f2\'e5\'ea\'f1\'f2 \'ea\'ee\'ec\'ec\'e5\'ed\'f2\'e0\'f0\'e8\'ff"", \f0\lang1033 Tester.\f1\lang1049 IMAGE_STATUS_PROCESS);\par
 }",
 
 @"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
@@ -312,9 +316,9 @@ catch (Exception ex)\par
 \cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : EditMessage(int index, string action, string status, string comment, int image)\par
 \cf3\par
 \cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
-\cf0\f0\lang1033 tester.\f1\lang1049 EditMessage(step, ""\'f2\'e5\'ea\'f1\'f2 \'e4\'e5\'e9\'f1\'f2\'e2\'e8\'ff"", \f0\lang1033 tester.\f1\lang1049 PASSED, ""\'f2\'e5\'ea\'f1\'f2 \'ea\'ee\'ec\'ec\'e5\'ed\'f2\'e0\'f0\'e8\'ff"", \f0\lang1033 tester.\f1\lang1049 IMAGE_STATUS_PASSED);\par
+\cf0\f0\lang1033 tester.\f1\lang1049 EditMessage(step, ""\'f2\'e5\'ea\'f1\'f2 \'e4\'e5\'e9\'f1\'f2\'e2\'e8\'ff"", \f0\lang1033 Tester.\f1\lang1049 PASSED, ""\'f2\'e5\'ea\'f1\'f2 \'ea\'ee\'ec\'ec\'e5\'ed\'f2\'e0\'f0\'e8\'ff"", \f0\lang1033 Tester.\f1\lang1049 IMAGE_STATUS_PASSED);\par
 \par
-\f0\lang1033 tester.\f1\lang1049 EditMessage(step, \f0\lang1033 null\f1\lang1049 , \f0\lang1033 tester.\f1\lang1049 FAILED, ""\'f2\'e5\'ea\'f1\'f2 \'ea\'ee\'ec\'ec\'e5\'ed\'f2\'e0\'f0\'e8\'ff"", \f0\lang1033 tester.\f1\lang1049 IMAGE_STATUS_FAILED);\par
+\f0\lang1033 tester.\f1\lang1049 EditMessage(step, \f0\lang1033 null\f1\lang1049 , \f0\lang1033 Tester.\f1\lang1049 FAILED, ""\'f2\'e5\'ea\'f1\'f2 \'ea\'ee\'ec\'ec\'e5\'ed\'f2\'e0\'f0\'e8\'ff"", \f0\lang1033 Tester.\f1\lang1049 IMAGE_STATUS_FAILED);\par
 \par
     }",
 
@@ -862,9 +866,9 @@ string value = await tester.GetValueFromElementAsync(Tester.BY_XPATH, ""//input[
 \cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \f0\lang1033 ScrollToElementAsync(string by, string locator, bool behaviorSmooth = false)\f1\lang1049\par
 \cf3\par
 \cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
-\cf0\f0\lang1033 await tester.ScrollToElementAsync(HatFrameworkDev.Tester.BY_CSS, ""body > footer"", true);\par
+\cf0\f0\lang1033 await tester.ScrollToElementAsync(Tester.BY_CSS, ""body > footer"", true);\par
 \par
-await tester.ScrollToElementAsync(HatFrameworkDev.Tester.BY_XPATH, ""/html/body/footer"", true);\par
+await tester.ScrollToElementAsync(Tester.BY_XPATH, ""/html/body/footer"", true);\par
     }",
 
 @"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
