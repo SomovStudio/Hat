@@ -150,6 +150,8 @@
             this.toolStripSeparator12 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             this.остановитьТестToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator20 = new System.Windows.Forms.ToolStripSeparator();
+            this.testTableClearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.imageListTest = new System.Windows.Forms.ImageList(this.components);
             this.toolStripTest = new System.Windows.Forms.ToolStrip();
             this.toolStripComboBoxFindValue = new System.Windows.Forms.ToolStripComboBox();
@@ -204,8 +206,6 @@
             this.folderBrowserDialogProjectCreate = new System.Windows.Forms.FolderBrowserDialog();
             this.openFileProjectDialog = new System.Windows.Forms.OpenFileDialog();
             this.saveFileLogDialog = new System.Windows.Forms.SaveFileDialog();
-            this.toolStripSeparator20 = new System.Windows.Forms.ToolStripSeparator();
-            this.testTableClearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -1314,7 +1314,7 @@
             this.toolStripSeparator20,
             this.testTableClearToolStripMenuItem});
             this.contextMenuStripTest.Name = "contextMenuStripTest";
-            this.contextMenuStripTest.Size = new System.Drawing.Size(253, 126);
+            this.contextMenuStripTest.Size = new System.Drawing.Size(253, 104);
             // 
             // подробнаяИнформацияОШагеToolStripMenuItem
             // 
@@ -1344,6 +1344,18 @@
             this.остановитьТестToolStripMenuItem1.Size = new System.Drawing.Size(252, 22);
             this.остановитьТестToolStripMenuItem1.Text = "Остановить тест";
             this.остановитьТестToolStripMenuItem1.Click += new System.EventHandler(this.остановитьТестToolStripMenuItem1_Click);
+            // 
+            // toolStripSeparator20
+            // 
+            this.toolStripSeparator20.Name = "toolStripSeparator20";
+            this.toolStripSeparator20.Size = new System.Drawing.Size(249, 6);
+            // 
+            // testTableClearToolStripMenuItem
+            // 
+            this.testTableClearToolStripMenuItem.Name = "testTableClearToolStripMenuItem";
+            this.testTableClearToolStripMenuItem.Size = new System.Drawing.Size(252, 22);
+            this.testTableClearToolStripMenuItem.Text = "Очистить таблицу";
+            this.testTableClearToolStripMenuItem.Click += new System.EventHandler(this.testTableClearToolStripMenuItem_Click);
             // 
             // imageListTest
             // 
@@ -1623,7 +1635,7 @@
             this.toolStripButton18.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton18.Name = "toolStripButton18";
             this.toolStripButton18.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton18.Text = "toolStripButton18";
+            this.toolStripButton18.Text = "Очистить";
             this.toolStripButton18.Click += new System.EventHandler(this.toolStripButton18_Click);
             // 
             // toolStripButton19
@@ -1891,18 +1903,6 @@
             // saveFileLogDialog
             // 
             this.saveFileLogDialog.Filter = "*.txt|*.txt";
-            // 
-            // toolStripSeparator20
-            // 
-            this.toolStripSeparator20.Name = "toolStripSeparator20";
-            this.toolStripSeparator20.Size = new System.Drawing.Size(249, 6);
-            // 
-            // testTableClearToolStripMenuItem
-            // 
-            this.testTableClearToolStripMenuItem.Name = "testTableClearToolStripMenuItem";
-            this.testTableClearToolStripMenuItem.Size = new System.Drawing.Size(252, 22);
-            this.testTableClearToolStripMenuItem.Text = "Очистить таблицу";
-            this.testTableClearToolStripMenuItem.Click += new System.EventHandler(this.testTableClearToolStripMenuItem_Click);
             // 
             // BrowserForm
             // 
