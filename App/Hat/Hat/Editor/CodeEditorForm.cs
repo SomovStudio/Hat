@@ -98,7 +98,7 @@ namespace Hat
             (files[index][4] as TabPage).Text = files[index][0].ToString() + " *";
         }
 
-        public void CloseFile()
+        private void closeFile()
         {
             try
             {
@@ -114,7 +114,7 @@ namespace Hat
                    
                     if (files[index][2].ToString() == STATUS_NOT_SAVE)
                     {
-                        DialogResult dialogResult = MessageBox.Show($"Вы закрываете файла {filename} {Environment.NewLine}Вы хотите сохранить изменения в файле?", "Вопрос", MessageBoxButtons.YesNoCancel);
+                        DialogResult dialogResult = MessageBox.Show($"Закрывается файл {filename} {Environment.NewLine}Вы хотите сохранить изменения в файле?", "Вопрос", MessageBoxButtons.YesNoCancel);
 
                         if (dialogResult == DialogResult.Cancel)
                         {
@@ -171,9 +171,12 @@ namespace Hat
 
         private void fileCloseToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            CloseFile();
+            closeFile();
         }
 
-        
+        private void saveFile()
+        {
+
+        }
     }
 }
