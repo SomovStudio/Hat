@@ -18,15 +18,16 @@ namespace Hat
             InitializeComponent();
         }
 
+        const string STATUS_SAVED = "status_saved";
+        const string STATUS_EDIT = "status_edit";
+
+        public BrowserForm parent;
+        List<string[]> files;
+
         private void CodeEditorForm_Load(object sender, EventArgs e)
         {
-            TextEditorControl textEditorControl = new TextEditorControl();
-            textEditorControl.Name = "textEditorControl";
-            textEditorControl.Text = "";
-            textEditorControl.Dock = DockStyle.Fill;
-            TabPage tab = new TabPage("file.cs");
-            tab.Controls.Add(textEditorControl);
-            tabControl1.TabPages.Add(tab);
+            files = new List<string[]>();
+            this.TopMost = Config.editorTopMost;
 
             /*
             // Removes the selected tab:  
@@ -35,5 +36,28 @@ namespace Hat
             tabControl1.TabPages.Clear();
             */
         }
+
+        private void CodeEditorForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            parent.СloseCodeEditor();
+        }
+
+        public void OpenFile(string filename, string path)
+        {
+            int index = tabControl1.TabPages.Count;
+            files.Add(new string[] { filename, path, STATUS_SAVED, index.ToString() });
+            
+            WorkOnFiles reader = new WorkOnFiles();
+            TextEditorControl textEditorControl = new TextEditorControl();
+            textEditorControl.Name = "textEditorControl" + index.ToString();
+            textEditorControl.Text = reader.readFile(Config.encoding, path);
+            textEditorControl.Dock = DockStyle.Fill;
+            textEditorControl.SetHighlighting("C#");
+            TabPage tab = new TabPage(filename);
+            tab.Controls.Add(textEditorControl);
+            tabControl1.TabPages.Add(tab);
+        }
+
+        
     }
 }

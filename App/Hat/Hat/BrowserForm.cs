@@ -28,10 +28,12 @@ namespace Hat
             systemConsoleMsg("", default, default, default, true);
             systemConsoleMsg($"Браузер Hat версия {Config.currentBrowserVersion} ({Config.dateBrowserUpdate})", default, ConsoleColor.DarkGray, ConsoleColor.White, true);
         }
+              
 
         private bool stopTest = false;
         private bool testSuccess = true;
         private StepTestForm stepTestForm;
+        private CodeEditorForm codeEditorForm;
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -1201,9 +1203,14 @@ namespace Hat
             }
         }
 
-        public void closeStep()
+        public void СloseStep()
         {
             if (stepTestForm != null) stepTestForm = null;
+        }
+
+        public void СloseCodeEditor()
+        {
+            if (codeEditorForm != null) codeEditorForm = null;
         }
 
         private void listViewTest_SelectedIndexChanged(object sender, EventArgs e)
@@ -1323,9 +1330,16 @@ namespace Hat
                     {
                         if (Config.selectName.Contains(".cs"))
                         {
+                            /*
                             EditorForm editorForm = new EditorForm();
                             editorForm.TopMost = Config.editorTopMost;
                             editorForm.Show();
+                            */
+                            if(codeEditorForm == null) codeEditorForm = new CodeEditorForm();
+                            codeEditorForm.parent = this;
+                            codeEditorForm.Show();
+                            codeEditorForm.OpenFile(Config.selectName, Config.selectValue);
+
                         }
                         else if (Config.selectName.Contains(".jpeg") || 
                             Config.selectName.Contains(".jpg") || 
