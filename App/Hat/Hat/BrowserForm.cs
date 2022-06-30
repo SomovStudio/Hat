@@ -1811,14 +1811,20 @@ namespace Hat
 
         private void toolStripButton13_Click(object sender, EventArgs e)
         {
+            /*
             cleadMessageStep();
             Report.Init();
             Autotests.devTestStutsAsync();
+            */
+
             /*
             EditorForm editorForm = new EditorForm();
             editorForm.TopMost = Config.editorTopMost;
             editorForm.Show();
             */
+
+            CodeEditorForm codeeditor = new CodeEditorForm();
+            codeeditor.Show();
         }
 
         private void toolStripButton18_Click(object sender, EventArgs e)
