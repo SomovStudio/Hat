@@ -132,7 +132,11 @@ namespace Hat
                         }
                         else if (dialogResult == DialogResult.Yes)
                         {
-                            parent.consoleMsg($"Файл {filename} - сохранён и закрыт");
+                            saveFile();
+                            tabControl1.TabPages.Remove(tabControl1.SelectedTab);
+                            files.RemoveAt(index);
+                            updateListFiles();
+                            parent.consoleMsg($"Файл {filename} - закрыт");
                         }
                     }
                     else
@@ -182,6 +186,7 @@ namespace Hat
             try
             {
                 int index = tabControl1.SelectedIndex;
+                if (index < 0) return;
                 toolStripStatusLabel5.Text = files[index][1].ToString();
             }
             catch (Exception ex)
@@ -193,7 +198,26 @@ namespace Hat
 
         private void saveFile()
         {
-            
+            try
+            {
+                int index = tabControl1.SelectedIndex;
+                int count = files.Count;
+                if (index < 0 && count <= 0) return;
+
+                string filename = files[index][0].ToString();
+                string path = files[index][1].ToString();
+                string content = (files[index][5] as TextEditorControl).Text;
+                WorkOnFiles write = new WorkOnFiles();
+                write.writeFile(content, toolStripStatusLabel2.Text, path);
+                (files[index][4] as TabPage).Text = filename;
+                files[index][2] = STATUS_SAVED;
+                parent.consoleMsg($"Файл {filename} - сохранён");
+            }
+            catch (Exception ex)
+            {
+                parent.consoleMsg(ex.ToString());
+            }
+
             /*
             if (this.Text == "") return;
             try
