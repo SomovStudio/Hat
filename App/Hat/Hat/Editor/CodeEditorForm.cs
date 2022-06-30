@@ -22,13 +22,13 @@ namespace Hat
         const string STATUS_NOT_SAVE = "status_not_saved";
 
         public BrowserForm parent;
-        List<string[]> files; // [имя файла | путь файла | статус | индекс]
+        List<object[]> files; // [имя файла | путь файла | статус | индекс | TabPage (вкладка) | TextEditorControl (редактор)]
 
         private void CodeEditorForm_Load(object sender, EventArgs e)
         {
             try
             {
-                files = new List<string[]>();
+                files = new List<object[]>();
                 this.TopMost = Config.editorTopMost;
             }
             catch (Exception ex)
@@ -67,8 +67,7 @@ namespace Hat
                 }
 
                 int index = tabControl1.TabPages.Count;
-                files.Add(new string[] { filename, path, STATUS_SAVED, index.ToString() }); // [имя файла | путь файла | статус | индекс]
-
+                
                 WorkOnFiles reader = new WorkOnFiles();
 
                 TextEditorControl textEditorControl = new TextEditorControl();
@@ -82,6 +81,8 @@ namespace Hat
                 TabPage tab = new TabPage(filename);
                 tab.Controls.Add(textEditorControl);
                 tabControl1.TabPages.Add(tab);
+
+                files.Add(new object[] { filename, path, STATUS_SAVED, index, tab, textEditorControl }); // [имя файла | путь файла | статус | индекс | TabPage (вкладка) | TextEditorControl (редактор)]
             }
             catch (Exception ex)
             {
@@ -92,7 +93,9 @@ namespace Hat
         private void textEditorControl_TextChanged(object sender, EventArgs e)
         {
             TextEditorControl textEditorControl = (TextEditorControl)sender;
-            MessageBox.Show(textEditorControl.Tag.ToString());
+            int index = Convert.ToInt32(textEditorControl.Tag);
+            files[index][2] = STATUS_NOT_SAVE;
+            (files[index][4] as TabPage).Text = files[index][0].ToString() + " *";
         }
 
         public void CloseFile()
@@ -107,9 +110,9 @@ namespace Hat
                 string filename = "";
                 if (Convert.ToInt32(files[index][3]) == index)
                 {
-                    filename = files[index][0];
+                    filename = files[index][0].ToString();
                    
-                    if (files[index][2] == STATUS_NOT_SAVE)
+                    if (files[index][2].ToString() == STATUS_NOT_SAVE)
                     {
                         DialogResult dialogResult = MessageBox.Show($"Вы закрываете файла {filename} {Environment.NewLine}Вы хотите сохранить изменения в файле?", "Вопрос", MessageBoxButtons.YesNoCancel);
 
@@ -156,6 +159,8 @@ namespace Hat
                 for (int i = 0; i < count; i++)
                 {
                     files[i][3] = i.ToString();
+                    (files[i][5] as TextEditorControl).Tag = i.ToString();
+                    //parent.consoleMsg($"{files[i][0]} | {files[i][1]} | {files[i][2]} | {files[i][3]} | {files[i][4]} | {(files[i][5] as TextEditorControl).Tag} | ");
                 }
             }
             catch (Exception ex)
