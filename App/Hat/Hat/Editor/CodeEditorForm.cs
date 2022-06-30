@@ -30,6 +30,7 @@ namespace Hat
             {
                 files = new List<object[]>();
                 this.TopMost = Config.editorTopMost;
+                toolStripStatusLabel2.Text = Config.encoding;
             }
             catch (Exception ex)
             {
@@ -58,7 +59,7 @@ namespace Hat
                 {
                     for (int i = 0; i < count; i++)
                     {
-                        if (files[i][1] == path)
+                        if (files[i][1].ToString() == path)
                         {
                             parent.consoleMsg($"Файл {filename} уже открыт в редакторе");
                             return;
@@ -83,6 +84,8 @@ namespace Hat
                 tabControl1.TabPages.Add(tab);
 
                 files.Add(new object[] { filename, path, STATUS_SAVED, index, tab, textEditorControl }); // [имя файла | путь файла | статус | индекс | TabPage (вкладка) | TextEditorControl (редактор)]
+
+                toolStripStatusLabel5.Text = path;
             }
             catch (Exception ex)
             {
@@ -174,9 +177,59 @@ namespace Hat
             closeFile();
         }
 
+        private void tabControl1_Selected(object sender, TabControlEventArgs e)
+        {
+            try
+            {
+                int index = tabControl1.SelectedIndex;
+                toolStripStatusLabel5.Text = files[index][1].ToString();
+            }
+            catch (Exception ex)
+            {
+                parent.consoleMsg(ex.ToString());
+            }
+            
+        }
+
         private void saveFile()
+        {
+            
+            /*
+            if (this.Text == "") return;
+            try
+            {
+                WorkOnFiles write = new WorkOnFiles();
+                write.writeFile(textEditorControl1.Text, toolStripStatusLabel2.Text, toolStripStatusLabel5.Text);
+                Config.browserForm.consoleMsg($"Файл {this.Text} - сохранён");
+                toolStripStatusLabel6.Text = "";
+            }
+            catch (Exception ex)
+            {
+                parent.consoleMsg(ex.ToString());
+            }
+            */
+        }
+
+        private void fileSaveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            saveFile();
+        }
+
+        private void fileSaveAsToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
         }
+
+        private void toolStripButton1_Click(object sender, EventArgs e)
+        {
+            saveFile();
+        }
+
+        private void toolStripButton2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        
     }
 }
