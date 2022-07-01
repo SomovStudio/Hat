@@ -89,6 +89,13 @@ namespace Hat
         private void BrowserForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             e.Cancel = true;
+
+            if (codeEditorForm != null)
+            {
+                MessageBox.Show("Редактор кода по прежнему открыт, возможно есть файлы которые не были сохранены. Закройте похалуйста редактор кода.");
+                return;
+            }
+
             if (testSuccess == false)
             {
                 systemConsoleMsg(Environment.NewLine + "==============================", default, default, default, true);
