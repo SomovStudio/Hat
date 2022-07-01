@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -279,6 +280,40 @@ namespace Hat
             saveFileAs();
         }
 
-        
+        private void createCmd()
+        {
+            try
+            {
+                int index = tabControl1.SelectedIndex;
+                int count = files.Count;
+                if (index < 0 && count <= 0) return;
+
+                if (Config.projectPath != "(не открыт)")
+                {
+                    CreateCmdForm createCmdForm = new CreateCmdForm();
+                    createCmdForm.textBox.Text = $"cd {Directory.GetCurrentDirectory()}" + Environment.NewLine;
+                    createCmdForm.textBox.Text += $"Hat.exe {files[index][0]} {Config.projectPath}";
+                    createCmdForm.ShowDialog();
+                }
+                else
+                {
+                    Config.browserForm.consoleMsg("Проект не открыт");
+                }
+            }
+            catch (Exception ex)
+            {
+                Config.browserForm.consoleMsgError(ex.ToString());
+            }
+        }
+
+        private void toolStripButton5_Click(object sender, EventArgs e)
+        {
+            createCmd();
+        }
+
+        private void commandToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            createCmd();
+        }
     }
 }
