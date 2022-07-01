@@ -47,7 +47,7 @@ namespace Hat
                 {
                     foreach (var error in results.Errors)
                     {
-                        Config.browserForm.consoleMsgError(error.ToString());
+                        Config.browserForm.consoleMsgErrorReport(error.ToString());
                     }
                 }
                 else
@@ -68,7 +68,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                Config.browserForm.consoleMsgError(ex.ToString());
+                Config.browserForm.consoleMsgErrorReport(ex.ToString());
             }
         }
 
@@ -83,79 +83,7 @@ namespace Hat
             await tester.TestEndAsync();
             await tester.BrowserCloseAsync();
 
-            /*
-            using (System.IO.FileStream file = System.IO.File.Create("image.jpeg"))
-            {
-                await tester.BrowserView.CoreWebView2.CapturePreviewAsync(
-                Microsoft.Web.WebView2.Core.CoreWebView2CapturePreviewImageFormat.Jpeg, file);
-            }
-            */ 
-
-            /*
-            await tester.TestBeginAsync();
-            await tester.GoToUrlAsync("https://somovstudio.github.io/test.html", 5);
-            await tester.WaitNotVisibleElementAsync(HatFrameworkDev.Tester.BY_CSS, "div[id='result']", 2);
-            await tester.FindElementAsync(HatFrameworkDev.Tester.BY_CSS, "div[id='result']", 2);
-            await tester.FindVisibleElementAsync(HatFrameworkDev.Tester.BY_CSS, "#auth #buttonLogin", 2);
-            await tester.SetValueInElementAsync(HatFrameworkDev.Tester.BY_CSS, "input[id='login']", "admin");
-            await tester.SetValueInElementAsync(HatFrameworkDev.Tester.BY_CSS, "input[id='pass']", "0000");
-            string value_css = await tester.GetValueFromElementAsync(HatFrameworkDev.Tester.BY_CSS, "input[id='login']");
-            tester.ConsoleMsg(value_css);
-            await tester.SetTextInElementAsync(HatFrameworkDev.Tester.BY_CSS, "#auth > h2", "Тестовый заголовок");
-            string text_css = await tester.GetTextFromElementAsync(HatFrameworkDev.Tester.BY_CSS, "#auth > h2");
-            tester.ConsoleMsg(text_css);
-            int count_css = await tester.GetCountElementsAsync(HatFrameworkDev.Tester.BY_CSS, "input");
-            tester.ConsoleMsg(count_css.ToString());
-            string attr_css = await tester.GetAttributeFromElementAsync(HatFrameworkDev.Tester.BY_CSS, "input", "name");
-            tester.ConsoleMsg(attr_css);
-            List<string> attrs_css = await tester.GetAttributeFromElementsAsync(HatFrameworkDev.Tester.BY_CSS, "input", "name");
-            if(attrs_css != null) 
-            {
-                foreach (string attr in attrs_css)
-                    tester.ConsoleMsg(attr);
-            }
-            await tester.SetAttributeInElementAsync(HatFrameworkDev.Tester.BY_CSS, "#auth > h2", "name", "textH1");
-            await tester.SetAttributeInElementsAsync(HatFrameworkDev.Tester.BY_CSS, "input", "class", "test-class");
-            string html_css = await tester.GetHtmlFromElementAsync(HatFrameworkDev.Tester.BY_CSS, "#auth > h2");
-            tester.ConsoleMsg(html_css);
-            await tester.SetHtmlInElementAsync(HatFrameworkDev.Tester.BY_CSS, "#auth > h2", "<div>Тестовый блок</div>");
-            await tester.ClickElementAsync(HatFrameworkDev.Tester.BY_CSS, "#auth #buttonLogin");
-            await tester.WaitVisibleElementAsync(HatFrameworkDev.Tester.BY_CSS, "div[id='result']", 2);
-            await tester.TestEndAsync();
-            */
-
-            /*
-            await tester.TestBeginAsync();
-            await tester.GoToUrlAsync("https://somovstudio.github.io/test.html", 5);
-            await tester.WaitNotVisibleElementAsync(HatFrameworkDev.Tester.BY_XPATH, "//div[@id='result']", 2);
-            await tester.FindElementAsync(HatFrameworkDev.Tester.BY_XPATH, "//div[@id='result']", 2);
-            await tester.FindVisibleElementAsync(HatFrameworkDev.Tester.BY_XPATH, "//div[@id='auth']//input[@id='buttonLogin']", 2);
-            await tester.SetValueInElementAsync(HatFrameworkDev.Tester.BY_XPATH, "//input[@id='login']", "admin");
-            await tester.SetValueInElementAsync(HatFrameworkDev.Tester.BY_XPATH, "//input[@id='pass']", "0000");
-            string value_xpath = await tester.GetValueFromElementAsync(HatFrameworkDev.Tester.BY_XPATH, "//input[@id='login']");
-            tester.ConsoleMsg(value_xpath);
-            await tester.SetTextInElementAsync(HatFrameworkDev.Tester.BY_XPATH, "//div[@id='auth']//h2", "Тестовый заголовок");
-            string text_xpath = await tester.GetTextFromElementAsync(HatFrameworkDev.Tester.BY_XPATH, "//div[@id='auth']//h2");
-            tester.ConsoleMsg(text_xpath);
-            int count_xpath = await tester.GetCountElementsAsync(HatFrameworkDev.Tester.BY_XPATH, "//input");
-            tester.ConsoleMsg(count_xpath.ToString());
-            string attr_xpath = await tester.GetAttributeFromElementAsync(HatFrameworkDev.Tester.BY_XPATH, "//input", "name");
-            tester.ConsoleMsg(attr_xpath);
-            List<string> attrs_xpath = await tester.GetAttributeFromElementsAsync(HatFrameworkDev.Tester.BY_XPATH, "//input", "name");
-            if(attrs_xpath != null)
-            {
-                foreach (string attr in attrs_xpath)
-                    tester.ConsoleMsg(attr);
-            }
-            await tester.SetAttributeInElementAsync(HatFrameworkDev.Tester.BY_XPATH, "//div[@id='auth']//h2", "name", "textH1");
-            await tester.SetAttributeInElementsAsync(HatFrameworkDev.Tester.BY_XPATH, "//input", "class", "test-class");
-            string html_xpath = await tester.GetHtmlFromElementAsync(HatFrameworkDev.Tester.BY_XPATH, "//div[@id='auth']//h2");
-            tester.ConsoleMsg(html_xpath);
-            await tester.SetHtmlInElementAsync(HatFrameworkDev.Tester.BY_XPATH, "//div[@id='auth']//h2", "<div>Тестовый блок</div>");
-            await tester.ClickElementAsync(HatFrameworkDev.Tester.BY_XPATH, "//div[@id='auth']//input[@id='buttonLogin']");
-            await tester.WaitVisibleElementAsync(HatFrameworkDev.Tester.BY_XPATH, "//div[@id='result']", 2);
-            await tester.TestEndAsync();
-            */
+            
         }
 
         public static void readNodes(TreeNodeCollection _nodes)

@@ -44,7 +44,7 @@ namespace HatFrameworkDev
         
 
         private MethodInfo browserConsoleMsg;       // функция: consoleMsg - вывод сообщения в консоль приложения
-        private MethodInfo browserConsoleMsgError;  // функция: consoleMsgError - вывод сообщения об ошибке в консоль приложения
+        private MethodInfo browserConsoleMsgError;  // функция: consoleMsgErrorReport - вывод сообщения об ошибке в консоль приложения
         private MethodInfo browserSystemConsoleMsg; // функция: systemConsoleMsg - вывод сообщения в системную консоль
         private MethodInfo browserCleadMessageStep; // функция: cleadMessageStep - очистка всех шагов в таблице "тест"
         private MethodInfo browserSendMessageStep;  // функция: sendMessageStep - вывести сообщение в таблицу "тест"
@@ -69,7 +69,7 @@ namespace HatFrameworkDev
             {
                 BrowserWindow = browserForm;
                 browserConsoleMsg = BrowserWindow.GetType().GetMethod("consoleMsg");
-                browserConsoleMsgError = BrowserWindow.GetType().GetMethod("consoleMsgError");
+                browserConsoleMsgError = BrowserWindow.GetType().GetMethod("consoleMsgErrorReport");
                 browserSystemConsoleMsg = BrowserWindow.GetType().GetMethod("systemConsoleMsg");
                 browserCleadMessageStep = BrowserWindow.GetType().GetMethod("cleadMessageStep");
                 browserSendMessageStep = BrowserWindow.GetType().GetMethod("sendMessageStep");

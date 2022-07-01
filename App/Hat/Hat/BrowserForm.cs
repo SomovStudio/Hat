@@ -217,11 +217,24 @@ namespace Hat
             }
         }
 
-        public void consoleMsgError(string message)
+        public void consoleMsgErrorReport(string message)
         {
             Report.AddStep(Report.ERROR, "", message);
             Report.SaveReport(testSuccess);
 
+            richTextBoxConsole.AppendText("[" + DateTime.Now.ToString() + "] ОШИБКА: " + message + Environment.NewLine);
+            richTextBoxConsole.ScrollToCaret();
+            systemConsoleMsg("- - - - - - - - - - - - - - - - - - - - - - - - - - - -", default, default, default, true);
+            systemConsoleMsg("Произошла ошибка:", default, ConsoleColor.Black, ConsoleColor.Red, true);
+            systemConsoleMsg(message, default, default, default, true);
+            systemConsoleMsg("- - - - - - - - - - - - - - - - - - - - - - - - - - - -", default, default, default, true);
+            systemConsoleMsg("", default, default, default, true);
+            resultAutotest(false);
+            if (Config.commandLineMode == true) Close();
+        }
+
+        public void consoleMsgError(string message)
+        {
             richTextBoxConsole.AppendText("[" + DateTime.Now.ToString() + "] ОШИБКА: " + message + Environment.NewLine);
             richTextBoxConsole.ScrollToCaret();
             systemConsoleMsg("- - - - - - - - - - - - - - - - - - - - - - - - - - - -", default, default, default, true);
@@ -468,7 +481,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsg(ex.Message);
+                consoleMsgError(ex.Message);
             }
         }
 
@@ -609,7 +622,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsg(ex.ToString());
+                consoleMsgError(ex.ToString());
             }
         }
 
@@ -725,7 +738,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsg(ex.ToString());
+                consoleMsgError(ex.ToString());
             }
         }
 
@@ -1250,7 +1263,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsg("Ошибка: " + ex.Message);
+                consoleMsgError(ex.ToString());
             }
         }
 

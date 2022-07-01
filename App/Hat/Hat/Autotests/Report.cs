@@ -42,7 +42,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                Config.browserForm.consoleMsg(ex.ToString());
+                Config.browserForm.consoleMsgError(ex.ToString());
             }
         }
                 
@@ -55,7 +55,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                Config.browserForm.consoleMsg(ex.ToString());
+                Config.browserForm.consoleMsgError(ex.ToString());
             }
         }
 
@@ -96,7 +96,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                Config.browserForm.consoleMsg(ex.ToString());
+                Config.browserForm.consoleMsgError(ex.ToString());
             }
         }
 
@@ -122,7 +122,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                Config.browserForm.consoleMsg(ex.ToString());
+                Config.browserForm.consoleMsgError(ex.ToString());
             }
         }
 
