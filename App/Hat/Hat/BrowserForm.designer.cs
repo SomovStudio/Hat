@@ -39,6 +39,9 @@
             this.toolStripSeparator16 = new System.Windows.Forms.ToolStripSeparator();
             this.закрытьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.проектToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem7 = new System.Windows.Forms.ToolStripMenuItem();
+            this.createProjectToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.createProjectVSToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.создатьПроектToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.открытьПроектToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
@@ -110,6 +113,9 @@
             this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
             this.imageListProject = new System.Windows.Forms.ImageList(this.components);
             this.toolStripProject = new System.Windows.Forms.ToolStrip();
+            this.toolStripDropDownButton4 = new System.Windows.Forms.ToolStripDropDownButton();
+            this.createProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.createProjectVSToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
@@ -150,6 +156,8 @@
             this.toolStripSeparator12 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             this.остановитьТестToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator20 = new System.Windows.Forms.ToolStripSeparator();
+            this.testTableClearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.imageListTest = new System.Windows.Forms.ImageList(this.components);
             this.toolStripTest = new System.Windows.Forms.ToolStrip();
             this.toolStripComboBoxFindValue = new System.Windows.Forms.ToolStripComboBox();
@@ -204,8 +212,6 @@
             this.folderBrowserDialogProjectCreate = new System.Windows.Forms.FolderBrowserDialog();
             this.openFileProjectDialog = new System.Windows.Forms.OpenFileDialog();
             this.saveFileLogDialog = new System.Windows.Forms.SaveFileDialog();
-            this.toolStripSeparator20 = new System.Windows.Forms.ToolStripSeparator();
-            this.testTableClearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -320,6 +326,7 @@
             // проектToolStripMenuItem
             // 
             this.проектToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem7,
             this.создатьПроектToolStripMenuItem,
             this.открытьПроектToolStripMenuItem,
             this.toolStripSeparator3,
@@ -331,12 +338,37 @@
             this.проектToolStripMenuItem.Size = new System.Drawing.Size(59, 20);
             this.проектToolStripMenuItem.Text = "Проект";
             // 
+            // toolStripMenuItem7
+            // 
+            this.toolStripMenuItem7.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.createProjectToolStripMenuItem1,
+            this.createProjectVSToolStripMenuItem1});
+            this.toolStripMenuItem7.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItem7.Image")));
+            this.toolStripMenuItem7.Name = "toolStripMenuItem7";
+            this.toolStripMenuItem7.Size = new System.Drawing.Size(163, 22);
+            this.toolStripMenuItem7.Text = "Создать проект";
+            // 
+            // createProjectToolStripMenuItem1
+            // 
+            this.createProjectToolStripMenuItem1.Name = "createProjectToolStripMenuItem1";
+            this.createProjectToolStripMenuItem1.Size = new System.Drawing.Size(318, 22);
+            this.createProjectToolStripMenuItem1.Text = "Создать простой проект";
+            this.createProjectToolStripMenuItem1.Click += new System.EventHandler(this.createProjectToolStripMenuItem1_Click);
+            // 
+            // createProjectVSToolStripMenuItem1
+            // 
+            this.createProjectVSToolStripMenuItem1.Name = "createProjectVSToolStripMenuItem1";
+            this.createProjectVSToolStripMenuItem1.Size = new System.Drawing.Size(318, 22);
+            this.createProjectVSToolStripMenuItem1.Text = "Создать проект совместимый с Visual Studio";
+            this.createProjectVSToolStripMenuItem1.Click += new System.EventHandler(this.createProjectVSToolStripMenuItem1_Click);
+            // 
             // создатьПроектToolStripMenuItem
             // 
             this.создатьПроектToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("создатьПроектToolStripMenuItem.Image")));
             this.создатьПроектToolStripMenuItem.Name = "создатьПроектToolStripMenuItem";
             this.создатьПроектToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
             this.создатьПроектToolStripMenuItem.Text = "Создать проект";
+            this.создатьПроектToolStripMenuItem.Visible = false;
             this.создатьПроектToolStripMenuItem.Click += new System.EventHandler(this.создатьПроектToolStripMenuItem_Click);
             // 
             // открытьПроектToolStripMenuItem
@@ -975,6 +1007,7 @@
             // toolStripProject
             // 
             this.toolStripProject.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripDropDownButton4,
             this.toolStripButton4,
             this.toolStripButton5,
             this.toolStripSeparator4,
@@ -995,6 +1028,32 @@
             this.toolStripProject.TabIndex = 1;
             this.toolStripProject.Text = "toolStrip2";
             // 
+            // toolStripDropDownButton4
+            // 
+            this.toolStripDropDownButton4.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripDropDownButton4.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.createProjectToolStripMenuItem,
+            this.createProjectVSToolStripMenuItem});
+            this.toolStripDropDownButton4.Image = ((System.Drawing.Image)(resources.GetObject("toolStripDropDownButton4.Image")));
+            this.toolStripDropDownButton4.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripDropDownButton4.Name = "toolStripDropDownButton4";
+            this.toolStripDropDownButton4.Size = new System.Drawing.Size(29, 22);
+            this.toolStripDropDownButton4.Text = "Создать проект";
+            // 
+            // createProjectToolStripMenuItem
+            // 
+            this.createProjectToolStripMenuItem.Name = "createProjectToolStripMenuItem";
+            this.createProjectToolStripMenuItem.Size = new System.Drawing.Size(318, 22);
+            this.createProjectToolStripMenuItem.Text = "Создать простой проект";
+            this.createProjectToolStripMenuItem.Click += new System.EventHandler(this.createProjectToolStripMenuItem_Click);
+            // 
+            // createProjectVSToolStripMenuItem
+            // 
+            this.createProjectVSToolStripMenuItem.Name = "createProjectVSToolStripMenuItem";
+            this.createProjectVSToolStripMenuItem.Size = new System.Drawing.Size(318, 22);
+            this.createProjectVSToolStripMenuItem.Text = "Создать проект совместимый с Visual Studio";
+            this.createProjectVSToolStripMenuItem.Click += new System.EventHandler(this.createProjectVSToolStripMenuItem_Click);
+            // 
             // toolStripButton4
             // 
             this.toolStripButton4.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -1003,6 +1062,7 @@
             this.toolStripButton4.Name = "toolStripButton4";
             this.toolStripButton4.Size = new System.Drawing.Size(23, 22);
             this.toolStripButton4.Text = "Создать проект";
+            this.toolStripButton4.Visible = false;
             this.toolStripButton4.Click += new System.EventHandler(this.toolStripButton4_Click);
             // 
             // toolStripButton5
@@ -1105,8 +1165,6 @@
             // 
             // editorTopMostToolStripMenuItem
             // 
-            this.editorTopMostToolStripMenuItem.Checked = true;
-            this.editorTopMostToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.editorTopMostToolStripMenuItem.Name = "editorTopMostToolStripMenuItem";
             this.editorTopMostToolStripMenuItem.Size = new System.Drawing.Size(213, 22);
             this.editorTopMostToolStripMenuItem.Text = "Отображать поверх окон";
@@ -1243,7 +1301,6 @@
             this.toolStripButton13.Name = "toolStripButton13";
             this.toolStripButton13.Size = new System.Drawing.Size(61, 22);
             this.toolStripButton13.Text = "для теста";
-            this.toolStripButton13.Visible = false;
             this.toolStripButton13.Click += new System.EventHandler(this.toolStripButton13_Click);
             // 
             // tabPage6
@@ -1314,7 +1371,7 @@
             this.toolStripSeparator20,
             this.testTableClearToolStripMenuItem});
             this.contextMenuStripTest.Name = "contextMenuStripTest";
-            this.contextMenuStripTest.Size = new System.Drawing.Size(253, 126);
+            this.contextMenuStripTest.Size = new System.Drawing.Size(253, 104);
             // 
             // подробнаяИнформацияОШагеToolStripMenuItem
             // 
@@ -1344,6 +1401,18 @@
             this.остановитьТестToolStripMenuItem1.Size = new System.Drawing.Size(252, 22);
             this.остановитьТестToolStripMenuItem1.Text = "Остановить тест";
             this.остановитьТестToolStripMenuItem1.Click += new System.EventHandler(this.остановитьТестToolStripMenuItem1_Click);
+            // 
+            // toolStripSeparator20
+            // 
+            this.toolStripSeparator20.Name = "toolStripSeparator20";
+            this.toolStripSeparator20.Size = new System.Drawing.Size(249, 6);
+            // 
+            // testTableClearToolStripMenuItem
+            // 
+            this.testTableClearToolStripMenuItem.Name = "testTableClearToolStripMenuItem";
+            this.testTableClearToolStripMenuItem.Size = new System.Drawing.Size(252, 22);
+            this.testTableClearToolStripMenuItem.Text = "Очистить таблицу";
+            this.testTableClearToolStripMenuItem.Click += new System.EventHandler(this.testTableClearToolStripMenuItem_Click);
             // 
             // imageListTest
             // 
@@ -1623,7 +1692,7 @@
             this.toolStripButton18.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton18.Name = "toolStripButton18";
             this.toolStripButton18.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton18.Text = "toolStripButton18";
+            this.toolStripButton18.Text = "Очистить";
             this.toolStripButton18.Click += new System.EventHandler(this.toolStripButton18_Click);
             // 
             // toolStripButton19
@@ -1892,18 +1961,6 @@
             // 
             this.saveFileLogDialog.Filter = "*.txt|*.txt";
             // 
-            // toolStripSeparator20
-            // 
-            this.toolStripSeparator20.Name = "toolStripSeparator20";
-            this.toolStripSeparator20.Size = new System.Drawing.Size(249, 6);
-            // 
-            // testTableClearToolStripMenuItem
-            // 
-            this.testTableClearToolStripMenuItem.Name = "testTableClearToolStripMenuItem";
-            this.testTableClearToolStripMenuItem.Size = new System.Drawing.Size(252, 22);
-            this.testTableClearToolStripMenuItem.Text = "Очистить таблицу";
-            this.testTableClearToolStripMenuItem.Click += new System.EventHandler(this.testTableClearToolStripMenuItem_Click);
-            // 
             // BrowserForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2162,6 +2219,12 @@
         public System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelProjectPath;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator20;
         private System.Windows.Forms.ToolStripMenuItem testTableClearToolStripMenuItem;
+        private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton4;
+        private System.Windows.Forms.ToolStripMenuItem createProjectToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem createProjectVSToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem7;
+        private System.Windows.Forms.ToolStripMenuItem createProjectToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem createProjectVSToolStripMenuItem1;
     }
 }
 

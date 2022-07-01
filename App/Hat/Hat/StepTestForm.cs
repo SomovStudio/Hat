@@ -26,7 +26,7 @@ namespace Hat
 
         private void StepTestForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            parent.closeStep();
+            parent.СloseStep();
         }
     }
 }

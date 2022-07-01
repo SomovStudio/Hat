@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using HatFramework;
+using System.IO;
 
 namespace Hat
 {
@@ -479,6 +480,154 @@ namespace Hat
             content += "}" + Environment.NewLine;
             return content;
         }
+
+        public static string getContentGitIgnore()
+        {
+            string content = "";
+            content += "/.vs/" + Environment.NewLine;
+            content += "/bin/" + Environment.NewLine;
+            content += "/obj/";
+            return content;
+        }
+
+        public static string getContentFileSLN(string projectName)
+        {
+            string content = "";
+            content += "Microsoft Visual Studio Solution File, Format Version 12.00" + Environment.NewLine;
+            content += "# Visual Studio Version 17" + Environment.NewLine;
+            content += "VisualStudioVersion = 17.0.31912.275" + Environment.NewLine;
+            content += "MinimumVisualStudioVersion = 10.0.40219.1" + Environment.NewLine;
+            content += "Project(\"{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}\") = \"" + projectName +"\", \"" + projectName + ".csproj\", \"{FB1744EF-7E49-4425-BBD7-F03E8F7B79FE}\"" + Environment.NewLine;
+            content += "EndProject" + Environment.NewLine;
+            content += "Global" + Environment.NewLine;
+            content += "	GlobalSection(SolutionConfigurationPlatforms) = preSolution" + Environment.NewLine;
+            content += "		Debug|Any CPU = Debug|Any CPU" + Environment.NewLine;
+            content += "		Release|Any CPU = Release|Any CPU" + Environment.NewLine;
+            content += "	EndGlobalSection" + Environment.NewLine;
+            content += "	GlobalSection(ProjectConfigurationPlatforms) = postSolution" + Environment.NewLine;
+            content += "		{FB1744EF-7E49-4425-BBD7-F03E8F7B79FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU" + Environment.NewLine;
+            content += "		{FB1744EF-7E49-4425-BBD7-F03E8F7B79FE}.Debug|Any CPU.Build.0 = Debug|Any CPU" + Environment.NewLine;
+            content += "		{FB1744EF-7E49-4425-BBD7-F03E8F7B79FE}.Release|Any CPU.ActiveCfg = Release|Any CPU" + Environment.NewLine;
+            content += "		{FB1744EF-7E49-4425-BBD7-F03E8F7B79FE}.Release|Any CPU.Build.0 = Release|Any CPU" + Environment.NewLine;
+            content += "	EndGlobalSection" + Environment.NewLine;
+            content += "	GlobalSection(SolutionProperties) = preSolution" + Environment.NewLine;
+            content += "		HideSolutionNode = FALSE" + Environment.NewLine;
+            content += "	EndGlobalSection" + Environment.NewLine;
+            content += "	GlobalSection(ExtensibilityGlobals) = postSolution" + Environment.NewLine;
+            content += "		SolutionGuid = {0E635FC4-DAA6-4998-BF49-711898655671}" + Environment.NewLine;
+            content += "	EndGlobalSection" + Environment.NewLine;
+            content += "EndGlobal";
+            return content;
+        }
+
+        public static string getContentFileCSPROJ()
+        {
+            string appPath = Directory.GetCurrentDirectory();
+
+            string content = "";
+            content += "<?xml version=\"1.0\" encoding=\"utf-8\"?>" + Environment.NewLine;
+            content += "<Project ToolsVersion=\"15.0\" xmlns=\"http://schemas.microsoft.com/developer/msbuild/2003\">" + Environment.NewLine;
+            content += @"  <Import Project=""$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props"" Condition=""Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')"" />" + Environment.NewLine;
+            content += "  <PropertyGroup>" + Environment.NewLine;
+            content += "    <Configuration Condition=\" '$(Configuration)' == '' \">Debug</Configuration>" + Environment.NewLine;
+            content += "    <Platform Condition=\" '$(Platform)' == '' \">AnyCPU</Platform>" + Environment.NewLine;
+            content += "    <ProjectGuid>{FB1744EF-7E49-4425-BBD7-F03E8F7B79FE}</ProjectGuid>" + Environment.NewLine;
+            content += "    <OutputType>Library</OutputType>" + Environment.NewLine;
+            content += "    <AppDesignerFolder>Properties</AppDesignerFolder>" + Environment.NewLine;
+            content += "    <RootNamespace>HatTests</RootNamespace>" + Environment.NewLine;
+            content += "    <AssemblyName>HatTests</AssemblyName>" + Environment.NewLine;
+            content += "    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>" + Environment.NewLine;
+            content += "    <FileAlignment>512</FileAlignment>" + Environment.NewLine;
+            content += "    <Deterministic>true</Deterministic>" + Environment.NewLine;
+            content += "  </PropertyGroup>" + Environment.NewLine;
+            content += "  <PropertyGroup Condition=\" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' \">" + Environment.NewLine;
+            content += "    <DebugSymbols>true</DebugSymbols>" + Environment.NewLine;
+            content += "    <DebugType>full</DebugType>" + Environment.NewLine;
+            content += "    <Optimize>false</Optimize>" + Environment.NewLine;
+            content += @"    <OutputPath>bin\Debug\</OutputPath>" + Environment.NewLine;
+            content += "    <DefineConstants>DEBUG;TRACE</DefineConstants>" + Environment.NewLine;
+            content += "    <ErrorReport>prompt</ErrorReport>" + Environment.NewLine;
+            content += "    <WarningLevel>4</WarningLevel>" + Environment.NewLine;
+            content += "  </PropertyGroup>" + Environment.NewLine;
+            content += "  <PropertyGroup Condition=\" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' \">" + Environment.NewLine;
+            content += "    <DebugType>pdbonly</DebugType>" + Environment.NewLine;
+            content += "    <Optimize>true</Optimize>" + Environment.NewLine;
+            content += @"    <OutputPath>bin\Release\</OutputPath>" + Environment.NewLine;
+            content += "    <DefineConstants>TRACE</DefineConstants>" + Environment.NewLine;
+            content += "    <ErrorReport>prompt</ErrorReport>" + Environment.NewLine;
+            content += "    <WarningLevel>4</WarningLevel>" + Environment.NewLine;
+            content += "  </PropertyGroup>" + Environment.NewLine;
+            content += "  <ItemGroup>" + Environment.NewLine;
+            content += "    <Reference Include=\"HatFramework\">" + Environment.NewLine;
+            content += "      <HintPath>" + appPath + "\\HatFramework.dll</HintPath>" + Environment.NewLine;
+            content += "    </Reference>" + Environment.NewLine;
+            content += "    <Reference Include=\"Microsoft.Web.WebView2.Core\">" + Environment.NewLine;
+            content += "      <HintPath>" + appPath + "\\Microsoft.Web.WebView2.Core.dll</HintPath>" + Environment.NewLine;
+            content += "    </Reference>" + Environment.NewLine;
+            content += "    <Reference Include=\"Microsoft.Web.WebView2.WinForms\">" + Environment.NewLine;
+            content += "      <HintPath>" + appPath + "\\Microsoft.Web.WebView2.WinForms.dll</HintPath>" + Environment.NewLine;
+            content += "    </Reference>" + Environment.NewLine;
+            content += "    <Reference Include=\"Microsoft.Web.WebView2.Wpf\">" + Environment.NewLine;
+            content += "      <HintPath>" + appPath + "\\Microsoft.Web.WebView2.Wpf.dll</HintPath>" + Environment.NewLine;
+            content += "    </Reference>" + Environment.NewLine;
+            content += "    <Reference Include=\"Newtonsoft.Json\">" + Environment.NewLine;
+            content += "      <HintPath>" + appPath + "\\Newtonsoft.Json.dll</HintPath>" + Environment.NewLine;
+            content += "    </Reference>" + Environment.NewLine;
+            content += "    <Reference Include=\"System\" />" + Environment.NewLine;
+            content += "    <Reference Include=\"System.Core\" />" + Environment.NewLine;
+            content += "    <Reference Include=\"System.Data\" />" + Environment.NewLine;
+            content += "    <Reference Include=\"System.Data.DataSetExtensions\" />" + Environment.NewLine;
+            content += "    <Reference Include=\"System.Deployment\" />" + Environment.NewLine;
+            content += "    <Reference Include=\"System.Drawing\" />" + Environment.NewLine;
+            content += "    <Reference Include=\"System.Net.Http\" />" + Environment.NewLine;
+            content += "    <Reference Include=\"System.Xml\" />" + Environment.NewLine;
+            content += "    <Reference Include=\"System.Xml.Linq\" />" + Environment.NewLine;
+            content += "    <Reference Include=\"System.Windows.Forms\" />" + Environment.NewLine;
+            content += "    <Reference Include=\"Microsoft.CSharp\" />" + Environment.NewLine;
+            content += "  </ItemGroup>" + Environment.NewLine;
+            content += "  <ItemGroup>" + Environment.NewLine;
+            content += @"    <Compile Include=""Properties\AssemblyInfo.cs"" />" + Environment.NewLine;
+            content += @"    <Compile Include=""Tests\support\Helper.cs"" />" + Environment.NewLine;
+            content += @"    <Compile Include=""Tests\support\PageObjects\ExamplePage.cs"" />" + Environment.NewLine;
+            content += @"    <Compile Include=""Tests\support\StepObjects\ExampleSteps.cs"" />" + Environment.NewLine;
+            content += @"    <Compile Include=""Tests\tests\ExampleTest1.cs"" />" + Environment.NewLine;
+            content += @"    <Compile Include=""Tests\tests\ExampleTest2.cs"" />" + Environment.NewLine;
+            content += "  </ItemGroup>" + Environment.NewLine;
+            content += "  <ItemGroup>" + Environment.NewLine;
+            content += @"    <None Include=""Tests\project.hat"" />" + Environment.NewLine;
+            content += "  </ItemGroup>" + Environment.NewLine;
+            content += "  <ItemGroup />" + Environment.NewLine;
+            content += @"  <Import Project=""$(MSBuildToolsPath)\Microsoft.CSharp.targets"" />" + Environment.NewLine;
+            content += "</Project>";
+            return content;
+        }
+
+        public static string getContentFileAssemblyInfo()
+        {
+            string content =
+@"
+using System.Reflection;
+using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
+
+[assembly: AssemblyTitle("""")]
+[assembly: AssemblyDescription("""")]
+[assembly: AssemblyConfiguration("""")]
+[assembly: AssemblyCompany("""")]
+[assembly: AssemblyProduct("""")]
+[assembly: AssemblyCopyright(""Copyright © 2022"")]
+[assembly: AssemblyTrademark("""")]
+[assembly: AssemblyCulture("""")]
+[assembly: ComVisible(false)]
+[assembly: Guid(""fb1744ef-7e49-4425-bbd7-f03e8f7b79fe"")]
+[assembly: AssemblyVersion(""1.0.0.0"")]
+[assembly: AssemblyFileVersion(""1.0.0.0"")]
+";
+            return content;
+        }
+
+
+
 
 
     }
