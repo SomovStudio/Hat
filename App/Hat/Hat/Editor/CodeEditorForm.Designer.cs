@@ -389,6 +389,9 @@
             this.closeFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.serviceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.commandToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.testToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.testPlayToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.testStopToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -410,6 +413,7 @@
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
+            this.testToolStripMenuItem,
             this.serviceToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -564,6 +568,7 @@
             this.toolStripButton3.Name = "toolStripButton3";
             this.toolStripButton3.Size = new System.Drawing.Size(23, 22);
             this.toolStripButton3.Text = "Запустить тест";
+            this.toolStripButton3.Click += new System.EventHandler(this.toolStripButton3_Click);
             // 
             // toolStripButton4
             // 
@@ -573,6 +578,7 @@
             this.toolStripButton4.Name = "toolStripButton4";
             this.toolStripButton4.Size = new System.Drawing.Size(23, 22);
             this.toolStripButton4.Text = "Остановить тест";
+            this.toolStripButton4.Click += new System.EventHandler(this.toolStripButton4_Click);
             // 
             // splitContainer1
             // 
@@ -1341,7 +1347,7 @@
             // closeFileToolStripMenuItem
             // 
             this.closeFileToolStripMenuItem.Name = "closeFileToolStripMenuItem";
-            this.closeFileToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.closeFileToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.closeFileToolStripMenuItem.Text = "Закрыть файл";
             this.closeFileToolStripMenuItem.Click += new System.EventHandler(this.closeFileToolStripMenuItem_Click);
             // 
@@ -1360,6 +1366,31 @@
             this.commandToolStripMenuItem.Size = new System.Drawing.Size(253, 22);
             this.commandToolStripMenuItem.Text = "Сформировать команду запуска";
             this.commandToolStripMenuItem.Click += new System.EventHandler(this.commandToolStripMenuItem_Click);
+            // 
+            // testToolStripMenuItem
+            // 
+            this.testToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.testPlayToolStripMenuItem,
+            this.testStopToolStripMenuItem});
+            this.testToolStripMenuItem.Name = "testToolStripMenuItem";
+            this.testToolStripMenuItem.Size = new System.Drawing.Size(64, 20);
+            this.testToolStripMenuItem.Text = "Отладка";
+            // 
+            // testPlayToolStripMenuItem
+            // 
+            this.testPlayToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("testPlayToolStripMenuItem.Image")));
+            this.testPlayToolStripMenuItem.Name = "testPlayToolStripMenuItem";
+            this.testPlayToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.testPlayToolStripMenuItem.Text = "Запустить тест";
+            this.testPlayToolStripMenuItem.Click += new System.EventHandler(this.testPlayToolStripMenuItem_Click);
+            // 
+            // testStopToolStripMenuItem
+            // 
+            this.testStopToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("testStopToolStripMenuItem.Image")));
+            this.testStopToolStripMenuItem.Name = "testStopToolStripMenuItem";
+            this.testStopToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.testStopToolStripMenuItem.Text = "Остановить тест";
+            this.testStopToolStripMenuItem.Click += new System.EventHandler(this.testStopToolStripMenuItem_Click);
             // 
             // CodeEditorForm
             // 
@@ -1438,5 +1469,8 @@
         private System.Windows.Forms.ToolStripMenuItem closeFileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem serviceToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem commandToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem testToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem testPlayToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem testStopToolStripMenuItem;
     }
 }

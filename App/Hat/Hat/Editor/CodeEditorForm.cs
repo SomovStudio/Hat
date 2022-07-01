@@ -315,5 +315,50 @@ namespace Hat
         {
             createCmd();
         }
+
+        private void testPlay()
+        {
+            try
+            {
+                int index = tabControl1.SelectedIndex;
+                int count = files.Count;
+                if (index < 0 && count <= 0) return;
+
+               
+                Config.selectName = files[index][0].ToString(); // имя файла или папки
+                Config.selectValue = files[index][1].ToString(); // путь к файлу или к папке
+                Config.browserForm.toolStripStatusLabelProjectFolderFile.Text = Config.selectName;
+                Config.browserForm.PlayTest(Config.selectName);
+            }
+            catch (Exception ex)
+            {
+                Config.browserForm.consoleMsgError(ex.ToString());
+            }
+        }
+
+        private void testStop()
+        {
+            Config.browserForm.StopTest();
+        }
+
+        private void toolStripButton3_Click(object sender, EventArgs e)
+        {
+            testPlay();
+        }
+
+        private void toolStripButton4_Click(object sender, EventArgs e)
+        {
+            testStop();
+        }
+
+        private void testPlayToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            testPlay();
+        }
+
+        private void testStopToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            testStop();
+        }
     }
 }
