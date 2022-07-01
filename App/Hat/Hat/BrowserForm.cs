@@ -508,6 +508,26 @@ namespace Hat
             projectCreate();
         }
 
+        private void createProjectToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            projectCreate();
+        }
+
+        private void createProjectVSToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            projectVSCreate();
+        }
+
+        private void createProjectToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            projectCreate();
+        }
+
+        private void createProjectVSToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            projectVSCreate();
+        }
+
         /* Создать проект */
         private void projectCreate()
         {
@@ -589,11 +609,127 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsgError(ex.ToString());
+                consoleMsg(ex.ToString());
             }
         }
 
-        
+        private void projectVSCreate()
+        {
+            try
+            {
+                InputBoxForm inputBox = new InputBoxForm();
+                inputBox.label.Text = "Введите пожалуйста имя проекта (например HatTests)";
+                inputBox.ShowDialog();
+                string projectName = inputBox.textBox.Text;
+                if (projectName == "" || projectName == null || projectName.Contains(" ") == true) {
+                    consoleMsg("Вы ввели некорректное имя проекта");
+                    return;
+                }
+
+                if (folderBrowserDialogProjectCreate.ShowDialog() == DialogResult.OK)
+                {
+                    Config.projectPath = folderBrowserDialogProjectCreate.SelectedPath;
+                    toolStripStatusLabelProjectPath.Text = Config.projectPath;
+
+                    // создание папок
+                    string folderPropertiesVS = "/Properties/";
+                    string folderTestsVs = "/Tests/";
+                    string folderSupport = "/Tests/support/";
+                    string folderSupportPageObjects = "/Tests/support/PageObjects/";
+                    string folderSupportStepObjects = "/Tests/support/StepObjects/";
+                    string folderTests = "/Tests/tests/";
+
+                    if (!Directory.Exists(Config.projectPath + folderPropertiesVS)) Directory.CreateDirectory(Config.projectPath + folderPropertiesVS);
+                    if (!Directory.Exists(Config.projectPath + folderTestsVs)) Directory.CreateDirectory(Config.projectPath + folderTestsVs);
+                    if (!Directory.Exists(Config.projectPath + folderSupport)) Directory.CreateDirectory(Config.projectPath + folderSupport);
+                    if (!Directory.Exists(Config.projectPath + folderSupportPageObjects)) Directory.CreateDirectory(Config.projectPath + folderSupportPageObjects);
+                    if (!Directory.Exists(Config.projectPath + folderSupportStepObjects)) Directory.CreateDirectory(Config.projectPath + folderSupportStepObjects);
+                    if (!Directory.Exists(Config.projectPath + folderTests)) Directory.CreateDirectory(Config.projectPath + folderTests);
+
+                    if (Directory.Exists(Config.projectPath + folderPropertiesVS) &&
+                        Directory.Exists(Config.projectPath + folderTestsVs) &&
+                        Directory.Exists(Config.projectPath + folderSupport) &&
+                        Directory.Exists(Config.projectPath + folderSupportPageObjects) &&
+                        Directory.Exists(Config.projectPath + folderSupportStepObjects) &&
+                        Directory.Exists(Config.projectPath + folderTests))
+                    {
+                        consoleMsg("Создание проекта: все необходимые папки созданы");
+                    }
+                    else
+                    {
+                        consoleMsg("Создание проекта: процесс прерван (невозможно создать все необходимые папки)");
+                        return;
+                    }
+
+                    // создание файлов
+                    string fileGitIgnore = "/.gitignore";
+                    string fileSLN = "/" + projectName + ".sln";
+                    string fileCSPROJ = "/" + projectName + ".csproj";
+                    string fileAssemblyInfo = "/Properties/AssemblyInfo.cs";
+
+                    string fileProject = "/Tests/project.hat";
+                    string fileSupportHelper = "/Tests/support/Helper.cs";
+                    string fileSupportPageObjectsExample = "/Tests/support/PageObjects/ExamplePage.cs";
+                    string fileSupportStepObjectsExample = "/Tests/support/StepObjects/ExampleSteps.cs";
+                    string fileTestsExample1 = "/Tests/tests/ExampleTest1.cs";
+                    string fileTestsExample2 = "/Tests/tests/ExampleTest2.cs";
+
+                    WorkOnFiles writer = new WorkOnFiles();
+                    if (!File.Exists(Config.projectPath + fileGitIgnore)) writer.writeFile(Autotests.getContentGitIgnore(), Config.encoding, Config.projectPath + fileGitIgnore);
+                    if (!File.Exists(Config.projectPath + fileSLN)) writer.writeFile(Autotests.getContentFileSLN(projectName), Config.encoding, Config.projectPath + fileSLN);
+                    if (!File.Exists(Config.projectPath + fileCSPROJ)) writer.writeFile(Autotests.getContentFileCSPROJ(), Config.encoding, Config.projectPath + fileCSPROJ);
+                    if (!File.Exists(Config.projectPath + fileAssemblyInfo)) writer.writeFile(Autotests.getContentFileAssemblyInfo(), Config.encoding, Config.projectPath + fileAssemblyInfo);
+
+                    if (!File.Exists(Config.projectPath + fileProject)) writer.writeFile(Config.getConfig(), WorkOnFiles.UTF_8_BOM, Config.projectPath + fileProject);
+                    if (!File.Exists(Config.projectPath + fileSupportHelper)) writer.writeFile(Autotests.getContentFileHelper(), Config.encoding, Config.projectPath + fileSupportHelper);
+                    if (!File.Exists(Config.projectPath + fileSupportPageObjectsExample)) writer.writeFile(Autotests.getContentFileExamplePage(), Config.encoding, Config.projectPath + fileSupportPageObjectsExample);
+                    if (!File.Exists(Config.projectPath + fileSupportStepObjectsExample)) writer.writeFile(Autotests.getContentFileExampleSteps(), Config.encoding, Config.projectPath + fileSupportStepObjectsExample);
+                    if (!File.Exists(Config.projectPath + fileTestsExample1)) writer.writeFile(Autotests.getContentFileExampleTest1(), Config.encoding, Config.projectPath + fileTestsExample1);
+                    if (!File.Exists(Config.projectPath + fileTestsExample2)) writer.writeFile(Autotests.getContentFileExampleTest2(), Config.encoding, Config.projectPath + fileTestsExample2);
+
+                    if (File.Exists(Config.projectPath + fileGitIgnore) &&
+                        File.Exists(Config.projectPath + fileSLN) &&
+                        File.Exists(Config.projectPath + fileCSPROJ) &&
+                        File.Exists(Config.projectPath + fileAssemblyInfo) &&
+                        File.Exists(Config.projectPath + fileProject) &&
+                        File.Exists(Config.projectPath + fileSupportHelper) &&
+                        File.Exists(Config.projectPath + fileSupportPageObjectsExample) &&
+                        File.Exists(Config.projectPath + fileSupportStepObjectsExample) &&
+                        File.Exists(Config.projectPath + fileTestsExample1) &&
+                        File.Exists(Config.projectPath + fileTestsExample2))
+                    {
+                        consoleMsg("Создание проекта: все необходимые файлы созданы");
+                    }
+                    else
+                    {
+                        consoleMsg("Создание проекта: процесс прерван (невозможно создать все необходимые файлы)");
+                        return;
+                    }
+
+                    consoleMsg("Создание проекта: успешно завершено (версия проекта: " + Config.version + ")");
+
+                    Config.projectPath += "\\Tests";
+                    fileProject = "\\project.hat";
+
+                    // Строится дерево папок и файлов
+                    treeViewProject.Nodes.Clear();
+                    treeViewProject.Nodes.Add(Config.projectPath, getFolderName(Config.projectPath), 0, 0);
+                    openProjectFolder(Config.projectPath, treeViewProject.Nodes);
+
+                    // Чтение файла конфигурации
+                    Config.readConfigJson(Config.projectPath + fileProject);
+                    showLibs();
+                    changeEncoding();
+                    changeEditorTopMost();
+                }
+            }
+            catch (Exception ex)
+            {
+                consoleMsg(ex.ToString());
+            }
+        }
+
+
         private void открытьПроектToolStripMenuItem_Click(object sender, EventArgs e)
         {
             projectOpen();
@@ -1844,8 +1980,8 @@ namespace Hat
             editorForm.Show();
             */
 
-            CodeEditorForm codeeditor = new CodeEditorForm();
-            codeeditor.Show();
+            //CodeEditorForm codeeditor = new CodeEditorForm();
+            //codeeditor.Show();
         }
 
         private void toolStripButton18_Click(object sender, EventArgs e)
@@ -2065,5 +2201,7 @@ namespace Hat
         {
             cleadMessageStep();
         }
+
+        
     }
 }
