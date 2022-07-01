@@ -181,6 +181,11 @@ namespace Hat
             closeFile();
         }
 
+        private void closeFileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            closeFile();
+        }
+
         private void tabControl1_Selected(object sender, TabControlEventArgs e)
         {
             try
@@ -207,31 +212,51 @@ namespace Hat
                 string filename = files[index][0].ToString();
                 string path = files[index][1].ToString();
                 string content = (files[index][5] as TextEditorControl).Text;
+
                 WorkOnFiles write = new WorkOnFiles();
                 write.writeFile(content, toolStripStatusLabel2.Text, path);
+
                 (files[index][4] as TabPage).Text = filename;
                 files[index][2] = STATUS_SAVED;
+
                 parent.consoleMsg($"Файл {filename} - сохранён");
             }
             catch (Exception ex)
             {
                 parent.consoleMsg(ex.ToString());
             }
+        }
 
-            /*
-            if (this.Text == "") return;
+        private void saveFileAs()
+        {
             try
             {
-                WorkOnFiles write = new WorkOnFiles();
-                write.writeFile(textEditorControl1.Text, toolStripStatusLabel2.Text, toolStripStatusLabel5.Text);
-                Config.browserForm.consoleMsg($"Файл {this.Text} - сохранён");
-                toolStripStatusLabel6.Text = "";
+                int index = tabControl1.SelectedIndex;
+                int count = files.Count;
+                if (index < 0 && count <= 0) return;
+
+                if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+                {
+                    string filename = Config.browserForm.getFileName(saveFileDialog1.FileName);
+                    string path = saveFileDialog1.FileName;
+
+                    WorkOnFiles write = new WorkOnFiles();
+                    write.writeFile((files[index][5] as TextEditorControl).Text, toolStripStatusLabel2.Text, path);
+
+                    files[index][0] = filename;
+                    files[index][1] = path;
+                    (files[index][4] as TabPage).Text = filename;
+                    files[index][2] = STATUS_SAVED;
+
+                    toolStripStatusLabel5.Text = path;
+                    Config.browserForm.consoleMsg($"Файл {filename} - сохранён");
+                    Config.browserForm.projectUpdate();
+                }
             }
             catch (Exception ex)
             {
                 parent.consoleMsg(ex.ToString());
             }
-            */
         }
 
         private void fileSaveToolStripMenuItem_Click(object sender, EventArgs e)
@@ -241,7 +266,7 @@ namespace Hat
 
         private void fileSaveAsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            saveFileAs();
         }
 
         private void toolStripButton1_Click(object sender, EventArgs e)
@@ -251,7 +276,7 @@ namespace Hat
 
         private void toolStripButton2_Click(object sender, EventArgs e)
         {
-
+            saveFileAs();
         }
 
         
