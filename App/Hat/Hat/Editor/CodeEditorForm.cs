@@ -23,7 +23,7 @@ namespace Hat
         const string STATUS_NOT_SAVE = "status_not_saved";
 
         public BrowserForm parent;
-        List<object[]> files; // [имя файла | путь файла | статус | индекс | TabPage (вкладка) | TextEditorControl (редактор)]
+        List<object[]> files; // [ 0 - имя файла | 1 - путь файла | 2 - статус | 3 - индекс | 4 - TabPage (вкладка) | 5 - TextEditorControl (редактор)]
 
         private string[] handbook = new string[] {
 @"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
@@ -1818,6 +1818,32 @@ if (response.IsSuccessStatusCode)\par
             parent.СloseCodeEditor();
         }
 
+        private void CodeEditorForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            // проверка несохранённых файлов
+            try
+            {
+                int index = tabControl1.SelectedIndex;
+                int count = files.Count;
+                if (index > 0 && count > 0)
+                {
+                    for (int i = 0; i < count; i++)
+                    {
+                        if (files[index][2] == STATUS_NOT_SAVE)
+                        {
+                            e.Cancel = true;
+                            MessageBox.Show("Не все открытые файлы были сохранены", "Сообщение");
+                            return;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                parent.consoleMsgError(ex.ToString());
+            }
+        }
+
         public void OpenFile(string filename, string path)
         {
             try
@@ -2045,6 +2071,16 @@ if (response.IsSuccessStatusCode)\par
         private void toolStripButton2_Click(object sender, EventArgs e)
         {
             saveFileAs();
+        }
+
+        private void toolStripButton6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void filesSaveAllToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
 
         private void createCmd()
@@ -2353,5 +2389,7 @@ if (response.IsSuccessStatusCode)\par
         {
             setValueInCode();
         }
+
+        
     }
 }
