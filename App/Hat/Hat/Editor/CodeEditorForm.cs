@@ -1823,17 +1823,34 @@ if (response.IsSuccessStatusCode)\par
             // проверка несохранённых файлов
             try
             {
-                int index = tabControl1.SelectedIndex;
                 int count = files.Count;
-                if (index > 0 && count > 0)
+                if (count > 0)
                 {
                     for (int i = 0; i < count; i++)
                     {
-                        if (files[index][2] == STATUS_NOT_SAVE)
+                        if (files[i][2].ToString() == STATUS_NOT_SAVE)
                         {
                             e.Cancel = true;
-                            MessageBox.Show("Не все открытые файлы были сохранены", "Сообщение");
-                            return;
+                            break;
+                        }
+                    }
+
+                    if (e.Cancel == true)
+                    {
+                        DialogResult dialogResult = MessageBox.Show($"Не все открытые файлы сохранены. {Environment.NewLine}Вы хотите сохранить изменения в файлах?", "Вопрос", MessageBoxButtons.YesNoCancel);
+
+                        if (dialogResult == DialogResult.Cancel)
+                        {
+                            e.Cancel = true;
+                        }
+                        else if (dialogResult == DialogResult.No)
+                        {
+                            e.Cancel = false;
+                        }
+                        else if (dialogResult == DialogResult.Yes)
+                        {
+                            saveFileAll();
+                            e.Cancel = false;
                         }
                     }
                 }
@@ -1877,7 +1894,8 @@ if (response.IsSuccessStatusCode)\par
                 tab.Controls.Add(textEditorControl);
                 tabControl1.TabPages.Add(tab);
 
-                files.Add(new object[] { filename, path, STATUS_SAVED, index, tab, textEditorControl }); // [имя файла | путь файла | статус | индекс | TabPage (вкладка) | TextEditorControl (редактор)]
+                // [ 0 - имя файла | 1 - путь файла | 2 - статус | 3 - индекс | 4 - TabPage (вкладка) | 5 - TextEditorControl (редактор)]
+                files.Add(new object[] { filename, path, STATUS_SAVED, index, tab, textEditorControl });
 
                 toolStripStatusLabel5.Text = path;
             }
@@ -2053,6 +2071,40 @@ if (response.IsSuccessStatusCode)\par
             }
         }
 
+        private void saveFileAll()
+        {
+            try
+            {
+                int count = files.Count;
+                if (count <= 0) return;
+
+                for (int i = 0; i < count; i++)
+                {
+                    // [ 0 - имя файла | 1 - путь файла | 2 - статус | 3 - индекс | 4 - TabPage (вкладка) | 5 - TextEditorControl (редактор)]
+                    if (files[i][2].ToString() == STATUS_NOT_SAVE)
+                    {
+                        string filename = files[i][0].ToString();
+                        string path = files[i][1].ToString();
+                        string content = (files[i][5] as TextEditorControl).Text;
+
+                        WorkOnFiles write = new WorkOnFiles();
+                        write.writeFile(content, toolStripStatusLabel2.Text, path);
+
+                        (files[i][4] as TabPage).Text = filename;
+                        files[i][2] = STATUS_SAVED;
+
+                        parent.consoleMsg($"Файл {filename} - сохранён");
+                    }
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                parent.consoleMsgError(ex.ToString());
+            }
+        }
+
         private void fileSaveToolStripMenuItem_Click(object sender, EventArgs e)
         {
             saveFile();
@@ -2075,12 +2127,12 @@ if (response.IsSuccessStatusCode)\par
 
         private void toolStripButton6_Click(object sender, EventArgs e)
         {
-
+            saveFileAll();
         }
 
         private void filesSaveAllToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            saveFileAll();
         }
 
         private void createCmd()

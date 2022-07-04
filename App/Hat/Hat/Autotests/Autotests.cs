@@ -68,7 +68,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                Config.browserForm.consoleMsgErrorReport(ex.ToString());
+                Config.browserForm.consoleMsgErrorReport(ex.Message);
             }
         }
 
