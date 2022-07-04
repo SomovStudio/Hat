@@ -1267,6 +1267,25 @@ namespace Hat
             }
         }
 
+        private void openTreeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (Config.projectPath != "(не открыт)")
+                {
+                    treeViewProject.ExpandAll();
+                }
+                else
+                {
+                    consoleMsg("Проект не открыт");
+                }
+            }
+            catch (Exception ex)
+            {
+                consoleMsgError(ex.ToString());
+            }
+        }
+
         private void toolStripButton7_Click(object sender, EventArgs e)
         {
             updateProjectTree();

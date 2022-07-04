@@ -212,6 +212,7 @@
             this.folderBrowserDialogProjectCreate = new System.Windows.Forms.FolderBrowserDialog();
             this.openFileProjectDialog = new System.Windows.Forms.OpenFileDialog();
             this.saveFileLogDialog = new System.Windows.Forms.SaveFileDialog();
+            this.openTreeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -1107,7 +1108,8 @@
             this.toolStripMenuItem1,
             this.окноРедактораToolStripMenuItem,
             this.toolStripSeparator19,
-            this.debugJavaScriptToolStripMenuItem1});
+            this.debugJavaScriptToolStripMenuItem1,
+            this.openTreeToolStripMenuItem});
             this.toolStripDropDownButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripDropDownButton1.Image")));
             this.toolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripDropDownButton1.Name = "toolStripDropDownButton1";
@@ -1961,6 +1963,13 @@
             // 
             this.saveFileLogDialog.Filter = "*.txt|*.txt";
             // 
+            // openTreeToolStripMenuItem
+            // 
+            this.openTreeToolStripMenuItem.Name = "openTreeToolStripMenuItem";
+            this.openTreeToolStripMenuItem.Size = new System.Drawing.Size(246, 22);
+            this.openTreeToolStripMenuItem.Text = "Развернуть дерево папок";
+            this.openTreeToolStripMenuItem.Click += new System.EventHandler(this.openTreeToolStripMenuItem_Click);
+            // 
             // BrowserForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2225,6 +2234,7 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem7;
         private System.Windows.Forms.ToolStripMenuItem createProjectToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem createProjectVSToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem openTreeToolStripMenuItem;
     }
 }
 
