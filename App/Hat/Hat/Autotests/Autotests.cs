@@ -409,6 +409,60 @@ namespace Hat
             return content;
         }
 
+        public static string getContentFileNewPage(string filename)
+        {
+            string content = "";
+            content += "using System;" + Environment.NewLine;
+            content += "using HatFramework;" + Environment.NewLine;
+            content += "" + Environment.NewLine;
+            content += "namespace Hat" + Environment.NewLine;
+            content += "{" + Environment.NewLine;
+            content += "    public static class " + filename + Environment.NewLine;
+            content += "    {" + Environment.NewLine;
+            content += "        public static string URL = \"https://test.com/\";" + Environment.NewLine;
+            content += "        public static string ButtonLogin = \"buttonLogin\";" + Environment.NewLine;
+            content += "    }" + Environment.NewLine;
+            content += "}" + Environment.NewLine;
+            return content;
+        }
+
+        public static string getContentFileNewStep(string filename)
+        {
+            string content = "";
+            content += "using System;" + Environment.NewLine;
+            content += "using System.Collections.Generic;" + Environment.NewLine;
+            content += "using System.ComponentModel;" + Environment.NewLine;
+            content += "using System.Windows.Forms;" + Environment.NewLine;
+            content += "using System.Threading;" + Environment.NewLine;
+            content += "using System.Threading.Tasks;" + Environment.NewLine;
+            content += "using System.IO;" + Environment.NewLine;
+            content += "using System.Data;" + Environment.NewLine;
+            content += "using System.Drawing;" + Environment.NewLine;
+            content += "using System.Linq;" + Environment.NewLine;
+            content += "using System.Text;" + Environment.NewLine;
+            content += "using System.Text.RegularExpressions;" + Environment.NewLine;
+            content += "using System.Net;" + Environment.NewLine;
+            content += "using System.Net.Http;" + Environment.NewLine;
+            content += "using System.Net.Http.Headers;" + Environment.NewLine;
+            content += "using System.Reflection;" + Environment.NewLine;
+            content += "using Newtonsoft.Json;" + Environment.NewLine;
+            content += "using HatFramework;" + Environment.NewLine;
+            content += "" + Environment.NewLine;
+            content += "namespace Hat" + Environment.NewLine;
+            content += "{" + Environment.NewLine;
+            content += "    public class " + filename + " : Tester" + Environment.NewLine;
+            content += "    {" + Environment.NewLine;
+            content += "        public " + filename + "(Form browserWindow): base(browserWindow) {}" + Environment.NewLine;
+            content += "" + Environment.NewLine;
+            content += "        public async Task Test()" + Environment.NewLine;
+            content += "        {" + Environment.NewLine;
+            content += "            await this.AssertTrueAsync(true);" + Environment.NewLine;
+            content += "        }" + Environment.NewLine;
+            content += "    }" + Environment.NewLine;
+            content += "}" + Environment.NewLine;
+            return content;
+        }
+
         public static string getContentGitIgnore()
         {
             string content = "";

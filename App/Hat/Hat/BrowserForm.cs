@@ -1561,7 +1561,7 @@ namespace Hat
             else consoleMsg("Проект не открыт");
         }
 
-        private void createFile()
+        private void createFile(string type)
         {
             try
             {
@@ -1592,7 +1592,10 @@ namespace Hat
                     if (!File.Exists(path + filename + ".cs"))
                     {
                         WorkOnFiles writer = new WorkOnFiles();
-                        writer.writeFile(Autotests.getContentFileNewTest(filename), Config.encoding, path + filename + ".cs");
+                        if (type == "autotest") writer.writeFile(Autotests.getContentFileNewTest(filename), Config.encoding, path + filename + ".cs");
+                        if (type == "page_objects") writer.writeFile(Autotests.getContentFileNewPage(filename), Config.encoding, path + filename + ".cs");
+                        if (type == "step_objects") writer.writeFile(Autotests.getContentFileNewStep(filename), Config.encoding, path + filename + ".cs");
+
                         if (File.Exists(path + filename + ".cs"))
                         {
                             consoleMsg("Новый файл теста " + filename + ".cs - успешно создан");
@@ -1619,7 +1622,43 @@ namespace Hat
 
         private void создатьФайлCToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (Config.projectPath != "(не открыт)") createFile();
+            if (Config.projectPath != "(не открыт)") createFile("autotest");
+            else consoleMsg("Проект не открыт");
+        }
+
+        private void createFileAutotestToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (Config.projectPath != "(не открыт)") createFile("autotest");
+            else consoleMsg("Проект не открыт");
+        }
+
+        private void createFilePageObjectsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (Config.projectPath != "(не открыт)") createFile("page_objects");
+            else consoleMsg("Проект не открыт");
+        }
+
+        private void createFileStepObjectToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (Config.projectPath != "(не открыт)") createFile("step_objects");
+            else consoleMsg("Проект не открыт");
+        }
+
+        private void toolStripMenuItem12_Click(object sender, EventArgs e)
+        {
+            if (Config.projectPath != "(не открыт)") createFile("autotest");
+            else consoleMsg("Проект не открыт");
+        }
+
+        private void toolStripMenuItem13_Click(object sender, EventArgs e)
+        {
+            if (Config.projectPath != "(не открыт)") createFile("page_objects");
+            else consoleMsg("Проект не открыт");
+        }
+
+        private void toolStripMenuItem14_Click(object sender, EventArgs e)
+        {
+            if (Config.projectPath != "(не открыт)") createFile("step_objects");
             else consoleMsg("Проект не открыт");
         }
 
@@ -1842,7 +1881,7 @@ namespace Hat
 
         private void toolStripMenuItem6_Click(object sender, EventArgs e)
         {
-            if (Config.projectPath != "(не открыт)") createFile();
+            if (Config.projectPath != "(не открыт)") createFile("autotest");
             else consoleMsg("Проект не открыт");
         }
 
@@ -1863,6 +1902,7 @@ namespace Hat
             if (Config.projectPath != "(не открыт)") deleteFolder();
             else consoleMsg("Проект не открыт");
         }
+
 
         private void подробнаяИнформацияОШагеToolStripMenuItem_Click(object sender, EventArgs e)
         {
