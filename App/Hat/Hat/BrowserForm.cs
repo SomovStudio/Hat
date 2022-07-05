@@ -1244,9 +1244,13 @@ namespace Hat
                 if (Config.projectPath != "(не открыт)")
                 {
                     // Строится дерево папок и файлов
+                    List<string> saveExtensions = TreeViewExtensions.GetExpansionState(treeViewProject.Nodes);
+
                     treeViewProject.Nodes.Clear();
                     treeViewProject.Nodes.Add(Config.projectPath, getFolderName(Config.projectPath), 0, 0);
                     openProjectFolder(Config.projectPath, treeViewProject.Nodes);
+
+                    TreeViewExtensions.SetExpansionState(treeViewProject.Nodes, saveExtensions);
 
                     // Чтение файла конфигурации
                     Config.readConfigJson(Config.projectPath + "/project.hat");

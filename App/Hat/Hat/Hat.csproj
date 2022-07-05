@@ -137,6 +137,7 @@
     <Compile Include="StepTestForm.designer.cs">
       <DependentUpon>StepTestForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="TreeViewExtensions.cs" />
     <EmbeddedResource Include="AboutForm.resx">
       <DependentUpon>AboutForm.cs</DependentUpon>
     </EmbeddedResource>
