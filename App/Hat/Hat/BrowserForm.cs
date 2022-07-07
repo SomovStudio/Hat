@@ -800,12 +800,14 @@ namespace Hat
         {
             try
             {
+                List<string> saveExtensions = TreeViewExtensions.GetExpansionState(treeViewProject.Nodes);
                 treeViewProject.Nodes.Clear();
                 if (Config.projectPath != "(не открыт)")
                 {
                     treeViewProject.Nodes.Add(Config.projectPath, getFolderName(Config.projectPath), 0, 0);
                     openProjectFolder(Config.projectPath, treeViewProject.Nodes);
                     consoleMsg("Данные в проводнике - обновлены");
+                    TreeViewExtensions.SetExpansionState(treeViewProject.Nodes, saveExtensions);
                 }
             }
             catch (Exception ex)
