@@ -2046,6 +2046,8 @@ namespace Hat
 
         private void toolStripButton13_Click(object sender, EventArgs e)
         {
+            WorkOnEmail.MessageSend();
+            
             /*
             cleadMessageStep();
             Report.Init();

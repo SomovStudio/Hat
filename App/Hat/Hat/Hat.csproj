@@ -104,6 +104,7 @@
       <DependentUpon>BrowserForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Config\Config.cs" />
+    <Compile Include="Utilits\WorkOnEmail.cs" />
     <Compile Include="Utilits\WorkOnFiles.cs" />
     <Compile Include="Editor\CodeEditorForm.cs">
       <SubType>Form</SubType>
