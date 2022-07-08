@@ -62,8 +62,8 @@ namespace Hat
                     showLibs();
                     changeEncoding();
                     changeEditorTopMost();
-                    systemConsoleMsg($"Проект успешно открыт (версия проекта: {Config.version})", default, ConsoleColor.DarkGray, ConsoleColor.White, true);
-                    consoleMsg($"Проект успешно открыт (версия проекта: {Config.version})");
+                    systemConsoleMsg($"Проект открыт (версия проекта: {Config.version})", default, ConsoleColor.DarkGray, ConsoleColor.White, true);
+                    consoleMsg($"Проект открыт (версия проекта: {Config.version})");
                     toolStripStatusLabelProjectFolderFile.Text = Config.selectName;
                     PlayTest(Config.selectName);
                 }
@@ -795,9 +795,10 @@ namespace Hat
                     showLibs();
 ;                   changeEncoding();
                     changeEditorTopMost();
+                    showDataMail();
 
-                    consoleMsg("Проект успешно открыт (версия проекта: " + Config.version + ")");
-                    systemConsoleMsg($"Проект успешно открыт (версия проекта: {Config.version})", default, ConsoleColor.DarkGray, ConsoleColor.White, true);
+                    consoleMsg("Проект открыт (версия проекта: " + Config.version + ")");
+                    systemConsoleMsg($"Проект открыт (версия проекта: {Config.version})", default, ConsoleColor.DarkGray, ConsoleColor.White, true);
                     if (Config.version != Config.currentBrowserVersion)
                     {
                         consoleMsg($"Предупреждение: версия проекта {Config.version} не совпадает с версией браузера {Config.currentBrowserVersion}");
@@ -901,6 +902,27 @@ namespace Hat
                 editorTopMostToolStripMenuItem.Checked = Config.editorTopMost;
                 toolStripMenuItemEditorTopMost.Checked = Config.editorTopMost;
                 consoleMsg("Способ отображение редактора - выбран");
+            }
+            catch (Exception ex)
+            {
+                consoleMsgError(ex.ToString());
+            }
+        }
+
+        /* Настройки почты (проект) */
+        public void showDataMail()
+        {
+            try
+            {
+                fromMailTextBox.Text = Config.dataMail[0];
+                fromLoginTextBox.Text = Config.dataMail[1];
+                fromPassTextBox.Text = Config.dataMail[2];
+                smtpServerTextBox.Text = Config.dataMail[4];
+                portSmtpServerTextBox.Text = Config.dataMail[5];
+                if (Config.dataMail[6] == "true") sslCheckBox.Checked = true;
+                else sslCheckBox.Checked = false;
+                toMailsTextBox.Text = Config.dataMail[3];
+                consoleMsg("Настройки почты - загружены");
             }
             catch (Exception ex)
             {
@@ -1745,7 +1767,7 @@ namespace Hat
                     Config.libraries = textBoxLibs.Text.Split(delimiter, StringSplitOptions.None);
                     Config.saveConfigJson(Config.projectPath + "/project.hat");
                     showLibs();
-                    consoleMsg("Скисок библиотек успешно сохранён в файл project.hat");
+                    consoleMsg("Скисок библиотек сохранён в файл project.hat");
                 }
             }
             catch (Exception ex)
@@ -2300,6 +2322,29 @@ namespace Hat
             cleadMessageStep();
         }
 
-        
+        private void toolStripButton22_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (Config.projectPath != "(не открыт)")
+                {
+                    Config.dataMail[0] = fromMailTextBox.Text;
+                    Config.dataMail[1] = fromLoginTextBox.Text;
+                    Config.dataMail[2] = fromPassTextBox.Text;
+                    Config.dataMail[4] = smtpServerTextBox.Text;
+                    Config.dataMail[5] = portSmtpServerTextBox.Text;
+                    if (sslCheckBox.Checked == true) Config.dataMail[6] = "true";
+                    else Config.dataMail[6] = "false";
+                    Config.dataMail[3] = toMailsTextBox.Text;
+                    Config.saveConfigJson(Config.projectPath + "/project.hat");
+                    showDataMail();
+                    consoleMsg("Настройки почты сохранены в файл project.hat");
+                }
+            }
+            catch (Exception ex)
+            {
+                consoleMsgError(ex.ToString());
+            }
+        }
     }
 }
