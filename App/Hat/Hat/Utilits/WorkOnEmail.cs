@@ -21,9 +21,9 @@ namespace Hat
             try
             {
                 // отправитель - устанавливаем адрес и отображаемое в письме имя
-                MailAddress from = new MailAddress("sep@zionec.ru", "SEP");
+                MailAddress from = new MailAddress("test@test.ru", "TESTER");
                 // кому отправляем
-                MailAddress to = new MailAddress("raven-84@mail.ru");
+                MailAddress to = new MailAddress("test2@test.ru");
                 // создаем объект сообщения
                 MailMessage m = new MailMessage(from, to);
                 // тема письма
@@ -35,7 +35,7 @@ namespace Hat
                 // адрес smtp-сервера и порт, с которого будем отправлять письмо
                 SmtpClient smtp = new SmtpClient("smtp.yandex.ru", 465);
                 // логин и пароль
-                smtp.Credentials = new NetworkCredential("sep@zionec.ru", "800jNT6zwMQrfl");
+                smtp.Credentials = new NetworkCredential("test@test.ru", "123456");
                 smtp.EnableSsl = true;
                 //ОШИБКА smtp.Send(m);
                 Console.Read();
@@ -60,11 +60,11 @@ namespace Hat
                 SmtpClient client =
                 new SmtpClient("smtp.yandex.ru", 465) // сервер,порт
                 {
-                    Credentials = new NetworkCredential("sep@zionec.ru", "800jNT6zwMQrfl"),
+                    Credentials = new NetworkCredential("test@test.ru", "123456"),
                     EnableSsl = true // обязательно!
                 };
-                message.From = new MailAddress("sep@zionec.ru"); // от кого
-                message.To.Add(new MailAddress("raven-84@mail.ru")); // кому
+                message.From = new MailAddress("test@test.ru"); // от кого
+                message.To.Add(new MailAddress("test2@test.ru")); // кому
                 message.Subject = "Тестовое письмо из браузера Hat";
                 message.SubjectEncoding = Encoding.UTF8;
                 message.Body = "Тестовое сообщение";
