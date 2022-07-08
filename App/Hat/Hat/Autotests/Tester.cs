@@ -512,6 +512,70 @@ namespace HatFrameworkDev
             return events;
         }
 
+        public async Task BrowserGoBackAsync(int sec)
+        {
+            statusPageLoad = false;
+            int step = SendMessage($"BrowserGoBackAsync()", PROCESS, "Выполняется действие браузера - назад", IMAGE_STATUS_PROCESS);
+            if (DefineTestStop(step) == true) return;
+
+            try
+            {
+                BrowserView.GoBack();
+
+                for (int i = 0; i < sec; i++)
+                {
+                    await Task.Delay(1000);
+                    if (statusPageLoad == true) break;
+                    if (DefineTestStop(step) == true) return;
+                }
+
+                if (statusPageLoad == true) EditMessage(step, null, PASSED, "Выполнено действие браузера - назад", IMAGE_STATUS_PASSED);
+                else
+                {
+                    EditMessage(step, null, FAILED, "Не выполнено действие браузера - назад (cтраница не загружена)", IMAGE_STATUS_FAILED);
+                    TestStopAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
+                TestStopAsync();
+                ConsoleMsgError(ex.ToString());
+            }
+        }
+
+        public async Task BrowserGoForwardAsync(int sec)
+        {
+            statusPageLoad = false;
+            int step = SendMessage($"BrowserGoForwardAsync()", PROCESS, "Выполняется действие браузера - вперед", IMAGE_STATUS_PROCESS);
+            if (DefineTestStop(step) == true) return;
+
+            try
+            {
+                BrowserView.GoForward();
+
+                for (int i = 0; i < sec; i++)
+                {
+                    await Task.Delay(1000);
+                    if (statusPageLoad == true) break;
+                    if (DefineTestStop(step) == true) return;
+                }
+
+                if (statusPageLoad == true) EditMessage(step, null, PASSED, "Выполнено действие браузера - вперед", IMAGE_STATUS_PASSED);
+                else
+                {
+                    EditMessage(step, null, FAILED, "Не выполнено действие браузера - вперед (cтраница не загружена)", IMAGE_STATUS_FAILED);
+                    TestStopAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
+                TestStopAsync();
+                ConsoleMsgError(ex.ToString());
+            }
+        }
+
         public async Task<string> ExecuteJavaScriptAsync(string script)
         {
             string result = null;

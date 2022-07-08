@@ -72,8 +72,9 @@ namespace Hat
             }
         }
 
-        public static async Task devTestStutsAsync()
+        public static async Task devTestAsync()
         {
+            /*
             HatFrameworkDev.Tester tester = new HatFrameworkDev.Tester(Config.browserForm);
             await tester.TestBeginAsync();
             await tester.GoToUrlAsync("https://somovstudio.github.io/test.html", 5);
@@ -82,8 +83,8 @@ namespace Hat
             await tester.AssertTrueAsync(false);
             await tester.TestEndAsync();
             await tester.BrowserCloseAsync();
+            */
 
-            
         }
 
         public static void readNodes(TreeNodeCollection _nodes)

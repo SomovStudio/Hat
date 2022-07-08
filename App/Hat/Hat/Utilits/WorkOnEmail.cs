@@ -6,12 +6,17 @@ using System.Threading.Tasks;
 using System.Net.Mail;
 using System.Net;
 using System.IO;
+using System.ComponentModel;
+using System.Web;
 
 namespace Hat
 {
     public class WorkOnEmail
     {
-        public static void SendMail()
+        /* Работа с электронной почтой Отправка почты. SmtpClient
+         * Источник: https://metanit.com/sharp/net/8.1.php
+         */
+        public static void SendMail_BAD()
         {
             try
             {
@@ -40,15 +45,13 @@ namespace Hat
             {
                 Config.browserForm.consoleMsgError(ex.ToString());
             }
-            
-            
         }
 
         /* Не отправляется письмо через smtp mail - время ожидания операции истекло
-         * https://ru.stackoverflow.com/questions/652352/%D0%9D%D0%B5-%D0%BE%D1%82%D0%BF%D1%80%D0%B0%D0%B2%D0%BB%D1%8F%D0%B5%D1%82%D1%81%D1%8F-%D0%BF%D0%B8%D1%81%D1%8C%D0%BC%D0%BE-%D1%87%D0%B5%D1%80%D0%B5%D0%B7-smtp-mail-%D0%B2%D1%80%D0%B5%D0%BC%D1%8F-%D0%BE%D0%B6%D0%B8%D0%B4%D0%B0%D0%BD%D0%B8%D1%8F-%D0%BE%D0%BF%D0%B5%D1%80%D0%B0%D1%86%D0%B8%D0%B8-%D0%B8%D1%81%D1%82%D0%B5%D0%BA%D0%BB%D0%BE
+         * Источник: https://ru.stackoverflow.com/questions/652352/%D0%9D%D0%B5-%D0%BE%D1%82%D0%BF%D1%80%D0%B0%D0%B2%D0%BB%D1%8F%D0%B5%D1%82%D1%81%D1%8F-%D0%BF%D0%B8%D1%81%D1%8C%D0%BC%D0%BE-%D1%87%D0%B5%D1%80%D0%B5%D0%B7-smtp-mail-%D0%B2%D1%80%D0%B5%D0%BC%D1%8F-%D0%BE%D0%B6%D0%B8%D0%B4%D0%B0%D0%BD%D0%B8%D1%8F-%D0%BE%D0%BF%D0%B5%D1%80%D0%B0%D1%86%D0%B8%D0%B8-%D0%B8%D1%81%D1%82%D0%B5%D0%BA%D0%BB%D0%BE
          */
 
-        public static void MessageSend()
+        public static void MessageSend_BAD()
         {
             try
             {
@@ -77,6 +80,24 @@ namespace Hat
                 Config.browserForm.consoleMsgError(ex.ToString());
             }
         }
+
+        /* send email using implicit ssl
+         * Источник: 
+         */
+        
+        public static void SendEmail()
+        {
+            try
+            {
+                
+            }
+            catch (Exception ex)
+            {
+                Config.browserForm.consoleMsgError(ex.ToString());
+            }
+        }
+
+        
 
     }
 }
