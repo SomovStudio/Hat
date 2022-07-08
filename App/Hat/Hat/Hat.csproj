@@ -104,7 +104,8 @@
       <DependentUpon>BrowserForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Config\Config.cs" />
-    <Compile Include="Config\WorkOnFiles.cs" />
+    <Compile Include="Utilits\WorkOnEmail.cs" />
+    <Compile Include="Utilits\WorkOnFiles.cs" />
     <Compile Include="Editor\CodeEditorForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -137,6 +138,7 @@
     <Compile Include="StepTestForm.designer.cs">
       <DependentUpon>StepTestForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Utilits\TreeViewExtensions.cs" />
     <EmbeddedResource Include="AboutForm.resx">
       <DependentUpon>AboutForm.cs</DependentUpon>
     </EmbeddedResource>

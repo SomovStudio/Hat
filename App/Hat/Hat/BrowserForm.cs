@@ -217,11 +217,24 @@ namespace Hat
             }
         }
 
-        public void consoleMsgError(string message)
+        public void consoleMsgErrorReport(string message)
         {
             Report.AddStep(Report.ERROR, "", message);
             Report.SaveReport(testSuccess);
 
+            richTextBoxConsole.AppendText("[" + DateTime.Now.ToString() + "] ОШИБКА: " + message + Environment.NewLine);
+            richTextBoxConsole.ScrollToCaret();
+            systemConsoleMsg("- - - - - - - - - - - - - - - - - - - - - - - - - - - -", default, default, default, true);
+            systemConsoleMsg("Произошла ошибка:", default, ConsoleColor.Black, ConsoleColor.Red, true);
+            systemConsoleMsg(message, default, default, default, true);
+            systemConsoleMsg("- - - - - - - - - - - - - - - - - - - - - - - - - - - -", default, default, default, true);
+            systemConsoleMsg("", default, default, default, true);
+            resultAutotest(false);
+            if (Config.commandLineMode == true) Close();
+        }
+
+        public void consoleMsgError(string message)
+        {
             richTextBoxConsole.AppendText("[" + DateTime.Now.ToString() + "] ОШИБКА: " + message + Environment.NewLine);
             richTextBoxConsole.ScrollToCaret();
             systemConsoleMsg("- - - - - - - - - - - - - - - - - - - - - - - - - - - -", default, default, default, true);
@@ -468,7 +481,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsg(ex.Message);
+                consoleMsgError(ex.Message);
             }
         }
 
@@ -609,7 +622,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsg(ex.ToString());
+                consoleMsgError(ex.ToString());
             }
         }
 
@@ -725,7 +738,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsg(ex.ToString());
+                consoleMsgError(ex.ToString());
             }
         }
 
@@ -787,12 +800,14 @@ namespace Hat
         {
             try
             {
+                List<string> saveExtensions = TreeViewExtensions.GetExpansionState(treeViewProject.Nodes);
                 treeViewProject.Nodes.Clear();
                 if (Config.projectPath != "(не открыт)")
                 {
                     treeViewProject.Nodes.Add(Config.projectPath, getFolderName(Config.projectPath), 0, 0);
                     openProjectFolder(Config.projectPath, treeViewProject.Nodes);
                     consoleMsg("Данные в проводнике - обновлены");
+                    TreeViewExtensions.SetExpansionState(treeViewProject.Nodes, saveExtensions);
                 }
             }
             catch (Exception ex)
@@ -1231,9 +1246,13 @@ namespace Hat
                 if (Config.projectPath != "(не открыт)")
                 {
                     // Строится дерево папок и файлов
+                    List<string> saveExtensions = TreeViewExtensions.GetExpansionState(treeViewProject.Nodes);
+
                     treeViewProject.Nodes.Clear();
                     treeViewProject.Nodes.Add(Config.projectPath, getFolderName(Config.projectPath), 0, 0);
                     openProjectFolder(Config.projectPath, treeViewProject.Nodes);
+
+                    TreeViewExtensions.SetExpansionState(treeViewProject.Nodes, saveExtensions);
 
                     // Чтение файла конфигурации
                     Config.readConfigJson(Config.projectPath + "/project.hat");
@@ -1250,7 +1269,26 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsg("Ошибка: " + ex.Message);
+                consoleMsgError(ex.ToString());
+            }
+        }
+
+        private void openTreeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (Config.projectPath != "(не открыт)")
+                {
+                    treeViewProject.ExpandAll();
+                }
+                else
+                {
+                    consoleMsg("Проект не открыт");
+                }
+            }
+            catch (Exception ex)
+            {
+                consoleMsgError(ex.ToString());
             }
         }
 
@@ -1529,7 +1567,7 @@ namespace Hat
             else consoleMsg("Проект не открыт");
         }
 
-        private void createFile()
+        private void createFile(string type)
         {
             try
             {
@@ -1560,7 +1598,10 @@ namespace Hat
                     if (!File.Exists(path + filename + ".cs"))
                     {
                         WorkOnFiles writer = new WorkOnFiles();
-                        writer.writeFile(Autotests.getContentFileNewTest(filename), Config.encoding, path + filename + ".cs");
+                        if (type == "autotest") writer.writeFile(Autotests.getContentFileNewTest(filename), Config.encoding, path + filename + ".cs");
+                        if (type == "page_objects") writer.writeFile(Autotests.getContentFileNewPage(filename), Config.encoding, path + filename + ".cs");
+                        if (type == "step_objects") writer.writeFile(Autotests.getContentFileNewStep(filename), Config.encoding, path + filename + ".cs");
+
                         if (File.Exists(path + filename + ".cs"))
                         {
                             consoleMsg("Новый файл теста " + filename + ".cs - успешно создан");
@@ -1587,7 +1628,43 @@ namespace Hat
 
         private void создатьФайлCToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (Config.projectPath != "(не открыт)") createFile();
+            if (Config.projectPath != "(не открыт)") createFile("autotest");
+            else consoleMsg("Проект не открыт");
+        }
+
+        private void createFileAutotestToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (Config.projectPath != "(не открыт)") createFile("autotest");
+            else consoleMsg("Проект не открыт");
+        }
+
+        private void createFilePageObjectsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (Config.projectPath != "(не открыт)") createFile("page_objects");
+            else consoleMsg("Проект не открыт");
+        }
+
+        private void createFileStepObjectToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (Config.projectPath != "(не открыт)") createFile("step_objects");
+            else consoleMsg("Проект не открыт");
+        }
+
+        private void toolStripMenuItem12_Click(object sender, EventArgs e)
+        {
+            if (Config.projectPath != "(не открыт)") createFile("autotest");
+            else consoleMsg("Проект не открыт");
+        }
+
+        private void toolStripMenuItem13_Click(object sender, EventArgs e)
+        {
+            if (Config.projectPath != "(не открыт)") createFile("page_objects");
+            else consoleMsg("Проект не открыт");
+        }
+
+        private void toolStripMenuItem14_Click(object sender, EventArgs e)
+        {
+            if (Config.projectPath != "(не открыт)") createFile("step_objects");
             else consoleMsg("Проект не открыт");
         }
 
@@ -1810,7 +1887,7 @@ namespace Hat
 
         private void toolStripMenuItem6_Click(object sender, EventArgs e)
         {
-            if (Config.projectPath != "(не открыт)") createFile();
+            if (Config.projectPath != "(не открыт)") createFile("autotest");
             else consoleMsg("Проект не открыт");
         }
 
@@ -1831,6 +1908,7 @@ namespace Hat
             if (Config.projectPath != "(не открыт)") deleteFolder();
             else consoleMsg("Проект не открыт");
         }
+
 
         private void подробнаяИнформацияОШагеToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -1968,6 +2046,10 @@ namespace Hat
 
         private void toolStripButton13_Click(object sender, EventArgs e)
         {
+            Autotests.devTestAsync();
+
+            //WorkOnEmail.MessageSend();
+
             /*
             cleadMessageStep();
             Report.Init();

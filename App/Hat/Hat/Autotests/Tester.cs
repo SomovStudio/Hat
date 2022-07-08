@@ -44,7 +44,7 @@ namespace HatFrameworkDev
         
 
         private MethodInfo browserConsoleMsg;       // функция: consoleMsg - вывод сообщения в консоль приложения
-        private MethodInfo browserConsoleMsgError;  // функция: consoleMsgError - вывод сообщения об ошибке в консоль приложения
+        private MethodInfo browserConsoleMsgError;  // функция: consoleMsgErrorReport - вывод сообщения об ошибке в консоль приложения
         private MethodInfo browserSystemConsoleMsg; // функция: systemConsoleMsg - вывод сообщения в системную консоль
         private MethodInfo browserCleadMessageStep; // функция: cleadMessageStep - очистка всех шагов в таблице "тест"
         private MethodInfo browserSendMessageStep;  // функция: sendMessageStep - вывести сообщение в таблицу "тест"
@@ -69,7 +69,7 @@ namespace HatFrameworkDev
             {
                 BrowserWindow = browserForm;
                 browserConsoleMsg = BrowserWindow.GetType().GetMethod("consoleMsg");
-                browserConsoleMsgError = BrowserWindow.GetType().GetMethod("consoleMsgError");
+                browserConsoleMsgError = BrowserWindow.GetType().GetMethod("consoleMsgErrorReport");
                 browserSystemConsoleMsg = BrowserWindow.GetType().GetMethod("systemConsoleMsg");
                 browserCleadMessageStep = BrowserWindow.GetType().GetMethod("cleadMessageStep");
                 browserSendMessageStep = BrowserWindow.GetType().GetMethod("sendMessageStep");
@@ -510,6 +510,93 @@ namespace HatFrameworkDev
                 ConsoleMsgError(ex.ToString());
             }
             return events;
+        }
+
+        public async Task BrowserGoBackAsync(int sec)
+        {
+            statusPageLoad = false;
+            int step = SendMessage($"BrowserGoBackAsync()", PROCESS, "Выполняется действие браузера - назад", IMAGE_STATUS_PROCESS);
+            if (DefineTestStop(step) == true) return;
+
+            try
+            {
+                BrowserView.GoBack();
+
+                for (int i = 0; i < sec; i++)
+                {
+                    await Task.Delay(1000);
+                    if (statusPageLoad == true) break;
+                    if (DefineTestStop(step) == true) return;
+                }
+
+                if (statusPageLoad == true) EditMessage(step, null, PASSED, "Выполнено действие браузера - назад", IMAGE_STATUS_PASSED);
+                else
+                {
+                    EditMessage(step, null, FAILED, "Не выполнено действие браузера - назад (cтраница не загружена)", IMAGE_STATUS_FAILED);
+                    TestStopAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
+                TestStopAsync();
+                ConsoleMsgError(ex.ToString());
+            }
+        }
+
+        public async Task BrowserGoForwardAsync(int sec)
+        {
+            statusPageLoad = false;
+            int step = SendMessage($"BrowserGoForwardAsync()", PROCESS, "Выполняется действие браузера - вперед", IMAGE_STATUS_PROCESS);
+            if (DefineTestStop(step) == true) return;
+
+            try
+            {
+                BrowserView.GoForward();
+
+                for (int i = 0; i < sec; i++)
+                {
+                    await Task.Delay(1000);
+                    if (statusPageLoad == true) break;
+                    if (DefineTestStop(step) == true) return;
+                }
+
+                if (statusPageLoad == true) EditMessage(step, null, PASSED, "Выполнено действие браузера - вперед", IMAGE_STATUS_PASSED);
+                else
+                {
+                    EditMessage(step, null, FAILED, "Не выполнено действие браузера - вперед (cтраница не загружена)", IMAGE_STATUS_FAILED);
+                    TestStopAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
+                TestStopAsync();
+                ConsoleMsgError(ex.ToString());
+            }
+        }
+
+        public async Task BrowserBasicAuthenticationAsync(string user, string pass)
+        {
+            statusPageLoad = false;
+            int step = SendMessage($"BrowserBasicAuthentication(\"{user}\", \"{pass}\")", PROCESS, "Выполняется базовая авторизация", IMAGE_STATUS_PROCESS);
+            if (DefineTestStop(step) == true) return;
+
+            try
+            {
+                BrowserView.CoreWebView2.BasicAuthenticationRequested += delegate (object sender, CoreWebView2BasicAuthenticationRequestedEventArgs args)
+                {
+                    args.Response.UserName = "zion";
+                    args.Response.Password = "newautotestreport";
+                    EditMessage(step, null, COMPLETED, $"Баговая авторизация - выполнена", IMAGE_STATUS_MESSAGE);
+                };
+            }
+            catch (Exception ex)
+            {
+                EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
+                TestStopAsync();
+                ConsoleMsgError(ex.ToString());
+            }
         }
 
         public async Task<string> ExecuteJavaScriptAsync(string script)

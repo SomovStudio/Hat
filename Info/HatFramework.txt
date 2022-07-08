@@ -234,8 +234,8 @@ resultAutotestSuccess() - отправить результат проверки
 findVisibleElementAsync() - определить визуальное отображение элемента
 
 ------------------------------------------------------------------------
-
-Новые методы для обновления 1.0.1
+Новые методы для обновления 1.1.0
+------------------------------------------------------------------------
 
 BrowserGetErrorsAsync() - получить список ошибок и предупреждений браузера
 
@@ -358,3 +358,41 @@ REST запросы
 	
 	RestGetAsync(string url, string charset = "UTF-8")
 	RestGetBasicAuthAsync(string login, string pass, string url, string charset = "UTF-8")
+	
+------------------------------------------------------------------------
+Новые методы для обновления 1.1.1
+------------------------------------------------------------------------
+
+Навигация браузера
+
+	BrowserGoBackAsync(int sec) - Навигационное действие браузера
+	BrowserGoForwardAsync(int sec) - Навигационное действие браузера
+
+		Tester tester = new Tester(Config.browserForm);
+		await tester.TestBeginAsync();
+		await tester.GoToUrlAsync("https://www.yahoo.com/", 5);
+		string currentUrl = await tester.GetUrlAsync();
+		await tester.AssertEqualsAsync("https://www.yahoo.com/", currentUrl);
+
+		await tester.GoToUrlAsync("https://yandex.ru/", 5);
+		currentUrl = await tester.GetUrlAsync();
+		await tester.AssertEqualsAsync("https://yandex.ru/", currentUrl);
+		
+		await tester.BrowserGoBackAsync(10);
+		currentUrl = await tester.GetUrlAsync();
+		await tester.AssertEqualsAsync("https://www.yahoo.com/", currentUrl);
+
+		await tester.BrowserGoForwardAsync(10);
+		currentUrl = await tester.GetUrlAsync();
+		await tester.AssertEqualsAsync("https://yandex.ru/", currentUrl);
+		await tester.TestEndAsync();
+
+	BrowserBasicAuthenticationAsync(string user, string pass) - Баговая авторизация
+	
+		Tester tester = new Tester(Config.browserForm);
+		await tester.BrowserBasicAuthenticationAsync("user", "pass");
+		await tester.TestBeginAsync();
+		await tester.GoToUrlAsync("http://test.ru/basic_auth.html", 5);
+		await tester.TestEndAsync();
+		
+		

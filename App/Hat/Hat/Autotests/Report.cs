@@ -22,6 +22,7 @@ namespace Hat
         public static string TestFileName;
         public static string FileName;
         public static string FolderName;
+        public static string FolderImagesName;
         public static int CountErrors;
         public static bool TestSuccess;
         public static List<string[]> Steps;
@@ -34,6 +35,7 @@ namespace Hat
                 Report.FileName = $"Report-{Report.TestFileName}.html";
                 Report.FileName = Report.FileName.Replace(".cs", "");
                 Report.FolderName = Config.projectPath + "/reports/";
+                Report.FolderImagesName = Config.projectPath + "/reports/screenshots/";
                 Report.CountErrors = 0;
                 Report.TestSuccess = false;
                 Report.Steps = new List<string[]>();
@@ -42,7 +44,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                Config.browserForm.consoleMsg(ex.ToString());
+                Config.browserForm.consoleMsgError(ex.ToString());
             }
         }
                 
@@ -55,7 +57,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                Config.browserForm.consoleMsg(ex.ToString());
+                Config.browserForm.consoleMsgError(ex.ToString());
             }
         }
 
@@ -68,6 +70,7 @@ namespace Hat
                 if (!Directory.Exists(Report.FolderName))
                 {
                     Directory.CreateDirectory(Report.FolderName);
+                    Directory.CreateDirectory(Report.FolderImagesName);
                     Config.browserForm.consoleMsg("Создана папка для отчетов");
                     Config.browserForm.updateProjectTree();
                 }
@@ -96,7 +99,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                Config.browserForm.consoleMsg(ex.ToString());
+                Config.browserForm.consoleMsgError(ex.ToString());
             }
         }
 
@@ -105,24 +108,28 @@ namespace Hat
             try
             {
                 string filename = $"image-{DateTime.Now.ToString("dd-mm-yyyy-hh-mm-ss")}.jpeg";
-                if (Directory.Exists(Report.FolderName))
+                if (Directory.Exists(Report.FolderImagesName))
                 {
-                    Report.AddStep(Report.SCREENSHOT, $"Файл: <a href=\"{filename}\">{filename}</a>", $"<img src=\"{filename}\" />");
-                    using (System.IO.FileStream file = System.IO.File.Create(Report.FolderName + filename))
+                    Report.AddStep(Report.SCREENSHOT, $"Файл: <a href=\"./screenshots/{filename}\">{filename}</a>", $"<img src=\"./screenshots/{filename}\" />");
+                    using (System.IO.FileStream file = System.IO.File.Create(Report.FolderImagesName + filename))
                     {
                         await Config.browserForm.getWebView().CoreWebView2.CapturePreviewAsync(CoreWebView2CapturePreviewImageFormat.Jpeg, file);
-                        if (File.Exists(Report.FolderName + filename)) Config.browserForm.consoleMsg($"Скриншот {filename} - сохранён");
-                        else Config.browserForm.consoleMsg($"Не удалось сохранить скриншот {filename} по адресу {Report.FolderName}");
+                        if (File.Exists(Report.FolderImagesName + filename))
+                        {
+                            Config.browserForm.consoleMsg($"Скриншот {filename} - сохранён");
+                            Config.browserForm.updateProjectTree();
+                        }
+                        else Config.browserForm.consoleMsg($"Не удалось сохранить скриншот {filename} по адресу {Report.FolderImagesName}");
                     }
                 }
                 else
                 {
-                    Config.browserForm.consoleMsg($"Не удалось сохранить скриншот {filename} по адресу {Report.FolderName}");
+                    Config.browserForm.consoleMsg($"Не удалось сохранить скриншот {filename} по адресу {Report.FolderImagesName}");
                 }
             }
             catch (Exception ex)
             {
-                Config.browserForm.consoleMsg(ex.ToString());
+                Config.browserForm.consoleMsgError(ex.ToString());
             }
         }
 
