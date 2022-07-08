@@ -107,6 +107,10 @@
             this.toolStripMenuItem9 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator13 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem11 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem12 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem13 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem14 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem8 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator11 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
@@ -217,10 +221,23 @@
             this.folderBrowserDialogProjectCreate = new System.Windows.Forms.FolderBrowserDialog();
             this.openFileProjectDialog = new System.Windows.Forms.OpenFileDialog();
             this.saveFileLogDialog = new System.Windows.Forms.SaveFileDialog();
-            this.toolStripMenuItem11 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem12 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem13 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem14 = new System.Windows.Forms.ToolStripMenuItem();
+            this.tabPage8 = new System.Windows.Forms.TabPage();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.fromMailTextBox = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.fromLoginTextBox = new System.Windows.Forms.TextBox();
+            this.fromPassTextBox = new System.Windows.Forms.TextBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.toMailsTextBox = new System.Windows.Forms.TextBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.smtpServerTextBox = new System.Windows.Forms.TextBox();
+            this.portSmtpServerTextBox = new System.Windows.Forms.TextBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.toolStrip4 = new System.Windows.Forms.ToolStrip();
+            this.toolStripButton22 = new System.Windows.Forms.ToolStripButton();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -263,6 +280,10 @@
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownBrowserHeight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownBrowserWidth)).BeginInit();
+            this.tabPage8.SuspendLayout();
+            this.groupBox3.SuspendLayout();
+            this.groupBox4.SuspendLayout();
+            this.toolStrip4.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -354,7 +375,7 @@
             this.createProjectVSToolStripMenuItem1});
             this.toolStripMenuItem7.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItem7.Image")));
             this.toolStripMenuItem7.Name = "toolStripMenuItem7";
-            this.toolStripMenuItem7.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuItem7.Size = new System.Drawing.Size(163, 22);
             this.toolStripMenuItem7.Text = "Создать проект";
             // 
             // createProjectToolStripMenuItem1
@@ -375,7 +396,7 @@
             // 
             this.создатьПроектToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("создатьПроектToolStripMenuItem.Image")));
             this.создатьПроектToolStripMenuItem.Name = "создатьПроектToolStripMenuItem";
-            this.создатьПроектToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.создатьПроектToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
             this.создатьПроектToolStripMenuItem.Text = "Создать проект";
             this.создатьПроектToolStripMenuItem.Visible = false;
             this.создатьПроектToolStripMenuItem.Click += new System.EventHandler(this.создатьПроектToolStripMenuItem_Click);
@@ -384,20 +405,20 @@
             // 
             this.открытьПроектToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("открытьПроектToolStripMenuItem.Image")));
             this.открытьПроектToolStripMenuItem.Name = "открытьПроектToolStripMenuItem";
-            this.открытьПроектToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.открытьПроектToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
             this.открытьПроектToolStripMenuItem.Text = "Открыть проект";
             this.открытьПроектToolStripMenuItem.Click += new System.EventHandler(this.открытьПроектToolStripMenuItem_Click);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(160, 6);
             // 
             // запуститьТестToolStripMenuItem
             // 
             this.запуститьТестToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("запуститьТестToolStripMenuItem.Image")));
             this.запуститьТестToolStripMenuItem.Name = "запуститьТестToolStripMenuItem";
-            this.запуститьТестToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.запуститьТестToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
             this.запуститьТестToolStripMenuItem.Text = "Запустить тест";
             this.запуститьТестToolStripMenuItem.Click += new System.EventHandler(this.запуститьТестToolStripMenuItem_Click);
             // 
@@ -405,14 +426,14 @@
             // 
             this.остановитьТестToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("остановитьТестToolStripMenuItem.Image")));
             this.остановитьТестToolStripMenuItem.Name = "остановитьТестToolStripMenuItem";
-            this.остановитьТестToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.остановитьТестToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
             this.остановитьТестToolStripMenuItem.Text = "Остановить тест";
             this.остановитьТестToolStripMenuItem.Click += new System.EventHandler(this.остановитьТестToolStripMenuItem_Click);
             // 
             // toolStripSeparator8
             // 
             this.toolStripSeparator8.Name = "toolStripSeparator8";
-            this.toolStripSeparator8.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator8.Size = new System.Drawing.Size(160, 6);
             // 
             // настройкиToolStripMenuItem
             // 
@@ -423,7 +444,7 @@
             this.debugJavaScriptToolStripMenuItem});
             this.настройкиToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("настройкиToolStripMenuItem.Image")));
             this.настройкиToolStripMenuItem.Name = "настройкиToolStripMenuItem";
-            this.настройкиToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.настройкиToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
             this.настройкиToolStripMenuItem.Text = "Настройки";
             // 
             // кодировкаФайловToolStripMenuItem
@@ -891,6 +912,7 @@
             this.tabControl2.Controls.Add(this.tabPage5);
             this.tabControl2.Controls.Add(this.tabPage6);
             this.tabControl2.Controls.Add(this.tabPage7);
+            this.tabControl2.Controls.Add(this.tabPage8);
             this.tabControl2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl2.Location = new System.Drawing.Point(0, 0);
             this.tabControl2.Name = "tabControl2";
@@ -939,7 +961,7 @@
             this.toolStripMenuItem2,
             this.toolStripMenuItem5});
             this.contextMenuStripTreeFolders.Name = "contextMenuStripTreeFolders";
-            this.contextMenuStripTreeFolders.Size = new System.Drawing.Size(205, 198);
+            this.contextMenuStripTreeFolders.Size = new System.Drawing.Size(205, 176);
             // 
             // запуститьТестToolStripMenuItem1
             // 
@@ -975,6 +997,38 @@
             this.toolStripMenuItem6.Text = "Создать файл автотеста";
             this.toolStripMenuItem6.Visible = false;
             this.toolStripMenuItem6.Click += new System.EventHandler(this.toolStripMenuItem6_Click);
+            // 
+            // toolStripMenuItem11
+            // 
+            this.toolStripMenuItem11.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem12,
+            this.toolStripMenuItem13,
+            this.toolStripMenuItem14});
+            this.toolStripMenuItem11.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItem11.Image")));
+            this.toolStripMenuItem11.Name = "toolStripMenuItem11";
+            this.toolStripMenuItem11.Size = new System.Drawing.Size(204, 22);
+            this.toolStripMenuItem11.Text = "Создать файл";
+            // 
+            // toolStripMenuItem12
+            // 
+            this.toolStripMenuItem12.Name = "toolStripMenuItem12";
+            this.toolStripMenuItem12.Size = new System.Drawing.Size(221, 22);
+            this.toolStripMenuItem12.Text = "Создать файл Autotest";
+            this.toolStripMenuItem12.Click += new System.EventHandler(this.toolStripMenuItem12_Click);
+            // 
+            // toolStripMenuItem13
+            // 
+            this.toolStripMenuItem13.Name = "toolStripMenuItem13";
+            this.toolStripMenuItem13.Size = new System.Drawing.Size(221, 22);
+            this.toolStripMenuItem13.Text = "Создать файл Page Objects";
+            this.toolStripMenuItem13.Click += new System.EventHandler(this.toolStripMenuItem13_Click);
+            // 
+            // toolStripMenuItem14
+            // 
+            this.toolStripMenuItem14.Name = "toolStripMenuItem14";
+            this.toolStripMenuItem14.Size = new System.Drawing.Size(221, 22);
+            this.toolStripMenuItem14.Text = "Создать файл Step Objects";
+            this.toolStripMenuItem14.Click += new System.EventHandler(this.toolStripMenuItem14_Click);
             // 
             // toolStripMenuItem8
             // 
@@ -1222,7 +1276,7 @@
             // 
             this.создатьПапкуToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("создатьПапкуToolStripMenuItem.Image")));
             this.создатьПапкуToolStripMenuItem.Name = "создатьПапкуToolStripMenuItem";
-            this.создатьПапкуToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.создатьПапкуToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
             this.создатьПапкуToolStripMenuItem.Text = "Создать папку";
             this.создатьПапкуToolStripMenuItem.Click += new System.EventHandler(this.создатьПапкуToolStripMenuItem_Click);
             // 
@@ -1230,7 +1284,7 @@
             // 
             this.удалитьПапкуToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("удалитьПапкуToolStripMenuItem.Image")));
             this.удалитьПапкуToolStripMenuItem.Name = "удалитьПапкуToolStripMenuItem";
-            this.удалитьПапкуToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.удалитьПапкуToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
             this.удалитьПапкуToolStripMenuItem.Text = "Удалить папку";
             this.удалитьПапкуToolStripMenuItem.Click += new System.EventHandler(this.удалитьПапкуToolStripMenuItem_Click);
             // 
@@ -2014,37 +2068,179 @@
             // 
             this.saveFileLogDialog.Filter = "*.txt|*.txt";
             // 
-            // toolStripMenuItem11
+            // tabPage8
             // 
-            this.toolStripMenuItem11.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem12,
-            this.toolStripMenuItem13,
-            this.toolStripMenuItem14});
-            this.toolStripMenuItem11.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItem11.Image")));
-            this.toolStripMenuItem11.Name = "toolStripMenuItem11";
-            this.toolStripMenuItem11.Size = new System.Drawing.Size(204, 22);
-            this.toolStripMenuItem11.Text = "Создать файл";
+            this.tabPage8.Controls.Add(this.groupBox4);
+            this.tabPage8.Controls.Add(this.toolStrip4);
+            this.tabPage8.Controls.Add(this.groupBox3);
+            this.tabPage8.Location = new System.Drawing.Point(4, 4);
+            this.tabPage8.Name = "tabPage8";
+            this.tabPage8.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage8.Size = new System.Drawing.Size(601, 177);
+            this.tabPage8.TabIndex = 3;
+            this.tabPage8.Text = "Почта";
+            this.tabPage8.UseVisualStyleBackColor = true;
             // 
-            // toolStripMenuItem12
+            // groupBox3
             // 
-            this.toolStripMenuItem12.Name = "toolStripMenuItem12";
-            this.toolStripMenuItem12.Size = new System.Drawing.Size(221, 22);
-            this.toolStripMenuItem12.Text = "Создать файл Autotest";
-            this.toolStripMenuItem12.Click += new System.EventHandler(this.toolStripMenuItem12_Click);
+            this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox3.Controls.Add(this.portSmtpServerTextBox);
+            this.groupBox3.Controls.Add(this.label14);
+            this.groupBox3.Controls.Add(this.fromPassTextBox);
+            this.groupBox3.Controls.Add(this.smtpServerTextBox);
+            this.groupBox3.Controls.Add(this.label11);
+            this.groupBox3.Controls.Add(this.label13);
+            this.groupBox3.Controls.Add(this.fromLoginTextBox);
+            this.groupBox3.Controls.Add(this.label10);
+            this.groupBox3.Controls.Add(this.fromMailTextBox);
+            this.groupBox3.Controls.Add(this.label9);
+            this.groupBox3.Location = new System.Drawing.Point(6, 33);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(589, 71);
+            this.groupBox3.TabIndex = 0;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Отправитель:";
             // 
-            // toolStripMenuItem13
+            // label9
             // 
-            this.toolStripMenuItem13.Name = "toolStripMenuItem13";
-            this.toolStripMenuItem13.Size = new System.Drawing.Size(221, 22);
-            this.toolStripMenuItem13.Text = "Создать файл Page Objects";
-            this.toolStripMenuItem13.Click += new System.EventHandler(this.toolStripMenuItem13_Click);
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(6, 20);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(40, 13);
+            this.label9.TabIndex = 0;
+            this.label9.Text = "Почта:";
             // 
-            // toolStripMenuItem14
+            // fromMailTextBox
             // 
-            this.toolStripMenuItem14.Name = "toolStripMenuItem14";
-            this.toolStripMenuItem14.Size = new System.Drawing.Size(221, 22);
-            this.toolStripMenuItem14.Text = "Создать файл Step Objects";
-            this.toolStripMenuItem14.Click += new System.EventHandler(this.toolStripMenuItem14_Click);
+            this.fromMailTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.fromMailTextBox.Location = new System.Drawing.Point(52, 16);
+            this.fromMailTextBox.Name = "fromMailTextBox";
+            this.fromMailTextBox.Size = new System.Drawing.Size(216, 20);
+            this.fromMailTextBox.TabIndex = 1;
+            // 
+            // label10
+            // 
+            this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(274, 20);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(39, 13);
+            this.label10.TabIndex = 2;
+            this.label10.Text = "логин:";
+            // 
+            // fromLoginTextBox
+            // 
+            this.fromLoginTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.fromLoginTextBox.Location = new System.Drawing.Point(319, 16);
+            this.fromLoginTextBox.Name = "fromLoginTextBox";
+            this.fromLoginTextBox.Size = new System.Drawing.Size(100, 20);
+            this.fromLoginTextBox.TabIndex = 3;
+            // 
+            // fromPassTextBox
+            // 
+            this.fromPassTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.fromPassTextBox.Location = new System.Drawing.Point(477, 16);
+            this.fromPassTextBox.Name = "fromPassTextBox";
+            this.fromPassTextBox.Size = new System.Drawing.Size(100, 20);
+            this.fromPassTextBox.TabIndex = 5;
+            // 
+            // label11
+            // 
+            this.label11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(425, 20);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(46, 13);
+            this.label11.TabIndex = 4;
+            this.label11.Text = "пароль:";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(6, 19);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(100, 13);
+            this.label12.TabIndex = 6;
+            this.label12.Text = "Почта получателя:";
+            // 
+            // toMailsTextBox
+            // 
+            this.toMailsTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.toMailsTextBox.Location = new System.Drawing.Point(115, 12);
+            this.toMailsTextBox.Name = "toMailsTextBox";
+            this.toMailsTextBox.Size = new System.Drawing.Size(464, 20);
+            this.toMailsTextBox.TabIndex = 7;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(1, 46);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(80, 13);
+            this.label13.TabIndex = 8;
+            this.label13.Text = "SMTP-Сервер:";
+            // 
+            // smtpServerTextBox
+            // 
+            this.smtpServerTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.smtpServerTextBox.Location = new System.Drawing.Point(87, 42);
+            this.smtpServerTextBox.Name = "smtpServerTextBox";
+            this.smtpServerTextBox.Size = new System.Drawing.Size(317, 20);
+            this.smtpServerTextBox.TabIndex = 9;
+            // 
+            // portSmtpServerTextBox
+            // 
+            this.portSmtpServerTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.portSmtpServerTextBox.Location = new System.Drawing.Point(477, 42);
+            this.portSmtpServerTextBox.Name = "portSmtpServerTextBox";
+            this.portSmtpServerTextBox.Size = new System.Drawing.Size(100, 20);
+            this.portSmtpServerTextBox.TabIndex = 11;
+            // 
+            // label14
+            // 
+            this.label14.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(432, 46);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(35, 13);
+            this.label14.TabIndex = 10;
+            this.label14.Text = "Порт:";
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox4.Controls.Add(this.toMailsTextBox);
+            this.groupBox4.Controls.Add(this.label12);
+            this.groupBox4.Location = new System.Drawing.Point(6, 110);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(589, 42);
+            this.groupBox4.TabIndex = 1;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Получатель:";
+            // 
+            // toolStrip4
+            // 
+            this.toolStrip4.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripButton22});
+            this.toolStrip4.Location = new System.Drawing.Point(3, 3);
+            this.toolStrip4.Name = "toolStrip4";
+            this.toolStrip4.Size = new System.Drawing.Size(595, 25);
+            this.toolStrip4.TabIndex = 2;
+            this.toolStrip4.Text = "toolStrip2";
+            // 
+            // toolStripButton22
+            // 
+            this.toolStripButton22.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton22.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton22.Image")));
+            this.toolStripButton22.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton22.Name = "toolStripButton22";
+            this.toolStripButton22.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButton22.Text = "Сохранить";
             // 
             // BrowserForm
             // 
@@ -2121,6 +2317,14 @@
             this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownBrowserHeight)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownBrowserWidth)).EndInit();
+            this.tabPage8.ResumeLayout(false);
+            this.tabPage8.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
+            this.toolStrip4.ResumeLayout(false);
+            this.toolStrip4.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2319,6 +2523,23 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem12;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem13;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem14;
+        private System.Windows.Forms.TabPage tabPage8;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.TextBox fromMailTextBox;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TextBox toMailsTextBox;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.TextBox fromPassTextBox;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.TextBox fromLoginTextBox;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.TextBox portSmtpServerTextBox;
+        private System.Windows.Forms.TextBox smtpServerTextBox;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.ToolStrip toolStrip4;
+        private System.Windows.Forms.ToolStripButton toolStripButton22;
     }
 }
 
