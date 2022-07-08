@@ -1780,9 +1780,77 @@ if (response.IsSuccessStatusCode)\par
 \}\f1\lang1049\par
 }",
 
-@"",
-@"",
-@"",
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.22000}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 BrowserGoBackAsync\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'ed\'e0\'e2\'e8\'e3\'e0\'f6\'e8\'e8 \'e1\'f0\'e0\'f3\'e7\'e5\'f0\'e0 \'e2\'fb\'ef\'ee\'eb\'ed\'ff\'e5\'f2 \'e4\'e5\'e9\'f1\'f2\'e2\'e8\'e5 \'ed\'e0\'e7\'e0\'e4 \'f1 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'fb\'ec \'ee\'e6\'e8\'e4\'e0\'ed\'e8\'e5\'ec \'e2 \'f1\'e5\'ea\'f3\'ed\'e4\'e0\'f5\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \f0\lang1033 BrowserGoBackAsync(int sec)\f1\lang1049\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0\f0\lang1033 Tester tester = new Tester(Config.browserForm);\par
+await tester.TestBeginAsync();\par
+await tester.GoToUrlAsync(""https://www.yahoo.com/"", 5);\par
+string currentUrl = await tester.GetUrlAsync();\par
+await tester.AssertEqualsAsync(""https://www.yahoo.com/"", currentUrl);\par
+\par
+await tester.GoToUrlAsync(""https://yandex.ru/"", 5);\par
+currentUrl = await tester.GetUrlAsync();\par
+await tester.AssertEqualsAsync(""https://yandex.ru/"", currentUrl);\par
+\tab\tab\par
+await tester.BrowserGoBackAsync(10);\par
+currentUrl = await tester.GetUrlAsync();\par
+await tester.AssertEqualsAsync(""https://www.yahoo.com/"", currentUrl);\par
+\par
+await tester.BrowserGoForwardAsync(10);\par
+currentUrl = await tester.GetUrlAsync();\par
+await tester.AssertEqualsAsync(""https://yandex.ru/"", currentUrl);\par
+await tester.TestEndAsync();\par
+    }",
+
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.22000}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 BrowserGoForwardAsync\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'ed\'e0\'e2\'e8\'e3\'e0\'f6\'e8\'e8 \'e1\'f0\'e0\'f3\'e7\'e5\'f0\'e0 \'e2\'fb\'ef\'ee\'eb\'ed\'ff\'e5\'f2 \'e4\'e5\'e9\'f1\'f2\'e2\'e8\'e5 \'e2\'ef\'e5\'f0\'e5\'e4 \'f1 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'fb\'ec \'ee\'e6\'e8\'e4\'e0\'ed\'e8\'e5\'ec \'e2 \'f1\'e5\'ea\'f3\'ed\'e4\'e0\'f5\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \f0\lang1033 BrowserGoForwardAsync(int sec)\f1\lang1049\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0\f0\lang1033 Tester tester = new Tester(Config.browserForm);\par
+await tester.TestBeginAsync();\par
+await tester.GoToUrlAsync(""https://www.yahoo.com/"", 5);\par
+string currentUrl = await tester.GetUrlAsync();\par
+await tester.AssertEqualsAsync(""https://www.yahoo.com/"", currentUrl);\par
+\par
+await tester.GoToUrlAsync(""https://yandex.ru/"", 5);\par
+currentUrl = await tester.GetUrlAsync();\par
+await tester.AssertEqualsAsync(""https://yandex.ru/"", currentUrl);\par
+\tab\tab\par
+await tester.BrowserGoBackAsync(10);\par
+currentUrl = await tester.GetUrlAsync();\par
+await tester.AssertEqualsAsync(""https://www.yahoo.com/"", currentUrl);\par
+\par
+await tester.BrowserGoForwardAsync(10);\par
+currentUrl = await tester.GetUrlAsync();\par
+await tester.AssertEqualsAsync(""https://yandex.ru/"", currentUrl);\par
+await tester.TestEndAsync();\par
+    }",
+
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.22000}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 BrowserBasicAuthenticationAsync\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'ed\'e0\'e2\'e8\'e3\'e0\'f6\'e8\'e8 \'e1\'f0\'e0\'f3\'e7\'e5\'f0\'e0 \'e2\'fb\'ef\'ee\'eb\'ed\'ff\'e5\'f2 \'e4\'e5\'e9\'f1\'f2\'e2\'e8\'e5 \'e2\'ef\'e5\'f0\'e5\'e4 \'f1 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'fb\'ec \'ee\'e6\'e8\'e4\'e0\'ed\'e8\'e5\'ec \'e2 \'f1\'e5\'ea\'f3\'ed\'e4\'e0\'f5\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \f0\lang1033 BrowserBasicAuthenticationAsync(string user, string pass)\f1\lang1049\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0\f0\lang1033 Tester tester = new Tester(Config.browserForm);\par
+await tester.BrowserBasicAuthenticationAsync(""user"", ""pass"");\par
+await tester.TestBeginAsync();\par
+await tester.GoToUrlAsync(""http://test.ru/basic_auth.html"", 5);\par
+await tester.TestEndAsync();\par
+    }",
+
 @"",
 @"",
 @"",
@@ -2376,8 +2444,20 @@ if (response.IsSuccessStatusCode)\par
 
                     if (value == "RestGetAsync") richTextBox1.Rtf = handbook[137];
                     if (value == "RestGetBasicAuthAsync") richTextBox1.Rtf = handbook[138];
-                    //if (value == "") richTextBox1.Rtf = handbook[139];
-                    //if (value == "") richTextBox1.Rtf = handbook[140];
+                    if (value == "BrowserGoBackAsync") richTextBox1.Rtf = handbook[139];
+                    if (value == "BrowserGoForwardAsync") richTextBox1.Rtf = handbook[140];
+                    if (value == "BrowserBasicAuthenticationAsync") richTextBox1.Rtf = handbook[141];
+                    /*
+                    if (value == "") richTextBox1.Rtf = handbook[142];
+                    if (value == "") richTextBox1.Rtf = handbook[143];
+                    if (value == "") richTextBox1.Rtf = handbook[144];
+                    if (value == "") richTextBox1.Rtf = handbook[145];
+                    if (value == "") richTextBox1.Rtf = handbook[146];
+                    if (value == "") richTextBox1.Rtf = handbook[147];
+                    if (value == "") richTextBox1.Rtf = handbook[148];
+                    if (value == "") richTextBox1.Rtf = handbook[149];
+                    if (value == "") richTextBox1.Rtf = handbook[150];
+                    */
                 }
             }
             catch (Exception ex)

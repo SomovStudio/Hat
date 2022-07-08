@@ -365,8 +365,8 @@ REST запросы
 
 Навигация браузера
 
-	BrowserGoBackAsync() - Навигационное действие браузера
-	BrowserGoForwardAsync() - Навигационное действие браузера
+	BrowserGoBackAsync(int sec) - Навигационное действие браузера
+	BrowserGoForwardAsync(int sec) - Навигационное действие браузера
 
 		Tester tester = new Tester(Config.browserForm);
 		await tester.TestBeginAsync();
@@ -387,10 +387,12 @@ REST запросы
 		await tester.AssertEqualsAsync("https://yandex.ru/", currentUrl);
 		await tester.TestEndAsync();
 
-	BrowserBasicAuthentication() - Баговая авторизация
+	BrowserBasicAuthenticationAsync(string user, string pass) - Баговая авторизация
 	
 		Tester tester = new Tester(Config.browserForm);
+		await tester.BrowserBasicAuthenticationAsync("user", "pass");
 		await tester.TestBeginAsync();
-		await tester.BrowserBasicAuthentication("user", "pass");
 		await tester.GoToUrlAsync("http://test.ru/basic_auth.html", 5);
 		await tester.TestEndAsync();
+		
+		

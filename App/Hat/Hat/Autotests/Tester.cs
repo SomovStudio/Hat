@@ -576,7 +576,7 @@ namespace HatFrameworkDev
             }
         }
 
-        public async Task BrowserBasicAuthentication(string user, string pass)
+        public async Task BrowserBasicAuthenticationAsync(string user, string pass)
         {
             statusPageLoad = false;
             int step = SendMessage($"BrowserBasicAuthentication(\"{user}\", \"{pass}\")", PROCESS, "Выполняется базовая авторизация", IMAGE_STATUS_PROCESS);
@@ -598,7 +598,6 @@ namespace HatFrameworkDev
                 ConsoleMsgError(ex.ToString());
             }
         }
-
 
         public async Task<string> ExecuteJavaScriptAsync(string script)
         {

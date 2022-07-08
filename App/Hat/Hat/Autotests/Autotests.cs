@@ -84,12 +84,6 @@ namespace Hat
             await tester.TestEndAsync();
             await tester.BrowserCloseAsync();
             */
-
-            HatFrameworkDev.Tester tester = new HatFrameworkDev.Tester(Config.browserForm);
-            await tester.TestBeginAsync();
-            await tester.BrowserBasicAuthentication("zion", "newautotestreport");
-            await tester.GoToUrlAsync("http://89.108.109.117:8082/report.html", 5);
-            await tester.TestEndAsync();
         }
 
         public static void readNodes(TreeNodeCollection _nodes)
