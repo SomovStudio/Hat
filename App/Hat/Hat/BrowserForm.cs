@@ -340,6 +340,22 @@ namespace Hat
             await Report.SaveReportScreenshotAsync();
         }
 
+        /* Отправить письмо с отчетом */
+        public void sendMail()
+        {
+            string content = "";
+            if (Report.Steps.Count > 0)
+            {
+                foreach (string[] step in Report.Steps)
+                {
+                    content += step[0] + Environment.NewLine;
+                    content += step[1] + Environment.NewLine;
+                    content += step[2] + Environment.NewLine;
+                }
+            }
+            WorkOnEmail.SendEmail("Автотест " + Report.TestFileName, content);
+        }
+
         /* Возвращает браузер */
         public Microsoft.Web.WebView2.WinForms.WebView2 getWebView()
         {
@@ -2046,9 +2062,9 @@ namespace Hat
 
         private void toolStripButton13_Click(object sender, EventArgs e)
         {
-            Autotests.devTestAsync();
+            //Autotests.devTestAsync();
 
-            //WorkOnEmail.MessageSend();
+            sendMail();
 
             /*
             cleadMessageStep();

@@ -13,83 +13,50 @@ namespace Hat
 {
     public class WorkOnEmail
     {
-        /* Работа с электронной почтой Отправка почты. SmtpClient
+        /*
+         * Отправка почты
          * Источник: https://metanit.com/sharp/net/8.1.php
          */
-        public static void SendMail_BAD()
+        public static void SendEmail(string subject, string body)
         {
             try
             {
-                // отправитель - устанавливаем адрес и отображаемое в письме имя
-                MailAddress from = new MailAddress("test@test.ru", "TESTER");
-                // кому отправляем
-                MailAddress to = new MailAddress("test2@test.ru");
+                // почта получателя (подготовка)
+                string dataMails = Config.dataMail[3];                              
+                string[] mails = dataMails.Split(' ');
+                int count = mails.Length;
+
+                // отправитель и получатель
+                MailAddress from = new MailAddress(Config.dataMail[0], "Browser Hat");  // отправитель
+                MailAddress to = new MailAddress(mails[0]);                             // получатель
+
                 // создаем объект сообщения
-                MailMessage m = new MailMessage(from, to);
-                // тема письма
-                m.Subject = "Тестовое письмо из браузера HAt";
-                // текст письма
-                m.Body = "<h2>Письмо-тест работы smtp-клиента</h2>";
-                // письмо представляет код html
-                m.IsBodyHtml = true;
-                // адрес smtp-сервера и порт, с которого будем отправлять письмо
-                SmtpClient smtp = new SmtpClient("smtp.yandex.ru", 465);
-                // логин и пароль
-                smtp.Credentials = new NetworkCredential("test@test.ru", "123456");
-                smtp.EnableSsl = true;
-                //ОШИБКА smtp.Send(m);
-                Console.Read();
-                Config.browserForm.consoleMsg("Тест: Письмо отправлено");
-            }
-            catch (Exception ex)
-            {
-                Config.browserForm.consoleMsgError(ex.ToString());
-            }
-        }
+                MailMessage message = new MailMessage(from, to);
+                message.Subject = subject;                                              // тема письма
+                message.Body = body;                                                    // текст письма
+                message.IsBodyHtml = true;                                              // письмо представляет код html
 
-        /* Не отправляется письмо через smtp mail - время ожидания операции истекло
-         * Источник: https://ru.stackoverflow.com/questions/652352/%D0%9D%D0%B5-%D0%BE%D1%82%D0%BF%D1%80%D0%B0%D0%B2%D0%BB%D1%8F%D0%B5%D1%82%D1%81%D1%8F-%D0%BF%D0%B8%D1%81%D1%8C%D0%BC%D0%BE-%D1%87%D0%B5%D1%80%D0%B5%D0%B7-smtp-mail-%D0%B2%D1%80%D0%B5%D0%BC%D1%8F-%D0%BE%D0%B6%D0%B8%D0%B4%D0%B0%D0%BD%D0%B8%D1%8F-%D0%BE%D0%BF%D0%B5%D1%80%D0%B0%D1%86%D0%B8%D0%B8-%D0%B8%D1%81%D1%82%D0%B5%D0%BA%D0%BB%D0%BE
-         */
-
-        public static void MessageSend_BAD()
-        {
-            try
-            {
-                Config.browserForm.consoleMsg("Тест: Начинается отправка письма");
-                MailMessage message = new MailMessage();
-                SmtpClient client =
-                new SmtpClient("smtp.yandex.ru", 465) // сервер,порт
+                // копии письма
+                if(count > 1)
                 {
-                    Credentials = new NetworkCredential("test@test.ru", "123456"),
-                    EnableSsl = true // обязательно!
-                };
-                message.From = new MailAddress("test@test.ru"); // от кого
-                message.To.Add(new MailAddress("test2@test.ru")); // кому
-                message.Subject = "Тестовое письмо из браузера Hat";
-                message.SubjectEncoding = Encoding.UTF8;
-                message.Body = "Тестовое сообщение";
-                message.BodyEncoding = Encoding.UTF8; // кодировка 
-                //string fileName = @"C:\Resume.txt"; // какой-нибудь файл
-                //Attachment item = new Attachment(fileName);
-                //message.Attachments.Add(item);// добавляем файл к сообщению
-                client.Send(message); // отправка сообщения
-                Config.browserForm.consoleMsg("Тест: Письмо отправлено");
-            }
-            catch (Exception ex)
-            {
-                Config.browserForm.consoleMsgError(ex.ToString());
-            }
-        }
-
-        /* send email using implicit ssl
-         * Источник: 
-         */
-        
-        public static void SendEmail()
-        {
-            try
-            {
+                    for (int i = 1; i < mails.Length; i++)
+                    {
+                        message.CC.Add(new MailAddress(mails[i]));
+                    }
+                }                             
                 
+                // адрес smtp-сервера и порт, с которого будем отправлять письмо
+                SmtpClient smtp = new SmtpClient(Config.dataMail[4], Convert.ToInt32(Config.dataMail[5]));
+                
+                // логин и пароль
+                smtp.Credentials = new NetworkCredential(Config.dataMail[1], Config.dataMail[2]);
+                if (Config.dataMail[2] == "true") smtp.EnableSsl = true;
+                else smtp.EnableSsl = false;
+
+                // отправка письма
+                smtp.Send(message);
+
+                Config.browserForm.consoleMsg($"Отправлено писем: {count}");
             }
             catch (Exception ex)
             {
