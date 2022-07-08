@@ -576,6 +576,30 @@ namespace HatFrameworkDev
             }
         }
 
+        public async Task BrowserBasicAuthentication(string user, string pass)
+        {
+            statusPageLoad = false;
+            int step = SendMessage($"BrowserBasicAuthentication(\"{user}\", \"{pass}\")", PROCESS, "Выполняется базовая авторизация", IMAGE_STATUS_PROCESS);
+            if (DefineTestStop(step) == true) return;
+
+            try
+            {
+                BrowserView.CoreWebView2.BasicAuthenticationRequested += delegate (object sender, CoreWebView2BasicAuthenticationRequestedEventArgs args)
+                {
+                    args.Response.UserName = "zion";
+                    args.Response.Password = "newautotestreport";
+                    EditMessage(step, null, COMPLETED, $"Баговая авторизация - выполнена", IMAGE_STATUS_MESSAGE);
+                };
+            }
+            catch (Exception ex)
+            {
+                EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
+                TestStopAsync();
+                ConsoleMsgError(ex.ToString());
+            }
+        }
+
+
         public async Task<string> ExecuteJavaScriptAsync(string script)
         {
             string result = null;
