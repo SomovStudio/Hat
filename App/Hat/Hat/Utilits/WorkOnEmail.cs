@@ -22,19 +22,39 @@ namespace Hat
             try
             {
                 // почта получателя (подготовка)
-                string dataMails = Config.dataMail[3];                              
-                string[] mails = dataMails.Split(' ');
+                string mailFrom = Config.dataMail[0];
+                string userFrom = Config.dataMail[1];
+                string passFrom = Config.dataMail[2];
+                string mailsTo = Config.dataMail[3];
+                string smtpServer = Config.dataMail[4];
+                string portServer = Config.dataMail[5];
+                string ssl = Config.dataMail[6];
+
+                /*
+                Config.browserForm.consoleMsg($"mailFrom: {mailFrom}");
+                Config.browserForm.consoleMsg($"userFrom: {userFrom}");
+                Config.browserForm.consoleMsg($"passFrom: {passFrom}");
+                Config.browserForm.consoleMsg($"mailsTo: {mailsTo}");
+                Config.browserForm.consoleMsg($"smtpServer: {smtpServer}");
+                Config.browserForm.consoleMsg($"portServer: {portServer}");
+                Config.browserForm.consoleMsg($"ssl: {ssl}");
+
+                Config.browserForm.consoleMsg($"subject: {subject}");
+                Config.browserForm.consoleMsg($"body: {body}");
+                */
+
+                string[] mails = mailsTo.Split(' ');
                 int count = mails.Length;
 
                 // отправитель и получатель
-                MailAddress from = new MailAddress(Config.dataMail[0], "Browser Hat");  // отправитель
-                MailAddress to = new MailAddress(mails[0]);                             // получатель
+                MailAddress from = new MailAddress(mailFrom, "Browser Hat");    // отправитель
+                MailAddress to = new MailAddress(mails[0]);                     // получатель
 
                 // создаем объект сообщения
                 MailMessage message = new MailMessage(from, to);
-                message.Subject = subject;                                              // тема письма
-                message.Body = body;                                                    // текст письма
-                message.IsBodyHtml = true;                                              // письмо представляет код html
+                message.Subject = subject;                                      // тема письма
+                message.Body = body;                                            // текст письма
+                message.IsBodyHtml = true;                                      // письмо представляет код html
 
                 // копии письма
                 if(count > 1)
@@ -46,11 +66,11 @@ namespace Hat
                 }                             
                 
                 // адрес smtp-сервера и порт, с которого будем отправлять письмо
-                SmtpClient smtp = new SmtpClient(Config.dataMail[4], Convert.ToInt32(Config.dataMail[5]));
+                SmtpClient smtp = new SmtpClient(smtpServer, Convert.ToInt32(portServer));
                 
                 // логин и пароль
-                smtp.Credentials = new NetworkCredential(Config.dataMail[1], Config.dataMail[2]);
-                if (Config.dataMail[2] == "true") smtp.EnableSsl = true;
+                smtp.Credentials = new NetworkCredential(userFrom, passFrom);
+                if (ssl == "true") smtp.EnableSsl = true;
                 else smtp.EnableSsl = false;
 
                 // отправка письма
