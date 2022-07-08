@@ -1,4 +1,7 @@
 # Hat
+
+[![License](http://img.shields.io/:license-mit-blue.svg)](https://github.com/SomovStudio/Hat/blob/main/LICENSE)
+
 Браузер со встроенной технологией автоматизации тестирования Web приложений.
 <br>
 Особенность браузера Hat в том что автотесты напрямую выполняются в браузере без Selenium и WebDriver.
