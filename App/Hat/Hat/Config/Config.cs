@@ -16,6 +16,8 @@ namespace Hat
         public bool EditorTopMost { get; set; }
 
         public string[] Libraries { get; set; }
+
+        public string[] DataMail { get; set; }
     }
 
     public static class Config
@@ -57,6 +59,16 @@ namespace Hat
             "System.Xml.dll",
             "System.Xml.Linq.dll"
         };
+        public static string[] dataMail = new string[]
+        {
+            "from@mail.com",                // 0 - Почта отправителя
+            "user",                         // 1 - Имя отправителя
+            "pass",                         // 2 - Пароль отправителя
+            "to1@mail.com to2@mail.com",    // 3 - Почта получателя
+            "smtp.yandex.ru",               // 4 - smtp
+            "587",                          // 5 - port (587)
+            "true"                          // 6 - ssl
+        };
 
         public static string getConfig()
         {
@@ -70,6 +82,7 @@ namespace Hat
                 jsonConfig.Encoding = encoding;
                 jsonConfig.EditorTopMost = editorTopMost;
                 jsonConfig.Libraries = libraries;
+                jsonConfig.DataMail = dataMail;
                 content = JsonConvert.SerializeObject(jsonConfig);
             }
             catch (Exception ex)
@@ -107,6 +120,7 @@ namespace Hat
                 encoding = jsonConfig.Encoding;
                 editorTopMost = jsonConfig.EditorTopMost;
                 libraries = jsonConfig.Libraries;
+                dataMail = jsonConfig.DataMail;
             }
             catch (Exception ex)
             {
