@@ -58,9 +58,11 @@ namespace HatFrameworkDev
         private MethodInfo getNameAutotest;         // Функция: getNameAutotest - возвращает имя запущенного автотеста
         private MethodInfo saveReport;              // функция: saveReport - вызывает метод сохранения отчета
         private MethodInfo saveReportScreenshotAsync; // функция: saveReportScreenshotAsync - сохраняет скриншот текущего состояния браузера
+        private MethodInfo sendMail;                // функция: sendMail - отправка отчета о падении автотеста по почте
 
         private bool statusPageLoad = false;    // флаг: статус загрузки страницы
         private bool testStop = false;          // флаг: остановка теста
+        private bool sendReportByMail = false;  // флаг: отправка отчета по почте
         private string assertStatus = null;     // флаг: рузельтат проверки
 
         public Tester(Form browserForm)
@@ -83,6 +85,7 @@ namespace HatFrameworkDev
                 getNameAutotest = BrowserWindow.GetType().GetMethod("getNameAutotest");
                 saveReport = BrowserWindow.GetType().GetMethod("saveReport");
                 saveReportScreenshotAsync = BrowserWindow.GetType().GetMethod("saveReportScreenshotAsync");
+                sendMail = BrowserWindow.GetType().GetMethod("sendMail");
 
                 MethodInfo mi = BrowserWindow.GetType().GetMethod("getWebView");
                 BrowserView = (Microsoft.Web.WebView2.WinForms.WebView2)mi.Invoke(BrowserWindow, null);
@@ -356,7 +359,7 @@ namespace HatFrameworkDev
                     browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { "-------------------------------" + Environment.NewLine, default, default, default, false });
 
                     Task screenshot = (Task)saveReportScreenshotAsync.Invoke(BrowserWindow, null);
-                    await screenshot;
+                    await screenshot; // создание скриншота
                 }
                 else
                 {
@@ -368,7 +371,8 @@ namespace HatFrameworkDev
                     browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { "-------------------------------" + Environment.NewLine, default, default, default, false });
                 }
 
-                saveReport.Invoke(BrowserWindow, null);
+                saveReport.Invoke(BrowserWindow, null); // сохранение отчета
+                if (sendReportByMail == true) sendMail.Invoke(BrowserWindow, null); // отправка отчета по почте
             }
             catch (Exception ex)
             {
@@ -590,6 +594,24 @@ namespace HatFrameworkDev
                     args.Response.Password = "newautotestreport";
                     EditMessage(step, null, COMPLETED, $"Баговая авторизация - выполнена", IMAGE_STATUS_MESSAGE);
                 };
+            }
+            catch (Exception ex)
+            {
+                EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
+                TestStopAsync();
+                ConsoleMsgError(ex.ToString());
+            }
+        }
+
+        public async Task BrowserEnableSendMailAsync()
+        {
+            int step = SendMessage($"BrowserEnableSendMailAsync()", PROCESS, "Включение опции отправки отчета на почту", IMAGE_STATUS_PROCESS);
+            if (DefineTestStop(step) == true) return;
+
+            try
+            {
+                sendReportByMail = true;
+                EditMessage(step, null, PASSED, "Включена опция отправки отчета на почту", IMAGE_STATUS_MESSAGE);
             }
             catch (Exception ex)
             {

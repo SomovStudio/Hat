@@ -377,7 +377,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsgError(ex.ToString());
+                consoleMsgError(ex.Message);
             }
 
         }
@@ -2110,9 +2110,9 @@ namespace Hat
 
         private void toolStripButton13_Click(object sender, EventArgs e)
         {
-            //Autotests.devTestAsync();
+            Autotests.devTestAsync();
 
-            sendMail();
+            //sendMail();
 
             /*
             cleadMessageStep();

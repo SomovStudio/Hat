@@ -74,16 +74,21 @@ namespace Hat
 
         public static async Task devTestAsync()
         {
-            /*
             HatFrameworkDev.Tester tester = new HatFrameworkDev.Tester(Config.browserForm);
+            await tester.BrowserEnableSendMailAsync();
             await tester.TestBeginAsync();
             await tester.GoToUrlAsync("https://somovstudio.github.io/test.html", 5);
-            string html = await tester.GetHtmlFromElementByTagAsync("input", 0);
-            tester.ConsoleMsg(html);
-            await tester.AssertTrueAsync(false);
+            await tester.SetValueInElementByIdAsync("login", "admin");
+            await tester.WaitAsync(2);
+            await tester.SetValueInElementByIdAsync("pass", "0001");
+            await tester.WaitAsync(2);
+            await tester.ClickElementByIdAsync("buttonLogin");
+            await tester.WaitAsync(2);
+            string actual = await tester.GetValueFromElementByIdAsync("textarea");
+            string expected = "\"Вы успешно авторизованы\"";
+            await tester.WaitVisibleElementByIdAsync("result", 5);
+            await tester.AssertEqualsAsync(expected, actual);
             await tester.TestEndAsync();
-            await tester.BrowserCloseAsync();
-            */
         }
 
         public static void readNodes(TreeNodeCollection _nodes)
