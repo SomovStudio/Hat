@@ -45,6 +45,7 @@ namespace Hat
                 this.Height = 900;
                 numericUpDownBrowserWidth.Value = panel1.Width;
                 numericUpDownBrowserHeight.Value = panel1.Height;
+                if (Config.openHtmlFile != null) toolStripComboBoxUrl.Text = Config.openHtmlFile;
                 webView2.Source = new Uri(toolStripComboBoxUrl.Text);
                 toolStripStatusLabelProjectPath.Text = Config.projectPath;
 
@@ -67,8 +68,6 @@ namespace Hat
                     toolStripStatusLabelProjectFolderFile.Text = Config.selectName;
                     PlayTest(Config.selectName);
                 }
-
-                
             }
             catch (Exception ex)
             {
