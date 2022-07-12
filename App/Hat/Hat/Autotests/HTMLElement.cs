@@ -455,7 +455,7 @@ namespace HatFrameworkDev
             await execute(script, step, $"Опцыя выбрана", $"Не удалось выбрать опцию");
         }
 
-        public async Task<string> GetOntionAsync(string by)
+        public async Task<string> GetOptionAsync(string by)
         {
             int step = _tester.SendMessage($"GetOntionAsync()", Tester.PROCESS, "Получение данных выбранной опции", Tester.IMAGE_STATUS_PROCESS);
             if (_tester.DefineTestStop(step) == true) return null;

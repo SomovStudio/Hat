@@ -102,9 +102,9 @@ namespace Hat
             await tester.WaitAsync(5);
             await element.SelectOptionAsync(HatFrameworkDev.HTMLElement.BY_TEXT, "Other");
 
-            string index = await element.GetOntionAsync(HatFrameworkDev.HTMLElement.BY_INDEX);
-            string text = await element.GetOntionAsync(HatFrameworkDev.HTMLElement.BY_TEXT);
-            string value = await element.GetOntionAsync(HatFrameworkDev.HTMLElement.BY_VALUE);
+            string index = await element.GetOptionAsync(HatFrameworkDev.HTMLElement.BY_INDEX);
+            string text = await element.GetOptionAsync(HatFrameworkDev.HTMLElement.BY_TEXT);
+            string value = await element.GetOptionAsync(HatFrameworkDev.HTMLElement.BY_VALUE);
 
             await tester.AssertEqualsAsync("2", index);
             await tester.AssertEqualsAsync("\"Other\"", text);
