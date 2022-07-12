@@ -395,4 +395,17 @@ REST запросы
 		await tester.GoToUrlAsync("http://test.ru/basic_auth.html", 5);
 		await tester.TestEndAsync();
 		
-		
+Работа с элементом select
+
+	SelectOptionByIndexAsync(int index) - выбирает option по указанному индексу
+	SelectOptionByValueAsync(string value) - выбирает option по указанному значению
+	SelectOptionByTextAsync(string text) - выбирает option по указанному тексту
+
+		Tester tester = new Tester(Config.browserForm);
+		await tester.TestBeginAsync();
+		await tester.GoToUrlAsync("https://somovstudio.github.io/test2.html", 5);
+		HTMLElement element = await tester.GetElementAsync(Tester.BY_XPATH, "//*[@id='MySelect']");
+		await element.SelectOptionByIndexAsync(2);
+		await element.SelectOptionByValueAsync("Mobile");
+		await element.SelectOptionByTextAsync("Other");
+		await tester.TestEndAsync();

@@ -74,6 +74,7 @@ namespace Hat
 
         public static async Task devTestAsync()
         {
+            /*
             HatFrameworkDev.Tester tester = new HatFrameworkDev.Tester(Config.browserForm);
             await tester.BrowserEnableSendMailAsync();
             await tester.TestBeginAsync();
@@ -88,6 +89,16 @@ namespace Hat
             string expected = "\"Вы успешно авторизованы\"";
             await tester.WaitVisibleElementByIdAsync("result", 5);
             await tester.AssertEqualsAsync(expected, actual);
+            await tester.TestEndAsync();
+            */
+
+            HatFrameworkDev.Tester tester = new HatFrameworkDev.Tester(Config.browserForm);
+            await tester.TestBeginAsync();
+            await tester.GoToUrlAsync("https://somovstudio.github.io/test2.html", 5);
+            HatFrameworkDev.HTMLElement element = await tester.GetElementAsync(HatFrameworkDev.Tester.BY_XPATH, "//*[@id='MySelect']");
+            await element.SelectOptionByIndexAsync(2);
+            await element.SelectOptionByValueAsync("Mobile");
+            await element.SelectOptionByTextAsync("Other");
             await tester.TestEndAsync();
         }
 

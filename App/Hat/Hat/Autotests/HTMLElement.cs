@@ -414,5 +414,107 @@ namespace HatFrameworkDev
                 _tester.ConsoleMsgError(ex.ToString());
             }
         }
+
+        public async Task SelectOptionByIndexAsync(int index)
+        {
+            int step = _tester.SendMessage($"SelectOptionByIndexAsync({index})", Tester.PROCESS, $"Выбирается опция с индексом {index}", Tester.IMAGE_STATUS_PROCESS);
+            if (_tester.DefineTestStop(step) == true) return;
+
+            string script = null;
+            if (_by == Tester.BY_CSS)
+            {
+                script = "(function(){";
+                script += $"var element = document.querySelector(\"{_locator}\");";
+                script += $"element.options[{index}].selected = true;";
+                script += "return element;";
+                script += "}());";
+            }
+            else if (_by == Tester.BY_XPATH)
+            {
+                script = "(function(){";
+                script += $"var element = document.evaluate(\"{_locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
+                script += $"element.options[{index}].selected = true;";
+                script += "return element;";
+                script += "}());";
+            }
+            await execute(script, step, $"Выбрана опция с индексом {index}", $"Не удалось выбрать опцию с индексом {index}");
+        }
+
+        public async Task SelectOptionByValueAsync(string value)
+        {
+            int step = _tester.SendMessage($"SelectOptionByValueAsync(\"{value}\")", Tester.PROCESS, $"Выбирается опция с значением {value}", Tester.IMAGE_STATUS_PROCESS);
+            if (_tester.DefineTestStop(step) == true) return;
+
+            string script = null;
+            if (_by == Tester.BY_CSS)
+            {
+                script = "(function(){";
+                script += $"var element = document.querySelector(\"{_locator}\");";
+                script += "for (var i = 0; i < element.options.length; ++i) {";
+                script += $"if (element.options[i].value === '{value}')";
+                script += "{";
+                script += "element.options[i].selected = true;";
+                script += "break;";
+                script += "}";
+                script += "}";
+                script += "return element;";
+                script += "}());";
+            }
+            else if (_by == Tester.BY_XPATH)
+            {
+                script = "(function(){";
+                script += $"var element = document.evaluate(\"{_locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
+                script += "for (var i = 0; i < element.options.length; ++i) {";
+                script += $"if (element.options[i].value === '{value}')";
+                script += "{";
+                script += "element.options[i].selected = true;";
+                script += "break;";
+                script += "}";
+                script += "}";
+                script += "return element;";
+                script += "}());";
+            }
+            await execute(script, step, $"Выбрана опция с значением {value}", $"Не удалось выбрать опцию с значением {value}");
+        }
+
+        public async Task SelectOptionByTextAsync(string text)
+        {
+            int step = _tester.SendMessage($"SelectOptionByTextAsync(\"{text}\")", Tester.PROCESS, $"Выбирается опция с текстом {text}", Tester.IMAGE_STATUS_PROCESS);
+            if (_tester.DefineTestStop(step) == true) return;
+
+            string script = null;
+            if (_by == Tester.BY_CSS)
+            {
+                script = "(function(){";
+                script += $"var element = document.querySelector(\"{_locator}\");";
+                script += "for (var i = 0; i < element.options.length; ++i) {";
+                script += $"if (element.options[i].text === '{text}')";
+                script += "{";
+                script += "element.options[i].selected = true;";
+                script += "break;";
+                script += "}";
+                script += "}";
+                script += "return element;";
+                script += "}());";
+            }
+            else if (_by == Tester.BY_XPATH)
+            {
+                script = "(function(){";
+                script += $"var element = document.evaluate(\"{_locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
+                script += "for (var i = 0; i < element.options.length; ++i) {";
+                script += $"if (element.options[i].text === '{text}')";
+                script += "{";
+                script += "element.options[i].selected = true;";
+                script += "break;";
+                script += "}";
+                script += "}";
+                script += "return element;";
+                script += "}());";
+            }
+            await execute(script, step, $"Выбрана опция с текстом {text}", $"Не удалось выбрать опцию с текстом {text}");
+        }
+
+
+
     }
 }
