@@ -466,3 +466,53 @@ using (System.IO.FileStream file = System.IO.File.Create("image.jpeg"))
 	await tester.BrowserView.CoreWebView2.CapturePreviewAsync(
 	Microsoft.Web.WebView2.Core.CoreWebView2CapturePreviewImageFormat.Jpeg, file);
 }
+
+
+---------------------------------------------
+НАЖАТИЕ КНОПКИ
+https://www.codegrepper.com/code-examples/javascript/dispatch+keydown+event+javascript
+https://thewebdev.info/2021/02/27/how-to-simulate-a-keypress-event-programmatically-with-javascript/
+
+
+var btn = document.getElementById('buttonLogin');
+btn.dispatchEvent(new KeyboardEvent('keypress', { 'key':'Enter' }));
+btn.dispatchEvent(new KeyboardEvent('keydown', {'key':'Enter'} ));
+btn.dispatchEvent(new KeyboardEvent('keyup', {'key':'Enter'} ));
+
+var input = document.getElementById('login');
+input.dispatchEvent(new KeyboardEvent('keydown', {'key': 'a'}));
+input.dispatchEvent(
+  new KeyboardEvent("keydown", {
+    key: "e",
+    keyCode: 69,
+    code: "KeyE",
+    which: 69,
+    shiftKey: false,
+    ctrlKey: false,
+    metaKey: false
+  })
+);
+
+---------------------------------------------
+ВЫБРАТЬ Option ИЗ Select
+
+var select = document.getElementById('MySelect');
+var value = select.options[select.selectedIndex].value;
+var text = select.options[select.selectedIndex].text;
+select.options[2].selected = 'selected';
+select.options[1].selected = true;
+for (var i = 0; i < select.options.length; ++i) {
+	if (select.options[i].text === _text)
+		select.options[i].selected = true;
+}
+
+---------------------------------------------
+Проверка кликабельности
+https://stackoverflow.com/questions/5632016/javascript-how-to-check-if-an-element-is-clickable-or-not
+
+if(e.getAttribute('onclick')!=null)
+if((e.getAttribute('onclick')!=null)||(e.getAttribute('href')!=null)) - clickable
+if((e.getAttribute('onclick')===null)&&(e.getAttribute('href')===null)) - not clickable
+
+
+

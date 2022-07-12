@@ -28,6 +28,7 @@ namespace Hat
         public static string currentBrowserVersion = "1.1.1";   // текущая версия браузера
         public static string dateBrowserUpdate = "22.07.2022";  // дата последнего обновления
 
+        public static string openHtmlFile = null;             // имя открываемого html файла при запуске браузера
         public static bool commandLineMode = false;         // флаг показывающий запуск приложения из командной строки
         public static string projectPath = "(не открыт)";   // полный путь к папке проекта
         public static string selectName = "";               // имя выбранного файла или папки

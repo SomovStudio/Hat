@@ -2391,6 +2391,34 @@ namespace HatFramework
             await execute(script, step, $"В элемент введен html {html}", $"Не удалось найти или ввести html в элемент по Tag: {tag} (Index: {index})");
         }
 
+        public async Task<bool> IsClickableElementAsync(string by, string locator)
+        {
+            int step = SendMessage($"IsClickableElementAsync(\"{by}\", \"{locator}\")", PROCESS, "Определяется кликабельность элемента", IMAGE_STATUS_PROCESS);
+            if (DefineTestStop(step) == true) return false;
+
+            bool clickable = false;
+            try
+            {
+                string script = "(function(){";
+                if (by == BY_CSS) script += $"var element = document.querySelector(\"{locator}\");";
+                else script += $"var element = document.evaluate(\"{locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
+                script += "if((element.getAttribute('onclick')!=null)||(element.getAttribute('href')!=null)) return true;";
+                script += "return false;";
+                script += "}());";
+                string result = await executeJS(script);
+                if (result != "null" && result != null && result == "true") clickable = true;
+                else clickable = false;
+                EditMessage(step, null, PASSED, $"Определена кликадельность элемента: {result}", IMAGE_STATUS_PASSED);
+            }
+            catch (Exception ex)
+            {
+                EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
+                TestStopAsync();
+                ConsoleMsgError(ex.ToString());
+            }
+            return clickable;
+        }
+
 
 
 

@@ -25,6 +25,11 @@ namespace Hat
                 Config.selectName = args[0];
                 Config.projectPath = args[1];
             }
+            if (args.Length == 1)
+            {
+                if (args[0].Contains(".html") || args[0].Contains(".htm")) Config.openHtmlFile = args[0];
+            }
+
             IntPtr hWnd = Process.GetCurrentProcess().MainWindowHandle;
             ShowWindow(hWnd, 0);
 

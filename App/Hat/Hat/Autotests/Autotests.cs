@@ -74,6 +74,7 @@ namespace Hat
 
         public static async Task devTestAsync()
         {
+            /*
             HatFrameworkDev.Tester tester = new HatFrameworkDev.Tester(Config.browserForm);
             await tester.BrowserEnableSendMailAsync();
             await tester.TestBeginAsync();
@@ -88,6 +89,26 @@ namespace Hat
             string expected = "\"Вы успешно авторизованы\"";
             await tester.WaitVisibleElementByIdAsync("result", 5);
             await tester.AssertEqualsAsync(expected, actual);
+            await tester.TestEndAsync();
+            */
+
+            HatFrameworkDev.Tester tester = new HatFrameworkDev.Tester(Config.browserForm);
+            await tester.TestBeginAsync();
+            await tester.GoToUrlAsync("https://somovstudio.github.io/test2.html", 5);
+            HatFrameworkDev.HTMLElement element = await tester.GetElementAsync(HatFrameworkDev.Tester.BY_XPATH, "//*[@id='MySelect']");
+            await element.SelectOptionAsync(HatFrameworkDev.HTMLElement.BY_INDEX, "2");
+            await tester.WaitAsync(5);
+            await element.SelectOptionAsync(HatFrameworkDev.HTMLElement.BY_VALUE, "Mobile");
+            await tester.WaitAsync(5);
+            await element.SelectOptionAsync(HatFrameworkDev.HTMLElement.BY_TEXT, "Other");
+
+            string index = await element.GetOptionAsync(HatFrameworkDev.HTMLElement.BY_INDEX);
+            string text = await element.GetOptionAsync(HatFrameworkDev.HTMLElement.BY_TEXT);
+            string value = await element.GetOptionAsync(HatFrameworkDev.HTMLElement.BY_VALUE);
+
+            await tester.AssertEqualsAsync("2", index);
+            await tester.AssertEqualsAsync("\"Other\"", text);
+            await tester.AssertEqualsAsync("\"Other\"", value);
             await tester.TestEndAsync();
         }
 

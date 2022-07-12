@@ -1788,7 +1788,7 @@ if (response.IsSuccessStatusCode)\par
 \cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \f0\lang1033 BrowserGoBackAsync(int sec)\f1\lang1049\par
 \cf3\par
 \cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
-\cf0\f0\lang1033 Tester tester = new Tester(Config.browserForm);\par
+\cf0\f0\lang1033 Tester tester = new Tester(browserForm);\par
 await tester.TestBeginAsync();\par
 await tester.GoToUrlAsync(""https://www.yahoo.com/"", 5);\par
 string currentUrl = await tester.GetUrlAsync();\par
@@ -1816,7 +1816,7 @@ await tester.TestEndAsync();\par
 \cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \f0\lang1033 BrowserGoForwardAsync(int sec)\f1\lang1049\par
 \cf3\par
 \cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
-\cf0\f0\lang1033 Tester tester = new Tester(Config.browserForm);\par
+\cf0\f0\lang1033 Tester tester = new Tester(browserForm);\par
 await tester.TestBeginAsync();\par
 await tester.GoToUrlAsync(""https://www.yahoo.com/"", 5);\par
 string currentUrl = await tester.GetUrlAsync();\par
@@ -1844,7 +1844,7 @@ await tester.TestEndAsync();\par
 \cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \f0\lang1033 BrowserBasicAuthenticationAsync(string user, string pass)\f1\lang1049\par
 \cf3\par
 \cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
-\cf0\f0\lang1033 Tester tester = new Tester(Config.browserForm);\par
+\cf0\f0\lang1033 Tester tester = new Tester(browserForm);\par
 await tester.BrowserBasicAuthenticationAsync(""user"", ""pass"");\par
 await tester.TestBeginAsync();\par
 await tester.GoToUrlAsync(""http://test.ru/basic_auth.html"", 5);\par
@@ -1859,13 +1859,132 @@ await tester.TestEndAsync();\par
 \cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \f0\lang1033 BrowserEnableSendMailAsync()\f1\lang1049\par
 \cf3\par
 \cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
-\cf0\f0\lang1033 Tester tester = new Tester(Config.browserForm);\par
+\cf0\f0\lang1033 Tester tester = new Tester(browserForm);\par
 await tester.BrowserEnableSendMailAsync();\par
 await tester.TestBeginAsync();\par
 \f1\lang1049 ...\f0\lang1033\par
 await tester.TestEndAsync();\par
 }",
 
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.22000}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 SelectOptionAsync\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'fb\'e1\'e8\'f0\'e0\'e5\'f2 \f0\lang1033 option \f1\lang1049\'e8\'e7 \'fd\'eb\'e5\'ec\'e5\'ed\'f2\'e0 \f0\lang1033 select \f1\lang1049\'ef\'ee \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'ee\'ec\'f3 \'e8\'ed\'e4\'e5\'ea\'f1\'f3, \'f2\'e5\'ea\'f1\'f2\'f3 \'e8\'eb\'e8 \'e7\'ed\'e0\'f7\'e5\'ed\'e8\'fe. \par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \f0\lang1033 SelectOptionAsync(string by, string value)\f1\lang1049\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0\f0\lang1033 Tester tester = new Tester(browserForm);\par
+await tester.TestBeginAsync();\par
+await tester.GoToUrlAsync(""https://somovstudio.github.io/test2.html"", 5);\par
+HTMLElement element = await tester.GetElementAsync(Tester.BY_XPATH, ""//*[@id='MySelect']"");\par
+await element.SelectOptionAsync(HTMLElement.BY_INDEX, ""2"");\par
+await element.SelectOptionAsync(HTMLElement.BY_VALUE, ""Mobile"");\par
+await element.SelectOptionAsync(HTMLElement.BY_TEXT, ""Other"");\par
+string index = await element.GetOptionAsync(HTMLElement.BY_INDEX);\par
+string text = await element.GetOptionAsync(HTMLElement.BY_TEXT);\par
+string value = await element.GetOptionAsync(HTMLElement.BY_VALUE);\par
+...\par
+await tester.TestEndAsync();\par
+    }",
+
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.22000}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 GetOptionAsync\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2 \'e8\'ed\'e4\'e5\'ea\'f1, \'f2\'e5\'ea\'f1\'f2 \'e8\'eb\'e8 \'e7\'ed\'e0\'f7\'e5\'ed\'e8\'e5 \'e2\'fb\'e1\'ee\'e0\'ed\'ed\'ee\'e9 \'ee\'ef\'f6\'e8\'e8\f0\lang1033  \f1\lang1049\'e2\'fb\'e1\'f0\'e0\'ed\'ed\'ee\'e9 \f0\lang1033 option \f1\lang1049\'e8\'e7 \'fd\'eb\'e5\'ec\'e5\'ed\'f2\'e0 \f0\lang1033 select\f1\lang1049\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \f0\lang1033 GetOptionAsync(string by)\f1\lang1049\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0\f0\lang1033 Tester tester = new Tester(browserForm);\par
+await tester.TestBeginAsync();\par
+await tester.GoToUrlAsync(""https://somovstudio.github.io/test2.html"", 5);\par
+HTMLElement element = await tester.GetElementAsync(Tester.BY_XPATH, ""//*[@id='MySelect']"");\par
+await element.SelectOptionAsync(HTMLElement.BY_INDEX, ""2"");\par
+await element.SelectOptionAsync(HTMLElement.BY_VALUE, ""Mobile"");\par
+await element.SelectOptionAsync(HTMLElement.BY_TEXT, ""Other"");\par
+string index = await element.GetOptionAsync(HTMLElement.BY_INDEX);\par
+string text = await element.GetOptionAsync(HTMLElement.BY_TEXT);\par
+string value = await element.GetOptionAsync(HTMLElement.BY_VALUE);\par
+...\par
+await tester.TestEndAsync();\par
+    }",
+
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.22000}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 BY_INDEX\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ea\'ee\'ed\'f1\'f2\'e0\'ed\'f2\'e0 \'ee\'e1\'ee\'e7\'ed\'e0\'f7\'e0\'e5\'f2 \'f2\'e8\'ef \'ee\'e1\'f0\'e0\'e1\'e0\'f2\'fb\'e2\'e0\'e5\'ec\'ee\'e3\'ee \'e7\'ed\'e0\'f7\'e5\'ed\'e8\'ff\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \f0\lang1033 BY_INDEX = ""BY_INDEX""\f1\lang1049\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0\f0\lang1033 HTMLElement.BY_INDEX\par
+}",
+
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.22000}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 BY_TEXT\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ea\'ee\'ed\'f1\'f2\'e0\'ed\'f2\'e0 \'ee\'e1\'ee\'e7\'ed\'e0\'f7\'e0\'e5\'f2 \'f2\'e8\'ef \'ee\'e1\'f0\'e0\'e1\'e0\'f2\'fb\'e2\'e0\'e5\'ec\'ee\'e3\'ee \'e7\'ed\'e0\'f7\'e5\'ed\'e8\'ff\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \f0\lang1033 BY_TEXT = ""BY_TEXT""\f1\lang1049\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0\f0\lang1033 HTMLElement.BY_TEXT\par
+}
+ ",
+
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.22000}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 BY_VALUE\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ea\'ee\'ed\'f1\'f2\'e0\'ed\'f2\'e0 \'ee\'e1\'ee\'e7\'ed\'e0\'f7\'e0\'e5\'f2 \'f2\'e8\'ef \'ee\'e1\'f0\'e0\'e1\'e0\'f2\'fb\'e2\'e0\'e5\'ec\'ee\'e3\'ee \'e7\'ed\'e0\'f7\'e5\'ed\'e8\'ff\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \f0\lang1033 BY_VALUE = ""BY_VALUE""\f1\lang1049\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0\f0\lang1033 HTMLElement.BY_VALUE\par
+}",
+
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.22000}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 IsClickableAsync\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'ee\'ef\'f0\'e5\'e4\'e5\'eb\'ff\'e5\'f2 \'ea\'eb\'e8\'ea\'e0\'e1\'e5\'eb\'fc\'ed\'ee\'f1\'f2\'fc \'fd\'eb\'e5\'ec\'e5\'ed\'f2\'e0 \'e8 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2 true \'e8\'eb\'e8 false\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \f0\lang1033 IsClickableAsync()\f1\lang1049\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0\f0\lang1033 Tester tester = new Tester(browserForm);\par
+await tester.TestBeginAsync();\par
+await tester.GoToUrlAsync(""https://somovstudio.github.io/test.html"", 5);\par
+HTMLElement element = await tester.GetElementAsync(Tester.BY_XPATH, ""//*[@id='buttonLogin']"");\par
+bool clickable = await element.IsClickableAsync();\par
+await tester.AssertTrueAsync(clickable);\par
+await tester.TestEndAsync();\par
+    }",
+
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.22000}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 IsClickableElementAsync\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'ee\'ef\'f0\'e5\'e4\'e5\'eb\'ff\'e5\'f2 \'ea\'eb\'e8\'ea\'e0\'e1\'e5\'eb\'fc\'ed\'ee\'f1\'f2\'fc \'fd\'eb\'e5\'ec\'e5\'ed\'f2\'e0 \'e8 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2 true \'e8\'eb\'e8 false\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \f0\lang1033 IsClickableElementAsync(string by, string locator)\f1\lang1049\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0\f0\lang1033 Tester tester = new Tester(browserForm);\par
+await tester.TestBeginAsync();\par
+await tester.GoToUrlAsync(""https://somovstudio.github.io/test.html"", 5);\par
+bool clickable = await tester.IsClickableElementAsync(Tester.BY_XPATH, ""//*[@id='buttonLogin']"");\par
+await tester.AssertTrueAsync(clickable);\par
+await tester.TestEndAsync();\par
+    }",
+
+@"",
+@"",
+@"",
+@"",
+@"",
+@"",
+@"",
+@"",
 @"",
 @"",
 @"",
@@ -2462,15 +2581,27 @@ await tester.TestEndAsync();\par
                     if (value == "BrowserGoForwardAsync") richTextBox1.Rtf = handbook[140];
                     if (value == "BrowserBasicAuthenticationAsync") richTextBox1.Rtf = handbook[141];
                     if (value == "BrowserEnableSendMailAsync") richTextBox1.Rtf = handbook[142];
+                    
+                    if (value == "SelectOptionAsync") richTextBox1.Rtf = handbook[143];
+                    if (value == "GetOptionAsync") richTextBox1.Rtf = handbook[144];
+                    if (value == "BY_INDEX") richTextBox1.Rtf = handbook[145];
+                    if (value == "BY_TEXT") richTextBox1.Rtf = handbook[146];
+                    if (value == "BY_VALUE") richTextBox1.Rtf = handbook[147];
+                    if (value == "IsClickableAsync") richTextBox1.Rtf = handbook[148];
+                    if (value == "IsClickableElementAsync") richTextBox1.Rtf = handbook[149];
+
                     /*
-                    if (value == "") richTextBox1.Rtf = handbook[143];
-                    if (value == "") richTextBox1.Rtf = handbook[144];
-                    if (value == "") richTextBox1.Rtf = handbook[145];
-                    if (value == "") richTextBox1.Rtf = handbook[146];
-                    if (value == "") richTextBox1.Rtf = handbook[147];
-                    if (value == "") richTextBox1.Rtf = handbook[148];
-                    if (value == "") richTextBox1.Rtf = handbook[149];
                     if (value == "") richTextBox1.Rtf = handbook[150];
+                    if (value == "") richTextBox1.Rtf = handbook[151];
+                    if (value == "") richTextBox1.Rtf = handbook[152];
+                    if (value == "") richTextBox1.Rtf = handbook[153];
+                    if (value == "") richTextBox1.Rtf = handbook[154];
+                    if (value == "") richTextBox1.Rtf = handbook[155];
+                    if (value == "") richTextBox1.Rtf = handbook[156];
+                    if (value == "") richTextBox1.Rtf = handbook[157];
+                    if (value == "") richTextBox1.Rtf = handbook[158];
+                    if (value == "") richTextBox1.Rtf = handbook[159];
+                    if (value == "") richTextBox1.Rtf = handbook[160];
                     */
                 }
             }

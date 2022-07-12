@@ -395,4 +395,50 @@ REST запросы
 		await tester.GoToUrlAsync("http://test.ru/basic_auth.html", 5);
 		await tester.TestEndAsync();
 		
+Работа с элементом select
+
+	SelectOptionAsync(string by, string value) - выбирает option по указанному индексу, тексту или значению
+	GetOptionAsync(string by) - возвращает индекс, текст или значение выбоанной опции
+
+		Tester tester = new Tester(browserForm);
+		await tester.TestBeginAsync();
+		await tester.GoToUrlAsync("https://somovstudio.github.io/test2.html", 5);
+		HTMLElement element = await tester.GetElementAsync(Tester.BY_XPATH, "//*[@id='MySelect']");
+		await element.SelectOptionAsync(HTMLElement.BY_INDEX, "2");
+		await tester.WaitAsync(5);
+		await element.SelectOptionAsync(HTMLElement.BY_VALUE, "Mobile");
+		await tester.WaitAsync(5);
+		await element.SelectOptionAsync(HTMLElement.BY_TEXT, "Other");
+		string index = await element.GetOptionAsync(HTMLElement.BY_INDEX);
+		string text = await element.GetOptionAsync(HTMLElement.BY_TEXT);
+		string value = await element.GetOptionAsync(HTMLElement.BY_VALUE);
+		await tester.AssertEqualsAsync("2", index);
+		await tester.AssertEqualsAsync("\"Other\"", text);
+		await tester.AssertEqualsAsync("\"Other\"", value);
+		await tester.TestEndAsync();
 		
+	BY_INDEX = "BY_INDEX";
+	BY_TEXT = "BY_TEXT";
+	BY_VALUE = "BY_VALUE";
+
+Проверка кликабельности
+
+	IsClickableAsync() - возвражает значение true или false;
+	
+		Tester tester = new Tester(browserForm);
+		await tester.TestBeginAsync();
+		await tester.GoToUrlAsync("https://somovstudio.github.io/test2.html", 5);
+		HTMLElement element = await tester.GetElementAsync(Tester.BY_XPATH, "//*[@id='MyButton']");
+		bool clickable = await element.IsClickableAsync();
+		await tester.AssertTrueAsync(clickable);
+		await tester.TestEndAsync();
+	
+	IsClickableElementAsync(string by, string locator) - возвражает значение true или false;
+	
+		Tester tester = new Tester(browserForm);
+		await tester.TestBeginAsync();
+		await tester.GoToUrlAsync("https://somovstudio.github.io/test2.html", 5);
+		bool clickable = await tester.IsClickableElementAsync(Tester.BY_XPATH, "//*[@id='buttonLogin']");
+		await tester.AssertTrueAsync(clickable);
+		await tester.TestEndAsync();
+

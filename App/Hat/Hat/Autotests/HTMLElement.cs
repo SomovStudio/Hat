@@ -12,6 +12,10 @@ namespace HatFrameworkDev
         private string _by;
         private string _locator;
 
+        public const string BY_INDEX = "BY_INDEX";
+        public const string BY_TEXT = "BY_TEXT";
+        public const string BY_VALUE = "BY_VALUE";
+
         public string Id { get; set; }
         public string Name { get; set; }
         public string Class { get; set; }
@@ -36,11 +40,13 @@ namespace HatFrameworkDev
                 if (result == null)
                 {
                     _tester.EditMessage(step, null, Tester.FAILED, $"{commentfailed} " + Environment.NewLine + $"Результат выполнения скрипта: {result}", Tester.IMAGE_STATUS_FAILED);
+                    //_tester.EditMessage(step, null, Tester.FAILED, commentfailed, Tester.IMAGE_STATUS_FAILED);
                     _tester.TestStopAsync();
                 }
                 else 
                 {
                     _tester.EditMessage(step, null, Tester.PASSED, $"{commentPassed} " + Environment.NewLine + $"Результат выполнения скрипта: {result}", Tester.IMAGE_STATUS_PASSED);
+                    //_tester.EditMessage(step, null, Tester.PASSED, commentPassed, Tester.IMAGE_STATUS_PASSED);
                 }
             }
             catch (Exception ex)
@@ -414,5 +420,78 @@ namespace HatFrameworkDev
                 _tester.ConsoleMsgError(ex.ToString());
             }
         }
+
+        public async Task SelectOptionAsync(string by, string value)
+        {
+            int step = _tester.SendMessage($"SelectOptionAsync({by}, {value})", Tester.PROCESS, $"Выбирается опция", Tester.IMAGE_STATUS_PROCESS);
+            if (_tester.DefineTestStop(step) == true) return;
+
+            string script = "(function(){";
+            if (_by == Tester.BY_CSS) script += $"var element = document.querySelector(\"{_locator}\");";
+            else if (_by == Tester.BY_XPATH) script += $"var element = document.evaluate(\"{_locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
+            if (by == BY_INDEX) script += $"element.options[{value}].selected = true;";
+            if (by == BY_TEXT)
+            {
+                script += "for (var i = 0; i < element.options.length; ++i) {";
+                script += $"if (element.options[i].text === '{value}')";
+                script += "{";
+                script += "element.options[i].selected = true;";
+                script += "break;";
+                script += "}";
+                script += "}";
+            }
+            if (by == BY_VALUE)
+            {
+                script += "for (var i = 0; i < element.options.length; ++i) {";
+                script += $"if (element.options[i].value === '{value}')";
+                script += "{";
+                script += "element.options[i].selected = true;";
+                script += "break;";
+                script += "}";
+                script += "}";
+            }
+            script += "return element;";
+            script += "}());";
+            await execute(script, step, $"Опцыя выбрана", $"Не удалось выбрать опцию");
+        }
+
+        public async Task<string> GetOptionAsync(string by)
+        {
+            int step = _tester.SendMessage($"GetOntionAsync()", Tester.PROCESS, "Получение данных выбранной опции", Tester.IMAGE_STATUS_PROCESS);
+            if (_tester.DefineTestStop(step) == true) return null;
+
+            string script = "(function(){";
+            if (_by == Tester.BY_CSS) script += $"var element = document.querySelector(\"{_locator}\");";
+            else if (_by == Tester.BY_XPATH) script += $"var element = document.evaluate(\"{_locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
+            if (by == BY_INDEX) script += "return element.selectedIndex;";
+            if (by == BY_TEXT) script += "return element.options[element.selectedIndex].text;";
+            if (by == BY_VALUE) script += "return element.options[element.selectedIndex].value;";
+            script += "}());";
+
+            string result = await execute(script, step, "Получен индекс или текст или значение из выбранной опции", "Не удалось получить индекс или текст или значение из выбранной опции");
+            return result;
+        }
+
+        public async Task<bool> IsClickableAsync()
+        {
+            int step = _tester.SendMessage($"IsClickableAsync()", Tester.PROCESS, "Определяется кликабельность элемента", Tester.IMAGE_STATUS_PROCESS);
+            if (_tester.DefineTestStop(step) == true) return false;
+
+            bool clickable = false;
+            string script = "";
+            script += "(function(){ ";
+            if (_by == Tester.BY_CSS) script += $"var elem = document.querySelector(\"{_locator}\");";
+            if (_by == Tester.BY_XPATH) script += $"var elem = document.evaluate(\"{_locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
+            script += "if((elem.getAttribute('onclick')!=null)||(elem.getAttribute('href')!=null)) return true;";
+            script += "return false;";
+            script += "}());";
+
+            string result = await execute(script, step, "Определена кликадельность элемента", "Не удалось определить кликабельность элемента");
+            if (result != "null" && result != null && result == "true") clickable = true;
+            else clickable = false;
+            return clickable;
+        }
+
+
     }
 }
