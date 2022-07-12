@@ -516,6 +516,54 @@ namespace HatFrameworkDev
             await execute(script, step, $"Выбрана опция с текстом {text}", $"Не удалось выбрать опцию с текстом {text}");
         }
 
+        public async Task<string> GetTextSelectOntionAsync()
+        {
+            int step = _tester.SendMessage($"GetTextSelectOntionAsync()", Tester.PROCESS, "Чтение текста из выбранной опции", Tester.IMAGE_STATUS_PROCESS);
+            if (_tester.DefineTestStop(step) == true) return null;
+
+            string script = null;
+            if (_by == Tester.BY_CSS)
+            {
+                script = "(function(){";
+                script += $"var element = document.querySelector(\"{_locator}\");";
+                script += "return element.options[element.selectedIndex].text;";
+                script += "}());";
+            }
+            else if (_by == Tester.BY_XPATH)
+            {
+                script = "(function(){";
+                script += $"var element = document.evaluate(\"{_locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
+                script += "return element.options[element.selectedIndex].text;";
+                script += "}());";
+            }
+            string result = await execute(script, step, "Прочитан текст из выбранной опции", "Не удалось прочитать текст из выбранной опции");
+            return result;
+        }
+
+        public async Task<string> GetValueSelectOntionAsync()
+        {
+            int step = _tester.SendMessage($"GetValueSelectOntionAsync()", Tester.PROCESS, "Чтение значения из выбранной опции", Tester.IMAGE_STATUS_PROCESS);
+            if (_tester.DefineTestStop(step) == true) return null;
+
+            string script = null;
+            if (_by == Tester.BY_CSS)
+            {
+                script = "(function(){";
+                script += $"var element = document.querySelector(\"{_locator}\");";
+                script += "return element.options[element.selectedIndex].value;";
+                script += "}());";
+            }
+            else if (_by == Tester.BY_XPATH)
+            {
+                script = "(function(){";
+                script += $"var element = document.evaluate(\"{_locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
+                script += "return element.options[element.selectedIndex].value;";
+                script += "}());";
+            }
+            string result = await execute(script, step, "Прочитано значение из выбранной опции", "Не удалось прочитать значение из выбранной опции");
+            return result;
+        }
+
 
 
     }

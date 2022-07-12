@@ -99,6 +99,10 @@ namespace Hat
             await element.SelectOptionByIndexAsync(2);
             await element.SelectOptionByValueAsync("Mobile");
             await element.SelectOptionByTextAsync("Other");
+            string text = await element.GetTextSelectOntionAsync();
+            string value = await element.GetValueSelectOntionAsync();
+            await tester.AssertEqualsAsync("\"Other\"", text);
+            await tester.AssertEqualsAsync("\"Other\"", value);
             await tester.TestEndAsync();
         }
 

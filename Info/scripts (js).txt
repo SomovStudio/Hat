@@ -505,3 +505,4 @@ for (var i = 0; i < select.options.length; ++i) {
 	if (select.options[i].text === _text)
 		select.options[i].selected = true;
 }
+

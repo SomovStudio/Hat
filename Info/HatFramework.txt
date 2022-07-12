@@ -400,6 +400,8 @@ REST запросы
 	SelectOptionByIndexAsync(int index) - выбирает option по указанному индексу
 	SelectOptionByValueAsync(string value) - выбирает option по указанному значению
 	SelectOptionByTextAsync(string text) - выбирает option по указанному тексту
+	GetTextSelectOntionAsync() - возвращает текст выбоанной опции
+	GetValueSelectOntionAsync() - возвращает значение выбоанной опции
 
 		Tester tester = new Tester(Config.browserForm);
 		await tester.TestBeginAsync();
@@ -408,4 +410,9 @@ REST запросы
 		await element.SelectOptionByIndexAsync(2);
 		await element.SelectOptionByValueAsync("Mobile");
 		await element.SelectOptionByTextAsync("Other");
+		string text = await element.GetTextSelectOntionAsync();
+		string value = await element.GetValueSelectOntionAsync();
+		await tester.AssertEqualsAsync("\"Other\"", text);
+		await tester.AssertEqualsAsync("\"Other\"", value);
 		await tester.TestEndAsync();
+	
