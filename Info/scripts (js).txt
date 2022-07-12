@@ -506,3 +506,13 @@ for (var i = 0; i < select.options.length; ++i) {
 		select.options[i].selected = true;
 }
 
+---------------------------------------------
+Проверка кликабельности
+https://stackoverflow.com/questions/5632016/javascript-how-to-check-if-an-element-is-clickable-or-not
+
+if(e.getAttribute('onclick')!=null)
+if((e.getAttribute('onclick')!=null)||(e.getAttribute('href')!=null)) - clickable
+if((e.getAttribute('onclick')===null)&&(e.getAttribute('href')===null)) - not clickable
+
+
+
