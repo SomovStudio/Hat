@@ -35,12 +35,14 @@ namespace HatFrameworkDev
                 if (_tester.Debug == true) _tester.ConsoleMsg($"[DEBUG] JS результат: {result}");
                 if (result == null)
                 {
-                    _tester.EditMessage(step, null, Tester.FAILED, $"{commentfailed} " + Environment.NewLine + $"Результат выполнения скрипта: {result}", Tester.IMAGE_STATUS_FAILED);
+                    //_tester.EditMessage(step, null, Tester.FAILED, $"{commentfailed} " + Environment.NewLine + $"Результат выполнения скрипта: {result}", Tester.IMAGE_STATUS_FAILED);
+                    _tester.EditMessage(step, null, Tester.FAILED, commentfailed, Tester.IMAGE_STATUS_FAILED);
                     _tester.TestStopAsync();
                 }
                 else 
                 {
-                    _tester.EditMessage(step, null, Tester.PASSED, $"{commentPassed} " + Environment.NewLine + $"Результат выполнения скрипта: {result}", Tester.IMAGE_STATUS_PASSED);
+                    //_tester.EditMessage(step, null, Tester.PASSED, $"{commentPassed} " + Environment.NewLine + $"Результат выполнения скрипта: {result}", Tester.IMAGE_STATUS_PASSED);
+                    _tester.EditMessage(step, null, Tester.PASSED, commentPassed, Tester.IMAGE_STATUS_PASSED);
                 }
             }
             catch (Exception ex)
