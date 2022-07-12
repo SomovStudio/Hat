@@ -35,14 +35,14 @@ namespace HatFrameworkDev
                 if (_tester.Debug == true) _tester.ConsoleMsg($"[DEBUG] JS результат: {result}");
                 if (result == null)
                 {
-                    //_tester.EditMessage(step, null, Tester.FAILED, $"{commentfailed} " + Environment.NewLine + $"Результат выполнения скрипта: {result}", Tester.IMAGE_STATUS_FAILED);
-                    _tester.EditMessage(step, null, Tester.FAILED, commentfailed, Tester.IMAGE_STATUS_FAILED);
+                    _tester.EditMessage(step, null, Tester.FAILED, $"{commentfailed} " + Environment.NewLine + $"Результат выполнения скрипта: {result}", Tester.IMAGE_STATUS_FAILED);
+                    //_tester.EditMessage(step, null, Tester.FAILED, commentfailed, Tester.IMAGE_STATUS_FAILED);
                     _tester.TestStopAsync();
                 }
                 else 
                 {
-                    //_tester.EditMessage(step, null, Tester.PASSED, $"{commentPassed} " + Environment.NewLine + $"Результат выполнения скрипта: {result}", Tester.IMAGE_STATUS_PASSED);
-                    _tester.EditMessage(step, null, Tester.PASSED, commentPassed, Tester.IMAGE_STATUS_PASSED);
+                    _tester.EditMessage(step, null, Tester.PASSED, $"{commentPassed} " + Environment.NewLine + $"Результат выполнения скрипта: {result}", Tester.IMAGE_STATUS_PASSED);
+                    //_tester.EditMessage(step, null, Tester.PASSED, commentPassed, Tester.IMAGE_STATUS_PASSED);
                 }
             }
             catch (Exception ex)
@@ -564,6 +564,34 @@ namespace HatFrameworkDev
             return result;
         }
 
+        public async Task<bool> IsClickableAsync()
+        {
+            int step = _tester.SendMessage($"IsClickableAsync()", Tester.PROCESS, "Определяется кликабельность элемента", Tester.IMAGE_STATUS_PROCESS);
+            if (_tester.DefineTestStop(step) == true) return false;
+
+            bool clickable = false;
+            try
+            {
+                string script = "";
+                script += "(function(){ ";
+                if (_by == Tester.BY_CSS) script += $"var elem = document.querySelector(\"{_locator}\");";
+                if (_by == Tester.BY_XPATH) script += $"var elem = document.evaluate(\"{_locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
+                script += "if((elem.getAttribute('onclick')!=null)||(elem.getAttribute('href')!=null)) return true;";
+                script += "return false;";
+                script += "}());";
+
+                string result = await execute(script, step, "Определена кликадельность элемента", "Не удалось определить кликабельность элемента");
+                if (_tester.Debug == true) _tester.ConsoleMsg($"[DEBUG] JS результат: {result}");
+                if (result != "null" && result != null && result == "true") clickable = true;
+                else clickable = false;
+            }
+            catch (Exception ex)
+            {
+                _tester.TestStopAsync();
+                _tester.ConsoleMsgError(ex.ToString());
+            }
+            return clickable;
+        }
 
 
     }

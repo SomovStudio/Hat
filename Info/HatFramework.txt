@@ -415,4 +415,25 @@ REST запросы
 		await tester.AssertEqualsAsync("\"Other\"", text);
 		await tester.AssertEqualsAsync("\"Other\"", value);
 		await tester.TestEndAsync();
+
+Проверка кликабельности
+
+	IsClickableAsync() - возвражает значение true или false;
 	
+		Tester tester = new Tester(Config.browserForm);
+		await tester.TestBeginAsync();
+		await tester.GoToUrlAsync("https://somovstudio.github.io/test2.html", 5);
+		HTMLElement element = await tester.GetElementAsync(Tester.BY_XPATH, "//*[@id='MyButton']");
+		bool clickable = await element.IsClickableAsync();
+		await tester.AssertTrueAsync(clickable);
+		await tester.TestEndAsync();
+	
+	IsClickableElementAsync(string by, string locator) - возвражает значение true или false;
+	
+		Tester tester = new Tester(Config.browserForm);
+		await tester.TestBeginAsync();
+		await tester.GoToUrlAsync("https://somovstudio.github.io/test2.html", 5);
+		bool clickable = await tester.IsClickableElementAsync(Tester.BY_XPATH, "//*[@id='MyButton']");
+		await tester.AssertTrueAsync(clickable);
+		await tester.TestEndAsync();
+

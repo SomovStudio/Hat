@@ -95,14 +95,8 @@ namespace Hat
             HatFrameworkDev.Tester tester = new HatFrameworkDev.Tester(Config.browserForm);
             await tester.TestBeginAsync();
             await tester.GoToUrlAsync("https://somovstudio.github.io/test2.html", 5);
-            HatFrameworkDev.HTMLElement element = await tester.GetElementAsync(HatFrameworkDev.Tester.BY_XPATH, "//*[@id='MySelect']");
-            await element.SelectOptionByIndexAsync(2);
-            await element.SelectOptionByValueAsync("Mobile");
-            await element.SelectOptionByTextAsync("Other");
-            string text = await element.GetTextSelectOntionAsync();
-            string value = await element.GetValueSelectOntionAsync();
-            await tester.AssertEqualsAsync("\"Other\"", text);
-            await tester.AssertEqualsAsync("\"Other\"", value);
+            bool clickable = await tester.IsClickableElementAsync(HatFrameworkDev.Tester.BY_XPATH, "//*[@id='MyButton']");
+            await tester.AssertTrueAsync(clickable);
             await tester.TestEndAsync();
         }
 
