@@ -514,5 +514,16 @@ if(e.getAttribute('onclick')!=null)
 if((e.getAttribute('onclick')!=null)||(e.getAttribute('href')!=null)) - clickable
 if((e.getAttribute('onclick')===null)&&(e.getAttribute('href')===null)) - not clickable
 
+---------------------------------------------
+Работа с фреймом
 
+window.frames["framename"]
+window.frames[0].document
+document.getElementById('frameId').contentDocument.getElementById('frameChild');
+
+var frame = window.frames["MyFrame"];
+frame.document.getElementById('login');
+frame.document.querySelectorAll('input')
+frame.document.querySelector('input')
+frame.document.evaluate("//input", frame.document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
 
