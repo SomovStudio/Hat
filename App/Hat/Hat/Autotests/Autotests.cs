@@ -108,7 +108,9 @@ namespace Hat
             string value = await frame.GetValueFromElementAsync(HatFrameworkDev.Tester.BY_XPATH, "//input[@id='login']");
             */
 
-
+            /* 6
+            await frame.ClickElementAsync(HatFrameworkDev.Tester.BY_XPATH, "//*[@id='buttonLogin']");
+            */
 
 
             await tester.TestEndAsync();

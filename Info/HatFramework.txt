@@ -456,7 +456,7 @@ REST запросы
 +	SetAttributeInElementsAsync(string by, string locator, string attribute, string value)
 +	GetValueFromElementAsync(string by, string locator)
 +	SetValueInElementAsync(string by, string locator, string value)
-	ClickElementAsync(string by, string locator)
++	ClickElementAsync(string by, string locator)
 	IsClickableElementAsync(string by, string locator)
 	ScrollToElementAsync(string by, string locator, bool behaviorSmooth = false)
 	GetCountElementsAsync(string by, string locator)

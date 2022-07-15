@@ -278,6 +278,19 @@ namespace HatFrameworkDev
             await execute(script, step, $"Значение введено в элемент", $"Не удалось найти или ввести значение в элемент по локатору: {locator}");
         }
 
+        public async Task ClickElementAsync(string by, string locator)
+        {
+            int step = _tester.SendMessage($"ClickElementAsync(\"{by}\", \"{locator}\")", Tester.PROCESS, "Нажатие на элемент", Tester.IMAGE_STATUS_PROCESS);
+            if (_tester.DefineTestStop(step) == true) return;
+
+            string script = "(function(){";
+            script += $"var frame = window.frames[{_index}].document;";
+            if (by == Tester.BY_CSS) script += $"var element = frame.querySelector(\"{locator}\"); element.click(); return element;";
+            else if (by == Tester.BY_XPATH) script += $"var element = frame.evaluate(\"{locator}\", frame, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue; element.click(); return element;";
+            script += "}());";
+            await execute(script, step, $"Элемент нажат", $"Не удалось найти элемент по локатору: {locator}");
+        }
+
 
 
 
