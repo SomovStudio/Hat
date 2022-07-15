@@ -323,6 +323,43 @@ namespace HatFrameworkDev
             return clickable;
         }
 
+        public async Task ScrollToElementAsync(string by, string locator, bool behaviorSmooth = false)
+        {
+            int step = _tester.SendMessage($"ScrollToElementAsync(\"{by}\", \"{locator}\", {behaviorSmooth})", Tester.PROCESS, "Прокрутить к элементу", Tester.IMAGE_STATUS_PROCESS);
+            if (_tester.DefineTestStop(step) == true) return;
+
+            try
+            {
+                string script = "(function(){";
+                script += $"var frame = window.frames[{_index}].document;";
+                if (by == Tester.BY_CSS)
+                {
+                    script += $"var element = frame.querySelector(\"{locator}\");";
+                    if (behaviorSmooth == true) script += "element.scrollIntoView({behavior: 'smooth'}); return element;";
+                    else script += "element.scrollIntoView(); return element;";
+                }
+                else if (by == Tester.BY_XPATH)
+                {
+                    script += $"var element = frame.evaluate(\"{locator}\", frame, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
+                    if (behaviorSmooth == true) script += "element.scrollIntoView({behavior: 'smooth'}); return element;";
+                    else script += "element.scrollIntoView(); return element;";
+                }
+                script += "}());";
+                if (_tester.Debug == true) _tester.ConsoleMsg($"[DEBUG] JS скрипт: {script}");
+                string result = await _tester.BrowserView.CoreWebView2.ExecuteScriptAsync(script);
+                if (_tester.Debug == true) _tester.ConsoleMsg($"[DEBUG] JS результат: {result}");
+                _tester.EditMessage(step, null, Tester.PASSED, "Прокрутил к элементу выполнена", Tester.IMAGE_STATUS_PASSED);
+            }
+            catch (Exception ex)
+            {
+                _tester.EditMessage(step, null, Tester.FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), Tester.IMAGE_STATUS_FAILED);
+                _tester.TestStopAsync();
+                _tester.ConsoleMsgError(ex.ToString());
+            }
+        }
+
+
+
 
 
 

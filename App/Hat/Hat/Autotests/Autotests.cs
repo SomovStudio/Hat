@@ -116,6 +116,10 @@ namespace Hat
             bool result = await frame.IsClickableElementAsync(HatFrameworkDev.Tester.BY_XPATH, "//*[@id='buttonLogin']");
             */
 
+            /* 8.
+            await frame.ScrollToElementAsync(HatFrameworkDev.Tester.BY_XPATH, "//*[@id='buttonLogin']", true);
+            */
+
             await tester.TestEndAsync();
 
 
