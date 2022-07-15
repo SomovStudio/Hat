@@ -697,6 +697,56 @@ namespace HatFrameworkDev
             return htmlElement;
         }
 
+        public async Task<FRAMEElement> GetFrameAsync(string by, string locator)
+        {
+            int step;
+            if (by == BY_CSS) step = SendMessage($"GetFrameAsync(\"{by}\", '{locator}')", PROCESS, "Полечить элемента", IMAGE_STATUS_PROCESS);
+            else step = SendMessage($"GetFrameAsync(\"{by}\", \"{locator}\")", PROCESS, "Полечить элемента", IMAGE_STATUS_PROCESS);
+            if (DefineTestStop(step) == true) return null;
+
+            FRAMEElement frameElement = new FRAMEElement(this, by, locator);
+            try
+            {
+                FRAMEElement el = null;
+                string script = "";
+                script = "(function(locator = \"" + locator + "\"){";
+                if (by == BY_CSS) script += "var el = document.querySelector(locator);";
+                else if (by == BY_XPATH) script += "var el = document.evaluate(locator, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
+                script += "var obj = {";
+                script += "Id: el.id,";
+                script += "Class: el.getAttribute('class'),";
+                script += "Name: el.name,";
+                script += "Type: el.type";
+                script += "};";
+                script += "return obj;";
+                script += "}());";
+
+                var obj = await BrowserView.CoreWebView2.ExecuteScriptAsync(script);
+                el = JsonConvert.DeserializeObject<FRAMEElement>(obj);
+                if (el == null)
+                {
+                    EditMessage(step, null, Tester.FAILED, $"Не удалось получить фрейм {locator} ({by})", Tester.IMAGE_STATUS_FAILED);
+                    TestStopAsync();
+                }
+                else
+                {
+                    frameElement = new FRAMEElement(this, by, locator);
+                    frameElement.Id = el.Id;
+                    frameElement.Name = el.Name;
+                    frameElement.Class = el.Class;
+                    frameElement.Type = el.Type;
+                    EditMessage(step, null, PASSED, "Фрейм получен", IMAGE_STATUS_PASSED);
+                }
+            }
+            catch (Exception ex)
+            {
+                EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
+                TestStopAsync();
+                ConsoleMsgError(ex.ToString());
+            }
+            return frameElement;
+        }
+
         public async Task GoToUrlAsync(string url, int sec)
         {
             statusPageLoad = false;

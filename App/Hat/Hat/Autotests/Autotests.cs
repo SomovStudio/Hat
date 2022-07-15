@@ -74,6 +74,23 @@ namespace Hat
 
         public static async Task devTestAsync()
         {
+            HatFrameworkDev.Tester tester = new HatFrameworkDev.Tester(Config.browserForm);
+            await tester.TestBeginAsync();
+            await tester.GoToUrlAsync("https://somovstudio.github.io/test2.html", 5);
+            HatFrameworkDev.FRAMEElement frame = await tester.GetFrameAsync(HatFrameworkDev.Tester.BY_XPATH, "//*[@id='MyFrame']");
+            tester.ConsoleMsg("Id: " + frame.Id);
+            tester.ConsoleMsg("Name: " + frame.Name);
+            tester.ConsoleMsg("Class: " + frame.Class);
+            tester.ConsoleMsg("Type: " + frame.Type);
+
+            string name = await frame.GetAttributeFromElementAsync(HatFrameworkDev.Tester.BY_XPATH, "//*[@id='login']", "name");
+            tester.ConsoleMsg("Attribute: " + name);
+
+            await tester.TestEndAsync();
+
+
+
+
             /*
             HatFrameworkDev.Tester tester = new HatFrameworkDev.Tester(Config.browserForm);
             await tester.BrowserEnableSendMailAsync();
@@ -92,6 +109,7 @@ namespace Hat
             await tester.TestEndAsync();
             */
 
+            /*
             HatFrameworkDev.Tester tester = new HatFrameworkDev.Tester(Config.browserForm);
             await tester.TestBeginAsync();
             await tester.GoToUrlAsync("https://somovstudio.github.io/test2.html", 5);
@@ -110,6 +128,9 @@ namespace Hat
             await tester.AssertEqualsAsync("\"Other\"", text);
             await tester.AssertEqualsAsync("\"Other\"", value);
             await tester.TestEndAsync();
+            */
+
+
         }
 
         public static void readNodes(TreeNodeCollection _nodes)

@@ -37,7 +37,7 @@ namespace HatFrameworkDev
                 if (_tester.Debug == true) _tester.ConsoleMsg($"[DEBUG] JS скрипт: {script}");
                 result = await _tester.BrowserView.CoreWebView2.ExecuteScriptAsync(script);
                 if (_tester.Debug == true) _tester.ConsoleMsg($"[DEBUG] JS результат: {result}");
-                if (result == null)
+                if (result == null || result == "null")
                 {
                     _tester.EditMessage(step, null, Tester.FAILED, $"{commentfailed} " + Environment.NewLine + $"Результат выполнения скрипта: {result}", Tester.IMAGE_STATUS_FAILED);
                     //_tester.EditMessage(step, null, Tester.FAILED, commentfailed, Tester.IMAGE_STATUS_FAILED);

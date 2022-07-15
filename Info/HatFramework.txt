@@ -442,3 +442,39 @@ REST запросы
 		await tester.AssertTrueAsync(clickable);
 		await tester.TestEndAsync();
 
+
+Класс для работы с фреймом
+
+	GetFrameAsync(string by, string locator) - метод возвращает элемент в виде объект класс которого FRAMEElement
+	FRAMEElement(Tester tester, string by, string locator) - это класса
+	
+	встроенные методы:
+	
+	GetAttributeFromElementAsync(string by, string locator, string attribute)
+	GetAttributeFromElementsAsync(string by, string locator, string attribute)
+	SetAttributeInElementAsync(string by, string locator, string attribute, string value)
+	SetAttributeInElementsAsync(string by, string locator, string attribute, string value)
+	GetValueFromElementAsync(string by, string locator)
+	SetValueInElementAsync(string by, string locator, string value)
+	ClickElementAsync(string by, string locator)
+	IsClickableElementAsync(string by, string locator)
+	ScrollToElementAsync(string by, string locator, bool behaviorSmooth = false)
+	GetCountElementsAsync(string by, string locator)
+	GetHtmlFromElementAsync(string by, string locator)
+	SetHtmlInElementAsync(string by, string locator, string html)
+	WaitAsync(int sec)
+	WaitNotVisibleElementAsync(string by, string locator, int sec)
+	WaitVisibleElementAsync(string by, string locator, int sec)
+	FindElementAsync(string by, string locator, int sec)
+	FindVisibleElementAsync(string by, string locator, int sec)
+	GetTitleAsync()
+	GetUrlAsync()
+	GoToUrlAsync(string url, int sec)
+	GetTextFromElementAsync(string by, string locator)
+	SetTextInElementAsync(string by, string locator, string text)
+	GetOptionAsync(string by, string locator)
+	SelectOptionAsync(string by, string locator, string value)
+	
+	
+	
+	
