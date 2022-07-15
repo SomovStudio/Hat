@@ -95,6 +95,10 @@ namespace Hat
             }
             */
 
+            /* 3.
+            await frame.SetAttributeInElementAsync(HatFrameworkDev.Tester.BY_XPATH, "//input[@id='buttonLogin']", "name", "NameButtonLogin");
+            */
+
 
             await tester.TestEndAsync();
 

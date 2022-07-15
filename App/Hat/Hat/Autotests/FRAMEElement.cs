@@ -172,6 +172,24 @@ namespace HatFrameworkDev
             return Json_Array;
         }
 
+        public async Task SetAttributeInElementAsync(string by, string locator, string attribute, string value)
+        {
+            int step = _tester.SendMessage($"SetAttributeInElementAsync(\"{by}\", \"{locator}\", \"{attribute}\", \"{value}\")", Tester.PROCESS, "Добавление аттрибута в элемент", Tester.IMAGE_STATUS_PROCESS);
+            if (_tester.DefineTestStop(step) == true) return;
+
+            string script = "(function(){";
+            script += $"var frame = window.frames[{_index}].document;";
+            if (by == Tester.BY_CSS) script += $"var element = frame.querySelector(\"{locator}\");";
+            else if (by == Tester.BY_XPATH) script += $"var element = frame.evaluate(\"{locator}\", frame, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
+            script += $"element.setAttribute('{attribute}', '{value}');";
+            script += $"return element.getAttribute('{attribute}');";
+            script += "}());";
+            await execute(script, step, $"Аттрибут '{attribute}' добавлен в элемент", $"Не удалось найти или ввести аттрибут в элемент по локатору: {locator}");
+        }
+
+
+
+
 
     }
 }
