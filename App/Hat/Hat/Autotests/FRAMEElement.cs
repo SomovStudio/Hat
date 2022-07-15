@@ -9,23 +9,19 @@ namespace HatFrameworkDev
     public class FRAMEElement
     {
         private Tester _tester;
-        private string _by;
-        private string _locator;
+        private int _index;
 
         public const string BY_INDEX = "BY_INDEX";
         public const string BY_TEXT = "BY_TEXT";
         public const string BY_VALUE = "BY_VALUE";
 
-        public string Id { get; set; }
         public string Name { get; set; }
-        public string Class { get; set; }
-        public string Type { get; set; }
+        public int Index { get; set; }
 
-        public FRAMEElement(Tester tester, string by, string locator)
+        public FRAMEElement(Tester tester, int index)
         {
             _tester = tester;
-            _by = by;
-            _locator = locator;
+            _index = index;
         }
 
         private async Task<string> execute(string script, int step, string commentPassed, string commentfailed)
@@ -57,15 +53,16 @@ namespace HatFrameworkDev
             return result;
         }
 
-        private async Task<bool> isVisible()
+        private async Task<bool> isVisible(string by, string locator)
         {
             bool found = false;
             try
             {
                 string script = "";
                 script += "(function(){ ";
-                if (_by == Tester.BY_CSS) script += $"var elem = document.querySelector(\"{_locator}\");";
-                if (_by == Tester.BY_XPATH) script += $"var elem = document.evaluate(\"{_locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
+                script += $"var frame = window.frames[{_index}].document;";
+                if (by == Tester.BY_CSS) script += $"var elem = frame.querySelector(\"{locator}\");";
+                if (by == Tester.BY_XPATH) script += $"var elem = frame.evaluate(\"{locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
                 script += "if (!(elem instanceof Element)) throw Error('DomUtil: elem is not an element.');";
                 script += "const style = getComputedStyle(elem);";
                 script += "if (style.display === 'none') return false;";
@@ -107,21 +104,10 @@ namespace HatFrameworkDev
             int step = _tester.SendMessage($"GetAttributeFromElementAsync(\"{by}\", \"{locator}\", \"{attribute}\")", Tester.PROCESS, $"Получение аттрибута {attribute} из элемент", Tester.IMAGE_STATUS_PROCESS);
             if (_tester.DefineTestStop(step) == true) return "";
 
-            //string script = "(function(){";
-            //if (by == Tester.BY_CSS) script += $"var element = document.querySelector(\"{locator}\");";
-            //else script += $"var element = document.evaluate(\"{locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
-            //script += $"return element.getAttribute('{attribute}');";
-            //script += "}());";
-            //string value = await execute(script, step, $"Получено значение из аттрибута {attribute}", $"Не удалось найти или получить аттрибут из элемента по локатору: {locator}");
-            //return value;
-
             string script = "(function(){";
-            if (_by == Tester.BY_CSS) script += $"var frame = document.querySelector(\"{_locator}\");";
-            else if (_by == Tester.BY_XPATH) script += $"var frame = document.evaluate(\"{_locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
-
+            script += $"var frame = window.frames[{_index}].document;";
             if (by == Tester.BY_CSS) script += $"var element = frame.querySelector(\"{locator}\");";
-            else if (by == Tester.BY_XPATH) script += $"var element = frame.evaluate(\"{locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
-
+            else if (by == Tester.BY_XPATH) script += $"var element = frame.evaluate(\"{locator}\", frame, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
             script += $"return element.getAttribute('{attribute}');";
             script += "}());";
             string value = await execute(script, step, $"Получено значение из аттрибута {attribute}", $"Не удалось найти или получить аттрибут из элемента по локатору: {locator}");

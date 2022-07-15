@@ -650,8 +650,8 @@ namespace HatFrameworkDev
         public async Task<HTMLElement> GetElementAsync(string by, string locator)
         {
             int step;
-            if(by == BY_CSS) step = SendMessage($"GetElementAsync(\"{by}\", '{locator}')", PROCESS, "Полечить элемента", IMAGE_STATUS_PROCESS);
-            else step = SendMessage($"GetElementAsync(\"{by}\", \"{locator}\")", PROCESS, "Полечить элемента", IMAGE_STATUS_PROCESS);
+            if(by == BY_CSS) step = SendMessage($"GetElementAsync(\"{by}\", '{locator}')", PROCESS, "Получить элемента", IMAGE_STATUS_PROCESS);
+            else step = SendMessage($"GetElementAsync(\"{by}\", \"{locator}\")", PROCESS, "Получить элемента", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return null;
 
             HTMLElement htmlElement = new HTMLElement(this, by, locator);
@@ -697,26 +697,21 @@ namespace HatFrameworkDev
             return htmlElement;
         }
 
-        public async Task<FRAMEElement> GetFrameAsync(string by, string locator)
+        public async Task<FRAMEElement> GetFrameAsync(int index)
         {
             int step;
-            if (by == BY_CSS) step = SendMessage($"GetFrameAsync(\"{by}\", '{locator}')", PROCESS, "Полечить элемента", IMAGE_STATUS_PROCESS);
-            else step = SendMessage($"GetFrameAsync(\"{by}\", \"{locator}\")", PROCESS, "Полечить элемента", IMAGE_STATUS_PROCESS);
+            step = SendMessage($"GetFrameAsync({index})", PROCESS, "Получить фрейм", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return null;
 
-            FRAMEElement frameElement = new FRAMEElement(this, by, locator);
+            FRAMEElement frameElement = new FRAMEElement(this, index);
             try
             {
                 FRAMEElement el = null;
-                string script = "";
-                script = "(function(locator = \"" + locator + "\"){";
-                if (by == BY_CSS) script += "var el = document.querySelector(locator);";
-                else if (by == BY_XPATH) script += "var el = document.evaluate(locator, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
+                string script = "(function(){";
+                script += $"var frame = window.frames[{index}];";
                 script += "var obj = {";
-                script += "Id: el.id,";
-                script += "Class: el.getAttribute('class'),";
-                script += "Name: el.name,";
-                script += "Type: el.type";
+                script += "Name: frame.name,";
+                script += $"Index: {index}";
                 script += "};";
                 script += "return obj;";
                 script += "}());";
@@ -725,16 +720,14 @@ namespace HatFrameworkDev
                 el = JsonConvert.DeserializeObject<FRAMEElement>(obj);
                 if (el == null)
                 {
-                    EditMessage(step, null, Tester.FAILED, $"Не удалось получить фрейм {locator} ({by})", Tester.IMAGE_STATUS_FAILED);
+                    EditMessage(step, null, Tester.FAILED, $"Не удалось получить фрейм с индексом {index}", Tester.IMAGE_STATUS_FAILED);
                     TestStopAsync();
                 }
                 else
                 {
-                    frameElement = new FRAMEElement(this, by, locator);
-                    frameElement.Id = el.Id;
+                    frameElement = new FRAMEElement(this, index);
+                    frameElement.Index = el.Index;
                     frameElement.Name = el.Name;
-                    frameElement.Class = el.Class;
-                    frameElement.Type = el.Type;
                     EditMessage(step, null, PASSED, "Фрейм получен", IMAGE_STATUS_PASSED);
                 }
             }

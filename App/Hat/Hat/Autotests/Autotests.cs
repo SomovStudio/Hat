@@ -77,13 +77,11 @@ namespace Hat
             HatFrameworkDev.Tester tester = new HatFrameworkDev.Tester(Config.browserForm);
             await tester.TestBeginAsync();
             await tester.GoToUrlAsync("https://somovstudio.github.io/test2.html", 5);
-            HatFrameworkDev.FRAMEElement frame = await tester.GetFrameAsync(HatFrameworkDev.Tester.BY_XPATH, "//*[@id='MyFrame']");
-            tester.ConsoleMsg("Id: " + frame.Id);
+            HatFrameworkDev.FRAMEElement frame = await tester.GetFrameAsync(0);
+            tester.ConsoleMsg("Index: " + frame.Index);
             tester.ConsoleMsg("Name: " + frame.Name);
-            tester.ConsoleMsg("Class: " + frame.Class);
-            tester.ConsoleMsg("Type: " + frame.Type);
-
-            string name = await frame.GetAttributeFromElementAsync(HatFrameworkDev.Tester.BY_XPATH, "//*[@id='login']", "name");
+           
+            string name = await frame.GetAttributeFromElementAsync(HatFrameworkDev.Tester.BY_XPATH, "//input[@id='login']", "name");
             tester.ConsoleMsg("Attribute: " + name);
 
             await tester.TestEndAsync();
