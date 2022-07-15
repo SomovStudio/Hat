@@ -395,6 +395,20 @@ namespace HatFrameworkDev
             return value;
         }
 
+        public async Task SetHtmlInElementAsync(string by, string locator, string html)
+        {
+            int step = _tester.SendMessage($"SetHtmlInElementAsync(\"{by}\", \"{locator}\", \"{html}\")", Tester.PROCESS, "Ввод html в элемент", Tester.IMAGE_STATUS_PROCESS);
+            if (_tester.DefineTestStop(step) == true) return;
+
+            string script = "(function(){";
+            script += $"var frame = window.frames[{_index}].document;";
+            if (by == Tester.BY_CSS) script += $"var element = frame.querySelector(\"{locator}\");";
+            else if (by == Tester.BY_XPATH) script += $"var element = frame.evaluate(\"{locator}\", frame, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
+            script += $"element.innerHTML = '{html}';";
+            script += $"return element.outerHTML;";
+            script += "}());";
+            await execute(script, step, $"В элемент введен html {html}", $"Не удалось найти или ввести html в элемент по локатору: {locator}");
+        }
 
 
 

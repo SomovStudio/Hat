@@ -128,6 +128,9 @@ namespace Hat
             string html = await frame.GetHtmlFromElementAsync(HatFrameworkDev.Tester.BY_XPATH, "//*[@id='buttonLogin']");
             */
 
+            /* 11.
+            await frame.SetHtmlInElementAsync(HatFrameworkDev.Tester.BY_XPATH, "//*[@id='auth']/h2", "<h2>Тестовый заголовок</h2>");
+            */
 
             await tester.TestEndAsync();
 
