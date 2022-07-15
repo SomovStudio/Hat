@@ -358,6 +358,26 @@ namespace HatFrameworkDev
             }
         }
 
+        public async Task<int> GetCountElementsAsync(string by, string locator)
+        {
+            int step = _tester.SendMessage($"GetCountElementsAsync(\"{by}\", \"{locator}\")", Tester.PROCESS, "Получение количества элементов", Tester.IMAGE_STATUS_PROCESS);
+            if (_tester.DefineTestStop(step) == true) return -1;
+
+            string script = "(function(){";
+            script += $"var frame = window.frames[{_index}].document;";
+            if (by == Tester.BY_CSS) script += "var element = frame.querySelectorAll(\"" + locator + "\"); return element.length;";
+            else if (by == Tester.BY_XPATH) script += $"var element = frame.evaluate(\"{locator}\", frame, null, XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null); return element.snapshotLength;";
+            script += "}());";
+            string result = await execute(script, step, $"Получение количества элементов", $"Не удалось найти или получить количество элементов по локатору: {locator}");
+            int value = -1;
+            if (result != "null" && result != null && result != "")
+            {
+                value = Int32.Parse(result);
+                _tester.EditMessage(step, null, Tester.PASSED, $"Количество элементов {result}", Tester.IMAGE_STATUS_PASSED);
+            }
+            return value;
+        }
+
 
 
 

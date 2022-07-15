@@ -120,6 +120,11 @@ namespace Hat
             await frame.ScrollToElementAsync(HatFrameworkDev.Tester.BY_XPATH, "//*[@id='buttonLogin']", true);
             */
 
+            /* 9.
+            int result = await frame.GetCountElementsAsync(HatFrameworkDev.Tester.BY_XPATH, "//input");
+            */
+
+
             await tester.TestEndAsync();
 
 
