@@ -63,7 +63,7 @@ namespace HatFrameworkDev
                 script += "(function(){ ";
                 script += $"var frame = window.frames[{_index}].document;";
                 if (by == Tester.BY_CSS) script += $"var elem = frame.querySelector(\"{locator}\");";
-                if (by == Tester.BY_XPATH) script += $"var elem = frame.evaluate(\"{locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
+                if (by == Tester.BY_XPATH) script += $"var elem = frame.evaluate(\"{locator}\", frame, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
                 script += "if (!(elem instanceof Element)) throw Error('DomUtil: elem is not an element.');";
                 script += "const style = getComputedStyle(elem);";
                 script += "if (style.display === 'none') return false;";
@@ -410,6 +410,65 @@ namespace HatFrameworkDev
             await execute(script, step, $"В элемент введен html {html}", $"Не удалось найти или ввести html в элемент по локатору: {locator}");
         }
 
+        public async Task WaitNotVisibleElementAsync(string by, string locator, int sec)
+        {
+            int step = _tester.SendMessage($"WaitNotVisibleElementAsync(\"{by}\", \"{locator}\", {sec})", Tester.PROCESS, $"Ожидание скрытия элемента {sec} секунд", Tester.IMAGE_STATUS_PROCESS);
+            if (_tester.DefineTestStop(step) == true) return;
+            try
+            {
+                bool found = true;
+                for (int i = 0; i < sec; i++)
+                {
+                    if (by == Tester.BY_CSS) found = await isVisible(Tester.BY_CSS, locator);
+                    else if (by == Tester.BY_XPATH) found = await isVisible(Tester.BY_XPATH, locator);
+                    if (found == false) break;
+                    await Task.Delay(1000);
+                }
+
+                if (found == false) _tester.EditMessage(step, null, Tester.PASSED, $"Ожидание скрытия элемента - завершено (элемент не отображается)", Tester.IMAGE_STATUS_PASSED);
+                else
+                {
+                    _tester.EditMessage(step, null, Tester.FAILED, $"Ожидание скрытия элемента - завершено (элемент отображается)", Tester.IMAGE_STATUS_FAILED);
+                    _tester.TestStopAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                _tester.EditMessage(step, null, Tester.FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), Tester.IMAGE_STATUS_FAILED);
+                _tester.TestStopAsync();
+                _tester.ConsoleMsgError(ex.ToString());
+            }
+        }
+
+        public async Task WaitVisibleElementAsync(string by, string locator, int sec)
+        {
+            int step = _tester.SendMessage($"WaitVisibleElementAsync(\"{by}\", \"{locator}\", {sec})", Tester.PROCESS, $"Ожидание элемента {sec} секунд", Tester.IMAGE_STATUS_PROCESS);
+            if (_tester.DefineTestStop(step) == true) return;
+            try
+            {
+                bool found = false;
+                for (int i = 0; i < sec; i++)
+                {
+                    if (by == Tester.BY_CSS) found = await isVisible(Tester.BY_CSS, locator);
+                    else if (by == Tester.BY_XPATH) found = await isVisible(Tester.BY_XPATH, locator);
+                    if (found) break;
+                    await Task.Delay(1000);
+                }
+
+                if (found == true) _tester.EditMessage(step, null, Tester.PASSED, $"Ожидание элемента - завершено (элемент отображается)", Tester.IMAGE_STATUS_PASSED);
+                else
+                {
+                    _tester.EditMessage(step, null, Tester.FAILED, $"Ожидание элемента - завершено (элемент не отображается)", Tester.IMAGE_STATUS_FAILED);
+                    _tester.TestStopAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                _tester.EditMessage(step, null, Tester.FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), Tester.IMAGE_STATUS_FAILED);
+                _tester.TestStopAsync();
+                _tester.ConsoleMsgError(ex.ToString());
+            }
+        }
 
 
 
