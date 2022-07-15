@@ -244,7 +244,39 @@ namespace HatFrameworkDev
             return Json_Array;
         }
 
+        public async Task<string> GetValueFromElementAsync(string by, string locator)
+        {
+            int step = _tester.SendMessage($"GetValueFromElementAsync(\"{by}\", \"{locator}\")", Tester.PROCESS, "Получение значения из элемент", Tester.IMAGE_STATUS_PROCESS);
+            if (_tester.DefineTestStop(step) == true) return "";
 
+            string script = "(function(){";
+            script += $"var frame = window.frames[{_index}].document;";
+            if (by == Tester.BY_CSS) script += $"var element = frame.querySelector(\"{locator}\"); return element.value;";
+            else if (by == Tester.BY_XPATH) script += $"var element = frame.evaluate(\"{locator}\", frame, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue; return element.value;";
+            script += "}());";
+            string value = await execute(script, step, $"Получено значение из элемента", $"Не удалось найти или получить данные из элемента по локатору: {locator}");
+            return value;
+        }
+
+        public async Task SetValueInElementAsync(string by, string locator, string value)
+        {
+            int step = _tester.SendMessage($"SetValueInElementAsync(\"{by}\", \"{locator}\", \"{value}\")", Tester.PROCESS, "Ввод значения в элемент", Tester.IMAGE_STATUS_PROCESS);
+            if (_tester.DefineTestStop(step) == true) return;
+
+            string script = "(function(){";
+            script += $"var frame = window.frames[{_index}].document;";
+            if (by == Tester.BY_CSS) script += $"var element = frame.querySelector(\"{locator}\");";
+            else if (by == Tester.BY_XPATH) script += $"var element = frame.evaluate(\"{locator}\", frame, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
+            script += "element.value = '" + value + "';";
+            script += "element.dispatchEvent(new KeyboardEvent('keydown', { bubbles: true }));";
+            script += "element.dispatchEvent(new KeyboardEvent('keypress', { bubbles: true }));";
+            script += "element.dispatchEvent(new KeyboardEvent('keyup', { bubbles: true }));";
+            script += "element.dispatchEvent(new Event('input', { bubbles: true }));";
+            script += "element.dispatchEvent(new Event('change', { bubbles: true }));";
+            script += "return element.value;";
+            script += "}());";
+            await execute(script, step, $"Значение введено в элемент", $"Не удалось найти или ввести значение в элемент по локатору: {locator}");
+        }
 
 
 

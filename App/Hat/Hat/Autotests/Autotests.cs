@@ -103,6 +103,13 @@ namespace Hat
             await frame.SetAttributeInElementsAsync(HatFrameworkDev.Tester.BY_XPATH, "//input", "name", "test");
             */
 
+            /* 5.
+            await frame.SetValueInElementAsync(HatFrameworkDev.Tester.BY_XPATH, "//input[@id='login']", "Тестировщик");
+            string value = await frame.GetValueFromElementAsync(HatFrameworkDev.Tester.BY_XPATH, "//input[@id='login']");
+            */
+
+
+
 
             await tester.TestEndAsync();
 
