@@ -378,6 +378,23 @@ namespace HatFrameworkDev
             return value;
         }
 
+        public async Task<string> GetHtmlFromElementAsync(string by, string locator)
+        {
+            int step = _tester.SendMessage($"GetHtmlFromElementAsync(\"{by}\", \"{locator}\")", Tester.PROCESS, $"Получение html из элемент", Tester.IMAGE_STATUS_PROCESS);
+            if (_tester.DefineTestStop(step) == true) return "";
+
+            string script = "(function(){";
+            script += $"var frame = window.frames[{_index}].document;";
+            if (by == Tester.BY_CSS) script += $"var element = frame.querySelector(\"{locator}\"); return element.outerHTML;";
+            else if (by == Tester.BY_XPATH) script += $"var element = frame.evaluate(\"{locator}\", frame, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
+            script += "return element.outerHTML;";
+            script += "}());";
+            string value = await execute(script, step, $"Получено html элемента", $"Не удалось найти или получить html из элемента по локатору: {locator}");
+            value = value.Replace("\\u003C", "<");
+            value = value.Replace("\\u003E", ">");
+            return value;
+        }
+
 
 
 

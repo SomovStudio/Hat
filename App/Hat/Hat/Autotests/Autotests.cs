@@ -124,6 +124,10 @@ namespace Hat
             int result = await frame.GetCountElementsAsync(HatFrameworkDev.Tester.BY_XPATH, "//input");
             */
 
+            /* 10.
+            string html = await frame.GetHtmlFromElementAsync(HatFrameworkDev.Tester.BY_XPATH, "//*[@id='buttonLogin']");
+            */
+
 
             await tester.TestEndAsync();
 
