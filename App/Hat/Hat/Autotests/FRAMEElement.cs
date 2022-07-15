@@ -291,6 +291,37 @@ namespace HatFrameworkDev
             await execute(script, step, $"Элемент нажат", $"Не удалось найти элемент по локатору: {locator}");
         }
 
+        public async Task<bool> IsClickableElementAsync(string by, string locator)
+        {
+            int step = _tester.SendMessage($"IsClickableElementAsync(\"{by}\", \"{locator}\")", Tester.PROCESS, "Определяется кликабельность элемента", Tester.IMAGE_STATUS_PROCESS);
+            if (_tester.DefineTestStop(step) == true) return false;
+
+            bool clickable = false;
+            try
+            {
+                string script = "(function(){";
+                script += $"var frame = window.frames[{_index}].document;";
+                if (by == Tester.BY_CSS) script += $"var element = frame.querySelector(\"{locator}\");";
+                else if (by == Tester.BY_XPATH) script += $"var element = frame.evaluate(\"{locator}\", frame, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
+                script += "if((element.getAttribute('onclick')!=null)||(element.getAttribute('href')!=null)) return true;";
+                script += "return false;";
+                script += "}());";
+                if (_tester.Debug == true) _tester.ConsoleMsg($"[DEBUG] JS скрипт: {script}");
+                string result = await _tester.BrowserView.CoreWebView2.ExecuteScriptAsync(script);
+                if (_tester.Debug == true) _tester.ConsoleMsg($"[DEBUG] JS результат: {result}");
+
+                if (result != "null" && result != null && result == "true") clickable = true;
+                else clickable = false;
+                _tester.EditMessage(step, null, Tester.PASSED, $"Определена кликадельность элемента: {result}", Tester.IMAGE_STATUS_PASSED);
+            }
+            catch (Exception ex)
+            {
+                _tester.EditMessage(step, null, Tester.FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), Tester.IMAGE_STATUS_FAILED);
+                _tester.TestStopAsync();
+                _tester.ConsoleMsgError(ex.ToString());
+            }
+            return clickable;
+        }
 
 
 
