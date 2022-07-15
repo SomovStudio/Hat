@@ -187,6 +187,65 @@ namespace HatFrameworkDev
             await execute(script, step, $"Аттрибут '{attribute}' добавлен в элемент", $"Не удалось найти или ввести аттрибут в элемент по локатору: {locator}");
         }
 
+        public async Task<List<string>> SetAttributeInElementsAsync(string by, string locator, string attribute, string value)
+        {
+            int step = _tester.SendMessage($"SetAttributeInElementsAsync(\"{by}\", \"{locator}\", \"{attribute}\", \"{value}\")", Tester.PROCESS, "Добавление аттрибута в элементы", Tester.IMAGE_STATUS_PROCESS);
+            if (_tester.DefineTestStop(step) == true) return null;
+
+            string script = "(function(){";
+            script += $"var frame = window.frames[{_index}].document;";
+            if (by == Tester.BY_CSS)
+            {
+                script += $"var element = frame.querySelectorAll(\"{locator}\");";
+                script += "var json = '[';";
+                script += "var attr = '';";
+                script += "for (var i = 0; i < element.length; i++){";
+                script += $"element[i].setAttribute('{attribute}', '{value}');";
+                script += $"attr = element[i].getAttribute('{attribute}');";
+                script += "json += '\"' + attr + '\",';";
+                script += "}";
+                script += "json = json.slice(0, -1);";
+                script += "json += ']';";
+                script += "return json;";
+            }
+            else if (by == Tester.BY_XPATH)
+            {
+                script += $"var element = frame.evaluate(\"{locator}\", frame, null, XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);";
+                script += "var json = '[';";
+                script += "var attr = '';";
+                script += "var count = element.snapshotLength;";
+                script += "for (var i = 0; i < count; i++){";
+                script += $"element.snapshotItem(i).setAttribute('{attribute}', '{value}');";
+                script += $"attr = element.snapshotItem(i).getAttribute('{attribute}');";
+                script += "json += '\"' + attr + '\",';";
+                script += "}";
+                script += "json = json.slice(0, -1);";
+                script += "json += ']';";
+                script += "return json;";
+            }
+            script += "}());";
+            string result = await execute(script, step, $"Аттрибут '{attribute}' добавлен в элементы", $"Не удалось найти или добавить аттрибут в элементы по локатору: {locator}");
+            List<string> Json_Array = null;
+            if (result != "null" && result != null)
+            {
+                try
+                {
+                    result = JsonConvert.DeserializeObject(result).ToString();
+                    Json_Array = JsonConvert.DeserializeObject<List<string>>(result);
+                    _tester.EditMessage(step, null, Tester.PASSED, $"Аттрибут '{attribute}' со значением '{result}' - добавлен в элементы и получен json {result}", Tester.IMAGE_STATUS_PASSED);
+                }
+                catch (Exception ex)
+                {
+                    _tester.EditMessage(step, null, Tester.FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), Tester.IMAGE_STATUS_FAILED);
+                    _tester.TestStopAsync();
+                    _tester.ConsoleMsgError(ex.ToString());
+                }
+            }
+            return Json_Array;
+        }
+
+
+
 
 
 

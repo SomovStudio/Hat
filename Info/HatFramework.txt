@@ -452,8 +452,8 @@ REST запросы
 	
 +	GetAttributeFromElementAsync(string by, string locator, string attribute)
 +	GetAttributeFromElementsAsync(string by, string locator, string attribute)
-	SetAttributeInElementAsync(string by, string locator, string attribute, string value)
-	SetAttributeInElementsAsync(string by, string locator, string attribute, string value)
++	SetAttributeInElementAsync(string by, string locator, string attribute, string value)
++	SetAttributeInElementsAsync(string by, string locator, string attribute, string value)
 	GetValueFromElementAsync(string by, string locator)
 	SetValueInElementAsync(string by, string locator, string value)
 	ClickElementAsync(string by, string locator)
