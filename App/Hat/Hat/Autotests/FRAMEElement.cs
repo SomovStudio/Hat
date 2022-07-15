@@ -64,7 +64,7 @@ namespace HatFrameworkDev
                 script += $"var frame = window.frames[{_index}].document;";
                 if (by == Tester.BY_CSS) script += $"var elem = frame.querySelector(\"{locator}\");";
                 if (by == Tester.BY_XPATH) script += $"var elem = frame.evaluate(\"{locator}\", frame, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
-                script += "if (!(elem instanceof Element)) throw Error('DomUtil: elem is not an element.');";
+                //script += "if (!(elem instanceof Element)) throw Error('DomUtil: elem is not an element.');";
                 script += "const style = getComputedStyle(elem);";
                 script += "if (style.display === 'none') return false;";
                 script += "if (style.visibility !== 'visible') return false;";
@@ -75,10 +75,10 @@ namespace HatFrameworkDev
                 script += "y: elem.getBoundingClientRect().top + elem.offsetHeight / 2";
                 script += "};";
                 script += "if (elemCenter.x < 0) return false;";
-                script += "if (elemCenter.x > (document.documentElement.clientWidth || window.innerWidth)) return false;";
+                script += "if (elemCenter.x > (frame.documentElement.clientWidth || window.innerWidth)) return false;";
                 script += "if (elemCenter.y < 0) return false;";
-                script += "if (elemCenter.y > (document.documentElement.clientHeight || window.innerHeight)) return false;";
-                script += "let pointContainer = document.elementFromPoint(elemCenter.x, elemCenter.y);";
+                script += "if (elemCenter.y > (frame.documentElement.clientHeight || window.innerHeight)) return false;";
+                script += "let pointContainer = frame.elementFromPoint(elemCenter.x, elemCenter.y);";
                 script += "do {";
                 script += "if (pointContainer === elem) return true;";
                 script += "} while (pointContainer = pointContainer.parentNode);";
