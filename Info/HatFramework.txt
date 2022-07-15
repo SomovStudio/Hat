@@ -445,13 +445,13 @@ REST запросы
 
 Класс для работы с фреймом
 
-	GetFrameAsync(string by, string locator) - метод возвращает элемент в виде объект класс которого FRAMEElement
-	FRAMEElement(Tester tester, string by, string locator) - это класса
++	GetFrameAsync(int index) - метод возвращает элемент в виде объект класс которого FRAMEElement
++	FRAMEElement(Tester tester, int index) - это класса
 	
 	встроенные методы:
 	
-	GetAttributeFromElementAsync(string by, string locator, string attribute)
-	GetAttributeFromElementsAsync(string by, string locator, string attribute)
++	GetAttributeFromElementAsync(string by, string locator, string attribute)
++	GetAttributeFromElementsAsync(string by, string locator, string attribute)
 	SetAttributeInElementAsync(string by, string locator, string attribute, string value)
 	SetAttributeInElementsAsync(string by, string locator, string attribute, string value)
 	GetValueFromElementAsync(string by, string locator)

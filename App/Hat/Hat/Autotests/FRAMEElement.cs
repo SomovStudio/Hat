@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace HatFrameworkDev
 {
@@ -114,6 +115,62 @@ namespace HatFrameworkDev
             return value;
         }
 
+        public async Task<List<string>> GetAttributeFromElementsAsync(string by, string locator, string attribute)
+        {
+            int step = _tester.SendMessage($"GetAttributeFromElementsAsync(\"{by}\", \"{locator}\", \"{attribute}\")", Tester.PROCESS, $"Получение аттрибутов {attribute} из элементов", Tester.IMAGE_STATUS_PROCESS);
+            if (_tester.DefineTestStop(step) == true) return null;
+
+            string script = "(function(){";
+            script += $"var frame = window.frames[{_index}].document;";
+            if (by == Tester.BY_CSS)
+            {
+                script += $"var element = frame.querySelectorAll(\"{locator}\");";
+                script += "var json = '[';";
+                script += "var attr = '';";
+                script += "var count = element.length;";
+                script += "for (var i = 0; i < count; i++){";
+                script += $"attr = element[i].getAttribute('{attribute}');";
+                script += "json += '\"' + attr + '\",';";
+                script += "}";
+                script += "json = json.slice(0, -1);";
+                script += "json += ']';";
+                script += "return json;";
+            }
+            else if (by == Tester.BY_XPATH)
+            {
+                script += $"var element = frame.evaluate(\"{locator}\", frame, null, XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);";
+                script += "var json = '[';";
+                script += "var attr = '';";
+                script += "var count = element.snapshotLength;";
+                script += "for (var i = 0; i < count; i++){";
+                script += $"attr = element.snapshotItem(i).getAttribute('{attribute}');";
+                script += "json += '\"' + attr + '\",';";
+                script += "}";
+                script += "json = json.slice(0, -1);";
+                script += "json += ']';";
+                script += "return json;";
+            }
+            script += "}());";
+
+            string result = await execute(script, step, $"Получение json из аттрибутов {attribute}", $"Не удалось найти или получить аттрибуты из элементов по локатору: {locator}");
+            List<string> Json_Array = null;
+            if (result != "null" && result != null)
+            {
+                try
+                {
+                    result = JsonConvert.DeserializeObject(result).ToString();
+                    Json_Array = JsonConvert.DeserializeObject<List<string>>(result);
+                    _tester.EditMessage(step, null, Tester.PASSED, $"Получен json {result} из аттрибутов {attribute}", Tester.IMAGE_STATUS_PASSED);
+                }
+                catch (Exception ex)
+                {
+                    _tester.EditMessage(step, null, Tester.FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), Tester.IMAGE_STATUS_FAILED);
+                    _tester.TestStopAsync();
+                    _tester.ConsoleMsgError(ex.ToString());
+                }
+            }
+            return Json_Array;
+        }
 
 
     }

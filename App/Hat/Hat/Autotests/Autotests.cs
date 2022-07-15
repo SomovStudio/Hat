@@ -80,9 +80,21 @@ namespace Hat
             HatFrameworkDev.FRAMEElement frame = await tester.GetFrameAsync(0);
             tester.ConsoleMsg("Index: " + frame.Index);
             tester.ConsoleMsg("Name: " + frame.Name);
-           
+
+            /* 1.
             string name = await frame.GetAttributeFromElementAsync(HatFrameworkDev.Tester.BY_XPATH, "//input[@id='login']", "name");
             tester.ConsoleMsg("Attribute: " + name);
+            */
+
+            /* 2.
+            List<string> values = await frame.GetAttributeFromElementsAsync(HatFrameworkDev.Tester.BY_XPATH, "//input", "name");
+            if (values != null)
+            {
+                foreach (string attr in values)
+                    tester.ConsoleMsg(attr);
+            }
+            */
+
 
             await tester.TestEndAsync();
 
