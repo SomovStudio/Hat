@@ -1816,6 +1816,7 @@ namespace Hat
                     toolStripMenuItemEditorTopMost.Checked = true;
                 }
                 Config.editorTopMost = editorTopMostToolStripMenuItem.Checked;
+                if (codeEditorForm != null) codeEditorForm.TopMost = Config.editorTopMost;
                 if (Config.projectPath != "(не открыт)") Config.saveConfigJson(Config.projectPath + "/project.hat");
             }
             catch (Exception ex)

@@ -132,10 +132,11 @@ namespace Hat
             await frame.SetHtmlInElementAsync(HatFrameworkDev.Tester.BY_XPATH, "//*[@id='auth']/h2", "<h2>Тестовый заголовок</h2>");
             */
 
-            /* 12. */
+            /* 12.
             await frame.WaitNotVisibleElementAsync(HatFrameworkDev.Tester.BY_XPATH, "//*[@id='result']", 5);
             await frame.ClickElementAsync(HatFrameworkDev.Tester.BY_XPATH, "//*[@id='buttonLogin']");
             await frame.WaitVisibleElementAsync(HatFrameworkDev.Tester.BY_XPATH, "//*[@id='result']", 5);
+            */
 
 
 
