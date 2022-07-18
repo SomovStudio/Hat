@@ -144,7 +144,7 @@ namespace HatFrameworkDev
                 if (by == BY_TAG) script += $"var elem = document.getElementsByTagName('{target}')[{index}];";
                 if (by == BY_CSS) script += $"var elem = document.querySelector(\"{target}\");";
                 if (by == BY_XPATH) script += $"var elem = document.evaluate(\"{target}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
-                script += "if (!(elem instanceof Element)) throw Error('DomUtil: elem is not an element.');";
+                //script += "if (!(elem instanceof Element)) throw Error('DomUtil: elem is not an element.');";
                 script += "const style = getComputedStyle(elem);";
                 script += "if (style.display === 'none') return false;";
                 script += "if (style.visibility !== 'visible') return false;";
