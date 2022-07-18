@@ -142,7 +142,10 @@ namespace Hat
             bool result = await frame.FindElementAsync(HatFrameworkDev.Tester.BY_XPATH, "//*[@id='result']", 5);
             */
 
-            /* 14. */
+            /* 14.
+            bool result = await frame.FindVisibleElementAsync(HatFrameworkDev.Tester.BY_XPATH, "//*[@id='result']", 5);
+            */
+
 
 
             await tester.TestEndAsync();

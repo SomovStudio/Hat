@@ -512,6 +512,35 @@ namespace HatFrameworkDev
             return found;
         }
 
+        public async Task<bool> FindVisibleElementAsync(string by, string locator, int sec)
+        {
+            int step = _tester.SendMessage($"FindVisibleElementAsync(\"{by}\", \"{locator}\", {sec})", Tester.PROCESS, "Поиск элемента", Tester.IMAGE_STATUS_PROCESS);
+            if (_tester.DefineTestStop(step) == true) return false;
+
+            bool found = false;
+            try
+            {
+                for (int i = 0; i < sec; i++)
+                {
+                    if (by == Tester.BY_CSS) found = await isVisible(Tester.BY_CSS, locator);
+                    else if (by == Tester.BY_XPATH) found = await isVisible(Tester.BY_XPATH, locator);
+                    if (found) break;
+                    await Task.Delay(1000);
+                }
+
+                if (found == true) _tester.EditMessage(step, null, Tester.PASSED, "Поиск элемента - завершен (элемент найден)", Tester.IMAGE_STATUS_PASSED);
+                else _tester.EditMessage(step, null, Tester.WARNING, "Поиск элемента - завершен (элемент не найден)", Tester.IMAGE_STATUS_WARNING);
+            }
+            catch (Exception ex)
+            {
+                _tester.EditMessage(step, null, Tester.FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), Tester.IMAGE_STATUS_FAILED);
+                _tester.TestStopAsync();
+                _tester.ConsoleMsgError(ex.ToString());
+            }
+            return found;
+        }
+
+
 
     }
 }
