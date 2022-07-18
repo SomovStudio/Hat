@@ -146,6 +146,13 @@ namespace Hat
             bool result = await frame.FindVisibleElementAsync(HatFrameworkDev.Tester.BY_XPATH, "//*[@id='result']", 5);
             */
 
+            /* 15.
+            string title = await frame.GetTitleAsync();
+            */
+
+            /* 16.
+            string url = await frame.GetUrlAsync();
+            */
 
 
             await tester.TestEndAsync();

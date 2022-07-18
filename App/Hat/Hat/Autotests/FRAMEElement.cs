@@ -540,7 +540,43 @@ namespace HatFrameworkDev
             return found;
         }
 
+        public async Task<string> GetTitleAsync()
+        {
+            int step = _tester.SendMessage($"GetTitleAsync()", Tester.PROCESS, "Чтение заголовка из фрейма", Tester.IMAGE_STATUS_PROCESS);
+            if (_tester.DefineTestStop(step) == true) return "";
 
+            string script = "";
+            script += "(function(){ ";
+            script += $"var frame = window.frames[{_index}].document;";
+            script += "var element = frame.querySelector('title');";
+            script += "return element.innerText;";
+            script += "}());";
+            string value = await execute(script, step, $"Прочитан заголовок фрейма", $"Не удалось прочитать заголовок фрейма");
+            return value;
+        }
+
+        public async Task<string> GetUrlAsync()
+        {
+            int step = _tester.SendMessage("GetUrlAsync()", Tester.PROCESS, "Запрашивается URL фрейма", Tester.IMAGE_STATUS_PROCESS);
+            if (_tester.DefineTestStop(step) == true) return null;
+            string url = null;
+            try
+            {
+                string script = "";
+                script += "(function(){ ";
+                script += $"var frame = window.frames[{_index}].document;";
+                script += "return frame.URL;";
+                script += "}());";
+                url = await execute(script, step, $"Получен URL фрейма", $"Не удалось получить URL фрейма");
+            }
+            catch (Exception ex)
+            {
+                _tester.EditMessage(step, null, Tester.FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), Tester.IMAGE_STATUS_FAILED);
+                _tester.TestStopAsync();
+                _tester.ConsoleMsgError(ex.ToString());
+            }
+            return url;
+        }
 
     }
 }
