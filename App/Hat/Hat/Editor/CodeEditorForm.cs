@@ -1990,6 +1990,32 @@ await tester.TestEndAsync();\par
 @"",
 @"",
 @"",
+@"",
+@"",
+@"",
+@"",
+@"",
+@"",
+@"",
+@"",
+@"",
+@"",
+@"",
+@"",
+@"",
+@"",
+@"",
+@"",
+@"",
+@"",
+@"",
+@"",
+@"",
+@"",
+@"",
+@"",
+@"",
+@"",
 @""
         };
 
@@ -2598,32 +2624,44 @@ await tester.TestEndAsync();\par
                     if (value == "BY_VALUE" && tag == "FRAMEElement") richTextBox1.Rtf = handbook[154];
                     if (value == "Name" && tag == "FRAMEElement") richTextBox1.Rtf = handbook[155];
                     if (value == "Index" && tag == "FRAMEElement") richTextBox1.Rtf = handbook[156];
-                    if (value == "" && tag == "FRAMEElement") richTextBox1.Rtf = handbook[157];
-                    if (value == "" && tag == "FRAMEElement") richTextBox1.Rtf = handbook[158];
-                    if (value == "" && tag == "FRAMEElement") richTextBox1.Rtf = handbook[159];
-                    if (value == "" && tag == "FRAMEElement") richTextBox1.Rtf = handbook[160];
 
-                    if (value == "" && tag == "FRAMEElement") richTextBox1.Rtf = handbook[161];
-                    if (value == "" && tag == "FRAMEElement") richTextBox1.Rtf = handbook[162];
-                    if (value == "" && tag == "FRAMEElement") richTextBox1.Rtf = handbook[163];
-                    if (value == "" && tag == "FRAMEElement") richTextBox1.Rtf = handbook[164];
-                    if (value == "" && tag == "FRAMEElement") richTextBox1.Rtf = handbook[165];
-                    if (value == "" && tag == "FRAMEElement") richTextBox1.Rtf = handbook[166];
-                    if (value == "" && tag == "FRAMEElement") richTextBox1.Rtf = handbook[167];
-                    if (value == "" && tag == "FRAMEElement") richTextBox1.Rtf = handbook[168];
-                    if (value == "" && tag == "FRAMEElement") richTextBox1.Rtf = handbook[169];
-                    if (value == "" && tag == "FRAMEElement") richTextBox1.Rtf = handbook[170];
+                    if (value == "ClickElementAsync" && tag == "FRAMEElement") richTextBox1.Rtf = handbook[157];
+                    if (value == "FindElementAsync" && tag == "FRAMEElement") richTextBox1.Rtf = handbook[158];
+                    if (value == "FindVisibleElementAsync" && tag == "FRAMEElement") richTextBox1.Rtf = handbook[159];
+                    if (value == "GetAttributeFromElementAsync" && tag == "FRAMEElement") richTextBox1.Rtf = handbook[160];
+                    if (value == "GetAttributeFromElementsAsync" && tag == "FRAMEElement") richTextBox1.Rtf = handbook[161];
+                    if (value == "GetCountElementsAsync" && tag == "FRAMEElement") richTextBox1.Rtf = handbook[162];
+                    if (value == "GetHtmlFromElementAsync" && tag == "FRAMEElement") richTextBox1.Rtf = handbook[163];
+                    if (value == "GetOptionAsync" && tag == "FRAMEElement") richTextBox1.Rtf = handbook[164];
+                    if (value == "GetTextFromElementAsync" && tag == "FRAMEElement") richTextBox1.Rtf = handbook[165];
+                    if (value == "GetTitleAsync" && tag == "FRAMEElement") richTextBox1.Rtf = handbook[166];
+                    if (value == "GetUrlAsync" && tag == "FRAMEElement") richTextBox1.Rtf = handbook[167];
+                    if (value == "GetValueFromElementAsync" && tag == "FRAMEElement") richTextBox1.Rtf = handbook[168];
+                    if (value == "IsClickableElementAsync" && tag == "FRAMEElement") richTextBox1.Rtf = handbook[169];
+                    if (value == "ScrollToElementAsync" && tag == "FRAMEElement") richTextBox1.Rtf = handbook[170];
+                    if (value == "SelectOptionAsync" && tag == "FRAMEElement") richTextBox1.Rtf = handbook[171];
+                    if (value == "SetAttributeInElementAsync" && tag == "FRAMEElement") richTextBox1.Rtf = handbook[172];
+                    if (value == "SetAttributeInElementsAsync" && tag == "FRAMEElement") richTextBox1.Rtf = handbook[173];
+                    if (value == "SetHtmlInElementAsync" && tag == "FRAMEElement") richTextBox1.Rtf = handbook[174];
+                    if (value == "SetTextInElementAsync" && tag == "FRAMEElement") richTextBox1.Rtf = handbook[175];
+                    if (value == "SetValueInElementAsync" && tag == "FRAMEElement") richTextBox1.Rtf = handbook[176];
+                    if (value == "WaitNotVisibleElementAsync" && tag == "FRAMEElement") richTextBox1.Rtf = handbook[177];
+                    if (value == "WaitVisibleElementAsync" && tag == "FRAMEElement") richTextBox1.Rtf = handbook[178];
 
-                    if (value == "" && tag == "FRAMEElement") richTextBox1.Rtf = handbook[171];
-                    if (value == "" && tag == "FRAMEElement") richTextBox1.Rtf = handbook[172];
-                    if (value == "" && tag == "FRAMEElement") richTextBox1.Rtf = handbook[173];
-                    if (value == "" && tag == "FRAMEElement") richTextBox1.Rtf = handbook[174];
-                    if (value == "" && tag == "FRAMEElement") richTextBox1.Rtf = handbook[175];
-                    if (value == "" && tag == "FRAMEElement") richTextBox1.Rtf = handbook[176];
-                    if (value == "" && tag == "FRAMEElement") richTextBox1.Rtf = handbook[177];
-                    if (value == "" && tag == "FRAMEElement") richTextBox1.Rtf = handbook[178];
-                    if (value == "" && tag == "FRAMEElement") richTextBox1.Rtf = handbook[179];
-                    if (value == "" && tag == "FRAMEElement") richTextBox1.Rtf = handbook[180];
+                    /*
+                    if (value == "" && tag == "") richTextBox1.Rtf = handbook[179];
+                    if (value == "" && tag == "") richTextBox1.Rtf = handbook[180];
+                    if (value == "" && tag == "") richTextBox1.Rtf = handbook[181];
+                    if (value == "" && tag == "") richTextBox1.Rtf = handbook[182];
+                    if (value == "" && tag == "") richTextBox1.Rtf = handbook[183];
+                    if (value == "" && tag == "") richTextBox1.Rtf = handbook[184];
+                    if (value == "" && tag == "") richTextBox1.Rtf = handbook[185];
+                    if (value == "" && tag == "") richTextBox1.Rtf = handbook[186];
+                    if (value == "" && tag == "") richTextBox1.Rtf = handbook[187];
+                    if (value == "" && tag == "") richTextBox1.Rtf = handbook[188];
+                    if (value == "" && tag == "") richTextBox1.Rtf = handbook[189];
+                    if (value == "" && tag == "") richTextBox1.Rtf = handbook[190];
+                    */
 
                 }
             }
