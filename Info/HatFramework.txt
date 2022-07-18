@@ -468,9 +468,8 @@ REST запросы
 +	FindVisibleElementAsync(string by, string locator, int sec)
 +	GetTitleAsync()
 +	GetUrlAsync()
-	GoToUrlAsync(string url, int sec)
-	GetTextFromElementAsync(string by, string locator)
-	SetTextInElementAsync(string by, string locator, string text)
++	GetTextFromElementAsync(string by, string locator)
++	SetTextInElementAsync(string by, string locator, string text)
 	GetOptionAsync(string by, string locator)
 	SelectOptionAsync(string by, string locator, string value)
 	

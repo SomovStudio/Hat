@@ -578,5 +578,36 @@ namespace HatFrameworkDev
             return url;
         }
 
+        public async Task<string> GetTextFromElementAsync(string by, string locator)
+        {
+            int step = _tester.SendMessage($"GetTextFromElementAsync(\"{by}\", \"{locator}\")", Tester.PROCESS, "Чтение текста из элемент", Tester.IMAGE_STATUS_PROCESS);
+            if (_tester.DefineTestStop(step) == true) return "";
+
+            string script = "(function(){";
+            script += $"var frame = window.frames[{_index}].document;";
+            if (by == Tester.BY_CSS) script += "var element = frame.querySelector(\"" + locator + "\"); return element.innerText;";
+            else if (by == Tester.BY_XPATH) script += $"var element = frame.evaluate(\"{locator}\", frame, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue; return element.innerText;";
+            script += "}());";
+            string value = await execute(script, step, $"Прочитан текст из элемента", $"Не удалось найти или прочитать текст из элемента по локатору: {locator}");
+            return value;
+        }
+
+        public async Task SetTextInElementAsync(string by, string locator, string text)
+        {
+            int step = _tester.SendMessage($"SetTextInElementAsync(\"{by}\", \"{locator}\", \"{text}\")", Tester.PROCESS, "Ввод текста в элемент", Tester.IMAGE_STATUS_PROCESS);
+            if (_tester.DefineTestStop(step) == true) return;
+
+            string script = "(function(){";
+            script += $"var frame = window.frames[{_index}].document;";
+            if (by == Tester.BY_CSS) script += $"var element = frame.querySelector(\"{locator}\");";
+            else if (by == Tester.BY_XPATH) script += $"var element = frame.evaluate(\"{locator}\", frame, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
+            script += $"element.innerText = '{text}';";
+            script += "return element.innerText;";
+            script += "}());";
+            await execute(script, step, $"Текст введен в элемент", $"Не удалось найти или ввести текст в элемент по локатору: {locator}");
+        }
+
+
+
     }
 }

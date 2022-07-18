@@ -154,6 +154,11 @@ namespace Hat
             string url = await frame.GetUrlAsync();
             */
 
+            /* 17.
+            await frame.SetTextInElementAsync(HatFrameworkDev.Tester.BY_XPATH, "//*[@id='auth']/h2", "Это тест");
+            string text = await frame.GetTextFromElementAsync(HatFrameworkDev.Tester.BY_XPATH, "//*[@id='auth']/h2");
+            */
+
 
             await tester.TestEndAsync();
 
