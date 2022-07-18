@@ -470,7 +470,47 @@ namespace HatFrameworkDev
             }
         }
 
+        public async Task<bool> FindElementAsync(string by, string locator, int sec)
+        {
+            int step = _tester.SendMessage($"FindElementAsync(\"{by}\", \"{locator}\", {sec})", Tester.PROCESS, "Поиск элемента", Tester.IMAGE_STATUS_PROCESS);
+            if (_tester.DefineTestStop(step) == true) return false;
 
+            bool found = false;
+            try
+            {
+                string script = "";
+                script += "(function(){ ";
+                script += $"var frame = window.frames[{_index}].document;";
+                if (by == Tester.BY_CSS) script += $"var elem = frame.querySelector(\"{locator}\");";
+                else if (by == Tester.BY_XPATH) script += $"var elem = frame.evaluate(\"{locator}\", frame, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
+                script += "return elem;";
+                script += "}());";
+
+                string result = null;
+                for (int i = 0; i < sec; i++)
+                {
+                    if (_tester.Debug == true) _tester.ConsoleMsg($"[DEBUG] JS скрипт: {script}");
+                    result = await _tester.BrowserView.CoreWebView2.ExecuteScriptAsync(script);
+                    if (_tester.Debug == true) _tester.ConsoleMsg($"[DEBUG] JS результат: {result}");
+                    if (result != "null" && result != null)
+                    {
+                        found = true;
+                        break;
+                    }
+                    await Task.Delay(1000);
+                }
+
+                if (found == true) _tester.EditMessage(step, null, Tester.PASSED, "Поиск элемента - завершен (элемент найден)", Tester.IMAGE_STATUS_PASSED);
+                else _tester.EditMessage(step, null, Tester.WARNING, "Поиск элемента - завершен (элемент не найден)", Tester.IMAGE_STATUS_WARNING);
+            }
+            catch (Exception ex)
+            {
+                _tester.EditMessage(step, null, Tester.FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), Tester.IMAGE_STATUS_FAILED);
+                _tester.TestStopAsync();
+                _tester.ConsoleMsgError(ex.ToString());
+            }
+            return found;
+        }
 
 
     }

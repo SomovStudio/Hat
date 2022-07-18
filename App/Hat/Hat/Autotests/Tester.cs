@@ -1263,7 +1263,7 @@ namespace HatFrameworkDev
                 string script = "";
                 script += "(function(){ ";
                 if (by == BY_CSS) script += $"var elem = document.querySelector(\"{locator}\");";
-                else script += $"var element = document.evaluate(\"{locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
+                else script += $"var elem = document.evaluate(\"{locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
                 script += "return elem;";
                 script += "}());";
 
