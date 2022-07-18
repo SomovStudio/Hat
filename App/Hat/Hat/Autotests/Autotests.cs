@@ -159,6 +159,15 @@ namespace Hat
             string text = await frame.GetTextFromElementAsync(HatFrameworkDev.Tester.BY_XPATH, "//*[@id='auth']/h2");
             */
 
+            /* 18. */
+            await frame.SelectOptionAsync(HatFrameworkDev.Tester.BY_XPATH, "//*[@id='MySelect'", HatFrameworkDev.FRAMEElement.BY_INDEX, "2");
+            await frame.SelectOptionAsync(HatFrameworkDev.Tester.BY_XPATH, "//*[@id='MySelect'", HatFrameworkDev.FRAMEElement.BY_VALUE, "Mobile");
+            await frame.SelectOptionAsync(HatFrameworkDev.Tester.BY_XPATH, "//*[@id='MySelect'", HatFrameworkDev.FRAMEElement.BY_TEXT, "Other");
+
+            string index = await frame.GetOptionAsync(HatFrameworkDev.Tester.BY_XPATH, "//*[@id='MySelect'", HatFrameworkDev.FRAMEElement.BY_INDEX);
+            string value = await frame.GetOptionAsync(HatFrameworkDev.Tester.BY_XPATH, "//*[@id='MySelect'", HatFrameworkDev.FRAMEElement.BY_VALUE);
+            string text = await frame.GetOptionAsync(HatFrameworkDev.Tester.BY_XPATH, "//*[@id='MySelect'", HatFrameworkDev.FRAMEElement.BY_TEXT);
+
 
             await tester.TestEndAsync();
 
