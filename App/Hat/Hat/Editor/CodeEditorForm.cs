@@ -2093,9 +2093,30 @@ tester.ConsoleMsg(""Name: "" + frame.Name);\par
 \cf0\f0\lang1033 FRAMEElement.BY_VALUE\par
 }",
 
-@"",
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.22000}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 Name\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ef\'e5\'f0\'e5\'ec\'e5\'ed\'ed\'e0\'ff \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2 \'e8\'eb\'e8 \'ef\'ee\'eb\'f3\'f7\'e0\'e5\'f2 \'e8\'ec\'ff (Name) \'f4\'f0\'e5\'e9\'ec\'e0\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \f0\lang1033 string Name \{ get; set; \}\f1\lang1049\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0\f0\lang1033 FRAMEElement frame = await tester.GetFrameAsync(0);\par
+tester.ConsoleMsg(""Name: "" + frame.Name);\par
+}",
 
-@"",
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.22000}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 Index\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ef\'e5\'f0\'e5\'ec\'e5\'ed\'ed\'e0\'ff \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2 \'e8\'eb\'e8 \'ef\'ee\'eb\'f3\'f7\'e0\'e5\'f2 \'e8\'ed\'e4\'e5\'ea\'f1 (Index) \'f4\'f0\'e5\'e9\'ec\'e0\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \f0\lang1033 int Index \{ get; set; \}\f1\lang1049\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0\f0\lang1033 FRAMEElement frame = await tester.GetFrameAsync(0);\par
+tester.ConsoleMsg(""Index: "" + frame.Index);\par
+}",
+
 @"",
 @"",
 @"",
