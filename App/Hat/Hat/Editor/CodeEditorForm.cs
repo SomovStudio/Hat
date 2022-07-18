@@ -1977,7 +1977,75 @@ await tester.AssertTrueAsync(clickable);\par
 await tester.TestEndAsync();\par
     }",
 
-@"",
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.22000}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 GetFrameAsync\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2 \'fd\'eb\'e5\'ec\'e5\'ed\'f2 \'e2 \'e2\'e8\'e4\'e5 \'ee\'e1\'fa\'e5\'ea\'f2 \'ea\'eb\'e0\'f1\'f1 \'ea\'ee\'f2\'ee\'f0\'ee\'e3\'ee FRAMEElement\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \f0\lang1033 GetFrameAsync(int index)\f1\lang1049\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0\f0\lang1033 Tester tester = new Tester(browserForm);\par
+await tester.TestBeginAsync();\par
+await tester.GoToUrlAsync(""https://somovstudio.github.io/test2.html"", 5);\par
+\par
+FRAMEElement frame = await tester.GetFrameAsync(0);\par
+tester.ConsoleMsg(""Index: "" + frame.Index);\par
+tester.ConsoleMsg(""Name: "" + frame.Name);\par
+\par
+string name = await frame.GetAttributeFromElementAsync(Tester.BY_XPATH, ""//input[@id='login']"", ""name"");\par
+\par
+List<string> values = await frame.GetAttributeFromElementsAsync(Tester.BY_XPATH, ""//input"", ""name"");\par
+if (values != null)\par
+\{\par
+\tab foreach (string attr in values)\par
+\tab\tab tester.ConsoleMsg(attr);\par
+\}\par
+\par
+await frame.SetAttributeInElementAsync(Tester.BY_XPATH, ""//input[@id='buttonLogin']"", ""name"", ""NameButtonLogin"");\par
+\par
+await frame.SetAttributeInElementsAsync(Tester.BY_XPATH, ""//input"", ""name"", ""test"");\par
+\par
+await frame.SetValueInElementAsync(Tester.BY_XPATH, ""//input[@id='login']"", ""\f1\lang1049\'d2\'e5\'f1\'f2\'e8\'f0\'ee\'e2\'f9\'e8\'ea"");\par
+string value = await frame.GetValueFromElementAsync(Tester.BY_XPATH, ""//input[@id='login']"");\par
+\par
+await frame.ClickElementAsync(Tester.BY_XPATH, ""//*[@id='buttonLogin']"");\par
+\par
+bool result = await frame.IsClickableElementAsync(Tester.BY_XPATH, ""//*[@id='buttonLogin']"");\par
+\par
+await frame.ScrollToElementAsync(Tester.BY_XPATH, ""//*[@id='buttonLogin']"", true);\par
+\par
+int result = await frame.GetCountElementsAsync(Tester.BY_XPATH, ""//input"");\par
+\par
+string html = await frame.GetHtmlFromElementAsync(Tester.BY_XPATH, ""//*[@id='buttonLogin']"");\par
+\par
+await frame.SetHtmlInElementAsync(Tester.BY_XPATH, ""//*[@id='auth']/h2"", ""<h2>\'d2\'e5\'f1\'f2\'ee\'e2\'fb\'e9 \'e7\'e0\'e3\'ee\'eb\'ee\'e2\'ee\'ea</h2>"");\par
+\par
+await frame.WaitNotVisibleElementAsync(Tester.BY_XPATH, ""//*[@id='result']"", 5);\par
+await frame.ClickElementAsync(Tester.BY_XPATH, ""//*[@id='buttonLogin']"");\par
+await frame.WaitVisibleElementAsync(Tester.BY_XPATH, ""//*[@id='result']"", 5);\par
+\par
+bool result = await frame.FindElementAsync(Tester.BY_XPATH, ""//*[@id='result']"", 5);\par
+\par
+bool result = await frame.FindVisibleElementAsync(Tester.BY_XPATH, ""//*[@id='result']"", 5);\par
+\par
+string title = await frame.GetTitleAsync();\par
+\par
+string url = await frame.GetUrlAsync();\par
+\par
+await frame.SetTextInElementAsync(Tester.BY_XPATH, ""//*[@id='auth']/h2"", ""\'dd\'f2\'ee \'f2\'e5\'f1\'f2"");\par
+string text = await frame.GetTextFromElementAsync(Tester.BY_XPATH, ""//*[@id='auth']/h2"");\par
+\par
+await frame.SelectOptionAsync(Tester.BY_XPATH, ""//*[@id='MySelect'"", FRAMEElement.BY_INDEX, ""2"");\par
+await frame.SelectOptionAsync(Tester.BY_XPATH, ""//*[@id='MySelect'"", FRAMEElement.BY_VALUE, ""Mobile"");\par
+await frame.SelectOptionAsync(Tester.BY_XPATH, ""//*[@id='MySelect'"", FRAMEElement.BY_TEXT, ""Other"");\par
+\par
+string index = await frame.GetOptionAsync(Tester.BY_XPATH, ""//*[@id='MySelect'"", FRAMEElement.BY_INDEX);\par
+string value = await frame.GetOptionAsync(Tester.BY_XPATH, ""//*[@id='MySelect'"", FRAMEElement.BY_VALUE);\par
+string text = await frame.GetOptionAsync(Tester.BY_XPATH, ""//*[@id='MySelect'"", FRAMEElement.BY_TEXT);\f0\lang1033\par
+}
+",
+
 @"",
 @"",
 @"",
