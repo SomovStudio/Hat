@@ -74,12 +74,14 @@ namespace Hat
 
         public static async Task devTestAsync()
         {
+            /*
             HatFrameworkDev.Tester tester = new HatFrameworkDev.Tester(Config.browserForm);
             await tester.TestBeginAsync();
             await tester.GoToUrlAsync("https://somovstudio.github.io/test2.html", 5);
             HatFrameworkDev.FRAMEElement frame = await tester.GetFrameAsync(0);
             tester.ConsoleMsg("Index: " + frame.Index);
             tester.ConsoleMsg("Name: " + frame.Name);
+            */
 
             /* 1.
             string name = await frame.GetAttributeFromElementAsync(HatFrameworkDev.Tester.BY_XPATH, "//input[@id='login']", "name");
@@ -159,7 +161,7 @@ namespace Hat
             string text = await frame.GetTextFromElementAsync(HatFrameworkDev.Tester.BY_XPATH, "//*[@id='auth']/h2");
             */
 
-            /* 18. */
+            /* 18.
             await frame.SelectOptionAsync(HatFrameworkDev.Tester.BY_XPATH, "//*[@id='MySelect'", HatFrameworkDev.FRAMEElement.BY_INDEX, "2");
             await frame.SelectOptionAsync(HatFrameworkDev.Tester.BY_XPATH, "//*[@id='MySelect'", HatFrameworkDev.FRAMEElement.BY_VALUE, "Mobile");
             await frame.SelectOptionAsync(HatFrameworkDev.Tester.BY_XPATH, "//*[@id='MySelect'", HatFrameworkDev.FRAMEElement.BY_TEXT, "Other");
@@ -167,11 +169,11 @@ namespace Hat
             string index = await frame.GetOptionAsync(HatFrameworkDev.Tester.BY_XPATH, "//*[@id='MySelect'", HatFrameworkDev.FRAMEElement.BY_INDEX);
             string value = await frame.GetOptionAsync(HatFrameworkDev.Tester.BY_XPATH, "//*[@id='MySelect'", HatFrameworkDev.FRAMEElement.BY_VALUE);
             string text = await frame.GetOptionAsync(HatFrameworkDev.Tester.BY_XPATH, "//*[@id='MySelect'", HatFrameworkDev.FRAMEElement.BY_TEXT);
+            */
 
-
+            /*
             await tester.TestEndAsync();
-
-
+            */
 
 
             /*
@@ -192,7 +194,6 @@ namespace Hat
             await tester.TestEndAsync();
             */
 
-            /*
             HatFrameworkDev.Tester tester = new HatFrameworkDev.Tester(Config.browserForm);
             await tester.TestBeginAsync();
             await tester.GoToUrlAsync("https://somovstudio.github.io/test2.html", 5);
@@ -211,7 +212,7 @@ namespace Hat
             await tester.AssertEqualsAsync("\"Other\"", text);
             await tester.AssertEqualsAsync("\"Other\"", value);
             await tester.TestEndAsync();
-            */
+
 
 
         }

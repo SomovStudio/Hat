@@ -650,8 +650,9 @@ namespace HatFrameworkDev
         public async Task<HTMLElement> GetElementAsync(string by, string locator)
         {
             int step;
-            if(by == BY_CSS) step = SendMessage($"GetElementAsync(\"{by}\", '{locator}')", PROCESS, "Получить элемента", IMAGE_STATUS_PROCESS);
-            else step = SendMessage($"GetElementAsync(\"{by}\", \"{locator}\")", PROCESS, "Получить элемента", IMAGE_STATUS_PROCESS);
+
+            if (by == BY_XPATH) step = SendMessage($"GetElementAsync(\"{by}\", \"{locator}\")", PROCESS, "Получить элемента", IMAGE_STATUS_PROCESS);
+            else step = SendMessage($"GetElementAsync(\"{by}\", '{locator}')", PROCESS, "Получить элемента", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return null;
 
             HTMLElement htmlElement = new HTMLElement(this, by, locator);
@@ -934,7 +935,7 @@ namespace HatFrameworkDev
                 for (int i = 0; i < sec; i++)
                 {
                     if (by == BY_CSS) found = await isVisible(BY_CSS, locator);
-                    else found = await isVisible(BY_XPATH, locator);
+                    else if (by == BY_XPATH) found = await isVisible(BY_XPATH, locator);
                     if (found) break;
                     await Task.Delay(1000);
                 }
@@ -1080,7 +1081,7 @@ namespace HatFrameworkDev
                 for (int i = 0; i < sec; i++)
                 {
                     if (by == BY_CSS) found = await isVisible(BY_CSS, locator);
-                    else found = await isVisible(BY_XPATH, locator);
+                    else if (by == BY_XPATH) found = await isVisible(BY_XPATH, locator);
                     if (found == false) break;
                     await Task.Delay(1000);
                 }
@@ -1263,7 +1264,7 @@ namespace HatFrameworkDev
                 string script = "";
                 script += "(function(){ ";
                 if (by == BY_CSS) script += $"var elem = document.querySelector(\"{locator}\");";
-                else script += $"var elem = document.evaluate(\"{locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
+                else if (by == BY_XPATH) script += $"var elem = document.evaluate(\"{locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
                 script += "return elem;";
                 script += "}());";
 
@@ -1410,7 +1411,7 @@ namespace HatFrameworkDev
                 for (int i = 0; i < sec; i++)
                 {
                     if (by == BY_CSS) found = await isVisible(BY_CSS, locator);
-                    else found = await isVisible(BY_XPATH, locator);
+                    else if (by == BY_XPATH) found = await isVisible(BY_XPATH, locator);
                     if (found) break;
                     await Task.Delay(1000);
                 }
@@ -1470,7 +1471,7 @@ namespace HatFrameworkDev
 
             string script = "(function(){";
             if (by == BY_CSS) script += $"var element = document.querySelector(\"{locator}\"); element.click(); return element;";
-            else script += $"var element = document.evaluate(\"{locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue; element.click(); return element;";
+            else if (by == BY_XPATH) script += $"var element = document.evaluate(\"{locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue; element.click(); return element;";
             script += "}());";
             await execute(script, step, $"Элемент нажат", $"Не удалось найти элемент по локатору: {locator}");
         }
@@ -1554,7 +1555,7 @@ namespace HatFrameworkDev
 
             string script = "(function(){";
             if (by == BY_CSS) script += $"var element = document.querySelector(\"{locator}\");";
-            else script += $"var element = document.evaluate(\"{locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
+            else if (by == BY_XPATH) script += $"var element = document.evaluate(\"{locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
             script += "element.value = '" + value + "';";
             script += "element.dispatchEvent(new KeyboardEvent('keydown', { bubbles: true }));";
             script += "element.dispatchEvent(new KeyboardEvent('keypress', { bubbles: true }));";
@@ -1613,7 +1614,7 @@ namespace HatFrameworkDev
 
             string script = "(function(){";
             if (by == BY_CSS) script += $"var element = document.querySelector(\"{locator}\"); return element.value;";
-            else script += $"var element = document.evaluate(\"{locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue; return element.value;";
+            else if (by == BY_XPATH) script += $"var element = document.evaluate(\"{locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue; return element.value;";
             script += "}());";
             string value = await execute(script, step, $"Получено значение из элемента", $"Не удалось найти или получить данные из элемента по локатору: {locator}");
             return value;
@@ -1678,7 +1679,7 @@ namespace HatFrameworkDev
 
             string script = "(function(){";
             if (by == BY_CSS) script += $"var element = document.querySelector(\"{locator}\");";
-            else script += $"var element = document.evaluate(\"{locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
+            else if (by == BY_XPATH) script += $"var element = document.evaluate(\"{locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
             script += $"element.innerText = '{text}';";
             script += "return element.innerText;";
             script += "}());";
@@ -1732,7 +1733,7 @@ namespace HatFrameworkDev
 
             string script = "(function(){";
             if (by == BY_CSS) script += "var element = document.querySelector(\"" + locator + "\"); return element.innerText;";
-            else script += $"var element = document.evaluate(\"{locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue; return element.innerText;";
+            else if (by == BY_XPATH) script += $"var element = document.evaluate(\"{locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue; return element.innerText;";
             script += "}());";
             string value = await execute(script, step, $"Прочитан текст из элемента", $"Не удалось найти или прочитать текст из элемента по локатору: {locator}");
             return value;
@@ -1793,7 +1794,7 @@ namespace HatFrameworkDev
 
             string script = "(function(){";
             if (by == BY_CSS) script += "var element = document.querySelectorAll(\"" + locator + "\"); return element.length;";
-            else script += $"var element = document.evaluate(\"{locator}\", document, null, XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null); return element.snapshotLength;";
+            else if (by == BY_XPATH) script += $"var element = document.evaluate(\"{locator}\", document, null, XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null); return element.snapshotLength;";
             script += "}());";
             string result = await execute(script, step, $"Получение количества элементов", $"Не удалось найти или получить количество элементов по локатору: {locator}");
             int value = -1;
@@ -1819,7 +1820,7 @@ namespace HatFrameworkDev
                     if (behaviorSmooth == true) script += "element.scrollIntoView({behavior: 'smooth'}); return element;";
                     else script += "element.scrollIntoView(); return element;";
                 }
-                else
+                else if (by == BY_XPATH)
                 {
                     script += $"var element = document.evaluate(\"{locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
                     if (behaviorSmooth == true) script += "element.scrollIntoView({behavior: 'smooth'}); return element;";
@@ -1894,7 +1895,7 @@ namespace HatFrameworkDev
 
             string script = "(function(){";
             if (by == BY_CSS) script += $"var element = document.querySelector(\"{locator}\");";
-            else script += $"var element = document.evaluate(\"{locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
+            else if (by == BY_XPATH) script += $"var element = document.evaluate(\"{locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
             script += $"return element.getAttribute('{attribute}');";
             script += "}());";
             string value = await execute(script, step, $"Получено значение из аттрибута {attribute}", $"Не удалось найти или получить аттрибут из элемента по локатору: {locator}");
@@ -2127,7 +2128,7 @@ namespace HatFrameworkDev
 
             string script = "(function(){";
             if (by == BY_CSS) script += $"var element = document.querySelector(\"{locator}\");";
-            else script += $"var element = document.evaluate(\"{locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
+            else if (by == BY_XPATH) script += $"var element = document.evaluate(\"{locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
             script += $"element.setAttribute('{attribute}', '{value}');";
             script += $"return element.getAttribute('{attribute}');";
             script += "}());";
@@ -2323,7 +2324,7 @@ namespace HatFrameworkDev
 
             string script = "(function(){";
             if (by == BY_CSS) script += $"var element = document.querySelector(\"{locator}\"); return element.outerHTML;";
-            else script += $"var element = document.evaluate(\"{locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
+            else if (by == BY_XPATH) script += $"var element = document.evaluate(\"{locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
             script += "return element.outerHTML;";
             script += "}());";
             string value = await execute(script, step, $"Получено html элемента", $"Не удалось найти или получить html из элемента по локатору: {locator}");
@@ -2388,7 +2389,7 @@ namespace HatFrameworkDev
 
             string script = "(function(){";
             if (by == BY_CSS) script += $"var element = document.querySelector(\"{locator}\");";
-            else script += $"var element = document.evaluate(\"{locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
+            else if (by == BY_XPATH) script += $"var element = document.evaluate(\"{locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
             script += $"element.innerHTML = '{html}';";
             script += $"return element.outerHTML;";
             script += "}());";
@@ -2444,7 +2445,7 @@ namespace HatFrameworkDev
             {
                 string script = "(function(){";
                 if (by == BY_CSS) script += $"var element = document.querySelector(\"{locator}\");";
-                else script += $"var element = document.evaluate(\"{locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
+                else if (by == BY_XPATH) script += $"var element = document.evaluate(\"{locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
                 script += "if((element.getAttribute('onclick')!=null)||(element.getAttribute('href')!=null)) return true;";
                 script += "return false;";
                 script += "}());";
