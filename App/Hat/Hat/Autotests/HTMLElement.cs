@@ -37,7 +37,7 @@ namespace HatFrameworkDev
                 if (_tester.Debug == true) _tester.ConsoleMsg($"[DEBUG] JS скрипт: {script}");
                 result = await _tester.BrowserView.CoreWebView2.ExecuteScriptAsync(script);
                 if (_tester.Debug == true) _tester.ConsoleMsg($"[DEBUG] JS результат: {result}");
-                if (result == null)
+                if (result == null || result == "null")
                 {
                     _tester.EditMessage(step, null, Tester.FAILED, $"{commentfailed} " + Environment.NewLine + $"Результат выполнения скрипта: {result}", Tester.IMAGE_STATUS_FAILED);
                     //_tester.EditMessage(step, null, Tester.FAILED, commentfailed, Tester.IMAGE_STATUS_FAILED);
@@ -67,7 +67,7 @@ namespace HatFrameworkDev
                 script += "(function(){ ";
                 if (_by == Tester.BY_CSS) script += $"var elem = document.querySelector(\"{_locator}\");";
                 if (_by == Tester.BY_XPATH) script += $"var elem = document.evaluate(\"{_locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
-                script += "if (!(elem instanceof Element)) throw Error('DomUtil: elem is not an element.');";
+                //script += "if (!(elem instanceof Element)) throw Error('DomUtil: elem is not an element.');";
                 script += "const style = getComputedStyle(elem);";
                 script += "if (style.display === 'none') return false;";
                 script += "if (style.visibility !== 'visible') return false;";

@@ -94,6 +94,7 @@
       <DependentUpon>AboutForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Autotests\Autotests.cs" />
+    <Compile Include="Autotests\FRAMEElement.cs" />
     <Compile Include="Autotests\HTMLElement.cs" />
     <Compile Include="Autotests\Report.cs" />
     <Compile Include="Autotests\Tester.cs" />

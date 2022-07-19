@@ -64,6 +64,8 @@
             this.перейтиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.обновитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator17 = new System.Windows.Forms.ToolStripSeparator();
+            this.internetExplorer11ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator21 = new System.Windows.Forms.ToolStripSeparator();
             this.средстваРазработкиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.справкаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.documentationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -527,6 +529,8 @@
             this.перейтиToolStripMenuItem,
             this.обновитьToolStripMenuItem,
             this.toolStripSeparator17,
+            this.internetExplorer11ToolStripMenuItem,
+            this.toolStripSeparator21,
             this.средстваРазработкиToolStripMenuItem});
             this.браузерToolStripMenuItem.Name = "браузерToolStripMenuItem";
             this.браузерToolStripMenuItem.Size = new System.Drawing.Size(63, 20);
@@ -568,6 +572,18 @@
             // 
             this.toolStripSeparator17.Name = "toolStripSeparator17";
             this.toolStripSeparator17.Size = new System.Drawing.Size(187, 6);
+            // 
+            // internetExplorer11ToolStripMenuItem
+            // 
+            this.internetExplorer11ToolStripMenuItem.Name = "internetExplorer11ToolStripMenuItem";
+            this.internetExplorer11ToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
+            this.internetExplorer11ToolStripMenuItem.Text = "Internet Explorer 11";
+            this.internetExplorer11ToolStripMenuItem.Click += new System.EventHandler(this.internetExplorer11ToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator21
+            // 
+            this.toolStripSeparator21.Name = "toolStripSeparator21";
+            this.toolStripSeparator21.Size = new System.Drawing.Size(187, 6);
             // 
             // средстваРазработкиToolStripMenuItem
             // 
@@ -1410,6 +1426,7 @@
             this.toolStripButton13.Name = "toolStripButton13";
             this.toolStripButton13.Size = new System.Drawing.Size(61, 22);
             this.toolStripButton13.Text = "для теста";
+            this.toolStripButton13.Visible = false;
             this.toolStripButton13.Click += new System.EventHandler(this.toolStripButton13_Click);
             // 
             // tabPage6
@@ -2569,6 +2586,8 @@
         private System.Windows.Forms.ToolStripButton toolStripButton22;
         private System.Windows.Forms.CheckBox sslCheckBox;
         private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.ToolStripMenuItem internetExplorer11ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator21;
     }
 }
 

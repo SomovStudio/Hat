@@ -1977,8 +1977,484 @@ await tester.AssertTrueAsync(clickable);\par
 await tester.TestEndAsync();\par
     }",
 
-@"",
-@"",
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.22000}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 GetFrameAsync\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2 \'fd\'eb\'e5\'ec\'e5\'ed\'f2 \'e2 \'e2\'e8\'e4\'e5 \'ee\'e1\'fa\'e5\'ea\'f2 \'ea\'eb\'e0\'f1\'f1 \'ea\'ee\'f2\'ee\'f0\'ee\'e3\'ee FRAMEElement\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \f0\lang1033 GetFrameAsync(int index)\f1\lang1049\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0\f0\lang1033 Tester tester = new Tester(browserForm);\par
+await tester.TestBeginAsync();\par
+await tester.GoToUrlAsync(""https://somovstudio.github.io/test2.html"", 5);\par
+\par
+FRAMEElement frame = await tester.GetFrameAsync(0);\par
+tester.ConsoleMsg(""Index: "" + frame.Index);\par
+tester.ConsoleMsg(""Name: "" + frame.Name);\par
+\par
+string name = await frame.GetAttributeFromElementAsync(Tester.BY_XPATH, ""//input[@id='login']"", ""name"");\par
+\par
+List<string> values = await frame.GetAttributeFromElementsAsync(Tester.BY_XPATH, ""//input"", ""name"");\par
+if (values != null)\par
+\{\par
+\tab foreach (string attr in values)\par
+\tab\tab tester.ConsoleMsg(attr);\par
+\}\par
+\par
+await frame.SetAttributeInElementAsync(Tester.BY_XPATH, ""//input[@id='buttonLogin']"", ""name"", ""NameButtonLogin"");\par
+\par
+await frame.SetAttributeInElementsAsync(Tester.BY_XPATH, ""//input"", ""name"", ""test"");\par
+\par
+await frame.SetValueInElementAsync(Tester.BY_XPATH, ""//input[@id='login']"", ""\f1\lang1049\'d2\'e5\'f1\'f2\'e8\'f0\'ee\'e2\'f9\'e8\'ea"");\par
+string value = await frame.GetValueFromElementAsync(Tester.BY_XPATH, ""//input[@id='login']"");\par
+\par
+await frame.ClickElementAsync(Tester.BY_XPATH, ""//*[@id='buttonLogin']"");\par
+\par
+bool result = await frame.IsClickableElementAsync(Tester.BY_XPATH, ""//*[@id='buttonLogin']"");\par
+\par
+await frame.ScrollToElementAsync(Tester.BY_XPATH, ""//*[@id='buttonLogin']"", true);\par
+\par
+int result = await frame.GetCountElementsAsync(Tester.BY_XPATH, ""//input"");\par
+\par
+string html = await frame.GetHtmlFromElementAsync(Tester.BY_XPATH, ""//*[@id='buttonLogin']"");\par
+\par
+await frame.SetHtmlInElementAsync(Tester.BY_XPATH, ""//*[@id='auth']/h2"", ""<h2>\'d2\'e5\'f1\'f2\'ee\'e2\'fb\'e9 \'e7\'e0\'e3\'ee\'eb\'ee\'e2\'ee\'ea</h2>"");\par
+\par
+await frame.WaitNotVisibleElementAsync(Tester.BY_XPATH, ""//*[@id='result']"", 5);\par
+await frame.ClickElementAsync(Tester.BY_XPATH, ""//*[@id='buttonLogin']"");\par
+await frame.WaitVisibleElementAsync(Tester.BY_XPATH, ""//*[@id='result']"", 5);\par
+\par
+bool result = await frame.FindElementAsync(Tester.BY_XPATH, ""//*[@id='result']"", 5);\par
+\par
+bool result = await frame.FindVisibleElementAsync(Tester.BY_XPATH, ""//*[@id='result']"", 5);\par
+\par
+string title = await frame.GetTitleAsync();\par
+\par
+string url = await frame.GetUrlAsync();\par
+\par
+await frame.SetTextInElementAsync(Tester.BY_XPATH, ""//*[@id='auth']/h2"", ""\'dd\'f2\'ee \'f2\'e5\'f1\'f2"");\par
+string text = await frame.GetTextFromElementAsync(Tester.BY_XPATH, ""//*[@id='auth']/h2"");\par
+\par
+await frame.SelectOptionAsync(Tester.BY_XPATH, ""//*[@id='MySelect']"", FRAMEElement.BY_INDEX, ""2"");\par
+await frame.SelectOptionAsync(Tester.BY_XPATH, ""//*[@id='MySelect']"", FRAMEElement.BY_VALUE, ""Mobile"");\par
+await frame.SelectOptionAsync(Tester.BY_XPATH, ""//*[@id='MySelect']"", FRAMEElement.BY_TEXT, ""Other"");\par
+\par
+string index = await frame.GetOptionAsync(Tester.BY_XPATH, ""//*[@id='MySelect']"", FRAMEElement.BY_INDEX);\par
+string value = await frame.GetOptionAsync(Tester.BY_XPATH, ""//*[@id='MySelect']"", FRAMEElement.BY_VALUE);\par
+string text = await frame.GetOptionAsync(Tester.BY_XPATH, ""//*[@id='MySelect']"", FRAMEElement.BY_TEXT);\f0\lang1033\par
+}
+",
+
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.22000}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 FRAMEElement\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'e2\'f1\'ef\'ee\'ec\'ee\'e3\'e0\'f2\'e5\'eb\'fc\'ed\'fb\'e9 \'ea\'eb\'e0\'f1\'f1 \'e4\'eb\'ff \'f0\'e0\'e1\'ee\'f2\'fb \'f1 \'f4\'f0\'e5\'e9\'ec\'ee\'ec \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'ee\'e3\'ee \'e8\'ed\'e4\'e5\'ea\'f1\'e0\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \f0\lang1033 FRAMEElement(Tester tester, int index)\f1\lang1049\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0 \'ef\'ee\'eb\'f3\'f7\'e5\'ed\'e8\'ff \'ee\'e1\'fa\'e5\'ea\'f2\'e0\cf3 :\par
+\cf0\f0\lang1033 FRAMEElement frame = await tester.GetFrameAsync(0);\par
+tester.ConsoleMsg(""Index: "" + frame.Index);\par
+tester.ConsoleMsg(""Name: "" + frame.Name);\par
+\par
+    }",
+
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.22000}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 BY_INDEX\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ea\'ee\'ed\'f1\'f2\'e0\'ed\'f2\'e0 \'ee\'e1\'ee\'e7\'ed\'e0\'f7\'e0\'e5\'f2 \'f2\'e8\'ef \'ee\'e1\'f0\'e0\'e1\'e0\'f2\'fb\'e2\'e0\'e5\'ec\'ee\'e3\'ee \'e7\'ed\'e0\'f7\'e5\'ed\'e8\'ff\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \f0\lang1033 BY_INDEX = ""BY_INDEX""\f1\lang1049\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0\f0\lang1033 FRAMEElement.BY_INDEX\par
+}",
+
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.22000}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 BY_TEXT\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ea\'ee\'ed\'f1\'f2\'e0\'ed\'f2\'e0 \'ee\'e1\'ee\'e7\'ed\'e0\'f7\'e0\'e5\'f2 \'f2\'e8\'ef \'ee\'e1\'f0\'e0\'e1\'e0\'f2\'fb\'e2\'e0\'e5\'ec\'ee\'e3\'ee \'e7\'ed\'e0\'f7\'e5\'ed\'e8\'ff\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \f0\lang1033 BY_TEXT = ""BY_TEXT""\f1\lang1049\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0\f0\lang1033 FRAMEElement.BY_TEXT\par
+}",
+
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.22000}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 BY_VALUE\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ea\'ee\'ed\'f1\'f2\'e0\'ed\'f2\'e0 \'ee\'e1\'ee\'e7\'ed\'e0\'f7\'e0\'e5\'f2 \'f2\'e8\'ef \'ee\'e1\'f0\'e0\'e1\'e0\'f2\'fb\'e2\'e0\'e5\'ec\'ee\'e3\'ee \'e7\'ed\'e0\'f7\'e5\'ed\'e8\'ff\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \f0\lang1033 BY_VALUE = ""BY_VALUE""\f1\lang1049\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0\f0\lang1033 FRAMEElement.BY_VALUE\par
+}",
+
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.22000}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 Name\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ef\'e5\'f0\'e5\'ec\'e5\'ed\'ed\'e0\'ff \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2 \'e8\'eb\'e8 \'ef\'ee\'eb\'f3\'f7\'e0\'e5\'f2 \'e8\'ec\'ff (Name) \'f4\'f0\'e5\'e9\'ec\'e0\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \f0\lang1033 string Name \{ get; set; \}\f1\lang1049\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0\f0\lang1033 FRAMEElement frame = await tester.GetFrameAsync(0);\par
+tester.ConsoleMsg(""Name: "" + frame.Name);\par
+}",
+
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.22000}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 Index\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ef\'e5\'f0\'e5\'ec\'e5\'ed\'ed\'e0\'ff \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2 \'e8\'eb\'e8 \'ef\'ee\'eb\'f3\'f7\'e0\'e5\'f2 \'e8\'ed\'e4\'e5\'ea\'f1 (Index) \'f4\'f0\'e5\'e9\'ec\'e0\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \f0\lang1033 int Index \{ get; set; \}\f1\lang1049\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0\f0\lang1033 FRAMEElement frame = await tester.GetFrameAsync(0);\par
+tester.ConsoleMsg(""Index: "" + frame.Index);\par
+}",
+
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.22000}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 ClickElementAsync\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'fb\'ef\'ee\'eb\'ed\'ff\'e5\'f2 \'ed\'e0\'e6\'e0\'f2\'e8\'e5 \'ed\'e0 \'fd\'eb\'e5\'ec\'e5\'ed\'f2\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \f0\lang1033 ClickElementAsync(string by, string locator)\f1\lang1049\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0\f0\lang1033 FRAMEElement frame = await tester.GetFrameAsync(0);\par
+await frame.ClickElementAsync(Tester.BY_CSS, ""#auth #buttonLogin"");\par
+\par
+await frame.ClickElementAsync(Tester.BY_XPATH, ""//div[@id='auth']//input[@id='buttonLogin']"");\par
+    }",
+
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.22000}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 FindElementAsync\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'fb\'ef\'ee\'eb\'ed\'ff\'e5\'f2 \'ef\'ee\'e8\'f1\'ea \'fd\'eb\'e5\'ec\'e5\'ed\'f2 \'e2 DOM \'f1 \'ee\'e6\'e8\'e4\'e0\'ed\'e8\'e5\'ec \'e2 \'f1\'e5\'ea\'f3\'ed\'e4\'e0\'f5 \'e8 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2 \'eb\'ee\'e3\'e8\'f7\'e5\'f1\'ea\'e8\'e9 \'f0\'e5\'e7\'f3\'eb\'fc\'f2\'e0\'f2 true \'e8\'eb\'e8 false\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \f0\lang1033 FindElementAsync(string by, string locator, int sec)\f1\lang1049\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0\f0\lang1033 FRAMEElement frame = await tester.GetFrameAsync(0);\par
+bool result = await frame.FindElementAsync(Tester.BY_CSS, ""div[id='result']"", 2);\par
+\par
+bool result = await frame.FindElementAsync(Tester.BY_XPATH, ""//div[@id='result']"", 2);\par
+    }",
+
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.22000}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 FindVisibleElementAsync\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'fb\'ef\'ee\'eb\'ed\'ff\'e5\'f2 \'ef\'ee\'e8\'f1\'ea \'e2\'e8\'e7\'f3\'e0\'eb\'fc\'ed\'ee \'ee\'f2\'ee\'e1\'f0\'e0\'e6\'e0\'e5\'ec\'ee\'e3\'ee \'fd\'eb\'e5\'ec\'e5\'ed\'f2\'e0 \'f1 \'ee\'e6\'e8\'e4\'e0\'ed\'e8\'e5\'ec \'e2 \'f1\'e5\'ea\'f3\'ed\'e4\'e0\'f5 \'e8 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2 \'eb\'ee\'e3\'e8\'f7\'e5\'f1\'ea\'e8\'e9 \'f0\'e5\'e7\'f3\'eb\'fc\'f2\'e0\'f2 true \'e8\'eb\'e8 false\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \f0\lang1033 FindVisibleElementAsync(string by, string locator, int sec)\f1\lang1049\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0\f0\lang1033 FRAMEElement frame = await tester.GetFrameAsync(0);\par
+bool result = await frame.FindVisibleElementAsync(Tester.BY_CSS, ""#auth #buttonLogin"", 2);\par
+\par
+bool result = await frame.FindVisibleElementAsync(Tester.BY_XPATH, ""//div[@id='auth']//input[@id='buttonLogin']"", 2);\par
+    }",
+
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.22000}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 GetAttributeFromElementAsync\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2 \'f1\'f2\'f0\'ee\'f7\'ed\'ee\'e5 \'e7\'ed\'e0\'f7\'e5\'ed\'e8\'e5 \'e8\'e7 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'ee\'e3\'ee \'e0\'f2\'f0\'e8\'e1\'f3\'f2\'e0 \'e2 \'e2\'fb\'e1\'f0\'e0\'ed\'ed\'ee\'ec \'fd\'eb\'e5\'ec\'e5\'ed\'f2\'e5\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \f0\lang1033 GetAttributeFromElementAsync(string by, string locator, string attribute)\f1\lang1049\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0\f0\lang1033 FRAMEElement frame = await tester.GetFrameAsync(0);\par
+string value = await frame.GetAttributeFromElementAsync(Tester.BY_CSS, ""input"", ""name"");\par
+\par
+string value = await frame.GetAttributeFromElementAsync(Tester.BY_XPATH, ""//input"", ""name"");\par
+    }",
+
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.22000}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 GetAttributeFromElementsAsync\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2 \'f1\'ef\'e8\'f1\'ee\'ea \'e7\'ed\'e0\'f7\'e5\'ed\'e8\'e9 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'ee\'e3\'ee \'e0\'f2\'f0\'e8\'e1\'f3\'f2\'e0 \'e8\'e7 \'ec\'ed\'ee\'e6\'e5\'f1\'f2\'e2\'e0 \'fd\'eb\'e5\'ec\'e5\'ed\'f2\'ee\'e2\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \f0\lang1033 GetAttributeFromElementsAsync(string by, string locator, string attribute)\f1\lang1049\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0\f0\lang1033 FRAMEElement frame = await tester.GetFrameAsync(0);\par
+List<string> values = await frame.GetAttributeFromElementsAsync(Tester.BY_CSS, ""input"", ""name"");\par
+if(values != null) \par
+\{\par
+\tab foreach (string attr in values)\par
+\tab\tab tester.ConsoleMsg(attr);\par
+\}\par
+\par
+\par
+List<string> values = await frame.GetAttributeFromElementsAsync(Tester.BY_XPATH, ""//input"", ""name"");\par
+if(values != null)\par
+\{\par
+\tab foreach (string attr in values)\par
+\tab\tab tester.ConsoleMsg(attr);\par
+\}\par
+}",
+
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.22000}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 GetCountElementsAsync\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2 \'ea\'ee\'eb\'e8\'f7\'e5\'f1\'f2\'e2\'ee \'ed\'e0\'e9\'e4\'e5\'ed\'ed\'fb\'f5 \'fd\'eb\'e5\'ec\'e5\'ed\'f2\'ee\'e2\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \f0\lang1033 GetCountElementsAsync(string by, string locator)\f1\lang1049\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0\f0\lang1033 FRAMEElement frame = await tester.GetFrameAsync(0);\par
+int count = await frame.GetCountElementsAsync(Tester.BY_CSS, ""input"");\par
+\par
+int count = await frame.GetCountElementsAsync(Tester.BY_XPATH, ""//input"");\par
+    }",
+
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.22000}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 GetHtmlFromElementAsync\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2 html \'ef\'f0\'e5\'e4\'f1\'f2\'e0\'e2\'eb\'e5\'ed\'e8\'e5 \'ee\'e1\'fa\'e5\'ea\'f2\'e0 \'e2 \'f1\'f2\'f0\'ee\'f7\'ed\'ee\'ec \'e2\'fb\'f0\'e0\'e6\'e5\'ed\'e8\'e8\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \f0\lang1033 GetHtmlFromElementAsync(string by, string locator)\f1\lang1049\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0\f0\lang1033 FRAMEElement frame = await tester.GetFrameAsync(0);\par
+string html = await frame.GetHtmlFromElementAsync(Tester.BY_CSS, ""#auth > h2"");\par
+\par
+string html = await frame.GetHtmlFromElementAsync(Tester.BY_XPATH, ""//div[@id='auth']//h2"");\par
+    }",
+
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.22000}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 GetOptionAsync\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2 \'e8\'ed\'e4\'e5\'ea\'f1, \'f2\'e5\'ea\'f1\'f2 \'e8\'eb\'e8 \'e7\'ed\'e0\'f7\'e5\'ed\'e8\'e5 \'e2\'fb\'e1\'ee\'e0\'ed\'ed\'ee\'e9 \'ee\'ef\'f6\'e8\'e8 \'e2\'fb\'e1\'f0\'e0\'ed\'ed\'ee\'e9 option \'e8\'e7 \'fd\'eb\'e5\'ec\'e5\'ed\'f2\'e0 select\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \f0\lang1033 GetOptionAsync(string by, string locator, string type)\f1\lang1049\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0\f0\lang1033 FRAMEElement frame = await tester.GetFrameAsync(0);\par
+\par
+string index = await frame.GetOptionAsync(Tester.BY_CSS, ""#MySelect"", FRAMEElement.BY_INDEX);\par
+string value = await frame.GetOptionAsync(Tester.BY_CSS, ""#MySelect"", FRAMEElement.BY_VALUE);\par
+string text = await frame.GetOptionAsync(Tester.BY_CSS, ""#MySelect"", FRAMEElement.BY_TEXT);\par
+\par
+string index = await frame.GetOptionAsync(Tester.BY_XPATH, ""//*[@id='MySelect']"", FRAMEElement.BY_INDEX);\par
+string value = await frame.GetOptionAsync(Tester.BY_XPATH, ""//*[@id='MySelect']"", FRAMEElement.BY_VALUE);\par
+string text = await frame.GetOptionAsync(Tester.BY_XPATH, ""//*[@id='MySelect']"", FRAMEElement.BY_TEXT);\par
+    }",
+
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.22000}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 GetTextFromElementAsync\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2 \'f2\'e5\'ea\'f1\'f2 \'e8\'e7 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'ee\'e3\'ee \'fd\'eb\'e5\'ec\'e5\'ed\'f2\'e0\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \f0\lang1033 GetTextFromElementAsync(string by, string locator)\f1\lang1049\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0\f0\lang1033 FRAMEElement frame = await tester.GetFrameAsync(0);\par
+string text = await frame.GetTextFromElementAsync(Tester.BY_CSS, ""#auth > h2"");\par
+\par
+string text = await frame.GetTextFromElementAsync(Tester.BY_XPATH, ""//div[@id='auth']//h2"");\par
+    }",
+
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.22000}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 GetTitleAsync\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2 \'e7\'e0\'e3\'ee\'eb\'ee\'e2\'ee\'ea \'f1\'f2\'f0\'e0\'ed\'e8\'f6\'fb\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \f0\lang1033 GetTitleAsync()\f1\lang1049\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0\f0\lang1033 FRAMEElement frame = await tester.GetFrameAsync(0);\par
+string title = await frame.GetTitleAsync();\par
+}",
+
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.22000}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 GetUrlAsync\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2 \'f2\'e5\'ea\'f3\'f9\'e8\'e9 URL\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \f0\lang1033 GetUrlAsync()\f1\lang1049\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0\f0\lang1033 FRAMEElement frame = await tester.GetFrameAsync(0);\par
+string url = await frame.GetUrlAsync();\par
+}",
+
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.22000}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 GetValueFromElementAsync\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2 \'e7\'ed\'e0\'f7\'e5\'ed\'e8\'e5 \'e8\'e7 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'ee\'e3\'ee \'fd\'eb\'e5\'ec\'e5\'ed\'f2\'e0\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \f0\lang1033 GetValueFromElementAsync(string by, string locator)\f1\lang1049\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0\f0\lang1033 FRAMEElement frame = await tester.GetFrameAsync(0);\par
+string value = await frame.GetValueFromElementAsync(Tester.BY_CSS, ""input[id='login']"");\par
+\par
+string value = await frame.GetValueFromElementAsync(Tester.BY_XPATH, ""//input[@id='login']"");\par
+    }",
+
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.22000}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 IsClickableElementAsync\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'ee\'ef\'f0\'e5\'e4\'e5\'eb\'ff\'e5\'f2 \'ea\'eb\'e8\'ea\'e0\'e1\'e5\'eb\'fc\'ed\'ee\'f1\'f2\'fc \'fd\'eb\'e5\'ec\'e5\'ed\'f2\'e0 \'e8 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2 true \'e8\'eb\'e8 false\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \f0\lang1033 IsClickableElementAsync(string by, string locator)\f1\lang1049\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0\f0\lang1033 FRAMEElement frame = await tester.GetFrameAsync(0);\par
+bool clickable = await frame.IsClickableElementAsync(Tester.BY_CSS, ""#buttonLogin"");\par
+await tester.AssertTrueAsync(clickable);\par
+\par
+bool clickable = await frame.IsClickableElementAsync(Tester.BY_XPATH, ""//*[@id='buttonLogin']"");\par
+await tester.AssertTrueAsync(clickable);\par
+\par
+    }",
+
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.22000}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 ScrollToElementAsync\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'fb\'ef\'ee\'eb\'ed\'ff\'e5\'f2 \'ef\'f0\'ee\'ea\'f0\'f3\'f2\'ea\'f3 \'ea \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'ee\'ec\'f3 \'fd\'eb\'e5\'ec\'e5\'ed\'f2\'f3 (\'ef\'e0\'f0\'e0\'ec\'e5\'f2\'f0 behaviorSmooth \'ee\'ef\'f0\'e5\'e4\'e5\'eb\'ff\'e5\'f2 \'ef\'eb\'e0\'e2\'ed\'ee\'f1\'f2\'fc \'ef\'f0\'ee\'ea\'f0\'f3\'f2\'ea\'e8)\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \f0\lang1033 ScrollToElementAsync(string by, string locator, bool behaviorSmooth = false)\f1\lang1049\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0\f0\lang1033 FRAMEElement frame = await tester.GetFrameAsync(0);\par
+await frame.ScrollToElementAsync(Tester.BY_CSS, ""body > footer"", true);\par
+\par
+await frame.ScrollToElementAsync(Tester.BY_XPATH, ""/html/body/footer"", true);\par
+    }",
+
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.22000}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 SelectOptionAsync\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'fb\'e1\'e8\'f0\'e0\'e5\'f2 option \'e8\'e7 \'fd\'eb\'e5\'ec\'e5\'ed\'f2\'e0 select \'ef\'ee \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'ee\'ec\'f3 \'e8\'ed\'e4\'e5\'ea\'f1\'f3, \'f2\'e5\'ea\'f1\'f2\'f3 \'e8\'eb\'e8 \'e7\'ed\'e0\'f7\'e5\'ed\'e8\'fe\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \f0\lang1033 SelectOptionAsync(string by, string locator, string type, string value)\f1\lang1049\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0\f0\lang1033 FRAMEElement frame = await tester.GetFrameAsync(0);\par
+await frame.SelectOptionAsync(Tester.BY_CSS, ""#MySelect"", FRAMEElement.BY_INDEX, ""2"");\par
+await frame.SelectOptionAsync(Tester.BY_CSS, ""#MySelect"", FRAMEElement.BY_VALUE, ""Mobile"");\par
+await frame.SelectOptionAsync(Tester.BY_CSS, ""#MySelect"", FRAMEElement.BY_TEXT, ""Other"");\par
+\par
+await frame.SelectOptionAsync(Tester.BY_XPATH, ""//*[@id='MySelect']"", FRAMEElement.BY_INDEX, ""2"");\par
+await frame.SelectOptionAsync(Tester.BY_XPATH, ""//*[@id='MySelect']"", FRAMEElement.BY_VALUE, ""Mobile"");\par
+await frame.SelectOptionAsync(Tester.BY_XPATH, ""//*[@id='MySelect']"", FRAMEElement.BY_TEXT, ""Other"");\par
+    }",
+
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.22000}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 SetAttributeInElementAsync\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'f1\'f2\'e0\'e2\'eb\'ff\'e5\'f2 \'e0\'f2\'f0\'e8\'e1\'f3\'f2 \'f1\'ee \'e7\'ed\'e0\'f7\'e5\'ed\'e8\'e5\'ec \'e2 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'fb\'e9 \'fd\'eb\'e5\'ec\'e5\'ed\'f2\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \f0\lang1033 SetAttributeInElementAsync(string by, string locator, string attribute, string value)\f1\lang1049\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0\f0\lang1033 FRAMEElement frame = await tester.GetFrameAsync(0);\par
+await frame.SetAttributeInElementAsync(Tester.BY_CSS, ""#auth > h2"", ""name"", ""test"");\par
+\par
+await frame.SetAttributeInElementAsync(Tester.BY_XPATH, ""//div[@id='auth']//h2"", ""name"", ""test"");\par
+    }",
+
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.22000}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 SetAttributeInElementsAsync\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'f1\'f2\'e0\'e2\'e8\'f2\'fc \'e0\'f2\'f0\'e8\'e1\'f3\'f2 \'f1 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'fb\'ec \'e7\'ed\'e0\'f7\'e5\'ed\'e8\'e5\'ec \'e2 \'ec\'ed\'ee\'e6\'e5\'f1\'f2\'e2\'ee \'fd\'eb\'e5\'ec\'e5\'ed\'f2\'ee\'e2 \'e8 \'e2 \'f0\'e5\'e7\'f3\'eb\'fc\'f2\'e0\'f2\'e5 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2 \'f1\'ef\'e8\'f1\'ee\'ea\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \f0\lang1033 SetAttributeInElementsAsync(string by, string locator, string attribute, string value)\f1\lang1049\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0\f0\lang1033 FRAMEElement frame = await tester.GetFrameAsync(0);\par
+\par
+List<string> values = await frame.SetAttributeInElementsAsync(Tester.BY_CSS, ""input"", ""class"", ""test-class"");\par
+foreach (string value in values)\par
+\{\par
+\tab tester.ConsoleMsg(value);\par
+\}\par
+\par
+List<string> values = await frame.SetAttributeInElementsAsync(Tester.BY_XPATH, ""//input"", ""class"", ""test-class"");\par
+foreach (string value in values)\par
+\{\par
+\tab tester.ConsoleMsg(value);\par
+\}\par
+}",
+
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.22000}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 SetHtmlInElementAsync\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'f1\'f2\'e0\'e2\'eb\'ff\'e5\'f2 html \'ef\'f0\'e5\'e4\'f1\'f2\'e0\'e2\'eb\'e5\'ed\'e8\'e5 \'ee\'e1\'fa\'e5\'ea\'f2\'e0 \'e2 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'fb\'e9 \'fd\'eb\'e5\'ec\'e5\'ed\'f2\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \f0\lang1033 SetHtmlInElementAsync(string by, string locator, string html)\f1\lang1049\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0\f0\lang1033 FRAMEElement frame = await tester.GetFrameAsync(0);\par
+await frame.SetHtmlInElementAsync(Tester.BY_CSS, ""#auth > h2"", ""<div>\f1\lang1049\'d2\'e5\'f1\'f2\'ee\'e2\'fb\'e9 \'e1\'eb\'ee\'ea</div>"");\par
+\par
+await \f0\lang1033 frame\f1\lang1049 .SetHtmlInElementAsync(Tester.BY_XPATH, ""//div[@id='auth']//h2"", ""<div>\'d2\'e5\'f1\'f2\'ee\'e2\'fb\'e9 \'e1\'eb\'ee\'ea</div>"");\f0\lang1033\par
+    }",
+
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.22000}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 SetTextInElementAsync\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'f1\'f2\'e0\'e2\'eb\'ff\'e5\'f2 \'f2\'e5\'ea\'f1\'f2 \'e2 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'fb\'e9 \'fd\'eb\'e5\'ec\'e5\'ed\'f2\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \f0\lang1033 SetTextInElementAsync(string by, string locator, string text)\f1\lang1049\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0\f0\lang1033 FRAMEElement frame = await tester.GetFrameAsync(0);\par
+await frame.SetTextInElementAsync(Tester.BY_CSS, ""#auth > h2"", ""\f1\lang1049\'d2\'e5\'f1\'f2\'ee\'e2\'fb\'e9 \'e7\'e0\'e3\'ee\'eb\'ee\'e2\'ee\'ea"");\par
+\par
+await \f0\lang1033 frame\f1\lang1049 .SetTextInElementAsync(Tester.BY_XPATH, ""//div[@id='auth']//h2"", ""\'d2\'e5\'f1\'f2\'ee\'e2\'fb\'e9 \'e7\'e0\'e3\'ee\'eb\'ee\'e2\'ee\'ea"");\f0\lang1033\par
+    }",
+
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.22000}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 SetValueInElementAsync\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'f1\'f2\'e0\'e2\'eb\'ff\'e5\'f2 \'e7\'ed\'e0\'f7\'e5\'ed\'e8\'e5 \'e2 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'fb\'e9 \'fd\'eb\'e5\'ec\'e5\'ed\'f2\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \f0\lang1033 SetValueInElementAsync(string by, string locator, string value)\f1\lang1049\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0\f0\lang1033 FRAMEElement frame = await tester.GetFrameAsync(0);\par
+await frame.SetValueInElementAsync(Tester.BY_CSS, ""input[id='login']"", ""admin"");\par
+await frame.SetValueInElementAsync(Tester.BY_CSS, ""input[id='pass']"", ""0000"");\par
+\par
+await frame.SetValueInElementAsync(Tester.BY_XPATH, ""//input[@id='login']"", ""admin"");\par
+await frame.SetValueInElementAsync(Tester.BY_XPATH, ""//input[@id='pass']"", ""0000"");\par
+    }",
+
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.22000}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 WaitNotVisibleElementAsync\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'fb\'ef\'ee\'eb\'ed\'ff\'e5\'f2 \'e2\'f0\'e5\'ec\'e5\'ed\'ed\'f3\'fe \'ee\'f1\'f2\'e0\'ed\'ee\'e2\'ea\'f3 \'e2\'fb\'ef\'ee\'eb\'ed\'e5\'ed\'e8\'ff \'f2\'e5\'f1\'f2\'e0 \'ed\'e0 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'ee\'e5 \'ea\'ee\'eb\'e8\'f7\'e5\'f1\'f2\'e2\'ee \'f1\'e5\'ea\'f3\'ed\'e4 \'e8 \'e6\'e4\'e5\'f2 \'ea\'ee\'e3\'e4\'e0  \'e7\'e0\'ef\'f0\'e0\'f8\'e8\'e2\'e0\'e5\'ec\'fb\'e9 \'fd\'eb\'e5\'ec\'e5\'ed\'f2 \'ef\'e5\'f0\'e5\'f1\'f2\'e0\'ed\'e5\'f2 \'ee\'f2\'ee\'e1\'f0\'e0\'e6\'e0\'e5\'f2\'fc\'f1\'ff \par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \f0\lang1033 WaitNotVisibleElementAsync(string by, string locator, int sec)\f1\lang1049\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0\f0\lang1033 FRAMEElement frame = await tester.GetFrameAsync(0);\par
+await frame.WaitNotVisibleElementAsync(Tester.BY_CSS, ""div[id='result']"", 2);\par
+\par
+await frame.WaitNotVisibleElementAsync(Tester.BY_XPATH, ""//div[@id='result']"", 2);\par
+    }",
+
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.22000}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 WaitVisibleElementAsync\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'fb\'ef\'ee\'eb\'ed\'ff\'e5\'f2 \'e2\'f0\'e5\'ec\'e5\'ed\'ed\'f3\'fe \'ee\'f1\'f2\'e0\'ed\'ee\'e2\'ea\'f3 \'e2\'fb\'ef\'ee\'eb\'ed\'e5\'ed\'e8\'ff \'f2\'e5\'f1\'f2\'e0 \'ed\'e0 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'ee\'e5 \'ea\'ee\'eb\'e8\'f7\'e5\'f1\'f2\'e2\'ee \'f1\'e5\'ea\'f3\'ed\'e4 \'e8 \'e6\'e4\'e5\'f2 \'ea\'ee\'e3\'e4\'e0  \'e7\'e0\'ef\'f0\'e0\'f8\'e8\'e2\'e0\'e5\'ec\'fb\'e9 \'fd\'eb\'e5\'ec\'e5\'ed\'f2 \'ee\'f2\'ee\'e1\'f0\'e0\'e7\'e8\'f2\'f1\'ff\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \f0\lang1033 WaitVisibleElementAsync(string by, string locator, int sec)\f1\lang1049\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0\f0\lang1033 FRAMEElement frame = await tester.GetFrameAsync(0);\par
+await frame.WaitVisibleElementAsync(Tester.BY_CSS, ""div[id='result']"", 2);\par
+\par
+await frame.WaitVisibleElementAsync(Tester.BY_XPATH, ""//div[@id='result']"", 2);\par
+    }",
+
 @"",
 @"",
 @"",
@@ -2426,183 +2902,217 @@ await tester.TestEndAsync();\par
                 if (treeView1.SelectedNode != null)
                 {
                     string value = treeView1.SelectedNode.Text;
-                    if (value == "Tester") richTextBox1.Rtf = handbook[0];
-                    if (value == "IMAGE_STATUS_PROCESS") richTextBox1.Rtf = handbook[1];
-                    if (value == "IMAGE_STATUS_PASSED") richTextBox1.Rtf = handbook[2];
-                    if (value == "IMAGE_STATUS_FAILED") richTextBox1.Rtf = handbook[3];
-                    if (value == "IMAGE_STATUS_MESSAGE") richTextBox1.Rtf = handbook[4];
-                    if (value == "IMAGE_STATUS_WARNING") richTextBox1.Rtf = handbook[5];
-                    if (value == "PASSED") richTextBox1.Rtf = handbook[6];
-                    if (value == "FAILED") richTextBox1.Rtf = handbook[7];
-                    if (value == "STOPPED") richTextBox1.Rtf = handbook[8];
-                    if (value == "PROCESS") richTextBox1.Rtf = handbook[9];
-                    if (value == "COMPLETED") richTextBox1.Rtf = handbook[10];
-                    if (value == "WARNING") richTextBox1.Rtf = handbook[11];
+                    string tag = treeView1.SelectedNode.Tag.ToString();
+                    if (value == "Tester" && tag == "Tester") richTextBox1.Rtf = handbook[0];
+                    if (value == "IMAGE_STATUS_PROCESS" && tag == "Tester") richTextBox1.Rtf = handbook[1];
+                    if (value == "IMAGE_STATUS_PASSED" && tag == "Tester") richTextBox1.Rtf = handbook[2];
+                    if (value == "IMAGE_STATUS_FAILED" && tag == "Tester") richTextBox1.Rtf = handbook[3];
+                    if (value == "IMAGE_STATUS_MESSAGE" && tag == "Tester") richTextBox1.Rtf = handbook[4];
+                    if (value == "IMAGE_STATUS_WARNING" && tag == "Tester") richTextBox1.Rtf = handbook[5];
+                    if (value == "PASSED" && tag == "Tester") richTextBox1.Rtf = handbook[6];
+                    if (value == "FAILED" && tag == "Tester") richTextBox1.Rtf = handbook[7];
+                    if (value == "STOPPED" && tag == "Tester") richTextBox1.Rtf = handbook[8];
+                    if (value == "PROCESS" && tag == "Tester") richTextBox1.Rtf = handbook[9];
+                    if (value == "COMPLETED" && tag == "Tester") richTextBox1.Rtf = handbook[10];
+                    if (value == "WARNING" && tag == "Tester") richTextBox1.Rtf = handbook[11];
 
-                    if (value == "BrowserView") richTextBox1.Rtf = handbook[12];
-                    if (value == "BrowserWindow") richTextBox1.Rtf = handbook[13];
+                    if (value == "BrowserView" && tag == "Tester") richTextBox1.Rtf = handbook[12];
+                    if (value == "BrowserWindow" && tag == "Tester") richTextBox1.Rtf = handbook[13];
 
-                    if (value == "BrowserCloseAsync") richTextBox1.Rtf = handbook[14];
-                    if (value == "BrowserSizeAsync") richTextBox1.Rtf = handbook[15];
-                    if (value == "BrowserFullScreenAsync") richTextBox1.Rtf = handbook[16];
-                    if (value == "BrowserSetUserAgentAsync") richTextBox1.Rtf = handbook[17];
-                    if (value == "BrowserGetUserAgentAsync") richTextBox1.Rtf = handbook[18];
+                    if (value == "BrowserCloseAsync" && tag == "Tester") richTextBox1.Rtf = handbook[14];
+                    if (value == "BrowserSizeAsync" && tag == "Tester") richTextBox1.Rtf = handbook[15];
+                    if (value == "BrowserFullScreenAsync" && tag == "Tester") richTextBox1.Rtf = handbook[16];
+                    if (value == "BrowserSetUserAgentAsync" && tag == "Tester") richTextBox1.Rtf = handbook[17];
+                    if (value == "BrowserGetUserAgentAsync" && tag == "Tester") richTextBox1.Rtf = handbook[18];
 
-                    if (value == "ConsoleMsg") richTextBox1.Rtf = handbook[19];
-                    if (value == "ConsoleMsgError") richTextBox1.Rtf = handbook[20];
-                    if (value == "ClearMessage") richTextBox1.Rtf = handbook[21];
-                    if (value == "SendMessage") richTextBox1.Rtf = handbook[22];
-                    if (value == "EditMessage") richTextBox1.Rtf = handbook[23];
+                    if (value == "ConsoleMsg" && tag == "Tester") richTextBox1.Rtf = handbook[19];
+                    if (value == "ConsoleMsgError" && tag == "Tester") richTextBox1.Rtf = handbook[20];
+                    if (value == "ClearMessage" && tag == "Tester") richTextBox1.Rtf = handbook[21];
+                    if (value == "SendMessage" && tag == "Tester") richTextBox1.Rtf = handbook[22];
+                    if (value == "EditMessage" && tag == "Tester") richTextBox1.Rtf = handbook[23];
 
-                    if (value == "TestBeginAsync") richTextBox1.Rtf = handbook[24];
-                    if (value == "TestEndAsync") richTextBox1.Rtf = handbook[25];
-                    if (value == "TestStopAsync") richTextBox1.Rtf = handbook[26];
-                    if (value == "DefineTestStop") richTextBox1.Rtf = handbook[27];
+                    if (value == "TestBeginAsync" && tag == "Tester") richTextBox1.Rtf = handbook[24];
+                    if (value == "TestEndAsync" && tag == "Tester") richTextBox1.Rtf = handbook[25];
+                    if (value == "TestStopAsync" && tag == "Tester") richTextBox1.Rtf = handbook[26];
+                    if (value == "DefineTestStop" && tag == "Tester") richTextBox1.Rtf = handbook[27];
 
-                    if (value == "ClickElementByClassAsync") richTextBox1.Rtf = handbook[28];
-                    if (value == "ClickElementAsync") richTextBox1.Rtf = handbook[29];
-                    if (value == "ClickElementByIdAsync") richTextBox1.Rtf = handbook[30];
-                    if (value == "ClickElementByNameAsync") richTextBox1.Rtf = handbook[31];
-                    if (value == "ClickElementByTagAsync") richTextBox1.Rtf = handbook[32];
-                    if (value == "FindElementByClassAsync") richTextBox1.Rtf = handbook[33];
-                    if (value == "FindElementAsync") richTextBox1.Rtf = handbook[34];
-                    if (value == "FindElementByIdAsync") richTextBox1.Rtf = handbook[35];
-                    if (value == "FindElementByNameAsync") richTextBox1.Rtf = handbook[36];
-                    if (value == "FindElementByTagAsync") richTextBox1.Rtf = handbook[37];
-                    if (value == "FindVisibleElementByClassAsync") richTextBox1.Rtf = handbook[38];
-                    if (value == "FindVisibleElementAsync") richTextBox1.Rtf = handbook[39];
-                    if (value == "FindVisibleElementByIdAsync") richTextBox1.Rtf = handbook[40];
-                    if (value == "FindVisibleElementByNameAsync") richTextBox1.Rtf = handbook[41];
-                    if (value == "FindVisibleElementByTagAsync") richTextBox1.Rtf = handbook[42];
-                    if (value == "GetAttributeFromElementByClassAsync") richTextBox1.Rtf = handbook[43];
-                    if (value == "GetAttributeFromElementAsync") richTextBox1.Rtf = handbook[44];
-                    if (value == "GetAttributeFromElementByIdAsync") richTextBox1.Rtf = handbook[45];
-                    if (value == "GetAttributeFromElementByNameAsync") richTextBox1.Rtf = handbook[46];
-                    if (value == "GetAttributeFromElementByTagAsync") richTextBox1.Rtf = handbook[47];
-                    if (value == "GetAttributeFromElementsAsync") richTextBox1.Rtf = handbook[48];
-                    if (value == "GetCountElementsByClassAsync") richTextBox1.Rtf = handbook[49];
-                    if (value == "GetCountElementsAsync") richTextBox1.Rtf = handbook[50];
-                    if (value == "GetCountElementsByNameAsync") richTextBox1.Rtf = handbook[51];
-                    if (value == "GetCountElementsByTagAsync") richTextBox1.Rtf = handbook[52];
-                    if (value == "GetElementAsync") richTextBox1.Rtf = handbook[53];
-                    if (value == "GetTextFromElementByClassAsync") richTextBox1.Rtf = handbook[54];
-                    if (value == "GetTextFromElementAsync") richTextBox1.Rtf = handbook[55];
-                    if (value == "GetTextFromElementByIdAsync") richTextBox1.Rtf = handbook[56];
-                    if (value == "GetTextFromElementByNameAsync") richTextBox1.Rtf = handbook[57];
-                    if (value == "GetTextFromElementByTagAsync") richTextBox1.Rtf = handbook[58];
-                    if (value == "GetTitleAsync") richTextBox1.Rtf = handbook[59];
-                    if (value == "GetUrlAsync") richTextBox1.Rtf = handbook[60];
-                    if (value == "GetValueFromElementByClassAsync") richTextBox1.Rtf = handbook[61];
-                    if (value == "GetValueFromElementAsync") richTextBox1.Rtf = handbook[62];
-                    if (value == "GetValueFromElementByIdAsync") richTextBox1.Rtf = handbook[63];
-                    if (value == "GetValueFromElementByNameAsync") richTextBox1.Rtf = handbook[64];
-                    if (value == "GetValueFromElementByTagAsync") richTextBox1.Rtf = handbook[65];
-                    if (value == "GoToUrlAsync") richTextBox1.Rtf = handbook[66];
-                    if (value == "ScrollToElementAsync") richTextBox1.Rtf = handbook[67];
-                    if (value == "SetAttributeInElementByClassAsync") richTextBox1.Rtf = handbook[68];
-                    if (value == "SetAttributeInElementAsync") richTextBox1.Rtf = handbook[69];
-                    if (value == "SetAttributeInElementByIdAsync") richTextBox1.Rtf = handbook[70];
-                    if (value == "SetAttributeInElementByNameAsync") richTextBox1.Rtf = handbook[71];
-                    if (value == "SetAttributeInElementByTagAsync") richTextBox1.Rtf = handbook[72];
-                    if (value == "SetTextInElementByClassAsync") richTextBox1.Rtf = handbook[73];
-                    if (value == "SetTextInElementAsync") richTextBox1.Rtf = handbook[74];
-                    if (value == "SetTextInElementByIdAsync") richTextBox1.Rtf = handbook[75];
-                    if (value == "SetTextInElementByNameAsync") richTextBox1.Rtf = handbook[76];
-                    if (value == "SetTextInElementByTagAsync") richTextBox1.Rtf = handbook[77];
-                    if (value == "SetValueInElementByClassAsync") richTextBox1.Rtf = handbook[78];
-                    if (value == "SetValueInElementAsync") richTextBox1.Rtf = handbook[79];
-                    if (value == "SetValueInElementByIdAsync") richTextBox1.Rtf = handbook[80];
-                    if (value == "SetValueInElementByNameAsync") richTextBox1.Rtf = handbook[81];
-                    if (value == "SetValueInElementByTagAsync") richTextBox1.Rtf = handbook[82];
-                    if (value == "WaitAsync") richTextBox1.Rtf = handbook[83];
-                    if (value == "WaitNotVisibleElementByClassAsync") richTextBox1.Rtf = handbook[84];
-                    if (value == "WaitNotVisibleElementAsync") richTextBox1.Rtf = handbook[85];
-                    if (value == "WaitNotVisibleElementByIdAsync") richTextBox1.Rtf = handbook[86];
-                    if (value == "WaitNotVisibleElementByNameAsync") richTextBox1.Rtf = handbook[87];
-                    if (value == "WaitNotVisibleElementByTagAsync") richTextBox1.Rtf = handbook[88];
-                    if (value == "WaitVisibleElementByClassAsync") richTextBox1.Rtf = handbook[89];
-                    if (value == "WaitVisibleElementAsync") richTextBox1.Rtf = handbook[90];
-                    if (value == "WaitVisibleElementByIdAsync") richTextBox1.Rtf = handbook[91];
-                    if (value == "WaitVisibleElementByNameAsync") richTextBox1.Rtf = handbook[92];
-                    if (value == "WaitVisibleElementByTagAsync") richTextBox1.Rtf = handbook[93];
+                    if (value == "ClickElementByClassAsync" && tag == "Tester") richTextBox1.Rtf = handbook[28];
+                    if (value == "ClickElementAsync" && tag == "Tester") richTextBox1.Rtf = handbook[29];
+                    if (value == "ClickElementByIdAsync" && tag == "Tester") richTextBox1.Rtf = handbook[30];
+                    if (value == "ClickElementByNameAsync" && tag == "Tester") richTextBox1.Rtf = handbook[31];
+                    if (value == "ClickElementByTagAsync" && tag == "Tester") richTextBox1.Rtf = handbook[32];
+                    if (value == "FindElementByClassAsync" && tag == "Tester") richTextBox1.Rtf = handbook[33];
+                    if (value == "FindElementAsync" && tag == "Tester") richTextBox1.Rtf = handbook[34];
+                    if (value == "FindElementByIdAsync" && tag == "Tester") richTextBox1.Rtf = handbook[35];
+                    if (value == "FindElementByNameAsync" && tag == "Tester") richTextBox1.Rtf = handbook[36];
+                    if (value == "FindElementByTagAsync" && tag == "Tester") richTextBox1.Rtf = handbook[37];
+                    if (value == "FindVisibleElementByClassAsync" && tag == "Tester") richTextBox1.Rtf = handbook[38];
+                    if (value == "FindVisibleElementAsync" && tag == "Tester") richTextBox1.Rtf = handbook[39];
+                    if (value == "FindVisibleElementByIdAsync" && tag == "Tester") richTextBox1.Rtf = handbook[40];
+                    if (value == "FindVisibleElementByNameAsync" && tag == "Tester") richTextBox1.Rtf = handbook[41];
+                    if (value == "FindVisibleElementByTagAsync" && tag == "Tester") richTextBox1.Rtf = handbook[42];
+                    if (value == "GetAttributeFromElementByClassAsync" && tag == "Tester") richTextBox1.Rtf = handbook[43];
+                    if (value == "GetAttributeFromElementAsync" && tag == "Tester") richTextBox1.Rtf = handbook[44];
+                    if (value == "GetAttributeFromElementByIdAsync" && tag == "Tester") richTextBox1.Rtf = handbook[45];
+                    if (value == "GetAttributeFromElementByNameAsync" && tag == "Tester") richTextBox1.Rtf = handbook[46];
+                    if (value == "GetAttributeFromElementByTagAsync" && tag == "Tester") richTextBox1.Rtf = handbook[47];
+                    if (value == "GetAttributeFromElementsAsync" && tag == "Tester") richTextBox1.Rtf = handbook[48];
+                    if (value == "GetCountElementsByClassAsync" && tag == "Tester") richTextBox1.Rtf = handbook[49];
+                    if (value == "GetCountElementsAsync" && tag == "Tester") richTextBox1.Rtf = handbook[50];
+                    if (value == "GetCountElementsByNameAsync" && tag == "Tester") richTextBox1.Rtf = handbook[51];
+                    if (value == "GetCountElementsByTagAsync" && tag == "Tester") richTextBox1.Rtf = handbook[52];
+                    if (value == "GetElementAsync" && tag == "Tester") richTextBox1.Rtf = handbook[53];
+                    if (value == "GetTextFromElementByClassAsync" && tag == "Tester") richTextBox1.Rtf = handbook[54];
+                    if (value == "GetTextFromElementAsync" && tag == "Tester") richTextBox1.Rtf = handbook[55];
+                    if (value == "GetTextFromElementByIdAsync" && tag == "Tester") richTextBox1.Rtf = handbook[56];
+                    if (value == "GetTextFromElementByNameAsync" && tag == "Tester") richTextBox1.Rtf = handbook[57];
+                    if (value == "GetTextFromElementByTagAsync" && tag == "Tester") richTextBox1.Rtf = handbook[58];
+                    if (value == "GetTitleAsync" && tag == "Tester") richTextBox1.Rtf = handbook[59];
+                    if (value == "GetUrlAsync" && tag == "Tester") richTextBox1.Rtf = handbook[60];
+                    if (value == "GetValueFromElementByClassAsync" && tag == "Tester") richTextBox1.Rtf = handbook[61];
+                    if (value == "GetValueFromElementAsync" && tag == "Tester") richTextBox1.Rtf = handbook[62];
+                    if (value == "GetValueFromElementByIdAsync" && tag == "Tester") richTextBox1.Rtf = handbook[63];
+                    if (value == "GetValueFromElementByNameAsync" && tag == "Tester") richTextBox1.Rtf = handbook[64];
+                    if (value == "GetValueFromElementByTagAsync" && tag == "Tester") richTextBox1.Rtf = handbook[65];
+                    if (value == "GoToUrlAsync" && tag == "Tester") richTextBox1.Rtf = handbook[66];
+                    if (value == "ScrollToElementAsync" && tag == "Tester") richTextBox1.Rtf = handbook[67];
+                    if (value == "SetAttributeInElementByClassAsync" && tag == "Tester") richTextBox1.Rtf = handbook[68];
+                    if (value == "SetAttributeInElementAsync" && tag == "Tester") richTextBox1.Rtf = handbook[69];
+                    if (value == "SetAttributeInElementByIdAsync" && tag == "Tester") richTextBox1.Rtf = handbook[70];
+                    if (value == "SetAttributeInElementByNameAsync" && tag == "Tester") richTextBox1.Rtf = handbook[71];
+                    if (value == "SetAttributeInElementByTagAsync" && tag == "Tester") richTextBox1.Rtf = handbook[72];
+                    if (value == "SetTextInElementByClassAsync" && tag == "Tester") richTextBox1.Rtf = handbook[73];
+                    if (value == "SetTextInElementAsync" && tag == "Tester") richTextBox1.Rtf = handbook[74];
+                    if (value == "SetTextInElementByIdAsync" && tag == "Tester") richTextBox1.Rtf = handbook[75];
+                    if (value == "SetTextInElementByNameAsync" && tag == "Tester") richTextBox1.Rtf = handbook[76];
+                    if (value == "SetTextInElementByTagAsync" && tag == "Tester") richTextBox1.Rtf = handbook[77];
+                    if (value == "SetValueInElementByClassAsync" && tag == "Tester") richTextBox1.Rtf = handbook[78];
+                    if (value == "SetValueInElementAsync" && tag == "Tester") richTextBox1.Rtf = handbook[79];
+                    if (value == "SetValueInElementByIdAsync" && tag == "Tester") richTextBox1.Rtf = handbook[80];
+                    if (value == "SetValueInElementByNameAsync" && tag == "Tester") richTextBox1.Rtf = handbook[81];
+                    if (value == "SetValueInElementByTagAsync" && tag == "Tester") richTextBox1.Rtf = handbook[82];
+                    if (value == "WaitAsync" && tag == "Tester") richTextBox1.Rtf = handbook[83];
+                    if (value == "WaitNotVisibleElementByClassAsync" && tag == "Tester") richTextBox1.Rtf = handbook[84];
+                    if (value == "WaitNotVisibleElementAsync" && tag == "Tester") richTextBox1.Rtf = handbook[85];
+                    if (value == "WaitNotVisibleElementByIdAsync" && tag == "Tester") richTextBox1.Rtf = handbook[86];
+                    if (value == "WaitNotVisibleElementByNameAsync" && tag == "Tester") richTextBox1.Rtf = handbook[87];
+                    if (value == "WaitNotVisibleElementByTagAsync" && tag == "Tester") richTextBox1.Rtf = handbook[88];
+                    if (value == "WaitVisibleElementByClassAsync" && tag == "Tester") richTextBox1.Rtf = handbook[89];
+                    if (value == "WaitVisibleElementAsync" && tag == "Tester") richTextBox1.Rtf = handbook[90];
+                    if (value == "WaitVisibleElementByIdAsync" && tag == "Tester") richTextBox1.Rtf = handbook[91];
+                    if (value == "WaitVisibleElementByNameAsync" && tag == "Tester") richTextBox1.Rtf = handbook[92];
+                    if (value == "WaitVisibleElementByTagAsync" && tag == "Tester") richTextBox1.Rtf = handbook[93];
 
-                    if (value == "ExecuteJavaScriptAsync") richTextBox1.Rtf = handbook[94];
+                    if (value == "ExecuteJavaScriptAsync" && tag == "Tester") richTextBox1.Rtf = handbook[94];
 
-                    if (value == "AssertEqualsAsync") richTextBox1.Rtf = handbook[95];
-                    if (value == "AssertNotEqualsAsync") richTextBox1.Rtf = handbook[96];
-                    if (value == "AssertTrueAsync") richTextBox1.Rtf = handbook[97];
-                    if (value == "AssertFalseAsync") richTextBox1.Rtf = handbook[98];
+                    if (value == "AssertEqualsAsync" && tag == "Tester") richTextBox1.Rtf = handbook[95];
+                    if (value == "AssertNotEqualsAsync" && tag == "Tester") richTextBox1.Rtf = handbook[96];
+                    if (value == "AssertTrueAsync" && tag == "Tester") richTextBox1.Rtf = handbook[97];
+                    if (value == "AssertFalseAsync" && tag == "Tester") richTextBox1.Rtf = handbook[98];
 
-                    if (value == "BrowserGetErrorsAsync") richTextBox1.Rtf = handbook[99];
-                    if (value == "BrowserGetNetworkAsync") richTextBox1.Rtf = handbook[100];
+                    if (value == "BrowserGetErrorsAsync" && tag == "Tester") richTextBox1.Rtf = handbook[99];
+                    if (value == "BrowserGetNetworkAsync" && tag == "Tester") richTextBox1.Rtf = handbook[100];
 
-                    if (value == "GetAttributeFromElementsByClassAsync") richTextBox1.Rtf = handbook[101];
-                    if (value == "GetAttributeFromElementsByNameAsync") richTextBox1.Rtf = handbook[102];
-                    if (value == "GetAttributeFromElementsByTagAsync") richTextBox1.Rtf = handbook[103];
-                    if (value == "SetAttributeInElementsByClassAsync") richTextBox1.Rtf = handbook[104];
-                    if (value == "SetAttributeInElementsAsync") richTextBox1.Rtf = handbook[105];
-                    if (value == "SetAttributeInElementsByNameAsync") richTextBox1.Rtf = handbook[106];
-                    if (value == "SetAttributeInElementsByTagAsync") richTextBox1.Rtf = handbook[107];
-                    if (value == "GetHtmlFromElementByClassAsync") richTextBox1.Rtf = handbook[108];
-                    if (value == "GetHtmlFromElementAsync") richTextBox1.Rtf = handbook[109];
-                    if (value == "GetHtmlFromElementByIdAsync") richTextBox1.Rtf = handbook[110];
-                    if (value == "GetHtmlFromElementByNameAsync") richTextBox1.Rtf = handbook[111];
-                    if (value == "GetHtmlFromElementByTagAsync") richTextBox1.Rtf = handbook[112];
-                    if (value == "SetHtmlInElementByClassAsync") richTextBox1.Rtf = handbook[113];
-                    if (value == "SetHtmlInElementAsync") richTextBox1.Rtf = handbook[114];
-                    if (value == "SetHtmlInElementByIdAsync") richTextBox1.Rtf = handbook[115];
-                    if (value == "SetHtmlInElementByNameAsync") richTextBox1.Rtf = handbook[116];
-                    if (value == "SetHtmlInElementByTagAsync") richTextBox1.Rtf = handbook[117];
+                    if (value == "GetAttributeFromElementsByClassAsync" && tag == "Tester") richTextBox1.Rtf = handbook[101];
+                    if (value == "GetAttributeFromElementsByNameAsync" && tag == "Tester") richTextBox1.Rtf = handbook[102];
+                    if (value == "GetAttributeFromElementsByTagAsync" && tag == "Tester") richTextBox1.Rtf = handbook[103];
+                    if (value == "SetAttributeInElementsByClassAsync" && tag == "Tester") richTextBox1.Rtf = handbook[104];
+                    if (value == "SetAttributeInElementsAsync" && tag == "Tester") richTextBox1.Rtf = handbook[105];
+                    if (value == "SetAttributeInElementsByNameAsync" && tag == "Tester") richTextBox1.Rtf = handbook[106];
+                    if (value == "SetAttributeInElementsByTagAsync" && tag == "Tester") richTextBox1.Rtf = handbook[107];
+                    if (value == "GetHtmlFromElementByClassAsync" && tag == "Tester") richTextBox1.Rtf = handbook[108];
+                    if (value == "GetHtmlFromElementAsync" && tag == "Tester") richTextBox1.Rtf = handbook[109];
+                    if (value == "GetHtmlFromElementByIdAsync" && tag == "Tester") richTextBox1.Rtf = handbook[110];
+                    if (value == "GetHtmlFromElementByNameAsync" && tag == "Tester") richTextBox1.Rtf = handbook[111];
+                    if (value == "GetHtmlFromElementByTagAsync" && tag == "Tester") richTextBox1.Rtf = handbook[112];
+                    if (value == "SetHtmlInElementByClassAsync" && tag == "Tester") richTextBox1.Rtf = handbook[113];
+                    if (value == "SetHtmlInElementAsync" && tag == "Tester") richTextBox1.Rtf = handbook[114];
+                    if (value == "SetHtmlInElementByIdAsync" && tag == "Tester") richTextBox1.Rtf = handbook[115];
+                    if (value == "SetHtmlInElementByNameAsync" && tag == "Tester") richTextBox1.Rtf = handbook[116];
+                    if (value == "SetHtmlInElementByTagAsync" && tag == "Tester") richTextBox1.Rtf = handbook[117];
 
-                    if (value == "HTMLElement") richTextBox1.Rtf = handbook[118];
-                    if (value == "Id") richTextBox1.Rtf = handbook[119];
-                    if (value == "Name") richTextBox1.Rtf = handbook[120];
-                    if (value == "Class") richTextBox1.Rtf = handbook[121];
-                    if (value == "Type") richTextBox1.Rtf = handbook[122];
-                    if (value == "ClickAsync") richTextBox1.Rtf = handbook[123];
-                    if (value == "GetAttributeAsync") richTextBox1.Rtf = handbook[124];
-                    if (value == "GetHtmlAsync") richTextBox1.Rtf = handbook[125];
-                    if (value == "GetTextAsync") richTextBox1.Rtf = handbook[126];
-                    if (value == "GetValueAsync") richTextBox1.Rtf = handbook[127];
-                    if (value == "ScrollToAsync") richTextBox1.Rtf = handbook[128];
-                    if (value == "SetAttributeAsync") richTextBox1.Rtf = handbook[129];
-                    if (value == "SetHtmlAsync") richTextBox1.Rtf = handbook[130];
-                    if (value == "SetTextAsync") richTextBox1.Rtf = handbook[131];
-                    if (value == "SetValueAsync") richTextBox1.Rtf = handbook[132];
-                    if (value == "WaitNotVisibleAsync") richTextBox1.Rtf = handbook[133];
-                    if (value == "WaitVisibleAsync") richTextBox1.Rtf = handbook[134];
+                    if (value == "HTMLElement" && tag == "HTMLElement") richTextBox1.Rtf = handbook[118];
+                    if (value == "Id" && tag == "HTMLElement") richTextBox1.Rtf = handbook[119];
+                    if (value == "Name" && tag == "HTMLElement") richTextBox1.Rtf = handbook[120];
+                    if (value == "Class" && tag == "HTMLElement") richTextBox1.Rtf = handbook[121];
+                    if (value == "Type" && tag == "HTMLElement") richTextBox1.Rtf = handbook[122];
+                    if (value == "ClickAsync" && tag == "HTMLElement") richTextBox1.Rtf = handbook[123];
+                    if (value == "GetAttributeAsync" && tag == "HTMLElement") richTextBox1.Rtf = handbook[124];
+                    if (value == "GetHtmlAsync" && tag == "HTMLElement") richTextBox1.Rtf = handbook[125];
+                    if (value == "GetTextAsync" && tag == "HTMLElement") richTextBox1.Rtf = handbook[126];
+                    if (value == "GetValueAsync" && tag == "HTMLElement") richTextBox1.Rtf = handbook[127];
+                    if (value == "ScrollToAsync" && tag == "HTMLElement") richTextBox1.Rtf = handbook[128];
+                    if (value == "SetAttributeAsync" && tag == "HTMLElement") richTextBox1.Rtf = handbook[129];
+                    if (value == "SetHtmlAsync" && tag == "HTMLElement") richTextBox1.Rtf = handbook[130];
+                    if (value == "SetTextAsync" && tag == "HTMLElement") richTextBox1.Rtf = handbook[131];
+                    if (value == "SetValueAsync" && tag == "HTMLElement") richTextBox1.Rtf = handbook[132];
+                    if (value == "WaitNotVisibleAsync" && tag == "HTMLElement") richTextBox1.Rtf = handbook[133];
+                    if (value == "WaitVisibleAsync" && tag == "HTMLElement") richTextBox1.Rtf = handbook[134];
 
-                    if (value == "BY_CSS") richTextBox1.Rtf = handbook[135];
-                    if (value == "BY_XPATH") richTextBox1.Rtf = handbook[136];
+                    if (value == "BY_CSS" && tag == "Tester") richTextBox1.Rtf = handbook[135];
+                    if (value == "BY_XPATH" && tag == "Tester") richTextBox1.Rtf = handbook[136];
 
-                    if (value == "RestGetAsync") richTextBox1.Rtf = handbook[137];
-                    if (value == "RestGetBasicAuthAsync") richTextBox1.Rtf = handbook[138];
-                    if (value == "BrowserGoBackAsync") richTextBox1.Rtf = handbook[139];
-                    if (value == "BrowserGoForwardAsync") richTextBox1.Rtf = handbook[140];
-                    if (value == "BrowserBasicAuthenticationAsync") richTextBox1.Rtf = handbook[141];
-                    if (value == "BrowserEnableSendMailAsync") richTextBox1.Rtf = handbook[142];
+                    if (value == "RestGetAsync" && tag == "Tester") richTextBox1.Rtf = handbook[137];
+                    if (value == "RestGetBasicAuthAsync" && tag == "Tester") richTextBox1.Rtf = handbook[138];
+                    if (value == "BrowserGoBackAsync" && tag == "Tester") richTextBox1.Rtf = handbook[139];
+                    if (value == "BrowserGoForwardAsync" && tag == "Tester") richTextBox1.Rtf = handbook[140];
+                    if (value == "BrowserBasicAuthenticationAsync" && tag == "Tester") richTextBox1.Rtf = handbook[141];
+                    if (value == "BrowserEnableSendMailAsync" && tag == "Tester") richTextBox1.Rtf = handbook[142];
                     
-                    if (value == "SelectOptionAsync") richTextBox1.Rtf = handbook[143];
-                    if (value == "GetOptionAsync") richTextBox1.Rtf = handbook[144];
-                    if (value == "BY_INDEX") richTextBox1.Rtf = handbook[145];
-                    if (value == "BY_TEXT") richTextBox1.Rtf = handbook[146];
-                    if (value == "BY_VALUE") richTextBox1.Rtf = handbook[147];
-                    if (value == "IsClickableAsync") richTextBox1.Rtf = handbook[148];
-                    if (value == "IsClickableElementAsync") richTextBox1.Rtf = handbook[149];
+                    if (value == "SelectOptionAsync" && tag == "HTMLElement") richTextBox1.Rtf = handbook[143];
+                    if (value == "GetOptionAsync" && tag == "HTMLElement") richTextBox1.Rtf = handbook[144];
+                    if (value == "BY_INDEX" && tag == "HTMLElement") richTextBox1.Rtf = handbook[145];
+                    if (value == "BY_TEXT" && tag == "HTMLElement") richTextBox1.Rtf = handbook[146];
+                    if (value == "BY_VALUE" && tag == "HTMLElement") richTextBox1.Rtf = handbook[147];
+                    if (value == "IsClickableAsync" && tag == "HTMLElement") richTextBox1.Rtf = handbook[148];
+                    if (value == "IsClickableElementAsync" && tag == "Tester") richTextBox1.Rtf = handbook[149];
+
+                    if (value == "GetFrameAsync") richTextBox1.Rtf = handbook[150];
+                    if (value == "FRAMEElement" && tag == "FRAMEElement") richTextBox1.Rtf = handbook[151];
+                    if (value == "BY_INDEX" && tag == "FRAMEElement") richTextBox1.Rtf = handbook[152];
+                    if (value == "BY_TEXT" && tag == "FRAMEElement") richTextBox1.Rtf = handbook[153];
+                    if (value == "BY_VALUE" && tag == "FRAMEElement") richTextBox1.Rtf = handbook[154];
+                    if (value == "Name" && tag == "FRAMEElement") richTextBox1.Rtf = handbook[155];
+                    if (value == "Index" && tag == "FRAMEElement") richTextBox1.Rtf = handbook[156];
+
+                    if (value == "ClickElementAsync" && tag == "FRAMEElement") richTextBox1.Rtf = handbook[157];
+                    if (value == "FindElementAsync" && tag == "FRAMEElement") richTextBox1.Rtf = handbook[158];
+                    if (value == "FindVisibleElementAsync" && tag == "FRAMEElement") richTextBox1.Rtf = handbook[159];
+                    if (value == "GetAttributeFromElementAsync" && tag == "FRAMEElement") richTextBox1.Rtf = handbook[160];
+                    if (value == "GetAttributeFromElementsAsync" && tag == "FRAMEElement") richTextBox1.Rtf = handbook[161];
+                    if (value == "GetCountElementsAsync" && tag == "FRAMEElement") richTextBox1.Rtf = handbook[162];
+                    if (value == "GetHtmlFromElementAsync" && tag == "FRAMEElement") richTextBox1.Rtf = handbook[163];
+                    if (value == "GetOptionAsync" && tag == "FRAMEElement") richTextBox1.Rtf = handbook[164];
+                    if (value == "GetTextFromElementAsync" && tag == "FRAMEElement") richTextBox1.Rtf = handbook[165];
+                    if (value == "GetTitleAsync" && tag == "FRAMEElement") richTextBox1.Rtf = handbook[166];
+                    if (value == "GetUrlAsync" && tag == "FRAMEElement") richTextBox1.Rtf = handbook[167];
+                    if (value == "GetValueFromElementAsync" && tag == "FRAMEElement") richTextBox1.Rtf = handbook[168];
+                    if (value == "IsClickableElementAsync" && tag == "FRAMEElement") richTextBox1.Rtf = handbook[169];
+                    if (value == "ScrollToElementAsync" && tag == "FRAMEElement") richTextBox1.Rtf = handbook[170];
+                    if (value == "SelectOptionAsync" && tag == "FRAMEElement") richTextBox1.Rtf = handbook[171];
+                    if (value == "SetAttributeInElementAsync" && tag == "FRAMEElement") richTextBox1.Rtf = handbook[172];
+                    if (value == "SetAttributeInElementsAsync" && tag == "FRAMEElement") richTextBox1.Rtf = handbook[173];
+                    if (value == "SetHtmlInElementAsync" && tag == "FRAMEElement") richTextBox1.Rtf = handbook[174];
+                    if (value == "SetTextInElementAsync" && tag == "FRAMEElement") richTextBox1.Rtf = handbook[175];
+                    if (value == "SetValueInElementAsync" && tag == "FRAMEElement") richTextBox1.Rtf = handbook[176];
+                    if (value == "WaitNotVisibleElementAsync" && tag == "FRAMEElement") richTextBox1.Rtf = handbook[177];
+                    if (value == "WaitVisibleElementAsync" && tag == "FRAMEElement") richTextBox1.Rtf = handbook[178];
 
                     /*
-                    if (value == "") richTextBox1.Rtf = handbook[150];
-                    if (value == "") richTextBox1.Rtf = handbook[151];
-                    if (value == "") richTextBox1.Rtf = handbook[152];
-                    if (value == "") richTextBox1.Rtf = handbook[153];
-                    if (value == "") richTextBox1.Rtf = handbook[154];
-                    if (value == "") richTextBox1.Rtf = handbook[155];
-                    if (value == "") richTextBox1.Rtf = handbook[156];
-                    if (value == "") richTextBox1.Rtf = handbook[157];
-                    if (value == "") richTextBox1.Rtf = handbook[158];
-                    if (value == "") richTextBox1.Rtf = handbook[159];
-                    if (value == "") richTextBox1.Rtf = handbook[160];
+                    if (value == "" && tag == "") richTextBox1.Rtf = handbook[179];
+                    if (value == "" && tag == "") richTextBox1.Rtf = handbook[180];
+                    if (value == "" && tag == "") richTextBox1.Rtf = handbook[181];
+                    if (value == "" && tag == "") richTextBox1.Rtf = handbook[182];
+                    if (value == "" && tag == "") richTextBox1.Rtf = handbook[183];
+                    if (value == "" && tag == "") richTextBox1.Rtf = handbook[184];
+                    if (value == "" && tag == "") richTextBox1.Rtf = handbook[185];
+                    if (value == "" && tag == "") richTextBox1.Rtf = handbook[186];
+                    if (value == "" && tag == "") richTextBox1.Rtf = handbook[187];
+                    if (value == "" && tag == "") richTextBox1.Rtf = handbook[188];
+                    if (value == "" && tag == "") richTextBox1.Rtf = handbook[189];
+                    if (value == "" && tag == "") richTextBox1.Rtf = handbook[190];
                     */
+
                 }
             }
             catch (Exception ex)
@@ -2643,10 +3153,13 @@ await tester.TestEndAsync();\par
                     if (treeView1.SelectedNode.Text == "Методы для выполнения Rest запросов") return;
                     if (treeView1.SelectedNode.Text == "Методы для проверки результата") return;
 
+                    if (treeView1.SelectedNode.Text == "Класс: FRAMEElement") return;
                     if (treeView1.SelectedNode.Text == "Класс: HTMLElement") return;
                     if (treeView1.SelectedNode.Text == "Конструктор") return;
                     if (treeView1.SelectedNode.Text == "Переменные") return;
                     if (treeView1.SelectedNode.Text == "Методы") return;
+
+                    
 
                     Clipboard.SetText(treeView1.SelectedNode.Text);
                     (files[index][5] as TextEditorControl).Focus();

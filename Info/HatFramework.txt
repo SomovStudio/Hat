@@ -442,3 +442,35 @@ REST запросы
 		await tester.AssertTrueAsync(clickable);
 		await tester.TestEndAsync();
 
+
+Класс для работы с фреймом
+
++	GetFrameAsync(int index) - метод возвращает элемент в виде объект класс которого FRAMEElement
++	FRAMEElement(Tester tester, int index) - это класса
+	
+	встроенные методы:
+
++	ClickElementAsync(string by, string locator)
++	FindElementAsync(string by, string locator, int sec)
++	FindVisibleElementAsync(string by, string locator, int sec)
++	GetAttributeFromElementAsync(string by, string locator, string attribute)
++	GetAttributeFromElementsAsync(string by, string locator, string attribute)
++	GetCountElementsAsync(string by, string locator)
++	GetHtmlFromElementAsync(string by, string locator)
++	GetOptionAsync(string by, string locator, string type)
++	GetTextFromElementAsync(string by, string locator)
++	GetTitleAsync()
++	GetUrlAsync()
++	GetValueFromElementAsync(string by, string locator)
++	IsClickableElementAsync(string by, string locator)
++	ScrollToElementAsync(string by, string locator, bool behaviorSmooth = false)
++	SelectOptionAsync(string by, string locator, string type, string value)
++	SetAttributeInElementAsync(string by, string locator, string attribute, string value)
++	SetAttributeInElementsAsync(string by, string locator, string attribute, string value)
++	SetHtmlInElementAsync(string by, string locator, string html)
++	SetTextInElementAsync(string by, string locator, string text)
++	SetValueInElementAsync(string by, string locator, string value)
++	WaitNotVisibleElementAsync(string by, string locator, int sec)
++	WaitVisibleElementAsync(string by, string locator, int sec)
+	
+	

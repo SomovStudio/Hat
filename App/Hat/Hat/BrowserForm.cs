@@ -659,6 +659,7 @@ namespace Hat
                     showLibs();
                     changeEncoding();
                     changeEditorTopMost();
+                    showDataMail();
                 }
             }
             catch (Exception ex)
@@ -775,6 +776,7 @@ namespace Hat
                     showLibs();
                     changeEncoding();
                     changeEditorTopMost();
+                    showDataMail();
                 }
             }
             catch (Exception ex)
@@ -1816,6 +1818,7 @@ namespace Hat
                     toolStripMenuItemEditorTopMost.Checked = true;
                 }
                 Config.editorTopMost = editorTopMostToolStripMenuItem.Checked;
+                if (codeEditorForm != null) codeEditorForm.TopMost = Config.editorTopMost;
                 if (Config.projectPath != "(не открыт)") Config.saveConfigJson(Config.projectPath + "/project.hat");
             }
             catch (Exception ex)
@@ -2365,6 +2368,20 @@ namespace Hat
                     showDataMail();
                     consoleMsg("Настройки почты сохранены в файл project.hat");
                 }
+            }
+            catch (Exception ex)
+            {
+                consoleMsgError(ex.ToString());
+            }
+        }
+
+        private void internetExplorer11ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                WebBrowser webBrowser = new WebBrowser();
+                webBrowser.Navigate(toolStripComboBoxUrl.Text, "_blank");
+                consoleMsg("Открыт браузер Internet Explorer 11");
             }
             catch (Exception ex)
             {
