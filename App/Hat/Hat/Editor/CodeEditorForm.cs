@@ -2212,9 +2212,37 @@ int count = await frame.GetCountElementsAsync(Tester.BY_CSS, ""input"");\par
 int count = await frame.GetCountElementsAsync(Tester.BY_XPATH, ""//input"");\par
     }",
 
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.22000}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 GetHtmlFromElementAsync\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2 html \'ef\'f0\'e5\'e4\'f1\'f2\'e0\'e2\'eb\'e5\'ed\'e8\'e5 \'ee\'e1\'fa\'e5\'ea\'f2\'e0 \'e2 \'f1\'f2\'f0\'ee\'f7\'ed\'ee\'ec \'e2\'fb\'f0\'e0\'e6\'e5\'ed\'e8\'e8\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \f0\lang1033 GetHtmlFromElementAsync(string by, string locator)\f1\lang1049\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0\f0\lang1033 FRAMEElement frame = await tester.GetFrameAsync(0);\par
+string html = await frame.GetHtmlFromElementAsync(Tester.BY_CSS, ""#auth > h2"");\par
+\par
+string html = await frame.GetHtmlFromElementAsync(Tester.BY_XPATH, ""//div[@id='auth']//h2"");\par
+    }",
+
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.22000}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 GetOptionAsync\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2 \'e8\'ed\'e4\'e5\'ea\'f1, \'f2\'e5\'ea\'f1\'f2 \'e8\'eb\'e8 \'e7\'ed\'e0\'f7\'e5\'ed\'e8\'e5 \'e2\'fb\'e1\'ee\'e0\'ed\'ed\'ee\'e9 \'ee\'ef\'f6\'e8\'e8 \'e2\'fb\'e1\'f0\'e0\'ed\'ed\'ee\'e9 option \'e8\'e7 \'fd\'eb\'e5\'ec\'e5\'ed\'f2\'e0 select\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \f0\lang1033 GetOptionAsync(string by, string locator, string type)\f1\lang1049\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0\f0\lang1033 FRAMEElement frame = await tester.GetFrameAsync(0);\par
+\par
+string index = await frame.GetOptionAsync(Tester.BY_XPATH, ""//*[@id='MySelect'"", FRAMEElement.BY_INDEX);\par
+string value = await frame.GetOptionAsync(Tester.BY_XPATH, ""//*[@id='MySelect'"", FRAMEElement.BY_VALUE);\par
+string text = await frame.GetOptionAsync(Tester.BY_XPATH, ""//*[@id='MySelect'"", FRAMEElement.BY_TEXT);\par
+    }",
+
 @"",
-@"",
-@"",
+
 @"",
 @"",
 @"",
