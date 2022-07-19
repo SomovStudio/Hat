@@ -76,108 +76,6 @@ namespace Hat
         {
             /*
             HatFrameworkDev.Tester tester = new HatFrameworkDev.Tester(Config.browserForm);
-            await tester.TestBeginAsync();
-            await tester.GoToUrlAsync("https://somovstudio.github.io/test2.html", 5);
-            HatFrameworkDev.FRAMEElement frame = await tester.GetFrameAsync(0);
-            tester.ConsoleMsg("Index: " + frame.Index);
-            tester.ConsoleMsg("Name: " + frame.Name);
-            */
-
-            /* 1.
-            string name = await frame.GetAttributeFromElementAsync(HatFrameworkDev.Tester.BY_XPATH, "//input[@id='login']", "name");
-            tester.ConsoleMsg("Attribute: " + name);
-            */
-
-            /* 2.
-            List<string> values = await frame.GetAttributeFromElementsAsync(HatFrameworkDev.Tester.BY_XPATH, "//input", "name");
-            if (values != null)
-            {
-                foreach (string attr in values)
-                    tester.ConsoleMsg(attr);
-            }
-            */
-
-            /* 3.
-            await frame.SetAttributeInElementAsync(HatFrameworkDev.Tester.BY_XPATH, "//input[@id='buttonLogin']", "name", "NameButtonLogin");
-            */
-
-            /* 4.
-            await frame.SetAttributeInElementsAsync(HatFrameworkDev.Tester.BY_XPATH, "//input", "name", "test");
-            */
-
-            /* 5.
-            await frame.SetValueInElementAsync(HatFrameworkDev.Tester.BY_XPATH, "//input[@id='login']", "Тестировщик");
-            string value = await frame.GetValueFromElementAsync(HatFrameworkDev.Tester.BY_XPATH, "//input[@id='login']");
-            */
-
-            /* 6.
-            await frame.ClickElementAsync(HatFrameworkDev.Tester.BY_XPATH, "//*[@id='buttonLogin']");
-            */
-
-            /* 7.
-            bool result = await frame.IsClickableElementAsync(HatFrameworkDev.Tester.BY_XPATH, "//*[@id='buttonLogin']");
-            */
-
-            /* 8.
-            await frame.ScrollToElementAsync(HatFrameworkDev.Tester.BY_XPATH, "//*[@id='buttonLogin']", true);
-            */
-
-            /* 9.
-            int result = await frame.GetCountElementsAsync(HatFrameworkDev.Tester.BY_XPATH, "//input");
-            */
-
-            /* 10.
-            string html = await frame.GetHtmlFromElementAsync(HatFrameworkDev.Tester.BY_XPATH, "//*[@id='buttonLogin']");
-            */
-
-            /* 11.
-            await frame.SetHtmlInElementAsync(HatFrameworkDev.Tester.BY_XPATH, "//*[@id='auth']/h2", "<h2>Тестовый заголовок</h2>");
-            */
-
-            /* 12.
-            await frame.WaitNotVisibleElementAsync(HatFrameworkDev.Tester.BY_XPATH, "//*[@id='result']", 5);
-            await frame.ClickElementAsync(HatFrameworkDev.Tester.BY_XPATH, "//*[@id='buttonLogin']");
-            await frame.WaitVisibleElementAsync(HatFrameworkDev.Tester.BY_XPATH, "//*[@id='result']", 5);
-            */
-
-            /* 13.
-            bool result = await frame.FindElementAsync(HatFrameworkDev.Tester.BY_XPATH, "//*[@id='result']", 5);
-            */
-
-            /* 14.
-            bool result = await frame.FindVisibleElementAsync(HatFrameworkDev.Tester.BY_XPATH, "//*[@id='result']", 5);
-            */
-
-            /* 15.
-            string title = await frame.GetTitleAsync();
-            */
-
-            /* 16.
-            string url = await frame.GetUrlAsync();
-            */
-
-            /* 17.
-            await frame.SetTextInElementAsync(HatFrameworkDev.Tester.BY_XPATH, "//*[@id='auth']/h2", "Это тест");
-            string text = await frame.GetTextFromElementAsync(HatFrameworkDev.Tester.BY_XPATH, "//*[@id='auth']/h2");
-            */
-
-            /* 18.
-            await frame.SelectOptionAsync(HatFrameworkDev.Tester.BY_XPATH, "//*[@id='MySelect'", HatFrameworkDev.FRAMEElement.BY_INDEX, "2");
-            await frame.SelectOptionAsync(HatFrameworkDev.Tester.BY_XPATH, "//*[@id='MySelect'", HatFrameworkDev.FRAMEElement.BY_VALUE, "Mobile");
-            await frame.SelectOptionAsync(HatFrameworkDev.Tester.BY_XPATH, "//*[@id='MySelect'", HatFrameworkDev.FRAMEElement.BY_TEXT, "Other");
-
-            string index = await frame.GetOptionAsync(HatFrameworkDev.Tester.BY_XPATH, "//*[@id='MySelect'", HatFrameworkDev.FRAMEElement.BY_INDEX);
-            string value = await frame.GetOptionAsync(HatFrameworkDev.Tester.BY_XPATH, "//*[@id='MySelect'", HatFrameworkDev.FRAMEElement.BY_VALUE);
-            string text = await frame.GetOptionAsync(HatFrameworkDev.Tester.BY_XPATH, "//*[@id='MySelect'", HatFrameworkDev.FRAMEElement.BY_TEXT);
-            */
-
-            /*
-            await tester.TestEndAsync();
-            */
-
-
-            /*
-            HatFrameworkDev.Tester tester = new HatFrameworkDev.Tester(Config.browserForm);
             await tester.BrowserEnableSendMailAsync();
             await tester.TestBeginAsync();
             await tester.GoToUrlAsync("https://somovstudio.github.io/test.html", 5);
@@ -194,6 +92,7 @@ namespace Hat
             await tester.TestEndAsync();
             */
 
+            /*
             HatFrameworkDev.Tester tester = new HatFrameworkDev.Tester(Config.browserForm);
             await tester.TestBeginAsync();
             await tester.GoToUrlAsync("https://somovstudio.github.io/test2.html", 5);
@@ -203,18 +102,14 @@ namespace Hat
             await element.SelectOptionAsync(HatFrameworkDev.HTMLElement.BY_VALUE, "Mobile");
             await tester.WaitAsync(5);
             await element.SelectOptionAsync(HatFrameworkDev.HTMLElement.BY_TEXT, "Other");
-
             string index = await element.GetOptionAsync(HatFrameworkDev.HTMLElement.BY_INDEX);
             string text = await element.GetOptionAsync(HatFrameworkDev.HTMLElement.BY_TEXT);
             string value = await element.GetOptionAsync(HatFrameworkDev.HTMLElement.BY_VALUE);
-
             await tester.AssertEqualsAsync("2", index);
             await tester.AssertEqualsAsync("\"Other\"", text);
             await tester.AssertEqualsAsync("\"Other\"", value);
             await tester.TestEndAsync();
-
-
-
+            */
         }
 
         public static void readNodes(TreeNodeCollection _nodes)

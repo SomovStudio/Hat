@@ -2036,13 +2036,13 @@ string url = await frame.GetUrlAsync();\par
 await frame.SetTextInElementAsync(Tester.BY_XPATH, ""//*[@id='auth']/h2"", ""\'dd\'f2\'ee \'f2\'e5\'f1\'f2"");\par
 string text = await frame.GetTextFromElementAsync(Tester.BY_XPATH, ""//*[@id='auth']/h2"");\par
 \par
-await frame.SelectOptionAsync(Tester.BY_XPATH, ""//*[@id='MySelect'"", FRAMEElement.BY_INDEX, ""2"");\par
-await frame.SelectOptionAsync(Tester.BY_XPATH, ""//*[@id='MySelect'"", FRAMEElement.BY_VALUE, ""Mobile"");\par
-await frame.SelectOptionAsync(Tester.BY_XPATH, ""//*[@id='MySelect'"", FRAMEElement.BY_TEXT, ""Other"");\par
+await frame.SelectOptionAsync(Tester.BY_XPATH, ""//*[@id='MySelect']"", FRAMEElement.BY_INDEX, ""2"");\par
+await frame.SelectOptionAsync(Tester.BY_XPATH, ""//*[@id='MySelect']"", FRAMEElement.BY_VALUE, ""Mobile"");\par
+await frame.SelectOptionAsync(Tester.BY_XPATH, ""//*[@id='MySelect']"", FRAMEElement.BY_TEXT, ""Other"");\par
 \par
-string index = await frame.GetOptionAsync(Tester.BY_XPATH, ""//*[@id='MySelect'"", FRAMEElement.BY_INDEX);\par
-string value = await frame.GetOptionAsync(Tester.BY_XPATH, ""//*[@id='MySelect'"", FRAMEElement.BY_VALUE);\par
-string text = await frame.GetOptionAsync(Tester.BY_XPATH, ""//*[@id='MySelect'"", FRAMEElement.BY_TEXT);\f0\lang1033\par
+string index = await frame.GetOptionAsync(Tester.BY_XPATH, ""//*[@id='MySelect']"", FRAMEElement.BY_INDEX);\par
+string value = await frame.GetOptionAsync(Tester.BY_XPATH, ""//*[@id='MySelect']"", FRAMEElement.BY_VALUE);\par
+string text = await frame.GetOptionAsync(Tester.BY_XPATH, ""//*[@id='MySelect']"", FRAMEElement.BY_TEXT);\f0\lang1033\par
 }
 ",
 
@@ -2236,9 +2236,13 @@ string html = await frame.GetHtmlFromElementAsync(Tester.BY_XPATH, ""//div[@id='
 \cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
 \cf0\f0\lang1033 FRAMEElement frame = await tester.GetFrameAsync(0);\par
 \par
-string index = await frame.GetOptionAsync(Tester.BY_XPATH, ""//*[@id='MySelect'"", FRAMEElement.BY_INDEX);\par
-string value = await frame.GetOptionAsync(Tester.BY_XPATH, ""//*[@id='MySelect'"", FRAMEElement.BY_VALUE);\par
-string text = await frame.GetOptionAsync(Tester.BY_XPATH, ""//*[@id='MySelect'"", FRAMEElement.BY_TEXT);\par
+string index = await frame.GetOptionAsync(Tester.BY_CSS, ""#MySelect"", FRAMEElement.BY_INDEX);\par
+string value = await frame.GetOptionAsync(Tester.BY_CSS, ""#MySelect"", FRAMEElement.BY_VALUE);\par
+string text = await frame.GetOptionAsync(Tester.BY_CSS, ""#MySelect"", FRAMEElement.BY_TEXT);\par
+\par
+string index = await frame.GetOptionAsync(Tester.BY_XPATH, ""//*[@id='MySelect']"", FRAMEElement.BY_INDEX);\par
+string value = await frame.GetOptionAsync(Tester.BY_XPATH, ""//*[@id='MySelect']"", FRAMEElement.BY_VALUE);\par
+string text = await frame.GetOptionAsync(Tester.BY_XPATH, ""//*[@id='MySelect']"", FRAMEElement.BY_TEXT);\par
     }",
 
 @"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
@@ -2310,15 +2314,147 @@ await tester.AssertTrueAsync(clickable);\par
 \par
     }",
 
-@"",
-@"",
-@"",
-@"",
-@"",
-@"",
-@"",
-@"",
-@"",
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.22000}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 ScrollToElementAsync\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'fb\'ef\'ee\'eb\'ed\'ff\'e5\'f2 \'ef\'f0\'ee\'ea\'f0\'f3\'f2\'ea\'f3 \'ea \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'ee\'ec\'f3 \'fd\'eb\'e5\'ec\'e5\'ed\'f2\'f3 (\'ef\'e0\'f0\'e0\'ec\'e5\'f2\'f0 behaviorSmooth \'ee\'ef\'f0\'e5\'e4\'e5\'eb\'ff\'e5\'f2 \'ef\'eb\'e0\'e2\'ed\'ee\'f1\'f2\'fc \'ef\'f0\'ee\'ea\'f0\'f3\'f2\'ea\'e8)\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \f0\lang1033 ScrollToElementAsync(string by, string locator, bool behaviorSmooth = false)\f1\lang1049\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0\f0\lang1033 FRAMEElement frame = await tester.GetFrameAsync(0);\par
+await frame.ScrollToElementAsync(Tester.BY_CSS, ""body > footer"", true);\par
+\par
+await frame.ScrollToElementAsync(Tester.BY_XPATH, ""/html/body/footer"", true);\par
+    }",
+
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.22000}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 SelectOptionAsync\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'fb\'e1\'e8\'f0\'e0\'e5\'f2 option \'e8\'e7 \'fd\'eb\'e5\'ec\'e5\'ed\'f2\'e0 select \'ef\'ee \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'ee\'ec\'f3 \'e8\'ed\'e4\'e5\'ea\'f1\'f3, \'f2\'e5\'ea\'f1\'f2\'f3 \'e8\'eb\'e8 \'e7\'ed\'e0\'f7\'e5\'ed\'e8\'fe\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \f0\lang1033 SelectOptionAsync(string by, string locator, string type, string value)\f1\lang1049\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0\f0\lang1033 FRAMEElement frame = await tester.GetFrameAsync(0);\par
+await frame.SelectOptionAsync(Tester.BY_CSS, ""#MySelect"", FRAMEElement.BY_INDEX, ""2"");\par
+await frame.SelectOptionAsync(Tester.BY_CSS, ""#MySelect"", FRAMEElement.BY_VALUE, ""Mobile"");\par
+await frame.SelectOptionAsync(Tester.BY_CSS, ""#MySelect"", FRAMEElement.BY_TEXT, ""Other"");\par
+\par
+await frame.SelectOptionAsync(Tester.BY_XPATH, ""//*[@id='MySelect']"", FRAMEElement.BY_INDEX, ""2"");\par
+await frame.SelectOptionAsync(Tester.BY_XPATH, ""//*[@id='MySelect']"", FRAMEElement.BY_VALUE, ""Mobile"");\par
+await frame.SelectOptionAsync(Tester.BY_XPATH, ""//*[@id='MySelect']"", FRAMEElement.BY_TEXT, ""Other"");\par
+    }",
+
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.22000}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 SetAttributeInElementAsync\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'f1\'f2\'e0\'e2\'eb\'ff\'e5\'f2 \'e0\'f2\'f0\'e8\'e1\'f3\'f2 \'f1\'ee \'e7\'ed\'e0\'f7\'e5\'ed\'e8\'e5\'ec \'e2 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'fb\'e9 \'fd\'eb\'e5\'ec\'e5\'ed\'f2\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \f0\lang1033 SetAttributeInElementAsync(string by, string locator, string attribute, string value)\f1\lang1049\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0\f0\lang1033 FRAMEElement frame = await tester.GetFrameAsync(0);\par
+await frame.SetAttributeInElementAsync(Tester.BY_CSS, ""#auth > h2"", ""name"", ""test"");\par
+\par
+await frame.SetAttributeInElementAsync(Tester.BY_XPATH, ""//div[@id='auth']//h2"", ""name"", ""test"");\par
+    }",
+
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.22000}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 SetAttributeInElementsAsync\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'f1\'f2\'e0\'e2\'e8\'f2\'fc \'e0\'f2\'f0\'e8\'e1\'f3\'f2 \'f1 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'fb\'ec \'e7\'ed\'e0\'f7\'e5\'ed\'e8\'e5\'ec \'e2 \'ec\'ed\'ee\'e6\'e5\'f1\'f2\'e2\'ee \'fd\'eb\'e5\'ec\'e5\'ed\'f2\'ee\'e2 \'e8 \'e2 \'f0\'e5\'e7\'f3\'eb\'fc\'f2\'e0\'f2\'e5 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2 \'f1\'ef\'e8\'f1\'ee\'ea\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \f0\lang1033 SetAttributeInElementsAsync(string by, string locator, string attribute, string value)\f1\lang1049\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0\f0\lang1033 FRAMEElement frame = await tester.GetFrameAsync(0);\par
+\par
+List<string> values = await frame.SetAttributeInElementsAsync(Tester.BY_CSS, ""input"", ""class"", ""test-class"");\par
+foreach (string value in values)\par
+\{\par
+\tab tester.ConsoleMsg(value);\par
+\}\par
+\par
+List<string> values = await frame.SetAttributeInElementsAsync(Tester.BY_XPATH, ""//input"", ""class"", ""test-class"");\par
+foreach (string value in values)\par
+\{\par
+\tab tester.ConsoleMsg(value);\par
+\}\par
+}",
+
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.22000}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 SetHtmlInElementAsync\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'f1\'f2\'e0\'e2\'eb\'ff\'e5\'f2 html \'ef\'f0\'e5\'e4\'f1\'f2\'e0\'e2\'eb\'e5\'ed\'e8\'e5 \'ee\'e1\'fa\'e5\'ea\'f2\'e0 \'e2 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'fb\'e9 \'fd\'eb\'e5\'ec\'e5\'ed\'f2\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \f0\lang1033 SetHtmlInElementAsync(string by, string locator, string html)\f1\lang1049\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0\f0\lang1033 FRAMEElement frame = await tester.GetFrameAsync(0);\par
+await frame.SetHtmlInElementAsync(Tester.BY_CSS, ""#auth > h2"", ""<div>\f1\lang1049\'d2\'e5\'f1\'f2\'ee\'e2\'fb\'e9 \'e1\'eb\'ee\'ea</div>"");\par
+\par
+await \f0\lang1033 frame\f1\lang1049 .SetHtmlInElementAsync(Tester.BY_XPATH, ""//div[@id='auth']//h2"", ""<div>\'d2\'e5\'f1\'f2\'ee\'e2\'fb\'e9 \'e1\'eb\'ee\'ea</div>"");\f0\lang1033\par
+    }",
+
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.22000}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 SetTextInElementAsync\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'f1\'f2\'e0\'e2\'eb\'ff\'e5\'f2 \'f2\'e5\'ea\'f1\'f2 \'e2 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'fb\'e9 \'fd\'eb\'e5\'ec\'e5\'ed\'f2\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \f0\lang1033 SetTextInElementAsync(string by, string locator, string text)\f1\lang1049\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0\f0\lang1033 FRAMEElement frame = await tester.GetFrameAsync(0);\par
+await frame.SetTextInElementAsync(Tester.BY_CSS, ""#auth > h2"", ""\f1\lang1049\'d2\'e5\'f1\'f2\'ee\'e2\'fb\'e9 \'e7\'e0\'e3\'ee\'eb\'ee\'e2\'ee\'ea"");\par
+\par
+await \f0\lang1033 frame\f1\lang1049 .SetTextInElementAsync(Tester.BY_XPATH, ""//div[@id='auth']//h2"", ""\'d2\'e5\'f1\'f2\'ee\'e2\'fb\'e9 \'e7\'e0\'e3\'ee\'eb\'ee\'e2\'ee\'ea"");\f0\lang1033\par
+    }",
+
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.22000}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 SetValueInElementAsync\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'f1\'f2\'e0\'e2\'eb\'ff\'e5\'f2 \'e7\'ed\'e0\'f7\'e5\'ed\'e8\'e5 \'e2 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'fb\'e9 \'fd\'eb\'e5\'ec\'e5\'ed\'f2\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \f0\lang1033 SetValueInElementAsync(string by, string locator, string value)\f1\lang1049\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0\f0\lang1033 FRAMEElement frame = await tester.GetFrameAsync(0);\par
+await frame.SetValueInElementAsync(Tester.BY_CSS, ""input[id='login']"", ""admin"");\par
+await frame.SetValueInElementAsync(Tester.BY_CSS, ""input[id='pass']"", ""0000"");\par
+\par
+await frame.SetValueInElementAsync(Tester.BY_XPATH, ""//input[@id='login']"", ""admin"");\par
+await frame.SetValueInElementAsync(Tester.BY_XPATH, ""//input[@id='pass']"", ""0000"");\par
+    }",
+
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.22000}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 WaitNotVisibleElementAsync\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'fb\'ef\'ee\'eb\'ed\'ff\'e5\'f2 \'e2\'f0\'e5\'ec\'e5\'ed\'ed\'f3\'fe \'ee\'f1\'f2\'e0\'ed\'ee\'e2\'ea\'f3 \'e2\'fb\'ef\'ee\'eb\'ed\'e5\'ed\'e8\'ff \'f2\'e5\'f1\'f2\'e0 \'ed\'e0 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'ee\'e5 \'ea\'ee\'eb\'e8\'f7\'e5\'f1\'f2\'e2\'ee \'f1\'e5\'ea\'f3\'ed\'e4 \'e8 \'e6\'e4\'e5\'f2 \'ea\'ee\'e3\'e4\'e0  \'e7\'e0\'ef\'f0\'e0\'f8\'e8\'e2\'e0\'e5\'ec\'fb\'e9 \'fd\'eb\'e5\'ec\'e5\'ed\'f2 \'ef\'e5\'f0\'e5\'f1\'f2\'e0\'ed\'e5\'f2 \'ee\'f2\'ee\'e1\'f0\'e0\'e6\'e0\'e5\'f2\'fc\'f1\'ff \par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \f0\lang1033 WaitNotVisibleElementAsync(string by, string locator, int sec)\f1\lang1049\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0\f0\lang1033 FRAMEElement frame = await tester.GetFrameAsync(0);\par
+await frame.WaitNotVisibleElementAsync(Tester.BY_CSS, ""div[id='result']"", 2);\par
+\par
+await frame.WaitNotVisibleElementAsync(Tester.BY_XPATH, ""//div[@id='result']"", 2);\par
+    }",
+
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.22000}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 WaitVisibleElementAsync\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'fb\'ef\'ee\'eb\'ed\'ff\'e5\'f2 \'e2\'f0\'e5\'ec\'e5\'ed\'ed\'f3\'fe \'ee\'f1\'f2\'e0\'ed\'ee\'e2\'ea\'f3 \'e2\'fb\'ef\'ee\'eb\'ed\'e5\'ed\'e8\'ff \'f2\'e5\'f1\'f2\'e0 \'ed\'e0 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'ee\'e5 \'ea\'ee\'eb\'e8\'f7\'e5\'f1\'f2\'e2\'ee \'f1\'e5\'ea\'f3\'ed\'e4 \'e8 \'e6\'e4\'e5\'f2 \'ea\'ee\'e3\'e4\'e0  \'e7\'e0\'ef\'f0\'e0\'f8\'e8\'e2\'e0\'e5\'ec\'fb\'e9 \'fd\'eb\'e5\'ec\'e5\'ed\'f2 \'ee\'f2\'ee\'e1\'f0\'e0\'e7\'e8\'f2\'f1\'ff\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \f0\lang1033 WaitVisibleElementAsync(string by, string locator, int sec)\f1\lang1049\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0\f0\lang1033 FRAMEElement frame = await tester.GetFrameAsync(0);\par
+await frame.WaitVisibleElementAsync(Tester.BY_CSS, ""div[id='result']"", 2);\par
+\par
+await frame.WaitVisibleElementAsync(Tester.BY_XPATH, ""//div[@id='result']"", 2);\par
+    }",
+
 @"",
 @"",
 @"",
