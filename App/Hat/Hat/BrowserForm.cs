@@ -2372,5 +2372,18 @@ namespace Hat
                 consoleMsgError(ex.ToString());
             }
         }
+
+        private void internetExplorer11ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                WebBrowser webBrowser = new WebBrowser();
+                webBrowser.Navigate(toolStripComboBoxUrl.Text, "_blank");
+            }
+            catch (Exception ex)
+            {
+                consoleMsgError(ex.ToString());
+            }
+        }
     }
 }
