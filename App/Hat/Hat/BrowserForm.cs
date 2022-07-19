@@ -659,6 +659,7 @@ namespace Hat
                     showLibs();
                     changeEncoding();
                     changeEditorTopMost();
+                    showDataMail();
                 }
             }
             catch (Exception ex)
@@ -775,6 +776,7 @@ namespace Hat
                     showLibs();
                     changeEncoding();
                     changeEditorTopMost();
+                    showDataMail();
                 }
             }
             catch (Exception ex)
