@@ -2379,6 +2379,7 @@ namespace Hat
             {
                 WebBrowser webBrowser = new WebBrowser();
                 webBrowser.Navigate(toolStripComboBoxUrl.Text, "_blank");
+                consoleMsg("Открыт браузер Internet Explorer 11");
             }
             catch (Exception ex)
             {
