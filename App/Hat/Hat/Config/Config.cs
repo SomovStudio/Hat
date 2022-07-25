@@ -25,8 +25,8 @@ namespace Hat
         /* переменные для браузера */
         public static BrowserForm browserForm;                  // окно браузера (форма)
         public static string defaultUserAgent = "";             // значение user-agent по умолчанию
-        public static string currentBrowserVersion = "1.1.1";   // текущая версия браузера
-        public static string dateBrowserUpdate = "19.07.2022";  // дата последнего обновления
+        public static string currentBrowserVersion = "1.1.2";   // текущая версия браузера
+        public static string dateBrowserUpdate = "25.08.2022";  // дата последнего обновления
 
         public static string openHtmlFile = null;             // имя открываемого html файла при запуске браузера
         public static bool commandLineMode = false;         // флаг показывающий запуск приложения из командной строки
