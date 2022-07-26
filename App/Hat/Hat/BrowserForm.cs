@@ -339,8 +339,8 @@ namespace Hat
             await Report.SaveReportScreenshotAsync();
         }
 
-        /* Отправить письмо с отчетом */
-        public void sendMail()
+        /* Отправить письмо с отчетом о провале FAILURE */
+        public void sendMailFailure()
         {
             try
             {
@@ -372,6 +372,50 @@ namespace Hat
                     }
                     content += "</table>";
                     WorkOnEmail.SendEmail("Failed автотест " + Report.TestFileName, content);
+                }
+            }
+            catch (Exception ex)
+            {
+                consoleMsgError(ex.Message);
+            }
+
+        }
+
+        /* Отправить письмо с отчетом о провале SUCCESS */
+        public void sendMailSuccess()
+        {
+            try
+            {
+                if (Report.TestSuccess == true)
+                {
+                    string content = "<h2>Отчет о работе автотеста</h2>";
+                    content += $"<p>Файл: {Report.TestFileName}</p>";
+                    content += $"<p>Результат: <b style=\"color:#34AF00\">Успешно</b></p>";
+                    content += "<br>";
+                    content += "<table border=\"1\">";
+                    content += "<tr>";
+                    content += "<th><b>Статус</b></th>";
+                    content += "<th><b>Действие</b></th>";
+                    content += "<th><b>Комментарий</b></th>";
+                    content += "</tr>";
+
+                    if (Report.Steps.Count > 0)
+                    {
+                        foreach (string[] step in Report.Steps)
+                        {
+                            content += "<tr>";
+                            if (step[0] == Report.PASSED) content += $"<td style=\"color:#34AF00\">{step[0]}</td>";
+                            else if (step[0] == Report.FAILED) content += $"<td style=\"color:#FF0000\">{step[0]}</td>";
+                            else if (step[0] == Report.ERROR) content += $"<td style=\"color:#FF0000\">{step[0]}</td>";
+                            else if (step[0] == Report.WARNING) content += $"<td style=\"color:#CCAA00\">{step[0]}</td>";
+                            else content += $"<td>{step[0]}</td>";
+                            content += $"<td>{step[1]}</td>";
+                            content += $"<td>{step[2]}</td>";
+                            content += "</tr>";
+                        }
+                    }
+                    content += "</table>";
+                    WorkOnEmail.SendEmail("Success автотест " + Report.TestFileName, content);
                 }
             }
             catch (Exception ex)
