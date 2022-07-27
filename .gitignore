@@ -1,5 +1,6 @@
 App/Hat/Hat/bin/
 App/Hat/Hat/obj/
+App/Hat/.vs/Hat/v17/.suo
 Lib/HatFramework/HatFramework/obj/
 Lib/HatFramework/HatFramework/bin/Release/ICSharpCode.TextEditor.dll
 Lib/HatFramework/HatFramework/bin/Release/Microsoft.Web.WebView2.Core.dll
@@ -10,3 +11,4 @@ Lib/HatFramework/HatFramework/bin/Release/Microsoft.Web.WebView2.Wpf.dll
 Lib/HatFramework/HatFramework/bin/Release/Microsoft.Web.WebView2.Wpf.xml
 Lib/HatFramework/HatFramework/bin/Release/Newtonsoft.Json.dll
 Lib/HatFramework/HatFramework/bin/Release/Newtonsoft.Json.xml
+Lib/HatFramework/.vs/HatFramework/v17/.suo
