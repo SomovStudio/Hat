@@ -93,6 +93,19 @@ namespace Hat
             return content;
         }
 
+        public static void defaultDataMail()
+        {
+            dataMail = new string[] {
+                "from@mail.com",                // 0 - Почта отправителя
+                "user",                         // 1 - Имя отправителя
+                "pass",                         // 2 - Пароль отправителя
+                "to1@mail.com to2@mail.com",    // 3 - Почта получателя
+                "smtp.yandex.ru",               // 4 - smtp
+                "587",                          // 5 - port (587)
+                "true"                          // 6 - ssl
+            };
+        }
+
         public static void saveConfigJson(string filename)
         {
             try

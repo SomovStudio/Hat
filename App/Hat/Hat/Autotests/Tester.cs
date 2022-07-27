@@ -607,7 +607,7 @@ namespace HatFrameworkDev
             }
         }
 
-        public async Task BrowserEnableSendMailAsync(bool byFailure = false, bool bySuccess = false)
+        public async Task BrowserEnableSendMailAsync(bool byFailure = true, bool bySuccess = true)
         {
             int step = SendMessage($"BrowserEnableSendMailAsync(\"{byFailure}\", \"{bySuccess}\")", PROCESS, "Включение опции отправки отчета на почту", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return;

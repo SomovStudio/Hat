@@ -669,7 +669,11 @@ namespace Hat
                     string fileTestsExample2 = "/tests/ExampleTest2.cs";
 
                     WorkOnFiles writer = new WorkOnFiles();
-                    if (!File.Exists(Config.projectPath + fileProject)) writer.writeFile(Config.getConfig(), WorkOnFiles.UTF_8_BOM, Config.projectPath + fileProject);
+                    if (!File.Exists(Config.projectPath + fileProject))
+                    {
+                        Config.defaultDataMail();
+                        writer.writeFile(Config.getConfig(), WorkOnFiles.UTF_8_BOM, Config.projectPath + fileProject);
+                    }
                     if (!File.Exists(Config.projectPath + fileSupportHelper)) writer.writeFile(Autotests.getContentFileHelper(), Config.encoding, Config.projectPath + fileSupportHelper);
                     if (!File.Exists(Config.projectPath + fileSupportPageObjectsExample)) writer.writeFile(Autotests.getContentFileExamplePage(), Config.encoding, Config.projectPath + fileSupportPageObjectsExample);
                     if (!File.Exists(Config.projectPath + fileSupportStepObjectsExample)) writer.writeFile(Autotests.getContentFileExampleSteps(), Config.encoding, Config.projectPath + fileSupportStepObjectsExample);
@@ -779,7 +783,11 @@ namespace Hat
                     if (!File.Exists(Config.projectPath + fileCSPROJ)) writer.writeFile(Autotests.getContentFileCSPROJ(), Config.encoding, Config.projectPath + fileCSPROJ);
                     if (!File.Exists(Config.projectPath + fileAssemblyInfo)) writer.writeFile(Autotests.getContentFileAssemblyInfo(), Config.encoding, Config.projectPath + fileAssemblyInfo);
 
-                    if (!File.Exists(Config.projectPath + fileProject)) writer.writeFile(Config.getConfig(), WorkOnFiles.UTF_8_BOM, Config.projectPath + fileProject);
+                    if (!File.Exists(Config.projectPath + fileProject))
+                    {
+                        Config.defaultDataMail();
+                        writer.writeFile(Config.getConfig(), WorkOnFiles.UTF_8_BOM, Config.projectPath + fileProject);
+                    }
                     if (!File.Exists(Config.projectPath + fileSupportHelper)) writer.writeFile(Autotests.getContentFileHelper(), Config.encoding, Config.projectPath + fileSupportHelper);
                     if (!File.Exists(Config.projectPath + fileSupportPageObjectsExample)) writer.writeFile(Autotests.getContentFileExamplePage(), Config.encoding, Config.projectPath + fileSupportPageObjectsExample);
                     if (!File.Exists(Config.projectPath + fileSupportStepObjectsExample)) writer.writeFile(Autotests.getContentFileExampleSteps(), Config.encoding, Config.projectPath + fileSupportStepObjectsExample);

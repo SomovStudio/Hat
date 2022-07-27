@@ -58,11 +58,13 @@ namespace HatFramework
         private MethodInfo getNameAutotest;         // Функция: getNameAutotest - возвращает имя запущенного автотеста
         private MethodInfo saveReport;              // функция: saveReport - вызывает метод сохранения отчета
         private MethodInfo saveReportScreenshotAsync; // функция: saveReportScreenshotAsync - сохраняет скриншот текущего состояния браузера
-        private MethodInfo sendMail;                // функция: sendMail - отправка отчета о падении автотеста по почте
+        private MethodInfo sendMailFailure;         // функция: sendMailFailure - отправка отчета о Failure автотеста по почте
+        private MethodInfo sendMailSuccess;         // функция: sendMailSuccess - отправка отчета о Success автотеста по почте
 
         private bool statusPageLoad = false;    // флаг: статус загрузки страницы
         private bool testStop = false;          // флаг: остановка теста
-        private bool sendReportByMail = false;  // флаг: отправка отчета по почте
+        private bool sendFailureReportByMail = false;  // флаг: отправка Failure отчета по почте
+        private bool sendSuccessReportByMail = false;  // флаг: отправка Success отчета по почте
         private string assertStatus = null;     // флаг: рузельтат проверки
 
         public Tester(Form browserForm)
@@ -85,7 +87,8 @@ namespace HatFramework
                 getNameAutotest = BrowserWindow.GetType().GetMethod("getNameAutotest");
                 saveReport = BrowserWindow.GetType().GetMethod("saveReport");
                 saveReportScreenshotAsync = BrowserWindow.GetType().GetMethod("saveReportScreenshotAsync");
-                sendMail = BrowserWindow.GetType().GetMethod("sendMail");
+                sendMailFailure = BrowserWindow.GetType().GetMethod("sendMailFailure");
+                sendMailSuccess = BrowserWindow.GetType().GetMethod("sendMailSuccess");
 
                 MethodInfo mi = BrowserWindow.GetType().GetMethod("getWebView");
                 BrowserView = (Microsoft.Web.WebView2.WinForms.WebView2)mi.Invoke(BrowserWindow, null);
@@ -372,7 +375,8 @@ namespace HatFramework
                 }
 
                 saveReport.Invoke(BrowserWindow, null); // сохранение отчета
-                if (sendReportByMail == true) sendMail.Invoke(BrowserWindow, null); // отправка отчета по почте
+                if (sendFailureReportByMail == true) sendMailFailure.Invoke(BrowserWindow, null); // отправка Failure отчета по почте
+                if (sendSuccessReportByMail == true) sendMailSuccess.Invoke(BrowserWindow, null); // отправка Success отчета по почте
             }
             catch (Exception ex)
             {
@@ -603,14 +607,15 @@ namespace HatFramework
             }
         }
 
-        public async Task BrowserEnableSendMailAsync()
+        public async Task BrowserEnableSendMailAsync(bool byFailure = false, bool bySuccess = false)
         {
-            int step = SendMessage($"BrowserEnableSendMailAsync()", PROCESS, "Включение опции отправки отчета на почту", IMAGE_STATUS_PROCESS);
+            int step = SendMessage($"BrowserEnableSendMailAsync(\"{byFailure}\", \"{bySuccess}\")", PROCESS, "Включение опции отправки отчета на почту", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return;
 
             try
             {
-                sendReportByMail = true;
+                sendFailureReportByMail = byFailure;
+                sendSuccessReportByMail = bySuccess;
                 EditMessage(step, null, PASSED, "Включена опция отправки отчета на почту", IMAGE_STATUS_MESSAGE);
             }
             catch (Exception ex)
