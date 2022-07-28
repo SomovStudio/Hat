@@ -19,8 +19,15 @@ namespace Hat
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Clipboard.SetText(textBox.Text);
-            Config.browserForm.consoleMsg("Команда запуска скопирована в буфер обмена");
+            try
+            {
+                Clipboard.SetText(textBox.Text);
+                Config.browserForm.consoleMsg("Команда запуска скопирована в буфер обмена");
+            }
+            catch (Exception ex)
+            {
+                Config.browserForm.consoleMsg(ex.Message);
+            }
         }
     }
 }
