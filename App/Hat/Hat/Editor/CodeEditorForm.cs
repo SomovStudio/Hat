@@ -2457,7 +2457,25 @@ await frame.WaitVisibleElementAsync(Tester.BY_CSS, ""div[id='result']"", 2);\par
 await frame.WaitVisibleElementAsync(Tester.BY_XPATH, ""//div[@id='result']"", 2);\par
     }",
 
-@"",
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.22000}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 GetTestResult\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2 \'f1\'f2\'e0\'f2\'f3\'f1 \'e2\'fb\'ef\'ee\'eb\'ed\'ff\'e5\'ec\'ee\'e3\'ee \'f2\'e5\'f1\'f2\'e0\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \f0\lang1033 GetTestResult()\f1\lang1049\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0\f0\lang1033 Tester tester = new Tester(browserForm);\par
+await tester.TestBeginAsync();\par
+\f1\lang1049 ...\par
+\f0\lang1033 if(tester.GetTestResult() == Tester.PROCESS) \{ \}\par
+\f1\lang1049 ...\par
+\f0\lang1033 await tester.TestEndAsync();\par
+if(tester.GetTestResult() == Tester.FAILED) \{ \}\par
+if(tester.GetTestResult() == Tester.PASSED) \{ \}\par
+\par
+}",
+
 @"",
 @"",
 @"",
@@ -3100,8 +3118,9 @@ await frame.WaitVisibleElementAsync(Tester.BY_XPATH, ""//div[@id='result']"", 2)
                     if (value == "WaitNotVisibleElementAsync" && tag == "FRAMEElement") richTextBox1.Rtf = handbook[177];
                     if (value == "WaitVisibleElementAsync" && tag == "FRAMEElement") richTextBox1.Rtf = handbook[178];
 
+                    if (value == "GetTestResult" && tag == "Tester") richTextBox1.Rtf = handbook[179];
+                    
                     /*
-                    if (value == "" && tag == "") richTextBox1.Rtf = handbook[179];
                     if (value == "" && tag == "") richTextBox1.Rtf = handbook[180];
                     if (value == "" && tag == "") richTextBox1.Rtf = handbook[181];
                     if (value == "" && tag == "") richTextBox1.Rtf = handbook[182];

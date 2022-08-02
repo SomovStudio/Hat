@@ -407,6 +407,23 @@ namespace HatFrameworkDev
             return testStop;
         }
 
+        public string GetTestResult()
+        {
+            string result = "null";
+            try
+            {
+                int step = SendMessage("GetTestResult()", PROCESS, "Определяется результат теста", IMAGE_STATUS_MESSAGE);
+                if (assertStatus == null) result = PROCESS;
+                else result = assertStatus;
+                EditMessage(step, null, COMPLETED, $"Результат теста получен: {result}", IMAGE_STATUS_MESSAGE);
+            }
+            catch (Exception ex)
+            {
+                ConsoleMsgError(ex.ToString());
+            }
+            return result;
+        }
+
         public async Task BrowserCloseAsync()
         {
             try
