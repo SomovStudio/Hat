@@ -1856,12 +1856,14 @@ await tester.TestEndAsync();\par
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 BrowserEnableSendMailAsync\cf0\par
 \cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'ea\'eb\'fe\'f7\'e0\'e5\'f2 \'ee\'ef\'f6\'e8\'fe \'ee\'f2\'ef\'f0\'e0\'e2\'ea\'e8 \'ee\'f2\'f7\'e5\'f2\'e0 \'ed\'e0 \'ef\'ee\'f7\'f2\'f3 \'e2 \'f1\'eb\'f3\'f7\'e0\'e5 \'ef\'f0\'ee\'e2\'e0\'eb\'e0 \'e2 \'f0\'e0\'e1\'ee\'f2\'e5 \'e0\'e2\'f2\'ee\'f2\'e5\'f1\'f2\'e0\par
-\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \f0\lang1033 BrowserEnableSendMailAsync()\f1\lang1049\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \f0\lang1033 BrowserEnableSendMailAsync(bool byFailure = true, bool bySuccess = true)\f1\lang1049\par
 \cf3\par
 \cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
 \cf0\f0\lang1033 Tester tester = new Tester(browserForm);\par
-await tester.BrowserEnableSendMailAsync();\par
-await tester.TestBeginAsync();\par
+await tester.BrowserEnableSendMailAsync(true, false); \f1\lang1049 // \'f2\'ee\'eb\'fc\'ea\'ee \'e2 \'f1\'eb\'f3\'f7\'e0\'e5 \'ef\'f0\'ee\'e2\'e0\'eb\'e0\par
+\f0\lang1033 await tester.BrowserEnableSendMailAsync(false, true); \f1\lang1049 // \'f2\'ee\'eb\'fc\'ea\'ee \'e2 \'f1\'eb\'f3\'f7\'e0\'e5 \'f3\'f1\'ef\'e5\'f5\'e0\par
+\f0\lang1033 await tester.BrowserEnableSendMailAsync();\f1\lang1049  // \'e2 \'ee\'e1\'ee\'e8\'f5 \'f1\'eb\'f3\'f7\'e0\'ff\'f5\par
+\f0\lang1033 await tester.TestBeginAsync();\par
 \f1\lang1049 ...\f0\lang1033\par
 await tester.TestEndAsync();\par
 }",
