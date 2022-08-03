@@ -40,8 +40,7 @@ namespace HatFrameworkDev
         private const string BY_ID = "BY_ID";
         private const string BY_CLASS = "BY_CLASS";
         private const string BY_NAME = "BY_NAME";
-        private const string BY_TAG = "BY_TAG";
-        
+        private const string BY_TAG = "BY_TAG";        
 
         private MethodInfo browserConsoleMsg;       // функция: consoleMsg - вывод сообщения в консоль приложения
         private MethodInfo browserConsoleMsgError;  // функция: consoleMsgErrorReport - вывод сообщения об ошибке в консоль приложения
@@ -2575,6 +2574,47 @@ namespace HatFrameworkDev
             return result;
         }
 
+
+        /* Методы для замера метрик ======================================================= */
+        private object[] timer;
+        public async Task TimerStart()
+        {
+            int step = SendMessage("TimerStart()", PROCESS, "Запуск таймера", IMAGE_STATUS_PROCESS);
+            try
+            {
+                DateTime dateTimeStart = DateTime.Now;
+                timer = new object[3] { null, null, null };
+                timer[0] = dateTimeStart;   // время - начало
+                timer[1] = null;            // время - завершение
+                timer[2] = null;            // время - разница
+                EditMessage(step, null, COMPLETED, $"Таймер запущен {dateTimeStart}", IMAGE_STATUS_MESSAGE);
+            }
+            catch (Exception ex)
+            {
+                EditMessage(step, null, Tester.FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), Tester.IMAGE_STATUS_FAILED);
+                ConsoleMsgError(ex.ToString());
+            }
+        }
+
+        public async Task<string> TimerStop()
+        {
+            int step = SendMessage("TimerStop()", PROCESS, "Остановка таймера", IMAGE_STATUS_PROCESS);
+            try
+            {
+                DateTime dateTimeStop = DateTime.Now;
+                timer[1] = dateTimeStop;
+                var result = (DateTime)timer[1] - (DateTime)timer[0];
+                timer[2] = result;
+                EditMessage(step, null, COMPLETED, $"Таймер остановлен {dateTimeStop} (затраченное время: {result})", IMAGE_STATUS_MESSAGE);
+                return result.ToString();
+            }
+            catch (Exception ex)
+            {
+                EditMessage(step, null, Tester.FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), Tester.IMAGE_STATUS_FAILED);
+                ConsoleMsgError(ex.ToString());
+            }
+            return null;
+        }
 
 
 

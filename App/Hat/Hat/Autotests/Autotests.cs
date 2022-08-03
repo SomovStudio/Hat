@@ -75,11 +75,12 @@ namespace Hat
         public static async Task devTestAsync()
         {
             HatFrameworkDev.Tester tester = new HatFrameworkDev.Tester(Config.browserForm);
+            await tester.TimerStart();
             await tester.TestBeginAsync();
             await tester.GoToUrlAsync("https://somovstudio.github.io/test.html", 5);
             await tester.SetValueInElementByIdAsync("login", "admin");
             await tester.WaitAsync(2);
-            await tester.SetValueInElementByIdAsync("pass", "0001");
+            await tester.SetValueInElementByIdAsync("pass", "0000");
             await tester.WaitAsync(2);
             await tester.ClickElementByIdAsync("buttonLogin");
             await tester.WaitAsync(2);
@@ -88,8 +89,9 @@ namespace Hat
             await tester.WaitVisibleElementByIdAsync("result", 5);
             await tester.AssertEqualsAsync(expected, actual);
             await tester.TestEndAsync();
-            
-            if(tester.GetTestResult() == Tester.PROCESS) { }
+            string result = await tester.TimerStop();
+            tester.ConsoleMsg(result);
+
 
 
 
