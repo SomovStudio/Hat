@@ -2687,6 +2687,35 @@ namespace HatFrameworkDev
             }
         }
 
+        public async Task<List<string>> AssertNoErrors()
+        {
+            List<string> errors = await BrowserGetErrorsAsync();
+            int step = SendMessage("AssertNoErrors()", PROCESS, "Проверка отсутствия ошибок в консоли", IMAGE_STATUS_PROCESS);
+
+            int countErrors = 0;
+            string textErrors = "";
+            foreach (string error in errors)
+            {
+                if (error.Contains("stats.g.doubleclick.net") == true) continue;
+                if (error.Contains("\"level\":\"error\"") == true)
+                {
+                    textErrors += error + Environment.NewLine;
+                    countErrors++;
+                }
+            }
+            if (countErrors > 0)
+            {
+                EditMessage(step, null, FAILED, "В консоли присутствует " + countErrors.ToString() + " ошибок." + Environment.NewLine + textErrors, Tester.IMAGE_STATUS_FAILED);
+                if (assertStatus == null) assertStatus = FAILED;
+            }
+            else
+            {
+                EditMessage(step, null, PASSED, "Проверка завершена - ошибок в консоли нет", Tester.IMAGE_STATUS_PASSED);
+                if (assertStatus == null) assertStatus = PASSED;
+            }
+            return errors;
+        }
+
 
 
     }

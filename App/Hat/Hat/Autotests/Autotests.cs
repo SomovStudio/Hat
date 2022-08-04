@@ -75,7 +75,17 @@ namespace Hat
         public static async Task devTestAsync()
         {
             HatFrameworkDev.Tester tester = new HatFrameworkDev.Tester(Config.browserForm);
-            DateTime start = await tester.TimerStart();
+            await tester.TestBeginAsync();
+            await tester.GoToUrlAsync("https://www.nvidia.com/", 5);
+            List<string> result = await tester.AssertNoErrors();
+            foreach (string error in result)
+            {
+                tester.ConsoleMsg(error);
+            }
+            await tester.TestEndAsync();
+
+            /*
+            HatFrameworkDev.Tester tester = new HatFrameworkDev.Tester(Config.browserForm);
             await tester.TestBeginAsync();
             await tester.GoToUrlAsync("https://somovstudio.github.io/test.html", 5);
             await tester.SetValueInElementByIdAsync("login", "admin");
@@ -88,9 +98,13 @@ namespace Hat
             string expected = "\"Вы успешно авторизованы\"";
             await tester.WaitVisibleElementByIdAsync("result", 5);
             await tester.AssertEqualsAsync(expected, actual);
+            List<string> result = await tester.AssertNoErrors();
+            foreach (string error in result)
+            {
+                tester.ConsoleMsg(error);
+            }
             await tester.TestEndAsync();
-            TimeSpan result = await tester.TimerStop(start);
-            tester.ConsoleMsg("Time " + result.TotalSeconds);
+            */
 
 
 
