@@ -2576,44 +2576,41 @@ namespace HatFrameworkDev
 
 
         /* Методы для замера метрик ======================================================= */
-        private object[] timer;
-        public async Task TimerStart()
+        //private object[] timer;
+        public async Task<DateTime> TimerStart()
         {
             int step = SendMessage("TimerStart()", PROCESS, "Запуск таймера", IMAGE_STATUS_PROCESS);
+            DateTime start = default;
             try
             {
-                DateTime dateTimeStart = DateTime.Now;
-                timer = new object[3] { null, null, null };
-                timer[0] = dateTimeStart;   // время - начало
-                timer[1] = null;            // время - завершение
-                timer[2] = null;            // время - разница
-                EditMessage(step, null, COMPLETED, $"Таймер запущен {dateTimeStart}", IMAGE_STATUS_MESSAGE);
+                start = DateTime.Now;
+                EditMessage(step, null, COMPLETED, $"Таймер запущен {start}", IMAGE_STATUS_MESSAGE);
             }
             catch (Exception ex)
             {
                 EditMessage(step, null, Tester.FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), Tester.IMAGE_STATUS_FAILED);
                 ConsoleMsgError(ex.ToString());
             }
+            return start;
         }
 
-        public async Task<string> TimerStop()
+        public async Task<TimeSpan> TimerStop(DateTime start)
         {
             int step = SendMessage("TimerStop()", PROCESS, "Остановка таймера", IMAGE_STATUS_PROCESS);
+            DateTime stop = default;
+            TimeSpan result = default;
             try
             {
-                DateTime dateTimeStop = DateTime.Now;
-                timer[1] = dateTimeStop;
-                var result = (DateTime)timer[1] - (DateTime)timer[0];
-                timer[2] = result;
-                EditMessage(step, null, COMPLETED, $"Таймер остановлен {dateTimeStop} (затраченное время: {result})", IMAGE_STATUS_MESSAGE);
-                return result.ToString();
+                stop = DateTime.Now;
+                result = (DateTime)stop - (DateTime)start;
+                EditMessage(step, null, COMPLETED, $"Таймер остановлен {stop} (затраченное время: {result})", IMAGE_STATUS_MESSAGE);
             }
             catch (Exception ex)
             {
                 EditMessage(step, null, Tester.FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), Tester.IMAGE_STATUS_FAILED);
                 ConsoleMsgError(ex.ToString());
             }
-            return null;
+            return result;
         }
 
 
