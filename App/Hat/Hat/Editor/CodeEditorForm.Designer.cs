@@ -314,7 +314,7 @@
             System.Windows.Forms.TreeNode treeNode147 = new System.Windows.Forms.TreeNode("AssertNotEqualsAsync", 2, 5);
             System.Windows.Forms.TreeNode treeNode148 = new System.Windows.Forms.TreeNode("AssertTrueAsync", 2, 5);
             System.Windows.Forms.TreeNode treeNode149 = new System.Windows.Forms.TreeNode("AssertFalseAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode150 = new System.Windows.Forms.TreeNode("AssertNoErrors", 2, 5);
+            System.Windows.Forms.TreeNode treeNode150 = new System.Windows.Forms.TreeNode("AssertNoErrorsAsync", 2, 5);
             System.Windows.Forms.TreeNode treeNode151 = new System.Windows.Forms.TreeNode("Методы для проверки результата", new System.Windows.Forms.TreeNode[] {
             treeNode146,
             treeNode147,
@@ -1540,7 +1540,7 @@
             treeNode150.Name = "Узел0";
             treeNode150.SelectedImageIndex = 5;
             treeNode150.Tag = "Tester";
-            treeNode150.Text = "AssertNoErrors";
+            treeNode150.Text = "AssertNoErrorsAsync";
             treeNode151.Name = "Узел37";
             treeNode151.Tag = "Tester";
             treeNode151.Text = "Методы для проверки результата";

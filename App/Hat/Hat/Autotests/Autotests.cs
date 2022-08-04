@@ -77,7 +77,7 @@ namespace Hat
             HatFrameworkDev.Tester tester = new HatFrameworkDev.Tester(Config.browserForm);
             await tester.TestBeginAsync();
             await tester.GoToUrlAsync("https://www.nvidia.com/", 5);
-            List<string> result = await tester.AssertNoErrors();
+            List<string> result = await tester.AssertNoErrorsAsync();
             foreach (string error in result)
             {
                 tester.ConsoleMsg(error);

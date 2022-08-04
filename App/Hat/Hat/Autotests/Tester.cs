@@ -2687,7 +2687,7 @@ namespace HatFrameworkDev
             }
         }
 
-        public async Task<List<string>> AssertNoErrors()
+        public async Task<List<string>> AssertNoErrorsAsync()
         {
             List<string> errors = await BrowserGetErrorsAsync();
             int step = SendMessage("AssertNoErrors()", PROCESS, "Проверка отсутствия ошибок в консоли", IMAGE_STATUS_PROCESS);
@@ -2716,6 +2716,12 @@ namespace HatFrameworkDev
             return errors;
         }
 
+        /*
+        public async Task<List<string>> AssertNoErrors()
+        {
+
+        }
+        */
 
 
     }
