@@ -2717,11 +2717,20 @@ namespace HatFrameworkDev
         }
 
         /*
-        public async Task<List<string>> AssertNoErrors()
+        BrowserGetNetworkAsync
+        check presence проверить присутствие
+        check absence проверить отсутствие
+        */
+
+        public async Task<List<string>> AssertNetworkPresenceEventsAsync(string[] events)
         {
 
         }
-        */
+
+        public async Task<List<string>> AssertNetworkAbsenceEventsAsync(string[] events)
+        {
+
+        }
 
 
     }
