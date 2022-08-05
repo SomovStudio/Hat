@@ -2716,21 +2716,20 @@ namespace HatFrameworkDev
             return errors;
         }
 
-        /*
-        BrowserGetNetworkAsync
-        check presence проверить присутствие
-        check absence проверить отсутствие
-        */
-
-        public async Task<List<string>> AssertNetworkPresenceEventsAsync(string[] events)
+        /* presence = true проверить присутствие | presence = false проверить отсутствие (absence) */
+        public async Task<List<string>> AssertNetworkEventsAsync(bool presence, string[] events)
         {
+            string network = await BrowserGetNetworkAsync();
+            int step = -1;
+            if (presence == true) step = SendMessage("AssertNetworkEventsAsync("+presence+", [...])", PROCESS, "Проверка присутствия событий в Network", IMAGE_STATUS_PROCESS);
+            else step = SendMessage("AssertNetworkEventsAsync(" + presence + ", [...])", PROCESS, "Проверка отсутствия событий в Network", IMAGE_STATUS_PROCESS);
 
+            List<string> results = new List<string>();
+            foreach (string eventName in events){
+                if(events.Contains(eventName) == presence) results.Add(eventName);
+            }
         }
-
-        public async Task<List<string>> AssertNetworkAbsenceEventsAsync(string[] events)
-        {
-
-        }
+                
 
 
     }
