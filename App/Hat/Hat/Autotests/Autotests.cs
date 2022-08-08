@@ -76,12 +76,10 @@ namespace Hat
         {
             HatFrameworkDev.Tester tester = new HatFrameworkDev.Tester(Config.browserForm);
             await tester.TestBeginAsync();
-            await tester.GoToUrlAsync("https://www.nvidia.com/", 5);
-            List<string> result = await tester.AssertNoErrorsAsync();
-            foreach (string error in result)
-            {
-                tester.ConsoleMsg(error);
-            }
+            await tester.GoToUrlAsync("https://mgts.ru/", 5);
+
+            await tester.AssertNetworkEventsAsync(true, new string[]{"t=pageview123"});
+
             await tester.TestEndAsync();
 
             /*

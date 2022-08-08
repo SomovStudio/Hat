@@ -2687,8 +2687,9 @@ namespace HatFrameworkDev
             }
         }
 
-        public async Task<List<string>> AssertNoErrorsAsync()
+        public async Task<bool> AssertNoErrorsAsync()
         {
+            
             List<string> errors = await BrowserGetErrorsAsync();
             int step = SendMessage("AssertNoErrors()", PROCESS, "Проверка отсутствия ошибок в консоли", IMAGE_STATUS_PROCESS);
 
@@ -2703,31 +2704,56 @@ namespace HatFrameworkDev
                     countErrors++;
                 }
             }
+
+            bool result;
             if (countErrors > 0)
             {
                 EditMessage(step, null, FAILED, "В консоли присутствует " + countErrors.ToString() + " ошибок." + Environment.NewLine + textErrors, Tester.IMAGE_STATUS_FAILED);
                 if (assertStatus == null) assertStatus = FAILED;
+                result = false;
             }
             else
             {
                 EditMessage(step, null, PASSED, "Проверка завершена - ошибок в консоли нет", Tester.IMAGE_STATUS_PASSED);
                 if (assertStatus == null) assertStatus = PASSED;
+                result = true;
             }
-            return errors;
+            return result;
         }
 
         /* presence = true проверить присутствие | presence = false проверить отсутствие (absence) */
-        public async Task<List<string>> AssertNetworkEventsAsync(bool presence, string[] events)
+        public async Task<bool> AssertNetworkEventsAsync(bool presence, string[] events)
         {
             string network = await BrowserGetNetworkAsync();
             int step = -1;
-            if (presence == true) step = SendMessage("AssertNetworkEventsAsync("+presence+", [...])", PROCESS, "Проверка присутствия событий в Network", IMAGE_STATUS_PROCESS);
+            if (presence == true) step = SendMessage("AssertNetworkEventsAsync(" + presence + ", [...])", PROCESS, "Проверка присутствия событий в Network", IMAGE_STATUS_PROCESS);
             else step = SendMessage("AssertNetworkEventsAsync(" + presence + ", [...])", PROCESS, "Проверка отсутствия событий в Network", IMAGE_STATUS_PROCESS);
-
-            List<string> results = new List<string>();
-            foreach (string eventName in events){
-                if(events.Contains(eventName) == presence) results.Add(eventName);
+            
+            bool actual;
+            bool result = true;
+            string report = "";
+            foreach (string eventName in events)
+            {
+                actual = events.Contains(eventName);
+                if (actual == true) report += "событие: " + eventName + " - присутствует" + Environment.NewLine;
+                else report += "событие: " + eventName + " - отсутствует" + Environment.NewLine;
+                if (actual != presence) result = false;
             }
+
+            if(result == true)
+            {
+                if (presence == true) EditMessage(step, null, PASSED, "Проверка завершена - все события присутствуют " + Environment.NewLine + report, Tester.IMAGE_STATUS_PASSED);
+                else EditMessage(step, null, PASSED, "Проверка завершена - все события отсутствуют " + Environment.NewLine + report, Tester.IMAGE_STATUS_PASSED);
+                if (assertStatus == null) assertStatus = PASSED;
+            }
+            else
+            {
+                if (presence == true) EditMessage(step, null, FAILED, "В Network отсутствуют следующие события " + Environment.NewLine + report, Tester.IMAGE_STATUS_FAILED);
+                else EditMessage(step, null, FAILED, "В Network присутствуют следующие события " + Environment.NewLine + report, Tester.IMAGE_STATUS_FAILED);
+                if (assertStatus == null) assertStatus = FAILED;
+            }
+
+            return result;
         }
                 
 
