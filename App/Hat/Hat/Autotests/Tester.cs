@@ -2734,13 +2734,13 @@ namespace HatFrameworkDev
             string report = "";
             foreach (string eventName in events)
             {
-                actual = events.Contains(eventName);
-                if (actual == true) report += "событие: " + eventName + " - присутствует" + Environment.NewLine;
-                else report += "событие: " + eventName + " - отсутствует" + Environment.NewLine;
+                actual = network.Contains(eventName);
+                if (actual == false) report += "событие: " + eventName + " - отсутствует" + Environment.NewLine;
+                else report += "событие: " + eventName + " - присутствует" + Environment.NewLine;
                 if (actual != presence) result = false;
             }
 
-            if(result == true)
+            if (result == true)
             {
                 if (presence == true) EditMessage(step, null, PASSED, "Проверка завершена - все события присутствуют " + Environment.NewLine + report, Tester.IMAGE_STATUS_PASSED);
                 else EditMessage(step, null, PASSED, "Проверка завершена - все события отсутствуют " + Environment.NewLine + report, Tester.IMAGE_STATUS_PASSED);
