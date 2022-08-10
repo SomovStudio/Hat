@@ -461,7 +461,7 @@ namespace HatFrameworkDev
 
         public string GetTestResult()
         {
-            string result = "null";
+            string result = PASSED;
             try
             {
                 int step = SendMessage("GetTestResult()", PROCESS, "Определяется результат теста", IMAGE_STATUS_MESSAGE);
