@@ -325,30 +325,51 @@ namespace HatFrameworkDev
         }
 
         /*
-         * Методы для отправки сообщения на почту или телеграм
+         * Методы для отправки сообщения на почту и телеграм
          */
-        public void SendMsgToMail(string subject, string body)
+        public async Task SendMsgToMailAsync(string subject, string body)
         {
+            int step = SendMessage($"SendMsgToMail(\"{subject}\", \"{body}\")", PROCESS, "Отправка письма", IMAGE_STATUS_PROCESS);
             try
             {
-                int step = SendMessage($"SendMsgToMail(\"{subject}\", \"...\")", PROCESS, "Отправка письма", IMAGE_STATUS_PASSED);
                 sendMail.Invoke(BrowserWindow, new Object[] { subject, body });
                 EditMessage(step, null, COMPLETED, "Письмо отправлено", IMAGE_STATUS_MESSAGE);
             }
             catch (Exception ex)
             {
+                EditMessage(step, null, Tester.FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), Tester.IMAGE_STATUS_FAILED);
                 ConsoleMsgError(ex.Message);
             }
         }
 
-        public void SendMsgToTelegram(string message)
+        public async Task SendMsgToTelegramAsync(string botToken, string chatId, string text, string charset = "UTF-8")
         {
+            int step = SendMessage($"SendMsgToTelegramAsync(\"{botToken}\", \"{chatId}\", \"{text}\", \"{charset}\")", PROCESS, "Отправка сообщения в Телеграм", IMAGE_STATUS_PROCESS);
+
             try
             {
-                //browserConsoleMsg.Invoke(BrowserWindow, new object[] { message });
+                string url = $"https://api.telegram.org/bot{botToken}/sendMessage?chat_id={chatId}&text={text}";
+
+                Uri uri = new Uri(url);
+                HttpClient client = new HttpClient();
+                client.BaseAddress = uri;
+                client.DefaultRequestHeaders.Clear();
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                client.DefaultRequestHeaders.Add("charset", charset);
+                HttpResponseMessage response = await client.GetAsync(url);
+                if (response.IsSuccessStatusCode)
+                {
+                    EditMessage(step, null, PASSED, "Сообщение отправлено в Телеграм", IMAGE_STATUS_PASSED);
+                }
+                else
+                {
+                    EditMessage(step, null, FAILED, "Не удалось отправить сообщение в Телеграм. " + Environment.NewLine + "Статус запроса: " + Environment.NewLine + response.StatusCode.ToString(), IMAGE_STATUS_FAILED);
+                }
             }
             catch (Exception ex)
             {
+                EditMessage(step, null, Tester.FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), Tester.IMAGE_STATUS_FAILED);
                 ConsoleMsgError(ex.Message);
             }
         }
@@ -2553,7 +2574,7 @@ namespace HatFrameworkDev
                 }
                 else
                 {
-                    EditMessage(step, null, FAILED, "Get Rest не выполнен" + Environment.NewLine + "Статус запроса: " + Environment.NewLine + response.StatusCode.ToString(), IMAGE_STATUS_PASSED);
+                    EditMessage(step, null, FAILED, "Get Rest не выполнен" + Environment.NewLine + "Статус запроса: " + Environment.NewLine + response.StatusCode.ToString(), IMAGE_STATUS_FAILED);
                 }
             }
             catch (Exception ex)
@@ -2593,7 +2614,7 @@ namespace HatFrameworkDev
                 }
                 else
                 {
-                    EditMessage(step, null, FAILED, "Get Rest не выполнен" + Environment.NewLine + "Статус запроса: " + Environment.NewLine + response.StatusCode.ToString(), IMAGE_STATUS_PASSED);
+                    EditMessage(step, null, FAILED, "Get Rest не выполнен" + Environment.NewLine + "Статус запроса: " + Environment.NewLine + response.StatusCode.ToString(), IMAGE_STATUS_FAILED);
                 }
             }
             catch (Exception ex)

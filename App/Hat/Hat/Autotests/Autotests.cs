@@ -78,7 +78,9 @@ namespace Hat
             await tester.TestBeginAsync();
             await tester.GoToUrlAsync(@"https://somovstudio.github.io/test.html", 25);
             await tester.TestEndAsync();
-            tester.SendMsgToMail("Тестовое сообщение", "Тест завершился успешно");
+            //tester.SendMsgToMail("Тестовое сообщение", "Тест завершился успешно");
+            tester.SendMsgToTelegramAsync("2106234737:AAH9oor8lVlKRjopP6MH58BzSnH1z5bPMPc", "-657960259", "Hat Browser - Тестирую отправку сообщений");
+            
             /*
             if (tester.GetTestResult() == HatFrameworkDev.Tester.PASSED) 
             {
