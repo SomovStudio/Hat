@@ -422,8 +422,20 @@ namespace Hat
             {
                 consoleMsgError(ex.Message);
             }
-
         }
+
+        public void sendMail(string subject, string body)
+        {
+            try
+            {
+                WorkOnEmail.SendEmail(subject, body);
+            }
+            catch (Exception ex)
+            {
+                consoleMsgError(ex.Message);
+            }
+        }
+
 
         /* Возвращает браузер */
         public Microsoft.Web.WebView2.WinForms.WebView2 getWebView()

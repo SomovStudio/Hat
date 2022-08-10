@@ -59,6 +59,7 @@ namespace HatFrameworkDev
         private MethodInfo saveReportScreenshotAsync; // функция: saveReportScreenshotAsync - сохраняет скриншот текущего состояния браузера
         private MethodInfo sendMailFailure;         // функция: sendMailFailure - отправка отчета о Failure автотеста по почте
         private MethodInfo sendMailSuccess;         // функция: sendMailSuccess - отправка отчета о Success автотеста по почте
+        private MethodInfo sendMail;                // функция: sendMail - отправка письма на почту
 
         private bool statusPageLoad = false;    // флаг: статус загрузки страницы
         private bool testStop = false;          // флаг: остановка теста
@@ -88,6 +89,7 @@ namespace HatFrameworkDev
                 saveReportScreenshotAsync = BrowserWindow.GetType().GetMethod("saveReportScreenshotAsync");
                 sendMailFailure = BrowserWindow.GetType().GetMethod("sendMailFailure");
                 sendMailSuccess = BrowserWindow.GetType().GetMethod("sendMailSuccess");
+                sendMail = BrowserWindow.GetType().GetMethod("sendMail");
 
                 MethodInfo mi = BrowserWindow.GetType().GetMethod("getWebView");
                 BrowserView = (Microsoft.Web.WebView2.WinForms.WebView2)mi.Invoke(BrowserWindow, null);
@@ -322,6 +324,36 @@ namespace HatFrameworkDev
             }
         }
 
+        /*
+         * Методы для отправки сообщения на почту или телеграм
+         */
+        public void SendMsgToMail(string subject, string body)
+        {
+            try
+            {
+                int step = SendMessage($"SendMsgToMail(\"{subject}\", \"...\")", PROCESS, "Отправка письма", IMAGE_STATUS_PASSED);
+                sendMail.Invoke(BrowserWindow, new Object[] { subject, body });
+                EditMessage(step, null, COMPLETED, "Письмо отправлено", IMAGE_STATUS_MESSAGE);
+            }
+            catch (Exception ex)
+            {
+                ConsoleMsgError(ex.Message);
+            }
+        }
+
+        public void SendMsgToTelegram(string message)
+        {
+            try
+            {
+                //browserConsoleMsg.Invoke(BrowserWindow, new object[] { message });
+            }
+            catch (Exception ex)
+            {
+                ConsoleMsgError(ex.Message);
+            }
+        }
+
+
         /* 
          * Методы для подготовки к тестированию и его завершению ====================================
          * */
@@ -412,8 +444,7 @@ namespace HatFrameworkDev
             try
             {
                 int step = SendMessage("GetTestResult()", PROCESS, "Определяется результат теста", IMAGE_STATUS_MESSAGE);
-                if (assertStatus == null) result = PROCESS;
-                else result = assertStatus;
+                if (assertStatus != null) result = assertStatus;
                 EditMessage(step, null, COMPLETED, $"Результат теста получен: {result}", IMAGE_STATUS_MESSAGE);
             }
             catch (Exception ex)

@@ -76,20 +76,15 @@ namespace Hat
         {
             HatFrameworkDev.Tester tester = new HatFrameworkDev.Tester(Config.browserForm);
             await tester.TestBeginAsync();
-            await tester.GoToUrlAsync(@"https://mgts.ru", 25);
-            await tester.WaitVisibleElementAsync(Tester.BY_XPATH, "//div[@class='header_action-btn']/button", 5);
-            await tester.ClickElementAsync(Tester.BY_XPATH, "//div[@class='header_action-btn']/button");
-            await tester.WaitVisibleElementAsync(Tester.BY_XPATH, "//div[@id='popup'][@class='popup popup--open']", 5);
-            await tester.SetValueInElementAsync(Tester.BY_XPATH, "//input[@id='popup_name']", "Тестирование Зионек");
-            await tester.WaitAsync(1);
-            await tester.SetValueInElementAsync(Tester.BY_XPATH, "//input[@id='popup_phone']", "9999999999");
-            await tester.WaitAsync(1);
-            await tester.ClickElementAsync(Tester.BY_XPATH, "//button[@id='SUBMIT_ORDER']");
-            await tester.WaitVisibleElementAsync(Tester.BY_XPATH, "//div[@class='popup_col popup_content main_order_success']", 15);
-
-            await tester.AssertNetworkEventsAsync(true, new string[] { "ec=zayavka", "ea=b2c_new_main", "el=some_shpd_nm", "zayavka_shpd" });
+            await tester.GoToUrlAsync(@"https://somovstudio.github.io/test.html", 25);
             await tester.TestEndAsync();
-
+            tester.SendMsgToMail("Тестовое сообщение", "Тест завершился успешно");
+            /*
+            if (tester.GetTestResult() == HatFrameworkDev.Tester.PASSED) 
+            {
+                tester.SendMsgToMail("Тестовое сообщение", "Тест завершился успешно");
+            }
+            */
 
 
 
