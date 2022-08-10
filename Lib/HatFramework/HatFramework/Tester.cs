@@ -42,7 +42,6 @@ namespace HatFramework
         private const string BY_NAME = "BY_NAME";
         private const string BY_TAG = "BY_TAG";
 
-
         private MethodInfo browserConsoleMsg;       // функция: consoleMsg - вывод сообщения в консоль приложения
         private MethodInfo browserConsoleMsgError;  // функция: consoleMsgErrorReport - вывод сообщения об ошибке в консоль приложения
         private MethodInfo browserSystemConsoleMsg; // функция: systemConsoleMsg - вывод сообщения в системную консоль
@@ -60,6 +59,7 @@ namespace HatFramework
         private MethodInfo saveReportScreenshotAsync; // функция: saveReportScreenshotAsync - сохраняет скриншот текущего состояния браузера
         private MethodInfo sendMailFailure;         // функция: sendMailFailure - отправка отчета о Failure автотеста по почте
         private MethodInfo sendMailSuccess;         // функция: sendMailSuccess - отправка отчета о Success автотеста по почте
+        private MethodInfo sendMail;                // функция: sendMail - отправка письма на почту
 
         private bool statusPageLoad = false;    // флаг: статус загрузки страницы
         private bool testStop = false;          // флаг: остановка теста
@@ -89,6 +89,7 @@ namespace HatFramework
                 saveReportScreenshotAsync = BrowserWindow.GetType().GetMethod("saveReportScreenshotAsync");
                 sendMailFailure = BrowserWindow.GetType().GetMethod("sendMailFailure");
                 sendMailSuccess = BrowserWindow.GetType().GetMethod("sendMailSuccess");
+                sendMail = BrowserWindow.GetType().GetMethod("sendMail");
 
                 MethodInfo mi = BrowserWindow.GetType().GetMethod("getWebView");
                 BrowserView = (Microsoft.Web.WebView2.WinForms.WebView2)mi.Invoke(BrowserWindow, null);
@@ -323,6 +324,57 @@ namespace HatFramework
             }
         }
 
+        /*
+         * Методы для отправки сообщения на почту и телеграм
+         */
+        public async Task SendMsgToMailAsync(string subject, string body)
+        {
+            int step = SendMessage($"SendMsgToMail(\"{subject}\", \"{body}\")", PROCESS, "Отправка письма", IMAGE_STATUS_PROCESS);
+            try
+            {
+                sendMail.Invoke(BrowserWindow, new Object[] { subject, body });
+                EditMessage(step, null, COMPLETED, "Письмо отправлено", IMAGE_STATUS_MESSAGE);
+            }
+            catch (Exception ex)
+            {
+                EditMessage(step, null, Tester.FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), Tester.IMAGE_STATUS_FAILED);
+                ConsoleMsgError(ex.Message);
+            }
+        }
+
+        public async Task SendMsgToTelegramAsync(string botToken, string chatId, string text, string charset = "UTF-8")
+        {
+            int step = SendMessage($"SendMsgToTelegramAsync(\"{botToken}\", \"{chatId}\", \"{text}\", \"{charset}\")", PROCESS, "Отправка сообщения в Телеграм", IMAGE_STATUS_PROCESS);
+
+            try
+            {
+                string url = $"https://api.telegram.org/bot{botToken}/sendMessage?chat_id={chatId}&text={text}";
+
+                Uri uri = new Uri(url);
+                HttpClient client = new HttpClient();
+                client.BaseAddress = uri;
+                client.DefaultRequestHeaders.Clear();
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                client.DefaultRequestHeaders.Add("charset", charset);
+                HttpResponseMessage response = await client.GetAsync(url);
+                if (response.IsSuccessStatusCode)
+                {
+                    EditMessage(step, null, PASSED, "Сообщение отправлено в Телеграм", IMAGE_STATUS_PASSED);
+                }
+                else
+                {
+                    EditMessage(step, null, FAILED, "Не удалось отправить сообщение в Телеграм. " + Environment.NewLine + "Статус запроса: " + Environment.NewLine + response.StatusCode.ToString(), IMAGE_STATUS_FAILED);
+                }
+            }
+            catch (Exception ex)
+            {
+                EditMessage(step, null, Tester.FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), Tester.IMAGE_STATUS_FAILED);
+                ConsoleMsgError(ex.Message);
+            }
+        }
+
+
         /* 
          * Методы для подготовки к тестированию и его завершению ====================================
          * */
@@ -405,6 +457,22 @@ namespace HatFramework
                 ConsoleMsgError(ex.ToString());
             }
             return testStop;
+        }
+
+        public string GetTestResult()
+        {
+            string result = PASSED;
+            try
+            {
+                int step = SendMessage("GetTestResult()", PROCESS, "Определяется результат теста", IMAGE_STATUS_MESSAGE);
+                if (assertStatus != null) result = assertStatus;
+                EditMessage(step, null, COMPLETED, $"Результат теста получен: {result}", IMAGE_STATUS_MESSAGE);
+            }
+            catch (Exception ex)
+            {
+                ConsoleMsgError(ex.ToString());
+            }
+            return result;
         }
 
         public async Task BrowserCloseAsync()
@@ -607,7 +675,7 @@ namespace HatFramework
             }
         }
 
-        public async Task BrowserEnableSendMailAsync(bool byFailure = false, bool bySuccess = false)
+        public async Task BrowserEnableSendMailAsync(bool byFailure = true, bool bySuccess = true)
         {
             int step = SendMessage($"BrowserEnableSendMailAsync(\"{byFailure}\", \"{bySuccess}\")", PROCESS, "Включение опции отправки отчета на почту", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return;
@@ -2506,7 +2574,7 @@ namespace HatFramework
                 }
                 else
                 {
-                    EditMessage(step, null, FAILED, "Get Rest не выполнен" + Environment.NewLine + "Статус запроса: " + Environment.NewLine + response.StatusCode.ToString(), IMAGE_STATUS_PASSED);
+                    EditMessage(step, null, FAILED, "Get Rest не выполнен" + Environment.NewLine + "Статус запроса: " + Environment.NewLine + response.StatusCode.ToString(), IMAGE_STATUS_FAILED);
                 }
             }
             catch (Exception ex)
@@ -2546,7 +2614,7 @@ namespace HatFramework
                 }
                 else
                 {
-                    EditMessage(step, null, FAILED, "Get Rest не выполнен" + Environment.NewLine + "Статус запроса: " + Environment.NewLine + response.StatusCode.ToString(), IMAGE_STATUS_PASSED);
+                    EditMessage(step, null, FAILED, "Get Rest не выполнен" + Environment.NewLine + "Статус запроса: " + Environment.NewLine + response.StatusCode.ToString(), IMAGE_STATUS_FAILED);
                 }
             }
             catch (Exception ex)
@@ -2558,6 +2626,44 @@ namespace HatFramework
             return result;
         }
 
+
+        /* Методы для замера метрик ======================================================= */
+        //private object[] timer;
+        public async Task<DateTime> TimerStart()
+        {
+            int step = SendMessage("TimerStart()", PROCESS, "Запуск таймера", IMAGE_STATUS_PROCESS);
+            DateTime start = default;
+            try
+            {
+                start = DateTime.Now;
+                EditMessage(step, null, COMPLETED, $"Таймер запущен {start}", IMAGE_STATUS_MESSAGE);
+            }
+            catch (Exception ex)
+            {
+                EditMessage(step, null, Tester.FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), Tester.IMAGE_STATUS_FAILED);
+                ConsoleMsgError(ex.ToString());
+            }
+            return start;
+        }
+
+        public async Task<TimeSpan> TimerStop(DateTime start)
+        {
+            int step = SendMessage("TimerStop()", PROCESS, "Остановка таймера", IMAGE_STATUS_PROCESS);
+            DateTime stop = default;
+            TimeSpan result = default;
+            try
+            {
+                stop = DateTime.Now;
+                result = (DateTime)stop - (DateTime)start;
+                EditMessage(step, null, COMPLETED, $"Таймер остановлен {stop} (затраченное время: {result})", IMAGE_STATUS_MESSAGE);
+            }
+            catch (Exception ex)
+            {
+                EditMessage(step, null, Tester.FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), Tester.IMAGE_STATUS_FAILED);
+                ConsoleMsgError(ex.ToString());
+            }
+            return result;
+        }
 
 
 
@@ -2631,6 +2737,75 @@ namespace HatFramework
                 if (assertStatus == null) assertStatus = FAILED;
                 return false;
             }
+        }
+
+        public async Task<bool> AssertNoErrorsAsync()
+        {
+
+            List<string> errors = await BrowserGetErrorsAsync();
+            int step = SendMessage("AssertNoErrors()", PROCESS, "Проверка отсутствия ошибок в консоли", IMAGE_STATUS_PROCESS);
+
+            int countErrors = 0;
+            string textErrors = "";
+            foreach (string error in errors)
+            {
+                if (error.Contains("stats.g.doubleclick.net") == true) continue;
+                if (error.Contains("\"level\":\"error\"") == true)
+                {
+                    textErrors += error + Environment.NewLine;
+                    countErrors++;
+                }
+            }
+
+            bool result;
+            if (countErrors > 0)
+            {
+                EditMessage(step, null, FAILED, "В консоли присутствует " + countErrors.ToString() + " ошибок." + Environment.NewLine + textErrors, Tester.IMAGE_STATUS_FAILED);
+                if (assertStatus == null) assertStatus = FAILED;
+                result = false;
+            }
+            else
+            {
+                EditMessage(step, null, PASSED, "Проверка завершена - ошибок в консоли нет", Tester.IMAGE_STATUS_PASSED);
+                if (assertStatus == null) assertStatus = PASSED;
+                result = true;
+            }
+            return result;
+        }
+
+        /* presence = true проверить присутствие | presence = false проверить отсутствие (absence) */
+        public async Task<bool> AssertNetworkEventsAsync(bool presence, string[] events)
+        {
+            string network = await BrowserGetNetworkAsync();
+            int step = -1;
+            if (presence == true) step = SendMessage("AssertNetworkEventsAsync(" + presence + ", [...])", PROCESS, "Проверка присутствия событий в Network", IMAGE_STATUS_PROCESS);
+            else step = SendMessage("AssertNetworkEventsAsync(" + presence + ", [...])", PROCESS, "Проверка отсутствия событий в Network", IMAGE_STATUS_PROCESS);
+
+            bool actual;
+            bool result = true;
+            string report = "";
+            foreach (string eventName in events)
+            {
+                actual = network.Contains(eventName);
+                if (actual == false) report += "событие: " + eventName + " - отсутствует" + Environment.NewLine;
+                else report += "событие: " + eventName + " - присутствует" + Environment.NewLine;
+                if (actual != presence) result = false;
+            }
+
+            if (result == true)
+            {
+                if (presence == true) EditMessage(step, null, PASSED, "Проверка завершена - все события присутствуют " + Environment.NewLine + report, Tester.IMAGE_STATUS_PASSED);
+                else EditMessage(step, null, PASSED, "Проверка завершена - все события отсутствуют " + Environment.NewLine + report, Tester.IMAGE_STATUS_PASSED);
+                if (assertStatus == null) assertStatus = PASSED;
+            }
+            else
+            {
+                if (presence == true) EditMessage(step, null, FAILED, "В Network отсутствуют следующие события " + Environment.NewLine + report, Tester.IMAGE_STATUS_FAILED);
+                else EditMessage(step, null, FAILED, "В Network присутствуют следующие события " + Environment.NewLine + report, Tester.IMAGE_STATUS_FAILED);
+                if (assertStatus == null) assertStatus = FAILED;
+            }
+
+            return result;
         }
 
 
