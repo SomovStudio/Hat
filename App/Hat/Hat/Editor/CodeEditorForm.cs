@@ -2525,7 +2525,19 @@ await tester.AssertNoErrorsAsync();\par
 await tester.TestEndAsync();\par
 }",
 
-@"",
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.22000}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 AssertNetworkEventsAsync\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'fb\'ef\'ee\'eb\'ed\'ff\'e5\'f2 \'ef\'f0\'ee\'e2\'e5\'f0\'ea\'f3 \'ef\'f0\'e8\'f1\'f3\'f2\'f1\'f2\'e2\'e8\'ff (presence \f0\lang1033 = true\f1\lang1049 )\f0\lang1033  \f1\lang1049\'e8\'eb\'e8 \'ee\'f2\'f1\'f3\'f2\'f1\'f2\'e2\'e8\'e5 (presence \f0\lang1033 = false\f1\lang1049 )\f0\lang1033  \f1\lang1049\'f3\'ea\'e0\'e7\'e0\'ed\'ed\'fb\'f5 \'f1\'ee\'e1\'fb\'f2\'e8\'e9 (events),\f0\lang1033  \f1\lang1049  \'e4\'e0\'ed\'ed\'fb\'e9 \'ec\'e5\'f2\'ee\'e4 \'f5\'ee\'f0\'ee\'f8\'ee \'e8\'f1\'ef\'ee\'eb\'fc\'e7\'ee\'e2\'e0\'f2\'fc \'ef\'f0\'e8 \'ef\'f0\'ee\'e2\'e5\'f0\'ea\'e5 \'f1\'ee\'e1\'fb\'f2\'e8\'e9 Google Analytics \'e8 \'df\'ed\'e4\'e5\'ea\'f1 \'cc\'e5\'f2\'f0\'e8\'ea\'e0\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \f0\lang1033 AssertNetworkEventsAsync(bool presence, string[] events)\f1\lang1049\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0\f0\lang1033 await tester.AssertNetworkEventsAsync(true, new string[] \{ \par
+\f1\lang1049\tab\f0\lang1033 ""ec=zayavka"", ""ea=b2c_new_main"", ""el=some_shpd_nm"", ""zayavka_shpd"" \par
+\});\par
+}",
+
 @"",
 @"",
 @"",
@@ -3168,10 +3180,9 @@ await tester.TestEndAsync();\par
                     if (value == "TimerStart" && tag == "Tester") richTextBox1.Rtf = handbook[180];
                     if (value == "TimerStop" && tag == "Tester") richTextBox1.Rtf = handbook[181];
                     if (value == "AssertNoErrorsAsync" && tag == "Tester") richTextBox1.Rtf = handbook[182];
+                    if (value == "AssertNetworkEventsAsync" && tag == "Tester") richTextBox1.Rtf = handbook[183];
 
                     /*
-                    
-                    if (value == "" && tag == "") richTextBox1.Rtf = handbook[183];
                     if (value == "" && tag == "") richTextBox1.Rtf = handbook[184];
                     if (value == "" && tag == "") richTextBox1.Rtf = handbook[185];
                     if (value == "" && tag == "") richTextBox1.Rtf = handbook[186];
