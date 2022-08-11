@@ -78,8 +78,8 @@ namespace Hat
             await tester.TestBeginAsync();
             await tester.GoToUrlAsync(@"https://somovstudio.github.io/test.html", 25);
             string text = null;
-            await tester.AssertNull(text);
-            await tester.AssertNotNull(text);
+            await tester.AssertNullAsync(text);
+            await tester.AssertNotNullAsync(text);
             await tester.TestEndAsync();
             
 

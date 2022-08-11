@@ -2739,7 +2739,7 @@ namespace HatFrameworkDev
             }
         }
 
-        public async Task<bool> AssertNotNull(object obj)
+        public async Task<bool> AssertNotNullAsync(object obj)
         {
             string value = "null";
             if(obj != null) value = obj.ToString();
@@ -2759,7 +2759,7 @@ namespace HatFrameworkDev
             }
         }
 
-        public async Task<bool> AssertNull(object obj)
+        public async Task<bool> AssertNullAsync(object obj)
         {
             string value = "null";
             if (obj != null) value = obj.ToString();
