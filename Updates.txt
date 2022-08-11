@@ -2,10 +2,13 @@
 
 Список внесённых изменений:
 
+- Исправлен баг при создании скриншота
 - Обновлен метод отправки писем на почту BrowserEnableSendMailAsync
 - Добавлен метод возвращающий статус проверки GetTestResult
 - Добавлены методы для замера затраченного времени TimerStart и TimerStop
-- Добавлены методы для проверки Google Analytics и Яндекс Метрика событий AssertNoErrorsAsync и AssertNetworkEventsAsync
+- Добавлен метод для проверки ошибок на странице AssertNoErrorsAsync
+- Добавлен метод для проверки network событий (Google Analytics и Яндекс Метрика) AssertNetworkEventsAsync 
+- Добавлены методы модульного тестирования Assert
 
 
 -----------------------------

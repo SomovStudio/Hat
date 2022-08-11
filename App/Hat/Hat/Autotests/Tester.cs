@@ -2677,13 +2677,13 @@ namespace HatFrameworkDev
             if (expected == actual)
             {
                 EditMessage(step, null, PASSED, "Ожидаемое и актуальное значение совпадают", IMAGE_STATUS_PASSED);
-                if (assertStatus == null) assertStatus = PASSED;
+                if (assertStatus == null || assertStatus == PASSED) assertStatus = PASSED;
                 return true;
             }
             else
             {
                 EditMessage(step, null, FAILED, "Ожидаемое и актуальное значение не совпадают", IMAGE_STATUS_FAILED);
-                if (assertStatus == null) assertStatus = FAILED;
+                if (assertStatus == null || assertStatus == PASSED) assertStatus = FAILED;
                 return false;
             }
         }
@@ -2694,13 +2694,13 @@ namespace HatFrameworkDev
             if (expected != actual)
             {
                 EditMessage(step, null, PASSED, "Ожидаемое и актуальное значение не совпадают", IMAGE_STATUS_PASSED);
-                if (assertStatus == null) assertStatus = PASSED;
+                if (assertStatus == null || assertStatus == PASSED) assertStatus = PASSED;
                 return true;
             }
             else
             {
                 EditMessage(step, null, FAILED, "Ожидаемое и актуальное значение совпадают", IMAGE_STATUS_FAILED);
-                if (assertStatus == null) assertStatus = FAILED;
+                if (assertStatus == null || assertStatus == PASSED) assertStatus = FAILED;
                 return false;
             }
         }
@@ -2711,13 +2711,13 @@ namespace HatFrameworkDev
             if (condition == true)
             {
                 EditMessage(step, null, PASSED, "Проверенное значение соответствует true", IMAGE_STATUS_PASSED);
-                if (assertStatus == null) assertStatus = PASSED;
+                if (assertStatus == null || assertStatus == PASSED) assertStatus = PASSED;
                 return true;
             }
             else
             {
                 EditMessage(step, null, FAILED, "Проверенное значение соответствует false (должно быть true)", IMAGE_STATUS_FAILED);
-                if (assertStatus == null) assertStatus = FAILED;
+                if (assertStatus == null || assertStatus == PASSED) assertStatus = FAILED;
                 return false;
             }
         }
@@ -2728,20 +2728,61 @@ namespace HatFrameworkDev
             if (condition == false)
             {
                 EditMessage(step, null, PASSED, "Проверенное значение соответствует false", IMAGE_STATUS_PASSED);
-                if (assertStatus == null) assertStatus = PASSED;
+                if (assertStatus == null || assertStatus == PASSED) assertStatus = PASSED;
                 return true;
             }
             else
             {
                 EditMessage(step, null, FAILED, "Проверенное значение соответствует true (должно быть false)", IMAGE_STATUS_FAILED);
-                if (assertStatus == null) assertStatus = FAILED;
+                if (assertStatus == null || assertStatus == PASSED) assertStatus = FAILED;
                 return false;
             }
         }
 
+        public async Task<bool> AssertNotNull(object obj)
+        {
+            string value = "null";
+            if(obj != null) value = obj.ToString();
+            
+            int step = SendMessage("AssertNotNull(" + value + ")", PROCESS, "Проверка значения которое не должно быть null", IMAGE_STATUS_PROCESS);
+            if(obj != null)
+            {
+                EditMessage(step, null, PASSED, "Проверенное значение не null", IMAGE_STATUS_PASSED);
+                if (assertStatus == null || assertStatus == PASSED) assertStatus = PASSED;
+                return true;
+            }
+            else
+            {
+                EditMessage(step, null, FAILED, "Проверенное значение null (должно быть не null)", IMAGE_STATUS_FAILED);
+                if (assertStatus == null || assertStatus == PASSED) assertStatus = FAILED;
+                return false;
+            }
+        }
+
+        public async Task<bool> AssertNull(object obj)
+        {
+            string value = "null";
+            if (obj != null) value = obj.ToString();
+
+            int step = SendMessage("AssertNull(" + value + ")", PROCESS, "Проверка значения которое должно быть null", IMAGE_STATUS_PROCESS);
+            if (obj == null)
+            {
+                EditMessage(step, null, PASSED, "Проверенное значение null", IMAGE_STATUS_PASSED);
+                if (assertStatus == null || assertStatus == PASSED) assertStatus = PASSED;
+                return true;
+            }
+            else
+            {
+                EditMessage(step, null, FAILED, "Проверенное значение не null (должно быть null)", IMAGE_STATUS_FAILED);
+                if (assertStatus == null || assertStatus == PASSED) assertStatus = FAILED;
+                return false;
+            }
+        }
+
+
+
         public async Task<bool> AssertNoErrorsAsync()
         {
-            
             List<string> errors = await BrowserGetErrorsAsync();
             int step = SendMessage("AssertNoErrors()", PROCESS, "Проверка отсутствия ошибок в консоли", IMAGE_STATUS_PROCESS);
 
@@ -2761,13 +2802,13 @@ namespace HatFrameworkDev
             if (countErrors > 0)
             {
                 EditMessage(step, null, FAILED, "В консоли присутствует " + countErrors.ToString() + " ошибок." + Environment.NewLine + textErrors, Tester.IMAGE_STATUS_FAILED);
-                if (assertStatus == null) assertStatus = FAILED;
+                if (assertStatus == null || assertStatus == PASSED) assertStatus = FAILED;
                 result = false;
             }
             else
             {
                 EditMessage(step, null, PASSED, "Проверка завершена - ошибок в консоли нет", Tester.IMAGE_STATUS_PASSED);
-                if (assertStatus == null) assertStatus = PASSED;
+                if (assertStatus == null || assertStatus == PASSED) assertStatus = PASSED;
                 result = true;
             }
             return result;
@@ -2796,13 +2837,13 @@ namespace HatFrameworkDev
             {
                 if (presence == true) EditMessage(step, null, PASSED, "Проверка завершена - все события присутствуют " + Environment.NewLine + report, Tester.IMAGE_STATUS_PASSED);
                 else EditMessage(step, null, PASSED, "Проверка завершена - все события отсутствуют " + Environment.NewLine + report, Tester.IMAGE_STATUS_PASSED);
-                if (assertStatus == null) assertStatus = PASSED;
+                if (assertStatus == null || assertStatus == PASSED) assertStatus = PASSED;
             }
             else
             {
                 if (presence == true) EditMessage(step, null, FAILED, "В Network отсутствуют следующие события " + Environment.NewLine + report, Tester.IMAGE_STATUS_FAILED);
                 else EditMessage(step, null, FAILED, "В Network присутствуют следующие события " + Environment.NewLine + report, Tester.IMAGE_STATUS_FAILED);
-                if (assertStatus == null) assertStatus = FAILED;
+                if (assertStatus == null || assertStatus == PASSED) assertStatus = FAILED;
             }
 
             return result;

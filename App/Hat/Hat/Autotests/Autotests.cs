@@ -77,11 +77,11 @@ namespace Hat
             HatFrameworkDev.Tester tester = new HatFrameworkDev.Tester(Config.browserForm);
             await tester.TestBeginAsync();
             await tester.GoToUrlAsync(@"https://somovstudio.github.io/test.html", 25);
+            string text = null;
+            await tester.AssertNull(text);
+            await tester.AssertNotNull(text);
             await tester.TestEndAsync();
-            if (tester.GetTestResult() == HatFrameworkDev.Tester.PASSED) 
-            {
-                await tester.SendMsgToMailAsync("Тестовое сообщение", "Тест завершился успешно");
-            }
+            
 
 
 
