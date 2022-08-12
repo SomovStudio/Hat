@@ -25,8 +25,8 @@ namespace Hat
         /* переменные для браузера */
         public static BrowserForm browserForm;                  // окно браузера (форма)
         public static string defaultUserAgent = "";             // значение user-agent по умолчанию
-        public static string currentBrowserVersion = "1.1.1";   // текущая версия браузера
-        public static string dateBrowserUpdate = "19.07.2022";  // дата последнего обновления
+        public static string currentBrowserVersion = "1.1.2";   // текущая версия браузера
+        public static string dateBrowserUpdate = "12.08.2022";  // дата последнего обновления
 
         public static string openHtmlFile = null;             // имя открываемого html файла при запуске браузера
         public static bool commandLineMode = false;         // флаг показывающий запуск приложения из командной строки
@@ -36,7 +36,7 @@ namespace Hat
         public static bool debugJavaScript = false;         // отладка javascript при выполнении автотеста
 
         /* переменные для файла project.hat */
-        public static string version = "1.1.0";                 // версия проекта
+        public static string version = "1.1.2";                 // версия проекта
         public static string encoding = WorkOnFiles.UTF_8_BOM;  // кодировка
         public static bool editorTopMost = false;               // настройка отображения редактора
         public static string[] libraries = new string[]         // библиотека подключаемых dll файлов
@@ -91,6 +91,19 @@ namespace Hat
                 browserForm.consoleMsgError(ex.ToString());
             }
             return content;
+        }
+
+        public static void defaultDataMail()
+        {
+            dataMail = new string[] {
+                "from@mail.com",                // 0 - Почта отправителя
+                "user",                         // 1 - Имя отправителя
+                "pass",                         // 2 - Пароль отправителя
+                "to1@mail.com to2@mail.com",    // 3 - Почта получателя
+                "smtp.yandex.ru",               // 4 - smtp
+                "587",                          // 5 - port (587)
+                "true"                          // 6 - ssl
+            };
         }
 
         public static void saveConfigJson(string filename)

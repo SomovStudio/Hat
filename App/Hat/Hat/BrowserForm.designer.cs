@@ -756,7 +756,8 @@
             this.toolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton3.Name = "toolStripButton3";
             this.toolStripButton3.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton3.Text = "О программе Cracker";
+            this.toolStripButton3.Text = "О программе Hat";
+            this.toolStripButton3.ToolTipText = "О программе Hat";
             this.toolStripButton3.Click += new System.EventHandler(this.toolStripButton3_Click);
             // 
             // splitContainer1

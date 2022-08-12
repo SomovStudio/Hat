@@ -339,8 +339,8 @@ namespace Hat
             await Report.SaveReportScreenshotAsync();
         }
 
-        /* Отправить письмо с отчетом */
-        public void sendMail()
+        /* Отправить письмо с отчетом о провале FAILURE */
+        public void sendMailFailure()
         {
             try
             {
@@ -380,6 +380,62 @@ namespace Hat
             }
 
         }
+
+        /* Отправить письмо с отчетом о провале SUCCESS */
+        public void sendMailSuccess()
+        {
+            try
+            {
+                if (Report.TestSuccess == true)
+                {
+                    string content = "<h2>Отчет о работе автотеста</h2>";
+                    content += $"<p>Файл: {Report.TestFileName}</p>";
+                    content += $"<p>Результат: <b style=\"color:#34AF00\">Успешно</b></p>";
+                    content += "<br>";
+                    content += "<table border=\"1\">";
+                    content += "<tr>";
+                    content += "<th><b>Статус</b></th>";
+                    content += "<th><b>Действие</b></th>";
+                    content += "<th><b>Комментарий</b></th>";
+                    content += "</tr>";
+
+                    if (Report.Steps.Count > 0)
+                    {
+                        foreach (string[] step in Report.Steps)
+                        {
+                            content += "<tr>";
+                            if (step[0] == Report.PASSED) content += $"<td style=\"color:#34AF00\">{step[0]}</td>";
+                            else if (step[0] == Report.FAILED) content += $"<td style=\"color:#FF0000\">{step[0]}</td>";
+                            else if (step[0] == Report.ERROR) content += $"<td style=\"color:#FF0000\">{step[0]}</td>";
+                            else if (step[0] == Report.WARNING) content += $"<td style=\"color:#CCAA00\">{step[0]}</td>";
+                            else content += $"<td>{step[0]}</td>";
+                            content += $"<td>{step[1]}</td>";
+                            content += $"<td>{step[2]}</td>";
+                            content += "</tr>";
+                        }
+                    }
+                    content += "</table>";
+                    WorkOnEmail.SendEmail("Success автотест " + Report.TestFileName, content);
+                }
+            }
+            catch (Exception ex)
+            {
+                consoleMsgError(ex.Message);
+            }
+        }
+
+        public void sendMail(string subject, string body)
+        {
+            try
+            {
+                WorkOnEmail.SendEmail(subject, body);
+            }
+            catch (Exception ex)
+            {
+                consoleMsgError(ex.Message);
+            }
+        }
+
 
         /* Возвращает браузер */
         public Microsoft.Web.WebView2.WinForms.WebView2 getWebView()
@@ -625,7 +681,11 @@ namespace Hat
                     string fileTestsExample2 = "/tests/ExampleTest2.cs";
 
                     WorkOnFiles writer = new WorkOnFiles();
-                    if (!File.Exists(Config.projectPath + fileProject)) writer.writeFile(Config.getConfig(), WorkOnFiles.UTF_8_BOM, Config.projectPath + fileProject);
+                    if (!File.Exists(Config.projectPath + fileProject))
+                    {
+                        Config.defaultDataMail();
+                        writer.writeFile(Config.getConfig(), WorkOnFiles.UTF_8_BOM, Config.projectPath + fileProject);
+                    }
                     if (!File.Exists(Config.projectPath + fileSupportHelper)) writer.writeFile(Autotests.getContentFileHelper(), Config.encoding, Config.projectPath + fileSupportHelper);
                     if (!File.Exists(Config.projectPath + fileSupportPageObjectsExample)) writer.writeFile(Autotests.getContentFileExamplePage(), Config.encoding, Config.projectPath + fileSupportPageObjectsExample);
                     if (!File.Exists(Config.projectPath + fileSupportStepObjectsExample)) writer.writeFile(Autotests.getContentFileExampleSteps(), Config.encoding, Config.projectPath + fileSupportStepObjectsExample);
@@ -735,7 +795,11 @@ namespace Hat
                     if (!File.Exists(Config.projectPath + fileCSPROJ)) writer.writeFile(Autotests.getContentFileCSPROJ(), Config.encoding, Config.projectPath + fileCSPROJ);
                     if (!File.Exists(Config.projectPath + fileAssemblyInfo)) writer.writeFile(Autotests.getContentFileAssemblyInfo(), Config.encoding, Config.projectPath + fileAssemblyInfo);
 
-                    if (!File.Exists(Config.projectPath + fileProject)) writer.writeFile(Config.getConfig(), WorkOnFiles.UTF_8_BOM, Config.projectPath + fileProject);
+                    if (!File.Exists(Config.projectPath + fileProject))
+                    {
+                        Config.defaultDataMail();
+                        writer.writeFile(Config.getConfig(), WorkOnFiles.UTF_8_BOM, Config.projectPath + fileProject);
+                    }
                     if (!File.Exists(Config.projectPath + fileSupportHelper)) writer.writeFile(Autotests.getContentFileHelper(), Config.encoding, Config.projectPath + fileSupportHelper);
                     if (!File.Exists(Config.projectPath + fileSupportPageObjectsExample)) writer.writeFile(Autotests.getContentFileExamplePage(), Config.encoding, Config.projectPath + fileSupportPageObjectsExample);
                     if (!File.Exists(Config.projectPath + fileSupportStepObjectsExample)) writer.writeFile(Autotests.getContentFileExampleSteps(), Config.encoding, Config.projectPath + fileSupportStepObjectsExample);

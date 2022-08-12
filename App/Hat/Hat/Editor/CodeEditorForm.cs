@@ -1856,12 +1856,14 @@ await tester.TestEndAsync();\par
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 BrowserEnableSendMailAsync\cf0\par
 \cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'ea\'eb\'fe\'f7\'e0\'e5\'f2 \'ee\'ef\'f6\'e8\'fe \'ee\'f2\'ef\'f0\'e0\'e2\'ea\'e8 \'ee\'f2\'f7\'e5\'f2\'e0 \'ed\'e0 \'ef\'ee\'f7\'f2\'f3 \'e2 \'f1\'eb\'f3\'f7\'e0\'e5 \'ef\'f0\'ee\'e2\'e0\'eb\'e0 \'e2 \'f0\'e0\'e1\'ee\'f2\'e5 \'e0\'e2\'f2\'ee\'f2\'e5\'f1\'f2\'e0\par
-\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \f0\lang1033 BrowserEnableSendMailAsync()\f1\lang1049\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \f0\lang1033 BrowserEnableSendMailAsync(bool byFailure = true, bool bySuccess = true)\f1\lang1049\par
 \cf3\par
 \cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
 \cf0\f0\lang1033 Tester tester = new Tester(browserForm);\par
-await tester.BrowserEnableSendMailAsync();\par
-await tester.TestBeginAsync();\par
+await tester.BrowserEnableSendMailAsync(true, false); \f1\lang1049 // \'f2\'ee\'eb\'fc\'ea\'ee \'e2 \'f1\'eb\'f3\'f7\'e0\'e5 \'ef\'f0\'ee\'e2\'e0\'eb\'e0\par
+\f0\lang1033 await tester.BrowserEnableSendMailAsync(false, true); \f1\lang1049 // \'f2\'ee\'eb\'fc\'ea\'ee \'e2 \'f1\'eb\'f3\'f7\'e0\'e5 \'f3\'f1\'ef\'e5\'f5\'e0\par
+\f0\lang1033 await tester.BrowserEnableSendMailAsync();\f1\lang1049  // \'e2 \'ee\'e1\'ee\'e8\'f5 \'f1\'eb\'f3\'f7\'e0\'ff\'f5\par
+\f0\lang1033 await tester.TestBeginAsync();\par
 \f1\lang1049 ...\f0\lang1033\par
 await tester.TestEndAsync();\par
 }",
@@ -2455,9 +2457,147 @@ await frame.WaitVisibleElementAsync(Tester.BY_CSS, ""div[id='result']"", 2);\par
 await frame.WaitVisibleElementAsync(Tester.BY_XPATH, ""//div[@id='result']"", 2);\par
     }",
 
-@"",
-@"",
-@"",
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.22000}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 GetTestResult\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2 \'f1\'f2\'e0\'f2\'f3\'f1 \'e2\'fb\'ef\'ee\'eb\'ed\'ff\'e5\'ec\'ee\'e3\'ee \'f2\'e5\'f1\'f2\'e0\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \f0\lang1033 GetTestResult()\f1\lang1049\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0\f0\lang1033 Tester tester = new Tester(browserForm);\par
+await tester.TestBeginAsync();\par
+\f1\lang1049 ...\par
+\f0\lang1033 if(tester.GetTestResult() == Tester.PROCESS) \{ \}\par
+\f1\lang1049 ...\par
+\f0\lang1033 await tester.TestEndAsync();\par
+if(tester.GetTestResult() == Tester.FAILED) \{ \}\par
+if(tester.GetTestResult() == Tester.PASSED) \{ \}\par
+\par
+}",
+
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.22000}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 TimerStart\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e7\'e0\'ef\'f3\'f1\'ea\'e0\'e5\'f2 \'ee\'f2\'f1\'f7\'e5\'f2 \'e2\'f0\'e5\'ec\'e5\'ed\'e8 \'e8 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2 \'e7\'ed\'e0\'f7\'e5\'ed\'e8\'e5 DateTime\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \f0\lang1033 TimerStart()\f1\lang1049\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0\f0\lang1033 Tester tester = new Tester(browserForm);\par
+DateTime start = await tester.TimerStart();\par
+await tester.TestBeginAsync();\par
+\f1\lang1049 ...\par
+\f0\lang1033 await tester.TestEndAsync();\par
+TimeSpan result = await tester.TimerStop(start);\par
+tester.ConsoleMsg(""Time "" + result.TotalSeconds);\par
+}",
+
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.22000}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 TimerStop\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e7\'e0\'e2\'e5\'f0\'f8\'e0\'e5\'f2 \'ee\'f2\'f1\'f7\'e5\'f2 \'e2\'f0\'e5\'ec\'e5\'ed\'e8 \'e8 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2 \'e7\'ed\'e0\'f7\'e5\'ed\'e8\'e5 TimeSpan \'f1 \'f0\'e5\'e7\'f3\'eb\'fc\'f2\'e0\'f2\'ee\'ec (\'ed\'e0\'ef\'f0\'e8\'ec\'e5\'f0 7,132157 \'f7\'f2\'ee \'e7\'ed\'e0\'f7\'e8\'f2 7 \'f1\'e5\'ea\'f3\'ed\'e4 \'e8 132157 \'ec\'e8\'eb\'eb\'e8\'f1\'e5\'ea\'f3\'ed\'e4)\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \f0\lang1033 TimerStop(DateTime start)\f1\lang1049\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0\f0\lang1033 Tester tester = new Tester(browserForm);\par
+DateTime start = await tester.TimerStart();\par
+await tester.TestBeginAsync();\par
+\f1\lang1049 ...\par
+\f0\lang1033 await tester.TestEndAsync();\par
+TimeSpan result = await tester.TimerStop(start);\par
+tester.ConsoleMsg(""Time "" + result.TotalSeconds);\par
+}",
+
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.22000}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 AssertNoErrorsAsync\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'fb\'ef\'ee\'eb\'ed\'ff\'e5\'f2 \'ef\'f0\'ee\'e2\'e5\'f0\'ea\'f3 \'ee\'f2\'f1\'f3\'f2\'f1\'f2\'e2\'e8\'ff \'ee\'f8\'e8\'e1\'ee\'ea \'ed\'e0 \'f1\'f2\'f0\'e0\'ed\'e8\'f6\'e5 \'e8 \'e5\'f1\'eb\'e8 \'ee\'f8\'e8\'e1\'ea\'e8 \'ef\'f0\'e8\'f1\'f3\'f2\'f1\'f2\'e2\'f3\'fe\'f2 \'ef\'f0\'ee\'e2\'e5\'f0\'ea\'e0 \'e1\'f3\'e4\'e5\'f2 \'f1\'f7\'e8\'f2\'e0\'f2\'fc\'f1\'ff \'ef\'f0\'ee\'e2\'e0\'eb\'fc\'ed\'ee\'e9\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \f0\lang1033 AssertNoErrorsAsync()\f1\lang1049\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0\f0\lang1033 Tester tester = new Tester(browserForm);\par
+await tester.TestBeginAsync();\par
+await tester.GoToUrlAsync(""https://www.nvidia.com/"", 5);\par
+await tester.AssertNoErrorsAsync();\par
+await tester.TestEndAsync();\par
+}",
+
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.22000}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 AssertNetworkEventsAsync\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'fb\'ef\'ee\'eb\'ed\'ff\'e5\'f2 \'ef\'f0\'ee\'e2\'e5\'f0\'ea\'f3 \'ef\'f0\'e8\'f1\'f3\'f2\'f1\'f2\'e2\'e8\'ff (presence \f0\lang1033 = true\f1\lang1049 )\f0\lang1033  \f1\lang1049\'e8\'eb\'e8 \'ee\'f2\'f1\'f3\'f2\'f1\'f2\'e2\'e8\'e5 (presence \f0\lang1033 = false\f1\lang1049 )\f0\lang1033  \f1\lang1049\'f3\'ea\'e0\'e7\'e0\'ed\'ed\'fb\'f5 \'f1\'ee\'e1\'fb\'f2\'e8\'e9 (events),\f0\lang1033  \f1\lang1049  \'e4\'e0\'ed\'ed\'fb\'e9 \'ec\'e5\'f2\'ee\'e4 \'f5\'ee\'f0\'ee\'f8\'ee \'e8\'f1\'ef\'ee\'eb\'fc\'e7\'ee\'e2\'e0\'f2\'fc \'ef\'f0\'e8 \'ef\'f0\'ee\'e2\'e5\'f0\'ea\'e5 \'f1\'ee\'e1\'fb\'f2\'e8\'e9 Google Analytics \'e8 \'df\'ed\'e4\'e5\'ea\'f1 \'cc\'e5\'f2\'f0\'e8\'ea\'e0\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \f0\lang1033 AssertNetworkEventsAsync(bool presence, string[] events)\f1\lang1049\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0\f0\lang1033 await tester.AssertNetworkEventsAsync(true, new string[] \{ \par
+\f1\lang1049\tab\f0\lang1033 ""ec=zayavka"", ""ea=b2c_new_main"", ""el=some_shpd_nm"", ""zayavka_shpd"" \par
+\});\par
+}",
+
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.22000}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 SendMsgToMailAsync\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'ee\'f2\'ef\'f0\'e0\'e2\'eb\'ff\'e5\'f2 \'ef\'e8\'f1\'fc\'ec\'ee \'ed\'e0 \'ef\'ee\'f7\'f2\'f3\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \f0\lang1033 SendMsgToMailAsync(string subject, string body)\f1\lang1049\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0\f0\lang1033 Tester tester = new Tester(browserForm);\par
+await tester.TestBeginAsync();\par
+...\par
+await tester.TestEndAsync();\par
+if(tester.GetTestResult() == Tester.PASSED) \par
+\{ \par
+\tab await tester.SendMsgToMailAsync(""\f1\lang1049\'d2\'e5\'f1\'f2\'ee\'e2\'ee\'e5 \'f1\'ee\'ee\'e1\'f9\'e5\'ed\'e8\'e5"", ""\'d2\'e5\'f1\'f2 \'e7\'e0\'e2\'e5\'f0\'f8\'e8\'eb\'f1\'ff \'f3\'f1\'ef\'e5\'f8\'ed\'ee"");\par
+\}\f0\lang1033\par
+}",
+
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.22000}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 SendMsgToTelegramAsync\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'ee\'f2\'ef\'f0\'e0\'e2\'eb\'ff\'e5\'f2 \'f1\'ee\'ee\'e1\'f9\'e5\'ed\'e8\'e5 \'e2 \'d2\'e5\'eb\'e5\'e3\'f0\'e0\'ec, \'e4\'eb\'ff \'fd\'f2\'ee\'e3\'ee \'ed\'f3\'e6\'ed\'ee \'f1\'ee\'e7\'e4\'e0\'f2\'fc \'e1\'ee\'f2\'e0 \'e4\'ee\'e1\'e0\'e2\'e8\'f2\'fc \'e5\'e3\'ee \'e2 \'f7\'e0\'f2 \'e8 \'e2 \'f4\'f3\'ed\'ea\'f6\'e8\'fe \'ef\'e5\'f0\'e5\'e4\'e0\'f2\'fc \'f2\'ee\'ea\'e5\'ed \'e1\'ee\'f2\'e0 (\f0\lang1033 botToken\f1\lang1049 ), \'e8\'e4\'e5\'ed\'f2\'e8\'f4\'e8\'ea\'e0\'f2\'ee\'f0 \'f7\'e0\'f2\'e0 \f0\lang1033 (chatId)\f1\lang1049 , \'f2\'e5\'ea\'f1\'f2 \'f1\'ee\'ee\'e1\'f9\'e5\'ed\'e8\'ff \f0\lang1033 (text) \f1\lang1049\'e8 \'ef\'f0\'e8 \'ed\'e5\'ee\'e1\'f5\'ee\'e4\'e8\'ec\'ee\'f1\'f2\'e8 \'f3\'ea\'e0\'e7\'e0\'f2\'fc \'ea\'ee\'e4\'e8\'f0\'ee\'e2\'ea\'f3 (\f0\lang1033 charset\f1\lang1049 )\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \f0\lang1033 SendMsgToTelegramAsync(string botToken, string chatId, string text, string charset = ""UTF-8"")\f1\lang1049\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0\f0\lang1033 Tester tester = new Tester(browserForm);\par
+await tester.TestBeginAsync();\par
+...\par
+await tester.TestEndAsync();\par
+if(tester.GetTestResult() == Tester.FAILED) \par
+\{ \par
+\tab await tester.SendMsgToTelegramAsync(""0000000001:ABCDabcd123ABCDabcd123ABCDabcd123ZX"", ""-123456789"", ""\f1\lang1049\'d2\'e5\'f1\'f2\'ee\'e2\'ee\'e5 \'f1\'ee\'ee\'e1\'f9\'e5\'ed\'e8\'e5"");\par
+\}\f0\lang1033\par
+}",
+
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.22000}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 AssertNotNullAsync\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'fb\'ef\'ee\'eb\'ed\'ff\'e5\'f2 \'ef\'f0\'ee\'e2\'e5\'f0\'ea\'f3 \'e7\'ed\'e0\'f7\'e5\'ed\'e8\'ff \'ea\'ee\'f2\'ee\'f0\'ee\'e5 \'ed\'e5 \'e4\'ee\'eb\'e6\'ed\'ee \'e1\'fb\'f2\'fc \f0\lang1033 null\f1\lang1049 , \'e8 \'e2 \'f1\'eb\'f3\'f7\'e0\'e5 \'e5\'f1\'eb\'e8 \'e7\'ed\'e0\'f7\'e5\'ed\'e8\'e5 \f0\lang1033 null \f1\lang1049\'ef\'f0\'ee\'e2\'e5\'f0\'ea\'e0 \'e1\'f3\'e4\'e5\'f2 \'f1\'f7\'e8\'f2\'e0\'f2\'fc\'f1\'ff \'ef\'f0\'ee\'e2\'e0\'eb\'fc\'ed\'ee\'e9\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \f0\lang1033 AssertNotNullAsync(object obj)\f1\lang1049\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0\f0\lang1033 string text = ""\f1\lang1049\'f2\'e5\'ea\'f1\'f2"";\par
+await tester.AssertNotNullAsync(text);\f0\lang1033\par
+}",
+
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.22000}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 AssertNullAsync\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'fb\'ef\'ee\'eb\'ed\'ff\'e5\'f2 \'ef\'f0\'ee\'e2\'e5\'f0\'ea\'f3 \'e7\'ed\'e0\'f7\'e5\'ed\'e8\'ff \'ea\'ee\'f2\'ee\'f0\'ee\'e5 \'e4\'ee\'eb\'e6\'ed\'ee \'e1\'fb\'f2\'fc \f0\lang1033 null\f1\lang1049 , \'e8 \'e2 \'f1\'eb\'f3\'f7\'e0\'e5 \'e5\'f1\'eb\'e8 \'e7\'ed\'e0\'f7\'e5\'ed\'e8\'e5 \'ed\'e5 \f0\lang1033 null \f1\lang1049\'ef\'f0\'ee\'e2\'e5\'f0\'ea\'e0 \'e1\'f3\'e4\'e5\'f2 \'f1\'f7\'e8\'f2\'e0\'f2\'fc\'f1\'ff \'ef\'f0\'ee\'e2\'e0\'eb\'fc\'ed\'ee\'e9\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \f0\lang1033 AssertNullAsync(object obj)\f1\lang1049\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0\f0\lang1033 string text = null;\par
+await tester.AssertNullAsync(text);\par
+}",
+
 @"",
 @"",
 @"",
@@ -3098,16 +3238,17 @@ await frame.WaitVisibleElementAsync(Tester.BY_XPATH, ""//div[@id='result']"", 2)
                     if (value == "WaitNotVisibleElementAsync" && tag == "FRAMEElement") richTextBox1.Rtf = handbook[177];
                     if (value == "WaitVisibleElementAsync" && tag == "FRAMEElement") richTextBox1.Rtf = handbook[178];
 
+                    if (value == "GetTestResult" && tag == "Tester") richTextBox1.Rtf = handbook[179];
+                    if (value == "TimerStart" && tag == "Tester") richTextBox1.Rtf = handbook[180];
+                    if (value == "TimerStop" && tag == "Tester") richTextBox1.Rtf = handbook[181];
+                    if (value == "AssertNoErrorsAsync" && tag == "Tester") richTextBox1.Rtf = handbook[182];
+                    if (value == "AssertNetworkEventsAsync" && tag == "Tester") richTextBox1.Rtf = handbook[183];
+                    if (value == "SendMsgToMailAsync" && tag == "Tester") richTextBox1.Rtf = handbook[184];
+                    if (value == "SendMsgToTelegramAsync" && tag == "Tester") richTextBox1.Rtf = handbook[185];
+                    if (value == "AssertNotNullAsync" && tag == "Tester") richTextBox1.Rtf = handbook[186];
+                    if (value == "AssertNullAsync" && tag == "Tester") richTextBox1.Rtf = handbook[187];
+
                     /*
-                    if (value == "" && tag == "") richTextBox1.Rtf = handbook[179];
-                    if (value == "" && tag == "") richTextBox1.Rtf = handbook[180];
-                    if (value == "" && tag == "") richTextBox1.Rtf = handbook[181];
-                    if (value == "" && tag == "") richTextBox1.Rtf = handbook[182];
-                    if (value == "" && tag == "") richTextBox1.Rtf = handbook[183];
-                    if (value == "" && tag == "") richTextBox1.Rtf = handbook[184];
-                    if (value == "" && tag == "") richTextBox1.Rtf = handbook[185];
-                    if (value == "" && tag == "") richTextBox1.Rtf = handbook[186];
-                    if (value == "" && tag == "") richTextBox1.Rtf = handbook[187];
                     if (value == "" && tag == "") richTextBox1.Rtf = handbook[188];
                     if (value == "" && tag == "") richTextBox1.Rtf = handbook[189];
                     if (value == "" && tag == "") richTextBox1.Rtf = handbook[190];
@@ -3151,7 +3292,10 @@ await frame.WaitVisibleElementAsync(Tester.BY_XPATH, ""//div[@id='result']"", 2)
 
                     if (treeView1.SelectedNode.Text == "Методы для выполнения JavaScript") return;
                     if (treeView1.SelectedNode.Text == "Методы для выполнения Rest запросов") return;
+                    if (treeView1.SelectedNode.Text == "Методы для замера затраченного времени") return;
+                    if (treeView1.SelectedNode.Text == "Методы для отправки email и message") return;
                     if (treeView1.SelectedNode.Text == "Методы для проверки результата") return;
+
 
                     if (treeView1.SelectedNode.Text == "Класс: FRAMEElement") return;
                     if (treeView1.SelectedNode.Text == "Класс: HTMLElement") return;
@@ -3180,6 +3324,9 @@ await frame.WaitVisibleElementAsync(Tester.BY_XPATH, ""//div[@id='result']"", 2)
             setValueInCode();
         }
 
-        
+        private void вставитьВКодToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            setValueInCode();
+        }
     }
 }
