@@ -74,6 +74,7 @@ namespace Hat
 
         public static async Task devTestAsync()
         {
+            /*
             HatFrameworkDev.Tester tester = new HatFrameworkDev.Tester(Config.browserForm);
             await tester.TestBeginAsync();
             await tester.GoToUrlAsync(@"https://somovstudio.github.io/test.html", 25);
@@ -81,7 +82,7 @@ namespace Hat
             await tester.AssertNullAsync(text);
             await tester.AssertNotNullAsync(text);
             await tester.TestEndAsync();
-            
+            */
 
 
 
