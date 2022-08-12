@@ -4,11 +4,12 @@
 
 - Исправлен баг при создании скриншота
 - Обновлен метод отправки писем на почту BrowserEnableSendMailAsync
+- Добавлены методы для отправки email и сообщений в Telegram
 - Добавлен метод возвращающий статус проверки GetTestResult
 - Добавлены методы для замера затраченного времени TimerStart и TimerStop
-- Добавлен метод для проверки ошибок на странице AssertNoErrorsAsync
-- Добавлен метод для проверки network событий (Google Analytics и Яндекс Метрика) AssertNetworkEventsAsync 
-- Добавлены методы модульного тестирования Assert
+- Добавлен метод для проверки ошибок на странице
+- Добавлен метод для проверки network событий Google Analytics, Яндекс Метрика и пр.
+- Исправлены и добавлены методы модульного тестирования Assert
 
 
 -----------------------------
@@ -29,7 +30,6 @@
 - Добавлен отдельный класс FRAMEElement для работы с фреймом
 - Internet Explorer 11
 
-https://github.com/SomovStudio/Hat/archive/refs/tags/v1.1.1.zip
 
 -----------------------------
 
@@ -52,3 +52,7 @@ https://github.com/SomovStudio/Hat/archive/refs/tags/v1.1.1.zip
 - Изменены методы BrowserGetUserAgentAsync и BrowserSetUserAgentAsync
 - Добавлены методы GetAttributeFromElements и SetAttributeInElements
 - Добавлены методы GetHtmlFromElement и SetHtmlInElement
+
+-----------------------------
+
+Релиз браузера Hat 1.0.0
