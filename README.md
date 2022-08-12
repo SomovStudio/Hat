@@ -13,7 +13,7 @@
 Запуск автотестов возможен из командной строки операционной системы Windows это пригодится при использовании автотестов в популярных средствах непрерывной интеграции таких как: Jenkins, TeamCity, GitLab CI/CD.
 <br>
 <br>
-Скачать приложение: https://github.com/SomovStudio/Hat/archive/refs/tags/v1.1.1.zip
+Скачать приложение: https://github.com/SomovStudio/Hat/archive/refs/tags/v1.1.2.zip
 <hr>
 
 <p align="center">
