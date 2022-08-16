@@ -14,6 +14,7 @@
 <br>
 <br>
 Скачать приложение: https://github.com/SomovStudio/Hat/archive/refs/tags/v1.1.2.zip
+(последнее обновление 12.08.2022 версия 1.1.2)
 <hr>
 
 <p align="center">
