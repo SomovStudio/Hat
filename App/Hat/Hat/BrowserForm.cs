@@ -307,6 +307,8 @@ namespace Hat
             item.ImageIndex = image;
             listViewTest.Items.Add(item);
             int index = listViewTest.Items.Count-1;
+            listViewTest.Items[index].Selected = true;
+            listViewTest.Items[index].EnsureVisible();
             return index;
         }
 
