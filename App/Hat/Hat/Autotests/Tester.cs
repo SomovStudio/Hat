@@ -1217,6 +1217,49 @@ namespace HatFrameworkDev
             }
         }
 
+        public async Task WaitElementNotDomAsync(string by, string locator, int sec)
+        {
+            int step = SendMessage($"WaitElementNotDomAsync(\"{by}\", \"{locator}\", {sec})", PROCESS, $"Ожидание присутствия элемента в DOM в течении {sec} секунд", IMAGE_STATUS_PROCESS);
+            if (DefineTestStop(step) == true) return;
+
+            try
+            {
+                bool found = true;
+
+                string script = "";
+                script += "(function(){ ";
+                if (by == BY_CSS) script += $"var elem = document.querySelector(\"{locator}\");";
+                else if (by == BY_XPATH) script += $"var elem = document.evaluate(\"{locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
+                script += "return elem;";
+                script += "}());";
+
+                string result = null;
+                for (int i = 0; i < sec; i++)
+                {
+                    result = await executeJS(script);
+                    if (result == "null" || result == null)
+                    {
+                        found = false;
+                        break;
+                    }
+                    await Task.Delay(1000);
+                }
+
+                if (found == false) EditMessage(step, null, PASSED, $"Ожидание элемента - завершено (элемент отсутствует в DOM)", IMAGE_STATUS_PASSED);
+                else
+                {
+                    EditMessage(step, null, FAILED, $"Ожидание элемента - завершено (элемент присутствует в DOM)", IMAGE_STATUS_FAILED);
+                    TestStopAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
+                TestStopAsync();
+                ConsoleMsgError(ex.ToString());
+            }
+        }
+
         public async Task<bool> FindElementByIdAsync(string id, int sec)
         {
             int step = SendMessage($"FindElementByIdAsync('{id}', {sec})", PROCESS, "Поиск элемента", IMAGE_STATUS_PROCESS);
