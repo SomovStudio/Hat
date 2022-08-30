@@ -3,7 +3,7 @@
 Список внесённых изменений:
 
 - Улучшение таблицы Тест
-- Добавлен метод WaitElementInDomAsync
+- Добавлены методы WaitElementInDomAsync и WaitElementNotDomAsync
 
 
 -----------------------------
