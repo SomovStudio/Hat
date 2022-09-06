@@ -67,6 +67,11 @@
             this.internetExplorer11ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator21 = new System.Windows.Forms.ToolStripSeparator();
             this.средстваРазработкиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.окноToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.testingPanelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator22 = new System.Windows.Forms.ToolStripSeparator();
+            this.projectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.systemToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.справкаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.documentationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.оПрограммеCrackerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -296,6 +301,7 @@
             this.файлToolStripMenuItem,
             this.проектToolStripMenuItem,
             this.браузерToolStripMenuItem,
+            this.окноToolStripMenuItem,
             this.справкаToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -591,6 +597,49 @@
             this.средстваРазработкиToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
             this.средстваРазработкиToolStripMenuItem.Text = "Средства разработки";
             this.средстваРазработкиToolStripMenuItem.Click += new System.EventHandler(this.средстваРазработкиToolStripMenuItem_Click);
+            // 
+            // окноToolStripMenuItem
+            // 
+            this.окноToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.testingPanelToolStripMenuItem,
+            this.toolStripSeparator22,
+            this.projectToolStripMenuItem,
+            this.systemToolStripMenuItem});
+            this.окноToolStripMenuItem.Name = "окноToolStripMenuItem";
+            this.окноToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
+            this.окноToolStripMenuItem.Text = "Окно";
+            // 
+            // testingPanelToolStripMenuItem
+            // 
+            this.testingPanelToolStripMenuItem.Checked = true;
+            this.testingPanelToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.testingPanelToolStripMenuItem.Name = "testingPanelToolStripMenuItem";
+            this.testingPanelToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
+            this.testingPanelToolStripMenuItem.Text = "Панель тестировщика";
+            this.testingPanelToolStripMenuItem.Click += new System.EventHandler(this.testingPanelToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator22
+            // 
+            this.toolStripSeparator22.Name = "toolStripSeparator22";
+            this.toolStripSeparator22.Size = new System.Drawing.Size(194, 6);
+            // 
+            // projectToolStripMenuItem
+            // 
+            this.projectToolStripMenuItem.Checked = true;
+            this.projectToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.projectToolStripMenuItem.Name = "projectToolStripMenuItem";
+            this.projectToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
+            this.projectToolStripMenuItem.Text = "Окно Проект";
+            this.projectToolStripMenuItem.Click += new System.EventHandler(this.projectToolStripMenuItem_Click);
+            // 
+            // systemToolStripMenuItem
+            // 
+            this.systemToolStripMenuItem.Checked = true;
+            this.systemToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.systemToolStripMenuItem.Name = "systemToolStripMenuItem";
+            this.systemToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
+            this.systemToolStripMenuItem.Text = "Окно Система";
+            this.systemToolStripMenuItem.Click += new System.EventHandler(this.systemToolStripMenuItem_Click);
             // 
             // справкаToolStripMenuItem
             // 
@@ -2589,6 +2638,11 @@
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.ToolStripMenuItem internetExplorer11ToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator21;
+        private System.Windows.Forms.ToolStripMenuItem окноToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem testingPanelToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator22;
+        private System.Windows.Forms.ToolStripMenuItem projectToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem systemToolStripMenuItem;
     }
 }
 

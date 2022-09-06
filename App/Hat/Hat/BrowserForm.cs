@@ -58,6 +58,8 @@ namespace Hat
                     treeViewProject.Nodes.Clear();
                     treeViewProject.Nodes.Add(Config.projectPath, getFolderName(Config.projectPath), 0, 0);
                     openProjectFolder(Config.projectPath, treeViewProject.Nodes);
+                    // Отключение интерфейса
+                    hiddenInterface();
                     // Чтение файла конфигурации
                     Config.readConfigJson(Config.projectPath + "/project.hat");
                     showLibs();
@@ -307,6 +309,8 @@ namespace Hat
             item.ImageIndex = image;
             listViewTest.Items.Add(item);
             int index = listViewTest.Items.Count-1;
+            listViewTest.Items[index].Selected = true;
+            listViewTest.Items[index].EnsureVisible();
             return index;
         }
 
@@ -2450,6 +2454,65 @@ namespace Hat
             catch (Exception ex)
             {
                 consoleMsgError(ex.ToString());
+            }
+        }
+
+        private void hiddenInterface()
+        {
+            try
+            {
+                menuStrip1.Visible = false;
+                toolStrip1.Visible = false;
+                splitContainer1.Panel2Collapsed = true;
+                consoleMsg("Интерфейс браузера отключен");
+            }
+            catch (Exception ex)
+            {
+                consoleMsgError(ex.ToString());
+            }
+        }
+
+        private void testingPanelToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (testingPanelToolStripMenuItem.Checked == true)
+            {
+                splitContainer1.Panel2Collapsed = true;
+                testingPanelToolStripMenuItem.Checked = false;
+            }
+            else
+            {
+                splitContainer1.Panel2Collapsed = false;
+                testingPanelToolStripMenuItem.Checked = true;
+            }
+        }
+
+        private void projectToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (projectToolStripMenuItem.Checked == true)
+            {
+                splitContainer2.Panel1Collapsed = true;
+                projectToolStripMenuItem.Checked = false;
+                if (systemToolStripMenuItem.Checked == false) systemToolStripMenuItem.Checked = true;
+            }
+            else
+            {
+                splitContainer2.Panel1Collapsed = false;
+                projectToolStripMenuItem.Checked = true;
+            }
+        }
+
+        private void systemToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (systemToolStripMenuItem.Checked == true)
+            {
+                splitContainer2.Panel2Collapsed = true;
+                systemToolStripMenuItem.Checked = false;
+                if (projectToolStripMenuItem.Checked == false) projectToolStripMenuItem.Checked = true;
+            }
+            else
+            {
+                splitContainer2.Panel2Collapsed = false;
+                systemToolStripMenuItem.Checked = true;
             }
         }
     }
