@@ -23,10 +23,11 @@ namespace Hat
             try {
                 // удаление папки с кэшом
                 if (Directory.Exists(Config.cacheFolder)) Directory.Delete(Config.cacheFolder, true);
+                if (!Directory.Exists(Config.cacheFolder)) Config.statucCacheClear = "true";
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                Config.statucCacheClear = ex.Message;
             }
             
 

@@ -31,11 +31,13 @@ namespace Hat
         public static string openHtmlFile = null;             // имя открываемого html файла при запуске браузера
         public static bool commandLineMode = false;         // флаг показывающий запуск приложения из командной строки
         public static string projectPath = "(не открыт)";   // полный путь к папке проекта
-        public static string cacheFolder = "Hat.exe.WebView2"; // кэш папка
         public static string selectName = "";               // имя выбранного файла или папки
         public static string selectValue = "";              // полный путь к выбранному файлу или папке
         public static bool debugJavaScript = false;         // отладка javascript при выполнении автотеста
-        
+
+        /* кэш браузера */
+        public static string cacheFolder = "Hat.exe.WebView2";  // кэш папка
+        public static string statucCacheClear = "false";        // статус очистки кэша
 
         /* переменные для файла project.hat */
         public static string version = "1.1.4";                 // версия проекта
