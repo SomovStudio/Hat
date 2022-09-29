@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
@@ -19,6 +20,16 @@ namespace Hat
         [STAThread]
         static void Main(String[] args)
         {
+            try {
+                // удаление папки с кэшом
+                if (Directory.Exists(Config.cacheFolder)) Directory.Delete(Config.cacheFolder, true);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            
+
             if (args.Length == 2)
             {
                 Config.commandLineMode = true;
