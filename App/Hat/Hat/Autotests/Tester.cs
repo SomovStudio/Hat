@@ -694,6 +694,30 @@ namespace HatFrameworkDev
             }
         }
 
+        public async Task BrowserPageReloadAsync()
+        {
+            int step = SendMessage($"BrowserPageReloadAsync()", PROCESS, "Перезагрузка страницы", IMAGE_STATUS_PROCESS);
+            if (DefineTestStop(step) == true) return;
+
+            try
+            {
+                string locator = "/html";
+                string script = "(function(){";
+                script += $"var element = document.evaluate(\"{locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
+                script += "element.scrollIntoView(); return element;";
+                script += "}());";
+                string result = await executeJS(script);
+                BrowserView.Reload();
+                EditMessage(step, null, PASSED, "Перезагрузка страницы выполнена", IMAGE_STATUS_MESSAGE);
+            }
+            catch (Exception ex)
+            {
+                EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
+                TestStopAsync();
+                ConsoleMsgError(ex.ToString());
+            }
+        }
+
         public async Task<string> ExecuteJavaScriptAsync(string script)
         {
             string result = null;

@@ -2634,7 +2634,17 @@ await tester.WaitElementNotDomAsync(Tester.BY_CSS, ""#element"", 5);\par
 \cf0\f0\lang1033 await tester.GoToUrlBaseAuthAsync(""https://dev.site.com"", ""login"", ""pass"", 25);\par
 }",
 
-@"",
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.22000}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 BrowserPageReloadAsync\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'fb\'ef\'ee\'eb\'ed\'ff\'e5\'f2 \'ef\'e5\'f0\'e5\'e7\'e0\'e3\'f0\'f3\'e7\'ea\'f3 \'ee\'f2\'ea\'f0\'fb\'f2\'ee\'e9 \'f1\'f2\'f0\'e0\'ed\'e8\'f6\'fb \'e2 \'e1\'f0\'e0\'f3\'e7\'e5\'f0\'e5\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \f0\lang1033 BrowserPageReloadAsync()\f1\lang1049\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0\f0\lang1033 await tester.BrowserPageReloadAsync();\par
+}",
+
 @"",
 @"",
 @"",
@@ -3289,9 +3299,10 @@ await tester.WaitElementNotDomAsync(Tester.BY_CSS, ""#element"", 5);\par
                     if (value == "WaitElementInDomAsync" && tag == "Tester") richTextBox1.Rtf = handbook[188];
                     if (value == "WaitElementNotDomAsync" && tag == "Tester") richTextBox1.Rtf = handbook[189];
                     if (value == "GoToUrlBaseAuthAsync" && tag == "Tester") richTextBox1.Rtf = handbook[190];
+                    if (value == "BrowserPageReloadAsync" && tag == "Tester") richTextBox1.Rtf = handbook[191];
 
                     /*
-                    if (value == "" && tag == "") richTextBox1.Rtf = handbook[191];
+                    
                     if (value == "" && tag == "") richTextBox1.Rtf = handbook[192];
                     if (value == "" && tag == "") richTextBox1.Rtf = handbook[193];
                     if (value == "" && tag == "") richTextBox1.Rtf = handbook[194];

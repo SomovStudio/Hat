@@ -78,7 +78,6 @@ namespace Hat
             await tester.TestBeginAsync();
             await tester.GoToUrlAsync(@"https://somovstudio.github.io/test.html", 25);
             
-
             await tester.TestEndAsync();
 
 
