@@ -662,8 +662,8 @@ namespace HatFrameworkDev
             {
                 BrowserView.CoreWebView2.BasicAuthenticationRequested += delegate (object sender, CoreWebView2BasicAuthenticationRequestedEventArgs args)
                 {
-                    args.Response.UserName = "zion";
-                    args.Response.Password = "newautotestreport";
+                    args.Response.UserName = user;
+                    args.Response.Password = pass;
                     EditMessage(step, null, COMPLETED, $"Баговая авторизация - выполнена", IMAGE_STATUS_MESSAGE);
                 };
             }
@@ -694,8 +694,9 @@ namespace HatFrameworkDev
             }
         }
 
-        public async Task BrowserPageReloadAsync()
+        public async Task BrowserPageReloadAsync(int sec)
         {
+            statusPageLoad = false;
             int step = SendMessage($"BrowserPageReloadAsync()", PROCESS, "Перезагрузка страницы", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return;
 
@@ -708,7 +709,20 @@ namespace HatFrameworkDev
                 script += "}());";
                 string result = await executeJS(script);
                 BrowserView.Reload();
-                EditMessage(step, null, PASSED, "Перезагрузка страницы выполнена", IMAGE_STATUS_MESSAGE);
+
+                for (int i = 0; i < sec; i++)
+                {
+                    await Task.Delay(1000);
+                    if (statusPageLoad == true) break;
+                    if (DefineTestStop(step) == true) return;
+                }
+
+                if (statusPageLoad == true) EditMessage(step, null, PASSED, "Перезагрузка страницы выполнена", IMAGE_STATUS_PASSED);
+                else
+                {
+                    EditMessage(step, null, FAILED, "Страница не загружена", IMAGE_STATUS_FAILED);
+                    TestStopAsync();
+                }
             }
             catch (Exception ex)
             {
