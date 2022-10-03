@@ -27,6 +27,22 @@ namespace Hat
             consoleMsg($"Браузер Hat версия {Config.currentBrowserVersion} ({Config.dateBrowserUpdate})");
             systemConsoleMsg("", default, default, default, true);
             systemConsoleMsg($"Браузер Hat версия {Config.currentBrowserVersion} ({Config.dateBrowserUpdate})", default, ConsoleColor.DarkGray, ConsoleColor.White, true);
+
+            if (Config.statucCacheClear == "true")
+            {
+                systemConsoleMsg("Кэш браузера очишен", default, ConsoleColor.DarkGray, ConsoleColor.White, true);
+                consoleMsg("Кэш браузера очишен");
+            }
+            else if (Config.statucCacheClear == "false")
+            {
+                systemConsoleMsg("Кэш браузера неудалось очистить, удалите папку " + Config.cacheFolder + " вручную", default, ConsoleColor.DarkGray, ConsoleColor.White, true);
+                consoleMsg("Кэш браузера неудалось очистить, удалите папку " + Config.cacheFolder + " вручную");
+            }
+            else
+            {
+                systemConsoleMsg("Кэш не очищен, произошла ошибка: " + Config.statucCacheClear, default, ConsoleColor.DarkGray, ConsoleColor.White, true);
+                consoleMsg("Кэш не очищен, произошла ошибка: " + Config.statucCacheClear);
+            }
         }
               
 
@@ -125,7 +141,7 @@ namespace Hat
                 webView2.EnsureCoreWebView2Async();
                 webView2.CoreWebView2.CallDevToolsProtocolMethodAsync("Network.clearBrowserCache", "{}");
                 webView2.CoreWebView2.CallDevToolsProtocolMethodAsync("Network.setCacheDisabled", @"{""cacheDisabled"":true}");
-                consoleMsg("Выполнена очистка кэша");
+                consoleMsg("Выполнена очистка кэша WebView");
                 webView2.EnsureCoreWebView2Async();
                 webView2.CoreWebView2.GetDevToolsProtocolEventReceiver("Log.entryAdded").DevToolsProtocolEventReceived += showMessageConsoleErrors;
                 webView2.CoreWebView2.CallDevToolsProtocolMethodAsync("Log.enable", "{}");

@@ -76,7 +76,8 @@
             System.Windows.Forms.TreeNode treeNode28 = new System.Windows.Forms.TreeNode("BrowserGetNetworkAsync", 2, 5);
             System.Windows.Forms.TreeNode treeNode29 = new System.Windows.Forms.TreeNode("BrowserGoBackAsync", 2, 5);
             System.Windows.Forms.TreeNode treeNode30 = new System.Windows.Forms.TreeNode("BrowserGoForwardAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode31 = new System.Windows.Forms.TreeNode("Методы для работы с браузером", new System.Windows.Forms.TreeNode[] {
+            System.Windows.Forms.TreeNode treeNode31 = new System.Windows.Forms.TreeNode("BrowserPageReloadAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode32 = new System.Windows.Forms.TreeNode("Методы для работы с браузером", new System.Windows.Forms.TreeNode[] {
             treeNode20,
             treeNode21,
             treeNode22,
@@ -87,49 +88,49 @@
             treeNode27,
             treeNode28,
             treeNode29,
-            treeNode30});
-            System.Windows.Forms.TreeNode treeNode32 = new System.Windows.Forms.TreeNode("ConsoleMsg", 2, 5);
-            System.Windows.Forms.TreeNode treeNode33 = new System.Windows.Forms.TreeNode("ConsoleMsgError", 2, 5);
-            System.Windows.Forms.TreeNode treeNode34 = new System.Windows.Forms.TreeNode("ClearMessage", 2, 5);
-            System.Windows.Forms.TreeNode treeNode35 = new System.Windows.Forms.TreeNode("SendMessage", 2, 5);
-            System.Windows.Forms.TreeNode treeNode36 = new System.Windows.Forms.TreeNode("EditMessage", 2, 5);
-            System.Windows.Forms.TreeNode treeNode37 = new System.Windows.Forms.TreeNode("Методы для вывода сообщений", new System.Windows.Forms.TreeNode[] {
-            treeNode32,
+            treeNode30,
+            treeNode31});
+            System.Windows.Forms.TreeNode treeNode33 = new System.Windows.Forms.TreeNode("ConsoleMsg", 2, 5);
+            System.Windows.Forms.TreeNode treeNode34 = new System.Windows.Forms.TreeNode("ConsoleMsgError", 2, 5);
+            System.Windows.Forms.TreeNode treeNode35 = new System.Windows.Forms.TreeNode("ClearMessage", 2, 5);
+            System.Windows.Forms.TreeNode treeNode36 = new System.Windows.Forms.TreeNode("SendMessage", 2, 5);
+            System.Windows.Forms.TreeNode treeNode37 = new System.Windows.Forms.TreeNode("EditMessage", 2, 5);
+            System.Windows.Forms.TreeNode treeNode38 = new System.Windows.Forms.TreeNode("Методы для вывода сообщений", new System.Windows.Forms.TreeNode[] {
             treeNode33,
             treeNode34,
             treeNode35,
-            treeNode36});
-            System.Windows.Forms.TreeNode treeNode38 = new System.Windows.Forms.TreeNode("TestBeginAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode39 = new System.Windows.Forms.TreeNode("TestEndAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode40 = new System.Windows.Forms.TreeNode("TestStopAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode41 = new System.Windows.Forms.TreeNode("GetTestResult", 2, 5);
-            System.Windows.Forms.TreeNode treeNode42 = new System.Windows.Forms.TreeNode("DefineTestStop", 2, 5);
-            System.Windows.Forms.TreeNode treeNode43 = new System.Windows.Forms.TreeNode("Методы для подготовки и завершению тестирования", new System.Windows.Forms.TreeNode[] {
-            treeNode38,
+            treeNode36,
+            treeNode37});
+            System.Windows.Forms.TreeNode treeNode39 = new System.Windows.Forms.TreeNode("TestBeginAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode40 = new System.Windows.Forms.TreeNode("TestEndAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode41 = new System.Windows.Forms.TreeNode("TestStopAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode42 = new System.Windows.Forms.TreeNode("GetTestResult", 2, 5);
+            System.Windows.Forms.TreeNode treeNode43 = new System.Windows.Forms.TreeNode("DefineTestStop", 2, 5);
+            System.Windows.Forms.TreeNode treeNode44 = new System.Windows.Forms.TreeNode("Методы для подготовки и завершению тестирования", new System.Windows.Forms.TreeNode[] {
             treeNode39,
             treeNode40,
             treeNode41,
-            treeNode42});
-            System.Windows.Forms.TreeNode treeNode44 = new System.Windows.Forms.TreeNode("GetAttributeFromElementAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode45 = new System.Windows.Forms.TreeNode("GetAttributeFromElementByClassAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode46 = new System.Windows.Forms.TreeNode("GetAttributeFromElementByIdAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode47 = new System.Windows.Forms.TreeNode("GetAttributeFromElementByNameAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode48 = new System.Windows.Forms.TreeNode("GetAttributeFromElementByTagAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode49 = new System.Windows.Forms.TreeNode("GetAttributeFromElementsAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode50 = new System.Windows.Forms.TreeNode("GetAttributeFromElementsByClassAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode51 = new System.Windows.Forms.TreeNode("GetAttributeFromElementsByNameAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode52 = new System.Windows.Forms.TreeNode("GetAttributeFromElementsByTagAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode53 = new System.Windows.Forms.TreeNode("SetAttributeInElementAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode54 = new System.Windows.Forms.TreeNode("SetAttributeInElementByClassAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode55 = new System.Windows.Forms.TreeNode("SetAttributeInElementByIdAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode56 = new System.Windows.Forms.TreeNode("SetAttributeInElementByNameAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode57 = new System.Windows.Forms.TreeNode("SetAttributeInElementByTagAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode58 = new System.Windows.Forms.TreeNode("SetAttributeInElementsAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode59 = new System.Windows.Forms.TreeNode("SetAttributeInElementsByClassAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode60 = new System.Windows.Forms.TreeNode("SetAttributeInElementsByNameAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode61 = new System.Windows.Forms.TreeNode("SetAttributeInElementsByTagAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode62 = new System.Windows.Forms.TreeNode("Атрибуты", new System.Windows.Forms.TreeNode[] {
-            treeNode44,
+            treeNode42,
+            treeNode43});
+            System.Windows.Forms.TreeNode treeNode45 = new System.Windows.Forms.TreeNode("GetAttributeFromElementAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode46 = new System.Windows.Forms.TreeNode("GetAttributeFromElementByClassAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode47 = new System.Windows.Forms.TreeNode("GetAttributeFromElementByIdAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode48 = new System.Windows.Forms.TreeNode("GetAttributeFromElementByNameAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode49 = new System.Windows.Forms.TreeNode("GetAttributeFromElementByTagAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode50 = new System.Windows.Forms.TreeNode("GetAttributeFromElementsAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode51 = new System.Windows.Forms.TreeNode("GetAttributeFromElementsByClassAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode52 = new System.Windows.Forms.TreeNode("GetAttributeFromElementsByNameAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode53 = new System.Windows.Forms.TreeNode("GetAttributeFromElementsByTagAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode54 = new System.Windows.Forms.TreeNode("SetAttributeInElementAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode55 = new System.Windows.Forms.TreeNode("SetAttributeInElementByClassAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode56 = new System.Windows.Forms.TreeNode("SetAttributeInElementByIdAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode57 = new System.Windows.Forms.TreeNode("SetAttributeInElementByNameAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode58 = new System.Windows.Forms.TreeNode("SetAttributeInElementByTagAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode59 = new System.Windows.Forms.TreeNode("SetAttributeInElementsAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode60 = new System.Windows.Forms.TreeNode("SetAttributeInElementsByClassAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode61 = new System.Windows.Forms.TreeNode("SetAttributeInElementsByNameAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode62 = new System.Windows.Forms.TreeNode("SetAttributeInElementsByTagAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode63 = new System.Windows.Forms.TreeNode("Атрибуты", new System.Windows.Forms.TreeNode[] {
             treeNode45,
             treeNode46,
             treeNode47,
@@ -146,19 +147,19 @@
             treeNode58,
             treeNode59,
             treeNode60,
-            treeNode61});
-            System.Windows.Forms.TreeNode treeNode63 = new System.Windows.Forms.TreeNode("GetValueFromElementAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode64 = new System.Windows.Forms.TreeNode("GetValueFromElementByClassAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode65 = new System.Windows.Forms.TreeNode("GetValueFromElementByIdAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode66 = new System.Windows.Forms.TreeNode("GetValueFromElementByNameAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode67 = new System.Windows.Forms.TreeNode("GetValueFromElementByTagAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode68 = new System.Windows.Forms.TreeNode("SetValueInElementAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode69 = new System.Windows.Forms.TreeNode("SetValueInElementByClassAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode70 = new System.Windows.Forms.TreeNode("SetValueInElementByIdAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode71 = new System.Windows.Forms.TreeNode("SetValueInElementByNameAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode72 = new System.Windows.Forms.TreeNode("SetValueInElementByTagAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode73 = new System.Windows.Forms.TreeNode("Значение", new System.Windows.Forms.TreeNode[] {
-            treeNode63,
+            treeNode61,
+            treeNode62});
+            System.Windows.Forms.TreeNode treeNode64 = new System.Windows.Forms.TreeNode("GetValueFromElementAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode65 = new System.Windows.Forms.TreeNode("GetValueFromElementByClassAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode66 = new System.Windows.Forms.TreeNode("GetValueFromElementByIdAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode67 = new System.Windows.Forms.TreeNode("GetValueFromElementByNameAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode68 = new System.Windows.Forms.TreeNode("GetValueFromElementByTagAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode69 = new System.Windows.Forms.TreeNode("SetValueInElementAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode70 = new System.Windows.Forms.TreeNode("SetValueInElementByClassAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode71 = new System.Windows.Forms.TreeNode("SetValueInElementByIdAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode72 = new System.Windows.Forms.TreeNode("SetValueInElementByNameAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode73 = new System.Windows.Forms.TreeNode("SetValueInElementByTagAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode74 = new System.Windows.Forms.TreeNode("Значение", new System.Windows.Forms.TreeNode[] {
             treeNode64,
             treeNode65,
             treeNode66,
@@ -167,40 +168,40 @@
             treeNode69,
             treeNode70,
             treeNode71,
-            treeNode72});
-            System.Windows.Forms.TreeNode treeNode74 = new System.Windows.Forms.TreeNode("ClickElementAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode75 = new System.Windows.Forms.TreeNode("ClickElementByClassAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode76 = new System.Windows.Forms.TreeNode("ClickElementByIdAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode77 = new System.Windows.Forms.TreeNode("ClickElementByNameAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode78 = new System.Windows.Forms.TreeNode("ClickElementByTagAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode79 = new System.Windows.Forms.TreeNode("IsClickableElementAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode80 = new System.Windows.Forms.TreeNode("ScrollToElementAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode81 = new System.Windows.Forms.TreeNode("Нажатие", new System.Windows.Forms.TreeNode[] {
-            treeNode74,
+            treeNode72,
+            treeNode73});
+            System.Windows.Forms.TreeNode treeNode75 = new System.Windows.Forms.TreeNode("ClickElementAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode76 = new System.Windows.Forms.TreeNode("ClickElementByClassAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode77 = new System.Windows.Forms.TreeNode("ClickElementByIdAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode78 = new System.Windows.Forms.TreeNode("ClickElementByNameAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode79 = new System.Windows.Forms.TreeNode("ClickElementByTagAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode80 = new System.Windows.Forms.TreeNode("IsClickableElementAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode81 = new System.Windows.Forms.TreeNode("ScrollToElementAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode82 = new System.Windows.Forms.TreeNode("Нажатие", new System.Windows.Forms.TreeNode[] {
             treeNode75,
             treeNode76,
             treeNode77,
             treeNode78,
             treeNode79,
-            treeNode80});
-            System.Windows.Forms.TreeNode treeNode82 = new System.Windows.Forms.TreeNode("GetElementAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode83 = new System.Windows.Forms.TreeNode("GetFrameAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode84 = new System.Windows.Forms.TreeNode("GetCountElementsAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode85 = new System.Windows.Forms.TreeNode("GetCountElementsByClassAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode86 = new System.Windows.Forms.TreeNode("GetCountElementsByNameAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode87 = new System.Windows.Forms.TreeNode("GetCountElementsByTagAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode88 = new System.Windows.Forms.TreeNode("GetHtmlFromElementAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode89 = new System.Windows.Forms.TreeNode("GetHtmlFromElementByClassAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode90 = new System.Windows.Forms.TreeNode("GetHtmlFromElementByIdAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode91 = new System.Windows.Forms.TreeNode("GetHtmlFromElementByNameAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode92 = new System.Windows.Forms.TreeNode("GetHtmlFromElementByTagAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode93 = new System.Windows.Forms.TreeNode("SetHtmlInElementAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode94 = new System.Windows.Forms.TreeNode("SetHtmlInElementByClassAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode95 = new System.Windows.Forms.TreeNode("SetHtmlInElementByIdAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode96 = new System.Windows.Forms.TreeNode("SetHtmlInElementByNameAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode97 = new System.Windows.Forms.TreeNode("SetHtmlInElementByTagAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode98 = new System.Windows.Forms.TreeNode("Объекты", new System.Windows.Forms.TreeNode[] {
-            treeNode82,
+            treeNode80,
+            treeNode81});
+            System.Windows.Forms.TreeNode treeNode83 = new System.Windows.Forms.TreeNode("GetElementAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode84 = new System.Windows.Forms.TreeNode("GetFrameAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode85 = new System.Windows.Forms.TreeNode("GetCountElementsAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode86 = new System.Windows.Forms.TreeNode("GetCountElementsByClassAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode87 = new System.Windows.Forms.TreeNode("GetCountElementsByNameAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode88 = new System.Windows.Forms.TreeNode("GetCountElementsByTagAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode89 = new System.Windows.Forms.TreeNode("GetHtmlFromElementAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode90 = new System.Windows.Forms.TreeNode("GetHtmlFromElementByClassAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode91 = new System.Windows.Forms.TreeNode("GetHtmlFromElementByIdAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode92 = new System.Windows.Forms.TreeNode("GetHtmlFromElementByNameAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode93 = new System.Windows.Forms.TreeNode("GetHtmlFromElementByTagAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode94 = new System.Windows.Forms.TreeNode("SetHtmlInElementAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode95 = new System.Windows.Forms.TreeNode("SetHtmlInElementByClassAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode96 = new System.Windows.Forms.TreeNode("SetHtmlInElementByIdAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode97 = new System.Windows.Forms.TreeNode("SetHtmlInElementByNameAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode98 = new System.Windows.Forms.TreeNode("SetHtmlInElementByTagAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode99 = new System.Windows.Forms.TreeNode("Объекты", new System.Windows.Forms.TreeNode[] {
             treeNode83,
             treeNode84,
             treeNode85,
@@ -215,22 +216,22 @@
             treeNode94,
             treeNode95,
             treeNode96,
-            treeNode97});
-            System.Windows.Forms.TreeNode treeNode99 = new System.Windows.Forms.TreeNode("WaitAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode100 = new System.Windows.Forms.TreeNode("WaitElementInDomAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode101 = new System.Windows.Forms.TreeNode("WaitElementNotDomAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode102 = new System.Windows.Forms.TreeNode("WaitNotVisibleElementAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode103 = new System.Windows.Forms.TreeNode("WaitNotVisibleElementByClassAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode104 = new System.Windows.Forms.TreeNode("WaitNotVisibleElementByIdAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode105 = new System.Windows.Forms.TreeNode("WaitNotVisibleElementByNameAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode106 = new System.Windows.Forms.TreeNode("WaitNotVisibleElementByTagAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode107 = new System.Windows.Forms.TreeNode("WaitVisibleElementAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode108 = new System.Windows.Forms.TreeNode("WaitVisibleElementByClassAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode109 = new System.Windows.Forms.TreeNode("WaitVisibleElementByIdAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode110 = new System.Windows.Forms.TreeNode("WaitVisibleElementByNameAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode111 = new System.Windows.Forms.TreeNode("WaitVisibleElementByTagAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode112 = new System.Windows.Forms.TreeNode("Ожидание", new System.Windows.Forms.TreeNode[] {
-            treeNode99,
+            treeNode97,
+            treeNode98});
+            System.Windows.Forms.TreeNode treeNode100 = new System.Windows.Forms.TreeNode("WaitAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode101 = new System.Windows.Forms.TreeNode("WaitElementInDomAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode102 = new System.Windows.Forms.TreeNode("WaitElementNotDomAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode103 = new System.Windows.Forms.TreeNode("WaitNotVisibleElementAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode104 = new System.Windows.Forms.TreeNode("WaitNotVisibleElementByClassAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode105 = new System.Windows.Forms.TreeNode("WaitNotVisibleElementByIdAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode106 = new System.Windows.Forms.TreeNode("WaitNotVisibleElementByNameAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode107 = new System.Windows.Forms.TreeNode("WaitNotVisibleElementByTagAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode108 = new System.Windows.Forms.TreeNode("WaitVisibleElementAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode109 = new System.Windows.Forms.TreeNode("WaitVisibleElementByClassAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode110 = new System.Windows.Forms.TreeNode("WaitVisibleElementByIdAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode111 = new System.Windows.Forms.TreeNode("WaitVisibleElementByNameAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode112 = new System.Windows.Forms.TreeNode("WaitVisibleElementByTagAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode113 = new System.Windows.Forms.TreeNode("Ожидание", new System.Windows.Forms.TreeNode[] {
             treeNode100,
             treeNode101,
             treeNode102,
@@ -242,19 +243,19 @@
             treeNode108,
             treeNode109,
             treeNode110,
-            treeNode111});
-            System.Windows.Forms.TreeNode treeNode113 = new System.Windows.Forms.TreeNode("FindElementAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode114 = new System.Windows.Forms.TreeNode("FindElementByClassAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode115 = new System.Windows.Forms.TreeNode("FindElementByIdAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode116 = new System.Windows.Forms.TreeNode("FindElementByNameAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode117 = new System.Windows.Forms.TreeNode("FindElementByTagAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode118 = new System.Windows.Forms.TreeNode("FindVisibleElementAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode119 = new System.Windows.Forms.TreeNode("FindVisibleElementByClassAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode120 = new System.Windows.Forms.TreeNode("FindVisibleElementByIdAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode121 = new System.Windows.Forms.TreeNode("FindVisibleElementByNameAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode122 = new System.Windows.Forms.TreeNode("FindVisibleElementByTagAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode123 = new System.Windows.Forms.TreeNode("Поиск", new System.Windows.Forms.TreeNode[] {
-            treeNode113,
+            treeNode111,
+            treeNode112});
+            System.Windows.Forms.TreeNode treeNode114 = new System.Windows.Forms.TreeNode("FindElementAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode115 = new System.Windows.Forms.TreeNode("FindElementByClassAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode116 = new System.Windows.Forms.TreeNode("FindElementByIdAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode117 = new System.Windows.Forms.TreeNode("FindElementByNameAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode118 = new System.Windows.Forms.TreeNode("FindElementByTagAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode119 = new System.Windows.Forms.TreeNode("FindVisibleElementAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode120 = new System.Windows.Forms.TreeNode("FindVisibleElementByClassAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode121 = new System.Windows.Forms.TreeNode("FindVisibleElementByIdAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode122 = new System.Windows.Forms.TreeNode("FindVisibleElementByNameAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode123 = new System.Windows.Forms.TreeNode("FindVisibleElementByTagAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode124 = new System.Windows.Forms.TreeNode("Поиск", new System.Windows.Forms.TreeNode[] {
             treeNode114,
             treeNode115,
             treeNode116,
@@ -263,27 +264,28 @@
             treeNode119,
             treeNode120,
             treeNode121,
-            treeNode122});
-            System.Windows.Forms.TreeNode treeNode124 = new System.Windows.Forms.TreeNode("GetTitleAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode125 = new System.Windows.Forms.TreeNode("GetUrlAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode126 = new System.Windows.Forms.TreeNode("GoToUrlAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode127 = new System.Windows.Forms.TreeNode("Страница", new System.Windows.Forms.TreeNode[] {
-            treeNode124,
+            treeNode122,
+            treeNode123});
+            System.Windows.Forms.TreeNode treeNode125 = new System.Windows.Forms.TreeNode("GetTitleAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode126 = new System.Windows.Forms.TreeNode("GetUrlAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode127 = new System.Windows.Forms.TreeNode("GoToUrlAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode128 = new System.Windows.Forms.TreeNode("GoToUrlBaseAuthAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode129 = new System.Windows.Forms.TreeNode("Страница", new System.Windows.Forms.TreeNode[] {
             treeNode125,
-            treeNode126});
-            System.Windows.Forms.TreeNode treeNode128 = new System.Windows.Forms.TreeNode("GetTextFromElementAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode129 = new System.Windows.Forms.TreeNode("GetTextFromElementByClassAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode130 = new System.Windows.Forms.TreeNode("GetTextFromElementByIdAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode131 = new System.Windows.Forms.TreeNode("GetTextFromElementByNameAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode132 = new System.Windows.Forms.TreeNode("GetTextFromElementByTagAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode133 = new System.Windows.Forms.TreeNode("SetTextInElementAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode134 = new System.Windows.Forms.TreeNode("SetTextInElementByClassAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode135 = new System.Windows.Forms.TreeNode("SetTextInElementByIdAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode136 = new System.Windows.Forms.TreeNode("SetTextInElementByNameAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode137 = new System.Windows.Forms.TreeNode("SetTextInElementByTagAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode138 = new System.Windows.Forms.TreeNode("Текст", new System.Windows.Forms.TreeNode[] {
-            treeNode128,
-            treeNode129,
+            treeNode126,
+            treeNode127,
+            treeNode128});
+            System.Windows.Forms.TreeNode treeNode130 = new System.Windows.Forms.TreeNode("GetTextFromElementAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode131 = new System.Windows.Forms.TreeNode("GetTextFromElementByClassAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode132 = new System.Windows.Forms.TreeNode("GetTextFromElementByIdAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode133 = new System.Windows.Forms.TreeNode("GetTextFromElementByNameAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode134 = new System.Windows.Forms.TreeNode("GetTextFromElementByTagAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode135 = new System.Windows.Forms.TreeNode("SetTextInElementAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode136 = new System.Windows.Forms.TreeNode("SetTextInElementByClassAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode137 = new System.Windows.Forms.TreeNode("SetTextInElementByIdAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode138 = new System.Windows.Forms.TreeNode("SetTextInElementByNameAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode139 = new System.Windows.Forms.TreeNode("SetTextInElementByTagAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode140 = new System.Windows.Forms.TreeNode("Текст", new System.Windows.Forms.TreeNode[] {
             treeNode130,
             treeNode131,
             treeNode132,
@@ -291,101 +293,101 @@
             treeNode134,
             treeNode135,
             treeNode136,
-            treeNode137});
-            System.Windows.Forms.TreeNode treeNode139 = new System.Windows.Forms.TreeNode("Методы для выполнения действий", new System.Windows.Forms.TreeNode[] {
-            treeNode62,
-            treeNode73,
-            treeNode81,
-            treeNode98,
-            treeNode112,
-            treeNode123,
-            treeNode127,
-            treeNode138});
-            System.Windows.Forms.TreeNode treeNode140 = new System.Windows.Forms.TreeNode("ExecuteJavaScriptAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode141 = new System.Windows.Forms.TreeNode("Методы для выполнения JavaScript", new System.Windows.Forms.TreeNode[] {
+            treeNode137,
+            treeNode138,
+            treeNode139});
+            System.Windows.Forms.TreeNode treeNode141 = new System.Windows.Forms.TreeNode("Методы для выполнения действий", new System.Windows.Forms.TreeNode[] {
+            treeNode63,
+            treeNode74,
+            treeNode82,
+            treeNode99,
+            treeNode113,
+            treeNode124,
+            treeNode129,
             treeNode140});
-            System.Windows.Forms.TreeNode treeNode142 = new System.Windows.Forms.TreeNode("RestGetAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode143 = new System.Windows.Forms.TreeNode("RestGetBasicAuthAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode144 = new System.Windows.Forms.TreeNode("Методы для выполнения Rest запросов", new System.Windows.Forms.TreeNode[] {
-            treeNode142,
-            treeNode143});
-            System.Windows.Forms.TreeNode treeNode145 = new System.Windows.Forms.TreeNode("TimerStart", 2, 5);
-            System.Windows.Forms.TreeNode treeNode146 = new System.Windows.Forms.TreeNode("TimerStop", 2, 5);
-            System.Windows.Forms.TreeNode treeNode147 = new System.Windows.Forms.TreeNode("Методы для замера затраченного времени", new System.Windows.Forms.TreeNode[] {
-            treeNode145,
-            treeNode146});
-            System.Windows.Forms.TreeNode treeNode148 = new System.Windows.Forms.TreeNode("SendMsgToMailAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode149 = new System.Windows.Forms.TreeNode("SendMsgToTelegramAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode150 = new System.Windows.Forms.TreeNode("Методы для отправки email и message", new System.Windows.Forms.TreeNode[] {
-            treeNode148,
-            treeNode149});
-            System.Windows.Forms.TreeNode treeNode151 = new System.Windows.Forms.TreeNode("AssertEqualsAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode152 = new System.Windows.Forms.TreeNode("AssertNotEqualsAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode153 = new System.Windows.Forms.TreeNode("AssertTrueAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode154 = new System.Windows.Forms.TreeNode("AssertFalseAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode155 = new System.Windows.Forms.TreeNode("AssertNotNullAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode156 = new System.Windows.Forms.TreeNode("AssertNullAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode157 = new System.Windows.Forms.TreeNode("AssertNoErrorsAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode158 = new System.Windows.Forms.TreeNode("AssertNetworkEventsAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode159 = new System.Windows.Forms.TreeNode("Методы для проверки результата", new System.Windows.Forms.TreeNode[] {
-            treeNode151,
-            treeNode152,
+            System.Windows.Forms.TreeNode treeNode142 = new System.Windows.Forms.TreeNode("ExecuteJavaScriptAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode143 = new System.Windows.Forms.TreeNode("Методы для выполнения JavaScript", new System.Windows.Forms.TreeNode[] {
+            treeNode142});
+            System.Windows.Forms.TreeNode treeNode144 = new System.Windows.Forms.TreeNode("RestGetAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode145 = new System.Windows.Forms.TreeNode("RestGetBasicAuthAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode146 = new System.Windows.Forms.TreeNode("Методы для выполнения Rest запросов", new System.Windows.Forms.TreeNode[] {
+            treeNode144,
+            treeNode145});
+            System.Windows.Forms.TreeNode treeNode147 = new System.Windows.Forms.TreeNode("TimerStart", 2, 5);
+            System.Windows.Forms.TreeNode treeNode148 = new System.Windows.Forms.TreeNode("TimerStop", 2, 5);
+            System.Windows.Forms.TreeNode treeNode149 = new System.Windows.Forms.TreeNode("Методы для замера затраченного времени", new System.Windows.Forms.TreeNode[] {
+            treeNode147,
+            treeNode148});
+            System.Windows.Forms.TreeNode treeNode150 = new System.Windows.Forms.TreeNode("SendMsgToMailAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode151 = new System.Windows.Forms.TreeNode("SendMsgToTelegramAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode152 = new System.Windows.Forms.TreeNode("Методы для отправки email и message", new System.Windows.Forms.TreeNode[] {
+            treeNode150,
+            treeNode151});
+            System.Windows.Forms.TreeNode treeNode153 = new System.Windows.Forms.TreeNode("AssertEqualsAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode154 = new System.Windows.Forms.TreeNode("AssertNotEqualsAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode155 = new System.Windows.Forms.TreeNode("AssertTrueAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode156 = new System.Windows.Forms.TreeNode("AssertFalseAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode157 = new System.Windows.Forms.TreeNode("AssertNotNullAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode158 = new System.Windows.Forms.TreeNode("AssertNullAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode159 = new System.Windows.Forms.TreeNode("AssertNoErrorsAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode160 = new System.Windows.Forms.TreeNode("AssertNetworkEventsAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode161 = new System.Windows.Forms.TreeNode("Методы для проверки результата", new System.Windows.Forms.TreeNode[] {
             treeNode153,
             treeNode154,
             treeNode155,
             treeNode156,
             treeNode157,
-            treeNode158});
-            System.Windows.Forms.TreeNode treeNode160 = new System.Windows.Forms.TreeNode("Класс: Tester", new System.Windows.Forms.TreeNode[] {
+            treeNode158,
+            treeNode159,
+            treeNode160});
+            System.Windows.Forms.TreeNode treeNode162 = new System.Windows.Forms.TreeNode("Класс: Tester", new System.Windows.Forms.TreeNode[] {
             treeNode2,
             treeNode16,
             treeNode19,
-            treeNode31,
-            treeNode37,
-            treeNode43,
-            treeNode139,
+            treeNode32,
+            treeNode38,
+            treeNode44,
             treeNode141,
-            treeNode144,
-            treeNode147,
-            treeNode150,
-            treeNode159});
-            System.Windows.Forms.TreeNode treeNode161 = new System.Windows.Forms.TreeNode("HTMLElement", 2, 5);
-            System.Windows.Forms.TreeNode treeNode162 = new System.Windows.Forms.TreeNode("Конструктор", new System.Windows.Forms.TreeNode[] {
+            treeNode143,
+            treeNode146,
+            treeNode149,
+            treeNode152,
             treeNode161});
-            System.Windows.Forms.TreeNode treeNode163 = new System.Windows.Forms.TreeNode("BY_INDEX", 4, 7);
-            System.Windows.Forms.TreeNode treeNode164 = new System.Windows.Forms.TreeNode("BY_TEXT", 4, 7);
-            System.Windows.Forms.TreeNode treeNode165 = new System.Windows.Forms.TreeNode("BY_VALUE", 4, 7);
-            System.Windows.Forms.TreeNode treeNode166 = new System.Windows.Forms.TreeNode("Константы", new System.Windows.Forms.TreeNode[] {
-            treeNode163,
-            treeNode164,
-            treeNode165});
-            System.Windows.Forms.TreeNode treeNode167 = new System.Windows.Forms.TreeNode("Id", 3, 6);
-            System.Windows.Forms.TreeNode treeNode168 = new System.Windows.Forms.TreeNode("Name", 3, 6);
-            System.Windows.Forms.TreeNode treeNode169 = new System.Windows.Forms.TreeNode("Class", 3, 6);
-            System.Windows.Forms.TreeNode treeNode170 = new System.Windows.Forms.TreeNode("Type", 3, 6);
-            System.Windows.Forms.TreeNode treeNode171 = new System.Windows.Forms.TreeNode("Переменные", new System.Windows.Forms.TreeNode[] {
-            treeNode167,
-            treeNode168,
+            System.Windows.Forms.TreeNode treeNode163 = new System.Windows.Forms.TreeNode("HTMLElement", 2, 5);
+            System.Windows.Forms.TreeNode treeNode164 = new System.Windows.Forms.TreeNode("Конструктор", new System.Windows.Forms.TreeNode[] {
+            treeNode163});
+            System.Windows.Forms.TreeNode treeNode165 = new System.Windows.Forms.TreeNode("BY_INDEX", 4, 7);
+            System.Windows.Forms.TreeNode treeNode166 = new System.Windows.Forms.TreeNode("BY_TEXT", 4, 7);
+            System.Windows.Forms.TreeNode treeNode167 = new System.Windows.Forms.TreeNode("BY_VALUE", 4, 7);
+            System.Windows.Forms.TreeNode treeNode168 = new System.Windows.Forms.TreeNode("Константы", new System.Windows.Forms.TreeNode[] {
+            treeNode165,
+            treeNode166,
+            treeNode167});
+            System.Windows.Forms.TreeNode treeNode169 = new System.Windows.Forms.TreeNode("Id", 3, 6);
+            System.Windows.Forms.TreeNode treeNode170 = new System.Windows.Forms.TreeNode("Name", 3, 6);
+            System.Windows.Forms.TreeNode treeNode171 = new System.Windows.Forms.TreeNode("Class", 3, 6);
+            System.Windows.Forms.TreeNode treeNode172 = new System.Windows.Forms.TreeNode("Type", 3, 6);
+            System.Windows.Forms.TreeNode treeNode173 = new System.Windows.Forms.TreeNode("Переменные", new System.Windows.Forms.TreeNode[] {
             treeNode169,
-            treeNode170});
-            System.Windows.Forms.TreeNode treeNode172 = new System.Windows.Forms.TreeNode("ClickAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode173 = new System.Windows.Forms.TreeNode("GetAttributeAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode174 = new System.Windows.Forms.TreeNode("GetHtmlAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode175 = new System.Windows.Forms.TreeNode("GetOptionAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode176 = new System.Windows.Forms.TreeNode("GetTextAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode177 = new System.Windows.Forms.TreeNode("GetValueAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode178 = new System.Windows.Forms.TreeNode("IsClickableAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode179 = new System.Windows.Forms.TreeNode("ScrollToAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode180 = new System.Windows.Forms.TreeNode("SelectOptionAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode181 = new System.Windows.Forms.TreeNode("SetAttributeAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode182 = new System.Windows.Forms.TreeNode("SetHtmlAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode183 = new System.Windows.Forms.TreeNode("SetTextAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode184 = new System.Windows.Forms.TreeNode("SetValueAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode185 = new System.Windows.Forms.TreeNode("WaitNotVisibleAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode186 = new System.Windows.Forms.TreeNode("WaitVisibleAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode187 = new System.Windows.Forms.TreeNode("Методы", new System.Windows.Forms.TreeNode[] {
-            treeNode172,
-            treeNode173,
+            treeNode170,
+            treeNode171,
+            treeNode172});
+            System.Windows.Forms.TreeNode treeNode174 = new System.Windows.Forms.TreeNode("ClickAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode175 = new System.Windows.Forms.TreeNode("GetAttributeAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode176 = new System.Windows.Forms.TreeNode("GetHtmlAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode177 = new System.Windows.Forms.TreeNode("GetOptionAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode178 = new System.Windows.Forms.TreeNode("GetTextAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode179 = new System.Windows.Forms.TreeNode("GetValueAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode180 = new System.Windows.Forms.TreeNode("IsClickableAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode181 = new System.Windows.Forms.TreeNode("ScrollToAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode182 = new System.Windows.Forms.TreeNode("SelectOptionAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode183 = new System.Windows.Forms.TreeNode("SetAttributeAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode184 = new System.Windows.Forms.TreeNode("SetHtmlAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode185 = new System.Windows.Forms.TreeNode("SetTextAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode186 = new System.Windows.Forms.TreeNode("SetValueAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode187 = new System.Windows.Forms.TreeNode("WaitNotVisibleAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode188 = new System.Windows.Forms.TreeNode("WaitVisibleAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode189 = new System.Windows.Forms.TreeNode("Методы", new System.Windows.Forms.TreeNode[] {
             treeNode174,
             treeNode175,
             treeNode176,
@@ -398,52 +400,52 @@
             treeNode183,
             treeNode184,
             treeNode185,
-            treeNode186});
-            System.Windows.Forms.TreeNode treeNode188 = new System.Windows.Forms.TreeNode("Класс: HTMLElement", new System.Windows.Forms.TreeNode[] {
-            treeNode162,
-            treeNode166,
-            treeNode171,
-            treeNode187});
-            System.Windows.Forms.TreeNode treeNode189 = new System.Windows.Forms.TreeNode("FRAMEElement", 2, 5);
-            System.Windows.Forms.TreeNode treeNode190 = new System.Windows.Forms.TreeNode("Конструктор", new System.Windows.Forms.TreeNode[] {
+            treeNode186,
+            treeNode187,
+            treeNode188});
+            System.Windows.Forms.TreeNode treeNode190 = new System.Windows.Forms.TreeNode("Класс: HTMLElement", new System.Windows.Forms.TreeNode[] {
+            treeNode164,
+            treeNode168,
+            treeNode173,
             treeNode189});
-            System.Windows.Forms.TreeNode treeNode191 = new System.Windows.Forms.TreeNode("BY_INDEX", 4, 7);
-            System.Windows.Forms.TreeNode treeNode192 = new System.Windows.Forms.TreeNode("BY_TEXT", 4, 7);
-            System.Windows.Forms.TreeNode treeNode193 = new System.Windows.Forms.TreeNode("BY_VALUE", 4, 7);
-            System.Windows.Forms.TreeNode treeNode194 = new System.Windows.Forms.TreeNode("Константы", new System.Windows.Forms.TreeNode[] {
-            treeNode191,
-            treeNode192,
-            treeNode193});
-            System.Windows.Forms.TreeNode treeNode195 = new System.Windows.Forms.TreeNode("Name", 3, 6);
-            System.Windows.Forms.TreeNode treeNode196 = new System.Windows.Forms.TreeNode("Index", 3, 6);
-            System.Windows.Forms.TreeNode treeNode197 = new System.Windows.Forms.TreeNode("Переменные", new System.Windows.Forms.TreeNode[] {
-            treeNode195,
-            treeNode196});
-            System.Windows.Forms.TreeNode treeNode198 = new System.Windows.Forms.TreeNode("ClickElementAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode199 = new System.Windows.Forms.TreeNode("FindElementAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode200 = new System.Windows.Forms.TreeNode("FindVisibleElementAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode201 = new System.Windows.Forms.TreeNode("GetAttributeFromElementAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode202 = new System.Windows.Forms.TreeNode("GetAttributeFromElementsAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode203 = new System.Windows.Forms.TreeNode("GetCountElementsAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode204 = new System.Windows.Forms.TreeNode("GetHtmlFromElementAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode205 = new System.Windows.Forms.TreeNode("GetOptionAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode206 = new System.Windows.Forms.TreeNode("GetTextFromElementAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode207 = new System.Windows.Forms.TreeNode("GetTitleAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode208 = new System.Windows.Forms.TreeNode("GetUrlAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode209 = new System.Windows.Forms.TreeNode("GetValueFromElementAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode210 = new System.Windows.Forms.TreeNode("IsClickableElementAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode211 = new System.Windows.Forms.TreeNode("ScrollToElementAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode212 = new System.Windows.Forms.TreeNode("SelectOptionAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode213 = new System.Windows.Forms.TreeNode("SetAttributeInElementAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode214 = new System.Windows.Forms.TreeNode("SetAttributeInElementsAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode215 = new System.Windows.Forms.TreeNode("SetHtmlInElementAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode216 = new System.Windows.Forms.TreeNode("SetTextInElementAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode217 = new System.Windows.Forms.TreeNode("SetValueInElementAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode218 = new System.Windows.Forms.TreeNode("WaitNotVisibleElementAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode219 = new System.Windows.Forms.TreeNode("WaitVisibleElementAsync", 2, 5);
-            System.Windows.Forms.TreeNode treeNode220 = new System.Windows.Forms.TreeNode("Методы", new System.Windows.Forms.TreeNode[] {
-            treeNode198,
-            treeNode199,
+            System.Windows.Forms.TreeNode treeNode191 = new System.Windows.Forms.TreeNode("FRAMEElement", 2, 5);
+            System.Windows.Forms.TreeNode treeNode192 = new System.Windows.Forms.TreeNode("Конструктор", new System.Windows.Forms.TreeNode[] {
+            treeNode191});
+            System.Windows.Forms.TreeNode treeNode193 = new System.Windows.Forms.TreeNode("BY_INDEX", 4, 7);
+            System.Windows.Forms.TreeNode treeNode194 = new System.Windows.Forms.TreeNode("BY_TEXT", 4, 7);
+            System.Windows.Forms.TreeNode treeNode195 = new System.Windows.Forms.TreeNode("BY_VALUE", 4, 7);
+            System.Windows.Forms.TreeNode treeNode196 = new System.Windows.Forms.TreeNode("Константы", new System.Windows.Forms.TreeNode[] {
+            treeNode193,
+            treeNode194,
+            treeNode195});
+            System.Windows.Forms.TreeNode treeNode197 = new System.Windows.Forms.TreeNode("Name", 3, 6);
+            System.Windows.Forms.TreeNode treeNode198 = new System.Windows.Forms.TreeNode("Index", 3, 6);
+            System.Windows.Forms.TreeNode treeNode199 = new System.Windows.Forms.TreeNode("Переменные", new System.Windows.Forms.TreeNode[] {
+            treeNode197,
+            treeNode198});
+            System.Windows.Forms.TreeNode treeNode200 = new System.Windows.Forms.TreeNode("ClickElementAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode201 = new System.Windows.Forms.TreeNode("FindElementAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode202 = new System.Windows.Forms.TreeNode("FindVisibleElementAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode203 = new System.Windows.Forms.TreeNode("GetAttributeFromElementAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode204 = new System.Windows.Forms.TreeNode("GetAttributeFromElementsAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode205 = new System.Windows.Forms.TreeNode("GetCountElementsAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode206 = new System.Windows.Forms.TreeNode("GetHtmlFromElementAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode207 = new System.Windows.Forms.TreeNode("GetOptionAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode208 = new System.Windows.Forms.TreeNode("GetTextFromElementAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode209 = new System.Windows.Forms.TreeNode("GetTitleAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode210 = new System.Windows.Forms.TreeNode("GetUrlAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode211 = new System.Windows.Forms.TreeNode("GetValueFromElementAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode212 = new System.Windows.Forms.TreeNode("IsClickableElementAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode213 = new System.Windows.Forms.TreeNode("ScrollToElementAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode214 = new System.Windows.Forms.TreeNode("SelectOptionAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode215 = new System.Windows.Forms.TreeNode("SetAttributeInElementAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode216 = new System.Windows.Forms.TreeNode("SetAttributeInElementsAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode217 = new System.Windows.Forms.TreeNode("SetHtmlInElementAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode218 = new System.Windows.Forms.TreeNode("SetTextInElementAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode219 = new System.Windows.Forms.TreeNode("SetValueInElementAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode220 = new System.Windows.Forms.TreeNode("WaitNotVisibleElementAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode221 = new System.Windows.Forms.TreeNode("WaitVisibleElementAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode222 = new System.Windows.Forms.TreeNode("Методы", new System.Windows.Forms.TreeNode[] {
             treeNode200,
             treeNode201,
             treeNode202,
@@ -463,12 +465,14 @@
             treeNode216,
             treeNode217,
             treeNode218,
-            treeNode219});
-            System.Windows.Forms.TreeNode treeNode221 = new System.Windows.Forms.TreeNode("Класс: FRAMEElement", new System.Windows.Forms.TreeNode[] {
-            treeNode190,
-            treeNode194,
-            treeNode197,
-            treeNode220});
+            treeNode219,
+            treeNode220,
+            treeNode221});
+            System.Windows.Forms.TreeNode treeNode223 = new System.Windows.Forms.TreeNode("Класс: FRAMEElement", new System.Windows.Forms.TreeNode[] {
+            treeNode192,
+            treeNode196,
+            treeNode199,
+            treeNode222});
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.fileSaveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -987,909 +991,919 @@
             treeNode30.SelectedImageIndex = 5;
             treeNode30.Tag = "Tester";
             treeNode30.Text = "BrowserGoForwardAsync";
-            treeNode31.Name = "Узел26";
+            treeNode31.ImageIndex = 2;
+            treeNode31.Name = "Узел1";
+            treeNode31.SelectedImageIndex = 5;
             treeNode31.Tag = "Tester";
-            treeNode31.Text = "Методы для работы с браузером";
-            treeNode32.ImageIndex = 2;
-            treeNode32.Name = "Узел16";
-            treeNode32.SelectedImageIndex = 5;
+            treeNode31.Text = "BrowserPageReloadAsync";
+            treeNode32.Name = "Узел26";
             treeNode32.Tag = "Tester";
-            treeNode32.Text = "ConsoleMsg";
+            treeNode32.Text = "Методы для работы с браузером";
             treeNode33.ImageIndex = 2;
-            treeNode33.Name = "Узел18";
+            treeNode33.Name = "Узел16";
             treeNode33.SelectedImageIndex = 5;
             treeNode33.Tag = "Tester";
-            treeNode33.Text = "ConsoleMsgError";
+            treeNode33.Text = "ConsoleMsg";
             treeNode34.ImageIndex = 2;
-            treeNode34.Name = "Узел19";
+            treeNode34.Name = "Узел18";
             treeNode34.SelectedImageIndex = 5;
             treeNode34.Tag = "Tester";
-            treeNode34.Text = "ClearMessage";
+            treeNode34.Text = "ConsoleMsgError";
             treeNode35.ImageIndex = 2;
-            treeNode35.Name = "Узел17";
+            treeNode35.Name = "Узел19";
             treeNode35.SelectedImageIndex = 5;
             treeNode35.Tag = "Tester";
-            treeNode35.Text = "SendMessage";
+            treeNode35.Text = "ClearMessage";
             treeNode36.ImageIndex = 2;
-            treeNode36.Name = "Узел2";
+            treeNode36.Name = "Узел17";
             treeNode36.SelectedImageIndex = 5;
             treeNode36.Tag = "Tester";
-            treeNode36.Text = "EditMessage";
-            treeNode37.Name = "Узел15";
+            treeNode36.Text = "SendMessage";
+            treeNode37.ImageIndex = 2;
+            treeNode37.Name = "Узел2";
+            treeNode37.SelectedImageIndex = 5;
             treeNode37.Tag = "Tester";
-            treeNode37.Text = "Методы для вывода сообщений";
-            treeNode38.ImageIndex = 2;
-            treeNode38.Name = "Узел21";
-            treeNode38.SelectedImageIndex = 5;
+            treeNode37.Text = "EditMessage";
+            treeNode38.Name = "Узел15";
             treeNode38.Tag = "Tester";
-            treeNode38.Text = "TestBeginAsync";
+            treeNode38.Text = "Методы для вывода сообщений";
             treeNode39.ImageIndex = 2;
-            treeNode39.Name = "Узел22";
+            treeNode39.Name = "Узел21";
             treeNode39.SelectedImageIndex = 5;
             treeNode39.Tag = "Tester";
-            treeNode39.Text = "TestEndAsync";
+            treeNode39.Text = "TestBeginAsync";
             treeNode40.ImageIndex = 2;
-            treeNode40.Name = "Узел3";
+            treeNode40.Name = "Узел22";
             treeNode40.SelectedImageIndex = 5;
             treeNode40.Tag = "Tester";
-            treeNode40.Text = "TestStopAsync";
+            treeNode40.Text = "TestEndAsync";
             treeNode41.ImageIndex = 2;
-            treeNode41.Name = "Узел0";
+            treeNode41.Name = "Узел3";
             treeNode41.SelectedImageIndex = 5;
             treeNode41.Tag = "Tester";
-            treeNode41.Text = "GetTestResult";
+            treeNode41.Text = "TestStopAsync";
             treeNode42.ImageIndex = 2;
-            treeNode42.Name = "Узел4";
+            treeNode42.Name = "Узел0";
             treeNode42.SelectedImageIndex = 5;
             treeNode42.Tag = "Tester";
-            treeNode42.Text = "DefineTestStop";
-            treeNode43.Name = "Узел20";
+            treeNode42.Text = "GetTestResult";
+            treeNode43.ImageIndex = 2;
+            treeNode43.Name = "Узел4";
+            treeNode43.SelectedImageIndex = 5;
             treeNode43.Tag = "Tester";
-            treeNode43.Text = "Методы для подготовки и завершению тестирования";
-            treeNode44.ImageIndex = 2;
-            treeNode44.Name = "Узел11";
-            treeNode44.SelectedImageIndex = 5;
+            treeNode43.Text = "DefineTestStop";
+            treeNode44.Name = "Узел20";
             treeNode44.Tag = "Tester";
-            treeNode44.Text = "GetAttributeFromElementAsync";
+            treeNode44.Text = "Методы для подготовки и завершению тестирования";
             treeNode45.ImageIndex = 2;
-            treeNode45.Name = "Узел10";
+            treeNode45.Name = "Узел11";
             treeNode45.SelectedImageIndex = 5;
             treeNode45.Tag = "Tester";
-            treeNode45.Text = "GetAttributeFromElementByClassAsync";
+            treeNode45.Text = "GetAttributeFromElementAsync";
             treeNode46.ImageIndex = 2;
-            treeNode46.Name = "Узел12";
+            treeNode46.Name = "Узел10";
             treeNode46.SelectedImageIndex = 5;
             treeNode46.Tag = "Tester";
-            treeNode46.Text = "GetAttributeFromElementByIdAsync";
+            treeNode46.Text = "GetAttributeFromElementByClassAsync";
             treeNode47.ImageIndex = 2;
-            treeNode47.Name = "Узел13";
+            treeNode47.Name = "Узел12";
             treeNode47.SelectedImageIndex = 5;
             treeNode47.Tag = "Tester";
-            treeNode47.Text = "GetAttributeFromElementByNameAsync";
+            treeNode47.Text = "GetAttributeFromElementByIdAsync";
             treeNode48.ImageIndex = 2;
-            treeNode48.Name = "Узел14";
+            treeNode48.Name = "Узел13";
             treeNode48.SelectedImageIndex = 5;
             treeNode48.Tag = "Tester";
-            treeNode48.Text = "GetAttributeFromElementByTagAsync";
+            treeNode48.Text = "GetAttributeFromElementByNameAsync";
             treeNode49.ImageIndex = 2;
-            treeNode49.Name = "Узел15";
+            treeNode49.Name = "Узел14";
             treeNode49.SelectedImageIndex = 5;
             treeNode49.Tag = "Tester";
-            treeNode49.Text = "GetAttributeFromElementsAsync";
+            treeNode49.Text = "GetAttributeFromElementByTagAsync";
             treeNode50.ImageIndex = 2;
-            treeNode50.Name = "Узел2";
+            treeNode50.Name = "Узел15";
             treeNode50.SelectedImageIndex = 5;
             treeNode50.Tag = "Tester";
-            treeNode50.Text = "GetAttributeFromElementsByClassAsync";
+            treeNode50.Text = "GetAttributeFromElementsAsync";
             treeNode51.ImageIndex = 2;
-            treeNode51.Name = "Узел3";
+            treeNode51.Name = "Узел2";
             treeNode51.SelectedImageIndex = 5;
             treeNode51.Tag = "Tester";
-            treeNode51.Text = "GetAttributeFromElementsByNameAsync";
+            treeNode51.Text = "GetAttributeFromElementsByClassAsync";
             treeNode52.ImageIndex = 2;
-            treeNode52.Name = "Узел4";
+            treeNode52.Name = "Узел3";
             treeNode52.SelectedImageIndex = 5;
             treeNode52.Tag = "Tester";
-            treeNode52.Text = "GetAttributeFromElementsByTagAsync";
+            treeNode52.Text = "GetAttributeFromElementsByNameAsync";
             treeNode53.ImageIndex = 2;
-            treeNode53.Name = "Узел36";
+            treeNode53.Name = "Узел4";
             treeNode53.SelectedImageIndex = 5;
             treeNode53.Tag = "Tester";
-            treeNode53.Text = "SetAttributeInElementAsync";
+            treeNode53.Text = "GetAttributeFromElementsByTagAsync";
             treeNode54.ImageIndex = 2;
-            treeNode54.Name = "Узел35";
+            treeNode54.Name = "Узел36";
             treeNode54.SelectedImageIndex = 5;
             treeNode54.Tag = "Tester";
-            treeNode54.Text = "SetAttributeInElementByClassAsync";
+            treeNode54.Text = "SetAttributeInElementAsync";
             treeNode55.ImageIndex = 2;
-            treeNode55.Name = "Узел37";
+            treeNode55.Name = "Узел35";
             treeNode55.SelectedImageIndex = 5;
             treeNode55.Tag = "Tester";
-            treeNode55.Text = "SetAttributeInElementByIdAsync";
+            treeNode55.Text = "SetAttributeInElementByClassAsync";
             treeNode56.ImageIndex = 2;
-            treeNode56.Name = "Узел38";
+            treeNode56.Name = "Узел37";
             treeNode56.SelectedImageIndex = 5;
             treeNode56.Tag = "Tester";
-            treeNode56.Text = "SetAttributeInElementByNameAsync";
+            treeNode56.Text = "SetAttributeInElementByIdAsync";
             treeNode57.ImageIndex = 2;
-            treeNode57.Name = "Узел39";
+            treeNode57.Name = "Узел38";
             treeNode57.SelectedImageIndex = 5;
             treeNode57.Tag = "Tester";
-            treeNode57.Text = "SetAttributeInElementByTagAsync";
+            treeNode57.Text = "SetAttributeInElementByNameAsync";
             treeNode58.ImageIndex = 2;
-            treeNode58.Name = "Узел1";
+            treeNode58.Name = "Узел39";
             treeNode58.SelectedImageIndex = 5;
             treeNode58.Tag = "Tester";
-            treeNode58.Text = "SetAttributeInElementsAsync";
+            treeNode58.Text = "SetAttributeInElementByTagAsync";
             treeNode59.ImageIndex = 2;
-            treeNode59.Name = "Узел0";
+            treeNode59.Name = "Узел1";
             treeNode59.SelectedImageIndex = 5;
             treeNode59.Tag = "Tester";
-            treeNode59.Text = "SetAttributeInElementsByClassAsync";
+            treeNode59.Text = "SetAttributeInElementsAsync";
             treeNode60.ImageIndex = 2;
-            treeNode60.Name = "Узел2";
+            treeNode60.Name = "Узел0";
             treeNode60.SelectedImageIndex = 5;
             treeNode60.Tag = "Tester";
-            treeNode60.Text = "SetAttributeInElementsByNameAsync";
+            treeNode60.Text = "SetAttributeInElementsByClassAsync";
             treeNode61.ImageIndex = 2;
-            treeNode61.Name = "Узел3";
+            treeNode61.Name = "Узел2";
             treeNode61.SelectedImageIndex = 5;
             treeNode61.Tag = "Tester";
-            treeNode61.Text = "SetAttributeInElementsByTagAsync";
-            treeNode62.Name = "Узел2";
+            treeNode61.Text = "SetAttributeInElementsByNameAsync";
+            treeNode62.ImageIndex = 2;
+            treeNode62.Name = "Узел3";
+            treeNode62.SelectedImageIndex = 5;
             treeNode62.Tag = "Tester";
-            treeNode62.Text = "Атрибуты";
-            treeNode63.ImageIndex = 2;
-            treeNode63.Name = "Узел29";
-            treeNode63.SelectedImageIndex = 5;
+            treeNode62.Text = "SetAttributeInElementsByTagAsync";
+            treeNode63.Name = "Узел2";
             treeNode63.Tag = "Tester";
-            treeNode63.Text = "GetValueFromElementAsync";
+            treeNode63.Text = "Атрибуты";
             treeNode64.ImageIndex = 2;
-            treeNode64.Name = "Узел28";
+            treeNode64.Name = "Узел29";
             treeNode64.SelectedImageIndex = 5;
             treeNode64.Tag = "Tester";
-            treeNode64.Text = "GetValueFromElementByClassAsync";
+            treeNode64.Text = "GetValueFromElementAsync";
             treeNode65.ImageIndex = 2;
-            treeNode65.Name = "Узел30";
+            treeNode65.Name = "Узел28";
             treeNode65.SelectedImageIndex = 5;
             treeNode65.Tag = "Tester";
-            treeNode65.Text = "GetValueFromElementByIdAsync";
+            treeNode65.Text = "GetValueFromElementByClassAsync";
             treeNode66.ImageIndex = 2;
-            treeNode66.Name = "Узел31";
+            treeNode66.Name = "Узел30";
             treeNode66.SelectedImageIndex = 5;
             treeNode66.Tag = "Tester";
-            treeNode66.Text = "GetValueFromElementByNameAsync";
+            treeNode66.Text = "GetValueFromElementByIdAsync";
             treeNode67.ImageIndex = 2;
-            treeNode67.Name = "Узел32";
+            treeNode67.Name = "Узел31";
             treeNode67.SelectedImageIndex = 5;
             treeNode67.Tag = "Tester";
-            treeNode67.Text = "GetValueFromElementByTagAsync";
+            treeNode67.Text = "GetValueFromElementByNameAsync";
             treeNode68.ImageIndex = 2;
-            treeNode68.Name = "Узел46";
+            treeNode68.Name = "Узел32";
             treeNode68.SelectedImageIndex = 5;
             treeNode68.Tag = "Tester";
-            treeNode68.Text = "SetValueInElementAsync";
+            treeNode68.Text = "GetValueFromElementByTagAsync";
             treeNode69.ImageIndex = 2;
-            treeNode69.Name = "Узел45";
+            treeNode69.Name = "Узел46";
             treeNode69.SelectedImageIndex = 5;
             treeNode69.Tag = "Tester";
-            treeNode69.Text = "SetValueInElementByClassAsync";
+            treeNode69.Text = "SetValueInElementAsync";
             treeNode70.ImageIndex = 2;
-            treeNode70.Name = "Узел47";
+            treeNode70.Name = "Узел45";
             treeNode70.SelectedImageIndex = 5;
             treeNode70.Tag = "Tester";
-            treeNode70.Text = "SetValueInElementByIdAsync";
+            treeNode70.Text = "SetValueInElementByClassAsync";
             treeNode71.ImageIndex = 2;
-            treeNode71.Name = "Узел48";
+            treeNode71.Name = "Узел47";
             treeNode71.SelectedImageIndex = 5;
             treeNode71.Tag = "Tester";
-            treeNode71.Text = "SetValueInElementByNameAsync";
+            treeNode71.Text = "SetValueInElementByIdAsync";
             treeNode72.ImageIndex = 2;
-            treeNode72.Name = "Узел49";
+            treeNode72.Name = "Узел48";
             treeNode72.SelectedImageIndex = 5;
             treeNode72.Tag = "Tester";
-            treeNode72.Text = "SetValueInElementByTagAsync";
-            treeNode73.Name = "Узел6";
+            treeNode72.Text = "SetValueInElementByNameAsync";
+            treeNode73.ImageIndex = 2;
+            treeNode73.Name = "Узел49";
+            treeNode73.SelectedImageIndex = 5;
             treeNode73.Tag = "Tester";
-            treeNode73.Text = "Значение";
-            treeNode74.ImageIndex = 2;
-            treeNode74.Name = "Узел29";
-            treeNode74.SelectedImageIndex = 5;
+            treeNode73.Text = "SetValueInElementByTagAsync";
+            treeNode74.Name = "Узел6";
             treeNode74.Tag = "Tester";
-            treeNode74.Text = "ClickElementAsync";
+            treeNode74.Text = "Значение";
             treeNode75.ImageIndex = 2;
-            treeNode75.Name = "Узел28";
+            treeNode75.Name = "Узел29";
             treeNode75.SelectedImageIndex = 5;
             treeNode75.Tag = "Tester";
-            treeNode75.Text = "ClickElementByClassAsync";
+            treeNode75.Text = "ClickElementAsync";
             treeNode76.ImageIndex = 2;
-            treeNode76.Name = "Узел30";
+            treeNode76.Name = "Узел28";
             treeNode76.SelectedImageIndex = 5;
             treeNode76.Tag = "Tester";
-            treeNode76.Text = "ClickElementByIdAsync";
+            treeNode76.Text = "ClickElementByClassAsync";
             treeNode77.ImageIndex = 2;
-            treeNode77.Name = "Узел31";
+            treeNode77.Name = "Узел30";
             treeNode77.SelectedImageIndex = 5;
             treeNode77.Tag = "Tester";
-            treeNode77.Text = "ClickElementByNameAsync";
+            treeNode77.Text = "ClickElementByIdAsync";
             treeNode78.ImageIndex = 2;
-            treeNode78.Name = "Узел32";
+            treeNode78.Name = "Узел31";
             treeNode78.SelectedImageIndex = 5;
             treeNode78.Tag = "Tester";
-            treeNode78.Text = "ClickElementByTagAsync";
+            treeNode78.Text = "ClickElementByNameAsync";
             treeNode79.ImageIndex = 2;
-            treeNode79.Name = "Узел7";
+            treeNode79.Name = "Узел32";
             treeNode79.SelectedImageIndex = 5;
             treeNode79.Tag = "Tester";
-            treeNode79.Text = "IsClickableElementAsync";
+            treeNode79.Text = "ClickElementByTagAsync";
             treeNode80.ImageIndex = 2;
-            treeNode80.Name = "Узел34";
+            treeNode80.Name = "Узел7";
             treeNode80.SelectedImageIndex = 5;
             treeNode80.Tag = "Tester";
-            treeNode80.Text = "ScrollToElementAsync";
-            treeNode81.Name = "Узел0";
+            treeNode80.Text = "IsClickableElementAsync";
+            treeNode81.ImageIndex = 2;
+            treeNode81.Name = "Узел34";
+            treeNode81.SelectedImageIndex = 5;
             treeNode81.Tag = "Tester";
-            treeNode81.Text = "Нажатие";
-            treeNode82.ImageIndex = 2;
-            treeNode82.Name = "Узел20";
-            treeNode82.SelectedImageIndex = 5;
+            treeNode81.Text = "ScrollToElementAsync";
+            treeNode82.Name = "Узел0";
             treeNode82.Tag = "Tester";
-            treeNode82.Text = "GetElementAsync";
+            treeNode82.Text = "Нажатие";
             treeNode83.ImageIndex = 2;
-            treeNode83.Name = "Узел0";
+            treeNode83.Name = "Узел20";
             treeNode83.SelectedImageIndex = 5;
             treeNode83.Tag = "Tester";
-            treeNode83.Text = "GetFrameAsync";
+            treeNode83.Text = "GetElementAsync";
             treeNode84.ImageIndex = 2;
-            treeNode84.Name = "Узел17";
+            treeNode84.Name = "Узел0";
             treeNode84.SelectedImageIndex = 5;
             treeNode84.Tag = "Tester";
-            treeNode84.Text = "GetCountElementsAsync";
+            treeNode84.Text = "GetFrameAsync";
             treeNode85.ImageIndex = 2;
-            treeNode85.Name = "Узел16";
+            treeNode85.Name = "Узел17";
             treeNode85.SelectedImageIndex = 5;
             treeNode85.Tag = "Tester";
-            treeNode85.Text = "GetCountElementsByClassAsync";
+            treeNode85.Text = "GetCountElementsAsync";
             treeNode86.ImageIndex = 2;
-            treeNode86.Name = "Узел18";
+            treeNode86.Name = "Узел16";
             treeNode86.SelectedImageIndex = 5;
             treeNode86.Tag = "Tester";
-            treeNode86.Text = "GetCountElementsByNameAsync";
+            treeNode86.Text = "GetCountElementsByClassAsync";
             treeNode87.ImageIndex = 2;
-            treeNode87.Name = "Узел19";
+            treeNode87.Name = "Узел18";
             treeNode87.SelectedImageIndex = 5;
             treeNode87.Tag = "Tester";
-            treeNode87.Text = "GetCountElementsByTagAsync";
+            treeNode87.Text = "GetCountElementsByNameAsync";
             treeNode88.ImageIndex = 2;
-            treeNode88.Name = "Узел1";
+            treeNode88.Name = "Узел19";
             treeNode88.SelectedImageIndex = 5;
             treeNode88.Tag = "Tester";
-            treeNode88.Text = "GetHtmlFromElementAsync";
+            treeNode88.Text = "GetCountElementsByTagAsync";
             treeNode89.ImageIndex = 2;
-            treeNode89.Name = "Узел0";
+            treeNode89.Name = "Узел1";
             treeNode89.SelectedImageIndex = 5;
             treeNode89.Tag = "Tester";
-            treeNode89.Text = "GetHtmlFromElementByClassAsync";
+            treeNode89.Text = "GetHtmlFromElementAsync";
             treeNode90.ImageIndex = 2;
-            treeNode90.Name = "Узел2";
+            treeNode90.Name = "Узел0";
             treeNode90.SelectedImageIndex = 5;
             treeNode90.Tag = "Tester";
-            treeNode90.Text = "GetHtmlFromElementByIdAsync";
+            treeNode90.Text = "GetHtmlFromElementByClassAsync";
             treeNode91.ImageIndex = 2;
-            treeNode91.Name = "Узел3";
+            treeNode91.Name = "Узел2";
             treeNode91.SelectedImageIndex = 5;
             treeNode91.Tag = "Tester";
-            treeNode91.Text = "GetHtmlFromElementByNameAsync";
+            treeNode91.Text = "GetHtmlFromElementByIdAsync";
             treeNode92.ImageIndex = 2;
-            treeNode92.Name = "Узел4";
+            treeNode92.Name = "Узел3";
             treeNode92.SelectedImageIndex = 5;
             treeNode92.Tag = "Tester";
-            treeNode92.Text = "GetHtmlFromElementByTagAsync";
+            treeNode92.Text = "GetHtmlFromElementByNameAsync";
             treeNode93.ImageIndex = 2;
-            treeNode93.Name = "Узел6";
+            treeNode93.Name = "Узел4";
             treeNode93.SelectedImageIndex = 5;
             treeNode93.Tag = "Tester";
-            treeNode93.Text = "SetHtmlInElementAsync";
+            treeNode93.Text = "GetHtmlFromElementByTagAsync";
             treeNode94.ImageIndex = 2;
-            treeNode94.Name = "Узел5";
+            treeNode94.Name = "Узел6";
             treeNode94.SelectedImageIndex = 5;
             treeNode94.Tag = "Tester";
-            treeNode94.Text = "SetHtmlInElementByClassAsync";
+            treeNode94.Text = "SetHtmlInElementAsync";
             treeNode95.ImageIndex = 2;
-            treeNode95.Name = "Узел7";
+            treeNode95.Name = "Узел5";
             treeNode95.SelectedImageIndex = 5;
             treeNode95.Tag = "Tester";
-            treeNode95.Text = "SetHtmlInElementByIdAsync";
+            treeNode95.Text = "SetHtmlInElementByClassAsync";
             treeNode96.ImageIndex = 2;
-            treeNode96.Name = "Узел8";
+            treeNode96.Name = "Узел7";
             treeNode96.SelectedImageIndex = 5;
             treeNode96.Tag = "Tester";
-            treeNode96.Text = "SetHtmlInElementByNameAsync";
+            treeNode96.Text = "SetHtmlInElementByIdAsync";
             treeNode97.ImageIndex = 2;
-            treeNode97.Name = "Узел9";
+            treeNode97.Name = "Узел8";
             treeNode97.SelectedImageIndex = 5;
             treeNode97.Tag = "Tester";
-            treeNode97.Text = "SetHtmlInElementByTagAsync";
-            treeNode98.Name = "Узел3";
+            treeNode97.Text = "SetHtmlInElementByNameAsync";
+            treeNode98.ImageIndex = 2;
+            treeNode98.Name = "Узел9";
+            treeNode98.SelectedImageIndex = 5;
             treeNode98.Tag = "Tester";
-            treeNode98.Text = "Объекты";
-            treeNode99.ImageIndex = 2;
-            treeNode99.Name = "Узел50";
-            treeNode99.SelectedImageIndex = 5;
+            treeNode98.Text = "SetHtmlInElementByTagAsync";
+            treeNode99.Name = "Узел3";
             treeNode99.Tag = "Tester";
-            treeNode99.Text = "WaitAsync";
+            treeNode99.Text = "Объекты";
             treeNode100.ImageIndex = 2;
-            treeNode100.Name = "Узел0";
+            treeNode100.Name = "Узел50";
             treeNode100.SelectedImageIndex = 5;
             treeNode100.Tag = "Tester";
-            treeNode100.Text = "WaitElementInDomAsync";
+            treeNode100.Text = "WaitAsync";
             treeNode101.ImageIndex = 2;
-            treeNode101.Name = "Узел1";
+            treeNode101.Name = "Узел0";
             treeNode101.SelectedImageIndex = 5;
             treeNode101.Tag = "Tester";
-            treeNode101.Text = "WaitElementNotDomAsync";
+            treeNode101.Text = "WaitElementInDomAsync";
             treeNode102.ImageIndex = 2;
-            treeNode102.Name = "Узел52";
+            treeNode102.Name = "Узел1";
             treeNode102.SelectedImageIndex = 5;
             treeNode102.Tag = "Tester";
-            treeNode102.Text = "WaitNotVisibleElementAsync";
+            treeNode102.Text = "WaitElementNotDomAsync";
             treeNode103.ImageIndex = 2;
-            treeNode103.Name = "Узел51";
+            treeNode103.Name = "Узел52";
             treeNode103.SelectedImageIndex = 5;
             treeNode103.Tag = "Tester";
-            treeNode103.Text = "WaitNotVisibleElementByClassAsync";
+            treeNode103.Text = "WaitNotVisibleElementAsync";
             treeNode104.ImageIndex = 2;
-            treeNode104.Name = "Узел53";
+            treeNode104.Name = "Узел51";
             treeNode104.SelectedImageIndex = 5;
             treeNode104.Tag = "Tester";
-            treeNode104.Text = "WaitNotVisibleElementByIdAsync";
+            treeNode104.Text = "WaitNotVisibleElementByClassAsync";
             treeNode105.ImageIndex = 2;
-            treeNode105.Name = "Узел54";
+            treeNode105.Name = "Узел53";
             treeNode105.SelectedImageIndex = 5;
             treeNode105.Tag = "Tester";
-            treeNode105.Text = "WaitNotVisibleElementByNameAsync";
+            treeNode105.Text = "WaitNotVisibleElementByIdAsync";
             treeNode106.ImageIndex = 2;
-            treeNode106.Name = "Узел55";
+            treeNode106.Name = "Узел54";
             treeNode106.SelectedImageIndex = 5;
             treeNode106.Tag = "Tester";
-            treeNode106.Text = "WaitNotVisibleElementByTagAsync";
+            treeNode106.Text = "WaitNotVisibleElementByNameAsync";
             treeNode107.ImageIndex = 2;
-            treeNode107.Name = "Узел57";
+            treeNode107.Name = "Узел55";
             treeNode107.SelectedImageIndex = 5;
             treeNode107.Tag = "Tester";
-            treeNode107.Text = "WaitVisibleElementAsync";
+            treeNode107.Text = "WaitNotVisibleElementByTagAsync";
             treeNode108.ImageIndex = 2;
-            treeNode108.Name = "Узел56";
+            treeNode108.Name = "Узел57";
             treeNode108.SelectedImageIndex = 5;
             treeNode108.Tag = "Tester";
-            treeNode108.Text = "WaitVisibleElementByClassAsync";
+            treeNode108.Text = "WaitVisibleElementAsync";
             treeNode109.ImageIndex = 2;
-            treeNode109.Name = "Узел58";
+            treeNode109.Name = "Узел56";
             treeNode109.SelectedImageIndex = 5;
             treeNode109.Tag = "Tester";
-            treeNode109.Text = "WaitVisibleElementByIdAsync";
+            treeNode109.Text = "WaitVisibleElementByClassAsync";
             treeNode110.ImageIndex = 2;
-            treeNode110.Name = "Узел59";
+            treeNode110.Name = "Узел58";
             treeNode110.SelectedImageIndex = 5;
             treeNode110.Tag = "Tester";
-            treeNode110.Text = "WaitVisibleElementByNameAsync";
+            treeNode110.Text = "WaitVisibleElementByIdAsync";
             treeNode111.ImageIndex = 2;
-            treeNode111.Name = "Узел60";
+            treeNode111.Name = "Узел59";
             treeNode111.SelectedImageIndex = 5;
             treeNode111.Tag = "Tester";
-            treeNode111.Text = "WaitVisibleElementByTagAsync";
-            treeNode112.Name = "Узел7";
+            treeNode111.Text = "WaitVisibleElementByNameAsync";
+            treeNode112.ImageIndex = 2;
+            treeNode112.Name = "Узел60";
+            treeNode112.SelectedImageIndex = 5;
             treeNode112.Tag = "Tester";
-            treeNode112.Text = "Ожидание";
-            treeNode113.ImageIndex = 2;
-            treeNode113.Name = "Узел1";
-            treeNode113.SelectedImageIndex = 5;
+            treeNode112.Text = "WaitVisibleElementByTagAsync";
+            treeNode113.Name = "Узел7";
             treeNode113.Tag = "Tester";
-            treeNode113.Text = "FindElementAsync";
+            treeNode113.Text = "Ожидание";
             treeNode114.ImageIndex = 2;
-            treeNode114.Name = "Узел0";
+            treeNode114.Name = "Узел1";
             treeNode114.SelectedImageIndex = 5;
             treeNode114.Tag = "Tester";
-            treeNode114.Text = "FindElementByClassAsync";
+            treeNode114.Text = "FindElementAsync";
             treeNode115.ImageIndex = 2;
-            treeNode115.Name = "Узел2";
+            treeNode115.Name = "Узел0";
             treeNode115.SelectedImageIndex = 5;
             treeNode115.Tag = "Tester";
-            treeNode115.Text = "FindElementByIdAsync";
+            treeNode115.Text = "FindElementByClassAsync";
             treeNode116.ImageIndex = 2;
-            treeNode116.Name = "Узел3";
+            treeNode116.Name = "Узел2";
             treeNode116.SelectedImageIndex = 5;
             treeNode116.Tag = "Tester";
-            treeNode116.Text = "FindElementByNameAsync";
+            treeNode116.Text = "FindElementByIdAsync";
             treeNode117.ImageIndex = 2;
-            treeNode117.Name = "Узел4";
+            treeNode117.Name = "Узел3";
             treeNode117.SelectedImageIndex = 5;
             treeNode117.Tag = "Tester";
-            treeNode117.Text = "FindElementByTagAsync";
+            treeNode117.Text = "FindElementByNameAsync";
             treeNode118.ImageIndex = 2;
-            treeNode118.Name = "Узел6";
+            treeNode118.Name = "Узел4";
             treeNode118.SelectedImageIndex = 5;
             treeNode118.Tag = "Tester";
-            treeNode118.Text = "FindVisibleElementAsync";
+            treeNode118.Text = "FindElementByTagAsync";
             treeNode119.ImageIndex = 2;
-            treeNode119.Name = "Узел5";
+            treeNode119.Name = "Узел6";
             treeNode119.SelectedImageIndex = 5;
             treeNode119.Tag = "Tester";
-            treeNode119.Text = "FindVisibleElementByClassAsync";
+            treeNode119.Text = "FindVisibleElementAsync";
             treeNode120.ImageIndex = 2;
-            treeNode120.Name = "Узел7";
+            treeNode120.Name = "Узел5";
             treeNode120.SelectedImageIndex = 5;
             treeNode120.Tag = "Tester";
-            treeNode120.Text = "FindVisibleElementByIdAsync";
+            treeNode120.Text = "FindVisibleElementByClassAsync";
             treeNode121.ImageIndex = 2;
-            treeNode121.Name = "Узел8";
+            treeNode121.Name = "Узел7";
             treeNode121.SelectedImageIndex = 5;
             treeNode121.Tag = "Tester";
-            treeNode121.Text = "FindVisibleElementByNameAsync";
+            treeNode121.Text = "FindVisibleElementByIdAsync";
             treeNode122.ImageIndex = 2;
-            treeNode122.Name = "Узел9";
+            treeNode122.Name = "Узел8";
             treeNode122.SelectedImageIndex = 5;
             treeNode122.Tag = "Tester";
-            treeNode122.Text = "FindVisibleElementByTagAsync";
-            treeNode123.Name = "Узел1";
+            treeNode122.Text = "FindVisibleElementByNameAsync";
+            treeNode123.ImageIndex = 2;
+            treeNode123.Name = "Узел9";
+            treeNode123.SelectedImageIndex = 5;
             treeNode123.Tag = "Tester";
-            treeNode123.Text = "Поиск";
-            treeNode124.ImageIndex = 2;
-            treeNode124.Name = "Узел26";
-            treeNode124.SelectedImageIndex = 5;
+            treeNode123.Text = "FindVisibleElementByTagAsync";
+            treeNode124.Name = "Узел1";
             treeNode124.Tag = "Tester";
-            treeNode124.Text = "GetTitleAsync";
+            treeNode124.Text = "Поиск";
             treeNode125.ImageIndex = 2;
-            treeNode125.Name = "Узел27";
+            treeNode125.Name = "Узел26";
             treeNode125.SelectedImageIndex = 5;
             treeNode125.Tag = "Tester";
-            treeNode125.Text = "GetUrlAsync";
+            treeNode125.Text = "GetTitleAsync";
             treeNode126.ImageIndex = 2;
-            treeNode126.Name = "Узел33";
+            treeNode126.Name = "Узел27";
             treeNode126.SelectedImageIndex = 5;
             treeNode126.Tag = "Tester";
-            treeNode126.Text = "GoToUrlAsync";
-            treeNode127.Name = "Узел5";
+            treeNode126.Text = "GetUrlAsync";
+            treeNode127.ImageIndex = 2;
+            treeNode127.Name = "Узел33";
+            treeNode127.SelectedImageIndex = 5;
             treeNode127.Tag = "Tester";
-            treeNode127.Text = "Страница";
+            treeNode127.Text = "GoToUrlAsync";
             treeNode128.ImageIndex = 2;
-            treeNode128.Name = "Узел22";
+            treeNode128.Name = "Узел0";
             treeNode128.SelectedImageIndex = 5;
             treeNode128.Tag = "Tester";
-            treeNode128.Text = "GetTextFromElementAsync";
-            treeNode129.ImageIndex = 2;
-            treeNode129.Name = "Узел21";
-            treeNode129.SelectedImageIndex = 5;
+            treeNode128.Text = "GoToUrlBaseAuthAsync";
+            treeNode129.Name = "Узел5";
             treeNode129.Tag = "Tester";
-            treeNode129.Text = "GetTextFromElementByClassAsync";
+            treeNode129.Text = "Страница";
             treeNode130.ImageIndex = 2;
-            treeNode130.Name = "Узел23";
+            treeNode130.Name = "Узел22";
             treeNode130.SelectedImageIndex = 5;
             treeNode130.Tag = "Tester";
-            treeNode130.Text = "GetTextFromElementByIdAsync";
+            treeNode130.Text = "GetTextFromElementAsync";
             treeNode131.ImageIndex = 2;
-            treeNode131.Name = "Узел24";
+            treeNode131.Name = "Узел21";
             treeNode131.SelectedImageIndex = 5;
             treeNode131.Tag = "Tester";
-            treeNode131.Text = "GetTextFromElementByNameAsync";
+            treeNode131.Text = "GetTextFromElementByClassAsync";
             treeNode132.ImageIndex = 2;
-            treeNode132.Name = "Узел25";
+            treeNode132.Name = "Узел23";
             treeNode132.SelectedImageIndex = 5;
             treeNode132.Tag = "Tester";
-            treeNode132.Text = "GetTextFromElementByTagAsync";
+            treeNode132.Text = "GetTextFromElementByIdAsync";
             treeNode133.ImageIndex = 2;
-            treeNode133.Name = "Узел41";
+            treeNode133.Name = "Узел24";
             treeNode133.SelectedImageIndex = 5;
             treeNode133.Tag = "Tester";
-            treeNode133.Text = "SetTextInElementAsync";
+            treeNode133.Text = "GetTextFromElementByNameAsync";
             treeNode134.ImageIndex = 2;
-            treeNode134.Name = "Узел40";
+            treeNode134.Name = "Узел25";
             treeNode134.SelectedImageIndex = 5;
             treeNode134.Tag = "Tester";
-            treeNode134.Text = "SetTextInElementByClassAsync";
+            treeNode134.Text = "GetTextFromElementByTagAsync";
             treeNode135.ImageIndex = 2;
-            treeNode135.Name = "Узел42";
+            treeNode135.Name = "Узел41";
             treeNode135.SelectedImageIndex = 5;
             treeNode135.Tag = "Tester";
-            treeNode135.Text = "SetTextInElementByIdAsync";
+            treeNode135.Text = "SetTextInElementAsync";
             treeNode136.ImageIndex = 2;
-            treeNode136.Name = "Узел43";
+            treeNode136.Name = "Узел40";
             treeNode136.SelectedImageIndex = 5;
             treeNode136.Tag = "Tester";
-            treeNode136.Text = "SetTextInElementByNameAsync";
+            treeNode136.Text = "SetTextInElementByClassAsync";
             treeNode137.ImageIndex = 2;
-            treeNode137.Name = "Узел44";
+            treeNode137.Name = "Узел42";
             treeNode137.SelectedImageIndex = 5;
             treeNode137.Tag = "Tester";
-            treeNode137.Text = "SetTextInElementByTagAsync";
-            treeNode138.Name = "Узел4";
+            treeNode137.Text = "SetTextInElementByIdAsync";
+            treeNode138.ImageIndex = 2;
+            treeNode138.Name = "Узел43";
+            treeNode138.SelectedImageIndex = 5;
             treeNode138.Tag = "Tester";
-            treeNode138.Text = "Текст";
-            treeNode139.Name = "Узел27";
+            treeNode138.Text = "SetTextInElementByNameAsync";
+            treeNode139.ImageIndex = 2;
+            treeNode139.Name = "Узел44";
+            treeNode139.SelectedImageIndex = 5;
             treeNode139.Tag = "Tester";
-            treeNode139.Text = "Методы для выполнения действий";
-            treeNode140.ImageIndex = 2;
-            treeNode140.Name = "Узел6";
-            treeNode140.SelectedImageIndex = 5;
+            treeNode139.Text = "SetTextInElementByTagAsync";
+            treeNode140.Name = "Узел4";
             treeNode140.Tag = "Tester";
-            treeNode140.Text = "ExecuteJavaScriptAsync";
-            treeNode141.Name = "Узел5";
+            treeNode140.Text = "Текст";
+            treeNode141.Name = "Узел27";
             treeNode141.Tag = "Tester";
-            treeNode141.Text = "Методы для выполнения JavaScript";
+            treeNode141.Text = "Методы для выполнения действий";
             treeNode142.ImageIndex = 2;
-            treeNode142.Name = "Узел1";
+            treeNode142.Name = "Узел6";
             treeNode142.SelectedImageIndex = 5;
             treeNode142.Tag = "Tester";
-            treeNode142.Text = "RestGetAsync";
-            treeNode143.ImageIndex = 2;
-            treeNode143.Name = "Узел2";
-            treeNode143.SelectedImageIndex = 5;
+            treeNode142.Text = "ExecuteJavaScriptAsync";
+            treeNode143.Name = "Узел5";
             treeNode143.Tag = "Tester";
-            treeNode143.Text = "RestGetBasicAuthAsync";
-            treeNode144.Name = "Узел0";
+            treeNode143.Text = "Методы для выполнения JavaScript";
+            treeNode144.ImageIndex = 2;
+            treeNode144.Name = "Узел1";
+            treeNode144.SelectedImageIndex = 5;
             treeNode144.Tag = "Tester";
-            treeNode144.Text = "Методы для выполнения Rest запросов";
+            treeNode144.Text = "RestGetAsync";
             treeNode145.ImageIndex = 2;
-            treeNode145.Name = "Узел1";
+            treeNode145.Name = "Узел2";
             treeNode145.SelectedImageIndex = 5;
             treeNode145.Tag = "Tester";
-            treeNode145.Text = "TimerStart";
-            treeNode146.ImageIndex = 2;
-            treeNode146.Name = "Узел2";
-            treeNode146.SelectedImageIndex = 5;
+            treeNode145.Text = "RestGetBasicAuthAsync";
+            treeNode146.Name = "Узел0";
             treeNode146.Tag = "Tester";
-            treeNode146.Text = "TimerStop";
-            treeNode147.Name = "Узел0";
+            treeNode146.Text = "Методы для выполнения Rest запросов";
+            treeNode147.ImageIndex = 2;
+            treeNode147.Name = "Узел1";
+            treeNode147.SelectedImageIndex = 5;
             treeNode147.Tag = "Tester";
-            treeNode147.Text = "Методы для замера затраченного времени";
+            treeNode147.Text = "TimerStart";
             treeNode148.ImageIndex = 2;
-            treeNode148.Name = "Узел1";
+            treeNode148.Name = "Узел2";
             treeNode148.SelectedImageIndex = 5;
             treeNode148.Tag = "Tester";
-            treeNode148.Text = "SendMsgToMailAsync";
-            treeNode149.ImageIndex = 2;
-            treeNode149.Name = "Узел2";
-            treeNode149.SelectedImageIndex = 5;
+            treeNode148.Text = "TimerStop";
+            treeNode149.Name = "Узел0";
             treeNode149.Tag = "Tester";
-            treeNode149.Text = "SendMsgToTelegramAsync";
-            treeNode150.Name = "Узел0";
+            treeNode149.Text = "Методы для замера затраченного времени";
+            treeNode150.ImageIndex = 2;
+            treeNode150.Name = "Узел1";
+            treeNode150.SelectedImageIndex = 5;
             treeNode150.Tag = "Tester";
-            treeNode150.Text = "Методы для отправки email и message";
+            treeNode150.Text = "SendMsgToMailAsync";
             treeNode151.ImageIndex = 2;
-            treeNode151.Name = "Узел38";
+            treeNode151.Name = "Узел2";
             treeNode151.SelectedImageIndex = 5;
             treeNode151.Tag = "Tester";
-            treeNode151.Text = "AssertEqualsAsync";
-            treeNode152.ImageIndex = 2;
-            treeNode152.Name = "Узел39";
-            treeNode152.SelectedImageIndex = 5;
+            treeNode151.Text = "SendMsgToTelegramAsync";
+            treeNode152.Name = "Узел0";
             treeNode152.Tag = "Tester";
-            treeNode152.Text = "AssertNotEqualsAsync";
+            treeNode152.Text = "Методы для отправки email и message";
             treeNode153.ImageIndex = 2;
-            treeNode153.Name = "Узел40";
+            treeNode153.Name = "Узел38";
             treeNode153.SelectedImageIndex = 5;
             treeNode153.Tag = "Tester";
-            treeNode153.Text = "AssertTrueAsync";
+            treeNode153.Text = "AssertEqualsAsync";
             treeNode154.ImageIndex = 2;
-            treeNode154.Name = "Узел41";
+            treeNode154.Name = "Узел39";
             treeNode154.SelectedImageIndex = 5;
             treeNode154.Tag = "Tester";
-            treeNode154.Text = "AssertFalseAsync";
+            treeNode154.Text = "AssertNotEqualsAsync";
             treeNode155.ImageIndex = 2;
-            treeNode155.Name = "Узел0";
+            treeNode155.Name = "Узел40";
             treeNode155.SelectedImageIndex = 5;
             treeNode155.Tag = "Tester";
-            treeNode155.Text = "AssertNotNullAsync";
+            treeNode155.Text = "AssertTrueAsync";
             treeNode156.ImageIndex = 2;
-            treeNode156.Name = "Узел1";
+            treeNode156.Name = "Узел41";
             treeNode156.SelectedImageIndex = 5;
             treeNode156.Tag = "Tester";
-            treeNode156.Text = "AssertNullAsync";
+            treeNode156.Text = "AssertFalseAsync";
             treeNode157.ImageIndex = 2;
             treeNode157.Name = "Узел0";
             treeNode157.SelectedImageIndex = 5;
             treeNode157.Tag = "Tester";
-            treeNode157.Text = "AssertNoErrorsAsync";
+            treeNode157.Text = "AssertNotNullAsync";
             treeNode158.ImageIndex = 2;
-            treeNode158.Name = "Узел0";
+            treeNode158.Name = "Узел1";
             treeNode158.SelectedImageIndex = 5;
             treeNode158.Tag = "Tester";
-            treeNode158.Text = "AssertNetworkEventsAsync";
-            treeNode159.Name = "Узел37";
+            treeNode158.Text = "AssertNullAsync";
+            treeNode159.ImageIndex = 2;
+            treeNode159.Name = "Узел0";
+            treeNode159.SelectedImageIndex = 5;
             treeNode159.Tag = "Tester";
-            treeNode159.Text = "Методы для проверки результата";
+            treeNode159.Text = "AssertNoErrorsAsync";
+            treeNode160.ImageIndex = 2;
             treeNode160.Name = "Узел0";
+            treeNode160.SelectedImageIndex = 5;
             treeNode160.Tag = "Tester";
-            treeNode160.Text = "Класс: Tester";
-            treeNode161.ImageIndex = 2;
-            treeNode161.Name = "Узел4";
-            treeNode161.SelectedImageIndex = 5;
-            treeNode161.Tag = "HTMLElement";
-            treeNode161.Text = "HTMLElement";
-            treeNode162.Name = "Узел1";
-            treeNode162.Tag = "HTMLElement";
-            treeNode162.Text = "Конструктор";
-            treeNode163.ImageIndex = 4;
-            treeNode163.Name = "Узел3";
-            treeNode163.SelectedImageIndex = 7;
+            treeNode160.Text = "AssertNetworkEventsAsync";
+            treeNode161.Name = "Узел37";
+            treeNode161.Tag = "Tester";
+            treeNode161.Text = "Методы для проверки результата";
+            treeNode162.Name = "Узел0";
+            treeNode162.Tag = "Tester";
+            treeNode162.Text = "Класс: Tester";
+            treeNode163.ImageIndex = 2;
+            treeNode163.Name = "Узел4";
+            treeNode163.SelectedImageIndex = 5;
             treeNode163.Tag = "HTMLElement";
-            treeNode163.Text = "BY_INDEX";
-            treeNode164.ImageIndex = 4;
-            treeNode164.Name = "Узел4";
-            treeNode164.SelectedImageIndex = 7;
+            treeNode163.Text = "HTMLElement";
+            treeNode164.Name = "Узел1";
             treeNode164.Tag = "HTMLElement";
-            treeNode164.Text = "BY_TEXT";
+            treeNode164.Text = "Конструктор";
             treeNode165.ImageIndex = 4;
-            treeNode165.Name = "Узел5";
+            treeNode165.Name = "Узел3";
             treeNode165.SelectedImageIndex = 7;
             treeNode165.Tag = "HTMLElement";
-            treeNode165.Text = "BY_VALUE";
-            treeNode166.Name = "Узел2";
+            treeNode165.Text = "BY_INDEX";
+            treeNode166.ImageIndex = 4;
+            treeNode166.Name = "Узел4";
+            treeNode166.SelectedImageIndex = 7;
             treeNode166.Tag = "HTMLElement";
-            treeNode166.Text = "Константы";
-            treeNode167.ImageIndex = 3;
+            treeNode166.Text = "BY_TEXT";
+            treeNode167.ImageIndex = 4;
             treeNode167.Name = "Узел5";
-            treeNode167.SelectedImageIndex = 6;
+            treeNode167.SelectedImageIndex = 7;
             treeNode167.Tag = "HTMLElement";
-            treeNode167.Text = "Id";
-            treeNode168.ImageIndex = 3;
-            treeNode168.Name = "Узел6";
-            treeNode168.SelectedImageIndex = 6;
+            treeNode167.Text = "BY_VALUE";
+            treeNode168.Name = "Узел2";
             treeNode168.Tag = "HTMLElement";
-            treeNode168.Text = "Name";
+            treeNode168.Text = "Константы";
             treeNode169.ImageIndex = 3;
-            treeNode169.Name = "Узел7";
+            treeNode169.Name = "Узел5";
             treeNode169.SelectedImageIndex = 6;
             treeNode169.Tag = "HTMLElement";
-            treeNode169.Text = "Class";
+            treeNode169.Text = "Id";
             treeNode170.ImageIndex = 3;
-            treeNode170.Name = "Узел8";
+            treeNode170.Name = "Узел6";
             treeNode170.SelectedImageIndex = 6;
             treeNode170.Tag = "HTMLElement";
-            treeNode170.Text = "Type";
-            treeNode171.Name = "Узел2";
+            treeNode170.Text = "Name";
+            treeNode171.ImageIndex = 3;
+            treeNode171.Name = "Узел7";
+            treeNode171.SelectedImageIndex = 6;
             treeNode171.Tag = "HTMLElement";
-            treeNode171.Text = "Переменные";
-            treeNode172.ImageIndex = 2;
-            treeNode172.Name = "Узел9";
-            treeNode172.SelectedImageIndex = 5;
+            treeNode171.Text = "Class";
+            treeNode172.ImageIndex = 3;
+            treeNode172.Name = "Узел8";
+            treeNode172.SelectedImageIndex = 6;
             treeNode172.Tag = "HTMLElement";
-            treeNode172.Text = "ClickAsync";
-            treeNode173.ImageIndex = 2;
-            treeNode173.Name = "Узел10";
-            treeNode173.SelectedImageIndex = 5;
+            treeNode172.Text = "Type";
+            treeNode173.Name = "Узел2";
             treeNode173.Tag = "HTMLElement";
-            treeNode173.Text = "GetAttributeAsync";
+            treeNode173.Text = "Переменные";
             treeNode174.ImageIndex = 2;
-            treeNode174.Name = "Узел11";
+            treeNode174.Name = "Узел9";
             treeNode174.SelectedImageIndex = 5;
             treeNode174.Tag = "HTMLElement";
-            treeNode174.Text = "GetHtmlAsync";
+            treeNode174.Text = "ClickAsync";
             treeNode175.ImageIndex = 2;
-            treeNode175.Name = "Узел1";
+            treeNode175.Name = "Узел10";
             treeNode175.SelectedImageIndex = 5;
             treeNode175.Tag = "HTMLElement";
-            treeNode175.Text = "GetOptionAsync";
+            treeNode175.Text = "GetAttributeAsync";
             treeNode176.ImageIndex = 2;
-            treeNode176.Name = "Узел12";
+            treeNode176.Name = "Узел11";
             treeNode176.SelectedImageIndex = 5;
             treeNode176.Tag = "HTMLElement";
-            treeNode176.Text = "GetTextAsync";
+            treeNode176.Text = "GetHtmlAsync";
             treeNode177.ImageIndex = 2;
-            treeNode177.Name = "Узел13";
+            treeNode177.Name = "Узел1";
             treeNode177.SelectedImageIndex = 5;
             treeNode177.Tag = "HTMLElement";
-            treeNode177.Text = "GetValueAsync";
+            treeNode177.Text = "GetOptionAsync";
             treeNode178.ImageIndex = 2;
-            treeNode178.Name = "Узел6";
+            treeNode178.Name = "Узел12";
             treeNode178.SelectedImageIndex = 5;
             treeNode178.Tag = "HTMLElement";
-            treeNode178.Text = "IsClickableAsync";
+            treeNode178.Text = "GetTextAsync";
             treeNode179.ImageIndex = 2;
-            treeNode179.Name = "Узел14";
+            treeNode179.Name = "Узел13";
             treeNode179.SelectedImageIndex = 5;
             treeNode179.Tag = "HTMLElement";
-            treeNode179.Text = "ScrollToAsync";
+            treeNode179.Text = "GetValueAsync";
             treeNode180.ImageIndex = 2;
-            treeNode180.Name = "Узел0";
+            treeNode180.Name = "Узел6";
             treeNode180.SelectedImageIndex = 5;
             treeNode180.Tag = "HTMLElement";
-            treeNode180.Text = "SelectOptionAsync";
+            treeNode180.Text = "IsClickableAsync";
             treeNode181.ImageIndex = 2;
-            treeNode181.Name = "Узел15";
+            treeNode181.Name = "Узел14";
             treeNode181.SelectedImageIndex = 5;
             treeNode181.Tag = "HTMLElement";
-            treeNode181.Text = "SetAttributeAsync";
+            treeNode181.Text = "ScrollToAsync";
             treeNode182.ImageIndex = 2;
-            treeNode182.Name = "Узел16";
+            treeNode182.Name = "Узел0";
             treeNode182.SelectedImageIndex = 5;
             treeNode182.Tag = "HTMLElement";
-            treeNode182.Text = "SetHtmlAsync";
+            treeNode182.Text = "SelectOptionAsync";
             treeNode183.ImageIndex = 2;
-            treeNode183.Name = "Узел17";
+            treeNode183.Name = "Узел15";
             treeNode183.SelectedImageIndex = 5;
             treeNode183.Tag = "HTMLElement";
-            treeNode183.Text = "SetTextAsync";
+            treeNode183.Text = "SetAttributeAsync";
             treeNode184.ImageIndex = 2;
-            treeNode184.Name = "Узел18";
+            treeNode184.Name = "Узел16";
             treeNode184.SelectedImageIndex = 5;
             treeNode184.Tag = "HTMLElement";
-            treeNode184.Text = "SetValueAsync";
+            treeNode184.Text = "SetHtmlAsync";
             treeNode185.ImageIndex = 2;
-            treeNode185.Name = "Узел19";
+            treeNode185.Name = "Узел17";
             treeNode185.SelectedImageIndex = 5;
             treeNode185.Tag = "HTMLElement";
-            treeNode185.Text = "WaitNotVisibleAsync";
+            treeNode185.Text = "SetTextAsync";
             treeNode186.ImageIndex = 2;
-            treeNode186.Name = "Узел20";
+            treeNode186.Name = "Узел18";
             treeNode186.SelectedImageIndex = 5;
             treeNode186.Tag = "HTMLElement";
-            treeNode186.Text = "WaitVisibleAsync";
-            treeNode187.Name = "Узел3";
+            treeNode186.Text = "SetValueAsync";
+            treeNode187.ImageIndex = 2;
+            treeNode187.Name = "Узел19";
+            treeNode187.SelectedImageIndex = 5;
             treeNode187.Tag = "HTMLElement";
-            treeNode187.Text = "Методы";
-            treeNode188.Name = "Узел0";
+            treeNode187.Text = "WaitNotVisibleAsync";
+            treeNode188.ImageIndex = 2;
+            treeNode188.Name = "Узел20";
+            treeNode188.SelectedImageIndex = 5;
             treeNode188.Tag = "HTMLElement";
-            treeNode188.Text = "Класс: HTMLElement";
-            treeNode189.ImageIndex = 2;
-            treeNode189.Name = "Узел6";
-            treeNode189.SelectedImageIndex = 5;
-            treeNode189.Tag = "FRAMEElement";
-            treeNode189.Text = "FRAMEElement";
-            treeNode190.Name = "Узел2";
-            treeNode190.Tag = "FRAMEElement";
-            treeNode190.Text = "Конструктор";
-            treeNode191.ImageIndex = 4;
-            treeNode191.Name = "Узел7";
-            treeNode191.SelectedImageIndex = 7;
+            treeNode188.Text = "WaitVisibleAsync";
+            treeNode189.Name = "Узел3";
+            treeNode189.Tag = "HTMLElement";
+            treeNode189.Text = "Методы";
+            treeNode190.Name = "Узел0";
+            treeNode190.Tag = "HTMLElement";
+            treeNode190.Text = "Класс: HTMLElement";
+            treeNode191.ImageIndex = 2;
+            treeNode191.Name = "Узел6";
+            treeNode191.SelectedImageIndex = 5;
             treeNode191.Tag = "FRAMEElement";
-            treeNode191.Text = "BY_INDEX";
-            treeNode192.ImageIndex = 4;
-            treeNode192.Name = "Узел8";
-            treeNode192.SelectedImageIndex = 7;
+            treeNode191.Text = "FRAMEElement";
+            treeNode192.Name = "Узел2";
             treeNode192.Tag = "FRAMEElement";
-            treeNode192.Text = "BY_TEXT";
+            treeNode192.Text = "Конструктор";
             treeNode193.ImageIndex = 4;
-            treeNode193.Name = "Узел9";
+            treeNode193.Name = "Узел7";
             treeNode193.SelectedImageIndex = 7;
             treeNode193.Tag = "FRAMEElement";
-            treeNode193.Text = "BY_VALUE";
-            treeNode194.Name = "Узел3";
+            treeNode193.Text = "BY_INDEX";
+            treeNode194.ImageIndex = 4;
+            treeNode194.Name = "Узел8";
+            treeNode194.SelectedImageIndex = 7;
             treeNode194.Tag = "FRAMEElement";
-            treeNode194.Text = "Константы";
-            treeNode195.ImageIndex = 3;
-            treeNode195.Name = "Узел10";
-            treeNode195.SelectedImageIndex = 6;
+            treeNode194.Text = "BY_TEXT";
+            treeNode195.ImageIndex = 4;
+            treeNode195.Name = "Узел9";
+            treeNode195.SelectedImageIndex = 7;
             treeNode195.Tag = "FRAMEElement";
-            treeNode195.Text = "Name";
-            treeNode196.ImageIndex = 3;
-            treeNode196.Name = "Узел11";
-            treeNode196.SelectedImageIndex = 6;
+            treeNode195.Text = "BY_VALUE";
+            treeNode196.Name = "Узел3";
             treeNode196.Tag = "FRAMEElement";
-            treeNode196.Text = "Index";
-            treeNode197.Name = "Узел4";
+            treeNode196.Text = "Константы";
+            treeNode197.ImageIndex = 3;
+            treeNode197.Name = "Узел10";
+            treeNode197.SelectedImageIndex = 6;
             treeNode197.Tag = "FRAMEElement";
-            treeNode197.Text = "Переменные";
-            treeNode198.ImageIndex = 2;
-            treeNode198.Name = "Узел12";
-            treeNode198.SelectedImageIndex = 5;
+            treeNode197.Text = "Name";
+            treeNode198.ImageIndex = 3;
+            treeNode198.Name = "Узел11";
+            treeNode198.SelectedImageIndex = 6;
             treeNode198.Tag = "FRAMEElement";
-            treeNode198.Text = "ClickElementAsync";
-            treeNode199.ImageIndex = 2;
-            treeNode199.Name = "Узел13";
-            treeNode199.SelectedImageIndex = 5;
+            treeNode198.Text = "Index";
+            treeNode199.Name = "Узел4";
             treeNode199.Tag = "FRAMEElement";
-            treeNode199.Text = "FindElementAsync";
+            treeNode199.Text = "Переменные";
             treeNode200.ImageIndex = 2;
-            treeNode200.Name = "Узел14";
+            treeNode200.Name = "Узел12";
             treeNode200.SelectedImageIndex = 5;
             treeNode200.Tag = "FRAMEElement";
-            treeNode200.Text = "FindVisibleElementAsync";
+            treeNode200.Text = "ClickElementAsync";
             treeNode201.ImageIndex = 2;
-            treeNode201.Name = "Узел15";
+            treeNode201.Name = "Узел13";
             treeNode201.SelectedImageIndex = 5;
             treeNode201.Tag = "FRAMEElement";
-            treeNode201.Text = "GetAttributeFromElementAsync";
+            treeNode201.Text = "FindElementAsync";
             treeNode202.ImageIndex = 2;
-            treeNode202.Name = "Узел16";
+            treeNode202.Name = "Узел14";
             treeNode202.SelectedImageIndex = 5;
             treeNode202.Tag = "FRAMEElement";
-            treeNode202.Text = "GetAttributeFromElementsAsync";
+            treeNode202.Text = "FindVisibleElementAsync";
             treeNode203.ImageIndex = 2;
-            treeNode203.Name = "Узел17";
+            treeNode203.Name = "Узел15";
             treeNode203.SelectedImageIndex = 5;
             treeNode203.Tag = "FRAMEElement";
-            treeNode203.Text = "GetCountElementsAsync";
+            treeNode203.Text = "GetAttributeFromElementAsync";
             treeNode204.ImageIndex = 2;
-            treeNode204.Name = "Узел18";
+            treeNode204.Name = "Узел16";
             treeNode204.SelectedImageIndex = 5;
             treeNode204.Tag = "FRAMEElement";
-            treeNode204.Text = "GetHtmlFromElementAsync";
+            treeNode204.Text = "GetAttributeFromElementsAsync";
             treeNode205.ImageIndex = 2;
-            treeNode205.Name = "Узел19";
+            treeNode205.Name = "Узел17";
             treeNode205.SelectedImageIndex = 5;
             treeNode205.Tag = "FRAMEElement";
-            treeNode205.Text = "GetOptionAsync";
+            treeNode205.Text = "GetCountElementsAsync";
             treeNode206.ImageIndex = 2;
-            treeNode206.Name = "Узел20";
+            treeNode206.Name = "Узел18";
             treeNode206.SelectedImageIndex = 5;
             treeNode206.Tag = "FRAMEElement";
-            treeNode206.Text = "GetTextFromElementAsync";
+            treeNode206.Text = "GetHtmlFromElementAsync";
             treeNode207.ImageIndex = 2;
-            treeNode207.Name = "Узел21";
+            treeNode207.Name = "Узел19";
             treeNode207.SelectedImageIndex = 5;
             treeNode207.Tag = "FRAMEElement";
-            treeNode207.Text = "GetTitleAsync";
+            treeNode207.Text = "GetOptionAsync";
             treeNode208.ImageIndex = 2;
-            treeNode208.Name = "Узел22";
+            treeNode208.Name = "Узел20";
             treeNode208.SelectedImageIndex = 5;
             treeNode208.Tag = "FRAMEElement";
-            treeNode208.Text = "GetUrlAsync";
+            treeNode208.Text = "GetTextFromElementAsync";
             treeNode209.ImageIndex = 2;
-            treeNode209.Name = "Узел23";
+            treeNode209.Name = "Узел21";
             treeNode209.SelectedImageIndex = 5;
             treeNode209.Tag = "FRAMEElement";
-            treeNode209.Text = "GetValueFromElementAsync";
+            treeNode209.Text = "GetTitleAsync";
             treeNode210.ImageIndex = 2;
-            treeNode210.Name = "Узел24";
+            treeNode210.Name = "Узел22";
             treeNode210.SelectedImageIndex = 5;
             treeNode210.Tag = "FRAMEElement";
-            treeNode210.Text = "IsClickableElementAsync";
+            treeNode210.Text = "GetUrlAsync";
             treeNode211.ImageIndex = 2;
-            treeNode211.Name = "Узел25";
+            treeNode211.Name = "Узел23";
             treeNode211.SelectedImageIndex = 5;
             treeNode211.Tag = "FRAMEElement";
-            treeNode211.Text = "ScrollToElementAsync";
+            treeNode211.Text = "GetValueFromElementAsync";
             treeNode212.ImageIndex = 2;
-            treeNode212.Name = "Узел26";
+            treeNode212.Name = "Узел24";
             treeNode212.SelectedImageIndex = 5;
             treeNode212.Tag = "FRAMEElement";
-            treeNode212.Text = "SelectOptionAsync";
+            treeNode212.Text = "IsClickableElementAsync";
             treeNode213.ImageIndex = 2;
-            treeNode213.Name = "Узел27";
+            treeNode213.Name = "Узел25";
             treeNode213.SelectedImageIndex = 5;
             treeNode213.Tag = "FRAMEElement";
-            treeNode213.Text = "SetAttributeInElementAsync";
+            treeNode213.Text = "ScrollToElementAsync";
             treeNode214.ImageIndex = 2;
-            treeNode214.Name = "Узел28";
+            treeNode214.Name = "Узел26";
             treeNode214.SelectedImageIndex = 5;
             treeNode214.Tag = "FRAMEElement";
-            treeNode214.Text = "SetAttributeInElementsAsync";
+            treeNode214.Text = "SelectOptionAsync";
             treeNode215.ImageIndex = 2;
-            treeNode215.Name = "Узел29";
+            treeNode215.Name = "Узел27";
             treeNode215.SelectedImageIndex = 5;
             treeNode215.Tag = "FRAMEElement";
-            treeNode215.Text = "SetHtmlInElementAsync";
+            treeNode215.Text = "SetAttributeInElementAsync";
             treeNode216.ImageIndex = 2;
-            treeNode216.Name = "Узел30";
+            treeNode216.Name = "Узел28";
             treeNode216.SelectedImageIndex = 5;
             treeNode216.Tag = "FRAMEElement";
-            treeNode216.Text = "SetTextInElementAsync";
+            treeNode216.Text = "SetAttributeInElementsAsync";
             treeNode217.ImageIndex = 2;
-            treeNode217.Name = "Узел31";
+            treeNode217.Name = "Узел29";
             treeNode217.SelectedImageIndex = 5;
             treeNode217.Tag = "FRAMEElement";
-            treeNode217.Text = "SetValueInElementAsync";
+            treeNode217.Text = "SetHtmlInElementAsync";
             treeNode218.ImageIndex = 2;
-            treeNode218.Name = "Узел32";
+            treeNode218.Name = "Узел30";
             treeNode218.SelectedImageIndex = 5;
             treeNode218.Tag = "FRAMEElement";
-            treeNode218.Text = "WaitNotVisibleElementAsync";
+            treeNode218.Text = "SetTextInElementAsync";
             treeNode219.ImageIndex = 2;
-            treeNode219.Name = "Узел33";
+            treeNode219.Name = "Узел31";
             treeNode219.SelectedImageIndex = 5;
             treeNode219.Tag = "FRAMEElement";
-            treeNode219.Text = "WaitVisibleElementAsync";
-            treeNode220.Name = "Узел5";
+            treeNode219.Text = "SetValueInElementAsync";
+            treeNode220.ImageIndex = 2;
+            treeNode220.Name = "Узел32";
+            treeNode220.SelectedImageIndex = 5;
             treeNode220.Tag = "FRAMEElement";
-            treeNode220.Text = "Методы";
-            treeNode221.Name = "Узел1";
+            treeNode220.Text = "WaitNotVisibleElementAsync";
+            treeNode221.ImageIndex = 2;
+            treeNode221.Name = "Узел33";
+            treeNode221.SelectedImageIndex = 5;
             treeNode221.Tag = "FRAMEElement";
-            treeNode221.Text = "Класс: FRAMEElement";
+            treeNode221.Text = "WaitVisibleElementAsync";
+            treeNode222.Name = "Узел5";
+            treeNode222.Tag = "FRAMEElement";
+            treeNode222.Text = "Методы";
+            treeNode223.Name = "Узел1";
+            treeNode223.Tag = "FRAMEElement";
+            treeNode223.Text = "Класс: FRAMEElement";
             this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode160,
-            treeNode188,
-            treeNode221});
+            treeNode162,
+            treeNode190,
+            treeNode223});
             this.treeView1.SelectedImageIndex = 0;
             this.treeView1.Size = new System.Drawing.Size(219, 177);
             this.treeView1.TabIndex = 1;
