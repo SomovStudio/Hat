@@ -846,6 +846,54 @@ namespace HatFrameworkDev
             }
         }
 
+        public async Task GoToUrlBaseAuthAsync(string url, string login, string pass, int sec)
+        {
+            statusPageLoad = false;
+            int step = SendMessage($"GoToUrlBaseAuthAsync('{url}', '{login}', '{pass}', {sec})", PROCESS, "Загрузка страницы (базовая авторизация)", IMAGE_STATUS_PROCESS);
+            if (DefineTestStop(step) == true) return;
+
+            try
+            {
+                string baseUrl = "";
+                if (url.Contains("https://") == true)
+                {
+                    baseUrl = url.Replace("https://", "");
+                    baseUrl = $"https://{login}:{pass}@{baseUrl}";
+                }
+                else if(url.Contains("http://") == true)
+                {
+                    baseUrl = url.Replace("http://", "");
+                    baseUrl = $"http://{login}:{pass}@{baseUrl}";
+                }
+                else
+                {
+                    baseUrl = $"http://{login}:{pass}@{url}";
+                }
+
+                BrowserView.CoreWebView2.Navigate(baseUrl);
+
+                for (int i = 0; i < sec; i++)
+                {
+                    await Task.Delay(1000);
+                    if (statusPageLoad == true) break;
+                    if (DefineTestStop(step) == true) return;
+                }
+
+                if (statusPageLoad == true) EditMessage(step, null, PASSED, "Страница загружена (базовая авторизация)", IMAGE_STATUS_PASSED);
+                else
+                {
+                    EditMessage(step, null, FAILED, "Страница не загружена (базовая авторизация)", IMAGE_STATUS_FAILED);
+                    TestStopAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
+                TestStopAsync();
+                ConsoleMsgError(ex.ToString());
+            }
+        }
+
         public async Task<string> GetUrlAsync()
         {
             int step = SendMessage("GetUrlAsync()", PROCESS, "Запрашивается текущий URL", IMAGE_STATUS_PROCESS);

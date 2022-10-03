@@ -77,11 +77,7 @@ namespace Hat
             HatFrameworkDev.Tester tester = new HatFrameworkDev.Tester(Config.browserForm);
             await tester.TestBeginAsync();
             await tester.GoToUrlAsync(@"https://somovstudio.github.io/test.html", 25);
-
-            await tester.WaitElementInDomAsync(Tester.BY_XPATH, "//div[@id='result']", 5);
-            await tester.WaitElementInDomAsync(Tester.BY_CSS, "#result", 5);
-            await tester.WaitElementNotDomAsync(Tester.BY_XPATH, "//div[@id='element']", 5);
-            await tester.WaitElementNotDomAsync(Tester.BY_CSS, "#element", 5);
+            
 
             await tester.TestEndAsync();
 
