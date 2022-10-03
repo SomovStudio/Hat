@@ -697,7 +697,7 @@ namespace HatFramework
         public async Task BrowserPageReloadAsync(int sec)
         {
             statusPageLoad = false;
-            int step = SendMessage($"BrowserPageReloadAsync()", PROCESS, "Перезагрузка страницы", IMAGE_STATUS_PROCESS);
+            int step = SendMessage($"BrowserPageReloadAsync({sec})", PROCESS, "Перезагрузка страницы", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return;
 
             try
@@ -717,7 +717,7 @@ namespace HatFramework
                     if (DefineTestStop(step) == true) return;
                 }
 
-                if (statusPageLoad == true) EditMessage(step, null, PASSED, "Перезагрузка страницы выполнена", IMAGE_STATUS_PASSED);
+                if (statusPageLoad == true) EditMessage(step, null, PASSED, "Перезагрузка страницы выполнена", IMAGE_STATUS_MESSAGE);
                 else
                 {
                     EditMessage(step, null, FAILED, "Страница не загружена", IMAGE_STATUS_FAILED);
