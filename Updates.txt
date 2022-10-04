@@ -3,6 +3,9 @@
 Список внесённых изменений:
 
 - Исправлен метод BrowserBasicAuthenticationAsync
+- Исправлены методы GetTextFromElement
+- Исправлены методы GetValueFromElement
+- Исправлены методы GetAttributeFromElement
 - Изменён метод BrowserPageReloadAsync
 
 

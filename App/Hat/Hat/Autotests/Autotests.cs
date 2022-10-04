@@ -74,16 +74,16 @@ namespace Hat
 
         public static async Task devTestAsync()
         {
+            /*
             HatFrameworkDev.Tester tester = new HatFrameworkDev.Tester(Config.browserForm);
             await tester.TestBeginAsync();
             await tester.GoToUrlAsync(@"https://somovstudio.github.io/test.html", 25);
             
             await tester.TestEndAsync();
+            */
 
 
 
-
-            /*
             HatFrameworkDev.Tester tester = new HatFrameworkDev.Tester(Config.browserForm);
             await tester.TestBeginAsync();
             await tester.GoToUrlAsync("https://somovstudio.github.io/test.html", 5);
@@ -93,17 +93,20 @@ namespace Hat
             await tester.WaitAsync(2);
             await tester.ClickElementByIdAsync("buttonLogin");
             await tester.WaitAsync(2);
-            string actual = await tester.GetValueFromElementByIdAsync("textarea");
-            string expected = "\"Вы успешно авторизованы\"";
             await tester.WaitVisibleElementByIdAsync("result", 5);
+            
+            string actual = await tester.GetValueFromElementByIdAsync("textarea");
+            string expected = "Вы успешно авторизованы";
             await tester.AssertEqualsAsync(expected, actual);
-            List<string> result = await tester.AssertNoErrors();
-            foreach (string error in result)
-            {
-                tester.ConsoleMsg(error);
-            }
+
+            actual = await tester.GetTextFromElementByTagAsync("h3", 0);
+            expected = "Результат авторизации";
+            await tester.AssertEqualsAsync(expected, actual);
+
+            string attribute = await tester.GetAttributeFromElementAsync(Tester.BY_XPATH, "/html/body/div[1]/input[1]", "placeholder");
+            tester.ConsoleMsg("[ATTRIBUTE]: " + attribute);
             await tester.TestEndAsync();
-            */
+
 
 
 
