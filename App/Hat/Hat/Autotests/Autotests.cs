@@ -319,7 +319,7 @@ namespace Hat
             await tester.ClickElementByIdAsync(""buttonLogin"");
             await tester.WaitVisibleElementByIdAsync(""result"", 5);
             string actual = await tester.GetValueFromElementByIdAsync(""textarea"");
-            string expected = ""\""Вы успешно авторизованы\"""";
+            string expected = ""Вы успешно авторизованы"";
             await tester.AssertEqualsAsync(expected, actual);
             await tester.TestEndAsync();
         }
@@ -384,7 +384,7 @@ namespace Hat
             await tester.ClickElementByIdAsync(ExamplePage.ButtonLogin);
             await tester.WaitVisibleElementByIdAsync(ExamplePage.Result, 5);
             string actual = await tester.GetValueFromElementByIdAsync(ExamplePage.Textarea);
-            string expected = ""\""Вы успешно авторизованы\"""";
+            string expected = ""Вы успешно авторизованы"";
             await tester.AssertEqualsAsync(expected, actual);
             await tester.TestEndAsync();
         }
