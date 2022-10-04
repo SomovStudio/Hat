@@ -494,6 +494,8 @@ namespace HatFrameworkDev
             try
             {
                 int step = SendMessage($"BrowserSizeAsync({width}, {height})", PROCESS, "Изменяется размер браузера", IMAGE_STATUS_PROCESS);
+                if (DefineTestStop(step) == true) return;
+
                 browserResize.Invoke(BrowserWindow, new object[] { width, height });
                 EditMessage(step, null, COMPLETED, "Размер браузера изменён", IMAGE_STATUS_MESSAGE);
             }
@@ -508,6 +510,8 @@ namespace HatFrameworkDev
             try
             {
                 int step = SendMessage($"BrowserFullScreenAsync()", PROCESS, "Изменяется размер браузера", IMAGE_STATUS_PROCESS);
+                if (DefineTestStop(step) == true) return;
+
                 browserResize.Invoke(BrowserWindow, new object[] { -1, -1 });
                 EditMessage(step, null, COMPLETED, "Размер браузера изменён", IMAGE_STATUS_MESSAGE);
             }
@@ -522,6 +526,8 @@ namespace HatFrameworkDev
             try
             {
                 int step = SendMessage($"BrowserSetUserAgentAsync({value})", PROCESS, "Изменяется значение User-Agent", IMAGE_STATUS_PROCESS);
+                if (DefineTestStop(step) == true) return;
+
                 browserUserAgent.Invoke(BrowserWindow, new object[] { value });
                 EditMessage(step, null, COMPLETED, "Значение User-Agent изменено", IMAGE_STATUS_MESSAGE);
             }
@@ -537,6 +543,8 @@ namespace HatFrameworkDev
             try
             {
                 int step = SendMessage($"BrowserGetUserAgentAsync()", PROCESS, "Получение значения User-Agent", IMAGE_STATUS_PROCESS);
+                if (DefineTestStop(step) == true) return "";
+
                 userAgent = BrowserView.CoreWebView2.Settings.UserAgent;
                 EditMessage(step, null, COMPLETED, $"Из User-Agent получено значение: {userAgent}", IMAGE_STATUS_MESSAGE);
             }
@@ -553,6 +561,8 @@ namespace HatFrameworkDev
             try
             {
                 int step = SendMessage($"BrowserGetErrorsAsync()", PROCESS, "Получение списка ошибок и предупреждений браузера", IMAGE_STATUS_PROCESS);
+                if (DefineTestStop(step) == true) return list;
+
                 list = (List<string>)browserGetErrors.Invoke(BrowserWindow, null);
                 EditMessage(step, null, COMPLETED, "Получен список ошибок и предупреждений браузера", IMAGE_STATUS_MESSAGE);
             }
@@ -569,6 +579,8 @@ namespace HatFrameworkDev
             try
             {
                 int step = SendMessage($"BrowserGetNetworkAsync()", PROCESS, "Получение списка событий браузера (network)", IMAGE_STATUS_PROCESS);
+                if (DefineTestStop(step) == true) return "";
+
                 string script =
                 @"(function(){
                 var performance = window.performance || window.mozPerformance || window.msPerformance || window.webkitPerformance || {};
@@ -3011,6 +3023,8 @@ namespace HatFrameworkDev
         public async Task<bool> AssertEqualsAsync(string expected, string actual)
         {
             int step = SendMessage("AssertEqualsAsync(" + expected + ", " + actual + ")", PROCESS, "Проверка совпадения ожидаемого и актуального значения", IMAGE_STATUS_PROCESS);
+            if (DefineTestStop(step) == true) return false;
+
             if (expected == actual)
             {
                 EditMessage(step, null, PASSED, "Ожидаемое и актуальное значение совпадают", IMAGE_STATUS_PASSED);
@@ -3021,6 +3035,7 @@ namespace HatFrameworkDev
             {
                 EditMessage(step, null, FAILED, "Ожидаемое и актуальное значение не совпадают", IMAGE_STATUS_FAILED);
                 if (assertStatus == null || assertStatus == PASSED) assertStatus = FAILED;
+                TestStopAsync();
                 return false;
             }
         }
@@ -3028,6 +3043,8 @@ namespace HatFrameworkDev
         public async Task<bool> AssertNotEqualsAsync(string expected, string actual)
         {
             int step = SendMessage("AssertNotEqualsAsync(" + expected + ", " + actual + ")", PROCESS, "Проверка не совпадения ожидаемого и актуального значения", IMAGE_STATUS_PROCESS);
+            if (DefineTestStop(step) == true) return false;
+
             if (expected != actual)
             {
                 EditMessage(step, null, PASSED, "Ожидаемое и актуальное значение не совпадают", IMAGE_STATUS_PASSED);
@@ -3038,6 +3055,7 @@ namespace HatFrameworkDev
             {
                 EditMessage(step, null, FAILED, "Ожидаемое и актуальное значение совпадают", IMAGE_STATUS_FAILED);
                 if (assertStatus == null || assertStatus == PASSED) assertStatus = FAILED;
+                TestStopAsync();
                 return false;
             }
         }
@@ -3045,6 +3063,8 @@ namespace HatFrameworkDev
         public async Task<bool> AssertTrueAsync(bool condition)
         {
             int step = SendMessage("AssertTrueAsync(" + condition.ToString() + ")", PROCESS, "Проверка значения которое должно быть true", IMAGE_STATUS_PROCESS);
+            if (DefineTestStop(step) == true) return false;
+
             if (condition == true)
             {
                 EditMessage(step, null, PASSED, "Проверенное значение соответствует true", IMAGE_STATUS_PASSED);
@@ -3055,6 +3075,7 @@ namespace HatFrameworkDev
             {
                 EditMessage(step, null, FAILED, "Проверенное значение соответствует false (должно быть true)", IMAGE_STATUS_FAILED);
                 if (assertStatus == null || assertStatus == PASSED) assertStatus = FAILED;
+                TestStopAsync();
                 return false;
             }
         }
@@ -3062,6 +3083,8 @@ namespace HatFrameworkDev
         public async Task<bool> AssertFalseAsync(bool condition)
         {
             int step = SendMessage("AssertFalseAsync(" + condition.ToString() + ")", PROCESS, "Проверка значения которое должно быть false", IMAGE_STATUS_PROCESS);
+            if (DefineTestStop(step) == true) return false;
+
             if (condition == false)
             {
                 EditMessage(step, null, PASSED, "Проверенное значение соответствует false", IMAGE_STATUS_PASSED);
@@ -3072,6 +3095,7 @@ namespace HatFrameworkDev
             {
                 EditMessage(step, null, FAILED, "Проверенное значение соответствует true (должно быть false)", IMAGE_STATUS_FAILED);
                 if (assertStatus == null || assertStatus == PASSED) assertStatus = FAILED;
+                TestStopAsync();
                 return false;
             }
         }
@@ -3082,7 +3106,9 @@ namespace HatFrameworkDev
             if(obj != null) value = obj.ToString();
             
             int step = SendMessage("AssertNotNull(" + value + ")", PROCESS, "Проверка значения которое не должно быть null", IMAGE_STATUS_PROCESS);
-            if(obj != null)
+            if (DefineTestStop(step) == true) return false;
+
+            if (obj != null)
             {
                 EditMessage(step, null, PASSED, "Проверенное значение не null", IMAGE_STATUS_PASSED);
                 if (assertStatus == null || assertStatus == PASSED) assertStatus = PASSED;
@@ -3092,6 +3118,7 @@ namespace HatFrameworkDev
             {
                 EditMessage(step, null, FAILED, "Проверенное значение null (должно быть не null)", IMAGE_STATUS_FAILED);
                 if (assertStatus == null || assertStatus == PASSED) assertStatus = FAILED;
+                TestStopAsync();
                 return false;
             }
         }
@@ -3102,6 +3129,8 @@ namespace HatFrameworkDev
             if (obj != null) value = obj.ToString();
 
             int step = SendMessage("AssertNull(" + value + ")", PROCESS, "Проверка значения которое должно быть null", IMAGE_STATUS_PROCESS);
+            if (DefineTestStop(step) == true) return false;
+
             if (obj == null)
             {
                 EditMessage(step, null, PASSED, "Проверенное значение null", IMAGE_STATUS_PASSED);
@@ -3112,6 +3141,7 @@ namespace HatFrameworkDev
             {
                 EditMessage(step, null, FAILED, "Проверенное значение не null (должно быть null)", IMAGE_STATUS_FAILED);
                 if (assertStatus == null || assertStatus == PASSED) assertStatus = FAILED;
+                TestStopAsync();
                 return false;
             }
         }
@@ -3122,6 +3152,7 @@ namespace HatFrameworkDev
         {
             List<string> errors = await BrowserGetErrorsAsync();
             int step = SendMessage("AssertNoErrors()", PROCESS, "Проверка отсутствия ошибок в консоли", IMAGE_STATUS_PROCESS);
+            if (DefineTestStop(step) == true) return false;
 
             int countErrors = 0;
             string textErrors = "";
@@ -3140,6 +3171,7 @@ namespace HatFrameworkDev
             {
                 EditMessage(step, null, FAILED, "В консоли присутствует " + countErrors.ToString() + " ошибок." + Environment.NewLine + textErrors, Tester.IMAGE_STATUS_FAILED);
                 if (assertStatus == null || assertStatus == PASSED) assertStatus = FAILED;
+                TestStopAsync();
                 result = false;
             }
             else
@@ -3158,7 +3190,8 @@ namespace HatFrameworkDev
             int step = -1;
             if (presence == true) step = SendMessage("AssertNetworkEventsAsync(" + presence + ", [...])", PROCESS, "Проверка присутствия событий в Network", IMAGE_STATUS_PROCESS);
             else step = SendMessage("AssertNetworkEventsAsync(" + presence + ", [...])", PROCESS, "Проверка отсутствия событий в Network", IMAGE_STATUS_PROCESS);
-            
+            if (DefineTestStop(step) == true) return false;
+
             bool actual;
             bool result = true;
             string report = "";
@@ -3181,6 +3214,7 @@ namespace HatFrameworkDev
                 if (presence == true) EditMessage(step, null, FAILED, "В Network отсутствуют следующие события " + Environment.NewLine + report, Tester.IMAGE_STATUS_FAILED);
                 else EditMessage(step, null, FAILED, "В Network присутствуют следующие события " + Environment.NewLine + report, Tester.IMAGE_STATUS_FAILED);
                 if (assertStatus == null || assertStatus == PASSED) assertStatus = FAILED;
+                TestStopAsync();
             }
 
             return result;
