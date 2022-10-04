@@ -105,13 +105,24 @@ namespace HatFrameworkDev
             int step = _tester.SendMessage($"GetAttributeFromElementAsync(\"{by}\", \"{locator}\", \"{attribute}\")", Tester.PROCESS, $"Получение аттрибута {attribute} из элемент", Tester.IMAGE_STATUS_PROCESS);
             if (_tester.DefineTestStop(step) == true) return "";
 
-            string script = "(function(){";
-            script += $"var frame = window.frames[{_index}].document;";
-            if (by == Tester.BY_CSS) script += $"var element = frame.querySelector(\"{locator}\");";
-            else if (by == Tester.BY_XPATH) script += $"var element = frame.evaluate(\"{locator}\", frame, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
-            script += $"return element.getAttribute('{attribute}');";
-            script += "}());";
-            string value = await execute(script, step, $"Получено значение из аттрибута {attribute}", $"Не удалось найти или получить аттрибут из элемента по локатору: {locator}");
+            string value = "";
+            try
+            {
+                string script = "(function(){";
+                script += $"var frame = window.frames[{_index}].document;";
+                if (by == Tester.BY_CSS) script += $"var element = frame.querySelector(\"{locator}\");";
+                else if (by == Tester.BY_XPATH) script += $"var element = frame.evaluate(\"{locator}\", frame, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
+                script += $"return element.getAttribute('{attribute}');";
+                script += "}());";
+                value = await execute(script, step, $"Получено значение из аттрибута {attribute}", $"Не удалось найти или получить аттрибут из элемента по локатору: {locator}");
+                if (value.Length > 1) value = value.Substring(1, value.Length - 2);
+            }
+            catch (Exception ex)
+            {
+                _tester.EditMessage(step, null, Tester.FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), Tester.IMAGE_STATUS_FAILED);
+                _tester.TestStopAsync();
+                _tester.ConsoleMsgError(ex.ToString());
+            }
             return value;
         }
 

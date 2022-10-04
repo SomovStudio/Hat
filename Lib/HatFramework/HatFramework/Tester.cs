@@ -1817,8 +1817,19 @@ namespace HatFramework
             int step = SendMessage($"GetValueFromElementByIdAsync('{id}')", PROCESS, "Получение значения из элемент", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return "";
 
-            string script = "(function(){ var element = document.getElementById('" + id + "'); return element.value; }());";
-            string value = await execute(script, step, $"Получено значение из элемента", $"Не удалось найти или получить данные из элемента с ID: {id}");
+            string value = "";
+            try
+            {
+                string script = "(function(){ var element = document.getElementById('" + id + "'); return element.value; }());";
+                value = await execute(script, step, $"Получено значение из элемента", $"Не удалось найти или получить данные из элемента с ID: {id}");
+                if (value.Length > 1) value = value.Substring(1, value.Length - 2);
+            }
+            catch (Exception ex)
+            {
+                EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
+                TestStopAsync();
+                ConsoleMsgError(ex.ToString());
+            }
             return value;
         }
 
@@ -1827,8 +1838,19 @@ namespace HatFramework
             int step = SendMessage($"GetValueFromElementByClassAsync('{_class}', {index})", PROCESS, "Получение значения из элемент", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return "";
 
-            string script = "(function(){ var element = document.getElementsByClassName('" + _class + "')[" + index + "]; return element.value; }());";
-            string value = await execute(script, step, $"Получено значение из элемента", $"Не удалось найти или получить данные из элемента по Class: {_class} (Index: {index})");
+            string value = "";
+            try
+            {
+                string script = "(function(){ var element = document.getElementsByClassName('" + _class + "')[" + index + "]; return element.value; }());";
+                value = await execute(script, step, $"Получено значение из элемента", $"Не удалось найти или получить данные из элемента по Class: {_class} (Index: {index})");
+                if (value.Length > 1) value = value.Substring(1, value.Length - 2);
+            }
+            catch (Exception ex)
+            {
+                EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
+                TestStopAsync();
+                ConsoleMsgError(ex.ToString());
+            }
             return value;
         }
 
@@ -1837,8 +1859,19 @@ namespace HatFramework
             int step = SendMessage($"GetValueFromElementByNameAsync('{name}', {index})", PROCESS, "Получение значения из элемент", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return "";
 
-            string script = "(function(){ var element = document.getElementsByName('" + name + "')[" + index + "]; return element.value; }());";
-            string value = await execute(script, step, $"Получено значение из элемента", $"Не удалось найти или получить данные из элемента по Name: {name} (Index: {index})");
+            string value = "";
+            try
+            {
+                string script = "(function(){ var element = document.getElementsByName('" + name + "')[" + index + "]; return element.value; }());";
+                value = await execute(script, step, $"Получено значение из элемента", $"Не удалось найти или получить данные из элемента по Name: {name} (Index: {index})");
+                if (value.Length > 1) value = value.Substring(1, value.Length - 2);
+            }
+            catch (Exception ex)
+            {
+                EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
+                TestStopAsync();
+                ConsoleMsgError(ex.ToString());
+            }
             return value;
         }
 
@@ -1847,8 +1880,19 @@ namespace HatFramework
             int step = SendMessage($"GetValueFromElementByTagAsync('{tag}', {index})", PROCESS, "Получение значения из элемент", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return "";
 
-            string script = "(function(){ var element = document.getElementsByTagName('" + tag + "')[" + index + "]; return element.value; }());";
-            string value = await execute(script, step, $"Получено значение из элемента", $"Не удалось найти или получить данные из элемента по Tag: {tag} (Index: {index})");
+            string value = "";
+            try
+            {
+                string script = "(function(){ var element = document.getElementsByTagName('" + tag + "')[" + index + "]; return element.value; }());";
+                value = await execute(script, step, $"Получено значение из элемента", $"Не удалось найти или получить данные из элемента по Tag: {tag} (Index: {index})");
+                if (value.Length > 1) value = value.Substring(1, value.Length - 2);
+            }
+            catch (Exception ex)
+            {
+                EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
+                TestStopAsync();
+                ConsoleMsgError(ex.ToString());
+            }
             return value;
         }
 
@@ -1857,11 +1901,22 @@ namespace HatFramework
             int step = SendMessage($"GetValueFromElementAsync(\"{by}\", \"{locator}\")", PROCESS, "Получение значения из элемент", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return "";
 
-            string script = "(function(){";
-            if (by == BY_CSS) script += $"var element = document.querySelector(\"{locator}\"); return element.value;";
-            else if (by == BY_XPATH) script += $"var element = document.evaluate(\"{locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue; return element.value;";
-            script += "}());";
-            string value = await execute(script, step, $"Получено значение из элемента", $"Не удалось найти или получить данные из элемента по локатору: {locator}");
+            string value = "";
+            try
+            {
+                string script = "(function(){";
+                if (by == BY_CSS) script += $"var element = document.querySelector(\"{locator}\"); return element.value;";
+                else if (by == BY_XPATH) script += $"var element = document.evaluate(\"{locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue; return element.value;";
+                script += "}());";
+                value = await execute(script, step, $"Получено значение из элемента", $"Не удалось найти или получить данные из элемента по локатору: {locator}");
+                if (value.Length > 1) value = value.Substring(1, value.Length - 2);
+            }
+            catch (Exception ex)
+            {
+                EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
+                TestStopAsync();
+                ConsoleMsgError(ex.ToString());
+            }
             return value;
         }
 
@@ -1936,8 +1991,19 @@ namespace HatFramework
             int step = SendMessage($"GetTextFromElementByIdAsync('{id}')", PROCESS, "Чтение текста из элемент", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return "";
 
-            string script = "(function(){ var element = document.getElementById('" + id + "'); return element.innerText; }());";
-            string value = await execute(script, step, $"Прочитан текст из элемента", $"Не удалось найти или прочитать текст из элемента с ID: {id}");
+            string value = "";
+            try
+            {
+                string script = "(function(){ var element = document.getElementById('" + id + "'); return element.innerText; }());";
+                value = await execute(script, step, $"Прочитан текст из элемента", $"Не удалось найти или прочитать текст из элемента с ID: {id}");
+                if (value.Length > 1) value = value.Substring(1, value.Length - 2);
+            }
+            catch (Exception ex)
+            {
+                EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
+                TestStopAsync();
+                ConsoleMsgError(ex.ToString());
+            }
             return value;
         }
 
@@ -1946,8 +2012,19 @@ namespace HatFramework
             int step = SendMessage($"GetTextFromElementByClassAsync('{_class}', {index})", PROCESS, "Чтение текста из элемент", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return "";
 
-            string script = "(function(){ var element = document.getElementsByClassName('" + _class + "')[" + index + "]; return element.innerText; }());";
-            string value = await execute(script, step, $"Прочитан текст из элемента", $"Не удалось найти или прочитать текст из элемента по Class: {_class} (Index: {index})");
+            string value = "";
+            try
+            {
+                string script = "(function(){ var element = document.getElementsByClassName('" + _class + "')[" + index + "]; return element.innerText; }());";
+                value = await execute(script, step, $"Прочитан текст из элемента", $"Не удалось найти или прочитать текст из элемента по Class: {_class} (Index: {index})");
+                if (value.Length > 1) value = value.Substring(1, value.Length - 2);
+            }
+            catch (Exception ex)
+            {
+                EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
+                TestStopAsync();
+                ConsoleMsgError(ex.ToString());
+            }
             return value;
         }
 
@@ -1956,8 +2033,19 @@ namespace HatFramework
             int step = SendMessage($"GetTextFromElementByNameAsync('{name}', {index})", PROCESS, "Чтение текста из элемент", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return "";
 
-            string script = "(function(){ var element = document.getElementsByName('" + name + "')[" + index + "]; return element.innerText; }());";
-            string value = await execute(script, step, $"Прочитан текст из элемента", $"Не удалось найти или прочитать текст из элемента по Name: {name} (Index: {index})");
+            string value = "";
+            try
+            {
+                string script = "(function(){ var element = document.getElementsByName('" + name + "')[" + index + "]; return element.innerText; }());";
+                value = await execute(script, step, $"Прочитан текст из элемента", $"Не удалось найти или прочитать текст из элемента по Name: {name} (Index: {index})");
+                if (value.Length > 1) value = value.Substring(1, value.Length - 2);
+            }
+            catch (Exception ex)
+            {
+                EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
+                TestStopAsync();
+                ConsoleMsgError(ex.ToString());
+            }
             return value;
         }
 
@@ -1966,8 +2054,19 @@ namespace HatFramework
             int step = SendMessage($"GetTextFromElementByTagAsync('{tag}', {index})", PROCESS, "Чтение текста из элемент", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return "";
 
-            string script = "(function(){ var element = document.getElementsByTagName('" + tag + "')[" + index + "]; return element.innerText; }());";
-            string value = await execute(script, step, $"Прочитан текст из элемента", $"Не удалось найти или прочитать текст из элемента по Tag: {tag} (Index: {index})");
+            string value = "";
+            try
+            {
+                string script = "(function(){ var element = document.getElementsByTagName('" + tag + "')[" + index + "]; return element.innerText; }());";
+                value = await execute(script, step, $"Прочитан текст из элемента", $"Не удалось найти или прочитать текст из элемента по Tag: {tag} (Index: {index})");
+                if (value.Length > 1) value = value.Substring(1, value.Length - 2);
+            }
+            catch (Exception ex)
+            {
+                EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
+                TestStopAsync();
+                ConsoleMsgError(ex.ToString());
+            }
             return value;
         }
 
@@ -1976,11 +2075,22 @@ namespace HatFramework
             int step = SendMessage($"GetTextFromElementAsync(\"{by}\", \"{locator}\")", PROCESS, "Чтение текста из элемент", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return "";
 
-            string script = "(function(){";
-            if (by == BY_CSS) script += "var element = document.querySelector(\"" + locator + "\"); return element.innerText;";
-            else if (by == BY_XPATH) script += $"var element = document.evaluate(\"{locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue; return element.innerText;";
-            script += "}());";
-            string value = await execute(script, step, $"Прочитан текст из элемента", $"Не удалось найти или прочитать текст из элемента по локатору: {locator}");
+            string value = "";
+            try
+            {
+                string script = "(function(){";
+                if (by == BY_CSS) script += "var element = document.querySelector(\"" + locator + "\"); return element.innerText;";
+                else if (by == BY_XPATH) script += $"var element = document.evaluate(\"{locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue; return element.innerText;";
+                script += "}());";
+                value = await execute(script, step, $"Прочитан текст из элемента", $"Не удалось найти или прочитать текст из элемента по локатору: {locator}");
+                if (value.Length > 1) value = value.Substring(1, value.Length - 2);
+            }
+            catch (Exception ex)
+            {
+                EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
+                TestStopAsync();
+                ConsoleMsgError(ex.ToString());
+            }
             return value;
         }
 
@@ -2098,8 +2208,19 @@ namespace HatFramework
             int step = SendMessage($"GetAttributeFromElementByIdAsync('{id}', '{attribute}')", PROCESS, $"Получение аттрибута {attribute} из элемент", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return "";
 
-            string script = "(function(){ var element = document.getElementById('" + id + "'); return element.getAttribute('" + attribute + "'); }());";
-            string value = await execute(script, step, $"Получено значение из аттрибута {attribute}", $"Не удалось найти или получить аттрибут из элемента с ID: {id}");
+            string value = "";
+            try
+            {
+                string script = "(function(){ var element = document.getElementById('" + id + "'); return element.getAttribute('" + attribute + "'); }());";
+                value = await execute(script, step, $"Получено значение из аттрибута {attribute}", $"Не удалось найти или получить аттрибут из элемента с ID: {id}");
+                if (value.Length > 1) value = value.Substring(1, value.Length - 2);
+            }
+            catch (Exception ex)
+            {
+                EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
+                TestStopAsync();
+                ConsoleMsgError(ex.ToString());
+            }
             return value;
         }
 
@@ -2108,8 +2229,19 @@ namespace HatFramework
             int step = SendMessage($"GetAttributeFromElementByClassAsync('{_class}', {index}, '{attribute}')", PROCESS, $"Получение аттрибута {attribute} из элемент", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return "";
 
-            string script = "(function(){ var element = document.getElementsByClassName('" + _class + "')[" + index + "]; return element.getAttribute('" + attribute + "'); }());";
-            string value = await execute(script, step, $"Получено значение из аттрибута {attribute}", $"Не удалось найти или получить аттрибут из элемента по Class: {_class} (Index: {index})");
+            string value = "";
+            try
+            {
+                string script = "(function(){ var element = document.getElementsByClassName('" + _class + "')[" + index + "]; return element.getAttribute('" + attribute + "'); }());";
+                value = await execute(script, step, $"Получено значение из аттрибута {attribute}", $"Не удалось найти или получить аттрибут из элемента по Class: {_class} (Index: {index})");
+                if (value.Length > 1) value = value.Substring(1, value.Length - 2);
+            }
+            catch (Exception ex)
+            {
+                EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
+                TestStopAsync();
+                ConsoleMsgError(ex.ToString());
+            }
             return value;
         }
 
@@ -2118,8 +2250,19 @@ namespace HatFramework
             int step = SendMessage($"GetAttributeFromElementByNameAsync('{name}', {index}, '{attribute}')", PROCESS, $"Получение аттрибута {attribute} из элемент", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return "";
 
-            string script = "(function(){ var element = document.getElementsByName('" + name + "')[" + index + "]; return element.getAttribute('" + attribute + "'); }());";
-            string value = await execute(script, step, $"Получено значение из аттрибута {attribute}", $"Не удалось найти или получить аттрибут из элемента по Name: {name} (Index: {index})");
+            string value = "";
+            try
+            {
+                string script = "(function(){ var element = document.getElementsByName('" + name + "')[" + index + "]; return element.getAttribute('" + attribute + "'); }());";
+                value = await execute(script, step, $"Получено значение из аттрибута {attribute}", $"Не удалось найти или получить аттрибут из элемента по Name: {name} (Index: {index})");
+                if (value.Length > 1) value = value.Substring(1, value.Length - 2);
+            }
+            catch (Exception ex)
+            {
+                EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
+                TestStopAsync();
+                ConsoleMsgError(ex.ToString());
+            }
             return value;
         }
 
@@ -2128,8 +2271,19 @@ namespace HatFramework
             int step = SendMessage($"GetAttributeFromElementByTagAsync('{tag}', {index}, '{attribute}')", PROCESS, $"Получение аттрибута {attribute} из элемент", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return "";
 
-            string script = "(function(){ var element = document.getElementsByTagName('" + tag + "')[" + index + "]; return element.getAttribute('" + attribute + "'); }());";
-            string value = await execute(script, step, $"Получено значение из аттрибута {attribute}", $"Не удалось найти или получить аттрибут из элемента по Tag: {tag} (Index: {index})");
+            string value = "";
+            try
+            {
+                string script = "(function(){ var element = document.getElementsByTagName('" + tag + "')[" + index + "]; return element.getAttribute('" + attribute + "'); }());";
+                value = await execute(script, step, $"Получено значение из аттрибута {attribute}", $"Не удалось найти или получить аттрибут из элемента по Tag: {tag} (Index: {index})");
+                if (value.Length > 1) value = value.Substring(1, value.Length - 2);
+            }
+            catch (Exception ex)
+            {
+                EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
+                TestStopAsync();
+                ConsoleMsgError(ex.ToString());
+            }
             return value;
         }
 
@@ -2138,12 +2292,23 @@ namespace HatFramework
             int step = SendMessage($"GetAttributeFromElementAsync(\"{by}\", \"{locator}\", \"{attribute}\")", PROCESS, $"Получение аттрибута {attribute} из элемент", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return "";
 
-            string script = "(function(){";
-            if (by == BY_CSS) script += $"var element = document.querySelector(\"{locator}\");";
-            else if (by == BY_XPATH) script += $"var element = document.evaluate(\"{locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
-            script += $"return element.getAttribute('{attribute}');";
-            script += "}());";
-            string value = await execute(script, step, $"Получено значение из аттрибута {attribute}", $"Не удалось найти или получить аттрибут из элемента по локатору: {locator}");
+            string value = "";
+            try
+            {
+                string script = "(function(){";
+                if (by == BY_CSS) script += $"var element = document.querySelector(\"{locator}\");";
+                else if (by == BY_XPATH) script += $"var element = document.evaluate(\"{locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
+                script += $"return element.getAttribute('{attribute}');";
+                script += "}());";
+                value = await execute(script, step, $"Получено значение из аттрибута {attribute}", $"Не удалось найти или получить аттрибут из элемента по локатору: {locator}");
+                if (value.Length > 1) value = value.Substring(1, value.Length - 2);
+            }
+            catch (Exception ex)
+            {
+                EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
+                TestStopAsync();
+                ConsoleMsgError(ex.ToString());
+            }
             return value;
         }
 

@@ -131,22 +131,33 @@ namespace HatFramework
             int step = _tester.SendMessage("GetTextAsync()", Tester.PROCESS, "Чтение текста из элемент", Tester.IMAGE_STATUS_PROCESS);
             if (_tester.DefineTestStop(step) == true) return null;
 
-            string script = null;
-            if (_by == Tester.BY_CSS)
+            string result = "";
+            try
             {
-                script = "(function(){";
-                script += $"var element = document.querySelector(\"{_locator}\");";
-                script += "return element.outerText;";
-                script += "}());";
+                string script = null;
+                if (_by == Tester.BY_CSS)
+                {
+                    script = "(function(){";
+                    script += $"var element = document.querySelector(\"{_locator}\");";
+                    script += "return element.outerText;";
+                    script += "}());";
+                }
+                else if (_by == Tester.BY_XPATH)
+                {
+                    script = "(function(){";
+                    script += $"var element = document.evaluate(\"{_locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
+                    script += "return element.outerText;";
+                    script += "}());";
+                }
+                result = await execute(script, step, "Текст из элемента прочитан", "Не удалось прочитать текст из элемента");
+                if (result.Length > 1) result = result.Substring(1, result.Length - 2);
             }
-            else if (_by == Tester.BY_XPATH)
+            catch (Exception ex)
             {
-                script = "(function(){";
-                script += $"var element = document.evaluate(\"{_locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
-                script += "return element.outerText;";
-                script += "}());";
+                _tester.EditMessage(step, null, Tester.FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), Tester.IMAGE_STATUS_FAILED);
+                _tester.TestStopAsync();
+                _tester.ConsoleMsgError(ex.ToString());
             }
-            string result = await execute(script, step, "Текст из элемента прочитан", "Не удалось прочитать текст из элемента");
             return result;
         }
 
@@ -180,22 +191,33 @@ namespace HatFramework
             int step = _tester.SendMessage("GetValueAsync()", Tester.PROCESS, "Чтение значения из элемент", Tester.IMAGE_STATUS_PROCESS);
             if (_tester.DefineTestStop(step) == true) return null;
 
-            string script = null;
-            if (_by == Tester.BY_CSS)
+            string result = "";
+            try
             {
-                script = "(function(){";
-                script += $"var element = document.querySelector(\"{_locator}\");";
-                script += "return element.value;";
-                script += "}());";
+                string script = null;
+                if (_by == Tester.BY_CSS)
+                {
+                    script = "(function(){";
+                    script += $"var element = document.querySelector(\"{_locator}\");";
+                    script += "return element.value;";
+                    script += "}());";
+                }
+                else if (_by == Tester.BY_XPATH)
+                {
+                    script = "(function(){";
+                    script += $"var element = document.evaluate(\"{_locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
+                    script += "return element.value;";
+                    script += "}());";
+                }
+                result = await execute(script, step, "Прочитано значение из элемента", "Не удалось прочитать значение элемента");
+                if (result.Length > 1) result = result.Substring(1, result.Length - 2);
             }
-            else if (_by == Tester.BY_XPATH)
+            catch (Exception ex)
             {
-                script = "(function(){";
-                script += $"var element = document.evaluate(\"{_locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
-                script += "return element.value;";
-                script += "}());";
+                _tester.EditMessage(step, null, Tester.FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), Tester.IMAGE_STATUS_FAILED);
+                _tester.TestStopAsync();
+                _tester.ConsoleMsgError(ex.ToString());
             }
-            string result = await execute(script, step, "Прочитано значение из элемента", "Не удалось прочитать значение элемента");
             return result;
         }
 
@@ -239,22 +261,33 @@ namespace HatFramework
             int step = _tester.SendMessage($"GetAttributeAsync('{name}')", Tester.PROCESS, "Получение атрибута из элемента", Tester.IMAGE_STATUS_PROCESS);
             if (_tester.DefineTestStop(step) == true) return null;
 
-            string script = null;
-            if (_by == Tester.BY_CSS)
+            string result = "";
+            try
             {
-                script = "(function(){";
-                script += $"var element = document.querySelector(\"{_locator}\");";
-                script += $"return element.getAttribute('{name}');";
-                script += "}());";
+                string script = null;
+                if (_by == Tester.BY_CSS)
+                {
+                    script = "(function(){";
+                    script += $"var element = document.querySelector(\"{_locator}\");";
+                    script += $"return element.getAttribute('{name}');";
+                    script += "}());";
+                }
+                else if (_by == Tester.BY_XPATH)
+                {
+                    script = "(function(){";
+                    script += $"var element = document.evaluate(\"{_locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
+                    script += $"return element.getAttribute('{name}');";
+                    script += "}());";
+                }
+                result = await execute(script, step, "Атрибут из элемента прочитан", "Не удалось прочитать атрибут из элемента");
+                if (result.Length > 1) result = result.Substring(1, result.Length - 2);
             }
-            else if (_by == Tester.BY_XPATH)
+            catch (Exception ex)
             {
-                script = "(function(){";
-                script += $"var element = document.evaluate(\"{_locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
-                script += $"return element.getAttribute('{name}');";
-                script += "}());";
+                _tester.EditMessage(step, null, Tester.FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), Tester.IMAGE_STATUS_FAILED);
+                _tester.TestStopAsync();
+                _tester.ConsoleMsgError(ex.ToString());
             }
-            string result = await execute(script, step, "Атрибут из элемента прочитан", "Не удалось прочитать атрибут из элемента");
             return result;
         }
 
