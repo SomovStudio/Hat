@@ -169,6 +169,10 @@ namespace Hat
             {
                 e.Handled = true;
                 toolStripComboBoxUrl.Text = e.Uri.ToString();
+                if (toolStripComboBoxUrl.Text.Contains("https://") == false && toolStripComboBoxUrl.Text.Contains("http://") == false)
+                {
+                    toolStripComboBoxUrl.Text = "https://" + toolStripComboBoxUrl.Text;
+                }
                 webView2.CoreWebView2.Navigate(toolStripComboBoxUrl.Text);
                 updateToolStripComboBoxUrl();
             }
@@ -566,6 +570,10 @@ namespace Hat
         {
             try
             {
+                if (toolStripComboBoxUrl.Text.Contains("https://") == false && toolStripComboBoxUrl.Text.Contains("http://") == false)
+                {
+                    toolStripComboBoxUrl.Text = "https://" + toolStripComboBoxUrl.Text;
+                }
                 webView2.CoreWebView2.Navigate(toolStripComboBoxUrl.Text);
                 updateToolStripComboBoxUrl();
             }
