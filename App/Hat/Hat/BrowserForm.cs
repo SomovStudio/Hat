@@ -130,6 +130,7 @@ namespace Hat
         /* Инициализация WevView */
         private void initWebView()
         {
+            //webView2.CoreWebView2.Settings.AreDefaultScriptDialogsEnabled = false;
             webView2.CoreWebView2InitializationCompleted += WebView_CoreWebView2InitializationCompleted;
         }
 
