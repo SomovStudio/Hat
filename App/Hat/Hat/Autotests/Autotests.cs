@@ -79,9 +79,12 @@ namespace Hat
             await tester.TestBeginAsync();
             await tester.GoToUrlAsync("https://somovstudio.github.io/test2.html", 5);
 
-            await tester.WaitAsync(5);
+            await tester.WaitAsync(2);
             await tester.ClickElementByIdAsync("btnAlert");
-            tester.ConsoleMsg("НАЖАЛ КНОПКУ btnAlert");
+            await tester.WaitAsync(2);
+            await tester.ClickElementByIdAsync("btnConfirm");
+            await tester.WaitAsync(2);
+            await tester.ClickElementByIdAsync("btnPrompt");
             
 
             await tester.TestEndAsync();

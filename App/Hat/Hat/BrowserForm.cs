@@ -151,7 +151,7 @@ namespace Hat
                 if (Config.defaultUserAgent == "") Config.defaultUserAgent = webView2.CoreWebView2.Settings.UserAgent;
                 consoleMsg($"Опция User-Agent по умолчанию {Config.defaultUserAgent}");
                 webView2.CoreWebView2.Settings.AreDefaultScriptDialogsEnabled = false;
-                consoleMsg("Выполнены настройки WebView (отключаны alert, prompt, confirm");
+                consoleMsg("Выполнены настройки WebView (отключаны alert, prompt, confirm)");
 
             }
             catch (Exception ex)
