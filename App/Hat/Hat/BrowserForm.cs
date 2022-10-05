@@ -130,7 +130,6 @@ namespace Hat
         /* Инициализация WevView */
         private void initWebView()
         {
-            //webView2.CoreWebView2.Settings.AreDefaultScriptDialogsEnabled = false;
             webView2.CoreWebView2InitializationCompleted += WebView_CoreWebView2InitializationCompleted;
         }
 
@@ -151,6 +150,9 @@ namespace Hat
                 consoleMsg("Опция Security.setIgnoreCertificateErrors - включен параметр ignore: true");
                 if (Config.defaultUserAgent == "") Config.defaultUserAgent = webView2.CoreWebView2.Settings.UserAgent;
                 consoleMsg($"Опция User-Agent по умолчанию {Config.defaultUserAgent}");
+                webView2.CoreWebView2.Settings.AreDefaultScriptDialogsEnabled = false;
+                consoleMsg("Выполнены настройки WebView (отключаны alert, prompt, confirm");
+
             }
             catch (Exception ex)
             {
