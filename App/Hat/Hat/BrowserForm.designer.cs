@@ -896,6 +896,7 @@
             this.webView2.Size = new System.Drawing.Size(1422, 527);
             this.webView2.TabIndex = 0;
             this.webView2.ZoomFactor = 1D;
+            this.webView2.CoreWebView2InitializationCompleted += new System.EventHandler<Microsoft.Web.WebView2.Core.CoreWebView2InitializationCompletedEventArgs>(this.webView2_CoreWebView2InitializationCompleted);
             this.webView2.SourceChanged += new System.EventHandler<Microsoft.Web.WebView2.Core.CoreWebView2SourceChangedEventArgs>(this.webView2_SourceChanged);
             this.webView2.ContentLoading += new System.EventHandler<Microsoft.Web.WebView2.Core.CoreWebView2ContentLoadingEventArgs>(this.webView2_ContentLoading);
             // 

@@ -158,6 +158,26 @@ namespace Hat
 
         }
 
+        private void webView2_CoreWebView2InitializationCompleted(object sender, CoreWebView2InitializationCompletedEventArgs e)
+        {
+            webView2.CoreWebView2.NewWindowRequested += CoreWebView2_NewWindowRequested;
+        }
+
+        private void CoreWebView2_NewWindowRequested(object sender, Microsoft.Web.WebView2.Core.CoreWebView2NewWindowRequestedEventArgs e)
+        {
+            try
+            {
+                e.Handled = true;
+                toolStripComboBoxUrl.Text = e.Uri.ToString();
+                webView2.CoreWebView2.Navigate(toolStripComboBoxUrl.Text);
+                updateToolStripComboBoxUrl();
+            }
+            catch (Exception ex)
+            {
+                consoleMsgError(ex.ToString());
+            }
+        }
+
         /* Игнорирование сертификата */
         private async void ignorCertificateErrors()
         {
@@ -2531,5 +2551,7 @@ namespace Hat
                 systemToolStripMenuItem.Checked = true;
             }
         }
+
+        
     }
 }

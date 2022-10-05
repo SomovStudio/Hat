@@ -3,11 +3,11 @@
 Список внесённых изменений:
 
 - Исправлен метод BrowserBasicAuthenticationAsync
-- Исправлены методы GetTextFromElement
-- Исправлены методы GetValueFromElement
-- Исправлены методы GetAttributeFromElement
+- Улучшены методы GetTextFromElement
+- Улучшены методы GetValueFromElement
+- Улучшены методы GetAttributeFromElement
 - Изменён метод BrowserPageReloadAsync
-
+- Браузер настроен так чтобы все страницы открываются только в текущем окне
 
 -----------------------------
 
