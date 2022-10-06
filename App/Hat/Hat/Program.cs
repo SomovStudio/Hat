@@ -45,9 +45,34 @@ namespace Hat
             IntPtr hWnd = Process.GetCurrentProcess().MainWindowHandle;
             ShowWindow(hWnd, 0);
 
+            Application.ThreadException += new System.Threading.ThreadExceptionEventHandler(Application_ThreadException);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new BrowserForm());
+        }
+
+        static void Application_ThreadException(object sender, System.Threading.ThreadExceptionEventArgs e)
+        {
+            Report.AddStep(Report.ERROR, "", e.Exception.ToString());
+            Report.SaveReport(false);
+
+            Console.OutputEncoding = System.Text.Encoding.UTF8;
+            Console.InputEncoding = System.Text.Encoding.UTF8;
+            Console.ResetColor();
+            Console.WriteLine("- - - - - - - - - - - - - - - - - - - - - - - - - - - -");
+            Console.ResetColor();
+            Console.BackgroundColor = ConsoleColor.Black;
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("Произошла ошибка:");
+            Console.ResetColor();
+            Console.WriteLine(e.Exception.ToString());
+            Console.WriteLine("- - - - - - - - - - - - - - - - - - - - - - - - - - - -");
+            Console.BackgroundColor = ConsoleColor.DarkRed;
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine("Tests ended. Finished: FAILURE");
+            Console.ResetColor();
+
+            Environment.Exit(0);
         }
     }
 }

@@ -279,15 +279,22 @@ namespace Hat
 
         public void consoleMsgError(string message)
         {
-            richTextBoxConsole.AppendText("[" + DateTime.Now.ToString() + "] ОШИБКА: " + message + Environment.NewLine);
-            richTextBoxConsole.ScrollToCaret();
-            systemConsoleMsg("- - - - - - - - - - - - - - - - - - - - - - - - - - - -", default, default, default, true);
-            systemConsoleMsg("Произошла ошибка:", default, ConsoleColor.Black, ConsoleColor.Red, true);
-            systemConsoleMsg(message, default, default, default, true);
-            systemConsoleMsg("- - - - - - - - - - - - - - - - - - - - - - - - - - - -", default, default, default, true);
-            systemConsoleMsg("", default, default, default, true);
-            resultAutotest(false);
-            if (Config.commandLineMode == true) Close();
+            try
+            {
+                richTextBoxConsole.AppendText("[" + DateTime.Now.ToString() + "] ОШИБКА: " + message + Environment.NewLine);
+                richTextBoxConsole.ScrollToCaret();
+                systemConsoleMsg("- - - - - - - - - - - - - - - - - - - - - - - - - - - -", default, default, default, true);
+                systemConsoleMsg("Произошла ошибка:", default, ConsoleColor.Black, ConsoleColor.Red, true);
+                systemConsoleMsg(message, default, default, default, true);
+                systemConsoleMsg("- - - - - - - - - - - - - - - - - - - - - - - - - - - -", default, default, default, true);
+                systemConsoleMsg("", default, default, default, true);
+                resultAutotest(false);
+                if (Config.commandLineMode == true) Close();
+            }
+            catch (Exception ex)
+            {
+
+            }
         }
 
 
