@@ -94,6 +94,7 @@ namespace HatFramework
                 MethodInfo mi = BrowserWindow.GetType().GetMethod("getWebView");
                 BrowserView = (Microsoft.Web.WebView2.WinForms.WebView2)mi.Invoke(BrowserWindow, null);
                 BrowserView.ContentLoading += contentLoading;
+                BrowserView.NavigationCompleted += navigationCompleted;
                 BrowserView.EnsureCoreWebView2Async();
 
                 showNameAutotest();
@@ -106,7 +107,12 @@ namespace HatFramework
 
         private void contentLoading(object sender, CoreWebView2ContentLoadingEventArgs e)
         {
-            statusPageLoad = true;
+            //statusPageLoad = true;
+        }
+
+        private void navigationCompleted(object sender, CoreWebView2NavigationCompletedEventArgs e)
+        {
+            statusPageLoad = true; // происходит когда страницы полностью загружена
         }
 
         private void resultAutotestSuccess(bool success)
@@ -406,11 +412,11 @@ namespace HatFramework
                 int step = SendMessage("TestEndAsync()", PROCESS, "Завершение теста", IMAGE_STATUS_PROCESS);
                 if (assertStatus == FAILED)
                 {
-                    ConsoleMsg("Тест завершен - провельно");
+                    ConsoleMsg("Тест завершен - провально");
                     EditMessage(step, null, FAILED, "Тест завершен - шаги теста выполнены неуспешно", IMAGE_STATUS_FAILED);
                     resultAutotestSuccess(false);
 
-                    browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { Environment.NewLine + "Тест завершен - провельно", default, ConsoleColor.DarkRed, ConsoleColor.White, true });
+                    browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { Environment.NewLine + "Тест завершен - провально", default, ConsoleColor.DarkRed, ConsoleColor.White, true });
                     browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { "-------------------------------" + Environment.NewLine, default, default, default, false });
 
                     Task screenshot = (Task)saveReportScreenshotAsync.Invoke(BrowserWindow, null);
@@ -2470,7 +2476,6 @@ namespace HatFramework
                 script += "return json;";
             }
             script += "}());";
-
             string result = await execute(script, step, $"Получение json из аттрибутов {attribute}", $"Не удалось найти или получить аттрибуты из элементов по локатору: {locator}");
             List<string> Json_Array = null;
             if (result != "null" && result != null)

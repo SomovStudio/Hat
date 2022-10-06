@@ -94,6 +94,7 @@ namespace HatFrameworkDev
                 MethodInfo mi = BrowserWindow.GetType().GetMethod("getWebView");
                 BrowserView = (Microsoft.Web.WebView2.WinForms.WebView2)mi.Invoke(BrowserWindow, null);
                 BrowserView.ContentLoading += contentLoading;
+                BrowserView.NavigationCompleted += navigationCompleted;
                 BrowserView.EnsureCoreWebView2Async();
 
                 showNameAutotest();
@@ -106,7 +107,12 @@ namespace HatFrameworkDev
 
         private void contentLoading(object sender, CoreWebView2ContentLoadingEventArgs e)
         {
-            statusPageLoad = true;
+            //statusPageLoad = true;
+        }
+
+        private void navigationCompleted(object sender, CoreWebView2NavigationCompletedEventArgs e)
+        {
+            statusPageLoad = true; // происходит когда страницы полностью загружена
         }
 
         private void resultAutotestSuccess(bool success)

@@ -603,7 +603,20 @@ namespace Hat
             try
             {
                 toolStripComboBoxUrl.Text = webView2.Source.ToString();
-                consoleMsg("Загружена страница: " + webView2.Source.ToString());
+                consoleMsg("Загрузка страницы: " + webView2.Source.ToString());
+            }
+            catch (Exception ex)
+            {
+                consoleMsgError(ex.ToString());
+            }
+        }
+
+        private void webView2_NavigationCompleted(object sender, CoreWebView2NavigationCompletedEventArgs e)
+        {
+            try
+            {
+                toolStripComboBoxUrl.Text = webView2.Source.ToString();
+                consoleMsg("Выполнена загрузка страницы: " + webView2.Source.ToString());
                 if (webView2.CoreWebView2.Settings.UserAgent != null && Config.defaultUserAgent == "")
                 {
                     Config.defaultUserAgent = webView2.CoreWebView2.Settings.UserAgent;
