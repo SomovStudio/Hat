@@ -2455,7 +2455,7 @@ namespace HatFrameworkDev
                 script += "json += ']';";
                 script += "return json;";
             }
-            else if(by == BY_XPATH)
+            else if (by == BY_XPATH)
             {
                 script += $"var element = document.evaluate(\"{locator}\", document, null, XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);";
                 script += "var json = '[';";
@@ -2470,7 +2470,6 @@ namespace HatFrameworkDev
                 script += "return json;";
             }
             script += "}());";
-
             string result = await execute(script, step, $"Получение json из аттрибутов {attribute}", $"Не удалось найти или получить аттрибуты из элементов по локатору: {locator}");
             List<string> Json_Array = null;
             if (result != "null" && result != null)

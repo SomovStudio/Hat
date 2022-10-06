@@ -77,15 +77,7 @@ namespace Hat
 
             HatFrameworkDev.Tester tester = new HatFrameworkDev.Tester(Config.browserForm);
             await tester.TestBeginAsync();
-            await tester.GoToUrlAsync("https://somovstudio.github.io/test2.html", 5);
-
-            await tester.WaitAsync(2);
-            await tester.ClickElementByIdAsync("btnAlert");
-            await tester.WaitAsync(2);
-            await tester.ClickElementByIdAsync("btnConfirm");
-            await tester.WaitAsync(2);
-            await tester.ClickElementByIdAsync("btnPrompt");
-            
+            await tester.GoToUrlAsync("https://somovstudio.github.io/test.html", 5);
 
             await tester.TestEndAsync();
 
