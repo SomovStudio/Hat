@@ -63,6 +63,11 @@
 			min-height: 24px;
 			max-height: 24px;
 		}
+		#btnAlert, #btnConfirm, #btnPrompt {
+			margin: 4px;
+			padding: 3px;
+		}
+
 	</style>
 </head>
 <body>
@@ -83,6 +88,9 @@
 		<span name="mybutton" id="MyButton" onclick="document.getElementById('MyTextarea').style = 'opacity: 0';">
 		Кнопка Spen
 		</span>
+		<button id="btnAlert" onclick="alert('Привет Мир'); document.getElementById('MyTextarea').innerText = 'Привет Мир'">Вызвать Alert</button>
+		<button id="btnConfirm" onclick="var element = document.getElementById('MyTextarea'); if(confirm('Вопрос: вы согласны?')){element.innerText = 'Да';}else{element.innerText = 'Нет';} element.innerText = element.textContent + ' (спасибо за ответ)';">Вызвать Confirm</button>
+		<button id="btnPrompt" onclick="var year = 0; year = prompt('Какой сейчас год?', 2022); document.getElementById('MyTextarea').innerText = 'Сейчас ' + year + ' год';">Вызвать Prompt</button>
 		<br><br>
 		<input type="radio" name="myradio" id="MyRadioYes"  value="yes" checked>
 		<label for="MyRadio">Да</label>

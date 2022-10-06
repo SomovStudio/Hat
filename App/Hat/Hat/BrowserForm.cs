@@ -150,12 +150,39 @@ namespace Hat
                 consoleMsg("Опция Security.setIgnoreCertificateErrors - включен параметр ignore: true");
                 if (Config.defaultUserAgent == "") Config.defaultUserAgent = webView2.CoreWebView2.Settings.UserAgent;
                 consoleMsg($"Опция User-Agent по умолчанию {Config.defaultUserAgent}");
+                webView2.CoreWebView2.Settings.AreDefaultScriptDialogsEnabled = false;
+                consoleMsg("Выполнена настройка WebView (отключаны alert, prompt, confirm)");
+
             }
             catch (Exception ex)
             {
                 consoleMsgError(ex.ToString());
             }
 
+        }
+
+        private void webView2_CoreWebView2InitializationCompleted(object sender, CoreWebView2InitializationCompletedEventArgs e)
+        {
+            webView2.CoreWebView2.NewWindowRequested += CoreWebView2_NewWindowRequested;
+        }
+
+        private void CoreWebView2_NewWindowRequested(object sender, Microsoft.Web.WebView2.Core.CoreWebView2NewWindowRequestedEventArgs e)
+        {
+            try
+            {
+                e.Handled = true;
+                toolStripComboBoxUrl.Text = e.Uri.ToString();
+                if (toolStripComboBoxUrl.Text.Contains("https://") == false && toolStripComboBoxUrl.Text.Contains("http://") == false)
+                {
+                    toolStripComboBoxUrl.Text = "https://" + toolStripComboBoxUrl.Text;
+                }
+                webView2.CoreWebView2.Navigate(toolStripComboBoxUrl.Text);
+                updateToolStripComboBoxUrl();
+            }
+            catch (Exception ex)
+            {
+                consoleMsgError(ex.ToString());
+            }
         }
 
         /* Игнорирование сертификата */
@@ -546,6 +573,10 @@ namespace Hat
         {
             try
             {
+                if (toolStripComboBoxUrl.Text.Contains("https://") == false && toolStripComboBoxUrl.Text.Contains("http://") == false)
+                {
+                    toolStripComboBoxUrl.Text = "https://" + toolStripComboBoxUrl.Text;
+                }
                 webView2.CoreWebView2.Navigate(toolStripComboBoxUrl.Text);
                 updateToolStripComboBoxUrl();
             }
@@ -2531,5 +2562,7 @@ namespace Hat
                 systemToolStripMenuItem.Checked = true;
             }
         }
+
+        
     }
 }

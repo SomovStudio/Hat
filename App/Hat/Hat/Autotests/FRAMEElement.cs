@@ -105,13 +105,24 @@ namespace HatFrameworkDev
             int step = _tester.SendMessage($"GetAttributeFromElementAsync(\"{by}\", \"{locator}\", \"{attribute}\")", Tester.PROCESS, $"Получение аттрибута {attribute} из элемент", Tester.IMAGE_STATUS_PROCESS);
             if (_tester.DefineTestStop(step) == true) return "";
 
-            string script = "(function(){";
-            script += $"var frame = window.frames[{_index}].document;";
-            if (by == Tester.BY_CSS) script += $"var element = frame.querySelector(\"{locator}\");";
-            else if (by == Tester.BY_XPATH) script += $"var element = frame.evaluate(\"{locator}\", frame, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
-            script += $"return element.getAttribute('{attribute}');";
-            script += "}());";
-            string value = await execute(script, step, $"Получено значение из аттрибута {attribute}", $"Не удалось найти или получить аттрибут из элемента по локатору: {locator}");
+            string value = "";
+            try
+            {
+                string script = "(function(){";
+                script += $"var frame = window.frames[{_index}].document;";
+                if (by == Tester.BY_CSS) script += $"var element = frame.querySelector(\"{locator}\");";
+                else if (by == Tester.BY_XPATH) script += $"var element = frame.evaluate(\"{locator}\", frame, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
+                script += $"return element.getAttribute('{attribute}');";
+                script += "}());";
+                value = await execute(script, step, $"Получено значение из аттрибута {attribute}", $"Не удалось найти или получить аттрибут из элемента по локатору: {locator}");
+                if (value.Length > 1) value = value.Substring(1, value.Length - 2);
+            }
+            catch (Exception ex)
+            {
+                _tester.EditMessage(step, null, Tester.FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), Tester.IMAGE_STATUS_FAILED);
+                _tester.TestStopAsync();
+                _tester.ConsoleMsgError(ex.ToString());
+            }
             return value;
         }
 
@@ -249,12 +260,23 @@ namespace HatFrameworkDev
             int step = _tester.SendMessage($"GetValueFromElementAsync(\"{by}\", \"{locator}\")", Tester.PROCESS, "Получение значения из элемент", Tester.IMAGE_STATUS_PROCESS);
             if (_tester.DefineTestStop(step) == true) return "";
 
-            string script = "(function(){";
-            script += $"var frame = window.frames[{_index}].document;";
-            if (by == Tester.BY_CSS) script += $"var element = frame.querySelector(\"{locator}\"); return element.value;";
-            else if (by == Tester.BY_XPATH) script += $"var element = frame.evaluate(\"{locator}\", frame, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue; return element.value;";
-            script += "}());";
-            string value = await execute(script, step, $"Получено значение из элемента", $"Не удалось найти или получить данные из элемента по локатору: {locator}");
+            string value = "";
+            try
+            {
+                string script = "(function(){";
+                script += $"var frame = window.frames[{_index}].document;";
+                if (by == Tester.BY_CSS) script += $"var element = frame.querySelector(\"{locator}\"); return element.value;";
+                else if (by == Tester.BY_XPATH) script += $"var element = frame.evaluate(\"{locator}\", frame, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue; return element.value;";
+                script += "}());";
+                value = await execute(script, step, $"Получено значение из элемента", $"Не удалось найти или получить данные из элемента по локатору: {locator}");
+                if (value.Length > 1) value = value.Substring(1, value.Length - 2);
+            }
+            catch (Exception ex)
+            {
+                _tester.EditMessage(step, null, Tester.FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), Tester.IMAGE_STATUS_FAILED);
+                _tester.TestStopAsync();
+                _tester.ConsoleMsgError(ex.ToString());
+            }
             return value;
         }
 
@@ -583,12 +605,23 @@ namespace HatFrameworkDev
             int step = _tester.SendMessage($"GetTextFromElementAsync(\"{by}\", \"{locator}\")", Tester.PROCESS, "Чтение текста из элемент", Tester.IMAGE_STATUS_PROCESS);
             if (_tester.DefineTestStop(step) == true) return "";
 
-            string script = "(function(){";
-            script += $"var frame = window.frames[{_index}].document;";
-            if (by == Tester.BY_CSS) script += "var element = frame.querySelector(\"" + locator + "\"); return element.innerText;";
-            else if (by == Tester.BY_XPATH) script += $"var element = frame.evaluate(\"{locator}\", frame, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue; return element.innerText;";
-            script += "}());";
-            string value = await execute(script, step, $"Прочитан текст из элемента", $"Не удалось найти или прочитать текст из элемента по локатору: {locator}");
+            string value = "";
+            try
+            {
+                string script = "(function(){";
+                script += $"var frame = window.frames[{_index}].document;";
+                if (by == Tester.BY_CSS) script += "var element = frame.querySelector(\"" + locator + "\"); return element.innerText;";
+                else if (by == Tester.BY_XPATH) script += $"var element = frame.evaluate(\"{locator}\", frame, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue; return element.innerText;";
+                script += "}());";
+                value = await execute(script, step, $"Прочитан текст из элемента", $"Не удалось найти или прочитать текст из элемента по локатору: {locator}");
+                if (value.Length > 1) value = value.Substring(1, value.Length - 2);
+            }
+            catch (Exception ex)
+            {
+                _tester.EditMessage(step, null, Tester.FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), Tester.IMAGE_STATUS_FAILED);
+                _tester.TestStopAsync();
+                _tester.ConsoleMsgError(ex.ToString());
+            }
             return value;
         }
 

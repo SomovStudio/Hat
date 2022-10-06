@@ -494,6 +494,8 @@ namespace HatFrameworkDev
             try
             {
                 int step = SendMessage($"BrowserSizeAsync({width}, {height})", PROCESS, "Изменяется размер браузера", IMAGE_STATUS_PROCESS);
+                if (DefineTestStop(step) == true) return;
+
                 browserResize.Invoke(BrowserWindow, new object[] { width, height });
                 EditMessage(step, null, COMPLETED, "Размер браузера изменён", IMAGE_STATUS_MESSAGE);
             }
@@ -508,6 +510,8 @@ namespace HatFrameworkDev
             try
             {
                 int step = SendMessage($"BrowserFullScreenAsync()", PROCESS, "Изменяется размер браузера", IMAGE_STATUS_PROCESS);
+                if (DefineTestStop(step) == true) return;
+
                 browserResize.Invoke(BrowserWindow, new object[] { -1, -1 });
                 EditMessage(step, null, COMPLETED, "Размер браузера изменён", IMAGE_STATUS_MESSAGE);
             }
@@ -522,6 +526,8 @@ namespace HatFrameworkDev
             try
             {
                 int step = SendMessage($"BrowserSetUserAgentAsync({value})", PROCESS, "Изменяется значение User-Agent", IMAGE_STATUS_PROCESS);
+                if (DefineTestStop(step) == true) return;
+
                 browserUserAgent.Invoke(BrowserWindow, new object[] { value });
                 EditMessage(step, null, COMPLETED, "Значение User-Agent изменено", IMAGE_STATUS_MESSAGE);
             }
@@ -537,6 +543,8 @@ namespace HatFrameworkDev
             try
             {
                 int step = SendMessage($"BrowserGetUserAgentAsync()", PROCESS, "Получение значения User-Agent", IMAGE_STATUS_PROCESS);
+                if (DefineTestStop(step) == true) return "";
+
                 userAgent = BrowserView.CoreWebView2.Settings.UserAgent;
                 EditMessage(step, null, COMPLETED, $"Из User-Agent получено значение: {userAgent}", IMAGE_STATUS_MESSAGE);
             }
@@ -553,6 +561,8 @@ namespace HatFrameworkDev
             try
             {
                 int step = SendMessage($"BrowserGetErrorsAsync()", PROCESS, "Получение списка ошибок и предупреждений браузера", IMAGE_STATUS_PROCESS);
+                if (DefineTestStop(step) == true) return list;
+
                 list = (List<string>)browserGetErrors.Invoke(BrowserWindow, null);
                 EditMessage(step, null, COMPLETED, "Получен список ошибок и предупреждений браузера", IMAGE_STATUS_MESSAGE);
             }
@@ -569,6 +579,8 @@ namespace HatFrameworkDev
             try
             {
                 int step = SendMessage($"BrowserGetNetworkAsync()", PROCESS, "Получение списка событий браузера (network)", IMAGE_STATUS_PROCESS);
+                if (DefineTestStop(step) == true) return "";
+
                 string script =
                 @"(function(){
                 var performance = window.performance || window.mozPerformance || window.msPerformance || window.webkitPerformance || {};
@@ -662,8 +674,8 @@ namespace HatFrameworkDev
             {
                 BrowserView.CoreWebView2.BasicAuthenticationRequested += delegate (object sender, CoreWebView2BasicAuthenticationRequestedEventArgs args)
                 {
-                    args.Response.UserName = "zion";
-                    args.Response.Password = "newautotestreport";
+                    args.Response.UserName = user;
+                    args.Response.Password = pass;
                     EditMessage(step, null, COMPLETED, $"Баговая авторизация - выполнена", IMAGE_STATUS_MESSAGE);
                 };
             }
@@ -694,9 +706,10 @@ namespace HatFrameworkDev
             }
         }
 
-        public async Task BrowserPageReloadAsync()
+        public async Task BrowserPageReloadAsync(int sec)
         {
-            int step = SendMessage($"BrowserPageReloadAsync()", PROCESS, "Перезагрузка страницы", IMAGE_STATUS_PROCESS);
+            statusPageLoad = false;
+            int step = SendMessage($"BrowserPageReloadAsync({sec})", PROCESS, "Перезагрузка страницы", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return;
 
             try
@@ -708,7 +721,20 @@ namespace HatFrameworkDev
                 script += "}());";
                 string result = await executeJS(script);
                 BrowserView.Reload();
-                EditMessage(step, null, PASSED, "Перезагрузка страницы выполнена", IMAGE_STATUS_MESSAGE);
+
+                for (int i = 0; i < sec; i++)
+                {
+                    await Task.Delay(1000);
+                    if (statusPageLoad == true) break;
+                    if (DefineTestStop(step) == true) return;
+                }
+
+                if (statusPageLoad == true) EditMessage(step, null, PASSED, "Перезагрузка страницы выполнена", IMAGE_STATUS_MESSAGE);
+                else
+                {
+                    EditMessage(step, null, FAILED, "Страница не загружена", IMAGE_STATUS_FAILED);
+                    TestStopAsync();
+                }
             }
             catch (Exception ex)
             {
@@ -1803,8 +1829,19 @@ namespace HatFrameworkDev
             int step = SendMessage($"GetValueFromElementByIdAsync('{id}')", PROCESS, "Получение значения из элемент", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return "";
 
-            string script = "(function(){ var element = document.getElementById('" + id + "'); return element.value; }());";
-            string value = await execute(script, step, $"Получено значение из элемента", $"Не удалось найти или получить данные из элемента с ID: {id}");
+            string value = "";
+            try
+            {
+                string script = "(function(){ var element = document.getElementById('" + id + "'); return element.value; }());";
+                value = await execute(script, step, $"Получено значение из элемента", $"Не удалось найти или получить данные из элемента с ID: {id}");
+                if (value.Length > 1) value = value.Substring(1, value.Length - 2);
+            }
+            catch (Exception ex)
+            {
+                EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
+                TestStopAsync();
+                ConsoleMsgError(ex.ToString());
+            }
             return value;
         }
 
@@ -1813,8 +1850,19 @@ namespace HatFrameworkDev
             int step = SendMessage($"GetValueFromElementByClassAsync('{_class}', {index})", PROCESS, "Получение значения из элемент", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return "";
 
-            string script = "(function(){ var element = document.getElementsByClassName('" + _class + "')[" + index + "]; return element.value; }());";
-            string value = await execute(script, step, $"Получено значение из элемента", $"Не удалось найти или получить данные из элемента по Class: {_class} (Index: {index})");
+            string value = "";
+            try
+            {
+                string script = "(function(){ var element = document.getElementsByClassName('" + _class + "')[" + index + "]; return element.value; }());";
+                value = await execute(script, step, $"Получено значение из элемента", $"Не удалось найти или получить данные из элемента по Class: {_class} (Index: {index})");
+                if (value.Length > 1) value = value.Substring(1, value.Length - 2);
+            }
+            catch (Exception ex)
+            {
+                EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
+                TestStopAsync();
+                ConsoleMsgError(ex.ToString());
+            }
             return value;
         }
 
@@ -1823,8 +1871,19 @@ namespace HatFrameworkDev
             int step = SendMessage($"GetValueFromElementByNameAsync('{name}', {index})", PROCESS, "Получение значения из элемент", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return "";
 
-            string script = "(function(){ var element = document.getElementsByName('" + name + "')[" + index + "]; return element.value; }());";
-            string value = await execute(script, step, $"Получено значение из элемента", $"Не удалось найти или получить данные из элемента по Name: {name} (Index: {index})");
+            string value = "";
+            try
+            {
+                string script = "(function(){ var element = document.getElementsByName('" + name + "')[" + index + "]; return element.value; }());";
+                value = await execute(script, step, $"Получено значение из элемента", $"Не удалось найти или получить данные из элемента по Name: {name} (Index: {index})");
+                if (value.Length > 1) value = value.Substring(1, value.Length - 2);
+            }
+            catch (Exception ex)
+            {
+                EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
+                TestStopAsync();
+                ConsoleMsgError(ex.ToString());
+            }
             return value;
         }
 
@@ -1833,8 +1892,19 @@ namespace HatFrameworkDev
             int step = SendMessage($"GetValueFromElementByTagAsync('{tag}', {index})", PROCESS, "Получение значения из элемент", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return "";
 
-            string script = "(function(){ var element = document.getElementsByTagName('" + tag + "')[" + index + "]; return element.value; }());";
-            string value = await execute(script, step, $"Получено значение из элемента", $"Не удалось найти или получить данные из элемента по Tag: {tag} (Index: {index})");
+            string value = "";
+            try
+            {
+                string script = "(function(){ var element = document.getElementsByTagName('" + tag + "')[" + index + "]; return element.value; }());";
+                value = await execute(script, step, $"Получено значение из элемента", $"Не удалось найти или получить данные из элемента по Tag: {tag} (Index: {index})");
+                if (value.Length > 1) value = value.Substring(1, value.Length - 2);
+            }
+            catch (Exception ex)
+            {
+                EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
+                TestStopAsync();
+                ConsoleMsgError(ex.ToString());
+            }
             return value;
         }
 
@@ -1843,11 +1913,22 @@ namespace HatFrameworkDev
             int step = SendMessage($"GetValueFromElementAsync(\"{by}\", \"{locator}\")", PROCESS, "Получение значения из элемент", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return "";
 
-            string script = "(function(){";
-            if (by == BY_CSS) script += $"var element = document.querySelector(\"{locator}\"); return element.value;";
-            else if (by == BY_XPATH) script += $"var element = document.evaluate(\"{locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue; return element.value;";
-            script += "}());";
-            string value = await execute(script, step, $"Получено значение из элемента", $"Не удалось найти или получить данные из элемента по локатору: {locator}");
+            string value = "";
+            try
+            {
+                string script = "(function(){";
+                if (by == BY_CSS) script += $"var element = document.querySelector(\"{locator}\"); return element.value;";
+                else if (by == BY_XPATH) script += $"var element = document.evaluate(\"{locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue; return element.value;";
+                script += "}());";
+                value = await execute(script, step, $"Получено значение из элемента", $"Не удалось найти или получить данные из элемента по локатору: {locator}");
+                if (value.Length > 1) value = value.Substring(1, value.Length - 2);
+            }
+            catch (Exception ex)
+            {
+                EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
+                TestStopAsync();
+                ConsoleMsgError(ex.ToString());
+            }
             return value;
         }
 
@@ -1922,8 +2003,19 @@ namespace HatFrameworkDev
             int step = SendMessage($"GetTextFromElementByIdAsync('{id}')", PROCESS, "Чтение текста из элемент", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return "";
 
-            string script = "(function(){ var element = document.getElementById('" + id + "'); return element.innerText; }());";
-            string value = await execute(script, step, $"Прочитан текст из элемента", $"Не удалось найти или прочитать текст из элемента с ID: {id}");
+            string value = "";
+            try
+            {
+                string script = "(function(){ var element = document.getElementById('" + id + "'); return element.innerText; }());";
+                value = await execute(script, step, $"Прочитан текст из элемента", $"Не удалось найти или прочитать текст из элемента с ID: {id}");
+                if (value.Length > 1) value = value.Substring(1, value.Length - 2);
+            }
+            catch (Exception ex)
+            {
+                EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
+                TestStopAsync();
+                ConsoleMsgError(ex.ToString());
+            }
             return value;
         }
 
@@ -1932,8 +2024,19 @@ namespace HatFrameworkDev
             int step = SendMessage($"GetTextFromElementByClassAsync('{_class}', {index})", PROCESS, "Чтение текста из элемент", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return "";
 
-            string script = "(function(){ var element = document.getElementsByClassName('" + _class + "')[" + index + "]; return element.innerText; }());";
-            string value = await execute(script, step, $"Прочитан текст из элемента", $"Не удалось найти или прочитать текст из элемента по Class: {_class} (Index: {index})");
+            string value = "";
+            try
+            {
+                string script = "(function(){ var element = document.getElementsByClassName('" + _class + "')[" + index + "]; return element.innerText; }());";
+                value = await execute(script, step, $"Прочитан текст из элемента", $"Не удалось найти или прочитать текст из элемента по Class: {_class} (Index: {index})");
+                if (value.Length > 1) value = value.Substring(1, value.Length - 2);
+            }
+            catch (Exception ex)
+            {
+                EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
+                TestStopAsync();
+                ConsoleMsgError(ex.ToString());
+            }
             return value;
         }
 
@@ -1942,8 +2045,19 @@ namespace HatFrameworkDev
             int step = SendMessage($"GetTextFromElementByNameAsync('{name}', {index})", PROCESS, "Чтение текста из элемент", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return "";
 
-            string script = "(function(){ var element = document.getElementsByName('" + name + "')[" + index + "]; return element.innerText; }());";
-            string value = await execute(script, step, $"Прочитан текст из элемента", $"Не удалось найти или прочитать текст из элемента по Name: {name} (Index: {index})");
+            string value = "";
+            try
+            {
+                string script = "(function(){ var element = document.getElementsByName('" + name + "')[" + index + "]; return element.innerText; }());";
+                value = await execute(script, step, $"Прочитан текст из элемента", $"Не удалось найти или прочитать текст из элемента по Name: {name} (Index: {index})");
+                if (value.Length > 1) value = value.Substring(1, value.Length - 2);
+            }
+            catch (Exception ex)
+            {
+                EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
+                TestStopAsync();
+                ConsoleMsgError(ex.ToString());
+            }
             return value;
         }
 
@@ -1952,8 +2066,19 @@ namespace HatFrameworkDev
             int step = SendMessage($"GetTextFromElementByTagAsync('{tag}', {index})", PROCESS, "Чтение текста из элемент", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return "";
 
-            string script = "(function(){ var element = document.getElementsByTagName('" + tag + "')[" + index + "]; return element.innerText; }());";
-            string value = await execute(script, step, $"Прочитан текст из элемента", $"Не удалось найти или прочитать текст из элемента по Tag: {tag} (Index: {index})");
+            string value = "";
+            try
+            {
+                string script = "(function(){ var element = document.getElementsByTagName('" + tag + "')[" + index + "]; return element.innerText; }());";
+                value = await execute(script, step, $"Прочитан текст из элемента", $"Не удалось найти или прочитать текст из элемента по Tag: {tag} (Index: {index})");
+                if(value.Length > 1) value = value.Substring(1, value.Length - 2);
+            }
+            catch (Exception ex)
+            {
+                EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
+                TestStopAsync();
+                ConsoleMsgError(ex.ToString());
+            }
             return value;
         }
 
@@ -1962,11 +2087,22 @@ namespace HatFrameworkDev
             int step = SendMessage($"GetTextFromElementAsync(\"{by}\", \"{locator}\")", PROCESS, "Чтение текста из элемент", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return "";
 
-            string script = "(function(){";
-            if (by == BY_CSS) script += "var element = document.querySelector(\"" + locator + "\"); return element.innerText;";
-            else if (by == BY_XPATH) script += $"var element = document.evaluate(\"{locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue; return element.innerText;";
-            script += "}());";
-            string value = await execute(script, step, $"Прочитан текст из элемента", $"Не удалось найти или прочитать текст из элемента по локатору: {locator}");
+            string value = "";
+            try
+            {
+                string script = "(function(){";
+                if (by == BY_CSS) script += "var element = document.querySelector(\"" + locator + "\"); return element.innerText;";
+                else if (by == BY_XPATH) script += $"var element = document.evaluate(\"{locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue; return element.innerText;";
+                script += "}());";
+                value = await execute(script, step, $"Прочитан текст из элемента", $"Не удалось найти или прочитать текст из элемента по локатору: {locator}");
+                if (value.Length > 1) value = value.Substring(1, value.Length - 2);
+            }
+            catch (Exception ex)
+            {
+                EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
+                TestStopAsync();
+                ConsoleMsgError(ex.ToString());
+            }
             return value;
         }
 
@@ -2084,8 +2220,19 @@ namespace HatFrameworkDev
             int step = SendMessage($"GetAttributeFromElementByIdAsync('{id}', '{attribute}')", PROCESS, $"Получение аттрибута {attribute} из элемент", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return "";
 
-            string script = "(function(){ var element = document.getElementById('" + id + "'); return element.getAttribute('" + attribute + "'); }());";
-            string value = await execute(script, step, $"Получено значение из аттрибута {attribute}", $"Не удалось найти или получить аттрибут из элемента с ID: {id}");
+            string value = "";
+            try
+            {
+                string script = "(function(){ var element = document.getElementById('" + id + "'); return element.getAttribute('" + attribute + "'); }());";
+                value = await execute(script, step, $"Получено значение из аттрибута {attribute}", $"Не удалось найти или получить аттрибут из элемента с ID: {id}");
+                if (value.Length > 1) value = value.Substring(1, value.Length - 2);
+            }
+            catch (Exception ex)
+            {
+                EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
+                TestStopAsync();
+                ConsoleMsgError(ex.ToString());
+            }
             return value;
         }
 
@@ -2094,8 +2241,19 @@ namespace HatFrameworkDev
             int step = SendMessage($"GetAttributeFromElementByClassAsync('{_class}', {index}, '{attribute}')", PROCESS, $"Получение аттрибута {attribute} из элемент", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return "";
 
-            string script = "(function(){ var element = document.getElementsByClassName('" + _class + "')[" + index + "]; return element.getAttribute('" + attribute + "'); }());";
-            string value = await execute(script, step, $"Получено значение из аттрибута {attribute}", $"Не удалось найти или получить аттрибут из элемента по Class: {_class} (Index: {index})");
+            string value = "";
+            try
+            {
+                string script = "(function(){ var element = document.getElementsByClassName('" + _class + "')[" + index + "]; return element.getAttribute('" + attribute + "'); }());";
+                value = await execute(script, step, $"Получено значение из аттрибута {attribute}", $"Не удалось найти или получить аттрибут из элемента по Class: {_class} (Index: {index})");
+                if (value.Length > 1) value = value.Substring(1, value.Length - 2);
+            }
+            catch (Exception ex)
+            {
+                EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
+                TestStopAsync();
+                ConsoleMsgError(ex.ToString());
+            }
             return value;
         }
 
@@ -2104,8 +2262,19 @@ namespace HatFrameworkDev
             int step = SendMessage($"GetAttributeFromElementByNameAsync('{name}', {index}, '{attribute}')", PROCESS, $"Получение аттрибута {attribute} из элемент", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return "";
 
-            string script = "(function(){ var element = document.getElementsByName('" + name + "')[" + index + "]; return element.getAttribute('" + attribute + "'); }());";
-            string value = await execute(script, step, $"Получено значение из аттрибута {attribute}", $"Не удалось найти или получить аттрибут из элемента по Name: {name} (Index: {index})");
+            string value = "";
+            try
+            {
+                string script = "(function(){ var element = document.getElementsByName('" + name + "')[" + index + "]; return element.getAttribute('" + attribute + "'); }());";
+                value = await execute(script, step, $"Получено значение из аттрибута {attribute}", $"Не удалось найти или получить аттрибут из элемента по Name: {name} (Index: {index})");
+                if (value.Length > 1) value = value.Substring(1, value.Length - 2);
+            }
+            catch (Exception ex)
+            {
+                EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
+                TestStopAsync();
+                ConsoleMsgError(ex.ToString());
+            }
             return value;
         }
 
@@ -2114,8 +2283,19 @@ namespace HatFrameworkDev
             int step = SendMessage($"GetAttributeFromElementByTagAsync('{tag}', {index}, '{attribute}')", PROCESS, $"Получение аттрибута {attribute} из элемент", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return "";
 
-            string script = "(function(){ var element = document.getElementsByTagName('" + tag + "')[" + index + "]; return element.getAttribute('" + attribute + "'); }());";
-            string value = await execute(script, step, $"Получено значение из аттрибута {attribute}", $"Не удалось найти или получить аттрибут из элемента по Tag: {tag} (Index: {index})");
+            string value = "";
+            try
+            {
+                string script = "(function(){ var element = document.getElementsByTagName('" + tag + "')[" + index + "]; return element.getAttribute('" + attribute + "'); }());";
+                value = await execute(script, step, $"Получено значение из аттрибута {attribute}", $"Не удалось найти или получить аттрибут из элемента по Tag: {tag} (Index: {index})");
+                if (value.Length > 1) value = value.Substring(1, value.Length - 2);
+            }
+            catch (Exception ex)
+            {
+                EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
+                TestStopAsync();
+                ConsoleMsgError(ex.ToString());
+            }
             return value;
         }
 
@@ -2124,12 +2304,23 @@ namespace HatFrameworkDev
             int step = SendMessage($"GetAttributeFromElementAsync(\"{by}\", \"{locator}\", \"{attribute}\")", PROCESS, $"Получение аттрибута {attribute} из элемент", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return "";
 
-            string script = "(function(){";
-            if (by == BY_CSS) script += $"var element = document.querySelector(\"{locator}\");";
-            else if (by == BY_XPATH) script += $"var element = document.evaluate(\"{locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
-            script += $"return element.getAttribute('{attribute}');";
-            script += "}());";
-            string value = await execute(script, step, $"Получено значение из аттрибута {attribute}", $"Не удалось найти или получить аттрибут из элемента по локатору: {locator}");
+            string value = "";
+            try
+            {
+                string script = "(function(){";
+                if (by == BY_CSS) script += $"var element = document.querySelector(\"{locator}\");";
+                else if (by == BY_XPATH) script += $"var element = document.evaluate(\"{locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
+                script += $"return element.getAttribute('{attribute}');";
+                script += "}());";
+                value = await execute(script, step, $"Получено значение из аттрибута {attribute}", $"Не удалось найти или получить аттрибут из элемента по локатору: {locator}");
+                if (value.Length > 1) value = value.Substring(1, value.Length - 2);
+            }
+            catch (Exception ex)
+            {
+                EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
+                TestStopAsync();
+                ConsoleMsgError(ex.ToString());
+            }
             return value;
         }
 
@@ -2264,7 +2455,7 @@ namespace HatFrameworkDev
                 script += "json += ']';";
                 script += "return json;";
             }
-            else if(by == BY_XPATH)
+            else if (by == BY_XPATH)
             {
                 script += $"var element = document.evaluate(\"{locator}\", document, null, XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);";
                 script += "var json = '[';";
@@ -2279,7 +2470,6 @@ namespace HatFrameworkDev
                 script += "return json;";
             }
             script += "}());";
-
             string result = await execute(script, step, $"Получение json из аттрибутов {attribute}", $"Не удалось найти или получить аттрибуты из элементов по локатору: {locator}");
             List<string> Json_Array = null;
             if (result != "null" && result != null)
@@ -2832,6 +3022,8 @@ namespace HatFrameworkDev
         public async Task<bool> AssertEqualsAsync(string expected, string actual)
         {
             int step = SendMessage("AssertEqualsAsync(" + expected + ", " + actual + ")", PROCESS, "Проверка совпадения ожидаемого и актуального значения", IMAGE_STATUS_PROCESS);
+            if (DefineTestStop(step) == true) return false;
+
             if (expected == actual)
             {
                 EditMessage(step, null, PASSED, "Ожидаемое и актуальное значение совпадают", IMAGE_STATUS_PASSED);
@@ -2842,6 +3034,7 @@ namespace HatFrameworkDev
             {
                 EditMessage(step, null, FAILED, "Ожидаемое и актуальное значение не совпадают", IMAGE_STATUS_FAILED);
                 if (assertStatus == null || assertStatus == PASSED) assertStatus = FAILED;
+                TestStopAsync();
                 return false;
             }
         }
@@ -2849,6 +3042,8 @@ namespace HatFrameworkDev
         public async Task<bool> AssertNotEqualsAsync(string expected, string actual)
         {
             int step = SendMessage("AssertNotEqualsAsync(" + expected + ", " + actual + ")", PROCESS, "Проверка не совпадения ожидаемого и актуального значения", IMAGE_STATUS_PROCESS);
+            if (DefineTestStop(step) == true) return false;
+
             if (expected != actual)
             {
                 EditMessage(step, null, PASSED, "Ожидаемое и актуальное значение не совпадают", IMAGE_STATUS_PASSED);
@@ -2859,6 +3054,7 @@ namespace HatFrameworkDev
             {
                 EditMessage(step, null, FAILED, "Ожидаемое и актуальное значение совпадают", IMAGE_STATUS_FAILED);
                 if (assertStatus == null || assertStatus == PASSED) assertStatus = FAILED;
+                TestStopAsync();
                 return false;
             }
         }
@@ -2866,6 +3062,8 @@ namespace HatFrameworkDev
         public async Task<bool> AssertTrueAsync(bool condition)
         {
             int step = SendMessage("AssertTrueAsync(" + condition.ToString() + ")", PROCESS, "Проверка значения которое должно быть true", IMAGE_STATUS_PROCESS);
+            if (DefineTestStop(step) == true) return false;
+
             if (condition == true)
             {
                 EditMessage(step, null, PASSED, "Проверенное значение соответствует true", IMAGE_STATUS_PASSED);
@@ -2876,6 +3074,7 @@ namespace HatFrameworkDev
             {
                 EditMessage(step, null, FAILED, "Проверенное значение соответствует false (должно быть true)", IMAGE_STATUS_FAILED);
                 if (assertStatus == null || assertStatus == PASSED) assertStatus = FAILED;
+                TestStopAsync();
                 return false;
             }
         }
@@ -2883,6 +3082,8 @@ namespace HatFrameworkDev
         public async Task<bool> AssertFalseAsync(bool condition)
         {
             int step = SendMessage("AssertFalseAsync(" + condition.ToString() + ")", PROCESS, "Проверка значения которое должно быть false", IMAGE_STATUS_PROCESS);
+            if (DefineTestStop(step) == true) return false;
+
             if (condition == false)
             {
                 EditMessage(step, null, PASSED, "Проверенное значение соответствует false", IMAGE_STATUS_PASSED);
@@ -2893,6 +3094,7 @@ namespace HatFrameworkDev
             {
                 EditMessage(step, null, FAILED, "Проверенное значение соответствует true (должно быть false)", IMAGE_STATUS_FAILED);
                 if (assertStatus == null || assertStatus == PASSED) assertStatus = FAILED;
+                TestStopAsync();
                 return false;
             }
         }
@@ -2903,7 +3105,9 @@ namespace HatFrameworkDev
             if(obj != null) value = obj.ToString();
             
             int step = SendMessage("AssertNotNull(" + value + ")", PROCESS, "Проверка значения которое не должно быть null", IMAGE_STATUS_PROCESS);
-            if(obj != null)
+            if (DefineTestStop(step) == true) return false;
+
+            if (obj != null)
             {
                 EditMessage(step, null, PASSED, "Проверенное значение не null", IMAGE_STATUS_PASSED);
                 if (assertStatus == null || assertStatus == PASSED) assertStatus = PASSED;
@@ -2913,6 +3117,7 @@ namespace HatFrameworkDev
             {
                 EditMessage(step, null, FAILED, "Проверенное значение null (должно быть не null)", IMAGE_STATUS_FAILED);
                 if (assertStatus == null || assertStatus == PASSED) assertStatus = FAILED;
+                TestStopAsync();
                 return false;
             }
         }
@@ -2923,6 +3128,8 @@ namespace HatFrameworkDev
             if (obj != null) value = obj.ToString();
 
             int step = SendMessage("AssertNull(" + value + ")", PROCESS, "Проверка значения которое должно быть null", IMAGE_STATUS_PROCESS);
+            if (DefineTestStop(step) == true) return false;
+
             if (obj == null)
             {
                 EditMessage(step, null, PASSED, "Проверенное значение null", IMAGE_STATUS_PASSED);
@@ -2933,6 +3140,7 @@ namespace HatFrameworkDev
             {
                 EditMessage(step, null, FAILED, "Проверенное значение не null (должно быть null)", IMAGE_STATUS_FAILED);
                 if (assertStatus == null || assertStatus == PASSED) assertStatus = FAILED;
+                TestStopAsync();
                 return false;
             }
         }
@@ -2943,6 +3151,7 @@ namespace HatFrameworkDev
         {
             List<string> errors = await BrowserGetErrorsAsync();
             int step = SendMessage("AssertNoErrors()", PROCESS, "Проверка отсутствия ошибок в консоли", IMAGE_STATUS_PROCESS);
+            if (DefineTestStop(step) == true) return false;
 
             int countErrors = 0;
             string textErrors = "";
@@ -2961,6 +3170,7 @@ namespace HatFrameworkDev
             {
                 EditMessage(step, null, FAILED, "В консоли присутствует " + countErrors.ToString() + " ошибок." + Environment.NewLine + textErrors, Tester.IMAGE_STATUS_FAILED);
                 if (assertStatus == null || assertStatus == PASSED) assertStatus = FAILED;
+                TestStopAsync();
                 result = false;
             }
             else
@@ -2979,7 +3189,8 @@ namespace HatFrameworkDev
             int step = -1;
             if (presence == true) step = SendMessage("AssertNetworkEventsAsync(" + presence + ", [...])", PROCESS, "Проверка присутствия событий в Network", IMAGE_STATUS_PROCESS);
             else step = SendMessage("AssertNetworkEventsAsync(" + presence + ", [...])", PROCESS, "Проверка отсутствия событий в Network", IMAGE_STATUS_PROCESS);
-            
+            if (DefineTestStop(step) == true) return false;
+
             bool actual;
             bool result = true;
             string report = "";
@@ -3002,6 +3213,7 @@ namespace HatFrameworkDev
                 if (presence == true) EditMessage(step, null, FAILED, "В Network отсутствуют следующие события " + Environment.NewLine + report, Tester.IMAGE_STATUS_FAILED);
                 else EditMessage(step, null, FAILED, "В Network присутствуют следующие события " + Environment.NewLine + report, Tester.IMAGE_STATUS_FAILED);
                 if (assertStatus == null || assertStatus == PASSED) assertStatus = FAILED;
+                TestStopAsync();
             }
 
             return result;
