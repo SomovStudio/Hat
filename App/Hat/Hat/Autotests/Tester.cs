@@ -406,11 +406,11 @@ namespace HatFrameworkDev
                 int step = SendMessage("TestEndAsync()", PROCESS, "Завершение теста", IMAGE_STATUS_PROCESS);
                 if (assertStatus == FAILED)
                 {
-                    ConsoleMsg("Тест завершен - провельно");
+                    ConsoleMsg("Тест завершен - провально");
                     EditMessage(step, null, FAILED, "Тест завершен - шаги теста выполнены неуспешно", IMAGE_STATUS_FAILED);
                     resultAutotestSuccess(false);
 
-                    browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { Environment.NewLine + "Тест завершен - провельно", default, ConsoleColor.DarkRed, ConsoleColor.White, true });
+                    browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { Environment.NewLine + "Тест завершен - провально", default, ConsoleColor.DarkRed, ConsoleColor.White, true });
                     browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { "-------------------------------" + Environment.NewLine, default, default, default, false });
 
                     Task screenshot = (Task)saveReportScreenshotAsync.Invoke(BrowserWindow, null);
