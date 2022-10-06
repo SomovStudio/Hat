@@ -72,7 +72,7 @@ namespace Hat
             Console.WriteLine("Tests ended. Finished: FAILURE");
             Console.ResetColor();
 
-            Environment.Exit(0);
+            Environment.Exit(1);
         }
     }
 }
