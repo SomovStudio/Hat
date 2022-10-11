@@ -278,7 +278,7 @@ namespace HatFramework
                 if (action != null)
                 {
                     message = Environment.NewLine + "Действие: " + action;
-                    browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { message, default, default, default, true });
+                    if (status == PASSED || status == FAILED || status == WARNING) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { message, default, default, default, true });
                 }
 
                 message = "Статус: ";
@@ -286,10 +286,10 @@ namespace HatFramework
                 if (status == PASSED) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { status, default, ConsoleColor.Black, ConsoleColor.DarkGreen, true });
                 else if (status == FAILED) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { status, default, ConsoleColor.Black, ConsoleColor.DarkRed, true });
                 else if (status == WARNING) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { status, default, ConsoleColor.Black, ConsoleColor.DarkYellow, true });
-                else browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { status, default, default, default, true });
+                //else browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { status, default, default, default, true });
 
                 message = "Комментарий: " + comment;
-                browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { message, default, default, default, true });
+                if (status == PASSED || status == FAILED || status == WARNING) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { message, default, default, default, true });
 
                 int index = (int)browserSendMessageStep.Invoke(BrowserWindow, new object[] { action, status, comment, image });
                 return index;
@@ -309,7 +309,7 @@ namespace HatFramework
                 if (action != null)
                 {
                     message = Environment.NewLine + "Действие: " + action;
-                    browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { message, default, default, default, true });
+                    if (status == PASSED || status == FAILED || status == WARNING) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { message, default, default, default, true });
                 }
 
                 message = "Статус: ";
@@ -317,10 +317,10 @@ namespace HatFramework
                 if (status == PASSED) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { status, default, ConsoleColor.Black, ConsoleColor.DarkGreen, true });
                 else if (status == FAILED) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { status, default, ConsoleColor.Black, ConsoleColor.DarkRed, true });
                 else if (status == WARNING) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { status, default, ConsoleColor.Black, ConsoleColor.DarkYellow, true });
-                else browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { status, default, default, default, true });
+                //else browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { status, default, default, default, true });
 
                 message = "Комментарий: " + comment;
-                browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { message, default, default, default, true });
+                if (status == PASSED || status == FAILED || status == WARNING) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { message, default, default, default, true });
 
                 browserEditMessageStep.Invoke(BrowserWindow, new object[] { index, action, status, comment, image });
             }
@@ -1291,7 +1291,7 @@ namespace HatFramework
                 script += "(function(){ ";
                 if (by == BY_CSS) script += $"var elem = document.querySelector(\"{locator}\");";
                 else if (by == BY_XPATH) script += $"var elem = document.evaluate(\"{locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
-                script += "return elem;";
+                script += "return elem.innerHTML;";
                 script += "}());";
 
                 string result = null;
@@ -1334,7 +1334,7 @@ namespace HatFramework
                 script += "(function(){ ";
                 if (by == BY_CSS) script += $"var elem = document.querySelector(\"{locator}\");";
                 else if (by == BY_XPATH) script += $"var elem = document.evaluate(\"{locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
-                script += "return elem;";
+                script += "return elem.innerHTML;";
                 script += "}());";
 
                 string result = null;
@@ -1375,7 +1375,7 @@ namespace HatFramework
                 string script = "";
                 script += "(function(){ ";
                 script += $"var elem = document.getElementById('{id}');";
-                script += "return elem;";
+                script += "return elem.innerHTML;";
                 script += "}());";
 
                 string result = null;
@@ -1413,7 +1413,7 @@ namespace HatFramework
                 string script = "";
                 script += "(function(){ ";
                 script += $"var elem = document.getElementsByClassName('{_class}')[{index}];";
-                script += "return elem;";
+                script += "return elem.innerHTML;";
                 script += "}());";
 
                 string result = null;
@@ -1451,7 +1451,7 @@ namespace HatFramework
                 string script = "";
                 script += "(function(){ ";
                 script += $"var elem = document.getElementsByName('{name}')[{index}];";
-                script += "return elem;";
+                script += "return elem.innerHTML;";
                 script += "}());";
 
                 string result = null;
@@ -1489,7 +1489,7 @@ namespace HatFramework
                 string script = "";
                 script += "(function(){ ";
                 script += $"var elem = document.getElementsByTagName('{tag}')[{index}];";
-                script += "return elem;";
+                script += "return elem.innerHTML;";
                 script += "}());";
 
                 string result = null;
@@ -1528,7 +1528,7 @@ namespace HatFramework
                 script += "(function(){ ";
                 if (by == BY_CSS) script += $"var elem = document.querySelector(\"{locator}\");";
                 else if (by == BY_XPATH) script += $"var elem = document.evaluate(\"{locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
-                script += "return elem;";
+                script += "return elem.innerHTML;";
                 script += "}());";
 
                 string result = null;

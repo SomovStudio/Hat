@@ -505,7 +505,7 @@ namespace HatFramework
                 script += $"var frame = window.frames[{_index}].document;";
                 if (by == Tester.BY_CSS) script += $"var elem = frame.querySelector(\"{locator}\");";
                 else if (by == Tester.BY_XPATH) script += $"var elem = frame.evaluate(\"{locator}\", frame, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
-                script += "return elem;";
+                script += "return elem.innerHTML;";
                 script += "}());";
 
                 string result = null;
