@@ -1291,7 +1291,7 @@ namespace HatFrameworkDev
                 script += "(function(){ ";
                 if (by == BY_CSS) script += $"var elem = document.querySelector(\"{locator}\");";
                 else if (by == BY_XPATH) script += $"var elem = document.evaluate(\"{locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
-                script += "return elem;";
+                script += "return elem.innerHTML;";
                 script += "}());";
 
                 string result = null;
@@ -1334,7 +1334,7 @@ namespace HatFrameworkDev
                 script += "(function(){ ";
                 if (by == BY_CSS) script += $"var elem = document.querySelector(\"{locator}\");";
                 else if (by == BY_XPATH) script += $"var elem = document.evaluate(\"{locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
-                script += "return elem;";
+                script += "return elem.innerHTML;";
                 script += "}());";
 
                 string result = null;
@@ -1375,7 +1375,7 @@ namespace HatFrameworkDev
                 string script = "";
                 script += "(function(){ ";
                 script += $"var elem = document.getElementById('{id}');";
-                script += "return elem;";
+                script += "return elem.innerHTML;";
                 script += "}());";
 
                 string result = null;
@@ -1413,7 +1413,7 @@ namespace HatFrameworkDev
                 string script = "";
                 script += "(function(){ ";
                 script += $"var elem = document.getElementsByClassName('{_class}')[{index}];";
-                script += "return elem;";
+                script += "return elem.innerHTML;";
                 script += "}());";
 
                 string result = null;
@@ -1451,7 +1451,7 @@ namespace HatFrameworkDev
                 string script = "";
                 script += "(function(){ ";
                 script += $"var elem = document.getElementsByName('{name}')[{index}];";
-                script += "return elem;";
+                script += "return elem.innerHTML;";
                 script += "}());";
 
                 string result = null;
@@ -1489,7 +1489,7 @@ namespace HatFrameworkDev
                 string script = "";
                 script += "(function(){ ";
                 script += $"var elem = document.getElementsByTagName('{tag}')[{index}];";
-                script += "return elem;";
+                script += "return elem.innerHTML;";
                 script += "}());";
 
                 string result = null;
@@ -1528,7 +1528,7 @@ namespace HatFrameworkDev
                 script += "(function(){ ";
                 if (by == BY_CSS) script += $"var elem = document.querySelector(\"{locator}\");";
                 else if (by == BY_XPATH) script += $"var elem = document.evaluate(\"{locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
-                script += "return elem;";
+                script += "return elem.innerHTML;";
                 script += "}());";
 
                 string result = null;
