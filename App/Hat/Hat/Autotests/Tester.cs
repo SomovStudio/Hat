@@ -274,22 +274,26 @@ namespace HatFrameworkDev
         {
             try
             {
-                string message;
-                if (action != null)
+                if (assertStatus != FAILED)
                 {
-                    message = Environment.NewLine + "Действие: " + action;
-                    if (status == PASSED || status == FAILED || status == WARNING) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { message, default, default, default, true });
+                    string message;
+                    if (action != null)
+                    {
+                        message = Environment.NewLine + "Действие: " + action;
+                        browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { message, default, default, default, true });
+                    }
+
+                    message = $"Статус1[{status} | {assertStatus}]: ";
+                    browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { message, default, default, default, false });
+
+                    if (status == PASSED) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { status, default, ConsoleColor.Black, ConsoleColor.DarkGreen, true });
+                    else if (status == FAILED && assertStatus != FAILED) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { status, default, ConsoleColor.Black, ConsoleColor.DarkRed, true });
+                    else if (status == WARNING && assertStatus != FAILED) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { status, default, ConsoleColor.Black, ConsoleColor.DarkYellow, true });
+                    else browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { status, default, default, default, true });
+
+                    message = "Комментарий: " + comment;
+                    browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { message, default, default, default, true });
                 }
-
-                message = "Статус: ";
-                browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { message, default, default, default, false });
-                if (status == PASSED) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { status, default, ConsoleColor.Black, ConsoleColor.DarkGreen, true });
-                else if (status == FAILED) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { status, default, ConsoleColor.Black, ConsoleColor.DarkRed, true });
-                else if (status == WARNING) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { status, default, ConsoleColor.Black, ConsoleColor.DarkYellow, true });
-                //else browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { status, default, default, default, true });
-
-                message = "Комментарий: " + comment;
-                if (status == PASSED || status == FAILED || status == WARNING) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { message, default, default, default, true });
 
                 int index = (int)browserSendMessageStep.Invoke(BrowserWindow, new object[] { action, status, comment, image });
                 return index;
@@ -305,22 +309,27 @@ namespace HatFrameworkDev
         {
             try
             {
-                string message;
-                if (action != null)
+                if (assertStatus != FAILED)
                 {
-                    message = Environment.NewLine + "Действие: " + action;
-                    if (status == PASSED || status == FAILED || status == WARNING) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { message, default, default, default, true });
+                    string message;
+                    if (action != null)
+                    {
+                        message = Environment.NewLine + "Действие: " + action;
+                        browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { message, default, default, default, true });
+                    }
+
+                    message = $"Статус2[{status} | {assertStatus}]: ";
+                    browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { message, default, default, default, false });
+
+                    if (status == PASSED) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { status, default, ConsoleColor.Black, ConsoleColor.DarkGreen, true });
+                    else if (status == FAILED) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { status, default, ConsoleColor.Black, ConsoleColor.DarkRed, true });
+                    else if (status == WARNING) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { status, default, ConsoleColor.Black, ConsoleColor.DarkYellow, true });
+                    else browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { status, default, default, default, true });
+
+                    message = "Комментарий: " + comment;
+                    browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { message, default, default, default, true });
+
                 }
-
-                message = "Статус: ";
-                browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { message, default, default, default, false });
-                if (status == PASSED) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { status, default, ConsoleColor.Black, ConsoleColor.DarkGreen, true });
-                else if (status == FAILED) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { status, default, ConsoleColor.Black, ConsoleColor.DarkRed, true });
-                else if (status == WARNING) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { status, default, ConsoleColor.Black, ConsoleColor.DarkYellow, true });
-                //else browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { status, default, default, default, true });
-
-                message = "Комментарий: " + comment;
-                if (status == PASSED || status == FAILED || status == WARNING) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { message, default, default, default, true });
 
                 browserEditMessageStep.Invoke(BrowserWindow, new object[] { index, action, status, comment, image });
             }
