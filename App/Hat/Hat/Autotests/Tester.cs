@@ -283,7 +283,7 @@ namespace HatFrameworkDev
                         browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { message, default, default, default, true });
                     }
 
-                    message = $"Статус1[{status} | {assertStatus}]: ";
+                    message = "Статус: ";
                     browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { message, default, default, default, false });
 
                     if (status == PASSED) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { status, default, ConsoleColor.Black, ConsoleColor.DarkGreen, true });
@@ -318,7 +318,7 @@ namespace HatFrameworkDev
                         browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { message, default, default, default, true });
                     }
 
-                    message = $"Статус2[{status} | {assertStatus}]: ";
+                    message = $"Статус: ";
                     browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { message, default, default, default, false });
 
                     if (status == PASSED) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { status, default, ConsoleColor.Black, ConsoleColor.DarkGreen, true });
