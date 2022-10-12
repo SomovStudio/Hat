@@ -2587,6 +2587,10 @@ namespace Hat
             }
         }
 
-        
+        private void toolStripButton23_Click(object sender, EventArgs e)
+        {
+            try { Process.Start("cmd.exe"); }
+            catch (Exception ex) { consoleMsgError(ex.ToString()); }
+        }
     }
 }
