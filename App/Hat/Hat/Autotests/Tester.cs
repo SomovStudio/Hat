@@ -66,11 +66,14 @@ namespace HatFrameworkDev
         private bool sendFailureReportByMail = false;  // флаг: отправка Failure отчета по почте
         private bool sendSuccessReportByMail = false;  // флаг: отправка Success отчета по почте
         private string assertStatus = null;     // флаг: рузельтат проверки
+        private List<string> listRedirects;     // список редиректов
 
         public Tester(Form browserForm)
         {
             try
             {
+                listRedirects = new List<string>();
+
                 BrowserWindow = browserForm;
                 browserConsoleMsg = BrowserWindow.GetType().GetMethod("consoleMsg");
                 browserConsoleMsgError = BrowserWindow.GetType().GetMethod("consoleMsgErrorReport");
@@ -107,12 +110,28 @@ namespace HatFrameworkDev
 
         private void contentLoading(object sender, CoreWebView2ContentLoadingEventArgs e)
         {
-            //statusPageLoad = true;
+            try
+            {
+                listRedirects.Add(BrowserView.Source.ToString()); // сохраняется текущий URL в список
+            }
+            catch (Exception ex)
+            {
+                ConsoleMsgError(ex.ToString());
+            }
+            
         }
 
         private void navigationCompleted(object sender, CoreWebView2NavigationCompletedEventArgs e)
         {
-            statusPageLoad = true; // происходит когда страницы полностью загружена
+            try
+            {
+                statusPageLoad = true; // происходит когда страницы полностью загружена
+                listRedirects.Add(BrowserView.Source.ToString()); // сохраняется текущий URL в список
+            }
+            catch (Exception ex)
+            {
+                ConsoleMsgError(ex.ToString());
+            }
         }
 
         private void resultAutotestSuccess(bool success)
@@ -617,6 +636,7 @@ namespace HatFrameworkDev
 
         public async Task BrowserGoBackAsync(int sec)
         {
+            listRedirects.Clear();
             statusPageLoad = false;
             int step = SendMessage($"BrowserGoBackAsync()", PROCESS, "Выполняется действие браузера - назад", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return;
@@ -649,6 +669,7 @@ namespace HatFrameworkDev
 
         public async Task BrowserGoForwardAsync(int sec)
         {
+            listRedirects.Clear();
             statusPageLoad = false;
             int step = SendMessage($"BrowserGoForwardAsync()", PROCESS, "Выполняется действие браузера - вперед", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return;
@@ -723,6 +744,7 @@ namespace HatFrameworkDev
 
         public async Task BrowserPageReloadAsync(int sec)
         {
+            listRedirects.Clear();
             statusPageLoad = false;
             int step = SendMessage($"BrowserPageReloadAsync({sec})", PROCESS, "Перезагрузка страницы", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return;
@@ -881,6 +903,7 @@ namespace HatFrameworkDev
 
         public async Task GoToUrlAsync(string url, int sec)
         {
+            listRedirects.Clear();
             statusPageLoad = false;
             int step = SendMessage($"GoToUrlAsync('{url}', {sec})", PROCESS, "Загрузка страницы", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return;
@@ -913,6 +936,7 @@ namespace HatFrameworkDev
 
         public async Task GoToUrlBaseAuthAsync(string url, string login, string pass, int sec)
         {
+            listRedirects.Clear();
             statusPageLoad = false;
             int step = SendMessage($"GoToUrlBaseAuthAsync('{url}', '{login}', '{pass}', {sec})", PROCESS, "Загрузка страницы (базовая авторизация)", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return;
@@ -976,6 +1000,15 @@ namespace HatFrameworkDev
                 ConsoleMsgError(ex.ToString());
             }
             return url;
+        }
+
+        public async Task<List<string>> GetListRedirectUrlAsync()
+        {
+            int step = SendMessage("GetListRedirectUrlAsync()", PROCESS, "Получаю список редиректов", IMAGE_STATUS_PROCESS);
+            if (DefineTestStop(step) == true) return null;
+            if(listRedirects == null) EditMessage(step, null, FAILED, "Список редиректов NULL", IMAGE_STATUS_FAILED);
+            else EditMessage(step, null, PASSED, "Список редиректов получен", IMAGE_STATUS_PASSED);
+            return listRedirects;
         }
 
         public async Task WaitAsync(int sec)

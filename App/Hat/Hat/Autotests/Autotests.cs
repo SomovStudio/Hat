@@ -74,7 +74,18 @@ namespace Hat
 
         public static async Task devTestAsync()
         {
+            HatFrameworkDev.Tester tester = new HatFrameworkDev.Tester(Config.browserForm);
+            await tester.TestBeginAsync();
+            await tester.GoToUrlAsync("https://yandex.ru/", 5);
 
+            List<string> redirects = await tester.GetListRedirectUrlAsync();
+            foreach (string url in redirects)
+            {
+                tester.ConsoleMsg(url);
+            }
+
+            await tester.TestEndAsync();
+            /*
             HatFrameworkDev.Tester tester = new HatFrameworkDev.Tester(Config.browserForm);
             await tester.TestBeginAsync();
             await tester.GoToUrlAsync("https://somovstudio.github.io/test.html", 5);
@@ -90,7 +101,7 @@ namespace Hat
             string expected = "Вы успешно авторизованы";
             await tester.AssertEqualsAsync(expected, actual);
             await tester.TestEndAsync();
-
+            */
 
 
             /*

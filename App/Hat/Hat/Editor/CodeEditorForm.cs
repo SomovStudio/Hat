@@ -2645,7 +2645,25 @@ await tester.WaitElementNotDomAsync(Tester.BY_CSS, ""#element"", 5);\par
 \cf0\f0\lang1033 await tester.BrowserPageReloadAsync(25);\par
 }",
 
-@"",
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.22000}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 GetListRedirectUrlAsync\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2 \'f1\'ef\'e8\'f1\'ee\'ea \'f0\'e5\'e4\'e8\'f0\'e5\'ea\'f2\'ee\'e2 \'ef\'f0\'ee\'e8\'e7\'ee\'f8\'e5\'e4\'f8\'e8\'f5 \'ef\'f0\'e8 \'e7\'e0\'e3\'f0\'f3\'e7\'ea\'e5 \'f1\'f2\'f0\'e0\'ed\'e8\'f6\'fb\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \f0\lang1033 GetListRedirectUrlAsync()\f1\lang1049\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0\f0\lang1033 Tester tester = new Tester(browserForm);\par
+await tester.TestBeginAsync();\par
+await tester.GoToUrlAsync(""https://yandex.ru/"", 5);\par
+\par
+List<string> redirects = await tester.GetListRedirectUrlAsync();\par
+foreach (string url in redirects)\par
+\{\par
+\tab tester.ConsoleMsg(url);\par
+\}\par
+}",
+
 @"",
 @"",
 @"",
@@ -3300,10 +3318,9 @@ await tester.WaitElementNotDomAsync(Tester.BY_CSS, ""#element"", 5);\par
                     if (value == "WaitElementNotDomAsync" && tag == "Tester") richTextBox1.Rtf = handbook[189];
                     if (value == "GoToUrlBaseAuthAsync" && tag == "Tester") richTextBox1.Rtf = handbook[190];
                     if (value == "BrowserPageReloadAsync" && tag == "Tester") richTextBox1.Rtf = handbook[191];
+                    if (value == "GetListRedirectUrlAsync" && tag == "Tester") richTextBox1.Rtf = handbook[192];
 
                     /*
-                    
-                    if (value == "" && tag == "") richTextBox1.Rtf = handbook[192];
                     if (value == "" && tag == "") richTextBox1.Rtf = handbook[193];
                     if (value == "" && tag == "") richTextBox1.Rtf = handbook[194];
                     if (value == "" && tag == "") richTextBox1.Rtf = handbook[195];
