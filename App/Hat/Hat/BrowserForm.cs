@@ -1992,22 +1992,7 @@ namespace Hat
 
         private void запуститьТестToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            try
-            {
-                if (Config.selectName.Contains(".cs"))
-                {
-                    stopTest = false;
-                    Autotests.play(Config.selectName);
-                }
-                else
-                {
-                    consoleMsg("Вы не выбрали файл для запуска. (выберите *.cs файл автотеста в окне проекта)");
-                }
-            }
-            catch (Exception ex)
-            {
-                consoleMsgError(ex.ToString());
-            }
+            PlayTest(null);
         }
 
         private void остановитьТестToolStripMenuItem_Click(object sender, EventArgs e)
