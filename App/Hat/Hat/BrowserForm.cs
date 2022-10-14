@@ -1724,6 +1724,7 @@ namespace Hat
                             codeEditorForm.parent = this;
                             codeEditorForm.Show();
                             codeEditorForm.OpenFile(Config.selectName, Config.selectValue);
+                            codeEditorForm.Focus();
 
                         }
                         else if (Config.selectName.Contains(".jpeg") || 
