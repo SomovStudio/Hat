@@ -2664,7 +2664,18 @@ foreach (string url in redirects)\par
 \}\par
 }",
 
-@"",
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.22000}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 GetUrlResponseAsync\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2\f0\lang1033  \f1\lang1049 HTTP \'ee\'f2\'e2\'e5\'f2 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'ee\'e3\'ee URL\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \f0\lang1033 GetUrlResponseAsync(string url)\f1\lang1049\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0\f0\lang1033 int response = await tester.GetUrlResponseAsync(""https://somovstudio.github.io/test.html"");\par
+await tester.AssertEqualsAsync(200, response);\par
+}",
+
 @"",
 @"",
 @"",
@@ -3319,9 +3330,9 @@ foreach (string url in redirects)\par
                     if (value == "GoToUrlBaseAuthAsync" && tag == "Tester") richTextBox1.Rtf = handbook[190];
                     if (value == "BrowserPageReloadAsync" && tag == "Tester") richTextBox1.Rtf = handbook[191];
                     if (value == "GetListRedirectUrlAsync" && tag == "Tester") richTextBox1.Rtf = handbook[192];
+                    if (value == "GetUrlResponseAsync" && tag == "Tester") richTextBox1.Rtf = handbook[193];
 
                     /*
-                    if (value == "" && tag == "") richTextBox1.Rtf = handbook[193];
                     if (value == "" && tag == "") richTextBox1.Rtf = handbook[194];
                     if (value == "" && tag == "") richTextBox1.Rtf = handbook[195];
                     if (value == "" && tag == "") richTextBox1.Rtf = handbook[196];

@@ -76,15 +76,13 @@ namespace Hat
         {
             HatFrameworkDev.Tester tester = new HatFrameworkDev.Tester(Config.browserForm);
             await tester.TestBeginAsync();
-            await tester.GoToUrlAsync("https://yandex.ru/", 5);
+            await tester.GoToUrlAsync("https://somovstudio.github.io/test.html", 5);
 
-            List<string> redirects = await tester.GetListRedirectUrlAsync();
-            foreach (string url in redirects)
-            {
-                tester.ConsoleMsg(url);
-            }
+            int response = await tester.GetUrlResponseAsync("https://somovstudio.github.io/test.html");
+            await tester.AssertEqualsAsync(200, response);
 
             await tester.TestEndAsync();
+
             /*
             HatFrameworkDev.Tester tester = new HatFrameworkDev.Tester(Config.browserForm);
             await tester.TestBeginAsync();

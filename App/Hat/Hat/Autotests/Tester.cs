@@ -1011,6 +1011,39 @@ namespace HatFrameworkDev
             return listRedirects;
         }
 
+        public async Task<int> GetUrlResponseAsync(string url)
+        {
+            int step = SendMessage($"GetUrlResponseAsync('{url}')", PROCESS, "Получаю HTTP ответ запрашиваемого URL", IMAGE_STATUS_PROCESS);
+            if (DefineTestStop(step) == true) return 0;
+
+            int statusCode = 0;
+            try
+            {
+                string userAgent = BrowserView.CoreWebView2.Settings.UserAgent;
+
+                HttpClient client;
+                HttpResponseMessage response;
+                HttpClientHandler handler = new HttpClientHandler();
+                handler.AllowAutoRedirect = false;
+
+                client = new HttpClient(handler);
+                client.DefaultRequestHeaders.UserAgent.ParseAdd(userAgent);
+                client.BaseAddress = new Uri(url);
+
+                response = client.GetAsync(url).Result;
+                statusCode = (int)response.StatusCode;
+
+                EditMessage(step, null, PASSED, $"Получен HTTP ответ: {statusCode} по URL: {url}", IMAGE_STATUS_PASSED);
+            }
+            catch (Exception ex)
+            {
+                EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
+                TestStopAsync();
+                ConsoleMsgError(ex.ToString());
+            }
+            return statusCode;
+        }
+
         public async Task WaitAsync(int sec)
         {
             int step = SendMessage($"WaitAsync({sec})", PROCESS, $"Ожидание {sec.ToString()} секунд", IMAGE_STATUS_PROCESS);
