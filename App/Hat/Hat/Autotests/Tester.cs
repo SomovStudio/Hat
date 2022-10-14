@@ -3034,7 +3034,7 @@ namespace HatFrameworkDev
          * Методы для проверки результата ===========================================================
          * https://junit.org/junit4/javadoc/4.8/org/junit/Assert.html
          * */
-        public async Task<bool> AssertEqualsAsync(string expected, string actual)
+        public async Task<bool> AssertEqualsAsync(dynamic expected, dynamic actual)
         {
             int step = SendMessage("AssertEqualsAsync(" + expected + ", " + actual + ")", PROCESS, "Проверка совпадения ожидаемого и актуального значения", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return false;
@@ -3054,7 +3054,7 @@ namespace HatFrameworkDev
             }
         }
 
-        public async Task<bool> AssertNotEqualsAsync(string expected, string actual)
+        public async Task<bool> AssertNotEqualsAsync(dynamic expected, dynamic actual)
         {
             int step = SendMessage("AssertNotEqualsAsync(" + expected + ", " + actual + ")", PROCESS, "Проверка не совпадения ожидаемого и актуального значения", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return false;
@@ -3114,7 +3114,7 @@ namespace HatFrameworkDev
             }
         }
 
-        public async Task<bool> AssertNotNullAsync(object obj)
+        public async Task<bool> AssertNotNullAsync(dynamic obj)
         {
             string value = "null";
             if(obj != null) value = obj.ToString();
@@ -3137,7 +3137,7 @@ namespace HatFrameworkDev
             }
         }
 
-        public async Task<bool> AssertNullAsync(object obj)
+        public async Task<bool> AssertNullAsync(dynamic obj)
         {
             string value = "null";
             if (obj != null) value = obj.ToString();
