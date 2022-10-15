@@ -66,11 +66,14 @@ namespace HatFramework
         private bool sendFailureReportByMail = false;  // флаг: отправка Failure отчета по почте
         private bool sendSuccessReportByMail = false;  // флаг: отправка Success отчета по почте
         private string assertStatus = null;     // флаг: рузельтат проверки
+        private List<string> listRedirects;     // список редиректов
 
         public Tester(Form browserForm)
         {
             try
             {
+                listRedirects = new List<string>();
+
                 BrowserWindow = browserForm;
                 browserConsoleMsg = BrowserWindow.GetType().GetMethod("consoleMsg");
                 browserConsoleMsgError = BrowserWindow.GetType().GetMethod("consoleMsgErrorReport");
@@ -107,12 +110,28 @@ namespace HatFramework
 
         private void contentLoading(object sender, CoreWebView2ContentLoadingEventArgs e)
         {
-            //statusPageLoad = true;
+            try
+            {
+                listRedirects.Add(BrowserView.Source.ToString()); // сохраняется текущий URL в список
+            }
+            catch (Exception ex)
+            {
+                ConsoleMsgError(ex.ToString());
+            }
+
         }
 
         private void navigationCompleted(object sender, CoreWebView2NavigationCompletedEventArgs e)
         {
-            statusPageLoad = true; // происходит когда страницы полностью загружена
+            try
+            {
+                statusPageLoad = true; // происходит когда страницы полностью загружена
+                listRedirects.Add(BrowserView.Source.ToString()); // сохраняется текущий URL в список
+            }
+            catch (Exception ex)
+            {
+                ConsoleMsgError(ex.ToString());
+            }
         }
 
         private void resultAutotestSuccess(bool success)
@@ -617,6 +636,7 @@ namespace HatFramework
 
         public async Task BrowserGoBackAsync(int sec)
         {
+            listRedirects.Clear();
             statusPageLoad = false;
             int step = SendMessage($"BrowserGoBackAsync()", PROCESS, "Выполняется действие браузера - назад", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return;
@@ -649,6 +669,7 @@ namespace HatFramework
 
         public async Task BrowserGoForwardAsync(int sec)
         {
+            listRedirects.Clear();
             statusPageLoad = false;
             int step = SendMessage($"BrowserGoForwardAsync()", PROCESS, "Выполняется действие браузера - вперед", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return;
@@ -723,6 +744,7 @@ namespace HatFramework
 
         public async Task BrowserPageReloadAsync(int sec)
         {
+            listRedirects.Clear();
             statusPageLoad = false;
             int step = SendMessage($"BrowserPageReloadAsync({sec})", PROCESS, "Перезагрузка страницы", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return;
@@ -881,6 +903,7 @@ namespace HatFramework
 
         public async Task GoToUrlAsync(string url, int sec)
         {
+            listRedirects.Clear();
             statusPageLoad = false;
             int step = SendMessage($"GoToUrlAsync('{url}', {sec})", PROCESS, "Загрузка страницы", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return;
@@ -913,6 +936,7 @@ namespace HatFramework
 
         public async Task GoToUrlBaseAuthAsync(string url, string login, string pass, int sec)
         {
+            listRedirects.Clear();
             statusPageLoad = false;
             int step = SendMessage($"GoToUrlBaseAuthAsync('{url}', '{login}', '{pass}', {sec})", PROCESS, "Загрузка страницы (базовая авторизация)", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return;
@@ -976,6 +1000,48 @@ namespace HatFramework
                 ConsoleMsgError(ex.ToString());
             }
             return url;
+        }
+
+        public async Task<List<string>> GetListRedirectUrlAsync()
+        {
+            int step = SendMessage("GetListRedirectUrlAsync()", PROCESS, "Получаю список редиректов", IMAGE_STATUS_PROCESS);
+            if (DefineTestStop(step) == true) return null;
+            if (listRedirects == null) EditMessage(step, null, FAILED, "Список редиректов NULL", IMAGE_STATUS_FAILED);
+            else EditMessage(step, null, PASSED, "Список редиректов получен", IMAGE_STATUS_PASSED);
+            return listRedirects;
+        }
+
+        public async Task<int> GetUrlResponseAsync(string url)
+        {
+            int step = SendMessage($"GetUrlResponseAsync('{url}')", PROCESS, "Получаю HTTP ответ запрашиваемого URL", IMAGE_STATUS_PROCESS);
+            if (DefineTestStop(step) == true) return 0;
+
+            int statusCode = 0;
+            try
+            {
+                string userAgent = BrowserView.CoreWebView2.Settings.UserAgent;
+
+                HttpClient client;
+                HttpResponseMessage response;
+                HttpClientHandler handler = new HttpClientHandler();
+                handler.AllowAutoRedirect = false;
+
+                client = new HttpClient(handler);
+                client.DefaultRequestHeaders.UserAgent.ParseAdd(userAgent);
+                client.BaseAddress = new Uri(url);
+
+                response = client.GetAsync(url).Result;
+                statusCode = (int)response.StatusCode;
+
+                EditMessage(step, null, PASSED, $"Получен HTTP ответ: {statusCode} по URL: {url}", IMAGE_STATUS_PASSED);
+            }
+            catch (Exception ex)
+            {
+                EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
+                TestStopAsync();
+                ConsoleMsgError(ex.ToString());
+            }
+            return statusCode;
         }
 
         public async Task WaitAsync(int sec)
@@ -3034,7 +3100,7 @@ namespace HatFramework
          * Методы для проверки результата ===========================================================
          * https://junit.org/junit4/javadoc/4.8/org/junit/Assert.html
          * */
-        public async Task<bool> AssertEqualsAsync(string expected, string actual)
+        public async Task<bool> AssertEqualsAsync(dynamic expected, dynamic actual)
         {
             int step = SendMessage("AssertEqualsAsync(" + expected + ", " + actual + ")", PROCESS, "Проверка совпадения ожидаемого и актуального значения", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return false;
@@ -3054,7 +3120,7 @@ namespace HatFramework
             }
         }
 
-        public async Task<bool> AssertNotEqualsAsync(string expected, string actual)
+        public async Task<bool> AssertNotEqualsAsync(dynamic expected, dynamic actual)
         {
             int step = SendMessage("AssertNotEqualsAsync(" + expected + ", " + actual + ")", PROCESS, "Проверка не совпадения ожидаемого и актуального значения", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return false;
@@ -3114,7 +3180,7 @@ namespace HatFramework
             }
         }
 
-        public async Task<bool> AssertNotNullAsync(object obj)
+        public async Task<bool> AssertNotNullAsync(dynamic obj)
         {
             string value = "null";
             if (obj != null) value = obj.ToString();
@@ -3137,7 +3203,7 @@ namespace HatFramework
             }
         }
 
-        public async Task<bool> AssertNullAsync(object obj)
+        public async Task<bool> AssertNullAsync(dynamic obj)
         {
             string value = "null";
             if (obj != null) value = obj.ToString();
