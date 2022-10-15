@@ -279,15 +279,22 @@ namespace Hat
 
         public void consoleMsgError(string message)
         {
-            richTextBoxConsole.AppendText("[" + DateTime.Now.ToString() + "] ОШИБКА: " + message + Environment.NewLine);
-            richTextBoxConsole.ScrollToCaret();
-            systemConsoleMsg("- - - - - - - - - - - - - - - - - - - - - - - - - - - -", default, default, default, true);
-            systemConsoleMsg("Произошла ошибка:", default, ConsoleColor.Black, ConsoleColor.Red, true);
-            systemConsoleMsg(message, default, default, default, true);
-            systemConsoleMsg("- - - - - - - - - - - - - - - - - - - - - - - - - - - -", default, default, default, true);
-            systemConsoleMsg("", default, default, default, true);
-            resultAutotest(false);
-            if (Config.commandLineMode == true) Close();
+            try
+            {
+                richTextBoxConsole.AppendText("[" + DateTime.Now.ToString() + "] ОШИБКА: " + message + Environment.NewLine);
+                richTextBoxConsole.ScrollToCaret();
+                systemConsoleMsg("- - - - - - - - - - - - - - - - - - - - - - - - - - - -", default, default, default, true);
+                systemConsoleMsg("Произошла ошибка:", default, ConsoleColor.Black, ConsoleColor.Red, true);
+                systemConsoleMsg(message, default, default, default, true);
+                systemConsoleMsg("- - - - - - - - - - - - - - - - - - - - - - - - - - - -", default, default, default, true);
+                systemConsoleMsg("", default, default, default, true);
+                resultAutotest(false);
+                if (Config.commandLineMode == true) Close();
+            }
+            catch (Exception ex)
+            {
+
+            }
         }
 
 
@@ -603,7 +610,20 @@ namespace Hat
             try
             {
                 toolStripComboBoxUrl.Text = webView2.Source.ToString();
-                consoleMsg("Загружена страница: " + webView2.Source.ToString());
+                consoleMsg("Загрузка страницы: " + webView2.Source.ToString());
+            }
+            catch (Exception ex)
+            {
+                consoleMsgError(ex.ToString());
+            }
+        }
+
+        private void webView2_NavigationCompleted(object sender, CoreWebView2NavigationCompletedEventArgs e)
+        {
+            try
+            {
+                toolStripComboBoxUrl.Text = webView2.Source.ToString();
+                consoleMsg("Выполнена загрузка страницы: " + webView2.Source.ToString());
                 if (webView2.CoreWebView2.Settings.UserAgent != null && Config.defaultUserAgent == "")
                 {
                     Config.defaultUserAgent = webView2.CoreWebView2.Settings.UserAgent;
@@ -623,6 +643,10 @@ namespace Hat
             {
                 if (e.KeyChar.GetHashCode().ToString() == "851981")
                 {
+                    if (toolStripComboBoxUrl.Text.Contains("https://") == false && toolStripComboBoxUrl.Text.Contains("http://") == false)
+                    {
+                        toolStripComboBoxUrl.Text = "https://" + toolStripComboBoxUrl.Text;
+                    }
                     webView2.CoreWebView2.Navigate(toolStripComboBoxUrl.Text);
                     updateToolStripComboBoxUrl();
                 }
@@ -1700,6 +1724,7 @@ namespace Hat
                             codeEditorForm.parent = this;
                             codeEditorForm.Show();
                             codeEditorForm.OpenFile(Config.selectName, Config.selectValue);
+                            codeEditorForm.Focus();
 
                         }
                         else if (Config.selectName.Contains(".jpeg") || 
@@ -1967,22 +1992,7 @@ namespace Hat
 
         private void запуститьТестToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            try
-            {
-                if (Config.selectName.Contains(".cs"))
-                {
-                    stopTest = false;
-                    Autotests.play(Config.selectName);
-                }
-                else
-                {
-                    consoleMsg("Вы не выбрали файл для запуска. (выберите *.cs файл автотеста в окне проекта)");
-                }
-            }
-            catch (Exception ex)
-            {
-                consoleMsgError(ex.ToString());
-            }
+            PlayTest(null);
         }
 
         private void остановитьТестToolStripMenuItem_Click(object sender, EventArgs e)
@@ -2563,6 +2573,10 @@ namespace Hat
             }
         }
 
-        
+        private void toolStripButton23_Click(object sender, EventArgs e)
+        {
+            try { Process.Start("cmd.exe"); }
+            catch (Exception ex) { consoleMsgError(ex.ToString()); }
+        }
     }
 }

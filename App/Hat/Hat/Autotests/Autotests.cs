@@ -74,13 +74,32 @@ namespace Hat
 
         public static async Task devTestAsync()
         {
-
             HatFrameworkDev.Tester tester = new HatFrameworkDev.Tester(Config.browserForm);
             await tester.TestBeginAsync();
             await tester.GoToUrlAsync("https://somovstudio.github.io/test.html", 5);
 
+            int response = await tester.GetUrlResponseAsync("https://somovstudio.github.io/test.html");
+            await tester.AssertEqualsAsync(200, response);
+
             await tester.TestEndAsync();
 
+            /*
+            HatFrameworkDev.Tester tester = new HatFrameworkDev.Tester(Config.browserForm);
+            await tester.TestBeginAsync();
+            await tester.GoToUrlAsync("https://somovstudio.github.io/test.html", 5);
+            await tester.WaitVisibleElementByIdAsync("login", 5);
+            await tester.SetValueInElementByIdAsync("login", "admin");
+            await tester.WaitAsync(2);
+            await tester.SetValueInElementByIdAsync("pass", "0000");
+            await tester.WaitAsync(2);
+            await tester.ClickElementByIdAsync("buttonLogin");
+            await tester.WaitAsync(2);
+            await tester.WaitVisibleElementByIdAsync("result", 5);
+            string actual = await tester.GetValueFromElementByIdAsync("textarea");
+            string expected = "Вы успешно авторизованы";
+            await tester.AssertEqualsAsync(expected, actual);
+            await tester.TestEndAsync();
+            */
 
 
             /*

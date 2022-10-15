@@ -66,11 +66,14 @@ namespace HatFrameworkDev
         private bool sendFailureReportByMail = false;  // флаг: отправка Failure отчета по почте
         private bool sendSuccessReportByMail = false;  // флаг: отправка Success отчета по почте
         private string assertStatus = null;     // флаг: рузельтат проверки
+        private List<string> listRedirects;     // список редиректов
 
         public Tester(Form browserForm)
         {
             try
             {
+                listRedirects = new List<string>();
+
                 BrowserWindow = browserForm;
                 browserConsoleMsg = BrowserWindow.GetType().GetMethod("consoleMsg");
                 browserConsoleMsgError = BrowserWindow.GetType().GetMethod("consoleMsgErrorReport");
@@ -94,6 +97,7 @@ namespace HatFrameworkDev
                 MethodInfo mi = BrowserWindow.GetType().GetMethod("getWebView");
                 BrowserView = (Microsoft.Web.WebView2.WinForms.WebView2)mi.Invoke(BrowserWindow, null);
                 BrowserView.ContentLoading += contentLoading;
+                BrowserView.NavigationCompleted += navigationCompleted;
                 BrowserView.EnsureCoreWebView2Async();
 
                 showNameAutotest();
@@ -106,7 +110,28 @@ namespace HatFrameworkDev
 
         private void contentLoading(object sender, CoreWebView2ContentLoadingEventArgs e)
         {
-            statusPageLoad = true;
+            try
+            {
+                listRedirects.Add(BrowserView.Source.ToString()); // сохраняется текущий URL в список
+            }
+            catch (Exception ex)
+            {
+                ConsoleMsgError(ex.ToString());
+            }
+            
+        }
+
+        private void navigationCompleted(object sender, CoreWebView2NavigationCompletedEventArgs e)
+        {
+            try
+            {
+                statusPageLoad = true; // происходит когда страницы полностью загружена
+                listRedirects.Add(BrowserView.Source.ToString()); // сохраняется текущий URL в список
+            }
+            catch (Exception ex)
+            {
+                ConsoleMsgError(ex.ToString());
+            }
         }
 
         private void resultAutotestSuccess(bool success)
@@ -268,22 +293,26 @@ namespace HatFrameworkDev
         {
             try
             {
-                string message;
-                if (action != null)
+                if (assertStatus != FAILED)
                 {
-                    message = Environment.NewLine + "Действие: " + action;
+                    string message;
+                    if (action != null)
+                    {
+                        message = Environment.NewLine + "Действие: " + action;
+                        browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { message, default, default, default, true });
+                    }
+
+                    message = "Статус: ";
+                    browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { message, default, default, default, false });
+
+                    if (status == PASSED) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { status, default, ConsoleColor.Black, ConsoleColor.DarkGreen, true });
+                    else if (status == FAILED && assertStatus != FAILED) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { status, default, ConsoleColor.Black, ConsoleColor.DarkRed, true });
+                    else if (status == WARNING && assertStatus != FAILED) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { status, default, ConsoleColor.Black, ConsoleColor.DarkYellow, true });
+                    else browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { status, default, default, default, true });
+
+                    message = "Комментарий: " + comment;
                     browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { message, default, default, default, true });
                 }
-
-                message = "Статус: ";
-                browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { message, default, default, default, false });
-                if (status == PASSED) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { status, default, ConsoleColor.Black, ConsoleColor.DarkGreen, true });
-                else if (status == FAILED) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { status, default, ConsoleColor.Black, ConsoleColor.DarkRed, true });
-                else if (status == WARNING) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { status, default, ConsoleColor.Black, ConsoleColor.DarkYellow, true });
-                else browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { status, default, default, default, true });
-
-                message = "Комментарий: " + comment;
-                browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { message, default, default, default, true });
 
                 int index = (int)browserSendMessageStep.Invoke(BrowserWindow, new object[] { action, status, comment, image });
                 return index;
@@ -299,22 +328,27 @@ namespace HatFrameworkDev
         {
             try
             {
-                string message;
-                if (action != null)
+                if (assertStatus != FAILED)
                 {
-                    message = Environment.NewLine + "Действие: " + action;
+                    string message;
+                    if (action != null)
+                    {
+                        message = Environment.NewLine + "Действие: " + action;
+                        browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { message, default, default, default, true });
+                    }
+
+                    message = $"Статус: ";
+                    browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { message, default, default, default, false });
+
+                    if (status == PASSED) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { status, default, ConsoleColor.Black, ConsoleColor.DarkGreen, true });
+                    else if (status == FAILED) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { status, default, ConsoleColor.Black, ConsoleColor.DarkRed, true });
+                    else if (status == WARNING) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { status, default, ConsoleColor.Black, ConsoleColor.DarkYellow, true });
+                    else browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { status, default, default, default, true });
+
+                    message = "Комментарий: " + comment;
                     browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { message, default, default, default, true });
+
                 }
-
-                message = "Статус: ";
-                browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { message, default, default, default, false });
-                if (status == PASSED) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { status, default, ConsoleColor.Black, ConsoleColor.DarkGreen, true });
-                else if (status == FAILED) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { status, default, ConsoleColor.Black, ConsoleColor.DarkRed, true });
-                else if (status == WARNING) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { status, default, ConsoleColor.Black, ConsoleColor.DarkYellow, true });
-                else browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { status, default, default, default, true });
-
-                message = "Комментарий: " + comment;
-                browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { message, default, default, default, true });
 
                 browserEditMessageStep.Invoke(BrowserWindow, new object[] { index, action, status, comment, image });
             }
@@ -406,11 +440,11 @@ namespace HatFrameworkDev
                 int step = SendMessage("TestEndAsync()", PROCESS, "Завершение теста", IMAGE_STATUS_PROCESS);
                 if (assertStatus == FAILED)
                 {
-                    ConsoleMsg("Тест завершен - провельно");
+                    ConsoleMsg("Тест завершен - провально");
                     EditMessage(step, null, FAILED, "Тест завершен - шаги теста выполнены неуспешно", IMAGE_STATUS_FAILED);
                     resultAutotestSuccess(false);
 
-                    browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { Environment.NewLine + "Тест завершен - провельно", default, ConsoleColor.DarkRed, ConsoleColor.White, true });
+                    browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { Environment.NewLine + "Тест завершен - провально", default, ConsoleColor.DarkRed, ConsoleColor.White, true });
                     browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { "-------------------------------" + Environment.NewLine, default, default, default, false });
 
                     Task screenshot = (Task)saveReportScreenshotAsync.Invoke(BrowserWindow, null);
@@ -602,6 +636,7 @@ namespace HatFrameworkDev
 
         public async Task BrowserGoBackAsync(int sec)
         {
+            listRedirects.Clear();
             statusPageLoad = false;
             int step = SendMessage($"BrowserGoBackAsync()", PROCESS, "Выполняется действие браузера - назад", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return;
@@ -634,6 +669,7 @@ namespace HatFrameworkDev
 
         public async Task BrowserGoForwardAsync(int sec)
         {
+            listRedirects.Clear();
             statusPageLoad = false;
             int step = SendMessage($"BrowserGoForwardAsync()", PROCESS, "Выполняется действие браузера - вперед", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return;
@@ -708,6 +744,7 @@ namespace HatFrameworkDev
 
         public async Task BrowserPageReloadAsync(int sec)
         {
+            listRedirects.Clear();
             statusPageLoad = false;
             int step = SendMessage($"BrowserPageReloadAsync({sec})", PROCESS, "Перезагрузка страницы", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return;
@@ -866,6 +903,7 @@ namespace HatFrameworkDev
 
         public async Task GoToUrlAsync(string url, int sec)
         {
+            listRedirects.Clear();
             statusPageLoad = false;
             int step = SendMessage($"GoToUrlAsync('{url}', {sec})", PROCESS, "Загрузка страницы", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return;
@@ -898,6 +936,7 @@ namespace HatFrameworkDev
 
         public async Task GoToUrlBaseAuthAsync(string url, string login, string pass, int sec)
         {
+            listRedirects.Clear();
             statusPageLoad = false;
             int step = SendMessage($"GoToUrlBaseAuthAsync('{url}', '{login}', '{pass}', {sec})", PROCESS, "Загрузка страницы (базовая авторизация)", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return;
@@ -961,6 +1000,48 @@ namespace HatFrameworkDev
                 ConsoleMsgError(ex.ToString());
             }
             return url;
+        }
+
+        public async Task<List<string>> GetListRedirectUrlAsync()
+        {
+            int step = SendMessage("GetListRedirectUrlAsync()", PROCESS, "Получаю список редиректов", IMAGE_STATUS_PROCESS);
+            if (DefineTestStop(step) == true) return null;
+            if(listRedirects == null) EditMessage(step, null, FAILED, "Список редиректов NULL", IMAGE_STATUS_FAILED);
+            else EditMessage(step, null, PASSED, "Список редиректов получен", IMAGE_STATUS_PASSED);
+            return listRedirects;
+        }
+
+        public async Task<int> GetUrlResponseAsync(string url)
+        {
+            int step = SendMessage($"GetUrlResponseAsync('{url}')", PROCESS, "Получаю HTTP ответ запрашиваемого URL", IMAGE_STATUS_PROCESS);
+            if (DefineTestStop(step) == true) return 0;
+
+            int statusCode = 0;
+            try
+            {
+                string userAgent = BrowserView.CoreWebView2.Settings.UserAgent;
+
+                HttpClient client;
+                HttpResponseMessage response;
+                HttpClientHandler handler = new HttpClientHandler();
+                handler.AllowAutoRedirect = false;
+
+                client = new HttpClient(handler);
+                client.DefaultRequestHeaders.UserAgent.ParseAdd(userAgent);
+                client.BaseAddress = new Uri(url);
+
+                response = client.GetAsync(url).Result;
+                statusCode = (int)response.StatusCode;
+
+                EditMessage(step, null, PASSED, $"Получен HTTP ответ: {statusCode} по URL: {url}", IMAGE_STATUS_PASSED);
+            }
+            catch (Exception ex)
+            {
+                EditMessage(step, null, FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), IMAGE_STATUS_FAILED);
+                TestStopAsync();
+                ConsoleMsgError(ex.ToString());
+            }
+            return statusCode;
         }
 
         public async Task WaitAsync(int sec)
@@ -1285,7 +1366,7 @@ namespace HatFrameworkDev
                 script += "(function(){ ";
                 if (by == BY_CSS) script += $"var elem = document.querySelector(\"{locator}\");";
                 else if (by == BY_XPATH) script += $"var elem = document.evaluate(\"{locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
-                script += "return elem;";
+                script += "return elem.innerHTML;";
                 script += "}());";
 
                 string result = null;
@@ -1328,7 +1409,7 @@ namespace HatFrameworkDev
                 script += "(function(){ ";
                 if (by == BY_CSS) script += $"var elem = document.querySelector(\"{locator}\");";
                 else if (by == BY_XPATH) script += $"var elem = document.evaluate(\"{locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
-                script += "return elem;";
+                script += "return elem.innerHTML;";
                 script += "}());";
 
                 string result = null;
@@ -1369,7 +1450,7 @@ namespace HatFrameworkDev
                 string script = "";
                 script += "(function(){ ";
                 script += $"var elem = document.getElementById('{id}');";
-                script += "return elem;";
+                script += "return elem.innerHTML;";
                 script += "}());";
 
                 string result = null;
@@ -1407,7 +1488,7 @@ namespace HatFrameworkDev
                 string script = "";
                 script += "(function(){ ";
                 script += $"var elem = document.getElementsByClassName('{_class}')[{index}];";
-                script += "return elem;";
+                script += "return elem.innerHTML;";
                 script += "}());";
 
                 string result = null;
@@ -1445,7 +1526,7 @@ namespace HatFrameworkDev
                 string script = "";
                 script += "(function(){ ";
                 script += $"var elem = document.getElementsByName('{name}')[{index}];";
-                script += "return elem;";
+                script += "return elem.innerHTML;";
                 script += "}());";
 
                 string result = null;
@@ -1483,7 +1564,7 @@ namespace HatFrameworkDev
                 string script = "";
                 script += "(function(){ ";
                 script += $"var elem = document.getElementsByTagName('{tag}')[{index}];";
-                script += "return elem;";
+                script += "return elem.innerHTML;";
                 script += "}());";
 
                 string result = null;
@@ -1522,7 +1603,7 @@ namespace HatFrameworkDev
                 script += "(function(){ ";
                 if (by == BY_CSS) script += $"var elem = document.querySelector(\"{locator}\");";
                 else if (by == BY_XPATH) script += $"var elem = document.evaluate(\"{locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
-                script += "return elem;";
+                script += "return elem.innerHTML;";
                 script += "}());";
 
                 string result = null;
@@ -3019,7 +3100,7 @@ namespace HatFrameworkDev
          * Методы для проверки результата ===========================================================
          * https://junit.org/junit4/javadoc/4.8/org/junit/Assert.html
          * */
-        public async Task<bool> AssertEqualsAsync(string expected, string actual)
+        public async Task<bool> AssertEqualsAsync(dynamic expected, dynamic actual)
         {
             int step = SendMessage("AssertEqualsAsync(" + expected + ", " + actual + ")", PROCESS, "Проверка совпадения ожидаемого и актуального значения", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return false;
@@ -3039,7 +3120,7 @@ namespace HatFrameworkDev
             }
         }
 
-        public async Task<bool> AssertNotEqualsAsync(string expected, string actual)
+        public async Task<bool> AssertNotEqualsAsync(dynamic expected, dynamic actual)
         {
             int step = SendMessage("AssertNotEqualsAsync(" + expected + ", " + actual + ")", PROCESS, "Проверка не совпадения ожидаемого и актуального значения", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return false;
@@ -3099,7 +3180,7 @@ namespace HatFrameworkDev
             }
         }
 
-        public async Task<bool> AssertNotNullAsync(object obj)
+        public async Task<bool> AssertNotNullAsync(dynamic obj)
         {
             string value = "null";
             if(obj != null) value = obj.ToString();
@@ -3122,7 +3203,7 @@ namespace HatFrameworkDev
             }
         }
 
-        public async Task<bool> AssertNullAsync(object obj)
+        public async Task<bool> AssertNullAsync(dynamic obj)
         {
             string value = "null";
             if (obj != null) value = obj.ToString();
