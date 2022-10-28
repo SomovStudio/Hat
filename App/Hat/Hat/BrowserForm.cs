@@ -22,7 +22,7 @@ namespace Hat
             InitializeComponent();
 
             Config.createStartPage();
-            toolStripComboBoxUrl.Text = "file:///" + Directory.GetCurrentDirectory() + "/page.html";
+            toolStripComboBoxUrl.Text = "file:///" + Config.fileStartPage;
 
             CheckForIllegalCrossThreadCalls = false;
             Config.encoding = WorkOnFiles.UTF_8_BOM;
