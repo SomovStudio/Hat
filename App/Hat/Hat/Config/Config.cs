@@ -25,8 +25,8 @@ namespace Hat
         /* переменные для браузера */
         public static BrowserForm browserForm;                  // окно браузера (форма)
         public static string defaultUserAgent = "";             // значение user-agent по умолчанию
-        public static string currentBrowserVersion = "1.1.6";   // текущая версия браузера
-        public static string dateBrowserUpdate = "15.10.2022";  // дата последнего обновления
+        public static string currentBrowserVersion = "1.1.7";   // текущая версия браузера
+        public static string dateBrowserUpdate = "28.10.2022";  // дата последнего обновления
 
         public static string openHtmlFile = null;             // имя открываемого html файла при запуске браузера
         public static bool commandLineMode = false;         // флаг показывающий запуск приложения из командной строки
@@ -146,7 +146,81 @@ namespace Hat
             }
         }
 
-
+        public static void createStartPage()
+        {
+            try
+            {
+                if (!File.Exists(Directory.GetCurrentDirectory() + "/page.html"))
+                {
+                    string content =
+@"
+<!DOCTYPE html>
+<html lang=""en"">
+<head>
+	<title>Приветствие</title>
+	<meta charset=""UTF-8"" />
+	<meta name=""viewport"" content=""width=device-width, initial-scale=1.0"" />
+	<meta http-equiv=""X-UA-Compatible"" content=""ie=edge"" />
+	<style type=""text/css"">
+		html { margin: 0; padding: 0; border: 0;}
+		body {
+			background-color: #F9F7FF;
+		    font-family: ""Source Sans Pro"", Helvetica, sans-serif;
+		    font-size: 9pt;
+		}
+		#info {
+			border: 1px solid #F1EDFF; 
+			border-radius: 10px; 
+			padding: 15px; 
+			position: relative; 
+			min-width: 350px;
+			max-width: 350px; 
+			margin-left: auto;
+    		margin-right: auto;
+    		margin-top: 5em;
+    		text-align: center;
+    		background-color: #F1EDFF;
+    		box-shadow: 0 0 10px rgba(90,147,224,0.8);
+    		color: #004A7F;
+		}
+		p{
+			text-align: left;
+		}
+	</style>
+</head>
+<body>
+	<div id=""info"">
+		<h2>Browser Hat</h2>
+		<p>
+			Браузер со встроенной технологией автоматизированного тестирования Web приложений
+			Особенность браузера Hat в том что автотесты напрямую выполняются в браузере без Selenium и WebDriver.
+			<br><br>
+			Встроенный фреймворк HatFramework содержит достаточное количество методов необходимых для выполнения основных задач автоматизации тестирования. Для описания скриптов автотестов используется язык программирования C# и встроенный редактор кода. Так же в качестве редактора можно воспользоваться Visual Studio. Удобный интерфейс браузера отображает все шаги выполнения теста с подробным описанием событий. Результат проверки формируется в отчет и отправляются на указаную почту. Запуск автотестов возможен из командной строки операционной системы Windows это пригодится при использовании автотестов в популярных средствах непрерывной интеграции таких как: Jenkins, TeamCity, GitLab CI/CD.
+		</p>
+		<p>
+			Программа разработана при поддержке компании <a href=""https://zionec.ru/"">Зионек</a>
+		</p>
+		<p>
+			Благодарим вас за использование нашего приложения.
+		</p>
+		<h4>
+			Copyright © 2022 Somov Studio. All Rights Reserved.
+		</h4>
+	</div>
+</body>
+</html>
+";
+                    StreamWriter writer;
+                    writer = new StreamWriter(Directory.GetCurrentDirectory() + "/page.html", false, new UTF8Encoding(true));
+                    writer.Write(content);
+                    writer.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                Config.browserForm.consoleMsgError(ex.ToString());
+            }
+        }
 
     }
 }
