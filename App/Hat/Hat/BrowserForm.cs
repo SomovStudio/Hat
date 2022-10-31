@@ -21,8 +21,8 @@ namespace Hat
         {
             InitializeComponent();
 
-            Config.createStartPage();
-            toolStripComboBoxUrl.Text = "file:///" + Config.fileStartPage;
+            StartPage.createStartPage();
+            toolStripComboBoxUrl.Text = "file:///" + StartPage.fileStartPage;
 
             CheckForIllegalCrossThreadCalls = false;
             Config.encoding = WorkOnFiles.UTF_8_BOM;
