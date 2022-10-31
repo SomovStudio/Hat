@@ -53,7 +53,7 @@ namespace Hat
             try
             {
                 if (status == Report.FAILED || status == Report.ERROR) Report.CountErrors++;
-                if (Steps != null) Report.Steps.Add(new string[] { status, action, comment });
+                if (Report.Steps != null && status != Report.STOPPED && status != Report.PROCESS) Report.Steps.Add(new string[] { status, action, comment });
             }
             catch (Exception ex)
             {
