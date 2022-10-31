@@ -76,10 +76,16 @@ namespace Hat
         {
             HatFrameworkDev.Tester tester = new HatFrameworkDev.Tester(Config.browserForm);
             await tester.TestBeginAsync();
-            await tester.GoToUrlAsync("https://somovstudio.github.io/test.html", 5);
+            //await tester.GoToUrlAsync("https://somovstudio.github.io/test.html", 5);
+            //int response = await tester.GetUrlResponseAsync("https://somovstudio.github.io/test.html");
+            //await tester.AssertEqualsAsync(200, response);
 
-            int response = await tester.GetUrlResponseAsync("https://somovstudio.github.io/test.html");
-            await tester.AssertEqualsAsync(200, response);
+
+            await tester.GoToUrlAsync("https://mgts.ru/bitrix/admin/iblock_element_admin.php?IBLOCK_ID=12&type=altasib_feedback&lang=ru&find_el_y=Y&clear_filter=Y&apply_filter=Y", 25);
+            await tester.ClickElementAsync(Tester.BY_XPATH, "//input[@name='FIND']");
+            await tester.WaitAsync(2);
+            await tester.WaitVisibleElementAsync(Tester.BY_XPATH, "//div[@class='main-ui-filter-wrapper main-ui-filter-theme-default']", 5);
+
 
             await tester.TestEndAsync();
 
