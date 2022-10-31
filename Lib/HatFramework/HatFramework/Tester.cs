@@ -173,7 +173,24 @@ namespace HatFramework
                 if (by == BY_TAG) script += $"var elem = document.getElementsByTagName('{target}')[{index}];";
                 if (by == BY_CSS) script += $"var elem = document.querySelector(\"{target}\");";
                 if (by == BY_XPATH) script += $"var elem = document.evaluate(\"{target}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
-                //script += "if (!(elem instanceof Element)) throw Error('DomUtil: elem is not an element.');";
+                script += "const style = getComputedStyle(elem);";
+                script += "if (style.display === 'none') return false;";
+                script += "if (style.visibility !== 'visible') return false;";
+                script += "if (style.opacity < 0.1) return false;";
+                script += "if (elem.offsetWidth + elem.offsetHeight + elem.getBoundingClientRect().height + elem.getBoundingClientRect().width === 0) return false;";
+                script += "const elemCenter = {";
+                script += "x: elem.getBoundingClientRect().left,";
+                script += "y: elem.getBoundingClientRect().top";
+                script += "};";
+                script += "if (elemCenter.x < (elem.offsetWidth * -1)) return false;";
+                script += "if (elemCenter.x > (document.documentElement.clientWidth || window.innerWidth)) return false;";
+                script += "if (elemCenter.y < (elem.offsetHeight * -1)) return false;";
+                script += "if (elemCenter.y > (document.documentElement.clientHeight || window.innerHeight)) return false;";
+                script += "return true;";
+                script += "}());";
+
+                /* старый метод
+                script += "if (!(elem instanceof Element)) throw Error('DomUtil: elem is not an element.');";
                 script += "const style = getComputedStyle(elem);";
                 script += "if (style.display === 'none') return false;";
                 script += "if (style.visibility !== 'visible') return false;";
@@ -193,6 +210,7 @@ namespace HatFramework
                 script += "} while (pointContainer = pointContainer.parentNode);";
                 script += "return false;";
                 script += "}());";
+                */
 
                 string result = await executeJS(script);
                 if (Debug == true) ConsoleMsg($"[DEBUG] JS результат: {result}");
