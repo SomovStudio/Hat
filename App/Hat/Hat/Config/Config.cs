@@ -25,8 +25,8 @@ namespace Hat
         /* переменные для браузера */
         public static BrowserForm browserForm;                  // окно браузера (форма)
         public static string defaultUserAgent = "";             // значение user-agent по умолчанию
-        public static string currentBrowserVersion = "1.1.6";   // текущая версия браузера
-        public static string dateBrowserUpdate = "15.10.2022";  // дата последнего обновления
+        public static string currentBrowserVersion = "1.1.7";   // текущая версия браузера
+        public static string dateBrowserUpdate = "1.11.2022";  // дата последнего обновления
 
         public static string openHtmlFile = null;             // имя открываемого html файла при запуске браузера
         public static bool commandLineMode = false;         // флаг показывающий запуск приложения из командной строки
@@ -34,7 +34,7 @@ namespace Hat
         public static string selectName = "";               // имя выбранного файла или папки
         public static string selectValue = "";              // полный путь к выбранному файлу или папке
         public static bool debugJavaScript = false;         // отладка javascript при выполнении автотеста
-
+        
         /* кэш браузера */
         public static string cacheFolder = "Hat.exe.WebView2";  // кэш папка
         public static string statucCacheClear = "false";        // статус очистки кэша
@@ -145,8 +145,6 @@ namespace Hat
                 browserForm.consoleMsgError(ex.ToString());
             }
         }
-
-
 
     }
 }

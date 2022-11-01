@@ -20,6 +20,10 @@ namespace Hat
         public BrowserForm()
         {
             InitializeComponent();
+
+            StartPage.createStartPage();
+            toolStripComboBoxUrl.Text = "file:///" + StartPage.fileStartPage;
+
             CheckForIllegalCrossThreadCalls = false;
             Config.encoding = WorkOnFiles.UTF_8_BOM;
             toolStripStatusLabelFileEncoding.Text = Config.encoding;
