@@ -17,7 +17,7 @@
 <hr>
 
 <p align="center">
-  <img src="https://github.com/SomovStudio/Hat/blob/main/Img/screenshots/Screenshot_2.png">
+  <img src="https://github.com/SomovStudio/Hat/blob/main/Img/screenshots/ScreenshotHat.png">
 </p>
 
 Системные требования:
@@ -42,5 +42,5 @@
 <br>Комания занимается разработкой Интернет-магазинов, Корпоративных порталов, CRM-систем и собственных решений.
 <br><br>
 <p align="center">
-  <img src="https://github.com/SomovStudio/Hat/blob/main/Img/partners/zionec.png">
+  <img src="https://github.com/SomovStudio/Hat/blob/main/Img/partners/companyzionec.png">
 </p>
