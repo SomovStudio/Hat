@@ -37,6 +37,15 @@
 <hr>
 Видеообзор браузера Hat: https://youtu.be/Dn9UtrNj6EM
 <br>
+<br>
+Уроки:
+<ul>
+	<li><a href="https://youtu.be/4qyzbEASw3E" target="_blank">Урок №1</a>: Проекта под Visual Studio и пример описания демонстрационного автотеста</li>
+	<li><a href="https://youtu.be/WdfLl0Ys8y0" target="_blank">Урок №2</a>: Выполнение JavaScript кода в теле автотеста</li>
+	<li><a href="https://youtu.be/dPRx4bqvZ4w" target="_blank">Урок №3</a>: Автотест для проверки API и обработки полученного результата в JSON формате</li>
+</ul>
+<br>
+
 <hr>
 <br>Программа разработана при поддержке компании <b>Зионек</b> https://zionec.ru/
 <br>Комания занимается разработкой Интернет-магазинов, Корпоративных порталов, CRM-систем и собственных решений.
