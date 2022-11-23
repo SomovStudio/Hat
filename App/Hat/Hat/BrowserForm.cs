@@ -241,8 +241,10 @@ namespace Hat
         {
             if (e != null && e.ParameterObjectAsJson != null)
             {
-                richTextBoxErrors.AppendText(e.ParameterObjectAsJson + Environment.NewLine);
-                richTextBoxErrors.ScrollToCaret();
+                //richTextBoxErrors.AppendText(e.ParameterObjectAsJson + Environment.NewLine);
+                //richTextBoxErrors.ScrollToCaret();
+                //if (e.ParameterObjectAsJson.Contains("error") == true) richTextBoxErrors.Text += e.ParameterObjectAsJson + Environment.NewLine;
+                richTextBoxErrors.Text += e.ParameterObjectAsJson + Environment.NewLine;
             }
         }
 
