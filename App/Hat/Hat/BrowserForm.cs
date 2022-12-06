@@ -147,10 +147,19 @@ namespace Hat
                 webView2.CoreWebView2.CallDevToolsProtocolMethodAsync("Network.setCacheDisabled", @"{""cacheDisabled"":true}");
                 consoleMsg("Выполнена очистка кэша WebView");
 
+
+                /* Chrome DevTools Protocol: https://chromedevtools.github.io/devtools-protocol/tot/ */
                 webView2.EnsureCoreWebView2Async();
-                webView2.CoreWebView2.GetDevToolsProtocolEventReceiver("Log.entryAdded").DevToolsProtocolEventReceived += showMessageConsoleErrors;
+                webView2.CoreWebView2.GetDevToolsProtocolEventReceiver("Log.entryAdded").DevToolsProtocolEventReceived += errorEvents;
                 webView2.CoreWebView2.CallDevToolsProtocolMethodAsync("Log.enable", "{}");
+                webView2.CoreWebView2.GetDevToolsProtocolEventReceiver("Runtime.consoleAPICalled").DevToolsProtocolEventReceived += errorEvents;
+                webView2.CoreWebView2.CallDevToolsProtocolMethodAsync("Runtime.enable", "{}");
+                webView2.CoreWebView2.GetDevToolsProtocolEventReceiver("Runtime.exceptionThrown").DevToolsProtocolEventReceived += errorEvents;
+                webView2.CoreWebView2.CallDevToolsProtocolMethodAsync("Runtime.enable", "{}");
+                webView2.CoreWebView2.GetDevToolsProtocolEventReceiver("Console.messageAdded").DevToolsProtocolEventReceived += errorEvents;
+                webView2.CoreWebView2.CallDevToolsProtocolMethodAsync("Console.enable", "{}");
                 consoleMsg("Запущен монитор ошибок на страницах");
+
 
                 webView2.CoreWebView2.CallDevToolsProtocolMethodAsync("Security.setIgnoreCertificateErrors", "{\"ignore\": true}");
                 consoleMsg("Опция Security.setIgnoreCertificateErrors - включен параметр ignore: true");
@@ -223,12 +232,27 @@ namespace Hat
             }
         }
 
-        private async void showMessageConsoleErrors(object sender, Microsoft.Web.WebView2.Core.CoreWebView2DevToolsProtocolEventReceivedEventArgs e)
+        private void errorEvents(object sender, Microsoft.Web.WebView2.Core.CoreWebView2DevToolsProtocolEventReceivedEventArgs e)
+        {
+            // "level":"error" | "subtype":"error" | ["level":"log", "type":"log"]
+            if (e != null && e.ParameterObjectAsJson != null)
+            {
+                if (e.ParameterObjectAsJson.Contains("\"level\":\"warning\"") == true) return;
+                if (e.ParameterObjectAsJson.Contains("\"level\":\"verbose\"") == true) return;
+                if (e.ParameterObjectAsJson.Contains("\"level\":\"info\"") == true) return;
+                richTextBoxErrors.AppendText(e.ParameterObjectAsJson + Environment.NewLine);
+                richTextBoxErrors.ScrollToCaret();
+            }
+        }
+
+        private void showMessageConsoleErrors(object sender, Microsoft.Web.WebView2.Core.CoreWebView2DevToolsProtocolEventReceivedEventArgs e)
         {
             /*
              * Chrome DevTools Protocol | Log Domain
              * https://chromedevtools.github.io/devtools-protocol/tot/Log/
              * Log.entryAdded, Log.LogEntry, Log.ViolationSetting, Log.clear, Log.disable, Log.enable, Log.startViolationsReport, Log.stopViolationsReport
+             * https://chromedevtools.github.io/devtools-protocol/tot/Runtime/
+             * https://chromedevtools.github.io/devtools-protocol/tot/Console/
              */
 
             if (e != null && e.ParameterObjectAsJson != null)
@@ -236,7 +260,6 @@ namespace Hat
                 // verbose, info, warning, error
                 if (e.ParameterObjectAsJson.Contains("\"level\":\"error\"") == true) richTextBoxErrors.AppendText(e.ParameterObjectAsJson + Environment.NewLine);
                 else if (e.ParameterObjectAsJson.Contains("\"level\":\"warning\"") == true) richTextBoxErrors.AppendText(e.ParameterObjectAsJson + Environment.NewLine);
-                //richTextBoxErrors.AppendText(e.ParameterObjectAsJson + Environment.NewLine);
                 richTextBoxErrors.ScrollToCaret();
             }
         }
