@@ -146,14 +146,18 @@ namespace Hat
                 webView2.CoreWebView2.CallDevToolsProtocolMethodAsync("Network.clearBrowserCache", "{}");
                 webView2.CoreWebView2.CallDevToolsProtocolMethodAsync("Network.setCacheDisabled", @"{""cacheDisabled"":true}");
                 consoleMsg("Выполнена очистка кэша WebView");
+
                 webView2.EnsureCoreWebView2Async();
                 webView2.CoreWebView2.GetDevToolsProtocolEventReceiver("Log.entryAdded").DevToolsProtocolEventReceived += showMessageConsoleErrors;
                 webView2.CoreWebView2.CallDevToolsProtocolMethodAsync("Log.enable", "{}");
                 consoleMsg("Запущен монитор ошибок на страницах");
+
                 webView2.CoreWebView2.CallDevToolsProtocolMethodAsync("Security.setIgnoreCertificateErrors", "{\"ignore\": true}");
                 consoleMsg("Опция Security.setIgnoreCertificateErrors - включен параметр ignore: true");
+
                 if (Config.defaultUserAgent == "") Config.defaultUserAgent = webView2.CoreWebView2.Settings.UserAgent;
                 consoleMsg($"Опция User-Agent по умолчанию {Config.defaultUserAgent}");
+
                 webView2.CoreWebView2.Settings.AreDefaultScriptDialogsEnabled = false;
                 consoleMsg("Выполнена настройка WebView (отключаны alert, prompt, confirm)");
 
@@ -244,7 +248,11 @@ namespace Hat
                 //richTextBoxErrors.AppendText(e.ParameterObjectAsJson + Environment.NewLine);
                 //richTextBoxErrors.ScrollToCaret();
                 //if (e.ParameterObjectAsJson.Contains("error") == true) richTextBoxErrors.Text += e.ParameterObjectAsJson + Environment.NewLine;
-                richTextBoxErrors.Text += e.ParameterObjectAsJson + Environment.NewLine;
+
+                //richTextBoxErrors.Text += e.ParameterObjectAsJson + Environment.NewLine;
+
+                richTextBoxErrors.AppendText(e.ParameterObjectAsJson + Environment.NewLine);
+                richTextBoxErrors.ScrollToCaret();
             }
         }
 

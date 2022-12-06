@@ -2065,6 +2065,7 @@
             this.richTextBoxErrors.Size = new System.Drawing.Size(787, 152);
             this.richTextBoxErrors.TabIndex = 1;
             this.richTextBoxErrors.Text = "";
+            this.richTextBoxErrors.WordWrap = false;
             // 
             // toolStrip2
             // 
