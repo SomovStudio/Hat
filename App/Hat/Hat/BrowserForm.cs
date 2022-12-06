@@ -137,22 +137,22 @@ namespace Hat
             webView2.CoreWebView2InitializationCompleted += WebView_CoreWebView2InitializationCompleted;
         }
 
-        private void WebView_CoreWebView2InitializationCompleted(object sender, CoreWebView2InitializationCompletedEventArgs e)
+        private async void WebView_CoreWebView2InitializationCompleted(object sender, CoreWebView2InitializationCompletedEventArgs e)
         {
             try
             {
                 consoleMsg("Инициализация WebView завершена");
-                webView2.EnsureCoreWebView2Async();
-                webView2.CoreWebView2.CallDevToolsProtocolMethodAsync("Network.clearBrowserCache", "{}");
-                webView2.CoreWebView2.CallDevToolsProtocolMethodAsync("Network.setCacheDisabled", @"{""cacheDisabled"":true}");
+                await webView2.EnsureCoreWebView2Async();
+                await webView2.CoreWebView2.CallDevToolsProtocolMethodAsync("Network.clearBrowserCache", "{}");
+                await webView2.CoreWebView2.CallDevToolsProtocolMethodAsync("Network.setCacheDisabled", @"{""cacheDisabled"":true}");
                 consoleMsg("Выполнена очистка кэша WebView");
 
-                webView2.EnsureCoreWebView2Async();
+                await webView2.EnsureCoreWebView2Async();
                 webView2.CoreWebView2.GetDevToolsProtocolEventReceiver("Log.entryAdded").DevToolsProtocolEventReceived += showMessageConsoleErrors;
-                webView2.CoreWebView2.CallDevToolsProtocolMethodAsync("Log.enable", "{}");
+                await webView2.CoreWebView2.CallDevToolsProtocolMethodAsync("Log.enable", "{}");
                 consoleMsg("Запущен монитор ошибок на страницах");
 
-                webView2.CoreWebView2.CallDevToolsProtocolMethodAsync("Security.setIgnoreCertificateErrors", "{\"ignore\": true}");
+                await webView2.CoreWebView2.CallDevToolsProtocolMethodAsync("Security.setIgnoreCertificateErrors", "{\"ignore\": true}");
                 consoleMsg("Опция Security.setIgnoreCertificateErrors - включен параметр ignore: true");
 
                 if (Config.defaultUserAgent == "") Config.defaultUserAgent = webView2.CoreWebView2.Settings.UserAgent;
@@ -223,24 +223,6 @@ namespace Hat
             }
         }
 
-        /* Мониторинг ошибок на загруженной странице */
-        private async void startMonitorConsoleErrors()
-        {
-            try
-            {
-                await webView2.EnsureCoreWebView2Async();
-                webView2.CoreWebView2.GetDevToolsProtocolEventReceiver("Log.entryAdded").DevToolsProtocolEventReceived += showMessageConsoleErrors;
-                await webView2.CoreWebView2.CallDevToolsProtocolMethodAsync("Log.enable", "{}");
-                //webView2.CoreWebView2.OpenDevToolsWindow();
-                //webView2.CoreWebView2.Navigate("https://stackoverflow.com");
-                consoleMsg("Запусщен монитор ошибок на страницах");
-            }
-            catch (Exception ex)
-            {
-                consoleMsgError(ex.ToString());
-            }
-        }
-
         private void showMessageConsoleErrors(object sender, Microsoft.Web.WebView2.Core.CoreWebView2DevToolsProtocolEventReceivedEventArgs e)
         {
             if (e != null && e.ParameterObjectAsJson != null)
@@ -248,8 +230,6 @@ namespace Hat
                 //richTextBoxErrors.AppendText(e.ParameterObjectAsJson + Environment.NewLine);
                 //richTextBoxErrors.ScrollToCaret();
                 //if (e.ParameterObjectAsJson.Contains("error") == true) richTextBoxErrors.Text += e.ParameterObjectAsJson + Environment.NewLine;
-
-                //richTextBoxErrors.Text += e.ParameterObjectAsJson + Environment.NewLine;
 
                 richTextBoxErrors.AppendText(e.ParameterObjectAsJson + Environment.NewLine);
                 richTextBoxErrors.ScrollToCaret();
