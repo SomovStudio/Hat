@@ -223,8 +223,14 @@ namespace Hat
             }
         }
 
-        private void showMessageConsoleErrors(object sender, Microsoft.Web.WebView2.Core.CoreWebView2DevToolsProtocolEventReceivedEventArgs e)
+        private async void showMessageConsoleErrors(object sender, Microsoft.Web.WebView2.Core.CoreWebView2DevToolsProtocolEventReceivedEventArgs e)
         {
+            /*
+             * Chrome DevTools Protocol | Log Domain
+             * https://chromedevtools.github.io/devtools-protocol/tot/Log/
+             * Log.entryAdded, Log.LogEntry, Log.ViolationSetting, Log.clear, Log.disable, Log.enable, Log.startViolationsReport, Log.stopViolationsReport
+             */
+
             if (e != null && e.ParameterObjectAsJson != null)
             {
                 // verbose, info, warning, error
