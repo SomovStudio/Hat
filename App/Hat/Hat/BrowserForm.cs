@@ -152,12 +152,13 @@ namespace Hat
                 webView2.EnsureCoreWebView2Async();
                 webView2.CoreWebView2.GetDevToolsProtocolEventReceiver("Log.entryAdded").DevToolsProtocolEventReceived += errorEvents;
                 webView2.CoreWebView2.CallDevToolsProtocolMethodAsync("Log.enable", "{}");
-                webView2.CoreWebView2.GetDevToolsProtocolEventReceiver("Runtime.consoleAPICalled").DevToolsProtocolEventReceived += errorEvents;
-                webView2.CoreWebView2.CallDevToolsProtocolMethodAsync("Runtime.enable", "{}");
-                webView2.CoreWebView2.GetDevToolsProtocolEventReceiver("Runtime.exceptionThrown").DevToolsProtocolEventReceived += errorEvents;
-                webView2.CoreWebView2.CallDevToolsProtocolMethodAsync("Runtime.enable", "{}");
                 webView2.CoreWebView2.GetDevToolsProtocolEventReceiver("Console.messageAdded").DevToolsProtocolEventReceived += errorEvents;
                 webView2.CoreWebView2.CallDevToolsProtocolMethodAsync("Console.enable", "{}");
+                webView2.CoreWebView2.GetDevToolsProtocolEventReceiver("Runtime.consoleAPICalled").DevToolsProtocolEventReceived += errorEvents;
+                webView2.CoreWebView2.GetDevToolsProtocolEventReceiver("Runtime.exceptionThrown").DevToolsProtocolEventReceived += errorEvents;
+                webView2.CoreWebView2.CallDevToolsProtocolMethodAsync("Runtime.enable", "{}");
+                webView2.CoreWebView2.GetDevToolsProtocolEventReceiver("Network.loadingFailed").DevToolsProtocolEventReceived += errorEvents;
+                webView2.CoreWebView2.CallDevToolsProtocolMethodAsync("Network.enable", "{}");
                 consoleMsg("Запущен монитор ошибок на страницах");
 
 
