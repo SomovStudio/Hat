@@ -137,22 +137,22 @@ namespace Hat
             webView2.CoreWebView2InitializationCompleted += WebView_CoreWebView2InitializationCompleted;
         }
 
-        private async void WebView_CoreWebView2InitializationCompleted(object sender, CoreWebView2InitializationCompletedEventArgs e)
+        private void WebView_CoreWebView2InitializationCompleted(object sender, CoreWebView2InitializationCompletedEventArgs e)
         {
             try
             {
                 consoleMsg("Инициализация WebView завершена");
-                await webView2.EnsureCoreWebView2Async();
-                await webView2.CoreWebView2.CallDevToolsProtocolMethodAsync("Network.clearBrowserCache", "{}");
-                await webView2.CoreWebView2.CallDevToolsProtocolMethodAsync("Network.setCacheDisabled", @"{""cacheDisabled"":true}");
+                webView2.EnsureCoreWebView2Async();
+                webView2.CoreWebView2.CallDevToolsProtocolMethodAsync("Network.clearBrowserCache", "{}");
+                webView2.CoreWebView2.CallDevToolsProtocolMethodAsync("Network.setCacheDisabled", @"{""cacheDisabled"":true}");
                 consoleMsg("Выполнена очистка кэша WebView");
 
-                await webView2.EnsureCoreWebView2Async();
+                webView2.EnsureCoreWebView2Async();
                 webView2.CoreWebView2.GetDevToolsProtocolEventReceiver("Log.entryAdded").DevToolsProtocolEventReceived += showMessageConsoleErrors;
-                await webView2.CoreWebView2.CallDevToolsProtocolMethodAsync("Log.enable", "{}");
+                webView2.CoreWebView2.CallDevToolsProtocolMethodAsync("Log.enable", "{}");
                 consoleMsg("Запущен монитор ошибок на страницах");
 
-                await webView2.CoreWebView2.CallDevToolsProtocolMethodAsync("Security.setIgnoreCertificateErrors", "{\"ignore\": true}");
+                webView2.CoreWebView2.CallDevToolsProtocolMethodAsync("Security.setIgnoreCertificateErrors", "{\"ignore\": true}");
                 consoleMsg("Опция Security.setIgnoreCertificateErrors - включен параметр ignore: true");
 
                 if (Config.defaultUserAgent == "") Config.defaultUserAgent = webView2.CoreWebView2.Settings.UserAgent;
@@ -234,8 +234,9 @@ namespace Hat
             if (e != null && e.ParameterObjectAsJson != null)
             {
                 // verbose, info, warning, error
-                //if (e.ParameterObjectAsJson.Contains("error") == true) richTextBoxErrors.AppendText(e.ParameterObjectAsJson + Environment.NewLine);
-                richTextBoxErrors.AppendText(e.ParameterObjectAsJson + Environment.NewLine);
+                if (e.ParameterObjectAsJson.Contains("\"level\":\"error\"") == true) richTextBoxErrors.AppendText(e.ParameterObjectAsJson + Environment.NewLine);
+                else if (e.ParameterObjectAsJson.Contains("\"level\":\"warning\"") == true) richTextBoxErrors.AppendText(e.ParameterObjectAsJson + Environment.NewLine);
+                //richTextBoxErrors.AppendText(e.ParameterObjectAsJson + Environment.NewLine);
                 richTextBoxErrors.ScrollToCaret();
             }
         }
