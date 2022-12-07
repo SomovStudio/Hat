@@ -141,15 +141,12 @@ namespace Hat
         {
             try
             {
-                consoleMsg("Инициализация WebView завершена");
+                consoleMsg("Начало инициализации WebView");
                 webView2.EnsureCoreWebView2Async();
-                webView2.CoreWebView2.CallDevToolsProtocolMethodAsync("Network.clearBrowserCache", "{}");
-                webView2.CoreWebView2.CallDevToolsProtocolMethodAsync("Network.setCacheDisabled", @"{""cacheDisabled"":true}");
-                consoleMsg("Выполнена очистка кэша WebView");
 
-
-                /* Chrome DevTools Protocol: https://chromedevtools.github.io/devtools-protocol/tot/ */
-                webView2.EnsureCoreWebView2Async();
+                /* Microsoft Edge DevTools Protocol: https://learn.microsoft.com/en-us/microsoft-edge/devtools-protocol-chromium/
+                 * Chrome DevTools Protocol: https://chromedevtools.github.io/devtools-protocol/tot/ 
+                 */
                 webView2.CoreWebView2.GetDevToolsProtocolEventReceiver("Log.entryAdded").DevToolsProtocolEventReceived += errorEvents;
                 webView2.CoreWebView2.CallDevToolsProtocolMethodAsync("Log.enable", "{}");
                 webView2.CoreWebView2.GetDevToolsProtocolEventReceiver("Console.messageAdded").DevToolsProtocolEventReceived += errorEvents;
@@ -157,20 +154,24 @@ namespace Hat
                 webView2.CoreWebView2.GetDevToolsProtocolEventReceiver("Runtime.consoleAPICalled").DevToolsProtocolEventReceived += errorEvents;
                 webView2.CoreWebView2.GetDevToolsProtocolEventReceiver("Runtime.exceptionThrown").DevToolsProtocolEventReceived += errorEvents;
                 webView2.CoreWebView2.CallDevToolsProtocolMethodAsync("Runtime.enable", "{}");
-                webView2.CoreWebView2.GetDevToolsProtocolEventReceiver("Network.loadingFailed").DevToolsProtocolEventReceived += errorEvents;
-                webView2.CoreWebView2.CallDevToolsProtocolMethodAsync("Network.enable", "{}");
+                //webView2.CoreWebView2.GetDevToolsProtocolEventReceiver("Network.loadingFailed").DevToolsProtocolEventReceived += errorEvents;
+                //webView2.CoreWebView2.CallDevToolsProtocolMethodAsync("Network.enable", "{}");
                 consoleMsg("Запущен монитор ошибок на страницах");
 
+                webView2.CoreWebView2.CallDevToolsProtocolMethodAsync("Network.enable", "{}");
+                webView2.CoreWebView2.CallDevToolsProtocolMethodAsync("Network.clearBrowserCache", "{}");
+                webView2.CoreWebView2.CallDevToolsProtocolMethodAsync("Network.setCacheDisabled", @"{""cacheDisabled"":true}");
+                consoleMsg("Выполнена очистка кэша WebView");
 
                 webView2.CoreWebView2.CallDevToolsProtocolMethodAsync("Security.setIgnoreCertificateErrors", "{\"ignore\": true}");
-                consoleMsg("Опция Security.setIgnoreCertificateErrors - включен параметр ignore: true");
+                consoleMsg("Включено игнорирование сертификата Security.setIgnoreCertificateErrors (true)");
 
                 if (Config.defaultUserAgent == "") Config.defaultUserAgent = webView2.CoreWebView2.Settings.UserAgent;
                 consoleMsg($"Опция User-Agent по умолчанию {Config.defaultUserAgent}");
 
                 webView2.CoreWebView2.Settings.AreDefaultScriptDialogsEnabled = false;
                 consoleMsg("Выполнена настройка WebView (отключаны alert, prompt, confirm)");
-
+                consoleMsg("Инициализация WebView - завершена");
             }
             catch (Exception ex)
             {
