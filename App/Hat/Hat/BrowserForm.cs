@@ -236,12 +236,30 @@ namespace Hat
 
         private void errorEvents(object sender, Microsoft.Web.WebView2.Core.CoreWebView2DevToolsProtocolEventReceivedEventArgs e)
         {
-            // "level":"error" | "subtype":"error" | ["level":"log", "type":"log"]
+            // Сообщения бывают: {"message":{}} | {"args":[]} | {"exceptionDetails":{}} | {"entry":{}} |
+            // Определять: "level":"error" | "type":"error" | "subtype":"error" | "className":"TypeError" | "className":"ReferenceError" | "className":"SyntaxError"
+            // Пропускать: "level":"log" | "type":"log" | "subtype":"log"
+            // Пропускать: "level":"info" | "type":"info" | "subtype":"info"
+            // Пропускать: "level":"warning" | "type":"warning" | "subtype":"warning"
+            // Пропускать: "level":"verbose" | "type":"verbose" | "subtype":"verbose"
             if (e != null && e.ParameterObjectAsJson != null)
             {
-                if (e.ParameterObjectAsJson.Contains("\"level\":\"warning\"") == true) return;
-                if (e.ParameterObjectAsJson.Contains("\"level\":\"verbose\"") == true) return;
+                if (e.ParameterObjectAsJson.Contains("\"level\":\"log\"") == true) return;
+                if (e.ParameterObjectAsJson.Contains("\"type\":\"log\"") == true) return;
+                if (e.ParameterObjectAsJson.Contains("\"subtype\":\"log\"") == true) return;
+
                 if (e.ParameterObjectAsJson.Contains("\"level\":\"info\"") == true) return;
+                if (e.ParameterObjectAsJson.Contains("\"type\":\"info\"") == true) return;
+                if (e.ParameterObjectAsJson.Contains("\"subtype\":\"info\"") == true) return;
+
+                if (e.ParameterObjectAsJson.Contains("\"level\":\"warning\"") == true) return;
+                if (e.ParameterObjectAsJson.Contains("\"type\":\"warning\"") == true) return;
+                if (e.ParameterObjectAsJson.Contains("\"subtype\":\"warning\"") == true) return;
+
+                if (e.ParameterObjectAsJson.Contains("\"level\":\"verbose\"") == true) return;
+                if (e.ParameterObjectAsJson.Contains("\"type\":\"verbose\"") == true) return;
+                if (e.ParameterObjectAsJson.Contains("\"subtype\":\"verbose\"") == true) return;
+
                 richTextBoxErrors.AppendText(e.ParameterObjectAsJson + Environment.NewLine);
                 richTextBoxErrors.ScrollToCaret();
             }

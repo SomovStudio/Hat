@@ -76,8 +76,14 @@ namespace Hat
         {
             HatFrameworkDev.Tester tester = new HatFrameworkDev.Tester(Config.browserForm);
             await tester.TestBeginAsync();
-            //await tester.GoToUrlAsync("https://somovstudio.github.io/test_error.html", 25);
-            await tester.GoToUrlAsync("https://rutube.sport/video/angliya-senegal-obzor-matcha-chm-2022/", 25);
+            await tester.GoToUrlAsync("https://somovstudio.github.io/test_error.html", 25);
+            //await tester.GoToUrlAsync("https://rutube.sport/video/angliya-senegal-obzor-matcha-chm-2022/", 25);
+
+            List<string> errors = await tester.BrowserGetErrorsAsync();
+            foreach (string error in errors)
+            {
+                tester.ConsoleMsg(error);
+            }
 
             await tester.TestEndAsync();
 
