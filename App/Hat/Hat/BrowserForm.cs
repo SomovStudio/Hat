@@ -141,22 +141,37 @@ namespace Hat
         {
             try
             {
-                consoleMsg("Инициализация WebView завершена");
+                consoleMsg("Начало инициализации WebView");
                 webView2.EnsureCoreWebView2Async();
+
+                /* Microsoft Edge DevTools Protocol: https://learn.microsoft.com/en-us/microsoft-edge/devtools-protocol-chromium/
+                 * Chrome DevTools Protocol: https://chromedevtools.github.io/devtools-protocol/tot/ 
+                 */
+                webView2.CoreWebView2.GetDevToolsProtocolEventReceiver("Log.entryAdded").DevToolsProtocolEventReceived += errorEvents;
+                webView2.CoreWebView2.CallDevToolsProtocolMethodAsync("Log.enable", "{}");
+                webView2.CoreWebView2.GetDevToolsProtocolEventReceiver("Console.messageAdded").DevToolsProtocolEventReceived += errorEvents;
+                webView2.CoreWebView2.CallDevToolsProtocolMethodAsync("Console.enable", "{}");
+                webView2.CoreWebView2.GetDevToolsProtocolEventReceiver("Runtime.consoleAPICalled").DevToolsProtocolEventReceived += errorEvents;
+                webView2.CoreWebView2.GetDevToolsProtocolEventReceiver("Runtime.exceptionThrown").DevToolsProtocolEventReceived += errorEvents;
+                webView2.CoreWebView2.CallDevToolsProtocolMethodAsync("Runtime.enable", "{}");
+                //webView2.CoreWebView2.GetDevToolsProtocolEventReceiver("Network.loadingFailed").DevToolsProtocolEventReceived += errorEvents;
+                //webView2.CoreWebView2.CallDevToolsProtocolMethodAsync("Network.enable", "{}");
+                consoleMsg("Запущен монитор ошибок на страницах");
+
+                webView2.CoreWebView2.CallDevToolsProtocolMethodAsync("Network.enable", "{}");
                 webView2.CoreWebView2.CallDevToolsProtocolMethodAsync("Network.clearBrowserCache", "{}");
                 webView2.CoreWebView2.CallDevToolsProtocolMethodAsync("Network.setCacheDisabled", @"{""cacheDisabled"":true}");
                 consoleMsg("Выполнена очистка кэша WebView");
-                webView2.EnsureCoreWebView2Async();
-                webView2.CoreWebView2.GetDevToolsProtocolEventReceiver("Log.entryAdded").DevToolsProtocolEventReceived += showMessageConsoleErrors;
-                webView2.CoreWebView2.CallDevToolsProtocolMethodAsync("Log.enable", "{}");
-                consoleMsg("Запущен монитор ошибок на страницах");
+
                 webView2.CoreWebView2.CallDevToolsProtocolMethodAsync("Security.setIgnoreCertificateErrors", "{\"ignore\": true}");
-                consoleMsg("Опция Security.setIgnoreCertificateErrors - включен параметр ignore: true");
+                consoleMsg("Включено игнорирование сертификата Security.setIgnoreCertificateErrors (true)");
+
                 if (Config.defaultUserAgent == "") Config.defaultUserAgent = webView2.CoreWebView2.Settings.UserAgent;
                 consoleMsg($"Опция User-Agent по умолчанию {Config.defaultUserAgent}");
+
                 webView2.CoreWebView2.Settings.AreDefaultScriptDialogsEnabled = false;
                 consoleMsg("Выполнена настройка WebView (отключаны alert, prompt, confirm)");
-
+                consoleMsg("Инициализация WebView - завершена");
             }
             catch (Exception ex)
             {
@@ -219,29 +234,52 @@ namespace Hat
             }
         }
 
-        /* Мониторинг ошибок на загруженной странице */
-        private async void startMonitorConsoleErrors()
+        private void errorEvents(object sender, Microsoft.Web.WebView2.Core.CoreWebView2DevToolsProtocolEventReceivedEventArgs e)
         {
-            try
+            // Сообщения бывают: {"message":{}} | {"args":[]} | {"exceptionDetails":{}} | {"entry":{}} |
+            // Определять: "level":"error" | "type":"error" | "subtype":"error" | "className":"TypeError" | "className":"ReferenceError" | "className":"SyntaxError"
+            // Пропускать: "level":"log" | "type":"log" | "subtype":"log"
+            // Пропускать: "level":"info" | "type":"info" | "subtype":"info"
+            // Пропускать: "level":"warning" | "type":"warning" | "subtype":"warning"
+            // Пропускать: "level":"verbose" | "type":"verbose" | "subtype":"verbose"
+            if (e != null && e.ParameterObjectAsJson != null)
             {
-                await webView2.EnsureCoreWebView2Async();
-                webView2.CoreWebView2.GetDevToolsProtocolEventReceiver("Log.entryAdded").DevToolsProtocolEventReceived += showMessageConsoleErrors;
-                await webView2.CoreWebView2.CallDevToolsProtocolMethodAsync("Log.enable", "{}");
-                //webView2.CoreWebView2.OpenDevToolsWindow();
-                //webView2.CoreWebView2.Navigate("https://stackoverflow.com");
-                consoleMsg("Запусщен монитор ошибок на страницах");
-            }
-            catch (Exception ex)
-            {
-                consoleMsgError(ex.ToString());
+                if (e.ParameterObjectAsJson.Contains("\"level\":\"log\"") == true) return;
+                if (e.ParameterObjectAsJson.Contains("\"type\":\"log\"") == true) return;
+                if (e.ParameterObjectAsJson.Contains("\"subtype\":\"log\"") == true) return;
+
+                if (e.ParameterObjectAsJson.Contains("\"level\":\"info\"") == true) return;
+                if (e.ParameterObjectAsJson.Contains("\"type\":\"info\"") == true) return;
+                if (e.ParameterObjectAsJson.Contains("\"subtype\":\"info\"") == true) return;
+
+                if (e.ParameterObjectAsJson.Contains("\"level\":\"warning\"") == true) return;
+                if (e.ParameterObjectAsJson.Contains("\"type\":\"warning\"") == true) return;
+                if (e.ParameterObjectAsJson.Contains("\"subtype\":\"warning\"") == true) return;
+
+                if (e.ParameterObjectAsJson.Contains("\"level\":\"verbose\"") == true) return;
+                if (e.ParameterObjectAsJson.Contains("\"type\":\"verbose\"") == true) return;
+                if (e.ParameterObjectAsJson.Contains("\"subtype\":\"verbose\"") == true) return;
+
+                richTextBoxErrors.AppendText(e.ParameterObjectAsJson + Environment.NewLine);
+                richTextBoxErrors.ScrollToCaret();
             }
         }
 
         private void showMessageConsoleErrors(object sender, Microsoft.Web.WebView2.Core.CoreWebView2DevToolsProtocolEventReceivedEventArgs e)
         {
+            /*
+             * Chrome DevTools Protocol | Log Domain
+             * https://chromedevtools.github.io/devtools-protocol/tot/Log/
+             * Log.entryAdded, Log.LogEntry, Log.ViolationSetting, Log.clear, Log.disable, Log.enable, Log.startViolationsReport, Log.stopViolationsReport
+             * https://chromedevtools.github.io/devtools-protocol/tot/Runtime/
+             * https://chromedevtools.github.io/devtools-protocol/tot/Console/
+             */
+
             if (e != null && e.ParameterObjectAsJson != null)
             {
-                richTextBoxErrors.AppendText(e.ParameterObjectAsJson + Environment.NewLine);
+                // verbose, info, warning, error
+                if (e.ParameterObjectAsJson.Contains("\"level\":\"error\"") == true) richTextBoxErrors.AppendText(e.ParameterObjectAsJson + Environment.NewLine);
+                else if (e.ParameterObjectAsJson.Contains("\"level\":\"warning\"") == true) richTextBoxErrors.AppendText(e.ParameterObjectAsJson + Environment.NewLine);
                 richTextBoxErrors.ScrollToCaret();
             }
         }

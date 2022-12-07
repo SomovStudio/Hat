@@ -772,7 +772,7 @@
             "https://www.google.com/",
             "https://yandex.ru/"});
             this.toolStripComboBoxUrl.Name = "toolStripComboBoxUrl";
-            this.toolStripComboBoxUrl.Size = new System.Drawing.Size(350, 25);
+            this.toolStripComboBoxUrl.Size = new System.Drawing.Size(850, 25);
             this.toolStripComboBoxUrl.SelectedIndexChanged += new System.EventHandler(this.toolStripComboBoxUrl_SelectedIndexChanged);
             this.toolStripComboBoxUrl.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.toolStripComboBoxUrl_KeyPress);
             // 
@@ -2065,6 +2065,7 @@
             this.richTextBoxErrors.Size = new System.Drawing.Size(787, 152);
             this.richTextBoxErrors.TabIndex = 1;
             this.richTextBoxErrors.Text = "";
+            this.richTextBoxErrors.WordWrap = false;
             // 
             // toolStrip2
             // 
