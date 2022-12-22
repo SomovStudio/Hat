@@ -2995,9 +2995,9 @@ namespace HatFrameworkDev
          * https://zetcode.com/csharp/httpclient/
          * https://jsonplaceholder.typicode.com/
          */
-        public async Task<string> RestGetAsync(string url, string charset = "UTF-8")
+        public async Task<string> RestGetAsync(string url, TimeSpan timeout, string charset = "UTF-8")
         {
-            int step = SendMessage($"RestGetAsync(\"{url}\", \"{charset}\")", PROCESS, "Выполнение Get Rest запроса", IMAGE_STATUS_PROCESS);
+            int step = SendMessage($"RestGetAsync(\"{url}\", \"{timeout}\", \"{charset}\")", PROCESS, "Выполнение Get Rest запроса", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return null;
 
             string result = null;
@@ -3007,6 +3007,7 @@ namespace HatFrameworkDev
 
                 Uri uri = new Uri(url);
                 HttpClient client = new HttpClient();
+                client.Timeout = timeout;
                 client.BaseAddress = uri;
                 client.DefaultRequestHeaders.Clear();
                 client.DefaultRequestHeaders.Accept.Clear();
@@ -3033,9 +3034,9 @@ namespace HatFrameworkDev
             return result;
         }
 
-        public async Task<string> RestGetBasicAuthAsync(string login, string pass, string url, string charset = "UTF-8")
+        public async Task<string> RestGetBasicAuthAsync(string login, string pass, string url, TimeSpan timeout, string charset = "UTF-8")
         {
-            int step = SendMessage($"RestGetAuthAsync(\"{login}\", \"{pass}\", \"{url}\", \"{charset}\")", PROCESS, "Выполнение Get Rest запроса", IMAGE_STATUS_PROCESS);
+            int step = SendMessage($"RestGetAuthAsync(\"{login}\", \"{pass}\", \"{url}\", \"{timeout}\", \"{charset}\")", PROCESS, "Выполнение Get Rest запроса", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return null;
 
             string result = null;
@@ -3046,6 +3047,7 @@ namespace HatFrameworkDev
 
                 Uri uri = new Uri(url);
                 HttpClient client = new HttpClient();
+                client.Timeout = timeout;
                 client.BaseAddress = uri;
                 client.DefaultRequestHeaders.Clear();
                 client.DefaultRequestHeaders.Accept.Clear();
