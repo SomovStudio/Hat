@@ -2997,7 +2997,7 @@ namespace HatFrameworkDev
          */
         public async Task<string> RestGetAsync(string url, TimeSpan timeout, string charset = "UTF-8")
         {
-            int step = SendMessage($"RestGetAsync(\"{url}\", \"{timeout}\", \"{timeout}\", \"{charset}\")", PROCESS, "Выполнение Get Rest запроса", IMAGE_STATUS_PROCESS);
+            int step = SendMessage($"RestGetAsync(\"{url}\", \"{timeout}\", \"{charset}\")", PROCESS, "Выполнение Get Rest запроса", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return null;
 
             string result = null;
@@ -3077,7 +3077,7 @@ namespace HatFrameworkDev
 
         public async Task<string> RestPostAsync(string url, string json, TimeSpan timeout, string charset = "UTF-8")
         {
-            int step = SendMessage($"RestPostAsync(\"{url}\", \"JSON\", \"{timeout}\", \"{timeout}\", \"{charset}\")", PROCESS, "Выполнение Post Rest запроса" + Environment.NewLine + json, IMAGE_STATUS_PROCESS);
+            int step = SendMessage($"RestPostAsync(\"{url}\", \"JSON\", \"{timeout}\", \"{charset}\")", PROCESS, "Выполнение Post Rest запроса" + Environment.NewLine + json, IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return null;
 
             string result = null;
