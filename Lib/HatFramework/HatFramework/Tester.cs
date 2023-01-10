@@ -3078,7 +3078,7 @@ namespace HatFramework
 
         public async Task<string> RestPostAsync(string url, string json, TimeSpan timeout, string charset = "UTF-8")
         {
-            int step = SendMessage($"RestPostAsync(\"{url}\", \"JSON\", \"{timeout}\", \"{charset}\")", PROCESS, "Выполнение Post Rest запроса" + Environment.NewLine + json, IMAGE_STATUS_PROCESS);
+            int step = SendMessage($"RestPostAsync(\"{url}\", \"JSON\", \"{timeout}\", \"{charset}\")", PROCESS, "Выполнение Post Rest запроса", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return null;
 
             string result = null;
@@ -3097,21 +3097,18 @@ namespace HatFramework
                 {
                     result = await response.Content.ReadAsStringAsync();
                     EditMessage(step, null, PASSED, "Post Rest запрос успешно выполнен" + Environment.NewLine +
-                        "Статус запроса: " + Environment.NewLine + response.StatusCode.ToString() +
-                        "Отправленный JSON: " + Environment.NewLine + json, IMAGE_STATUS_PASSED);
+                        "Статус запроса: " + Environment.NewLine + response.StatusCode.ToString(), IMAGE_STATUS_PASSED);
                 }
                 else
                 {
                     EditMessage(step, null, FAILED, "Post Rest не выполнен" + Environment.NewLine +
-                        "Статус запроса: " + Environment.NewLine + response.StatusCode.ToString() +
-                        "Отправленный JSON: " + Environment.NewLine + json, IMAGE_STATUS_FAILED);
+                        "Статус запроса: " + Environment.NewLine + response.StatusCode.ToString(), IMAGE_STATUS_FAILED);
                 }
             }
             catch (Exception ex)
             {
                 EditMessage(step, null, Tester.FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine +
-                    "Полное описание ошибка: " + ex.ToString() + Environment.NewLine + Environment.NewLine +
-                    "Отправляемый JSON: " + Environment.NewLine + json, Tester.IMAGE_STATUS_FAILED);
+                    "Полное описание ошибка: " + ex.ToString(), Tester.IMAGE_STATUS_FAILED);
                 TestStopAsync();
                 ConsoleMsgError(ex.ToString());
             }
