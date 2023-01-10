@@ -1719,22 +1719,23 @@ await element.ScrollToAsync(false);\par
 
 @"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
-{\*\generator Riched20 10.0.22000}\viewkind4\uc1 
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 RestGetAsync\cf0\par
-\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'fb\'ef\'ee\'eb\'ed\'ff\'e5\'f2 \f0\lang1033 Get Rest \f1\lang1049\'e7\'e0\'ef\'f0\'ee\'f1 \'e8 \'ef\'ee\'eb\'f3\'f7\'e0\'e5\'f2 \'f0\'e5\'e7\'f3\'eb\'fc\'f2\'e0\'f2 \'e2 \'f4\'ee\'f0\'ec\'e0\'f2\'e5 \f0\lang1033 json\f1\lang1049\par
-\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \f0\lang1033 RestGetAsync(string url, string charset = ""UTF-8"")\f1\lang1049\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'fb\'ef\'ee\'eb\'ed\'ff\'e5\'f2 Get Rest \'e7\'e0\'ef\'f0\'ee\'f1 \'e8 \'ef\'ee\'eb\'f3\'f7\'e0\'e5\'f2 \'f0\'e5\'e7\'f3\'eb\'fc\'f2\'e0\'f2 \'e2 \'f4\'ee\'f0\'ec\'e0\'f2\'e5 json\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \f0\lang1033 RestGetAsync(string url, TimeSpan timeout, string charset = ""UTF-8"")\f1\lang1049\par
 \cf3\par
 \cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
-\cf0\f0\lang1033 string result = await tester.RestGetAsync(""https://jsonplaceholder.typicode.com/posts/1/"");\par
+\cf0\f0\lang1033 string result = await tester.RestGetAsync(""https://jsonplaceholder.typicode.com/posts/1/"", TimeSpan.FromDays(1), ""UTF-8"");\par
 tester.ConsoleMsg(result);\par
-\f1\lang1049\par
-\cf2\'c4\'e0\'ed\'ed\'fb\'e9 \'ec\'e5\'f2\'ee\'e4 \'e8\'f1\'ef\'ee\'eb\'fc\'e7\'f3\'e5\'f2 \'f1\'f2\'e0\'ed\'e4\'e0\'f0\'f2\'ed\'fb\'e9 \'ef\'ee\'e4\'f5\'ee\'e4\cf3 :\par
+\par
+\cf2\f1\lang1049\'c4\'e0\'ed\'ed\'fb\'e9 \'ec\'e5\'f2\'ee\'e4 \'e8\'f1\'ef\'ee\'eb\'fc\'e7\'f3\'e5\'f2 \'f1\'f2\'e0\'ed\'e4\'e0\'f0\'f2\'ed\'fb\'e9 \'ef\'ee\'e4\'f5\'ee\'e4\cf3 :\par
 \cf0\f0\lang1033 using System.Net;\par
 using System.Net.Http;\par
 using System.Net.Http.Headers;\par
 \par
 Uri uri = new Uri(url);\par
 HttpClient client = new HttpClient();\par
+client.Timeout = TimeSpan.FromDays(1);\par
 client.BaseAddress = uri;\par
 client.DefaultRequestHeaders.Clear();\par
 client.DefaultRequestHeaders.Accept.Clear();\par
@@ -1745,7 +1746,7 @@ HttpResponseMessage response = await client.GetAsync(url);\par
 if (response.IsSuccessStatusCode)\par
 \{\par
 \tab return await response.Content.ReadAsStringAsync();\par
-\}\f1\lang1049\par
+\}\par
 }",
 
 @"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
@@ -1753,10 +1754,10 @@ if (response.IsSuccessStatusCode)\par
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 RestGetBasicAuthAsync\cf0\par
 \cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'fb\'ef\'ee\'eb\'ed\'ff\'e5\'f2 \f0\lang1033 Get Rest \f1\lang1049\'e7\'e0\'ef\'f0\'ee\'f1 \'e8 \'ef\'ee\'eb\'f3\'f7\'e0\'e5\'f2 \'f0\'e5\'e7\'f3\'eb\'fc\'f2\'e0\'f2 \'e2 \'f4\'ee\'f0\'ec\'e0\'f2\'e5 \f0\lang1033 json\f1\lang1049\par
-\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \f0\lang1033 RestGetBasicAuthAsync(string login, string pass, string url, string charset = ""UTF-8"")\f1\lang1049\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \f0\lang1033 RestGetBasicAuthAsync(string login, string pass, string url, TimeSpan timeout, string charset = ""UTF-8"")\f1\lang1049\par
 \cf3\par
 \cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
-\cf0\f0\lang1033 string result = await tester.RestGetBasicAuthAsync(""admin"", ""0000"", ""{{\field{\*\fldinst{HYPERLINK https://jsonplaceholder.typicode.com/posts/1/ }}{\fldrslt{https://jsonplaceholder.typicode.com/posts/1/\ul0\cf0}}}}\f0\fs20 "", ""UTF-8"");\par
+\cf0\f0\lang1033 string result = await tester.RestGetBasicAuthAsync(""admin"", ""0000"", ""https://jsonplaceholder.typicode.com/posts/1/"", TimeSpan.FromDays(1), ""UTF-8"");\par
 tester.ConsoleMsg(result);\par
 \f1\lang1049\par
 \cf2\'c4\'e0\'ed\'ed\'fb\'e9 \'ec\'e5\'f2\'ee\'e4 \'e8\'f1\'ef\'ee\'eb\'fc\'e7\'f3\'e5\'f2 \'f1\'f2\'e0\'ed\'e4\'e0\'f0\'f2\'ed\'fb\'e9 \'ef\'ee\'e4\'f5\'ee\'e4\cf3 :\par
@@ -1767,6 +1768,7 @@ using System.Net.Http.Headers;\par
 byte[] authToken = Encoding.ASCII.GetBytes($""\{login\}:\{pass\}"");\par
 Uri uri = new Uri(url);\par
 HttpClient client = new HttpClient();\par
+client.Timeout = TimeSpan.FromDays(1);\par
 client.BaseAddress = uri;\par
 client.DefaultRequestHeaders.Clear();\par
 client.DefaultRequestHeaders.Accept.Clear();\par
@@ -2676,7 +2678,35 @@ foreach (string url in redirects)\par
 await tester.AssertEqualsAsync(200, response);\par
 }",
 
-@"",
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 RestPostAsync\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'fb\'ef\'ee\'eb\'ed\'ff\'e5\'f2 \f0\lang1033 Post\f1\lang1049  Rest \'e7\'e0\'ef\'f0\'ee\'f1\f0\lang1033  \f1\lang1049\'f1 \'ee\'f2\'ef\'f0\'e0\'e2\'ea\'ee\'e9 \'e4\'e0\'ed\'ed\'fb\'f5 \'e2 \'f4\'ee\'f0\'ec\'e0\'f2\'e5 \f0\lang1033 json\f1\lang1049  \'e8 \'ef\'ee\'eb\'f3\'f7\'e0\'e5\'f2 \'f0\'e5\'e7\'f3\'eb\'fc\'f2\'e0\'f2 \'f2\'e0\'ea \'e6\'e5 \'e2 \'f4\'ee\'f0\'ec\'e0\'f2\'e5 json\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \f0\lang1033 RestPostAsync(string url, string json, TimeSpan timeout, string charset = ""UTF-8"")\f1\lang1049\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0\f0\lang1033 string result = await tester.RestPostAsync(""https://jsonplaceholder.typicode.com/posts/1/"",\f1\lang1049  \f0\lang1033 ""\{\}"", TimeSpan.FromDays(1), ""UTF-8"");\par
+tester.ConsoleMsg(result);\par
+\par
+\cf2\f1\lang1049\'c4\'e0\'ed\'ed\'fb\'e9 \'ec\'e5\'f2\'ee\'e4 \'e8\'f1\'ef\'ee\'eb\'fc\'e7\'f3\'e5\'f2 \'f1\'f2\'e0\'ed\'e4\'e0\'f0\'f2\'ed\'fb\'e9 \'ef\'ee\'e4\'f5\'ee\'e4\cf3 :\par
+\cf0\f0\lang1033 using System.Net;\par
+using System.Net.Http;\par
+using System.Net.Http.Headers;\par
+\par
+Uri uri = new Uri(url);\par
+HttpClient client = new HttpClient();\par
+client.Timeout = TimeSpan.FromDays(1);\par
+client.DefaultRequestHeaders.Add(""charset"", ""UTF-8"");\par
+client.DefaultRequestHeaders.Add(""User-Agent"", userAgent);\par
+HttpContent content = new StringContent(""\{\}"", Encoding.UTF8, ""application/json"");\par
+HttpResponseMessage response = await client.PostAsync(uri, content);\par
+if (response.IsSuccessStatusCode)\par
+\{\par
+\tab return await response.Content.ReadAsStringAsync();\par
+\}\par
+}",
+
 @"",
 @"",
 @"",
@@ -3331,9 +3361,9 @@ await tester.AssertEqualsAsync(200, response);\par
                     if (value == "BrowserPageReloadAsync" && tag == "Tester") richTextBox1.Rtf = handbook[191];
                     if (value == "GetListRedirectUrlAsync" && tag == "Tester") richTextBox1.Rtf = handbook[192];
                     if (value == "GetUrlResponseAsync" && tag == "Tester") richTextBox1.Rtf = handbook[193];
+                    if (value == "RestPostAsync" && tag == "Tester") richTextBox1.Rtf = handbook[194];
 
                     /*
-                    if (value == "" && tag == "") richTextBox1.Rtf = handbook[194];
                     if (value == "" && tag == "") richTextBox1.Rtf = handbook[195];
                     if (value == "" && tag == "") richTextBox1.Rtf = handbook[196];
                     if (value == "" && tag == "") richTextBox1.Rtf = handbook[197];

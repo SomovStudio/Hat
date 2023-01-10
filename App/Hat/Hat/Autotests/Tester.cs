@@ -2995,9 +2995,9 @@ namespace HatFrameworkDev
          * https://zetcode.com/csharp/httpclient/
          * https://jsonplaceholder.typicode.com/
          */
-        public async Task<string> RestGetAsync(string url, string charset = "UTF-8")
+        public async Task<string> RestGetAsync(string url, TimeSpan timeout, string charset = "UTF-8")
         {
-            int step = SendMessage($"RestGetAsync(\"{url}\", \"{charset}\")", PROCESS, "Выполнение Get Rest запроса", IMAGE_STATUS_PROCESS);
+            int step = SendMessage($"RestGetAsync(\"{url}\", \"{timeout}\", \"{charset}\")", PROCESS, "Выполнение Get Rest запроса", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return null;
 
             string result = null;
@@ -3007,6 +3007,7 @@ namespace HatFrameworkDev
 
                 Uri uri = new Uri(url);
                 HttpClient client = new HttpClient();
+                client.Timeout = timeout;
                 client.BaseAddress = uri;
                 client.DefaultRequestHeaders.Clear();
                 client.DefaultRequestHeaders.Accept.Clear();
@@ -3033,9 +3034,9 @@ namespace HatFrameworkDev
             return result;
         }
 
-        public async Task<string> RestGetBasicAuthAsync(string login, string pass, string url, string charset = "UTF-8")
+        public async Task<string> RestGetBasicAuthAsync(string login, string pass, string url, TimeSpan timeout, string charset = "UTF-8")
         {
-            int step = SendMessage($"RestGetAuthAsync(\"{login}\", \"{pass}\", \"{url}\", \"{charset}\")", PROCESS, "Выполнение Get Rest запроса", IMAGE_STATUS_PROCESS);
+            int step = SendMessage($"RestGetAuthAsync(\"{login}\", \"{pass}\", \"{url}\", \"{timeout}\", \"{charset}\")", PROCESS, "Выполнение Get Rest запроса", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return null;
 
             string result = null;
@@ -3046,6 +3047,7 @@ namespace HatFrameworkDev
 
                 Uri uri = new Uri(url);
                 HttpClient client = new HttpClient();
+                client.Timeout = timeout;
                 client.BaseAddress = uri;
                 client.DefaultRequestHeaders.Clear();
                 client.DefaultRequestHeaders.Accept.Clear();
@@ -3073,9 +3075,47 @@ namespace HatFrameworkDev
             return result;
         }
 
+        public async Task<string> RestPostAsync(string url, string json, TimeSpan timeout, string charset = "UTF-8")
+        {
+            int step = SendMessage($"RestPostAsync(\"{url}\", \"JSON\", \"{timeout}\", \"{charset}\")", PROCESS, "Выполнение Post Rest запроса", IMAGE_STATUS_PROCESS);
+            if (DefineTestStop(step) == true) return null;
+
+            string result = null;
+            try
+            {
+                string userAgent = BrowserView.CoreWebView2.Settings.UserAgent;
+
+                Uri uri = new Uri(url);
+                HttpClient client = new HttpClient();
+                client.Timeout = timeout;
+                client.DefaultRequestHeaders.Add("charset", charset);
+                client.DefaultRequestHeaders.Add("User-Agent", userAgent);
+                HttpContent content = new StringContent(json, Encoding.UTF8, "application/json");
+                HttpResponseMessage response = await client.PostAsync(uri, content);
+                if (response.IsSuccessStatusCode)
+                {
+                    result = await response.Content.ReadAsStringAsync();
+                    EditMessage(step, null, PASSED, "Post Rest запрос успешно выполнен" + Environment.NewLine +
+                        "Статус запроса: " + Environment.NewLine + response.StatusCode.ToString(), IMAGE_STATUS_PASSED);
+                }
+                else
+                {
+                    EditMessage(step, null, FAILED, "Post Rest не выполнен" + Environment.NewLine + 
+                        "Статус запроса: " + Environment.NewLine + response.StatusCode.ToString(), IMAGE_STATUS_FAILED);
+                }
+            }
+            catch (Exception ex)
+            {
+                EditMessage(step, null, Tester.FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + 
+                    "Полное описание ошибка: " + ex.ToString(), Tester.IMAGE_STATUS_FAILED);
+                TestStopAsync();
+                ConsoleMsgError(ex.ToString());
+            }
+            return result;
+        }
+
 
         /* Методы для замера метрик ======================================================= */
-        //private object[] timer;
         public async Task<DateTime> TimerStart()
         {
             int step = SendMessage("TimerStart()", PROCESS, "Запуск таймера", IMAGE_STATUS_PROCESS);
