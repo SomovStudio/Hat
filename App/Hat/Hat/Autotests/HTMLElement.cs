@@ -464,6 +464,11 @@ namespace HatFrameworkDev
                 script += $"if (element.options[i].text === '{value}')";
                 script += "{";
                 script += "element.options[i].selected = true;";
+                script += "element.dispatchEvent(new KeyboardEvent('keydown', { bubbles: true }));";
+                script += "element.dispatchEvent(new KeyboardEvent('keypress', { bubbles: true }));";
+                script += "element.dispatchEvent(new KeyboardEvent('keyup', { bubbles: true }));";
+                script += "element.dispatchEvent(new Event('input', { bubbles: true }));";
+                script += "element.dispatchEvent(new Event('change', { bubbles: true }));";
                 script += "break;";
                 script += "}";
                 script += "}";
@@ -474,6 +479,11 @@ namespace HatFrameworkDev
                 script += $"if (element.options[i].value === '{value}')";
                 script += "{";
                 script += "element.options[i].selected = true;";
+                script += "element.dispatchEvent(new KeyboardEvent('keydown', { bubbles: true }));";
+                script += "element.dispatchEvent(new KeyboardEvent('keypress', { bubbles: true }));";
+                script += "element.dispatchEvent(new KeyboardEvent('keyup', { bubbles: true }));";
+                script += "element.dispatchEvent(new Event('input', { bubbles: true }));";
+                script += "element.dispatchEvent(new Event('change', { bubbles: true }));";
                 script += "break;";
                 script += "}";
                 script += "}";

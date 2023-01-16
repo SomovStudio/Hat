@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HatFramework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -464,6 +465,11 @@ namespace HatFramework
                 script += $"if (element.options[i].text === '{value}')";
                 script += "{";
                 script += "element.options[i].selected = true;";
+                script += "element.dispatchEvent(new KeyboardEvent('keydown', { bubbles: true }));";
+                script += "element.dispatchEvent(new KeyboardEvent('keypress', { bubbles: true }));";
+                script += "element.dispatchEvent(new KeyboardEvent('keyup', { bubbles: true }));";
+                script += "element.dispatchEvent(new Event('input', { bubbles: true }));";
+                script += "element.dispatchEvent(new Event('change', { bubbles: true }));";
                 script += "break;";
                 script += "}";
                 script += "}";
@@ -474,6 +480,11 @@ namespace HatFramework
                 script += $"if (element.options[i].value === '{value}')";
                 script += "{";
                 script += "element.options[i].selected = true;";
+                script += "element.dispatchEvent(new KeyboardEvent('keydown', { bubbles: true }));";
+                script += "element.dispatchEvent(new KeyboardEvent('keypress', { bubbles: true }));";
+                script += "element.dispatchEvent(new KeyboardEvent('keyup', { bubbles: true }));";
+                script += "element.dispatchEvent(new Event('input', { bubbles: true }));";
+                script += "element.dispatchEvent(new Event('change', { bubbles: true }));";
                 script += "break;";
                 script += "}";
                 script += "}";
