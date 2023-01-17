@@ -457,7 +457,15 @@ namespace HatFrameworkDev
             string script = "(function(){";
             if (_by == Tester.BY_CSS) script += $"var element = document.querySelector(\"{_locator}\");";
             else if (_by == Tester.BY_XPATH) script += $"var element = document.evaluate(\"{_locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
-            if (by == BY_INDEX) script += $"element.options[{value}].selected = true;";
+            if (by == BY_INDEX)
+            {
+                script += $"element.options[{value}].selected = true;";
+                script += "element.dispatchEvent(new KeyboardEvent('keydown', { bubbles: true }));";
+                script += "element.dispatchEvent(new KeyboardEvent('keypress', { bubbles: true }));";
+                script += "element.dispatchEvent(new KeyboardEvent('keyup', { bubbles: true }));";
+                script += "element.dispatchEvent(new Event('input', { bubbles: true }));";
+                script += "element.dispatchEvent(new Event('change', { bubbles: true }));";
+            }
             if (by == BY_TEXT)
             {
                 script += "for (var i = 0; i < element.options.length; ++i) {";

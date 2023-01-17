@@ -663,7 +663,15 @@ namespace HatFramework
             script += $"var frame = window.frames[{_index}].document;";
             if (by == Tester.BY_CSS) script += $"var element = frame.querySelector(\"{locator}\");";
             else if (by == Tester.BY_XPATH) script += $"var element = frame.evaluate(\"{locator}\", frame, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
-            if (type == BY_INDEX) script += $"element.options[{value}].selected = true;";
+            if (type == BY_INDEX)
+            {
+                script += $"element.options[{value}].selected = true;";
+                script += "element.dispatchEvent(new KeyboardEvent('keydown', { bubbles: true }));";
+                script += "element.dispatchEvent(new KeyboardEvent('keypress', { bubbles: true }));";
+                script += "element.dispatchEvent(new KeyboardEvent('keyup', { bubbles: true }));";
+                script += "element.dispatchEvent(new Event('input', { bubbles: true }));";
+                script += "element.dispatchEvent(new Event('change', { bubbles: true }));";
+            }
             if (type == BY_TEXT)
             {
                 script += "for (var i = 0; i < element.options.length; ++i) {";
