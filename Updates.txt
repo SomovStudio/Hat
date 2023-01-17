@@ -3,7 +3,8 @@
 Список внесённых изменений:
 
 - Обновлен плагин WebView до версии 
-- Изменения в методе SelectOptionAsync
+- Улучшение метода SelectOptionAsync
+- Правки методов RestGetAsync, RestGetBasicAuthAsync и RestPostAsync
 
 -----------------------------
 

@@ -3023,7 +3023,9 @@ namespace HatFramework
                 }
                 else
                 {
-                    EditMessage(step, null, FAILED, "Get Rest не выполнен" + Environment.NewLine + "Статус запроса: " + Environment.NewLine + response.StatusCode.ToString(), IMAGE_STATUS_FAILED);
+                    EditMessage(step, null, FAILED, "Get Rest не выполнен " + Environment.NewLine +
+                        "Статус запроса: " + Environment.NewLine + response.StatusCode.ToString(), IMAGE_STATUS_FAILED);
+                    TestStopAsync();
                 }
             }
             catch (Exception ex)
@@ -3064,7 +3066,9 @@ namespace HatFramework
                 }
                 else
                 {
-                    EditMessage(step, null, FAILED, "Get Rest не выполнен" + Environment.NewLine + "Статус запроса: " + Environment.NewLine + response.StatusCode.ToString(), IMAGE_STATUS_FAILED);
+                    EditMessage(step, null, FAILED, "Get Rest не выполнен" + Environment.NewLine +
+                        "Статус запроса: " + Environment.NewLine + response.StatusCode.ToString(), IMAGE_STATUS_FAILED);
+                    TestStopAsync();
                 }
             }
             catch (Exception ex)
@@ -3103,6 +3107,7 @@ namespace HatFramework
                 {
                     EditMessage(step, null, FAILED, "Post Rest не выполнен" + Environment.NewLine +
                         "Статус запроса: " + Environment.NewLine + response.StatusCode.ToString(), IMAGE_STATUS_FAILED);
+                    TestStopAsync();
                 }
             }
             catch (Exception ex)
@@ -3129,6 +3134,7 @@ namespace HatFramework
             catch (Exception ex)
             {
                 EditMessage(step, null, Tester.FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), Tester.IMAGE_STATUS_FAILED);
+                TestStopAsync();
                 ConsoleMsgError(ex.ToString());
             }
             return start;
@@ -3148,6 +3154,7 @@ namespace HatFramework
             catch (Exception ex)
             {
                 EditMessage(step, null, Tester.FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), Tester.IMAGE_STATUS_FAILED);
+                TestStopAsync();
                 ConsoleMsgError(ex.ToString());
             }
             return result;
