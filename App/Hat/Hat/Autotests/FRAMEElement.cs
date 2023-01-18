@@ -605,8 +605,10 @@ namespace HatFrameworkDev
             {
                 string script = "(function(){";
                 script += $"var frame = window.frames[{_index}].document;";
-                if (by == Tester.BY_CSS) script += "var element = frame.querySelector(\"" + locator + "\"); return element.innerText;";
-                else if (by == Tester.BY_XPATH) script += $"var element = frame.evaluate(\"{locator}\", frame, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue; return element.innerText;";
+                if (by == Tester.BY_CSS) script += "var element = frame.querySelector(\"" + locator + "\"); ";
+                else if (by == Tester.BY_XPATH) script += $"var element = frame.evaluate(\"{locator}\", frame, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue; ";
+                script += "if(element.innerText == '' && element.value != null) { return element.value; } ";
+                script += "else { return element.innerText; } ";
                 script += "}());";
                 value = await execute(script, step, $"Прочитан текст из элемента", $"Не удалось найти или прочитать текст из элемента по локатору: {locator}");
                 if (value.Length > 1) value = value.Substring(1, value.Length - 2);
@@ -617,6 +619,8 @@ namespace HatFrameworkDev
                 _tester.TestStopAsync();
                 _tester.ConsoleMsgError(ex.ToString());
             }
+
+            if (value == "") _tester.EditMessage(step, null, Tester.COMPLETED, "Не удалось получить текст из элемента", Tester.IMAGE_STATUS_WARNING);
             return value;
         }
 

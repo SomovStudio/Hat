@@ -76,16 +76,29 @@ namespace Hat
         {
             HatFrameworkDev.Tester tester = new HatFrameworkDev.Tester(Config.browserForm);
             await tester.TestBeginAsync();
+            await tester.GoToUrlAsync("https://somovstudio.github.io/test.html", 25);
+            await tester.ClickElementByIdAsync("buttonLogin");
+            await tester.WaitAsync(2);
+            await tester.WaitVisibleElementByIdAsync("result", 5);
+            //string text = await tester.GetTextFromElementAsync(HatFrameworkDev.Tester.BY_XPATH, "//textarea");
+            //string text = await tester.GetTextFromElementByTagAsync("textarea", 0);
+            string text = await tester.GetTextFromElementByIdAsync("textarea");
+            tester.ConsoleMsg("TEXT: " + text);
+            await tester.TestEndAsync();
+
+
+            /*
+            HatFrameworkDev.Tester tester = new HatFrameworkDev.Tester(Config.browserForm);
+            await tester.TestBeginAsync();
             await tester.GoToUrlAsync("https://somovstudio.github.io/test_error.html", 25);
             //await tester.GoToUrlAsync("https://rutube.sport/video/angliya-senegal-obzor-matcha-chm-2022/", 25);
-
             List<string> errors = await tester.BrowserGetErrorsAsync();
             foreach (string error in errors)
             {
                 tester.ConsoleMsg(error);
             }
-
             await tester.TestEndAsync();
+            */
 
             /*
             HatFrameworkDev.Tester tester = new HatFrameworkDev.Tester(Config.browserForm);

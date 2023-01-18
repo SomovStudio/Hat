@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -133,15 +134,17 @@ namespace HatFrameworkDev
                 if (_by == Tester.BY_CSS)
                 {
                     script = "(function(){";
-                    script += $"var element = document.querySelector(\"{_locator}\");";
-                    script += "return element.outerText;";
+                    script += $"var element = document.querySelector(\"{_locator}\"); ";
+                    script += "if(element.outerText == '' && element.value != null) { return element.value; } ";
+                    script += "else { return element.outerText; } ";
                     script += "}());";
                 }
                 else if (_by == Tester.BY_XPATH)
                 {
                     script = "(function(){";
-                    script += $"var element = document.evaluate(\"{_locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
-                    script += "return element.outerText;";
+                    script += $"var element = document.evaluate(\"{_locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue; ";
+                    script += "if(element.outerText == '' && element.value != null) { return element.value; } ";
+                    script += "else { return element.outerText; } ";
                     script += "}());";
                 }
                 result = await execute(script, step, "Текст из элемента прочитан", "Не удалось прочитать текст из элемента");
@@ -153,6 +156,8 @@ namespace HatFrameworkDev
                 _tester.TestStopAsync();
                 _tester.ConsoleMsgError(ex.ToString());
             }
+
+            if (result == "") _tester.EditMessage(step, null, Tester.COMPLETED, "Не удалось получить текст из элемента", Tester.IMAGE_STATUS_WARNING);
             return result;
         }
 
