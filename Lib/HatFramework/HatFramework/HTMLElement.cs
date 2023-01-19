@@ -544,6 +544,11 @@ namespace HatFramework
             return clickable;
         }
 
+        public async Task<string> GetLocatorAsync()
+        {
+            _tester.SendMessage($"GetLocator()", Tester.PROCESS, "Локатор элемента: " + _locator, Tester.IMAGE_STATUS_PROCESS);
+            return _locator;
+        }
 
     }
 }
