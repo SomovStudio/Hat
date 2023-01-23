@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using HatFramework;
 using System.IO;
+using System.Security.AccessControl;
 
 namespace Hat
 {
@@ -76,6 +77,80 @@ namespace Hat
         {
             HatFrameworkDev.Tester tester = new HatFrameworkDev.Tester(Config.browserForm);
             await tester.TestBeginAsync();
+            await tester.GoToUrlAsync("https://magazstraz.ru/catalog/strazy/ms_classic/strazy_ms_classic/?oid=1439", 25);
+            await tester.WaitAsync(2);
+
+            List<string> errors = new List<string>();
+            string currentUrl = await tester.GetUrlAsync();
+            string pageTitle = await tester.GetTitleAsync();
+            int amountProducts = 0;
+
+            // страницы: товаров
+            if (await tester.FindElementAsync(Tester.BY_XPATH, "//div[@class='button_block wide']/span", 2) == true)
+            {
+                tester.SendMessage("ТЕСТ:", Tester.PASSED, "Проверка верстки - кнопка ПОД ЗАКАЗ", Tester.IMAGE_STATUS_PASSED);
+            }
+            else
+            {
+                amountProducts++;
+
+                bool result = false;
+                await tester.ClickElementAsync(Tester.BY_XPATH, "//div[@class='button_block ']/span");
+                result = await tester.FindElementAsync(Tester.BY_XPATH, "//div[@class='button_block wide']//a[@href='/basket/']//span[text()='В корзине']", 5);
+                await tester.ClickElementAsync(Tester.BY_XPATH, "//div[@class='button_block wide']//a[@href='/basket/']");
+                if(result == false)
+                {
+                    tester.SendMessage("TEST:", Tester.FAILED, "Провал", Tester.IMAGE_STATUS_FAILED);
+                    errors.Add("Страница: " + pageTitle);
+                    errors.Add("Ссылка: " + currentUrl);
+                    errors.Add("Ошибка: ");
+                    errors.Add("|- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -");
+                }
+                else tester.SendMessage("TEST:", Tester.PASSED, "Успех", Tester.IMAGE_STATUS_PASSED);
+
+                await tester.WaitAsync(5);
+
+                currentUrl = await tester.GetUrlAsync();
+
+                if (currentUrl != null)
+                {
+                    tester.ConsoleMsg("TEST CURRENT URL: " + currentUrl.ToString());
+                    result = currentUrl.Contains("/basket/");
+                    if (result == false)
+                    {
+                        tester.SendMessage("TEST:", Tester.FAILED, "Провал", Tester.IMAGE_STATUS_FAILED);
+                        errors.Add("Страница: " + pageTitle);
+                        errors.Add("Ссылка: " + currentUrl);
+                        errors.Add("Ошибка: ");
+                        errors.Add("|- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -");
+                    }
+                    else tester.SendMessage("TEST:", Tester.PASSED, "Успех", Tester.IMAGE_STATUS_PASSED);
+                }
+                else
+                {
+                    tester.ConsoleMsg("-- TEST CURRENT URL: NULL" );
+                }
+                
+
+                result = await tester.FindElementAsync(Tester.BY_XPATH, "//button[contains(text(), 'Оформить заказ')]", 5);
+                if (result == false)
+                {
+                    tester.SendMessage("TEST:", Tester.FAILED, "Провал", Tester.IMAGE_STATUS_FAILED);
+                    errors.Add("Страница: " + pageTitle);
+                    errors.Add("Ссылка: " + currentUrl);
+                    errors.Add("Ошибка: ");
+                    errors.Add("|- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -");
+                }
+                else tester.SendMessage("TEST:", Tester.PASSED, "Успех", Tester.IMAGE_STATUS_PASSED);
+
+            }
+
+
+            await tester.TestEndAsync();
+
+            /*
+            HatFrameworkDev.Tester tester = new HatFrameworkDev.Tester(Config.browserForm);
+            await tester.TestBeginAsync();
             await tester.GoToUrlAsync("https://somovstudio.github.io/test.html", 25);
             await tester.ClickElementByIdAsync("buttonLogin");
             await tester.WaitAsync(2);
@@ -85,6 +160,7 @@ namespace Hat
             string text = await tester.GetTextFromElementByIdAsync("textarea");
             tester.ConsoleMsg("TEXT: " + text);
             await tester.TestEndAsync();
+            */
 
 
             /*
@@ -99,6 +175,7 @@ namespace Hat
             }
             await tester.TestEndAsync();
             */
+
 
             /*
             HatFrameworkDev.Tester tester = new HatFrameworkDev.Tester(Config.browserForm);
@@ -143,8 +220,6 @@ namespace Hat
             tester.ConsoleMsg("[ATTRIBUTE]: " + attribute);
             await tester.TestEndAsync();
             */
-
-
 
 
             /*
