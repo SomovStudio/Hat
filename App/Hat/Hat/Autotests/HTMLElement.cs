@@ -122,6 +122,39 @@ namespace HatFrameworkDev
             await execute(script, step, "Элемент нажат", "Не удалось нажать на элемент");
         }
 
+        public async Task ClickMouseAsync()
+        {
+            int step = _tester.SendMessage("ClickMouseAsync()", Tester.PROCESS, "Нажатие (mouse) на элемент", Tester.IMAGE_STATUS_PROCESS);
+            if (_tester.DefineTestStop(step) == true) return;
+
+            string script = null;
+            if (_by == Tester.BY_CSS)
+            {
+                script = "(function(){";
+                script += "var clickEvent = new MouseEvent(\"click\", { \"view\": window, \"bubbles\": true, \"cancelable\": false });";
+                script += $"var element = document.querySelector(\"{_locator}\");";
+                script += "element.dispatchEvent(new KeyboardEvent('keydown', { bubbles: true }));";
+                script += "element.dispatchEvent(new KeyboardEvent('keypress', { bubbles: true }));";
+                script += "element.dispatchEvent(new KeyboardEvent('keyup', { bubbles: true }));";
+                script += "element.dispatchEvent(clickEvent);";
+                script += "return element;";
+                script += "}());";
+            }
+            else if (_by == Tester.BY_XPATH)
+            {
+                script = "(function(){";
+                script += "var clickEvent = new MouseEvent(\"click\", { \"view\": window, \"bubbles\": true, \"cancelable\": false });";
+                script += $"var element = document.evaluate(\"{_locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
+                script += "element.dispatchEvent(new KeyboardEvent('keydown', { bubbles: true }));";
+                script += "element.dispatchEvent(new KeyboardEvent('keypress', { bubbles: true }));";
+                script += "element.dispatchEvent(new KeyboardEvent('keyup', { bubbles: true }));";
+                script += "element.dispatchEvent(clickEvent);";
+                script += "return element;";
+                script += "}());";
+            }
+            await execute(script, step, "Элемент нажат (mouse)", "Не удалось нажать (mouse) на элемент");
+        }
+
         public async Task<string> GetTextAsync()
         {
             int step = _tester.SendMessage("GetTextAsync()", Tester.PROCESS, "Чтение текста из элемент", Tester.IMAGE_STATUS_PROCESS);

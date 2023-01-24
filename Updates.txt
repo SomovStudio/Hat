@@ -6,8 +6,7 @@
 - Исправлен метод SelectOptionAsync
 - Изменения в методах RestGetAsync, RestGetBasicAuthAsync и RestPostAsync
 - Улучшение методов GetTextFromElement
-- Добавлен метод GetLocatorAsync для класса HTMLElement
-- Добавлены методы Click (presskey, mouse и пр.) для класса HTMLElement
+- Добавлены методы ClickMouseAsync и GetLocatorAsync для класса HTMLElement
 
 -----------------------------
 

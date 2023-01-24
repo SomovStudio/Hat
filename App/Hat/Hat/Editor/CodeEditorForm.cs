@@ -2719,7 +2719,17 @@ if (response.IsSuccessStatusCode)\par
 tester.ConsoleMsg(locator);\cf2\f1\lang1049\par
 }",
 
-@"",
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 ClickMouseAsync\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'fb\'ef\'ee\'eb\'ed\'ff\'e5\'f2 \'ed\'e0\'e6\'e0\'f2\'e8\'e5 \'ed\'e0 \'fd\'eb\'e5\'ec\'e5\'ed\'f2\f0\lang1033  \f1\lang1049\'fd\'ec\'f3\'eb\'e8\'f0\'f3\'ff \'ec\'fb\'f8\'ea\'f3\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \f0\lang1033 ClickMouseAsync()\f1\lang1049\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0\f0\lang1033 await element.ClickMouseAsync();\par
+}",
+
 @"",
 @"",
 @"",
@@ -3381,9 +3391,9 @@ tester.ConsoleMsg(locator);\cf2\f1\lang1049\par
                     if (value == "RestPostAsync" && tag == "Tester") richTextBox1.Rtf = handbook[194];
 
                     if (value == "GetLocatorAsync" && tag == "HTMLElement") richTextBox1.Rtf = handbook[195];
+                    if (value == "ClickMouseAsync" && tag == "HTMLElement") richTextBox1.Rtf = handbook[196];
 
                     /*
-                    if (value == "" && tag == "") richTextBox1.Rtf = handbook[196];
                     if (value == "" && tag == "") richTextBox1.Rtf = handbook[197];
                     if (value == "" && tag == "") richTextBox1.Rtf = handbook[198];
                     if (value == "" && tag == "") richTextBox1.Rtf = handbook[199];

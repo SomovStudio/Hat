@@ -77,10 +77,12 @@ namespace Hat
         {
             HatFrameworkDev.Tester tester = new HatFrameworkDev.Tester(Config.browserForm);
             await tester.TestBeginAsync();
-            await tester.GoToUrlAsync("https://magazstraz.ru/catalog/strazy/ms_classic/strazy_ms_classic/?oid=1439", 25);
-            await tester.WaitAsync(2);
+            await tester.GoToUrlAsync("https://somovstudio.github.io/test.html", 25);
+            HatFrameworkDev.HTMLElement element = await tester.GetElementAsync(HatFrameworkDev.Tester.BY_XPATH, "//input[@id='buttonLogin']");
+            await element.ClickMouseAsync();
 
-            
+
+
             await tester.TestEndAsync();
 
             /*
