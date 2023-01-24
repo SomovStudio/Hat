@@ -3104,6 +3104,39 @@ namespace HatFramework
             return result;
         }
 
+        public async Task<int> RestGetStatusCodeAsync(string url)
+        {
+            int result = 0;
+
+            int step = SendMessage($"RestGetStatusCodeAsync(\"{url}\")", PROCESS, "Выполнение Get Rest запроса и получение статуса", IMAGE_STATUS_PROCESS);
+            if (DefineTestStop(step) == true) return result;
+
+            try
+            {
+                string userAgent = BrowserView.CoreWebView2.Settings.UserAgent;
+
+                Uri uri = new Uri(url);
+                HttpClient client = new HttpClient();
+                client.BaseAddress = uri;
+                client.DefaultRequestHeaders.Clear();
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                client.DefaultRequestHeaders.Add("charset", "UTF-8");
+                client.DefaultRequestHeaders.Add("User-Agent", userAgent);
+                HttpResponseMessage response = await client.GetAsync(url);
+                result = (int)response.StatusCode;
+
+                EditMessage(step, null, PASSED, "Get Rest запрос выполнен. Результат: " + result.ToString(), IMAGE_STATUS_PASSED);
+            }
+            catch (Exception ex)
+            {
+                EditMessage(step, null, Tester.FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), Tester.IMAGE_STATUS_FAILED);
+                TestStopAsync();
+                ConsoleMsgError(ex.ToString());
+            }
+            return result;
+        }
+
         public async Task<string> RestPostAsync(string url, string json, TimeSpan timeout, string charset = "UTF-8")
         {
             int step = SendMessage($"RestPostAsync(\"{url}\", \"JSON\", \"{timeout}\", \"{charset}\")", PROCESS, "Выполнение Post Rest запроса", IMAGE_STATUS_PROCESS);
