@@ -1,4 +1,6 @@
-﻿using System;
+﻿using HatFramework;
+using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -121,6 +123,39 @@ namespace HatFramework
             await execute(script, step, "Элемент нажат", "Не удалось нажать на элемент");
         }
 
+        public async Task ClickMouseAsync()
+        {
+            int step = _tester.SendMessage("ClickMouseAsync()", Tester.PROCESS, "Нажатие (mouse) на элемент", Tester.IMAGE_STATUS_PROCESS);
+            if (_tester.DefineTestStop(step) == true) return;
+
+            string script = null;
+            if (_by == Tester.BY_CSS)
+            {
+                script = "(function(){";
+                script += "var clickEvent = new MouseEvent(\"click\", { \"view\": window, \"bubbles\": true, \"cancelable\": false });";
+                script += $"var element = document.querySelector(\"{_locator}\");";
+                script += "element.dispatchEvent(new KeyboardEvent('keydown', { bubbles: true }));";
+                script += "element.dispatchEvent(new KeyboardEvent('keypress', { bubbles: true }));";
+                script += "element.dispatchEvent(new KeyboardEvent('keyup', { bubbles: true }));";
+                script += "element.dispatchEvent(clickEvent);";
+                script += "return element;";
+                script += "}());";
+            }
+            else if (_by == Tester.BY_XPATH)
+            {
+                script = "(function(){";
+                script += "var clickEvent = new MouseEvent(\"click\", { \"view\": window, \"bubbles\": true, \"cancelable\": false });";
+                script += $"var element = document.evaluate(\"{_locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
+                script += "element.dispatchEvent(new KeyboardEvent('keydown', { bubbles: true }));";
+                script += "element.dispatchEvent(new KeyboardEvent('keypress', { bubbles: true }));";
+                script += "element.dispatchEvent(new KeyboardEvent('keyup', { bubbles: true }));";
+                script += "element.dispatchEvent(clickEvent);";
+                script += "return element;";
+                script += "}());";
+            }
+            await execute(script, step, "Элемент нажат (mouse)", "Не удалось нажать (mouse) на элемент");
+        }
+
         public async Task<string> GetTextAsync()
         {
             int step = _tester.SendMessage("GetTextAsync()", Tester.PROCESS, "Чтение текста из элемент", Tester.IMAGE_STATUS_PROCESS);
@@ -133,15 +168,17 @@ namespace HatFramework
                 if (_by == Tester.BY_CSS)
                 {
                     script = "(function(){";
-                    script += $"var element = document.querySelector(\"{_locator}\");";
-                    script += "return element.outerText;";
+                    script += $"var element = document.querySelector(\"{_locator}\"); ";
+                    script += "if(element.outerText == '' && element.value != null) { return element.value; } ";
+                    script += "else { return element.outerText; } ";
                     script += "}());";
                 }
                 else if (_by == Tester.BY_XPATH)
                 {
                     script = "(function(){";
-                    script += $"var element = document.evaluate(\"{_locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
-                    script += "return element.outerText;";
+                    script += $"var element = document.evaluate(\"{_locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue; ";
+                    script += "if(element.outerText == '' && element.value != null) { return element.value; } ";
+                    script += "else { return element.outerText; } ";
                     script += "}());";
                 }
                 result = await execute(script, step, "Текст из элемента прочитан", "Не удалось прочитать текст из элемента");
@@ -153,6 +190,8 @@ namespace HatFramework
                 _tester.TestStopAsync();
                 _tester.ConsoleMsgError(ex.ToString());
             }
+
+            if (result == "") _tester.EditMessage(step, null, Tester.COMPLETED, "Не удалось получить текст из элемента", Tester.IMAGE_STATUS_WARNING);
             return result;
         }
 
@@ -457,13 +496,26 @@ namespace HatFramework
             string script = "(function(){";
             if (_by == Tester.BY_CSS) script += $"var element = document.querySelector(\"{_locator}\");";
             else if (_by == Tester.BY_XPATH) script += $"var element = document.evaluate(\"{_locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
-            if (by == BY_INDEX) script += $"element.options[{value}].selected = true;";
+            if (by == BY_INDEX)
+            {
+                script += $"element.options[{value}].selected = true;";
+                script += "element.dispatchEvent(new KeyboardEvent('keydown', { bubbles: true }));";
+                script += "element.dispatchEvent(new KeyboardEvent('keypress', { bubbles: true }));";
+                script += "element.dispatchEvent(new KeyboardEvent('keyup', { bubbles: true }));";
+                script += "element.dispatchEvent(new Event('input', { bubbles: true }));";
+                script += "element.dispatchEvent(new Event('change', { bubbles: true }));";
+            }
             if (by == BY_TEXT)
             {
                 script += "for (var i = 0; i < element.options.length; ++i) {";
                 script += $"if (element.options[i].text === '{value}')";
                 script += "{";
                 script += "element.options[i].selected = true;";
+                script += "element.dispatchEvent(new KeyboardEvent('keydown', { bubbles: true }));";
+                script += "element.dispatchEvent(new KeyboardEvent('keypress', { bubbles: true }));";
+                script += "element.dispatchEvent(new KeyboardEvent('keyup', { bubbles: true }));";
+                script += "element.dispatchEvent(new Event('input', { bubbles: true }));";
+                script += "element.dispatchEvent(new Event('change', { bubbles: true }));";
                 script += "break;";
                 script += "}";
                 script += "}";
@@ -474,6 +526,11 @@ namespace HatFramework
                 script += $"if (element.options[i].value === '{value}')";
                 script += "{";
                 script += "element.options[i].selected = true;";
+                script += "element.dispatchEvent(new KeyboardEvent('keydown', { bubbles: true }));";
+                script += "element.dispatchEvent(new KeyboardEvent('keypress', { bubbles: true }));";
+                script += "element.dispatchEvent(new KeyboardEvent('keyup', { bubbles: true }));";
+                script += "element.dispatchEvent(new Event('input', { bubbles: true }));";
+                script += "element.dispatchEvent(new Event('change', { bubbles: true }));";
                 script += "break;";
                 script += "}";
                 script += "}";
@@ -520,6 +577,14 @@ namespace HatFramework
             return clickable;
         }
 
+        public async Task<string> GetLocatorAsync()
+        {
+            int step = _tester.SendMessage($"GetLocatorAsync()", Tester.PROCESS, "Получить локатор элемента", Tester.IMAGE_STATUS_PROCESS);
+            if (_tester.DefineTestStop(step) == true) return "";
+
+            _tester.SendMessage($"GetLocatorAsync()", Tester.PASSED, "Получен локатор элемента: " + _locator, Tester.IMAGE_STATUS_PASSED);
+            return _locator;
+        }
 
     }
 }

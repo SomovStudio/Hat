@@ -2105,9 +2105,12 @@ namespace HatFrameworkDev
             string value = "";
             try
             {
-                string script = "(function(){ var element = document.getElementById('" + id + "'); return element.innerText; }());";
+                string script = "(function(){ var element = document.getElementById('" + id + "'); ";
+                script += "if(element.innerText == '' && element.value != null) { return element.value; } ";
+                script += "else { return element.innerText; } ";
+                script += "}());";
                 value = await execute(script, step, $"Прочитан текст из элемента", $"Не удалось найти или прочитать текст из элемента с ID: {id}");
-                if (value.Length > 1) value = value.Substring(1, value.Length - 2);
+                if (value.Length > 1 && value != "null") value = value.Substring(1, value.Length - 2);
             }
             catch (Exception ex)
             {
@@ -2115,6 +2118,8 @@ namespace HatFrameworkDev
                 TestStopAsync();
                 ConsoleMsgError(ex.ToString());
             }
+
+            if (value == "") EditMessage(step, null, COMPLETED, "Не удалось получить текст из элемента", IMAGE_STATUS_WARNING);
             return value;
         }
 
@@ -2126,9 +2131,12 @@ namespace HatFrameworkDev
             string value = "";
             try
             {
-                string script = "(function(){ var element = document.getElementsByClassName('" + _class + "')[" + index + "]; return element.innerText; }());";
+                string script = "(function(){ var element = document.getElementsByClassName('" + _class + "')[" + index + "]; return element.innerText; ";
+                script += "if(element.innerText == '' && element.value != null) { return element.value; } ";
+                script += "else { return element.innerText; } ";
+                script += "}());";
                 value = await execute(script, step, $"Прочитан текст из элемента", $"Не удалось найти или прочитать текст из элемента по Class: {_class} (Index: {index})");
-                if (value.Length > 1) value = value.Substring(1, value.Length - 2);
+                if (value.Length > 1 && value != "null") value = value.Substring(1, value.Length - 2);
             }
             catch (Exception ex)
             {
@@ -2136,6 +2144,8 @@ namespace HatFrameworkDev
                 TestStopAsync();
                 ConsoleMsgError(ex.ToString());
             }
+
+            if (value == "") EditMessage(step, null, COMPLETED, "Не удалось получить текст из элемента", IMAGE_STATUS_WARNING);
             return value;
         }
 
@@ -2147,9 +2157,12 @@ namespace HatFrameworkDev
             string value = "";
             try
             {
-                string script = "(function(){ var element = document.getElementsByName('" + name + "')[" + index + "]; return element.innerText; }());";
+                string script = "(function(){ var element = document.getElementsByName('" + name + "')[" + index + "]; ";
+                script += "if(element.innerText == '' && element.value != null) { return element.value; } ";
+                script += "else { return element.innerText; } ";
+                script += "}());";
                 value = await execute(script, step, $"Прочитан текст из элемента", $"Не удалось найти или прочитать текст из элемента по Name: {name} (Index: {index})");
-                if (value.Length > 1) value = value.Substring(1, value.Length - 2);
+                if (value.Length > 1 && value != "null") value = value.Substring(1, value.Length - 2);
             }
             catch (Exception ex)
             {
@@ -2157,6 +2170,8 @@ namespace HatFrameworkDev
                 TestStopAsync();
                 ConsoleMsgError(ex.ToString());
             }
+
+            if (value == "") EditMessage(step, null, COMPLETED, "Не удалось получить текст из элемента", IMAGE_STATUS_WARNING);
             return value;
         }
 
@@ -2168,9 +2183,12 @@ namespace HatFrameworkDev
             string value = "";
             try
             {
-                string script = "(function(){ var element = document.getElementsByTagName('" + tag + "')[" + index + "]; return element.innerText; }());";
+                string script = "(function(){ var element = document.getElementsByTagName('" + tag + "')[" + index + "]; ";
+                script += "if(element.innerText == '' && element.value != null) { return element.value; } ";
+                script += "else { return element.innerText; } ";
+                script += "}());";
                 value = await execute(script, step, $"Прочитан текст из элемента", $"Не удалось найти или прочитать текст из элемента по Tag: {tag} (Index: {index})");
-                if(value.Length > 1) value = value.Substring(1, value.Length - 2);
+                if (value.Length > 1 && value != "null") value = value.Substring(1, value.Length - 2);
             }
             catch (Exception ex)
             {
@@ -2178,6 +2196,8 @@ namespace HatFrameworkDev
                 TestStopAsync();
                 ConsoleMsgError(ex.ToString());
             }
+
+            if (value == "") EditMessage(step, null, COMPLETED, "Не удалось получить текст из элемента", IMAGE_STATUS_WARNING);
             return value;
         }
 
@@ -2190,11 +2210,13 @@ namespace HatFrameworkDev
             try
             {
                 string script = "(function(){";
-                if (by == BY_CSS) script += "var element = document.querySelector(\"" + locator + "\"); return element.innerText;";
-                else if (by == BY_XPATH) script += $"var element = document.evaluate(\"{locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue; return element.innerText;";
+                if (by == BY_CSS) script += "var element = document.querySelector(\"" + locator + "\"); ";
+                else if (by == BY_XPATH) script += $"var element = document.evaluate(\"{locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue; ";
+                script += "if(element.innerText == '' && element.value != null) { return element.value; } ";
+                script += "else { return element.innerText; } ";
                 script += "}());";
                 value = await execute(script, step, $"Прочитан текст из элемента", $"Не удалось найти или прочитать текст из элемента по локатору: {locator}");
-                if (value.Length > 1) value = value.Substring(1, value.Length - 2);
+                if (value.Length > 1 && value != "null") value = value.Substring(1, value.Length - 2);
             }
             catch (Exception ex)
             {
@@ -2202,6 +2224,8 @@ namespace HatFrameworkDev
                 TestStopAsync();
                 ConsoleMsgError(ex.ToString());
             }
+
+            if (value == "") EditMessage(step, null, COMPLETED, "Не удалось получить текст из элемента", IMAGE_STATUS_WARNING);
             return value;
         }
 
@@ -3022,7 +3046,9 @@ namespace HatFrameworkDev
                 }
                 else
                 {
-                    EditMessage(step, null, FAILED, "Get Rest не выполнен" + Environment.NewLine + "Статус запроса: " + Environment.NewLine + response.StatusCode.ToString(), IMAGE_STATUS_FAILED);
+                    EditMessage(step, null, FAILED, "Get Rest не выполнен " + Environment.NewLine + 
+                        "Статус запроса: " + Environment.NewLine + response.StatusCode.ToString(), IMAGE_STATUS_FAILED);
+                    TestStopAsync();
                 }
             }
             catch (Exception ex)
@@ -3063,8 +3089,43 @@ namespace HatFrameworkDev
                 }
                 else
                 {
-                    EditMessage(step, null, FAILED, "Get Rest не выполнен" + Environment.NewLine + "Статус запроса: " + Environment.NewLine + response.StatusCode.ToString(), IMAGE_STATUS_FAILED);
+                    EditMessage(step, null, FAILED, "Get Rest не выполнен" + Environment.NewLine + 
+                        "Статус запроса: " + Environment.NewLine + response.StatusCode.ToString(), IMAGE_STATUS_FAILED);
+                    TestStopAsync();
                 }
+            }
+            catch (Exception ex)
+            {
+                EditMessage(step, null, Tester.FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), Tester.IMAGE_STATUS_FAILED);
+                TestStopAsync();
+                ConsoleMsgError(ex.ToString());
+            }
+            return result;
+        }
+
+        public async Task<int> RestGetStatusCodeAsync(string url)
+        {
+            int result = 0;
+
+            int step = SendMessage($"RestGetStatusCodeAsync(\"{url}\")", PROCESS, "Выполнение Get Rest запроса и получение статуса", IMAGE_STATUS_PROCESS);
+            if (DefineTestStop(step) == true) return result;
+            
+            try
+            {
+                string userAgent = BrowserView.CoreWebView2.Settings.UserAgent;
+
+                Uri uri = new Uri(url);
+                HttpClient client = new HttpClient();
+                client.BaseAddress = uri;
+                client.DefaultRequestHeaders.Clear();
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                client.DefaultRequestHeaders.Add("charset", "UTF-8");
+                client.DefaultRequestHeaders.Add("User-Agent", userAgent);
+                HttpResponseMessage response = await client.GetAsync(url);
+                result = (int)response.StatusCode;
+
+                EditMessage(step, null, PASSED, "Get Rest запрос выполнен. Результат: " + result.ToString(), IMAGE_STATUS_PASSED);
             }
             catch (Exception ex)
             {
@@ -3102,6 +3163,7 @@ namespace HatFrameworkDev
                 {
                     EditMessage(step, null, FAILED, "Post Rest не выполнен" + Environment.NewLine + 
                         "Статус запроса: " + Environment.NewLine + response.StatusCode.ToString(), IMAGE_STATUS_FAILED);
+                    TestStopAsync();
                 }
             }
             catch (Exception ex)
@@ -3128,6 +3190,7 @@ namespace HatFrameworkDev
             catch (Exception ex)
             {
                 EditMessage(step, null, Tester.FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), Tester.IMAGE_STATUS_FAILED);
+                TestStopAsync();
                 ConsoleMsgError(ex.ToString());
             }
             return start;
@@ -3147,6 +3210,7 @@ namespace HatFrameworkDev
             catch (Exception ex)
             {
                 EditMessage(step, null, Tester.FAILED, "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(), Tester.IMAGE_STATUS_FAILED);
+                TestStopAsync();
                 ConsoleMsgError(ex.ToString());
             }
             return result;

@@ -1,3 +1,16 @@
+Обновление браузера Hat 1.1.11 (24.01.2023)
+
+Список внесённых изменений:
+
+- Обновлен плагин WebView до версии 2.1.0.1518.46
+- Исправлен метод SelectOptionAsync
+- Улучшены методы GetTextFromElement*
+- Изменены методы RestGetAsync, RestGetBasicAuthAsync и RestPostAsync
+- Добавлен метод RestGetStatusCodeAsync
+- Добавлены методы ClickMouseAsync и GetLocatorAsync для класса HTMLElement
+
+-----------------------------
+
 Обновление браузера Hat 1.1.10 (10.01.2023)
 
 Список внесённых изменений:
