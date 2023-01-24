@@ -1496,6 +1496,7 @@
             this.toolStripButton13.Name = "toolStripButton13";
             this.toolStripButton13.Size = new System.Drawing.Size(61, 22);
             this.toolStripButton13.Text = "для теста";
+            this.toolStripButton13.Visible = false;
             this.toolStripButton13.Click += new System.EventHandler(this.toolStripButton13_Click);
             // 
             // tabPage6

@@ -545,7 +545,10 @@ namespace HatFrameworkDev
 
         public async Task<string> GetLocatorAsync()
         {
-            _tester.SendMessage($"GetLocator()", Tester.PROCESS, "Локатор элемента: " + _locator, Tester.IMAGE_STATUS_PROCESS);
+            int step = _tester.SendMessage($"GetLocatorAsync()", Tester.PROCESS, "Получить локатор элемента", Tester.IMAGE_STATUS_PROCESS);
+            if (_tester.DefineTestStop(step) == true) return "";
+
+            _tester.SendMessage($"GetLocatorAsync()", Tester.PASSED, "Получен локатор элемента: " + _locator, Tester.IMAGE_STATUS_PASSED);
             return _locator;
         }
 
