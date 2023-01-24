@@ -4,8 +4,9 @@
 
 - Обновлен плагин WebView до версии 
 - Исправлен метод SelectOptionAsync
-- Изменения в методах RestGetAsync, RestGetBasicAuthAsync и RestPostAsync
-- Улучшение методов GetTextFromElement
+- Улучшены методы GetTextFromElement*
+- Изменены методы RestGetAsync, RestGetBasicAuthAsync и RestPostAsync
+- Добавлен метод RestGetStatusCodeAsync
 - Добавлены методы ClickMouseAsync и GetLocatorAsync для класса HTMLElement
 
 -----------------------------
