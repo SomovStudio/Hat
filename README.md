@@ -17,7 +17,7 @@
 <hr>
 
 <p align="center">
-  <img src="https://github.com/SomovStudio/Hat/blob/main/Img/screenshots/ScreenshotHat.png">
+  <img src="https://github.com/SomovStudio/Hat/blob/main/Img/screenshots/HatZionec.png">
 </p>
 
 Системные требования:
