@@ -652,6 +652,32 @@ namespace HatFrameworkDev
             return events;
         }
 
+        public async Task<string> BrowserClearNetworkAsync()
+        {
+            string events = null;
+            try
+            {
+                int step = SendMessage($"BrowserClearNetworkAsync()", PROCESS, "Очистка списка событий браузера (network)", IMAGE_STATUS_PROCESS);
+                if (DefineTestStop(step) == true) return "";
+
+                string script =
+                @"(function(){
+                var performance = window.performance || window.mozPerformance || window.msPerformance || window.webkitPerformance || {};
+                var network = performance.getEntries() || {}; 
+                var result = network.slice(5,10);
+                return result;
+                }());";
+
+                events = await executeJS(script);
+                EditMessage(step, null, COMPLETED, "Выполнена очистка событий браузера (network) " + Environment.NewLine + "Текущее состояние Network: " + events.ToString(), IMAGE_STATUS_MESSAGE);
+            }
+            catch (Exception ex)
+            {
+                ConsoleMsgError(ex.ToString());
+            }
+            return events;
+        }
+
         public async Task BrowserGoBackAsync(int sec)
         {
             listRedirects.Clear();
