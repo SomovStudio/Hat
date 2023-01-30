@@ -2742,7 +2742,18 @@ tester.ConsoleMsg(locator);\cf2\f1\lang1049\par
 tester.ConsoleMsg(statusCode.ToString());\par
 }",
 
-@"",
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 BrowserClearNetworkAsync\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'fb\'ef\'ee\'eb\'ed\'ff\'e5\'f2 \'ee\'f7\'e8\'f1\'f2\'ea\'f3 \'f1\'ee\'e1\'fb\'f2\'e8\'e9 network \'e2 \'e1\'f0\'e0\'f3\'e7\'e5\'f0\'e5\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \f0\lang1033 BrowserClearNetworkAsync()\f1\lang1049\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0\f0\lang1033 string events = await tester.BrowserClearNetworkAsync();\par
+tester.ConsoleMsg(events);\par
+}",
+
 @"",
 @"",
 @"",
@@ -3405,9 +3416,9 @@ tester.ConsoleMsg(statusCode.ToString());\par
                     if (value == "ClickMouseAsync" && tag == "HTMLElement") richTextBox1.Rtf = handbook[196];
 
                     if (value == "RestGetStatusCodeAsync" && tag == "Tester") richTextBox1.Rtf = handbook[197];
+                    if (value == "BrowserClearNetworkAsync" && tag == "Tester") richTextBox1.Rtf = handbook[198];
 
                     /*
-                    if (value == "" && tag == "") richTextBox1.Rtf = handbook[198];
                     if (value == "" && tag == "") richTextBox1.Rtf = handbook[199];
                     if (value == "" && tag == "") richTextBox1.Rtf = handbook[200];
                     if (value == "" && tag == "") richTextBox1.Rtf = handbook[201];
