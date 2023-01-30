@@ -1002,6 +1002,7 @@ namespace Hat
                     Config.readConfigJson(Config.projectPath + "/project.hat");
                     showLibs();
 ;                   changeEncoding();
+                    changeLanguage();
                     changeEditorTopMost();
                     showDataMail();
 
@@ -1101,6 +1102,35 @@ namespace Hat
                 consoleMsgError(ex.ToString());
             }
         }
+
+        /* Язык вывода (русский / английский) */
+        public void changeLanguage()
+        {
+            try
+            {
+                if (Config.languageEnd == false)
+                {
+                    languageRusToolStripMenuItem.Checked = true;
+                    languageRusToolStripMenuItem1.Checked = true;
+                    languageEngToolStripMenuItem.Checked = false;
+                    languageEngToolStripMenuItem1.Checked = false;
+                    consoleMsg("Язык вывода - русский");
+                }
+                else
+                {
+                    languageRusToolStripMenuItem.Checked = false;
+                    languageRusToolStripMenuItem1.Checked = false;
+                    languageEngToolStripMenuItem.Checked = true;
+                    languageEngToolStripMenuItem1.Checked = true;
+                    consoleMsg("Язык вывода - английский");
+                }
+            }
+            catch (Exception ex)
+            {
+                consoleMsgError(ex.ToString());
+            }
+        }
+
 
         /* Способ открытия редактора (поверх окон) */
         public void changeEditorTopMost()
@@ -2619,6 +2649,83 @@ namespace Hat
         {
             try { Process.Start("cmd.exe"); }
             catch (Exception ex) { consoleMsgError(ex.ToString()); }
+        }
+
+        private void languageRusToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // для вывода выбран русский язык
+            try
+            {
+                languageRusToolStripMenuItem.Checked = true;
+                languageRusToolStripMenuItem1.Checked = true;
+                languageEngToolStripMenuItem.Checked = false;
+                languageEngToolStripMenuItem1.Checked = false;
+                Config.languageEnd = false;
+                if (Config.projectPath != "(не открыт)") Config.saveConfigJson(Config.projectPath + "/project.hat");
+                consoleMsg("Язык вывода изменен на русский");
+            }
+            catch (Exception ex)
+            {
+                consoleMsgError(ex.ToString());
+            }
+        }
+
+        private void languageRusToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            // для вывода выбран русский язык
+            try
+            {
+                languageRusToolStripMenuItem.Checked = true;
+                languageRusToolStripMenuItem1.Checked = true;
+                languageEngToolStripMenuItem.Checked = false;
+                languageEngToolStripMenuItem1.Checked = false;
+                Config.languageEnd = false;
+                if (Config.projectPath != "(не открыт)") Config.saveConfigJson(Config.projectPath + "/project.hat");
+                consoleMsg("Язык вывода изменен на русский");
+            }
+            catch (Exception ex)
+            {
+                consoleMsgError(ex.ToString());
+            }
+        }
+
+        private void languageEngToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // для вывода выбран английский язык
+            try
+            {
+                languageRusToolStripMenuItem.Checked = false;
+                languageRusToolStripMenuItem1.Checked = false;
+                languageEngToolStripMenuItem.Checked = true;
+                languageEngToolStripMenuItem1.Checked = true;
+                Config.languageEnd = true;
+                if (Config.projectPath != "(не открыт)") Config.saveConfigJson(Config.projectPath + "/project.hat");
+                consoleMsg("Язык вывода изменен на английский");
+            }
+            catch (Exception ex)
+            {
+                consoleMsgError(ex.ToString());
+            }
+        }
+        
+
+        private void languageEngToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            // для вывода выбран английский язык
+            try
+            {
+                languageRusToolStripMenuItem.Checked = false;
+                languageRusToolStripMenuItem1.Checked = false;
+                languageEngToolStripMenuItem.Checked = true;
+                languageEngToolStripMenuItem1.Checked = true;
+                Config.languageEnd = true;
+                if (Config.projectPath != "(не открыт)") Config.saveConfigJson(Config.projectPath + "/project.hat");
+                consoleMsg("Язык вывода изменен на английский");
+            }
+            catch (Exception ex)
+            {
+                consoleMsgError(ex.ToString());
+            }
         }
     }
 }
