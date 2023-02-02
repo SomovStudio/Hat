@@ -13,10 +13,9 @@ namespace Hat
     {
         public string Version { get; set; }
         public string Encoding { get; set; }
+        public bool LanguageEnd { get; set; }
         public bool EditorTopMost { get; set; }
-
         public string[] Libraries { get; set; }
-
         public string[] DataMail { get; set; }
     }
 
@@ -25,8 +24,8 @@ namespace Hat
         /* переменные для браузера */
         public static BrowserForm browserForm;                  // окно браузера (форма)
         public static string defaultUserAgent = "";             // значение user-agent по умолчанию
-        public static string currentBrowserVersion = "1.1.11";   // текущая версия браузера
-        public static string dateBrowserUpdate = "24.01.2023";  // дата последнего обновления
+        public static string currentBrowserVersion = "1.2.0";   // текущая версия браузера
+        public static string dateBrowserUpdate = "01.02.2023";  // дата последнего обновления
 
         public static string openHtmlFile = null;             // имя открываемого html файла при запуске браузера
         public static bool commandLineMode = false;         // флаг показывающий запуск приложения из командной строки
@@ -40,8 +39,9 @@ namespace Hat
         public static string statucCacheClear = "false";        // статус очистки кэша
 
         /* переменные для файла project.hat */
-        public static string version = "1.1.11";                 // версия проекта
+        public static string version = "1.2.0";                // версия проекта
         public static string encoding = WorkOnFiles.UTF_8_BOM;  // кодировка
+        public static bool languageEnd = false;                 // поддержка английского языка
         public static bool editorTopMost = false;               // настройка отображения редактора
         public static string[] libraries = new string[]         // библиотека подключаемых dll файлов
         {
@@ -85,6 +85,7 @@ namespace Hat
                 JsonConfig jsonConfig = new JsonConfig();
                 jsonConfig.Version = version;
                 jsonConfig.Encoding = encoding;
+                jsonConfig.LanguageEnd= languageEnd;
                 jsonConfig.EditorTopMost = editorTopMost;
                 jsonConfig.Libraries = libraries;
                 jsonConfig.DataMail = dataMail;
@@ -136,6 +137,7 @@ namespace Hat
                 JsonConfig jsonConfig = JsonConvert.DeserializeObject<JsonConfig>(content);
                 version = jsonConfig.Version;
                 encoding = jsonConfig.Encoding;
+                languageEnd= jsonConfig.LanguageEnd;
                 editorTopMost = jsonConfig.EditorTopMost;
                 libraries = jsonConfig.Libraries;
                 dataMail = jsonConfig.DataMail;

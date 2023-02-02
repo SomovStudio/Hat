@@ -1,5 +1,4 @@
-﻿using ICSharpCode.TextEditor;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -2742,7 +2741,18 @@ tester.ConsoleMsg(locator);\cf2\f1\lang1049\par
 tester.ConsoleMsg(statusCode.ToString());\par
 }",
 
-@"",
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 BrowserClearNetworkAsync\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'fb\'ef\'ee\'eb\'ed\'ff\'e5\'f2 \'ee\'f7\'e8\'f1\'f2\'ea\'f3 \'f1\'ee\'e1\'fb\'f2\'e8\'e9 network \'e2 \'e1\'f0\'e0\'f3\'e7\'e5\'f0\'e5\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \f0\lang1033 BrowserClearNetworkAsync()\f1\lang1049\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0\f0\lang1033 string events = await tester.BrowserClearNetworkAsync();\par
+tester.ConsoleMsg(events);\par
+}",
+
 @"",
 @"",
 @"",
@@ -2845,12 +2855,11 @@ tester.ConsoleMsg(statusCode.ToString());\par
                 
                 WorkOnFiles reader = new WorkOnFiles();
 
-                TextEditorControl textEditorControl = new TextEditorControl();
+                RichTextBox textEditorControl = new RichTextBox();
                 textEditorControl.Tag = index.ToString();
                 textEditorControl.Name = "textEditorControl" + index.ToString();
                 textEditorControl.Text = reader.readFile(Config.encoding, path);
                 textEditorControl.Dock = DockStyle.Fill;
-                textEditorControl.SetHighlighting("C#");
                 textEditorControl.TextChanged += new System.EventHandler(this.textEditorControl_TextChanged);
 
                 TabPage tab = new TabPage(filename);
@@ -2870,7 +2879,7 @@ tester.ConsoleMsg(statusCode.ToString());\par
 
         private void textEditorControl_TextChanged(object sender, EventArgs e)
         {
-            TextEditorControl textEditorControl = (TextEditorControl)sender;
+            RichTextBox textEditorControl = (RichTextBox)sender;
             int index = Convert.ToInt32(textEditorControl.Tag);
             files[index][2] = STATUS_NOT_SAVE;
             (files[index][4] as TabPage).Text = files[index][0].ToString() + " *";
@@ -2941,7 +2950,7 @@ tester.ConsoleMsg(statusCode.ToString());\par
                 for (int i = 0; i < count; i++)
                 {
                     files[i][3] = i.ToString();
-                    (files[i][5] as TextEditorControl).Tag = i.ToString();
+                    (files[i][5] as RichTextBox).Tag = i.ToString();
                     //parent.consoleMsg($"{files[i][0]} | {files[i][1]} | {files[i][2]} | {files[i][3]} | {files[i][4]} | {(files[i][5] as TextEditorControl).Tag} | ");
                 }
             }
@@ -2986,7 +2995,7 @@ tester.ConsoleMsg(statusCode.ToString());\par
 
                 string filename = files[index][0].ToString();
                 string path = files[index][1].ToString();
-                string content = (files[index][5] as TextEditorControl).Text;
+                string content = (files[index][5] as RichTextBox).Text;
 
                 WorkOnFiles write = new WorkOnFiles();
                 write.writeFile(content, toolStripStatusLabel2.Text, path);
@@ -3016,7 +3025,7 @@ tester.ConsoleMsg(statusCode.ToString());\par
                     string path = saveFileDialog1.FileName;
 
                     WorkOnFiles write = new WorkOnFiles();
-                    write.writeFile((files[index][5] as TextEditorControl).Text, toolStripStatusLabel2.Text, path);
+                    write.writeFile((files[index][5] as RichTextBox).Text, toolStripStatusLabel2.Text, path);
 
                     files[index][0] = filename;
                     files[index][1] = path;
@@ -3048,7 +3057,7 @@ tester.ConsoleMsg(statusCode.ToString());\par
                     {
                         string filename = files[i][0].ToString();
                         string path = files[i][1].ToString();
-                        string content = (files[i][5] as TextEditorControl).Text;
+                        string content = (files[i][5] as RichTextBox).Text;
 
                         WorkOnFiles write = new WorkOnFiles();
                         write.writeFile(content, toolStripStatusLabel2.Text, path);
@@ -3405,9 +3414,9 @@ tester.ConsoleMsg(statusCode.ToString());\par
                     if (value == "ClickMouseAsync" && tag == "HTMLElement") richTextBox1.Rtf = handbook[196];
 
                     if (value == "RestGetStatusCodeAsync" && tag == "Tester") richTextBox1.Rtf = handbook[197];
+                    if (value == "BrowserClearNetworkAsync" && tag == "Tester") richTextBox1.Rtf = handbook[198];
 
                     /*
-                    if (value == "" && tag == "") richTextBox1.Rtf = handbook[198];
                     if (value == "" && tag == "") richTextBox1.Rtf = handbook[199];
                     if (value == "" && tag == "") richTextBox1.Rtf = handbook[200];
                     if (value == "" && tag == "") richTextBox1.Rtf = handbook[201];
@@ -3474,7 +3483,7 @@ tester.ConsoleMsg(statusCode.ToString());\par
                     
 
                     Clipboard.SetText(treeView1.SelectedNode.Text);
-                    (files[index][5] as TextEditorControl).Focus();
+                    (files[index][5] as RichTextBox).Focus();
                     SendKeys.Send("+{INSERT}");
                     //SendKeys.Send("^{v}");
                     //SendKeys.Send("^v");
