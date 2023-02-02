@@ -2860,6 +2860,8 @@ tester.ConsoleMsg(events);\par
                 textEditorControl.Name = "textEditorControl" + index.ToString();
                 textEditorControl.Text = reader.readFile(Config.encoding, path);
                 textEditorControl.Dock = DockStyle.Fill;
+                textEditorControl.Font = new Font("Consolas", 11);
+                textEditorControl.WordWrap = false;
                 textEditorControl.TextChanged += new System.EventHandler(this.textEditorControl_TextChanged);
 
                 TabPage tab = new TabPage(filename);
