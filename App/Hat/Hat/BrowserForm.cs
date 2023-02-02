@@ -1787,11 +1787,6 @@ namespace Hat
                     {
                         if (Config.selectName.Contains(".cs"))
                         {
-                            /*
-                            EditorForm editorForm = new EditorForm();
-                            editorForm.TopMost = Config.editorTopMost;
-                            editorForm.Show();
-                            */
                             if(codeEditorForm == null) codeEditorForm = new CodeEditorForm();
                             codeEditorForm.parent = this;
                             codeEditorForm.Show();

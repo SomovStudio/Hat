@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -6,6 +7,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -2872,6 +2874,8 @@ tester.ConsoleMsg(events);\par
                 files.Add(new object[] { filename, path, STATUS_SAVED, index, tab, textEditorControl });
 
                 toolStripStatusLabel5.Text = path;
+
+                highlighting(textEditorControl);
             }
             catch (Exception ex)
             {
@@ -2885,6 +2889,65 @@ tester.ConsoleMsg(events);\par
             int index = Convert.ToInt32(textEditorControl.Tag);
             files[index][2] = STATUS_NOT_SAVE;
             (files[index][4] as TabPage).Text = files[index][0].ToString() + " *";
+        }
+
+        private void highlighting(RichTextBox richTextBox)
+        {
+            try
+            {
+                string tokensGreen = "(using|namespace)";
+                Regex rexGreen = new Regex(tokensGreen);
+                MatchCollection mcGreen = rexGreen.Matches(richTextBox.Text);
+                int startCursorPositionGreen = richTextBox.SelectionStart;
+                int startIndexGreen = 0;
+                int stopIndexGreen = 0;
+                foreach (Match mGreen in mcGreen)
+                {
+                    startIndexGreen = mGreen.Index;
+                    stopIndexGreen = mGreen.Length;
+                    richTextBox.Select(startIndexGreen, stopIndexGreen);
+                    richTextBox.SelectionColor = Color.DarkGreen;
+                    richTextBox.SelectionStart = startCursorPositionGreen;
+                    richTextBox.SelectionColor = Color.Black;
+                }
+
+                string tokensRed = "(void|class|string|char|bool|int|double|long|float|short|struct|const|delegate|Task|Exception|List)";
+                Regex rexRed = new Regex(tokensRed);
+                MatchCollection mcRed = rexRed.Matches(richTextBox.Text);
+                int startCursorPositionRed = richTextBox.SelectionStart;
+                int startIndexRed = 0;
+                int stopIndexRed = 0;
+                foreach (Match mRed in mcRed)
+                {
+                    startIndexRed = mRed.Index;
+                    stopIndexRed = mRed.Length;
+                    richTextBox.Select(startIndexRed, stopIndexRed);
+                    richTextBox.SelectionColor = Color.Red;
+                    richTextBox.SelectionStart = startCursorPositionRed;
+                    richTextBox.SelectionColor = Color.Black;
+                }
+
+                string tokensBlue = "(await|auto|public|private|static|async|true|false|break|continue|return|else|switch|case|enum|register|typedef|foreach|for|signed|default|unsigned|goto|sizeof|volatile|do|if|while|extern|union|try|catch)";
+                Regex rexBlue = new Regex(tokensBlue);
+                MatchCollection mcBlue = rexBlue.Matches(richTextBox.Text);
+                int startCursorPositionBlue = richTextBox.SelectionStart;
+                int startIndexBlue = 0;
+                int stopIndexBlue = 0;
+                foreach (Match mBlue in mcBlue)
+                {
+                    startIndexBlue = mBlue.Index;
+                    stopIndexBlue = mBlue.Length;
+                    richTextBox.Select(startIndexBlue, stopIndexBlue);
+                    richTextBox.SelectionColor = Color.Blue;
+                    richTextBox.SelectionStart = startCursorPositionBlue;
+                    richTextBox.SelectionColor = Color.Black;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                parent.consoleMsgError(ex.ToString());
+            }
         }
 
         private void closeFile()
