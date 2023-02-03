@@ -2896,6 +2896,12 @@ tester.ConsoleMsg(events);\par
         {
             // номер строки
             toolStripStatusLabel7.Text = (((RichTextBox)sender).GetLineFromCharIndex(((RichTextBox)sender).SelectionStart) + 1).ToString();
+
+            if (e.KeyData == Keys.Tab)
+            {
+                ((RichTextBox)sender).SelectedText = "";
+                //((RichTextBox)sender).SelectedText += new string(' ', 4);
+            }
         }
 
         private void textEditorControl_TextChanged(object sender, EventArgs e)
@@ -2912,14 +2918,21 @@ tester.ConsoleMsg(events);\par
             try
             {
                 /*
+                 * Регулярные выражения онлайн: http://regexstorm.net/tester
+                 * Элементы языка регулярных выражений: https://learn.microsoft.com/ru-ru/dotnet/standard/base-types/regular-expression-language-quick-reference
+                 * 
                  * (?i)                     - без учета регистра
                  * (?im)                    - без учета регистра и поддержка многострочного текста
                  * (?im)(using|^do)         - слово do только две буква в начале строки
                  * (?im)(using|^do|//.*)    - любое количество символов после // позволяет выделить комментарий
                  *              (?<!")//.*  - это значит что перед // не должно быть "
+                 *              do(?![a-z]) - это значит что после слова do нет других символов
+                 * 
                  */
+                // (?m)(/\*.*\*/) - это выделяет комментарий вида /* comment */  для многострочного комментария нужно отключить поддерку многострочного теста (?s)(/\*.*\*/)
+                // (?m)(/\*[\s\S]+?\*/) - для многострочного комментария
 
-                string tokensRed = "(?m)(void|class|string|char|bool|int|double|long|float|short|struct|const|delegate|Task|Exception|List)";
+                string tokensRed = "(?m)(void|class|string|char|bool|int|double|long|float|short|struct|const|delegate|Task|Exception|List)(?![a-z])";
                 Regex rexRed = new Regex(tokensRed);
                 MatchCollection mcRed = rexRed.Matches(richTextBox.Text);
                 int startCursorPositionRed = richTextBox.SelectionStart;
@@ -2936,7 +2949,7 @@ tester.ConsoleMsg(events);\par
                 }
 
 
-                string tokensBlue = "(?m)(await|auto|public|private|static|async|true|false|break|continue|return|else|switch|case|enum|register|typedef|^foreach|^for|signed|default|unsigned|goto|sizeof|volatile|^do|^if|^while|extern|union|^try|catch)";
+                string tokensBlue = "(?m)(await|auto|public|private|static|async|true|false|break|continue|return|else|switch|case|enum|register|typedef|foreach|for|signed|default|unsigned|goto|sizeof|volatile|do|if|while|extern|union|try|catch)(?![a-z])";
                 Regex rexBlue = new Regex(tokensBlue);
                 MatchCollection mcBlue = rexBlue.Matches(richTextBox.Text);
                 int startCursorPositionBlue = richTextBox.SelectionStart;
@@ -2953,7 +2966,7 @@ tester.ConsoleMsg(events);\par
                 }
 
 
-                string tokensGreen = "(?m)(^using|^namespace|(?<!\")//.*)";
+                string tokensGreen = "(?m)(using|namespace|/\\*[\\s\\S]+?\\*/|(?<!\")//.*)(?![a-z])";
                 Regex rexGreen = new Regex(tokensGreen);
                 MatchCollection mcGreen = rexGreen.Matches(richTextBox.Text);
                 int startCursorPositionGreen = richTextBox.SelectionStart;
@@ -2964,10 +2977,12 @@ tester.ConsoleMsg(events);\par
                     startIndexGreen = mGreen.Index;
                     stopIndexGreen = mGreen.Length;
                     richTextBox.Select(startIndexGreen, stopIndexGreen);
-                    richTextBox.SelectionColor = Color.DarkGreen;
+                    richTextBox.SelectionColor = Color.Green;
                     richTextBox.SelectionStart = startCursorPositionGreen;
                     richTextBox.SelectionColor = Color.Black;
                 }
+
+
             }
             catch (Exception ex)
             {
