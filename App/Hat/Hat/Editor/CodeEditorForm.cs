@@ -2864,7 +2864,10 @@ tester.ConsoleMsg(events);\par
                 textEditorControl.Dock = DockStyle.Fill;
                 textEditorControl.Font = new Font("Consolas", 11);
                 textEditorControl.WordWrap = false;
+                textEditorControl.AcceptsTab= true;
                 textEditorControl.TextChanged += new System.EventHandler(this.textEditorControl_TextChanged);
+                textEditorControl.Click += new System.EventHandler(this.textEditorControl_Click);
+                textEditorControl.KeyUp += new KeyEventHandler(this.textEditorControl_KeyUp);
 
                 TabPage tab = new TabPage(filename);
                 tab.Controls.Add(textEditorControl);
@@ -2883,18 +2886,32 @@ tester.ConsoleMsg(events);\par
             }
         }
 
+        private void textEditorControl_Click(object sender, EventArgs e)
+        {
+            // номер строки
+            toolStripStatusLabel7.Text = (((RichTextBox)sender).GetLineFromCharIndex(((RichTextBox)sender).SelectionStart) + 1).ToString();
+        }
+
+        private void textEditorControl_KeyUp(object sender, KeyEventArgs e)
+        {
+            // номер строки
+            toolStripStatusLabel7.Text = (((RichTextBox)sender).GetLineFromCharIndex(((RichTextBox)sender).SelectionStart) + 1).ToString();
+        }
+
         private void textEditorControl_TextChanged(object sender, EventArgs e)
         {
             RichTextBox textEditorControl = (RichTextBox)sender;
             int index = Convert.ToInt32(textEditorControl.Tag);
             files[index][2] = STATUS_NOT_SAVE;
             (files[index][4] as TabPage).Text = files[index][0].ToString() + " *";
+            
         }
 
         private void highlighting(RichTextBox richTextBox)
         {
             try
             {
+
                 string tokensGreen = "(using|namespace)";
                 Regex rexGreen = new Regex(tokensGreen);
                 MatchCollection mcGreen = rexGreen.Matches(richTextBox.Text);
@@ -2910,6 +2927,8 @@ tester.ConsoleMsg(events);\par
                     richTextBox.SelectionStart = startCursorPositionGreen;
                     richTextBox.SelectionColor = Color.Black;
                 }
+
+
 
                 string tokensRed = "(void|class|string|char|bool|int|double|long|float|short|struct|const|delegate|Task|Exception|List)";
                 Regex rexRed = new Regex(tokensRed);
@@ -2927,6 +2946,8 @@ tester.ConsoleMsg(events);\par
                     richTextBox.SelectionColor = Color.Black;
                 }
 
+
+
                 string tokensBlue = "(await|auto|public|private|static|async|true|false|break|continue|return|else|switch|case|enum|register|typedef|foreach|for|signed|default|unsigned|goto|sizeof|volatile|do|if|while|extern|union|try|catch)";
                 Regex rexBlue = new Regex(tokensBlue);
                 MatchCollection mcBlue = rexBlue.Matches(richTextBox.Text);
@@ -2942,7 +2963,6 @@ tester.ConsoleMsg(events);\par
                     richTextBox.SelectionStart = startCursorPositionBlue;
                     richTextBox.SelectionColor = Color.Black;
                 }
-
             }
             catch (Exception ex)
             {
@@ -3569,6 +3589,11 @@ tester.ConsoleMsg(events);\par
         private void вставитьВКодToolStripMenuItem_Click(object sender, EventArgs e)
         {
             setValueInCode();
+        }
+
+        private void richTextBox1_KeyDown(object sender, KeyEventArgs e)
+        {
+
         }
     }
 }
