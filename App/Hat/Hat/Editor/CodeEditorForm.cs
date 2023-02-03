@@ -2911,26 +2911,15 @@ tester.ConsoleMsg(events);\par
         {
             try
             {
+                /*
+                 * (?i)                     - без учета регистра
+                 * (?im)                    - без учета регистра и поддержка многострочного текста
+                 * (?im)(using|^do)         - слово do только две буква в начале строки
+                 * (?im)(using|^do|//.*)    - любое количество символов после // позволяет выделить комментарий
+                 *              (?<!")//.*  - это значит что перед // не должно быть "
+                 */
 
-                string tokensGreen = "(using|namespace)";
-                Regex rexGreen = new Regex(tokensGreen);
-                MatchCollection mcGreen = rexGreen.Matches(richTextBox.Text);
-                int startCursorPositionGreen = richTextBox.SelectionStart;
-                int startIndexGreen = 0;
-                int stopIndexGreen = 0;
-                foreach (Match mGreen in mcGreen)
-                {
-                    startIndexGreen = mGreen.Index;
-                    stopIndexGreen = mGreen.Length;
-                    richTextBox.Select(startIndexGreen, stopIndexGreen);
-                    richTextBox.SelectionColor = Color.DarkGreen;
-                    richTextBox.SelectionStart = startCursorPositionGreen;
-                    richTextBox.SelectionColor = Color.Black;
-                }
-
-
-
-                string tokensRed = "(void|class|string|char|bool|int|double|long|float|short|struct|const|delegate|Task|Exception|List)";
+                string tokensRed = "(?m)(void|class|string|char|bool|int|double|long|float|short|struct|const|delegate|Task|Exception|List)";
                 Regex rexRed = new Regex(tokensRed);
                 MatchCollection mcRed = rexRed.Matches(richTextBox.Text);
                 int startCursorPositionRed = richTextBox.SelectionStart;
@@ -2947,8 +2936,7 @@ tester.ConsoleMsg(events);\par
                 }
 
 
-
-                string tokensBlue = "(await|auto|public|private|static|async|true|false|break|continue|return|else|switch|case|enum|register|typedef|foreach|for|signed|default|unsigned|goto|sizeof|volatile|do|if|while|extern|union|try|catch)";
+                string tokensBlue = "(?m)(await|auto|public|private|static|async|true|false|break|continue|return|else|switch|case|enum|register|typedef|^foreach|^for|signed|default|unsigned|goto|sizeof|volatile|^do|^if|^while|extern|union|^try|catch)";
                 Regex rexBlue = new Regex(tokensBlue);
                 MatchCollection mcBlue = rexBlue.Matches(richTextBox.Text);
                 int startCursorPositionBlue = richTextBox.SelectionStart;
@@ -2961,6 +2949,23 @@ tester.ConsoleMsg(events);\par
                     richTextBox.Select(startIndexBlue, stopIndexBlue);
                     richTextBox.SelectionColor = Color.Blue;
                     richTextBox.SelectionStart = startCursorPositionBlue;
+                    richTextBox.SelectionColor = Color.Black;
+                }
+
+
+                string tokensGreen = "(?m)(^using|^namespace|(?<!\")//.*)";
+                Regex rexGreen = new Regex(tokensGreen);
+                MatchCollection mcGreen = rexGreen.Matches(richTextBox.Text);
+                int startCursorPositionGreen = richTextBox.SelectionStart;
+                int startIndexGreen = 0;
+                int stopIndexGreen = 0;
+                foreach (Match mGreen in mcGreen)
+                {
+                    startIndexGreen = mGreen.Index;
+                    stopIndexGreen = mGreen.Length;
+                    richTextBox.Select(startIndexGreen, stopIndexGreen);
+                    richTextBox.SelectionColor = Color.DarkGreen;
+                    richTextBox.SelectionStart = startCursorPositionGreen;
                     richTextBox.SelectionColor = Color.Black;
                 }
             }
