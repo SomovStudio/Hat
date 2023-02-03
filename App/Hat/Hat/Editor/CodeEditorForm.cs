@@ -6,6 +6,7 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -2899,7 +2900,7 @@ tester.ConsoleMsg(events);\par
 
             if (e.KeyData == Keys.Tab)
             {
-                ((RichTextBox)sender).SelectedText = "";
+                //((RichTextBox)sender).SelectedText = "";
                 //((RichTextBox)sender).SelectedText += new string(' ', 4);
             }
         }
@@ -2910,7 +2911,8 @@ tester.ConsoleMsg(events);\par
             int index = Convert.ToInt32(textEditorControl.Tag);
             files[index][2] = STATUS_NOT_SAVE;
             (files[index][4] as TabPage).Text = files[index][0].ToString() + " *";
-            
+
+            strHighlighting(textEditorControl);
         }
 
         private void highlighting(RichTextBox richTextBox)
@@ -2988,6 +2990,60 @@ tester.ConsoleMsg(events);\par
             {
                 parent.consoleMsgError(ex.ToString());
             }
+        }
+
+        /*
+        public static void HighlightLine(this RichTextBox richTextBox, int index, Color color)
+        {
+            richTextBox.SelectAll();
+            richTextBox.SelectionBackColor = richTextBox.BackColor;
+            var lines = richTextBox.Lines;
+            if (index < 0 || index >= lines.Length)
+                return;
+            var start = richTextBox.GetFirstCharIndexFromLine(index);  // Get the 1st char index of the appended text
+            var length = lines[index].Length;
+            richTextBox.Select(start, length);                 // Select from there to the end
+            richTextBox.SelectionBackColor = color;
+        }
+        */
+
+        private void strHighlighting(RichTextBox richTextBox)
+        {
+            try
+            {
+                richTextBox1.Text = richTextBox.Lines[Convert.ToInt32(toolStripStatusLabel7.Text) - 1];
+
+                /*
+                string tokensRed = "(?m)(void|class|string|char|bool|int|double|long|float|short|struct|const|delegate|Task|Exception|List)(?![a-z])";
+                Regex rexRed = new Regex(tokensRed);
+                MatchCollection mcRed = rexRed.Matches(richTextBox.Lines[Convert.ToInt32(toolStripStatusLabel7.Text) - 1]);
+                int startCursorPositionRed = richTextBox.SelectionStart;
+                int startIndexRed = 0;
+                int stopIndexRed = 0;
+                foreach (Match mRed in mcRed)
+                {
+                    startIndexRed = mRed.Index;
+                    stopIndexRed = mRed.Length;
+                    richTextBox.Select(startIndexRed, stopIndexRed);
+                    richTextBox.SelectionColor = Color.Red;
+                    richTextBox.SelectionStart = startCursorPositionRed;
+                    richTextBox.SelectionColor = Color.Black;
+
+                }
+                */
+
+                int start = richTextBox.GetFirstCharIndexFromLine(Convert.ToInt32(toolStripStatusLabel7.Text) - 1);
+                var length = richTextBox.Lines[Convert.ToInt32(toolStripStatusLabel7.Text) - 1].Length;
+                richTextBox.Select(start, length);
+                richTextBox.SelectionBackColor = Color.Red;
+
+
+            }
+            catch(Exception ex)
+            {
+                richTextBox1.Text = ex.Message;
+            }
+            
         }
 
         private void closeFile()
