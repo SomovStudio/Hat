@@ -2878,8 +2878,6 @@ tester.ConsoleMsg(events);\par
                 files.Add(new object[] { filename, path, STATUS_SAVED, index, tab, textEditorControl });
 
                 toolStripStatusLabel5.Text = path;
-
-                highlighting(textEditorControl);
             }
             catch (Exception ex)
             {
@@ -2897,12 +2895,6 @@ tester.ConsoleMsg(events);\par
         {
             // номер строки
             toolStripStatusLabel7.Text = (((RichTextBox)sender).GetLineFromCharIndex(((RichTextBox)sender).SelectionStart) + 1).ToString();
-
-            if (e.KeyData == Keys.Tab)
-            {
-                //((RichTextBox)sender).SelectedText = "";
-                //((RichTextBox)sender).SelectedText += new string(' ', 4);
-            }
         }
 
         private void textEditorControl_TextChanged(object sender, EventArgs e)
@@ -2911,141 +2903,9 @@ tester.ConsoleMsg(events);\par
             int index = Convert.ToInt32(textEditorControl.Tag);
             files[index][2] = STATUS_NOT_SAVE;
             (files[index][4] as TabPage).Text = files[index][0].ToString() + " *";
-
-            strHighlighting(textEditorControl);
         }
 
-        private void highlighting(RichTextBox richTextBox)
-        {
-            try
-            {
-                /*
-                 * Регулярные выражения онлайн: http://regexstorm.net/tester
-                 * Элементы языка регулярных выражений: https://learn.microsoft.com/ru-ru/dotnet/standard/base-types/regular-expression-language-quick-reference
-                 * 
-                 * (?i)                     - без учета регистра
-                 * (?im)                    - без учета регистра и поддержка многострочного текста
-                 * (?im)(using|^do)         - слово do только две буква в начале строки
-                 * (?im)(using|^do|//.*)    - любое количество символов после // позволяет выделить комментарий
-                 *              (?<!")//.*  - это значит что перед // не должно быть "
-                 *              do(?![a-z]) - это значит что после слова do нет других символов
-                 * 
-                 */
-                // (?m)(/\*.*\*/) - это выделяет комментарий вида /* comment */  для многострочного комментария нужно отключить поддерку многострочного теста (?s)(/\*.*\*/)
-                // (?m)(/\*[\s\S]+?\*/) - для многострочного комментария
-
-                string tokensRed = "(?m)(void|class|string|char|bool|int|double|long|float|short|struct|const|delegate|Task|Exception|List)(?![a-z])";
-                Regex rexRed = new Regex(tokensRed);
-                MatchCollection mcRed = rexRed.Matches(richTextBox.Text);
-                int startCursorPositionRed = richTextBox.SelectionStart;
-                int startIndexRed = 0;
-                int stopIndexRed = 0;
-                foreach (Match mRed in mcRed)
-                {
-                    startIndexRed = mRed.Index;
-                    stopIndexRed = mRed.Length;
-                    richTextBox.Select(startIndexRed, stopIndexRed);
-                    richTextBox.SelectionColor = Color.Red;
-                    richTextBox.SelectionStart = startCursorPositionRed;
-                    richTextBox.SelectionColor = Color.Black;
-                }
-
-
-                string tokensBlue = "(?m)(await|auto|public|private|static|async|true|false|break|continue|return|else|switch|case|enum|register|typedef|foreach|for|signed|default|unsigned|goto|sizeof|volatile|do|if|while|extern|union|try|catch)(?![a-z])";
-                Regex rexBlue = new Regex(tokensBlue);
-                MatchCollection mcBlue = rexBlue.Matches(richTextBox.Text);
-                int startCursorPositionBlue = richTextBox.SelectionStart;
-                int startIndexBlue = 0;
-                int stopIndexBlue = 0;
-                foreach (Match mBlue in mcBlue)
-                {
-                    startIndexBlue = mBlue.Index;
-                    stopIndexBlue = mBlue.Length;
-                    richTextBox.Select(startIndexBlue, stopIndexBlue);
-                    richTextBox.SelectionColor = Color.Blue;
-                    richTextBox.SelectionStart = startCursorPositionBlue;
-                    richTextBox.SelectionColor = Color.Black;
-                }
-
-
-                string tokensGreen = "(?m)(using|namespace|/\\*[\\s\\S]+?\\*/|(?<!\")//.*)(?![a-z])";
-                Regex rexGreen = new Regex(tokensGreen);
-                MatchCollection mcGreen = rexGreen.Matches(richTextBox.Text);
-                int startCursorPositionGreen = richTextBox.SelectionStart;
-                int startIndexGreen = 0;
-                int stopIndexGreen = 0;
-                foreach (Match mGreen in mcGreen)
-                {
-                    startIndexGreen = mGreen.Index;
-                    stopIndexGreen = mGreen.Length;
-                    richTextBox.Select(startIndexGreen, stopIndexGreen);
-                    richTextBox.SelectionColor = Color.Green;
-                    richTextBox.SelectionStart = startCursorPositionGreen;
-                    richTextBox.SelectionColor = Color.Black;
-                }
-
-
-            }
-            catch (Exception ex)
-            {
-                parent.consoleMsgError(ex.ToString());
-            }
-        }
-
-        /*
-        public static void HighlightLine(this RichTextBox richTextBox, int index, Color color)
-        {
-            richTextBox.SelectAll();
-            richTextBox.SelectionBackColor = richTextBox.BackColor;
-            var lines = richTextBox.Lines;
-            if (index < 0 || index >= lines.Length)
-                return;
-            var start = richTextBox.GetFirstCharIndexFromLine(index);  // Get the 1st char index of the appended text
-            var length = lines[index].Length;
-            richTextBox.Select(start, length);                 // Select from there to the end
-            richTextBox.SelectionBackColor = color;
-        }
-        */
-
-        private void strHighlighting(RichTextBox richTextBox)
-        {
-            try
-            {
-                richTextBox1.Text = richTextBox.Lines[Convert.ToInt32(toolStripStatusLabel7.Text) - 1];
-
-                /*
-                string tokensRed = "(?m)(void|class|string|char|bool|int|double|long|float|short|struct|const|delegate|Task|Exception|List)(?![a-z])";
-                Regex rexRed = new Regex(tokensRed);
-                MatchCollection mcRed = rexRed.Matches(richTextBox.Lines[Convert.ToInt32(toolStripStatusLabel7.Text) - 1]);
-                int startCursorPositionRed = richTextBox.SelectionStart;
-                int startIndexRed = 0;
-                int stopIndexRed = 0;
-                foreach (Match mRed in mcRed)
-                {
-                    startIndexRed = mRed.Index;
-                    stopIndexRed = mRed.Length;
-                    richTextBox.Select(startIndexRed, stopIndexRed);
-                    richTextBox.SelectionColor = Color.Red;
-                    richTextBox.SelectionStart = startCursorPositionRed;
-                    richTextBox.SelectionColor = Color.Black;
-
-                }
-                */
-
-                int start = richTextBox.GetFirstCharIndexFromLine(Convert.ToInt32(toolStripStatusLabel7.Text) - 1);
-                var length = richTextBox.Lines[Convert.ToInt32(toolStripStatusLabel7.Text) - 1].Length;
-                richTextBox.Select(start, length);
-                richTextBox.SelectionBackColor = Color.Red;
-
-
-            }
-            catch(Exception ex)
-            {
-                richTextBox1.Text = ex.Message;
-            }
-            
-        }
-
+        
         private void closeFile()
         {
             try
