@@ -11,6 +11,9 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.Integration;
+using ICSharpCode.AvalonEdit;
+using System.Windows.Media;
 
 namespace Hat
 {
@@ -2858,20 +2861,23 @@ tester.ConsoleMsg(events);\par
                 
                 WorkOnFiles reader = new WorkOnFiles();
 
-                RichTextBox textEditorControl = new RichTextBox();
+                ElementHost host = new ElementHost();
+                host.Dock = DockStyle.Fill;
+
+                TextEditor textEditorControl = new TextEditor();
+                textEditorControl.SyntaxHighlighting = ICSharpCode.AvalonEdit.Highlighting.HighlightingManager.Instance.GetDefinition("C#");
+                textEditorControl.ShowLineNumbers= true;
                 textEditorControl.Tag = index.ToString();
                 textEditorControl.Name = "textEditorControl" + index.ToString();
                 textEditorControl.Text = reader.readFile(Config.encoding, path);
-                textEditorControl.Dock = DockStyle.Fill;
-                textEditorControl.Font = new Font("Consolas", 11);
-                textEditorControl.WordWrap = false;
-                textEditorControl.AcceptsTab= true;
+                textEditorControl.FontFamily = new System.Windows.Media.FontFamily("Consolas");
+                textEditorControl.FontSize = 14;
                 textEditorControl.TextChanged += new System.EventHandler(this.textEditorControl_TextChanged);
-                textEditorControl.Click += new System.EventHandler(this.textEditorControl_Click);
-                textEditorControl.KeyUp += new KeyEventHandler(this.textEditorControl_KeyUp);
+
+                host.Child = textEditorControl;
 
                 TabPage tab = new TabPage(filename);
-                tab.Controls.Add(textEditorControl);
+                tab.Controls.Add(host);
                 tabControl1.TabPages.Add(tab);
 
                 // [ 0 - имя файла | 1 - путь файла | 2 - статус | 3 - индекс | 4 - TabPage (вкладка) | 5 - TextEditorControl (редактор)]
@@ -2885,21 +2891,9 @@ tester.ConsoleMsg(events);\par
             }
         }
 
-        private void textEditorControl_Click(object sender, EventArgs e)
-        {
-            // номер строки
-            toolStripStatusLabel7.Text = (((RichTextBox)sender).GetLineFromCharIndex(((RichTextBox)sender).SelectionStart) + 1).ToString();
-        }
-
-        private void textEditorControl_KeyUp(object sender, KeyEventArgs e)
-        {
-            // номер строки
-            toolStripStatusLabel7.Text = (((RichTextBox)sender).GetLineFromCharIndex(((RichTextBox)sender).SelectionStart) + 1).ToString();
-        }
-
         private void textEditorControl_TextChanged(object sender, EventArgs e)
         {
-            RichTextBox textEditorControl = (RichTextBox)sender;
+            TextEditor textEditorControl = (TextEditor)sender;
             int index = Convert.ToInt32(textEditorControl.Tag);
             files[index][2] = STATUS_NOT_SAVE;
             (files[index][4] as TabPage).Text = files[index][0].ToString() + " *";
@@ -3016,7 +3010,7 @@ tester.ConsoleMsg(events);\par
 
                 string filename = files[index][0].ToString();
                 string path = files[index][1].ToString();
-                string content = (files[index][5] as RichTextBox).Text;
+                string content = (files[index][5] as TextEditor).Text;
 
                 WorkOnFiles write = new WorkOnFiles();
                 write.writeFile(content, toolStripStatusLabel2.Text, path);
