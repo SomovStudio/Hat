@@ -47,12 +47,14 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
             this.panel2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.label12);
             this.panel2.Controls.Add(this.label11);
             this.panel2.Controls.Add(this.linkLabel4);
             this.panel2.Controls.Add(this.label10);
@@ -70,7 +72,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 109);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(442, 377);
+            this.panel2.Size = new System.Drawing.Size(442, 402);
             this.panel2.TabIndex = 8;
             // 
             // label11
@@ -78,15 +80,16 @@
             this.label11.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.label11.Image = ((System.Drawing.Image)(resources.GetObject("label11.Image")));
             this.label11.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.label11.Location = new System.Drawing.Point(0, 317);
+            this.label11.Location = new System.Drawing.Point(0, 342);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(442, 60);
             this.label11.TabIndex = 20;
             // 
             // linkLabel4
             // 
+            this.linkLabel4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.linkLabel4.AutoSize = true;
-            this.linkLabel4.Location = new System.Drawing.Point(339, 292);
+            this.linkLabel4.Location = new System.Drawing.Point(321, 283);
             this.linkLabel4.Name = "linkLabel4";
             this.linkLabel4.Size = new System.Drawing.Size(91, 13);
             this.linkLabel4.TabIndex = 19;
@@ -96,8 +99,10 @@
             // 
             // label10
             // 
+            this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(12, 292);
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label10.Location = new System.Drawing.Point(12, 283);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(307, 13);
             this.label10.TabIndex = 18;
@@ -111,7 +116,7 @@
             this.groupBox1.Controls.Add(this.richTextBox1);
             this.groupBox1.Location = new System.Drawing.Point(12, 81);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(418, 198);
+            this.groupBox1.Size = new System.Drawing.Size(418, 188);
             this.groupBox1.TabIndex = 17;
             this.groupBox1.TabStop = false;
             // 
@@ -123,7 +128,7 @@
             this.richTextBox1.Location = new System.Drawing.Point(3, 16);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.ReadOnly = true;
-            this.richTextBox1.Size = new System.Drawing.Size(412, 179);
+            this.richTextBox1.Size = new System.Drawing.Size(412, 169);
             this.richTextBox1.TabIndex = 1;
             this.richTextBox1.Text = resources.GetString("richTextBox1.Text");
             // 
@@ -253,11 +258,21 @@
             this.label1.TabIndex = 6;
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // label12
+            // 
+            this.label12.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label12.Location = new System.Drawing.Point(12, 302);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(409, 32);
+            this.label12.TabIndex = 21;
+            this.label12.Text = "Компания занимается разработкой Интернет-магазинов, Корпоративных порталов, CRM-с" +
+    "истем и собственных решений.";
+            // 
             // AboutForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(442, 486);
+            this.ClientSize = new System.Drawing.Size(442, 511);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -294,5 +309,6 @@
         private System.Windows.Forms.LinkLabel linkLabel4;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label12;
     }
 }
