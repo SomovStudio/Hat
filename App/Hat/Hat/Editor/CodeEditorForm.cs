@@ -13,7 +13,10 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.Integration;
 using ICSharpCode.AvalonEdit;
+using ICSharpCode.AvalonEdit.Search;
 using System.Windows.Media;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
+using System.Windows.Input;
 
 namespace Hat
 {
@@ -2873,6 +2876,8 @@ tester.ConsoleMsg(events);\par
                 textEditorControl.FontFamily = new System.Windows.Media.FontFamily("Consolas");
                 textEditorControl.FontSize = 14;
                 textEditorControl.TextChanged += new System.EventHandler(this.textEditorControl_TextChanged);
+                textEditorControl.KeyDown += new System.Windows.Input.KeyEventHandler(textEditorControl_KeyDown);
+                SearchPanel.Install(textEditorControl);
 
                 host.Child = textEditorControl;
 
@@ -2891,6 +2896,15 @@ tester.ConsoleMsg(events);\par
             }
         }
 
+        private void textEditorControl_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key == Key.S && ModifierKeys == Keys.Control)
+            {
+                e.Handled = true;
+                saveFile();
+            }
+        }
+
         private void textEditorControl_TextChanged(object sender, EventArgs e)
         {
             TextEditor textEditorControl = (TextEditor)sender;
@@ -2899,7 +2913,7 @@ tester.ConsoleMsg(events);\par
             (files[index][4] as TabPage).Text = files[index][0].ToString() + " *";
         }
 
-        
+
         private void closeFile()
         {
             try
@@ -2965,7 +2979,7 @@ tester.ConsoleMsg(events);\par
                 for (int i = 0; i < count; i++)
                 {
                     files[i][3] = i.ToString();
-                    (files[i][5] as RichTextBox).Tag = i.ToString();
+                    (files[i][5] as TextEditor).Tag = i.ToString();
                     //parent.consoleMsg($"{files[i][0]} | {files[i][1]} | {files[i][2]} | {files[i][3]} | {files[i][4]} | {(files[i][5] as TextEditorControl).Tag} | ");
                 }
             }
@@ -3040,7 +3054,7 @@ tester.ConsoleMsg(events);\par
                     string path = saveFileDialog1.FileName;
 
                     WorkOnFiles write = new WorkOnFiles();
-                    write.writeFile((files[index][5] as RichTextBox).Text, toolStripStatusLabel2.Text, path);
+                    write.writeFile((files[index][5] as TextEditor).Text, toolStripStatusLabel2.Text, path);
 
                     files[index][0] = filename;
                     files[index][1] = path;
@@ -3072,7 +3086,7 @@ tester.ConsoleMsg(events);\par
                     {
                         string filename = files[i][0].ToString();
                         string path = files[i][1].ToString();
-                        string content = (files[i][5] as RichTextBox).Text;
+                        string content = (files[i][5] as TextEditor).Text;
 
                         WorkOnFiles write = new WorkOnFiles();
                         write.writeFile(content, toolStripStatusLabel2.Text, path);
@@ -3495,11 +3509,12 @@ tester.ConsoleMsg(events);\par
                     if (treeView1.SelectedNode.Text == "Переменные") return;
                     if (treeView1.SelectedNode.Text == "Методы") return;
 
-                    
-
                     Clipboard.SetText(treeView1.SelectedNode.Text);
-                    (files[index][5] as RichTextBox).Focus();
-                    SendKeys.Send("+{INSERT}");
+                    (files[index][5] as TextEditor).Paste();
+
+                    //Clipboard.SetText(treeView1.SelectedNode.Text);
+                    //(files[index][5] as RichTextBox).Focus();
+                    //SendKeys.Send("+{INSERT}");
                     //SendKeys.Send("^{v}");
                     //SendKeys.Send("^v");
                     //SendKeys.Send("^(v)");
@@ -3521,9 +3536,21 @@ tester.ConsoleMsg(events);\par
             setValueInCode();
         }
 
-        private void richTextBox1_KeyDown(object sender, KeyEventArgs e)
+        private void toolStripButton7_Click(object sender, EventArgs e)
         {
-
+            try
+            {
+                int index = tabControl1.SelectedIndex;
+                int count = files.Count;
+                if (index < 0 && count <= 0) return;
+                (files[index][5] as TextEditor).Focus();
+                //SendKeys.Send("^f");
+                SendKeys.SendWait("^{f}");
+            }
+            catch (Exception ex)
+            {
+                Config.browserForm.consoleMsgError(ex.ToString());
+            }
         }
     }
 }
