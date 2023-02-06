@@ -24,12 +24,12 @@ namespace HatFrameworkDev
         public const int IMAGE_STATUS_FAILED = 2;           // изображение "провально"
         public const int IMAGE_STATUS_MESSAGE = 3;          // изображение "сообщение"
         public const int IMAGE_STATUS_WARNING = 4;          // изображение "предупреждение"
-        public const string PASSED = "Успешно";
-        public const string FAILED = "Провально";
-        public const string STOPPED = "Остановлено";
-        public const string PROCESS = "Выполняется";
-        public const string COMPLETED = "Выполнено";
-        public const string WARNING = "Предупреждение";
+        public const string PASSED = "PASSED";
+        public const string FAILED = "FAILED";
+        public const string STOPPED = "STOPPED";
+        public const string PROCESS = "PROCESS";
+        public const string COMPLETED = "COMPLETED";
+        public const string WARNING = "WARNING";
         public const string BY_CSS = "BY_CSS";     // тип локатора css
         public const string BY_XPATH = "BY_XPATH"; // тип локатора xpath
 

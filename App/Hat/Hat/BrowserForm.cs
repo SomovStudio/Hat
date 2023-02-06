@@ -397,6 +397,7 @@ namespace Hat
 
         public int sendMessageStep(string step, string status, string comment, int image)
         {
+            /*
             if(Config.languageEng == true)
             {
                 if (status == null) status = "";
@@ -417,7 +418,7 @@ namespace Hat
                 else if (status == Tester.COMPLETED) status = "ВЫПОЛНЕНО";
                 else if (status == Tester.STOPPED) status = "ОСТАНОВЛЕНО";
             }
-            
+            */
             Report.AddStep(status, step, comment);
 
             ListViewItem item;
@@ -444,6 +445,7 @@ namespace Hat
         {
             try
             {
+                /*
                 if (Config.languageEng == true)
                 {
                     if (status == null) status = null;
@@ -464,6 +466,7 @@ namespace Hat
                     else if (status == Tester.COMPLETED) status = "ВЫПОЛНЕНО";
                     else if (status == Tester.STOPPED) status = "ОСТАНОВЛЕНО";
                 }
+                */
 
                 if (image != null) listViewTest.Items[index].ImageIndex = image;
                 if (step != null) listViewTest.Items[index].SubItems[1].Text = step;

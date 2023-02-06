@@ -10,14 +10,15 @@ namespace Hat
 {
     public class Report
     {
-        public const string PASSED = "Успешно";
-        public const string FAILED = "Провально";
-        public const string STOPPED = "Остановлено";
-        public const string PROCESS = "Выполняется";
-        public const string COMPLETED = "Выполнено";
-        public const string WARNING = "Предупреждение";
-        public const string ERROR = "ОШИБКА";
-        public const string SCREENSHOT = "Скриншот";
+        public const string PASSED = "PASSED";
+        public const string FAILED = "FAILED";
+        public const string STOPPED = "STOPPED";
+        public const string PROCESS = "PROCESS";
+        public const string COMPLETED = "COMPLETED";
+        public const string WARNING = "WARNING";
+
+        public const string ERROR = "ERROR";
+        public const string SCREENSHOT = "SCREENSHOT";
 
         public static string TestFileName;
         public static string FileName;
