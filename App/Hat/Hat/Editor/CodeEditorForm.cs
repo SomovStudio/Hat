@@ -2965,7 +2965,7 @@ tester.ConsoleMsg(events);\par
                 for (int i = 0; i < count; i++)
                 {
                     files[i][3] = i.ToString();
-                    (files[i][5] as RichTextBox).Tag = i.ToString();
+                    (files[i][5] as TextEditor).Tag = i.ToString();
                     //parent.consoleMsg($"{files[i][0]} | {files[i][1]} | {files[i][2]} | {files[i][3]} | {files[i][4]} | {(files[i][5] as TextEditorControl).Tag} | ");
                 }
             }
@@ -3040,7 +3040,7 @@ tester.ConsoleMsg(events);\par
                     string path = saveFileDialog1.FileName;
 
                     WorkOnFiles write = new WorkOnFiles();
-                    write.writeFile((files[index][5] as RichTextBox).Text, toolStripStatusLabel2.Text, path);
+                    write.writeFile((files[index][5] as TextEditor).Text, toolStripStatusLabel2.Text, path);
 
                     files[index][0] = filename;
                     files[index][1] = path;
@@ -3072,7 +3072,7 @@ tester.ConsoleMsg(events);\par
                     {
                         string filename = files[i][0].ToString();
                         string path = files[i][1].ToString();
-                        string content = (files[i][5] as RichTextBox).Text;
+                        string content = (files[i][5] as TextEditor).Text;
 
                         WorkOnFiles write = new WorkOnFiles();
                         write.writeFile(content, toolStripStatusLabel2.Text, path);
@@ -3495,11 +3495,12 @@ tester.ConsoleMsg(events);\par
                     if (treeView1.SelectedNode.Text == "Переменные") return;
                     if (treeView1.SelectedNode.Text == "Методы") return;
 
-                    
-
                     Clipboard.SetText(treeView1.SelectedNode.Text);
-                    (files[index][5] as RichTextBox).Focus();
-                    SendKeys.Send("+{INSERT}");
+                    (files[index][5] as TextEditor).Paste();
+
+                    //Clipboard.SetText(treeView1.SelectedNode.Text);
+                    //(files[index][5] as RichTextBox).Focus();
+                    //SendKeys.Send("+{INSERT}");
                     //SendKeys.Send("^{v}");
                     //SendKeys.Send("^v");
                     //SendKeys.Send("^(v)");
