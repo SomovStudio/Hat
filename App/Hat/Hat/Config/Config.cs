@@ -41,7 +41,7 @@ namespace Hat
         /* переменные для файла project.hat */
         public static string version = "1.2.0";                // версия проекта
         public static string encoding = WorkOnFiles.UTF_8_BOM;  // кодировка
-        public static bool languageEng = false;                 // поддержка английского языка
+        public static bool languageEng = true;                 // поддержка английского языка
         public static bool editorTopMost = false;               // настройка отображения редактора
         public static string[] libraries = new string[]         // библиотека подключаемых dll файлов
         {

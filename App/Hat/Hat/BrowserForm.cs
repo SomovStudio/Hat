@@ -32,21 +32,25 @@ namespace Hat
             Config.browserForm = this;
             consoleMsg($"Браузер Hat версия {Config.currentBrowserVersion} ({Config.dateBrowserUpdate})");
             systemConsoleMsg("", default, default, default, true);
-            systemConsoleMsg($"Браузер Hat версия {Config.currentBrowserVersion} ({Config.dateBrowserUpdate})", default, ConsoleColor.DarkGray, ConsoleColor.White, true);
+            if(Config.languageEng == false) systemConsoleMsg($"Браузер Hat версия {Config.currentBrowserVersion} ({Config.dateBrowserUpdate})", default, ConsoleColor.DarkGray, ConsoleColor.White, true);
+            else systemConsoleMsg($"Browser Hat version {Config.currentBrowserVersion} ({Config.dateBrowserUpdate})", default, ConsoleColor.DarkGray, ConsoleColor.White, true);
 
             if (Config.statucCacheClear == "true")
             {
-                systemConsoleMsg("Кэш браузера очишен", default, ConsoleColor.DarkGray, ConsoleColor.White, true);
+                if (Config.languageEng == false) systemConsoleMsg("Кэш браузера очишен", default, ConsoleColor.DarkGray, ConsoleColor.White, true);
+                else systemConsoleMsg("The browser cache has been cleared", default, ConsoleColor.DarkGray, ConsoleColor.White, true);
                 consoleMsg("Кэш браузера очишен");
             }
             else if (Config.statucCacheClear == "false")
             {
-                systemConsoleMsg("Кэш браузера неудалось очистить, удалите папку " + Config.cacheFolder + " вручную", default, ConsoleColor.DarkGray, ConsoleColor.White, true);
+                if (Config.languageEng == false) systemConsoleMsg("Кэш браузера неудалось очистить, удалите папку " + Config.cacheFolder + " вручную", default, ConsoleColor.DarkGray, ConsoleColor.White, true);
+                else systemConsoleMsg("Browser cache could not be cleared. Delete the folder " + Config.cacheFolder, default, ConsoleColor.DarkGray, ConsoleColor.White, true);
                 consoleMsg("Кэш браузера неудалось очистить, удалите папку " + Config.cacheFolder + " вручную");
             }
             else
             {
-                systemConsoleMsg("Кэш не очищен, произошла ошибка: " + Config.statucCacheClear, default, ConsoleColor.DarkGray, ConsoleColor.White, true);
+                if (Config.languageEng == false) systemConsoleMsg("Кэш не очищен, произошла ошибка: " + Config.statucCacheClear, default, ConsoleColor.DarkGray, ConsoleColor.White, true);
+                else systemConsoleMsg("The cache has not been cleared, an error has occurred: " + Config.statucCacheClear, default, ConsoleColor.DarkGray, ConsoleColor.White, true);
                 consoleMsg("Кэш не очищен, произошла ошибка: " + Config.statucCacheClear);
             }
         }
@@ -73,7 +77,8 @@ namespace Hat
 
                 if (Config.commandLineMode == true)
                 {
-                    systemConsoleMsg("Запуск браузера...", default, ConsoleColor.DarkGray, ConsoleColor.White, true);
+                    if (Config.languageEng == false) systemConsoleMsg("Запуск браузера...", default, ConsoleColor.DarkGray, ConsoleColor.White, true);
+                    else systemConsoleMsg("Launching the browser...", default, ConsoleColor.DarkGray, ConsoleColor.White, true);
                     consoleMsg("Запуск браузера Hat из командной строки");
                     toolStripStatusLabelProjectPath.Text = Config.projectPath;
                     // Строится дерево папок и файлов
@@ -87,7 +92,8 @@ namespace Hat
                     showLibs();
                     changeEncoding();
                     changeEditorTopMost();
-                    systemConsoleMsg($"Проект открыт (версия проекта: {Config.version})", default, ConsoleColor.DarkGray, ConsoleColor.White, true);
+                    if (Config.languageEng == false) systemConsoleMsg($"Проект открыт (версия проекта: {Config.version})", default, ConsoleColor.DarkGray, ConsoleColor.White, true);
+                    else systemConsoleMsg($"The project is open (project version: {Config.version})", default, ConsoleColor.DarkGray, ConsoleColor.White, true);
                     consoleMsg($"Проект открыт (версия проекта: {Config.version})");
                     toolStripStatusLabelProjectFolderFile.Text = Config.selectName;
                     PlayTest(Config.selectName);
@@ -122,13 +128,15 @@ namespace Hat
             if (testSuccess == false)
             {
                 systemConsoleMsg(Environment.NewLine + "==============================", default, default, default, true);
-                systemConsoleMsg("Tests ended. Finished: FAILURE", default, ConsoleColor.DarkRed, ConsoleColor.White, true);
+                if (Config.languageEng == false) systemConsoleMsg("Тестирование завершено ПРОВАЛЬНО", default, ConsoleColor.DarkRed, ConsoleColor.White, true);
+                else systemConsoleMsg("Tests ended. Finished: FAILURE", default, ConsoleColor.DarkRed, ConsoleColor.White, true);
                 Environment.Exit(1);
             }
             else
             {
                 systemConsoleMsg(Environment.NewLine + "==============================", default, default, default, true);
-                systemConsoleMsg("Tests ended. Finished: SUCCESS", default, ConsoleColor.DarkGreen, ConsoleColor.White, true);
+                if (Config.languageEng == false) systemConsoleMsg("Тестирование завершено УСПЕШНО", default, ConsoleColor.DarkGreen, ConsoleColor.White, true);
+                else systemConsoleMsg("Tests ended. Finished: SUCCESS", default, ConsoleColor.DarkGreen, ConsoleColor.White, true);
                 Environment.Exit(0);
             }
         }
@@ -312,8 +320,10 @@ namespace Hat
 
             richTextBoxConsole.AppendText("[" + DateTime.Now.ToString() + "] ОШИБКА: " + message + Environment.NewLine);
             richTextBoxConsole.ScrollToCaret();
+            
             systemConsoleMsg("- - - - - - - - - - - - - - - - - - - - - - - - - - - -", default, default, default, true);
-            systemConsoleMsg("Произошла ошибка:", default, ConsoleColor.Black, ConsoleColor.Red, true);
+            if (Config.languageEng == false) systemConsoleMsg("Произошла ошибка:", default, ConsoleColor.Black, ConsoleColor.Red, true);
+            else systemConsoleMsg("An error has occurred:", default, ConsoleColor.Black, ConsoleColor.Red, true);
             systemConsoleMsg(message, default, default, default, true);
             systemConsoleMsg("- - - - - - - - - - - - - - - - - - - - - - - - - - - -", default, default, default, true);
             systemConsoleMsg("", default, default, default, true);
@@ -328,7 +338,8 @@ namespace Hat
                 richTextBoxConsole.AppendText("[" + DateTime.Now.ToString() + "] ОШИБКА: " + message + Environment.NewLine);
                 richTextBoxConsole.ScrollToCaret();
                 systemConsoleMsg("- - - - - - - - - - - - - - - - - - - - - - - - - - - -", default, default, default, true);
-                systemConsoleMsg("Произошла ошибка:", default, ConsoleColor.Black, ConsoleColor.Red, true);
+                if (Config.languageEng == false) systemConsoleMsg("Произошла ошибка:", default, ConsoleColor.Black, ConsoleColor.Red, true);
+                else systemConsoleMsg("An error has occurred:", default, ConsoleColor.Black, ConsoleColor.Red, true);
                 systemConsoleMsg(message, default, default, default, true);
                 systemConsoleMsg("- - - - - - - - - - - - - - - - - - - - - - - - - - - -", default, default, default, true);
                 systemConsoleMsg("", default, default, default, true);
@@ -1057,11 +1068,14 @@ namespace Hat
                     showDataMail();
 
                     consoleMsg("Проект открыт (версия проекта: " + Config.version + ")");
-                    systemConsoleMsg($"Проект открыт (версия проекта: {Config.version})", default, ConsoleColor.DarkGray, ConsoleColor.White, true);
+                    if (Config.languageEng == false) systemConsoleMsg($"Проект открыт (версия проекта: {Config.version})", default, ConsoleColor.DarkGray, ConsoleColor.White, true);
+                    else systemConsoleMsg($"The project is open (project version: {Config.version})", default, ConsoleColor.DarkGray, ConsoleColor.White, true);
+
                     if (Config.version != Config.currentBrowserVersion)
                     {
                         consoleMsg($"Предупреждение: версия проекта {Config.version} не совпадает с версией браузера {Config.currentBrowserVersion}");
-                        systemConsoleMsg($"Предупреждение: версия проекта {Config.version} не совпадает с версией браузера {Config.currentBrowserVersion}", default, ConsoleColor.DarkGray, ConsoleColor.White, true);
+                        if (Config.languageEng == false) systemConsoleMsg($"Предупреждение: версия проекта {Config.version} не совпадает с версией браузера {Config.currentBrowserVersion}", default, ConsoleColor.DarkGray, ConsoleColor.White, true);
+                        else systemConsoleMsg($"Warning: project version {Config.version} does not match the browser version {Config.currentBrowserVersion}", default, ConsoleColor.DarkGray, ConsoleColor.White, true);
                     }
                 }
              }

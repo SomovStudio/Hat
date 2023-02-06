@@ -478,7 +478,8 @@ namespace HatFrameworkDev
                 ConsoleMsg("Тест начинается...");
 
                 browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { "" + Environment.NewLine, default, default, default, false });
-                browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { "-- Тест начинается ------------", default, ConsoleColor.White, ConsoleColor.DarkBlue, true });
+                if (languageEng == false) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { "-- Тест начинается ------------", default, ConsoleColor.White, ConsoleColor.DarkBlue, true });
+                else browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { "-- The test begins ------------", default, ConsoleColor.White, ConsoleColor.DarkBlue, true });
             }
             catch (Exception ex)
             {
@@ -497,7 +498,8 @@ namespace HatFrameworkDev
                     EditMessage(step, null, FAILED, "Тест завершен - шаги теста выполнены неуспешно", IMAGE_STATUS_FAILED);
                     resultAutotestSuccess(false);
 
-                    browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { Environment.NewLine + "Тест завершен - провально", default, ConsoleColor.DarkRed, ConsoleColor.White, true });
+                    if (languageEng == false) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { Environment.NewLine + "Тест завершен - провально", default, ConsoleColor.DarkRed, ConsoleColor.White, true });
+                    else browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { Environment.NewLine + "The test is completed - failed", default, ConsoleColor.DarkRed, ConsoleColor.White, true });
                     browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { "-------------------------------" + Environment.NewLine, default, default, default, false });
 
                     Task screenshot = (Task)saveReportScreenshotAsync.Invoke(BrowserWindow, null);
@@ -509,7 +511,8 @@ namespace HatFrameworkDev
                     EditMessage(step, null, PASSED, "Тест завершен - все шаги выполнены успешно", IMAGE_STATUS_PASSED);
                     resultAutotestSuccess(true);
 
-                    browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { Environment.NewLine + "Тест завершен - успешено", default, ConsoleColor.DarkGreen, ConsoleColor.White, true });
+                    if (languageEng == false) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { Environment.NewLine + "Тест завершен - успешено", default, ConsoleColor.DarkGreen, ConsoleColor.White, true });
+                    else browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { Environment.NewLine + "The test is completed - passed", default, ConsoleColor.DarkGreen, ConsoleColor.White, true });
                     browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { "-------------------------------" + Environment.NewLine, default, default, default, false });
                 }
 
