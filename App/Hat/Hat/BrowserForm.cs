@@ -13,7 +13,6 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Microsoft.Web.WebView2.Core;
 using HatFramework;
-using System.Xml.Linq;
 
 namespace Hat
 {
@@ -397,28 +396,6 @@ namespace Hat
 
         public int sendMessageStep(string step, string status, string comment, int image)
         {
-            /*
-            if(Config.languageEng == true)
-            {
-                if (status == null) status = "";
-                else if (status == Tester.PASSED) status = "PASSED";
-                else if (status == Tester.FAILED) status = "FAILED";
-                else if (status == Tester.WARNING) status = "WARNING";
-                else if (status == Tester.PROCESS) status = "PROCESS";
-                else if (status == Tester.COMPLETED) status = "COMPLETED";
-                else if (status == Tester.STOPPED) status = "STOPPED";
-            }
-            else
-            {
-                if (status == null) status = "";
-                else if (status == Tester.PASSED) status = "УСПЕШНО";
-                else if (status == Tester.FAILED) status = "ПРОВАЛЬНО";
-                else if (status == Tester.WARNING) status = "ПРЕДУПРЕЖДЕНИЕ";
-                else if (status == Tester.PROCESS) status = "В ПРОЦЕССЕ";
-                else if (status == Tester.COMPLETED) status = "ВЫПОЛНЕНО";
-                else if (status == Tester.STOPPED) status = "ОСТАНОВЛЕНО";
-            }
-            */
             Report.AddStep(status, step, comment);
 
             ListViewItem item;
@@ -445,29 +422,6 @@ namespace Hat
         {
             try
             {
-                /*
-                if (Config.languageEng == true)
-                {
-                    if (status == null) status = null;
-                    else if (status == Tester.PASSED) status = "PASSED";
-                    else if (status == Tester.FAILED) status = "FAILED";
-                    else if (status == Tester.WARNING) status = "WARNING";
-                    else if (status == Tester.PROCESS) status = "PROCESS";
-                    else if (status == Tester.COMPLETED) status = "COMPLETED";
-                    else if (status == Tester.STOPPED) status = "STOPPED";
-                }
-                else
-                {
-                    if (status == null) status = null;
-                    else if (status == Tester.PASSED) status = "УСПЕШНО";
-                    else if (status == Tester.FAILED) status = "ПРОВАЛЬНО";
-                    else if (status == Tester.WARNING) status = "ПРЕДУПРЕЖДЕНИЕ";
-                    else if (status == Tester.PROCESS) status = "В ПРОЦЕССЕ";
-                    else if (status == Tester.COMPLETED) status = "ВЫПОЛНЕНО";
-                    else if (status == Tester.STOPPED) status = "ОСТАНОВЛЕНО";
-                }
-                */
-
                 if (image != null) listViewTest.Items[index].ImageIndex = image;
                 if (step != null) listViewTest.Items[index].SubItems[1].Text = step;
                 if (status != null) listViewTest.Items[index].SubItems[2].Text = status;

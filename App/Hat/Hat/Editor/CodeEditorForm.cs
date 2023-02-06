@@ -16,6 +16,7 @@ using ICSharpCode.AvalonEdit;
 using ICSharpCode.AvalonEdit.Search;
 using System.Windows.Media;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
+using System.Windows.Input;
 
 namespace Hat
 {
@@ -2875,6 +2876,7 @@ tester.ConsoleMsg(events);\par
                 textEditorControl.FontFamily = new System.Windows.Media.FontFamily("Consolas");
                 textEditorControl.FontSize = 14;
                 textEditorControl.TextChanged += new System.EventHandler(this.textEditorControl_TextChanged);
+                textEditorControl.KeyDown += new System.Windows.Input.KeyEventHandler(textEditorControl_KeyDown);
                 SearchPanel.Install(textEditorControl);
 
                 host.Child = textEditorControl;
@@ -2894,6 +2896,15 @@ tester.ConsoleMsg(events);\par
             }
         }
 
+        private void textEditorControl_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key == Key.S && ModifierKeys == Keys.Control)
+            {
+                e.Handled = true;
+                saveFile();
+            }
+        }
+
         private void textEditorControl_TextChanged(object sender, EventArgs e)
         {
             TextEditor textEditorControl = (TextEditor)sender;
@@ -2902,7 +2913,7 @@ tester.ConsoleMsg(events);\par
             (files[index][4] as TabPage).Text = files[index][0].ToString() + " *";
         }
 
-        
+
         private void closeFile()
         {
             try
