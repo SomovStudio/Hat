@@ -13,7 +13,9 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.Integration;
 using ICSharpCode.AvalonEdit;
+using ICSharpCode.AvalonEdit.Search;
 using System.Windows.Media;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
 
 namespace Hat
 {
@@ -2873,6 +2875,7 @@ tester.ConsoleMsg(events);\par
                 textEditorControl.FontFamily = new System.Windows.Media.FontFamily("Consolas");
                 textEditorControl.FontSize = 14;
                 textEditorControl.TextChanged += new System.EventHandler(this.textEditorControl_TextChanged);
+                SearchPanel.Install(textEditorControl);
 
                 host.Child = textEditorControl;
 
@@ -3520,6 +3523,23 @@ tester.ConsoleMsg(events);\par
         private void вставитьВКодToolStripMenuItem_Click(object sender, EventArgs e)
         {
             setValueInCode();
+        }
+
+        private void toolStripButton7_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int index = tabControl1.SelectedIndex;
+                int count = files.Count;
+                if (index < 0 && count <= 0) return;
+
+                (files[index][5] as TextEditor).Focus();
+                SendKeys.Send("^f");
+            }
+            catch (Exception ex)
+            {
+                Config.browserForm.consoleMsgError(ex.ToString());
+            }
         }
     }
 }
