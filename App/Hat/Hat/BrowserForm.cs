@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Microsoft.Web.WebView2.Core;
 using HatFramework;
+using System.Xml.Linq;
 
 namespace Hat
 {

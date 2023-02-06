@@ -12,6 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Newtonsoft.Json;
+using System.Text.RegularExpressions;
 
 namespace HatFrameworkDev
 {
@@ -331,7 +332,18 @@ namespace HatFrameworkDev
                     }
 
                     if (action != null && action != "") browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { " - " + action, default, default, default, false });
-                    if (comment != null && comment != "") browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { " - " + comment, default, default, default, false });
+                    if (comment != null)
+                    {
+                        if (Regex.IsMatch(comment, @"\p{IsCyrillic}") == true) // в комментарии присутствует русский текст
+                        {
+                            if (languageEng == true) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { "", default, default, default, false }); // комментарий на русском языке | английский включен
+                            else browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { " - " + comment, default, default, default, false }); // комментарий на русском языке | английский отключен
+                        }
+                        else
+                        {
+                            browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { " - " + comment, default, default, default, false });
+                        }
+                    }
                 }
 
                 int index = (int)browserSendMessageStep.Invoke(BrowserWindow, new object[] { action, status, comment, image }); // вывод сообщения в таблицу браузера
@@ -375,7 +387,19 @@ namespace HatFrameworkDev
                     }
 
                     if (action != null && action != "") browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { " - " + action, default, default, default, false });
-                    if (comment != null && comment != "") browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { " - " + comment, default, default, default, false });
+                    if (comment != null)
+                    {
+                        if (Regex.IsMatch(comment, @"\p{IsCyrillic}") == true) // в комментарии присутствует русский текст
+                        {
+                            if (languageEng == true) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { "", default, default, default, false }); // комментарий на русском языке | английский включен
+                            else browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { " - " + comment, default, default, default, false }); // комментарий на русском языке | английский отключен
+                        }
+                        else
+                        {
+                            browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { " - " + comment, default, default, default, false });
+                        }
+                    }
+
                     browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { "", default, default, default, true }); // вставляется пустая строка
                 }
 

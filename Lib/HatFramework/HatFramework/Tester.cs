@@ -12,6 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Newtonsoft.Json;
+using System.Text.RegularExpressions;
 using HatFramework;
 
 namespace HatFramework
@@ -307,26 +308,6 @@ namespace HatFramework
             {
                 if (assertStatus != FAILED)
                 {
-                    /*
-                        string message;
-                        if (action != null)
-                        {
-                            message = Environment.NewLine + "Действие: " + action;
-                            browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { message, default, default, default, true });
-                        }
-
-                        message = "Статус: ";
-                        browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { message, default, default, default, false });
-
-                        if (status == PASSED) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { status, default, ConsoleColor.Black, ConsoleColor.DarkGreen, true });
-                        else if (status == FAILED && assertStatus != FAILED) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { status, default, ConsoleColor.Black, ConsoleColor.DarkRed, true });
-                        else if (status == WARNING && assertStatus != FAILED) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { status, default, ConsoleColor.Black, ConsoleColor.DarkYellow, true });
-                        else browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { status, default, default, default, true });
-
-                        message = "Комментарий: " + comment;
-                        browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { message, default, default, default, true });
-                    */
-
                     // вывод сообщения в системную консоль
                     browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { "", default, default, default, true }); // вставляется пустая строка
 
@@ -351,8 +332,20 @@ namespace HatFramework
                         else if (status == STOPPED) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { "ОСТАНОВЛЕНО", default, default, default, false });
                     }
 
-                    if (action != null && action != "") browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { " : " + action, default, default, default, false });
-                    if (comment != null && comment != "") browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { " - " + comment, default, default, default, false });
+                    if (action != null && action != "") browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { " - " + action, default, default, default, false });
+                    if (comment != null)
+                    {
+                        if (Regex.IsMatch(comment, @"\p{IsCyrillic}") == true) // в комментарии присутствует русский текст
+                        {
+                            if (languageEng == true) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { "", default, default, default, false }); // комментарий на русском языке | английский включен
+                            else browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { " - " + comment, default, default, default, false }); // комментарий на русском языке | английский отключен
+                        }
+                        else
+                        {
+                            browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { " - " + comment, default, default, default, false });
+                        }
+                    }
+
                 }
 
                 int index = (int)browserSendMessageStep.Invoke(BrowserWindow, new object[] { action, status, comment, image }); // вывод сообщения в таблицу браузера
@@ -371,26 +364,6 @@ namespace HatFramework
             {
                 if (assertStatus != FAILED)
                 {
-                    /*
-                        string message;
-                        if (action != null)
-                        {
-                            message = Environment.NewLine + "Действие: " + action;
-                            browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { message, default, default, default, true });
-                        }
-
-                        message = $"Статус: ";
-                        browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { message, default, default, default, false });
-
-                        if (status == PASSED) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { status, default, ConsoleColor.Black, ConsoleColor.DarkGreen, true });
-                        else if (status == FAILED) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { status, default, ConsoleColor.Black, ConsoleColor.DarkRed, true });
-                        else if (status == WARNING) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { status, default, ConsoleColor.Black, ConsoleColor.DarkYellow, true });
-                        else browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { status, default, default, default, true });
-
-                        message = "Комментарий: " + comment;
-                        browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { message, default, default, default, true });
-                    */
-
                     // вывод сообщения в системную консоль
                     browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { "", default, default, default, true }); // вставляется пустая строка
 
@@ -415,8 +388,20 @@ namespace HatFramework
                         else if (status == STOPPED) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { "ОСТАНОВЛЕНО", default, default, default, false });
                     }
 
-                    if (action != null && action != "") browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { " : " + action, default, default, default, false });
-                    if (comment != null && comment != "") browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { " - " + comment, default, default, default, false });
+                    if (action != null && action != "") browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { " - " + action, default, default, default, false });
+                    if (comment != null)
+                    {
+                        if (Regex.IsMatch(comment, @"\p{IsCyrillic}") == true) // в комментарии присутствует русский текст
+                        {
+                            if (languageEng == true) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { "", default, default, default, false }); // комментарий на русском языке | английский включен
+                            else browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { " - " + comment, default, default, default, false }); // комментарий на русском языке | английский отключен
+                        }
+                        else
+                        {
+                            browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { " - " + comment, default, default, default, false });
+                        }
+                    }
+
                     browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { "", default, default, default, true }); // вставляется пустая строка
                 }
 
