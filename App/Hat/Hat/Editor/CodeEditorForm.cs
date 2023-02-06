@@ -3532,9 +3532,9 @@ tester.ConsoleMsg(events);\par
                 int index = tabControl1.SelectedIndex;
                 int count = files.Count;
                 if (index < 0 && count <= 0) return;
-
                 (files[index][5] as TextEditor).Focus();
-                SendKeys.Send("^f");
+                //SendKeys.Send("^f");
+                SendKeys.SendWait("^{f}");
             }
             catch (Exception ex)
             {
