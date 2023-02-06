@@ -3521,10 +3521,5 @@ tester.ConsoleMsg(events);\par
         {
             setValueInCode();
         }
-
-        private void richTextBox1_KeyDown(object sender, KeyEventArgs e)
-        {
-
-        }
     }
 }
