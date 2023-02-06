@@ -12,6 +12,7 @@ using System.Diagnostics;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Microsoft.Web.WebView2.Core;
+using HatFramework;
 
 namespace Hat
 {
@@ -384,6 +385,27 @@ namespace Hat
 
         public int sendMessageStep(string step, string status, string comment, int image)
         {
+            if(Config.languageEng == true)
+            {
+                if (status == null) status = "";
+                else if (status == Tester.PASSED) status = "PASSED";
+                else if (status == Tester.FAILED) status = "FAILED";
+                else if (status == Tester.WARNING) status = "WARNING";
+                else if (status == Tester.PROCESS) status = "PROCESS";
+                else if (status == Tester.COMPLETED) status = "COMPLETED";
+                else if (status == Tester.STOPPED) status = "STOPPED";
+            }
+            else
+            {
+                if (status == null) status = "";
+                else if (status == Tester.PASSED) status = "УСПЕШНО";
+                else if (status == Tester.FAILED) status = "ПРОВАЛЬНО";
+                else if (status == Tester.WARNING) status = "ПРЕДУПРЕЖДЕНИЕ";
+                else if (status == Tester.PROCESS) status = "В ПРОЦЕССЕ";
+                else if (status == Tester.COMPLETED) status = "ВЫПОЛНЕНО";
+                else if (status == Tester.STOPPED) status = "ОСТАНОВЛЕНО";
+            }
+            
             Report.AddStep(status, step, comment);
 
             ListViewItem item;
@@ -410,6 +432,27 @@ namespace Hat
         {
             try
             {
+                if (Config.languageEng == true)
+                {
+                    if (status == null) status = null;
+                    else if (status == Tester.PASSED) status = "PASSED";
+                    else if (status == Tester.FAILED) status = "FAILED";
+                    else if (status == Tester.WARNING) status = "WARNING";
+                    else if (status == Tester.PROCESS) status = "PROCESS";
+                    else if (status == Tester.COMPLETED) status = "COMPLETED";
+                    else if (status == Tester.STOPPED) status = "STOPPED";
+                }
+                else
+                {
+                    if (status == null) status = null;
+                    else if (status == Tester.PASSED) status = "УСПЕШНО";
+                    else if (status == Tester.FAILED) status = "ПРОВАЛЬНО";
+                    else if (status == Tester.WARNING) status = "ПРЕДУПРЕЖДЕНИЕ";
+                    else if (status == Tester.PROCESS) status = "В ПРОЦЕССЕ";
+                    else if (status == Tester.COMPLETED) status = "ВЫПОЛНЕНО";
+                    else if (status == Tester.STOPPED) status = "ОСТАНОВЛЕНО";
+                }
+
                 if (image != null) listViewTest.Items[index].ImageIndex = image;
                 if (step != null) listViewTest.Items[index].SubItems[1].Text = step;
                 if (status != null) listViewTest.Items[index].SubItems[2].Text = status;
@@ -570,6 +613,12 @@ namespace Hat
             webView2.CoreWebView2.Settings.UserAgent = textBoxUserAgent.Text;
             checkBoxUserAgent.Checked = false;
             textBoxUserAgent.ReadOnly = false;
+        }
+
+        /* Возвращает выбранный язык вывода */
+        public bool getlanguageEng()
+        {
+            return Config.languageEng;
         }
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
@@ -1108,7 +1157,7 @@ namespace Hat
         {
             try
             {
-                if (Config.languageEnd == false)
+                if (Config.languageEng == false)
                 {
                     languageRusToolStripMenuItem.Checked = true;
                     languageRusToolStripMenuItem1.Checked = true;
@@ -2655,7 +2704,7 @@ namespace Hat
                 languageRusToolStripMenuItem1.Checked = true;
                 languageEngToolStripMenuItem.Checked = false;
                 languageEngToolStripMenuItem1.Checked = false;
-                Config.languageEnd = false;
+                Config.languageEng = false;
                 if (Config.projectPath != "(не открыт)") Config.saveConfigJson(Config.projectPath + "/project.hat");
                 consoleMsg("Язык вывода изменен на русский");
             }
@@ -2674,7 +2723,7 @@ namespace Hat
                 languageRusToolStripMenuItem1.Checked = true;
                 languageEngToolStripMenuItem.Checked = false;
                 languageEngToolStripMenuItem1.Checked = false;
-                Config.languageEnd = false;
+                Config.languageEng = false;
                 if (Config.projectPath != "(не открыт)") Config.saveConfigJson(Config.projectPath + "/project.hat");
                 consoleMsg("Язык вывода изменен на русский");
             }
@@ -2693,7 +2742,7 @@ namespace Hat
                 languageRusToolStripMenuItem1.Checked = false;
                 languageEngToolStripMenuItem.Checked = true;
                 languageEngToolStripMenuItem1.Checked = true;
-                Config.languageEnd = true;
+                Config.languageEng = true;
                 if (Config.projectPath != "(не открыт)") Config.saveConfigJson(Config.projectPath + "/project.hat");
                 consoleMsg("Язык вывода изменен на английский");
             }
@@ -2713,7 +2762,7 @@ namespace Hat
                 languageRusToolStripMenuItem1.Checked = false;
                 languageEngToolStripMenuItem.Checked = true;
                 languageEngToolStripMenuItem1.Checked = true;
-                Config.languageEnd = true;
+                Config.languageEng = true;
                 if (Config.projectPath != "(не открыт)") Config.saveConfigJson(Config.projectPath + "/project.hat");
                 consoleMsg("Язык вывода изменен на английский");
             }

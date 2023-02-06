@@ -55,12 +55,14 @@ namespace HatFrameworkDev
         private MethodInfo resultAutotest;          // функция: resultAutotest - устанавливает флаг общего результата выполнения теста
         private MethodInfo debugJavaScript;         // функция: getDebug - возвращает статус отладки
         private MethodInfo getNameAutotest;         // Функция: getNameAutotest - возвращает имя запущенного автотеста
+        private MethodInfo getlanguageEng;          // Функция: getlanguageEng - возвращает статус английского языка для вывода (true/false)
         private MethodInfo saveReport;              // функция: saveReport - вызывает метод сохранения отчета
         private MethodInfo saveReportScreenshotAsync; // функция: saveReportScreenshotAsync - сохраняет скриншот текущего состояния браузера
         private MethodInfo sendMailFailure;         // функция: sendMailFailure - отправка отчета о Failure автотеста по почте
         private MethodInfo sendMailSuccess;         // функция: sendMailSuccess - отправка отчета о Success автотеста по почте
         private MethodInfo sendMail;                // функция: sendMail - отправка письма на почту
 
+        private bool languageEng = false;       // флаг: английский язык для вывода
         private bool statusPageLoad = false;    // флаг: статус загрузки страницы
         private bool testStop = false;          // флаг: остановка теста
         private bool sendFailureReportByMail = false;  // флаг: отправка Failure отчета по почте
@@ -88,6 +90,7 @@ namespace HatFrameworkDev
                 resultAutotest = BrowserWindow.GetType().GetMethod("resultAutotest");
                 debugJavaScript = BrowserWindow.GetType().GetMethod("getStatusDebugJavaScript");
                 getNameAutotest = BrowserWindow.GetType().GetMethod("getNameAutotest");
+                getlanguageEng = BrowserWindow.GetType().GetMethod("getlanguageEng");
                 saveReport = BrowserWindow.GetType().GetMethod("saveReport");
                 saveReportScreenshotAsync = BrowserWindow.GetType().GetMethod("saveReportScreenshotAsync");
                 sendMailFailure = BrowserWindow.GetType().GetMethod("sendMailFailure");
@@ -100,6 +103,7 @@ namespace HatFrameworkDev
                 BrowserView.NavigationCompleted += navigationCompleted;
                 BrowserView.EnsureCoreWebView2Async();
 
+                changeLanguageAutotest();
                 showNameAutotest();
             }
             catch (Exception ex)
@@ -139,6 +143,18 @@ namespace HatFrameworkDev
             try
             {
                 resultAutotest.Invoke(BrowserWindow, new object[] { success });
+            }
+            catch (Exception ex)
+            {
+                ConsoleMsgError(ex.ToString());
+            }
+        }
+
+        private void changeLanguageAutotest()
+        {
+            try
+            {
+                languageEng = (bool)getlanguageEng.Invoke(BrowserWindow, null);
             }
             catch (Exception ex)
             {
@@ -188,29 +204,6 @@ namespace HatFrameworkDev
                 script += "if (elemCenter.y > (document.documentElement.clientHeight || window.innerHeight)) return false;";
                 script += "return true;";
                 script += "}());";
-
-                /* старый метод
-                script += "if (!(elem instanceof Element)) throw Error('DomUtil: elem is not an element.');";
-                script += "const style = getComputedStyle(elem);";
-                script += "if (style.display === 'none') return false;";
-                script += "if (style.visibility !== 'visible') return false;";
-                script += "if (style.opacity < 0.1) return false;";
-                script += "if (elem.offsetWidth + elem.offsetHeight + elem.getBoundingClientRect().height + elem.getBoundingClientRect().width === 0) return false;";
-                script += "const elemCenter = {";
-                script += "x: elem.getBoundingClientRect().left + elem.offsetWidth / 2,";
-                script += "y: elem.getBoundingClientRect().top + elem.offsetHeight / 2";
-                script += "};";
-                script += "if (elemCenter.x < 0) return false;";
-                script += "if (elemCenter.x > (document.documentElement.clientWidth || window.innerWidth)) return false;";
-                script += "if (elemCenter.y < 0) return false;";
-                script += "if (elemCenter.y > (document.documentElement.clientHeight || window.innerHeight)) return false;";
-                script += "let pointContainer = document.elementFromPoint(elemCenter.x, elemCenter.y);";
-                script += "do {";
-                script += "if (pointContainer === elem) return true;";
-                script += "} while (pointContainer = pointContainer.parentNode);";
-                script += "return false;";
-                script += "}());";
-                */
 
                 string result = await executeJS(script);
                 if (Debug == true) ConsoleMsg($"[DEBUG] JS результат: {result}");
@@ -313,26 +306,35 @@ namespace HatFrameworkDev
             {
                 if (assertStatus != FAILED)
                 {
-                    string message;
-                    if (action != null)
+                    // вывод сообщения в системную консоль
+                    browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { "", default, default, default, true }); // вставляется пустая строка
+
+                    if (languageEng == true)
                     {
-                        message = Environment.NewLine + "Действие: " + action;
-                        browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { message, default, default, default, true });
+                        if (status == null) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { "", default, default, default, false });
+                        else if (status == PASSED) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { "PASSED", default, ConsoleColor.Black, ConsoleColor.DarkGreen, false });
+                        else if (status == FAILED && assertStatus != FAILED) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { "FAILED", default, ConsoleColor.Black, ConsoleColor.DarkRed, false });
+                        else if (status == WARNING && assertStatus != FAILED) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { "WARNING", default, ConsoleColor.Black, ConsoleColor.DarkYellow, false });
+                        else if (status == PROCESS) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { "PROCESS", default, default, default, false });
+                        else if (status == COMPLETED) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { "COMPLETED", default, default, default, false });
+                        else if (status == STOPPED) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { "STOPPED", default, default, default, false });
+                    }
+                    else
+                    {
+                        if (status == null) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { "", default, default, default, false });
+                        else if (status == PASSED) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { "УСПЕШНО", default, ConsoleColor.Black, ConsoleColor.DarkGreen, false });
+                        else if (status == FAILED && assertStatus != FAILED) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { "ПРОВАЛЬНО", default, ConsoleColor.Black, ConsoleColor.DarkRed, false });
+                        else if (status == WARNING && assertStatus != FAILED) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { "ПРЕДУПРЕЖДЕНИЕ", default, ConsoleColor.Black, ConsoleColor.DarkYellow, false });
+                        else if (status == PROCESS) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { "В ПРОЦЕССЕ", default, default, default, false });
+                        else if (status == COMPLETED) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { "ВЫПОЛНЕНО", default, default, default, false });
+                        else if (status == STOPPED) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { "ОСТАНОВЛЕНО", default, default, default, false });
                     }
 
-                    message = "Статус: ";
-                    browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { message, default, default, default, false });
-
-                    if (status == PASSED) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { status, default, ConsoleColor.Black, ConsoleColor.DarkGreen, true });
-                    else if (status == FAILED && assertStatus != FAILED) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { status, default, ConsoleColor.Black, ConsoleColor.DarkRed, true });
-                    else if (status == WARNING && assertStatus != FAILED) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { status, default, ConsoleColor.Black, ConsoleColor.DarkYellow, true });
-                    else browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { status, default, default, default, true });
-
-                    message = "Комментарий: " + comment;
-                    browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { message, default, default, default, true });
+                    if (action != null && action != "") browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { " - " + action, default, default, default, false });
+                    if (comment != null && comment != "") browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { " - " + comment, default, default, default, false });
                 }
 
-                int index = (int)browserSendMessageStep.Invoke(BrowserWindow, new object[] { action, status, comment, image });
+                int index = (int)browserSendMessageStep.Invoke(BrowserWindow, new object[] { action, status, comment, image }); // вывод сообщения в таблицу браузера
                 return index;
             }
             catch (Exception ex)
@@ -348,27 +350,36 @@ namespace HatFrameworkDev
             {
                 if (assertStatus != FAILED)
                 {
-                    string message;
-                    if (action != null)
+                    // вывод сообщения в системную консоль
+                    browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { "", default, default, default, true }); // вставляется пустая строка
+
+                    if (languageEng == true)
                     {
-                        message = Environment.NewLine + "Действие: " + action;
-                        browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { message, default, default, default, true });
+                        if (status == null) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { "", default, default, default, false });
+                        else if (status == PASSED) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { "PASSED", default, ConsoleColor.Black, ConsoleColor.DarkGreen, false });
+                        else if (status == FAILED && assertStatus != FAILED) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { "FAILED", default, ConsoleColor.Black, ConsoleColor.DarkRed, false });
+                        else if (status == WARNING && assertStatus != FAILED) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { "WARNING", default, ConsoleColor.Black, ConsoleColor.DarkYellow, false });
+                        else if (status == PROCESS) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { "PROCESS", default, default, default, false });
+                        else if (status == COMPLETED) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { "COMPLETED", default, default, default, false });
+                        else if (status == STOPPED) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { "STOPPED", default, default, default, false });
+                    }
+                    else
+                    {
+                        if (status == null) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { "", default, default, default, false });
+                        else if (status == PASSED) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { "УСПЕШНО", default, ConsoleColor.Black, ConsoleColor.DarkGreen, false });
+                        else if (status == FAILED && assertStatus != FAILED) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { "ПРОВАЛЬНО", default, ConsoleColor.Black, ConsoleColor.DarkRed, false });
+                        else if (status == WARNING && assertStatus != FAILED) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { "ПРЕДУПРЕЖДЕНИЕ", default, ConsoleColor.Black, ConsoleColor.DarkYellow, false });
+                        else if (status == PROCESS) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { "В ПРОЦЕССЕ", default, default, default, false });
+                        else if (status == COMPLETED) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { "ВЫПОЛНЕНО", default, default, default, false });
+                        else if (status == STOPPED) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { "ОСТАНОВЛЕНО", default, default, default, false });
                     }
 
-                    message = $"Статус: ";
-                    browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { message, default, default, default, false });
-
-                    if (status == PASSED) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { status, default, ConsoleColor.Black, ConsoleColor.DarkGreen, true });
-                    else if (status == FAILED) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { status, default, ConsoleColor.Black, ConsoleColor.DarkRed, true });
-                    else if (status == WARNING) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { status, default, ConsoleColor.Black, ConsoleColor.DarkYellow, true });
-                    else browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { status, default, default, default, true });
-
-                    message = "Комментарий: " + comment;
-                    browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { message, default, default, default, true });
-
+                    if (action != null && action != "") browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { " - " + action, default, default, default, false });
+                    if (comment != null && comment != "") browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { " - " + comment, default, default, default, false });
+                    browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { "", default, default, default, true }); // вставляется пустая строка
                 }
 
-                browserEditMessageStep.Invoke(BrowserWindow, new object[] { index, action, status, comment, image });
+                browserEditMessageStep.Invoke(BrowserWindow, new object[] { index, action, status, comment, image }); // изменяем сообщения в таблицу браузера
             }
             catch (Exception ex)
             {
