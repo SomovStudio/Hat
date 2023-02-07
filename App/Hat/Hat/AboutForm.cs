@@ -21,7 +21,8 @@ namespace Hat
         {
             try
             {
-                System.Diagnostics.Process.Start(@"https://opensource.org/licenses/MIT");
+                //System.Diagnostics.Process.Start(@"https://opensource.org/licenses/MIT");
+                System.Diagnostics.Process.Start(@"https://github.com/SomovStudio/Hat/blob/main/LICENSE");
             }
             catch (Exception ex)
             {

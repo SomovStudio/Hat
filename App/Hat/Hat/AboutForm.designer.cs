@@ -78,12 +78,12 @@
             // label12
             // 
             this.label12.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label12.Location = new System.Drawing.Point(12, 303);
+            this.label12.Location = new System.Drawing.Point(12, 301);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(409, 32);
             this.label12.TabIndex = 21;
-            this.label12.Text = "Компания занимается разработкой Интернет-магазинов, Корпоративных порталов, CRM-с" +
-    "истем и собственных решений.";
+            this.label12.Text = "Компания \"Зионек\" занимается разработкой \"Интернет-магазинов\", \"Корпоративных пор" +
+    "талов\", \"CRM-систем\" и собственных решений.";
             // 
             // label11
             // 
@@ -99,7 +99,7 @@
             // 
             this.linkLabel4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.linkLabel4.AutoSize = true;
-            this.linkLabel4.Location = new System.Drawing.Point(323, 287);
+            this.linkLabel4.Location = new System.Drawing.Point(330, 287);
             this.linkLabel4.Name = "linkLabel4";
             this.linkLabel4.Size = new System.Drawing.Size(91, 13);
             this.linkLabel4.TabIndex = 19;
@@ -114,9 +114,9 @@
             this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label10.Location = new System.Drawing.Point(12, 287);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(307, 13);
+            this.label10.Size = new System.Drawing.Size(317, 13);
             this.label10.TabIndex = 18;
-            this.label10.Text = "Программа разработана при поддержке компании Зионек";
+            this.label10.Text = "Программа разработана при поддержке компании \"Зионек\"";
             // 
             // groupBox1
             // 
