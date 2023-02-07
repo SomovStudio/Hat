@@ -855,6 +855,7 @@ namespace Hat
                     changeEncoding();
                     changeEditorTopMost();
                     showDataMail();
+                    changeLanguage();
                 }
             }
             catch (Exception ex)
@@ -976,6 +977,7 @@ namespace Hat
                     changeEncoding();
                     changeEditorTopMost();
                     showDataMail();
+                    changeLanguage();
                 }
             }
             catch (Exception ex)
