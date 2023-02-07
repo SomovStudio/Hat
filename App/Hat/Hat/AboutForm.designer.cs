@@ -280,7 +280,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "AboutForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "О программе Hat";
+            this.Text = "О программе Hat | Copyright © 2023 Somov Studio. All Rights Reserved.";
             this.Load += new System.EventHandler(this.AboutForm_Load);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
