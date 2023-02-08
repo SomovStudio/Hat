@@ -17,6 +17,9 @@ using ICSharpCode.AvalonEdit.Search;
 using System.Windows.Media;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
 using System.Windows.Input;
+using ICSharpCode.AvalonEdit.CodeCompletion;
+using Hat.Editor;
+using ICSharpCode.AvalonEdit.Editing;
 
 namespace Hat
 {
@@ -2877,6 +2880,8 @@ tester.ConsoleMsg(events);\par
                 textEditorControl.FontSize = 14;
                 textEditorControl.TextChanged += new System.EventHandler(this.textEditorControl_TextChanged);
                 textEditorControl.KeyDown += new System.Windows.Input.KeyEventHandler(textEditorControl_KeyDown);
+                textEditorControl.TextArea.TextEntering += textEditor_TextArea_TextEntering;
+                textEditorControl.TextArea.TextEntered += textEditor_TextArea_TextEntered;
                 SearchPanel.Install(textEditorControl);
 
                 host.Child = textEditorControl;
@@ -2911,6 +2916,40 @@ tester.ConsoleMsg(events);\par
             int index = Convert.ToInt32(textEditorControl.Tag);
             files[index][2] = STATUS_NOT_SAVE;
             (files[index][4] as TabPage).Text = files[index][0].ToString() + " *";
+        }
+
+        CompletionWindow completionWindow;
+
+        void textEditor_TextArea_TextEntered(object sender, TextCompositionEventArgs e)
+        {
+            if (e.Text == ".")
+            {
+                // Open code completion after the user has pressed dot:
+                completionWindow = new CompletionWindow((TextArea)sender);
+                IList<ICompletionData> data = completionWindow.CompletionList.CompletionData;
+                data.Add(new CompletionData("Item1"));
+                data.Add(new CompletionData("Item2"));
+                data.Add(new CompletionData("Item3"));
+                completionWindow.Show();
+                completionWindow.Closed += delegate {
+                    completionWindow = null;
+                };
+            }
+        }
+
+        void textEditor_TextArea_TextEntering(object sender, TextCompositionEventArgs e)
+        {
+            if (e.Text.Length > 0 && completionWindow != null)
+            {
+                if (!char.IsLetterOrDigit(e.Text[0]))
+                {
+                    // Whenever a non-letter is typed while the completion window is open,
+                    // insert the currently selected element.
+                    completionWindow.CompletionList.RequestInsertion(e);
+                }
+            }
+            // Do not set e.Handled=true.
+            // We still want to insert the character that was typed.
         }
 
 
