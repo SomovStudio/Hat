@@ -52,9 +52,10 @@ namespace Hat.Editor
         }
         */
 
-        public CompletionData(string text)
+        public CompletionData(string text, string description)
         {
             this.Text = text;
+            this.TextDescription = description;
         }
 
         public System.Windows.Media.ImageSource Image
@@ -63,6 +64,7 @@ namespace Hat.Editor
         }
 
         public string Text { get; private set; }
+        public string TextDescription { get; private set; }
 
         public object Content
         {
@@ -71,7 +73,7 @@ namespace Hat.Editor
 
         public object Description
         {
-            get { return this.Text; }
+            get { return this.TextDescription; }
         }
 
         public void Complete(TextArea textArea, ISegment completionSegment,

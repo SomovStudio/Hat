@@ -33,6 +33,7 @@ namespace Hat
         const string STATUS_SAVED = "status_saved";
         const string STATUS_NOT_SAVE = "status_not_saved";
 
+        CompletionWindow completionWindow;
         public BrowserForm parent;
         List<object[]> files; // [ 0 - имя файла | 1 - путь файла | 2 - статус | 3 - индекс | 4 - TabPage (вкладка) | 5 - TextEditorControl (редактор)]
 
@@ -2918,18 +2919,16 @@ tester.ConsoleMsg(events);\par
             (files[index][4] as TabPage).Text = files[index][0].ToString() + " *";
         }
 
-        CompletionWindow completionWindow;
-
         void textEditor_TextArea_TextEntered(object sender, TextCompositionEventArgs e)
         {
             if (e.Text == ".")
             {
-                // Open code completion after the user has pressed dot:
                 completionWindow = new CompletionWindow((TextArea)sender);
+                completionWindow.Width = 250;
                 IList<ICompletionData> data = completionWindow.CompletionList.CompletionData;
-                data.Add(new CompletionData("Item1"));
-                data.Add(new CompletionData("Item2"));
-                data.Add(new CompletionData("Item3"));
+                data.Add(new CompletionData("BY_CSS", "Tester.BY_CSS"));
+                data.Add(new CompletionData("BY_XPATH", "Tester.BY_XPATH"));
+                data.Add(new CompletionData("IMAGE_STATUS_PROCESS", "Tester.IMAGE_STATUS_PROCESS"));
                 completionWindow.Show();
                 completionWindow.Closed += delegate {
                     completionWindow = null;
@@ -2943,15 +2942,10 @@ tester.ConsoleMsg(events);\par
             {
                 if (!char.IsLetterOrDigit(e.Text[0]))
                 {
-                    // Whenever a non-letter is typed while the completion window is open,
-                    // insert the currently selected element.
                     completionWindow.CompletionList.RequestInsertion(e);
                 }
             }
-            // Do not set e.Handled=true.
-            // We still want to insert the character that was typed.
         }
-
 
         private void closeFile()
         {
