@@ -470,6 +470,7 @@ namespace Hat
                 if (Report.TestSuccess == false)
                 {
                     string content = "<h2>Отчет о работе автотеста</h2>";
+                    content += $"<p>Описание: {Report.Description}</p>";
                     content += $"<p>Файл: {Report.TestFileName}</p>";
                     content += $"<p>Результат: <b style=\"color:#7F0000\">Провально</b></p>";
                     content += "<br>";
@@ -485,9 +486,24 @@ namespace Hat
                         foreach (string[] step in Report.Steps)
                         {
                             content += "<tr>";
-                            if (step[0] == Report.FAILED) content += $"<td style=\"color:#FF0000\">{step[0]}</td>";
-                            else if (step[0] == Report.ERROR) content += $"<td style=\"color:#FF0000\">{step[0]}</td>";
-                            else content += $"<td>{step[0]}</td>";
+                            if (Config.languageEng == false)
+                            {
+                                if (step[0] == Report.FAILED) content += $"<td style=\"color:#FF0000\">Провально</td>";
+                                else if (step[0] == Report.PASSED) content += $"<td style=\"color:#34AF00\">Успешно</td>";
+                                else if (step[0] == Report.ERROR) content += $"<td style=\"color:#FF0000\">ОШИБКА</td>";
+                                else if (step[0] == Report.STOPPED) content += $"<td style=\"color:#000000\">Остановлен</td>";
+                                else if (step[0] == Report.PROCESS) content += $"<td style=\"color:#000000\">В процессе</td>";
+                                else if (step[0] == Report.COMPLETED) content += $"<td style=\"color:#000000\">Выполнено</td>";
+                                else if (step[0] == Report.WARNING) content += $"<td style=\"color:#CCAA00\">Предупреждение</td>";
+                                else if (step[0] == Report.SCREENSHOT) content += $"<td style=\"color:#000000\">Скриншот</td>";
+                                else content += $"<td>{step[0]}</td>";
+                            }
+                            else
+                            {
+                                if (step[0] == Report.FAILED) content += $"<td style=\"color:#FF0000\">{step[0]}</td>";
+                                else if (step[0] == Report.ERROR) content += $"<td style=\"color:#FF0000\">{step[0]}</td>";
+                                else content += $"<td>{step[0]}</td>";
+                            }
                             content += $"<td>{step[1]}</td>";
                             content += $"<td>{step[2]}</td>";
                             content += "</tr>";
@@ -512,6 +528,7 @@ namespace Hat
                 if (Report.TestSuccess == true)
                 {
                     string content = "<h2>Отчет о работе автотеста</h2>";
+                    content += $"<p>Описание: {Report.Description}</p>";
                     content += $"<p>Файл: {Report.TestFileName}</p>";
                     content += $"<p>Результат: <b style=\"color:#34AF00\">Успешно</b></p>";
                     content += "<br>";
@@ -527,11 +544,26 @@ namespace Hat
                         foreach (string[] step in Report.Steps)
                         {
                             content += "<tr>";
-                            if (step[0] == Report.PASSED) content += $"<td style=\"color:#34AF00\">{step[0]}</td>";
-                            else if (step[0] == Report.FAILED) content += $"<td style=\"color:#FF0000\">{step[0]}</td>";
-                            else if (step[0] == Report.ERROR) content += $"<td style=\"color:#FF0000\">{step[0]}</td>";
-                            else if (step[0] == Report.WARNING) content += $"<td style=\"color:#CCAA00\">{step[0]}</td>";
-                            else content += $"<td>{step[0]}</td>";
+                            if (Config.languageEng == false)
+                            {
+                                if (step[0] == Report.FAILED) content += $"<td style=\"color:#FF0000\">Провально</td>";
+                                else if (step[0] == Report.PASSED) content += $"<td style=\"color:#34AF00\">Успешно</td>";
+                                else if (step[0] == Report.ERROR) content += $"<td style=\"color:#FF0000\">ОШИБКА</td>";
+                                else if (step[0] == Report.STOPPED) content += $"<td style=\"color:#000000\">Остановлен</td>";
+                                else if (step[0] == Report.PROCESS) content += $"<td style=\"color:#000000\">В процессе</td>";
+                                else if (step[0] == Report.COMPLETED) content += $"<td style=\"color:#000000\">Выполнено</td>";
+                                else if (step[0] == Report.WARNING) content += $"<td style=\"color:#CCAA00\">Предупреждение</td>";
+                                else if (step[0] == Report.SCREENSHOT) content += $"<td style=\"color:#000000\">Скриншот</td>";
+                                else content += $"<td>{step[0]}</td>";
+                            }
+                            else
+                            {
+                                if (step[0] == Report.PASSED) content += $"<td style=\"color:#34AF00\">{step[0]}</td>";
+                                else if (step[0] == Report.FAILED) content += $"<td style=\"color:#FF0000\">{step[0]}</td>";
+                                else if (step[0] == Report.ERROR) content += $"<td style=\"color:#FF0000\">{step[0]}</td>";
+                                else if (step[0] == Report.WARNING) content += $"<td style=\"color:#CCAA00\">{step[0]}</td>";
+                                else content += $"<td>{step[0]}</td>";
+                            }
                             content += $"<td>{step[1]}</td>";
                             content += $"<td>{step[2]}</td>";
                             content += "</tr>";
