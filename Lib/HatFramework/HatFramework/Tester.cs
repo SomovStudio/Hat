@@ -63,6 +63,7 @@ namespace HatFramework
         private MethodInfo sendMailFailure;         // функция: sendMailFailure - отправка отчета о Failure автотеста по почте
         private MethodInfo sendMailSuccess;         // функция: sendMailSuccess - отправка отчета о Success автотеста по почте
         private MethodInfo sendMail;                // функция: sendMail - отправка письма на почту
+        private MethodInfo description;             // функция: description - добавляет описание автотеста для его вывода в отчет
 
         private bool languageEng = false;       // флаг: английский язык для вывода
         private bool statusPageLoad = false;    // флаг: статус загрузки страницы
@@ -98,6 +99,7 @@ namespace HatFramework
                 sendMailFailure = BrowserWindow.GetType().GetMethod("sendMailFailure");
                 sendMailSuccess = BrowserWindow.GetType().GetMethod("sendMailSuccess");
                 sendMail = BrowserWindow.GetType().GetMethod("sendMail");
+                description = BrowserWindow.GetType().GetMethod("description");
 
                 MethodInfo mi = BrowserWindow.GetType().GetMethod("getWebView");
                 BrowserView = (Microsoft.Web.WebView2.WinForms.WebView2)mi.Invoke(BrowserWindow, null);
@@ -261,6 +263,21 @@ namespace HatFramework
                 ConsoleMsgError(ex.ToString());
             }
             return result;
+        }
+
+        /*
+         * Описание автотеста для отчета
+         */
+        public void Description(string text)
+        {
+            try
+            {
+                description.Invoke(BrowserWindow, new object[] { text });
+            }
+            catch (Exception ex)
+            {
+                ConsoleMsgError(ex.Message);
+            }
         }
 
         /* 

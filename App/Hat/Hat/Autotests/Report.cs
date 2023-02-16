@@ -20,6 +20,7 @@ namespace Hat
         public const string ERROR = "ERROR";
         public const string SCREENSHOT = "SCREENSHOT";
 
+        public static string Description;
         public static string TestFileName;
         public static string FileName;
         public static string FolderName;
@@ -32,6 +33,7 @@ namespace Hat
         {
             try
             {
+                Report.Description = "";
                 Report.TestFileName = Config.selectName;
                 Report.FileName = $"Report-{Report.TestFileName}.html";
                 Report.FileName = Report.FileName.Replace(".cs", "");
@@ -48,7 +50,12 @@ namespace Hat
                 Config.browserForm.consoleMsgError(ex.ToString());
             }
         }
-                
+        
+        public static void SetDescription(string text)
+        {
+            Description = text;
+        }
+
         public static void AddStep(string status, string action, string comment)
         {
             try
@@ -182,13 +189,13 @@ namespace Hat
 <meta http-equiv=""X-UA-Compatible"" content=""ie=edge"" />
 <style type=""text/css"">
 html { margin: 0; padding: 0; border: 0;}
-body { background-color: #F9F7FF; font-family: ""Source Sans Pro"", Helvetica, sans-serif; font-size: 9pt; }
+body { background-color: #F9F7FF; font-family: ""Source Sans Pro"", Helvetica, sans-serif; font-size: 10pt; }
 .wrapper { margin-left: auto; margin-right: auto; position: relative; max-width: 1440px; }
 header { display: block; position: fixed; top: 0px; background-color: #F9F7FF; border-bottom: 1px solid #eaeff2; min-width: 1400px; max-width: 1400px; z-index: 1000; }
 section { display: block; position: relative; min-width: 1400px; max-width: 1400px; }
 table { margin: 0px; min-width: 1400px; max-width: 1400px; }
 thead { background-color: #4d545d; color: #FFF; }
-.table { position: relative; top: 140px; z-index: 1; }
+.table { position: relative; top: 165px; z-index: 1; }
 .table-status { padding: 10px; min-width: 100px; max-width: 100px; }
 .table-action { padding: 10px; min-width: 450px; max-width: 450px; }
 .table-comment { padding: 10px; min-width: 700px; max-width: 700px; }
@@ -222,9 +229,10 @@ img { min-width: 700px; max-width: 700px; }
             content += "<div class=\"wrapper\">" + Environment.NewLine;
             content += "<header>" + Environment.NewLine;
             content += "<h2>Отчет о работе автотеста</h2>" + Environment.NewLine;
-            content += $"<h3>Файл: {Report.TestFileName}</h3>" + Environment.NewLine;
-            if (Report.TestSuccess == true) content += "<h3>Результат: <span class=\"result-passed\">Успешно</span></h3>" + Environment.NewLine;
-            else content += "<h3>Результат: <span class=\"result-failed\">Провально</span></h3>" + Environment.NewLine;
+            content += $"<b id=\"description\">Описание: </b>{Report.Description}" + Environment.NewLine;
+            content += $"<br><b id=\"file\">Файл: </b>{Report.TestFileName}" + Environment.NewLine;
+            if (Report.TestSuccess == true) content += "<h3 id=\"result\">Результат: <span class=\"result-passed\">Успешно</span></h3>" + Environment.NewLine;
+            else content += "<h3 id=\"result\">Результат: <span class=\"result-failed\">Провально</span></h3>" + Environment.NewLine;
             content += "<table>" + Environment.NewLine;
             content += "<thead>" + Environment.NewLine;
             content += "<tr>" + Environment.NewLine;
@@ -257,14 +265,28 @@ img { min-width: 700px; max-width: 700px; }
                         }
                         else
                         {
-                            if (step[0] == Report.PASSED) content += $"<td class=\"table-status table-row status-passed\">{step[0]}</td>" + Environment.NewLine;
-                            if (step[0] == Report.FAILED) content += $"<td class=\"table-status table-row status-failed\">{step[0]}</td>" + Environment.NewLine;
-                            if (step[0] == Report.STOPPED) content += $"<td class=\"table-status table-row status-stopped\">{step[0]}</td>" + Environment.NewLine;
-                            if (step[0] == Report.PROCESS) content += $"<td class=\"table-status table-row status-process\">{step[0]}</td>" + Environment.NewLine;
-                            if (step[0] == Report.COMPLETED) content += $"<td class=\"table-status table-row status-completed\">{step[0]}</td>" + Environment.NewLine;
-                            if (step[0] == Report.WARNING) content += $"<td class=\"table-status table-row status-warning\">{step[0]}</td>" + Environment.NewLine;
-                            if (step[0] == Report.ERROR) content += $"<td class=\"table-status table-row status-error\">{step[0]}</td>" + Environment.NewLine;
-                            if (step[0] == Report.SCREENSHOT) content += $"<td class=\"table-status table-row status-screenshot\">{step[0]}</td>" + Environment.NewLine;
+                            if (Config.languageEng == false)
+                            {
+                                if (step[0] == Report.PASSED) content += $"<td class=\"table-status table-row status-passed\">Успешно</td>" + Environment.NewLine;
+                                if (step[0] == Report.FAILED) content += $"<td class=\"table-status table-row status-failed\">Провально</td>" + Environment.NewLine;
+                                if (step[0] == Report.STOPPED) content += $"<td class=\"table-status table-row status-stopped\">Остановлен</td>" + Environment.NewLine;
+                                if (step[0] == Report.PROCESS) content += $"<td class=\"table-status table-row status-process\">В процессе</td>" + Environment.NewLine;
+                                if (step[0] == Report.COMPLETED) content += $"<td class=\"table-status table-row status-completed\">Выполнено</td>" + Environment.NewLine;
+                                if (step[0] == Report.WARNING) content += $"<td class=\"table-status table-row status-warning\">Предупреждение</td>" + Environment.NewLine;
+                                if (step[0] == Report.ERROR) content += $"<td class=\"table-status table-row status-error\">ОШИБКА</td>" + Environment.NewLine;
+                                if (step[0] == Report.SCREENSHOT) content += $"<td class=\"table-status table-row status-screenshot\">Скриншот</td>" + Environment.NewLine;
+                            }
+                            else
+                            {
+                                if (step[0] == Report.PASSED) content += $"<td class=\"table-status table-row status-passed\">{step[0]}</td>" + Environment.NewLine;
+                                if (step[0] == Report.FAILED) content += $"<td class=\"table-status table-row status-failed\">{step[0]}</td>" + Environment.NewLine;
+                                if (step[0] == Report.STOPPED) content += $"<td class=\"table-status table-row status-stopped\">{step[0]}</td>" + Environment.NewLine;
+                                if (step[0] == Report.PROCESS) content += $"<td class=\"table-status table-row status-process\">{step[0]}</td>" + Environment.NewLine;
+                                if (step[0] == Report.COMPLETED) content += $"<td class=\"table-status table-row status-completed\">{step[0]}</td>" + Environment.NewLine;
+                                if (step[0] == Report.WARNING) content += $"<td class=\"table-status table-row status-warning\">{step[0]}</td>" + Environment.NewLine;
+                                if (step[0] == Report.ERROR) content += $"<td class=\"table-status table-row status-error\">{step[0]}</td>" + Environment.NewLine;
+                                if (step[0] == Report.SCREENSHOT) content += $"<td class=\"table-status table-row status-screenshot\">{step[0]}</td>" + Environment.NewLine;
+                            }
                             content += $"<td class=\"table-action table-row\">{step[1]}</td>" + Environment.NewLine;
                             content += $"<td class=\"table-comment table-row\">{step[2]}</td>" + Environment.NewLine;
                             content += "</tr>" + Environment.NewLine;

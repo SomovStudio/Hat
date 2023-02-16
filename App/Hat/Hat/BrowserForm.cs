@@ -351,7 +351,6 @@ namespace Hat
             }
         }
 
-
         public void systemConsoleMsg(string message, Encoding encoding, ConsoleColor backgroundColor, ConsoleColor foregroundColor, bool newLine)
         {
             // Console.BackgroundColor - Возвращает или задает цвет фона консоли. (Значение из перечисления, задающее фоновый цвет консоли, то есть цвет, на фоне которого выводятся символы. Значением по умолчанию является Black.)
@@ -379,6 +378,22 @@ namespace Hat
             else System.Console.Write(message);
 
             System.Console.ResetColor();
+        }
+
+        /* Описание автотеста (для отчета) */
+        public void description(string text)
+        {
+            try
+            {
+                Report.SetDescription(text);
+                if (Config.languageEng == false) systemConsoleMsg("Описание: " + text, default, default, default, true);
+                else systemConsoleMsg("Description: " + text, default, default, default, true);
+                consoleMsg("Описание: " + text);
+            }
+            catch (Exception ex)
+            {
+                consoleMsgError(ex.ToString());
+            }
         }
 
         /* Сообщение в таблицу */
