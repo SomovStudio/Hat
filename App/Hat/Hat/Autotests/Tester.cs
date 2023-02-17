@@ -56,7 +56,8 @@ namespace HatFrameworkDev
         private MethodInfo resultAutotest;          // функция: resultAutotest - устанавливает флаг общего результата выполнения теста
         private MethodInfo debugJavaScript;         // функция: getDebug - возвращает статус отладки
         private MethodInfo getNameAutotest;         // Функция: getNameAutotest - возвращает имя запущенного автотеста
-        private MethodInfo getlanguageEngConsole;          // Функция: getlanguageEngConsole - возвращает статус английского языка для вывода (true/false)
+        private MethodInfo getlanguageEngConsole;   // Функция: getlanguageEngConsole - возвращает статус английского языка для вывода в командную строку (true/false)
+        private MethodInfo getlanguageEngReportMail;// Функция: getlanguageEngReportMail - возвращает статус английского языка для вывода в отчет и письмо (true/false)
         private MethodInfo saveReport;              // функция: saveReport - вызывает метод сохранения отчета
         private MethodInfo saveReportScreenshotAsync; // функция: saveReportScreenshotAsync - сохраняет скриншот текущего состояния браузера
         private MethodInfo sendMailFailure;         // функция: sendMailFailure - отправка отчета о Failure автотеста по почте
@@ -64,13 +65,14 @@ namespace HatFrameworkDev
         private MethodInfo sendMail;                // функция: sendMail - отправка письма на почту
         private MethodInfo description;             // функция: description - добавляет описание автотеста для его вывода в отчет
 
-        private bool languageEng = false;       // флаг: английский язык для вывода
-        private bool statusPageLoad = false;    // флаг: статус загрузки страницы
-        private bool testStop = false;          // флаг: остановка теста
+        private bool languageEngConsole = false;    // флаг: английский язык для вывода в командной строке
+        private bool languageEngReportEmail = false;// флаг: английский язык для вывода в отчет и письмо
+        private bool statusPageLoad = false;        // флаг: статус загрузки страницы
+        private bool testStop = false;              // флаг: остановка теста
         private bool sendFailureReportByMail = false;  // флаг: отправка Failure отчета по почте
         private bool sendSuccessReportByMail = false;  // флаг: отправка Success отчета по почте
-        private string assertStatus = null;     // флаг: рузельтат проверки
-        private List<string> listRedirects;     // список редиректов
+        private string assertStatus = null;         // флаг: рузельтат проверки
+        private List<string> listRedirects;         // список редиректов
 
         public Tester(Form browserForm)
         {
@@ -93,6 +95,7 @@ namespace HatFrameworkDev
                 debugJavaScript = BrowserWindow.GetType().GetMethod("getStatusDebugJavaScript");
                 getNameAutotest = BrowserWindow.GetType().GetMethod("getNameAutotest");
                 getlanguageEngConsole = BrowserWindow.GetType().GetMethod("getlanguageEngConsole");
+                getlanguageEngReportMail = BrowserWindow.GetType().GetMethod("getlanguageEngReportMail");
                 saveReport = BrowserWindow.GetType().GetMethod("saveReport");
                 saveReportScreenshotAsync = BrowserWindow.GetType().GetMethod("saveReportScreenshotAsync");
                 sendMailFailure = BrowserWindow.GetType().GetMethod("sendMailFailure");
@@ -157,7 +160,8 @@ namespace HatFrameworkDev
         {
             try
             {
-                languageEng = (bool)getlanguageEngConsole.Invoke(BrowserWindow, null);
+                languageEngConsole = (bool)getlanguageEngConsole.Invoke(BrowserWindow, null);
+                languageEngReportEmail = (bool)getlanguageEngReportMail.Invoke(BrowserWindow, null);
             }
             catch (Exception ex)
             {
@@ -327,7 +331,7 @@ namespace HatFrameworkDev
                     // вывод сообщения в системную консоль
                     browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { "", default, default, default, true }); // вставляется пустая строка
 
-                    if (languageEng == true)
+                    if (languageEngConsole == true)
                     {
                         if (status == null) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { "", default, default, default, false });
                         else if (status == PASSED) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { "PASSED", default, ConsoleColor.Black, ConsoleColor.DarkGreen, false });
@@ -353,7 +357,7 @@ namespace HatFrameworkDev
                     {
                         if (Regex.IsMatch(comment, @"\p{IsCyrillic}") == true) // в комментарии присутствует русский текст
                         {
-                            if (languageEng == true) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { "", default, default, default, false }); // комментарий на русском языке | английский включен
+                            if (languageEngConsole == true) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { "", default, default, default, false }); // комментарий на русском языке | английский включен
                             else browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { " - " + comment, default, default, default, false }); // комментарий на русском языке | английский отключен
                         }
                         else
@@ -382,7 +386,7 @@ namespace HatFrameworkDev
                     // вывод сообщения в системную консоль
                     browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { "", default, default, default, true }); // вставляется пустая строка
 
-                    if (languageEng == true)
+                    if (languageEngConsole == true)
                     {
                         if (status == null) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { "", default, default, default, false });
                         else if (status == PASSED) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { "PASSED", default, ConsoleColor.Black, ConsoleColor.DarkGreen, false });
@@ -408,7 +412,7 @@ namespace HatFrameworkDev
                     {
                         if (Regex.IsMatch(comment, @"\p{IsCyrillic}") == true) // в комментарии присутствует русский текст
                         {
-                            if (languageEng == true) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { "", default, default, default, false }); // комментарий на русском языке | английский включен
+                            if (languageEngConsole == true) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { "", default, default, default, false }); // комментарий на русском языке | английский включен
                             else browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { " - " + comment, default, default, default, false }); // комментарий на русском языке | английский отключен
                         }
                         else
@@ -495,7 +499,7 @@ namespace HatFrameworkDev
                 ConsoleMsg("Тест начинается...");
 
                 browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { "" + Environment.NewLine, default, default, default, false });
-                if (languageEng == false) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { "-- Тест начинается ------------", default, ConsoleColor.White, ConsoleColor.DarkBlue, true });
+                if (languageEngConsole == false) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { "-- Тест начинается ------------", default, ConsoleColor.White, ConsoleColor.DarkBlue, true });
                 else browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { "-- The test begins ------------", default, ConsoleColor.White, ConsoleColor.DarkBlue, true });
             }
             catch (Exception ex)
@@ -515,7 +519,7 @@ namespace HatFrameworkDev
                     EditMessage(step, null, FAILED, "Тест завершен - шаги теста выполнены неуспешно", IMAGE_STATUS_FAILED);
                     resultAutotestSuccess(false);
 
-                    if (languageEng == false) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { Environment.NewLine + "Тест завершен - провально", default, ConsoleColor.DarkRed, ConsoleColor.White, true });
+                    if (languageEngConsole == false) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { Environment.NewLine + "Тест завершен - провально", default, ConsoleColor.DarkRed, ConsoleColor.White, true });
                     else browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { Environment.NewLine + "The test is completed - failed", default, ConsoleColor.DarkRed, ConsoleColor.White, true });
                     browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { "-------------------------------" + Environment.NewLine, default, default, default, false });
 
@@ -528,7 +532,7 @@ namespace HatFrameworkDev
                     EditMessage(step, null, PASSED, "Тест завершен - все шаги выполнены успешно", IMAGE_STATUS_PASSED);
                     resultAutotestSuccess(true);
 
-                    if (languageEng == false) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { Environment.NewLine + "Тест завершен - успешено", default, ConsoleColor.DarkGreen, ConsoleColor.White, true });
+                    if (languageEngConsole == false) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { Environment.NewLine + "Тест завершен - успешено", default, ConsoleColor.DarkGreen, ConsoleColor.White, true });
                     else browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { Environment.NewLine + "The test is completed - passed", default, ConsoleColor.DarkGreen, ConsoleColor.White, true });
                     browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { "-------------------------------" + Environment.NewLine, default, default, default, false });
                 }
