@@ -20,7 +20,7 @@ namespace Hat
         public static void play(string testFilename)
         {
             Config.browserForm.consoleMsg($"Запущен файл автотеста: {testFilename}");
-            if (Config.languageEng == false) Config.browserForm.systemConsoleMsg($"Запущен файл автотеста: {testFilename}", default, ConsoleColor.DarkCyan, ConsoleColor.White, true);
+            if (Config.languageEngConsole == false) Config.browserForm.systemConsoleMsg($"Запущен файл автотеста: {testFilename}", default, ConsoleColor.DarkCyan, ConsoleColor.White, true);
             else Config.browserForm.systemConsoleMsg($"The autotest file is running: {testFilename}", default, ConsoleColor.DarkCyan, ConsoleColor.White, true);
 
             try

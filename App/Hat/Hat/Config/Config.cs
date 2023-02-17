@@ -13,7 +13,8 @@ namespace Hat
     {
         public string Version { get; set; }
         public string Encoding { get; set; }
-        public bool LanguageEng { get; set; }
+        public bool LanguageEngConsole { get; set; }
+        public bool LanguageEngReportMail { get; set; }
         public bool EditorTopMost { get; set; }
         public string[] Libraries { get; set; }
         public string[] DataMail { get; set; }
@@ -39,9 +40,10 @@ namespace Hat
         public static string statucCacheClear = "false";        // статус очистки кэша
 
         /* переменные для файла project.hat */
-        public static string version = "1.2.1";                // версия проекта
+        public static string version = "1.2.1";                 // версия проекта
         public static string encoding = WorkOnFiles.UTF_8_BOM;  // кодировка
-        public static bool languageEng = true;                 // поддержка английского языка
+        public static bool languageEngConsole = true;           // поддержка английского языка в консоли (по умолчанию английский)
+        public static bool languageEngReportMail = false;       // поддержка английского языка в отече и письме (по умолчанию русский)
         public static bool editorTopMost = false;               // настройка отображения редактора
         public static string[] libraries = new string[]         // библиотека подключаемых dll файлов
         {
@@ -85,7 +87,8 @@ namespace Hat
                 JsonConfig jsonConfig = new JsonConfig();
                 jsonConfig.Version = version;
                 jsonConfig.Encoding = encoding;
-                jsonConfig.LanguageEng= languageEng;
+                jsonConfig.LanguageEngConsole= languageEngConsole;
+                jsonConfig.LanguageEngReportMail = languageEngReportMail;
                 jsonConfig.EditorTopMost = editorTopMost;
                 jsonConfig.Libraries = libraries;
                 jsonConfig.DataMail = dataMail;
@@ -109,6 +112,12 @@ namespace Hat
                 "587",                          // 5 - port (587)
                 "true"                          // 6 - ssl
             };
+        }
+
+        public static void defaultLanguage()
+        {
+            Config.languageEngConsole = true;
+            Config.languageEngReportMail = false;
         }
 
         public static void saveConfigJson(string filename)
@@ -137,7 +146,8 @@ namespace Hat
                 JsonConfig jsonConfig = JsonConvert.DeserializeObject<JsonConfig>(content);
                 version = jsonConfig.Version;
                 encoding = jsonConfig.Encoding;
-                languageEng = jsonConfig.LanguageEng;
+                languageEngConsole = jsonConfig.LanguageEngConsole;
+                languageEngReportMail = jsonConfig.LanguageEngReportMail;
                 editorTopMost = jsonConfig.EditorTopMost;
                 libraries = jsonConfig.Libraries;
                 dataMail = jsonConfig.DataMail;

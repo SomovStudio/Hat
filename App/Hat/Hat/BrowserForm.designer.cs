@@ -49,13 +49,16 @@
             this.остановитьТестToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
             this.настройкиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemEditorTopMost = new System.Windows.Forms.ToolStripMenuItem();
             this.кодировкаФайловToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dEFAULTToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.uTF8ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.uTF8BOMToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.wINDOWS1251ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItemEditorTopMost = new System.Windows.Forms.ToolStripMenuItem();
+            this.languageReportMailToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.languageReportEmailRusToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.languageReportEmailEngToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.languageEngRusToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.languageRusToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.languageEngToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -138,13 +141,16 @@
             this.toolStripButton23 = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator23 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
+            this.окноРедактораToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.editorTopMostToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemDEFAULT = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemUTF8 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemUTF8BOM = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemWINDOWS1251 = new System.Windows.Forms.ToolStripMenuItem();
-            this.окноРедактораToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.editorTopMostToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.languageReportMailToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.languageReportEmailRusToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.languageReportEmailEngToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.languageEngRusToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.languageRusToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.languageEngToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -457,8 +463,9 @@
             // настройкиToolStripMenuItem
             // 
             this.настройкиToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.кодировкаФайловToolStripMenuItem,
             this.toolStripMenuItem4,
+            this.кодировкаФайловToolStripMenuItem,
+            this.languageReportMailToolStripMenuItem1,
             this.languageEngRusToolStripMenuItem1,
             this.toolStripSeparator18,
             this.debugJavaScriptToolStripMenuItem});
@@ -466,6 +473,21 @@
             this.настройкиToolStripMenuItem.Name = "настройкиToolStripMenuItem";
             this.настройкиToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.настройкиToolStripMenuItem.Text = "Настройки";
+            // 
+            // toolStripMenuItem4
+            // 
+            this.toolStripMenuItem4.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItemEditorTopMost});
+            this.toolStripMenuItem4.Name = "toolStripMenuItem4";
+            this.toolStripMenuItem4.Size = new System.Drawing.Size(296, 22);
+            this.toolStripMenuItem4.Text = "Окно редактора";
+            // 
+            // toolStripMenuItemEditorTopMost
+            // 
+            this.toolStripMenuItemEditorTopMost.Name = "toolStripMenuItemEditorTopMost";
+            this.toolStripMenuItemEditorTopMost.Size = new System.Drawing.Size(213, 22);
+            this.toolStripMenuItemEditorTopMost.Text = "Отображать поверх окон";
+            this.toolStripMenuItemEditorTopMost.Click += new System.EventHandler(this.toolStripMenuItemEditorTopMost_Click);
             // 
             // кодировкаФайловToolStripMenuItem
             // 
@@ -508,20 +530,30 @@
             this.wINDOWS1251ToolStripMenuItem.Text = "WINDOWS-1251";
             this.wINDOWS1251ToolStripMenuItem.Click += new System.EventHandler(this.wINDOWS1251ToolStripMenuItem_Click);
             // 
-            // toolStripMenuItem4
+            // languageReportMailToolStripMenuItem1
             // 
-            this.toolStripMenuItem4.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItemEditorTopMost});
-            this.toolStripMenuItem4.Name = "toolStripMenuItem4";
-            this.toolStripMenuItem4.Size = new System.Drawing.Size(296, 22);
-            this.toolStripMenuItem4.Text = "Окно редактора";
+            this.languageReportMailToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.languageReportEmailRusToolStripMenuItem1,
+            this.languageReportEmailEngToolStripMenuItem1});
+            this.languageReportMailToolStripMenuItem1.Name = "languageReportMailToolStripMenuItem1";
+            this.languageReportMailToolStripMenuItem1.Size = new System.Drawing.Size(296, 22);
+            this.languageReportMailToolStripMenuItem1.Text = "Язык вывода в отчете и письме";
             // 
-            // toolStripMenuItemEditorTopMost
+            // languageReportEmailRusToolStripMenuItem1
             // 
-            this.toolStripMenuItemEditorTopMost.Name = "toolStripMenuItemEditorTopMost";
-            this.toolStripMenuItemEditorTopMost.Size = new System.Drawing.Size(213, 22);
-            this.toolStripMenuItemEditorTopMost.Text = "Отображать поверх окон";
-            this.toolStripMenuItemEditorTopMost.Click += new System.EventHandler(this.toolStripMenuItemEditorTopMost_Click);
+            this.languageReportEmailRusToolStripMenuItem1.Checked = true;
+            this.languageReportEmailRusToolStripMenuItem1.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.languageReportEmailRusToolStripMenuItem1.Name = "languageReportEmailRusToolStripMenuItem1";
+            this.languageReportEmailRusToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.languageReportEmailRusToolStripMenuItem1.Text = "Русский";
+            this.languageReportEmailRusToolStripMenuItem1.Click += new System.EventHandler(this.languageReportEmailRusToolStripMenuItem1_Click);
+            // 
+            // languageReportEmailEngToolStripMenuItem1
+            // 
+            this.languageReportEmailEngToolStripMenuItem1.Name = "languageReportEmailEngToolStripMenuItem1";
+            this.languageReportEmailEngToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.languageReportEmailEngToolStripMenuItem1.Text = "Английский";
+            this.languageReportEmailEngToolStripMenuItem1.Click += new System.EventHandler(this.languageReportEmailEngToolStripMenuItem1_Click);
             // 
             // languageEngRusToolStripMenuItem1
             // 
@@ -535,7 +567,7 @@
             // languageRusToolStripMenuItem1
             // 
             this.languageRusToolStripMenuItem1.Name = "languageRusToolStripMenuItem1";
-            this.languageRusToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.languageRusToolStripMenuItem1.Size = new System.Drawing.Size(141, 22);
             this.languageRusToolStripMenuItem1.Text = "Русский";
             this.languageRusToolStripMenuItem1.Click += new System.EventHandler(this.languageRusToolStripMenuItem1_Click);
             // 
@@ -544,7 +576,7 @@
             this.languageEngToolStripMenuItem1.Checked = true;
             this.languageEngToolStripMenuItem1.CheckState = System.Windows.Forms.CheckState.Checked;
             this.languageEngToolStripMenuItem1.Name = "languageEngToolStripMenuItem1";
-            this.languageEngToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.languageEngToolStripMenuItem1.Size = new System.Drawing.Size(141, 22);
             this.languageEngToolStripMenuItem1.Text = "Английский";
             this.languageEngToolStripMenuItem1.Click += new System.EventHandler(this.languageEngToolStripMenuItem1_Click);
             // 
@@ -1290,8 +1322,9 @@
             // 
             this.toolStripDropDownButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.toolStripDropDownButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem1,
             this.окноРедактораToolStripMenuItem,
+            this.toolStripMenuItem1,
+            this.languageReportMailToolStripMenuItem,
             this.languageEngRusToolStripMenuItem,
             this.toolStripSeparator19,
             this.debugJavaScriptToolStripMenuItem1,
@@ -1301,47 +1334,6 @@
             this.toolStripDropDownButton1.Name = "toolStripDropDownButton1";
             this.toolStripDropDownButton1.Size = new System.Drawing.Size(29, 22);
             this.toolStripDropDownButton1.Text = "Настройки";
-            // 
-            // toolStripMenuItem1
-            // 
-            this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItemDEFAULT,
-            this.toolStripMenuItemUTF8,
-            this.toolStripMenuItemUTF8BOM,
-            this.toolStripMenuItemWINDOWS1251});
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(296, 22);
-            this.toolStripMenuItem1.Text = "Кодировка файлов:";
-            // 
-            // toolStripMenuItemDEFAULT
-            // 
-            this.toolStripMenuItemDEFAULT.Name = "toolStripMenuItemDEFAULT";
-            this.toolStripMenuItemDEFAULT.Size = new System.Drawing.Size(180, 22);
-            this.toolStripMenuItemDEFAULT.Text = "DEFAULT";
-            this.toolStripMenuItemDEFAULT.Click += new System.EventHandler(this.toolStripMenuItemDEFAULT_Click);
-            // 
-            // toolStripMenuItemUTF8
-            // 
-            this.toolStripMenuItemUTF8.Name = "toolStripMenuItemUTF8";
-            this.toolStripMenuItemUTF8.Size = new System.Drawing.Size(180, 22);
-            this.toolStripMenuItemUTF8.Text = "UTF-8";
-            this.toolStripMenuItemUTF8.Click += new System.EventHandler(this.toolStripMenuItemUTF8_Click);
-            // 
-            // toolStripMenuItemUTF8BOM
-            // 
-            this.toolStripMenuItemUTF8BOM.Checked = true;
-            this.toolStripMenuItemUTF8BOM.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.toolStripMenuItemUTF8BOM.Name = "toolStripMenuItemUTF8BOM";
-            this.toolStripMenuItemUTF8BOM.Size = new System.Drawing.Size(180, 22);
-            this.toolStripMenuItemUTF8BOM.Text = "UTF-8 BOM";
-            this.toolStripMenuItemUTF8BOM.Click += new System.EventHandler(this.toolStripMenuItemUTF8BOM_Click);
-            // 
-            // toolStripMenuItemWINDOWS1251
-            // 
-            this.toolStripMenuItemWINDOWS1251.Name = "toolStripMenuItemWINDOWS1251";
-            this.toolStripMenuItemWINDOWS1251.Size = new System.Drawing.Size(180, 22);
-            this.toolStripMenuItemWINDOWS1251.Text = "WINDOWS-1251";
-            this.toolStripMenuItemWINDOWS1251.Click += new System.EventHandler(this.toolStripMenuItemWINDOWS1251_Click);
             // 
             // окноРедактораToolStripMenuItem
             // 
@@ -1358,6 +1350,72 @@
             this.editorTopMostToolStripMenuItem.Text = "Отображать поверх окон";
             this.editorTopMostToolStripMenuItem.Click += new System.EventHandler(this.editorTopMostToolStripMenuItem_Click);
             // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItemDEFAULT,
+            this.toolStripMenuItemUTF8,
+            this.toolStripMenuItemUTF8BOM,
+            this.toolStripMenuItemWINDOWS1251});
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(296, 22);
+            this.toolStripMenuItem1.Text = "Кодировка файлов:";
+            // 
+            // toolStripMenuItemDEFAULT
+            // 
+            this.toolStripMenuItemDEFAULT.Name = "toolStripMenuItemDEFAULT";
+            this.toolStripMenuItemDEFAULT.Size = new System.Drawing.Size(160, 22);
+            this.toolStripMenuItemDEFAULT.Text = "DEFAULT";
+            this.toolStripMenuItemDEFAULT.Click += new System.EventHandler(this.toolStripMenuItemDEFAULT_Click);
+            // 
+            // toolStripMenuItemUTF8
+            // 
+            this.toolStripMenuItemUTF8.Name = "toolStripMenuItemUTF8";
+            this.toolStripMenuItemUTF8.Size = new System.Drawing.Size(160, 22);
+            this.toolStripMenuItemUTF8.Text = "UTF-8";
+            this.toolStripMenuItemUTF8.Click += new System.EventHandler(this.toolStripMenuItemUTF8_Click);
+            // 
+            // toolStripMenuItemUTF8BOM
+            // 
+            this.toolStripMenuItemUTF8BOM.Checked = true;
+            this.toolStripMenuItemUTF8BOM.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.toolStripMenuItemUTF8BOM.Name = "toolStripMenuItemUTF8BOM";
+            this.toolStripMenuItemUTF8BOM.Size = new System.Drawing.Size(160, 22);
+            this.toolStripMenuItemUTF8BOM.Text = "UTF-8 BOM";
+            this.toolStripMenuItemUTF8BOM.Click += new System.EventHandler(this.toolStripMenuItemUTF8BOM_Click);
+            // 
+            // toolStripMenuItemWINDOWS1251
+            // 
+            this.toolStripMenuItemWINDOWS1251.Name = "toolStripMenuItemWINDOWS1251";
+            this.toolStripMenuItemWINDOWS1251.Size = new System.Drawing.Size(160, 22);
+            this.toolStripMenuItemWINDOWS1251.Text = "WINDOWS-1251";
+            this.toolStripMenuItemWINDOWS1251.Click += new System.EventHandler(this.toolStripMenuItemWINDOWS1251_Click);
+            // 
+            // languageReportMailToolStripMenuItem
+            // 
+            this.languageReportMailToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.languageReportEmailRusToolStripMenuItem,
+            this.languageReportEmailEngToolStripMenuItem});
+            this.languageReportMailToolStripMenuItem.Name = "languageReportMailToolStripMenuItem";
+            this.languageReportMailToolStripMenuItem.Size = new System.Drawing.Size(296, 22);
+            this.languageReportMailToolStripMenuItem.Text = "Язык вывода в отчете и письме";
+            // 
+            // languageReportEmailRusToolStripMenuItem
+            // 
+            this.languageReportEmailRusToolStripMenuItem.Checked = true;
+            this.languageReportEmailRusToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.languageReportEmailRusToolStripMenuItem.Name = "languageReportEmailRusToolStripMenuItem";
+            this.languageReportEmailRusToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.languageReportEmailRusToolStripMenuItem.Text = "Русский";
+            this.languageReportEmailRusToolStripMenuItem.Click += new System.EventHandler(this.languageReportEmailRusToolStripMenuItem_Click);
+            // 
+            // languageReportEmailEngToolStripMenuItem
+            // 
+            this.languageReportEmailEngToolStripMenuItem.Name = "languageReportEmailEngToolStripMenuItem";
+            this.languageReportEmailEngToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.languageReportEmailEngToolStripMenuItem.Text = "Английский";
+            this.languageReportEmailEngToolStripMenuItem.Click += new System.EventHandler(this.languageReportEmailEngToolStripMenuItem_Click);
+            // 
             // languageEngRusToolStripMenuItem
             // 
             this.languageEngRusToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -1370,7 +1428,7 @@
             // languageRusToolStripMenuItem
             // 
             this.languageRusToolStripMenuItem.Name = "languageRusToolStripMenuItem";
-            this.languageRusToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.languageRusToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
             this.languageRusToolStripMenuItem.Text = "Русский";
             this.languageRusToolStripMenuItem.Click += new System.EventHandler(this.languageRusToolStripMenuItem_Click);
             // 
@@ -1379,7 +1437,7 @@
             this.languageEngToolStripMenuItem.Checked = true;
             this.languageEngToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.languageEngToolStripMenuItem.Name = "languageEngToolStripMenuItem";
-            this.languageEngToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.languageEngToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
             this.languageEngToolStripMenuItem.Text = "Английский";
             this.languageEngToolStripMenuItem.Click += new System.EventHandler(this.languageEngToolStripMenuItem_Click);
             // 
@@ -2755,6 +2813,12 @@
         private System.Windows.Forms.ToolStripMenuItem languageRusToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem languageEngToolStripMenuItem1;
         private System.Windows.Forms.ImageList imageListTabs;
+        private System.Windows.Forms.ToolStripMenuItem languageReportMailToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem languageReportEmailRusToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem languageReportEmailEngToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem languageReportMailToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem languageReportEmailRusToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem languageReportEmailEngToolStripMenuItem;
     }
 }
 

@@ -56,7 +56,7 @@ namespace HatFrameworkDev
         private MethodInfo resultAutotest;          // функция: resultAutotest - устанавливает флаг общего результата выполнения теста
         private MethodInfo debugJavaScript;         // функция: getDebug - возвращает статус отладки
         private MethodInfo getNameAutotest;         // Функция: getNameAutotest - возвращает имя запущенного автотеста
-        private MethodInfo getlanguageEng;          // Функция: getlanguageEng - возвращает статус английского языка для вывода (true/false)
+        private MethodInfo getlanguageEngConsole;          // Функция: getlanguageEngConsole - возвращает статус английского языка для вывода (true/false)
         private MethodInfo saveReport;              // функция: saveReport - вызывает метод сохранения отчета
         private MethodInfo saveReportScreenshotAsync; // функция: saveReportScreenshotAsync - сохраняет скриншот текущего состояния браузера
         private MethodInfo sendMailFailure;         // функция: sendMailFailure - отправка отчета о Failure автотеста по почте
@@ -92,7 +92,7 @@ namespace HatFrameworkDev
                 resultAutotest = BrowserWindow.GetType().GetMethod("resultAutotest");
                 debugJavaScript = BrowserWindow.GetType().GetMethod("getStatusDebugJavaScript");
                 getNameAutotest = BrowserWindow.GetType().GetMethod("getNameAutotest");
-                getlanguageEng = BrowserWindow.GetType().GetMethod("getlanguageEng");
+                getlanguageEngConsole = BrowserWindow.GetType().GetMethod("getlanguageEngConsole");
                 saveReport = BrowserWindow.GetType().GetMethod("saveReport");
                 saveReportScreenshotAsync = BrowserWindow.GetType().GetMethod("saveReportScreenshotAsync");
                 sendMailFailure = BrowserWindow.GetType().GetMethod("sendMailFailure");
@@ -157,7 +157,7 @@ namespace HatFrameworkDev
         {
             try
             {
-                languageEng = (bool)getlanguageEng.Invoke(BrowserWindow, null);
+                languageEng = (bool)getlanguageEngConsole.Invoke(BrowserWindow, null);
             }
             catch (Exception ex)
             {

@@ -91,13 +91,13 @@ namespace Hat
                         if (File.Exists(Report.FolderName + Report.FileName))
                         {
                             Config.browserForm.consoleMsg($"Создан файл отчета {Report.FileName}");
-                            if (Config.languageEng == false) Config.browserForm.systemConsoleMsg($"Создан файл отчета {Report.FileName}" + Environment.NewLine, default, ConsoleColor.DarkGray, ConsoleColor.White, true);
+                            if (Config.languageEngConsole == false) Config.browserForm.systemConsoleMsg($"Создан файл отчета {Report.FileName}" + Environment.NewLine, default, ConsoleColor.DarkGray, ConsoleColor.White, true);
                             else Config.browserForm.systemConsoleMsg($"Report file created {Report.FileName}" + Environment.NewLine, default, ConsoleColor.DarkGray, ConsoleColor.White, true);
                         }
                         else
                         {
                             Config.browserForm.consoleMsg($"Не удалось создать файл отчета {Report.FileName} по адресу {Report.FolderName}");
-                            if (Config.languageEng == false) Config.browserForm.systemConsoleMsg($"Не удалось создать файл отчета {Report.FileName} по адресу {Report.FolderName}" + Environment.NewLine, default, ConsoleColor.DarkGray, ConsoleColor.White, true);
+                            if (Config.languageEngConsole == false) Config.browserForm.systemConsoleMsg($"Не удалось создать файл отчета {Report.FileName} по адресу {Report.FolderName}" + Environment.NewLine, default, ConsoleColor.DarkGray, ConsoleColor.White, true);
                             else Config.browserForm.systemConsoleMsg($"Failed to create report file {Report.FileName} in the folder {Report.FolderName}" + Environment.NewLine, default, ConsoleColor.DarkGray, ConsoleColor.White, true);
                         }
                         Config.browserForm.updateProjectTree();
@@ -109,13 +109,13 @@ namespace Hat
                         if (File.Exists(Report.FolderName + Report.FileName))
                         {
                             Config.browserForm.consoleMsg($"Обновлен файл отчета {Report.FileName}");
-                            if (Config.languageEng == false) Config.browserForm.systemConsoleMsg($"Обновлен файл отчета {Report.FileName}" + Environment.NewLine, default, ConsoleColor.DarkGray, ConsoleColor.White, true);
+                            if (Config.languageEngConsole == false) Config.browserForm.systemConsoleMsg($"Обновлен файл отчета {Report.FileName}" + Environment.NewLine, default, ConsoleColor.DarkGray, ConsoleColor.White, true);
                             else Config.browserForm.systemConsoleMsg($"Updated report file {Report.FileName}" + Environment.NewLine, default, ConsoleColor.DarkGray, ConsoleColor.White, true);
                         }
                         else
                         {
                             Config.browserForm.consoleMsg($"Отсутствует файл отчета {Report.FileName} по адресу {Report.FolderName}");
-                            if (Config.languageEng == false) Config.browserForm.systemConsoleMsg($"Отсутствует файл отчета {Report.FileName} по адресу {Report.FolderName}" + Environment.NewLine, default, ConsoleColor.DarkGray, ConsoleColor.White, true);
+                            if (Config.languageEngConsole == false) Config.browserForm.systemConsoleMsg($"Отсутствует файл отчета {Report.FileName} по адресу {Report.FolderName}" + Environment.NewLine, default, ConsoleColor.DarkGray, ConsoleColor.White, true);
                             else Config.browserForm.systemConsoleMsg($"The report file is missing {Report.FileName} in the folder {Report.FolderName}" + Environment.NewLine, default, ConsoleColor.DarkGray, ConsoleColor.White, true);
                         }
                     }
@@ -123,7 +123,7 @@ namespace Hat
                 else
                 {
                     Config.browserForm.consoleMsg($"Не удалось создать папку для отчетов по адресу {Report.FolderName}");
-                    if (Config.languageEng == false) Config.browserForm.systemConsoleMsg($"Не удалось создать папку для отчетов по адресу {Report.FolderName}" + Environment.NewLine, default, ConsoleColor.DarkGray, ConsoleColor.White, true);
+                    if (Config.languageEngConsole == false) Config.browserForm.systemConsoleMsg($"Не удалось создать папку для отчетов по адресу {Report.FolderName}" + Environment.NewLine, default, ConsoleColor.DarkGray, ConsoleColor.White, true);
                     else Config.browserForm.systemConsoleMsg($"Failed to create a folder for reports at {Report.FolderName}" + Environment.NewLine, default, ConsoleColor.DarkGray, ConsoleColor.White, true);
                 }
             }
@@ -152,14 +152,14 @@ namespace Hat
                         if (File.Exists(Report.FolderImagesName + filename))
                         {
                             Config.browserForm.consoleMsg($"Скриншот {filename} - сохранён");
-                            if (Config.languageEng == false) Config.browserForm.systemConsoleMsg($"Скриншот {filename}" + Environment.NewLine, default, ConsoleColor.DarkGray, ConsoleColor.White, true);
+                            if (Config.languageEngConsole == false) Config.browserForm.systemConsoleMsg($"Скриншот {filename}" + Environment.NewLine, default, ConsoleColor.DarkGray, ConsoleColor.White, true);
                             else Config.browserForm.systemConsoleMsg($"Screenshot {filename}" + Environment.NewLine, default, ConsoleColor.DarkGray, ConsoleColor.White, true);
                             Config.browserForm.updateProjectTree();
                         }
                         else
                         {
                             Config.browserForm.consoleMsg($"Не удалось сохранить скриншот {filename} по адресу {Report.FolderImagesName}");
-                            if (Config.languageEng == false) Config.browserForm.systemConsoleMsg($"Не удалось сохранить скриншот {filename} по адресу {Report.FolderImagesName}" + Environment.NewLine, default, ConsoleColor.DarkGray, ConsoleColor.White, true);
+                            if (Config.languageEngConsole == false) Config.browserForm.systemConsoleMsg($"Не удалось сохранить скриншот {filename} по адресу {Report.FolderImagesName}" + Environment.NewLine, default, ConsoleColor.DarkGray, ConsoleColor.White, true);
                             else Config.browserForm.systemConsoleMsg($"Failed to save screenshot {filename} in the folder {Report.FolderImagesName}" + Environment.NewLine, default, ConsoleColor.DarkGray, ConsoleColor.White, true);
                         }
                     }
@@ -167,7 +167,7 @@ namespace Hat
                 else
                 {
                     Config.browserForm.consoleMsg($"Не удалось сохранить скриншот потому что отсутствует папка {Report.FolderImagesName}");
-                    if (Config.languageEng == false) Config.browserForm.systemConsoleMsg($"Не удалось сохранить скриншот потому что отсутствует папка {Report.FolderImagesName}" + Environment.NewLine, default, ConsoleColor.DarkGray, ConsoleColor.White, true);
+                    if (Config.languageEngConsole == false) Config.browserForm.systemConsoleMsg($"Не удалось сохранить скриншот потому что отсутствует папка {Report.FolderImagesName}" + Environment.NewLine, default, ConsoleColor.DarkGray, ConsoleColor.White, true);
                     else Config.browserForm.systemConsoleMsg($"The screenshot could not be saved because the folder is missing {Report.FolderImagesName}" + Environment.NewLine, default, ConsoleColor.DarkGray, ConsoleColor.White, true);
                 }
             }
@@ -179,12 +179,29 @@ namespace Hat
 
         public static string GetHead()
         {
-            string content =
-@"<!DOCTYPE html>
-<html lang=""ru"">
-<head>
-<title>Отчет</title>
-<meta charset=""UTF-8"" />
+            string content = "<!--" + Environment.NewLine;
+            if (Report.TestSuccess == true) content += "SUCCESS" + Environment.NewLine;
+            else content += "FAILURE" + Environment.NewLine;
+            content += Report.TestFileName + Environment.NewLine;
+            content += Report.Description + Environment.NewLine;
+            content += "-->" + Environment.NewLine;
+
+            if (Config.languageEngReportMail == false)
+            {
+                content += "<!DOCTYPE html>" + Environment.NewLine;
+                content += "<html lang=\"ru-RU\">" + Environment.NewLine;
+                content += "<head>" + Environment.NewLine;
+                content += "<title>Отчет</title>" + Environment.NewLine;
+            }
+            else
+            {
+                content += "<!DOCTYPE html>" + Environment.NewLine;
+                content += "<html lang=\"en-EN\">" + Environment.NewLine;
+                content += "<head>" + Environment.NewLine;
+                content += "<title>Report</title>" + Environment.NewLine;
+            }
+            content +=
+@"<meta charset=""UTF-8"" />
 <meta name=""viewport"" content=""width=device-width, initial-scale=1.0"" />
 <meta http-equiv=""X-UA-Compatible"" content=""ie=edge"" />
 <style type=""text/css"">
@@ -228,21 +245,44 @@ img { min-width: 700px; max-width: 700px; }
             string content = Environment.NewLine + "<body>" + Environment.NewLine;
             content += "<div class=\"wrapper\">" + Environment.NewLine;
             content += "<header>" + Environment.NewLine;
-            content += "<h2>Отчет о работе автотеста</h2>" + Environment.NewLine;
-            content += $"<b id=\"description\">Описание: </b>{Report.Description}" + Environment.NewLine;
-            content += $"<br><b id=\"file\">Файл: </b>{Report.TestFileName}" + Environment.NewLine;
-            if (Report.TestSuccess == true) content += "<h3 id=\"result\">Результат: <span class=\"result-passed\">Успешно</span></h3>" + Environment.NewLine;
-            else content += "<h3 id=\"result\">Результат: <span class=\"result-failed\">Провально</span></h3>" + Environment.NewLine;
-            content += "<table>" + Environment.NewLine;
-            content += "<thead>" + Environment.NewLine;
-            content += "<tr>" + Environment.NewLine;
-            content += "<th class=\"table-status\">Статус</th>" + Environment.NewLine;
-            content += "<th class=\"table-action\">Действие</th>" + Environment.NewLine;
-            content += "<th class=\"table-comment\">Комментарий</th>" + Environment.NewLine;
-            content += "</tr> " + Environment.NewLine;
-            content += "</thead>" + Environment.NewLine;
-            content += "</table>" + Environment.NewLine;
-            content += "</header>" + Environment.NewLine;
+
+            if (Config.languageEngReportMail == false)
+            {
+                content += "<h2>Отчет о работе автотеста</h2>" + Environment.NewLine;
+                content += $"<b id=\"description\">Описание: </b>{Report.Description}" + Environment.NewLine;
+                content += $"<br><b id=\"file\">Файл: </b>{Report.TestFileName}" + Environment.NewLine;
+                if (Report.TestSuccess == true) content += "<h3 id=\"result\">Результат: <span class=\"result-passed\">Успешно</span></h3>" + Environment.NewLine;
+                else content += "<h3 id=\"result\">Результат: <span class=\"result-failed\">Провально</span></h3>" + Environment.NewLine;
+                content += "<table>" + Environment.NewLine;
+                content += "<thead>" + Environment.NewLine;
+                content += "<tr>" + Environment.NewLine;
+                content += "<th class=\"table-status\">Статус</th>" + Environment.NewLine;
+                content += "<th class=\"table-action\">Действие</th>" + Environment.NewLine;
+                content += "<th class=\"table-comment\">Комментарий</th>" + Environment.NewLine;
+                content += "</tr> " + Environment.NewLine;
+                content += "</thead>" + Environment.NewLine;
+                content += "</table>" + Environment.NewLine;
+                content += "</header>" + Environment.NewLine;
+            }
+            else
+            {
+                content += "<h2>Autotest Report</h2>" + Environment.NewLine;
+                content += $"<b id=\"description\">Description: </b>{Report.Description}" + Environment.NewLine;
+                content += $"<br><b id=\"file\">File: </b>{Report.TestFileName}" + Environment.NewLine;
+                if (Report.TestSuccess == true) content += "<h3 id=\"result\">Result: <span class=\"result-passed\">Success</span></h3>" + Environment.NewLine;
+                else content += "<h3 id=\"result\">Result: <span class=\"result-failed\">Failure</span></h3>" + Environment.NewLine;
+                content += "<table>" + Environment.NewLine;
+                content += "<thead>" + Environment.NewLine;
+                content += "<tr>" + Environment.NewLine;
+                content += "<th class=\"table-status\">Status</th>" + Environment.NewLine;
+                content += "<th class=\"table-action\">Action</th>" + Environment.NewLine;
+                content += "<th class=\"table-comment\">Comment</th>" + Environment.NewLine;
+                content += "</tr> " + Environment.NewLine;
+                content += "</thead>" + Environment.NewLine;
+                content += "</table>" + Environment.NewLine;
+                content += "</header>" + Environment.NewLine;
+            }
+            
 
             if (Report.Steps.Count > 0)
             {
@@ -265,7 +305,7 @@ img { min-width: 700px; max-width: 700px; }
                         }
                         else
                         {
-                            if (Config.languageEng == false)
+                            if (Config.languageEngReportMail == false)
                             {
                                 if (step[0] == Report.PASSED) content += $"<td class=\"table-status table-row status-passed\">Успешно</td>" + Environment.NewLine;
                                 if (step[0] == Report.FAILED) content += $"<td class=\"table-status table-row status-failed\">Провально</td>" + Environment.NewLine;
@@ -273,7 +313,7 @@ img { min-width: 700px; max-width: 700px; }
                                 if (step[0] == Report.PROCESS) content += $"<td class=\"table-status table-row status-process\">В процессе</td>" + Environment.NewLine;
                                 if (step[0] == Report.COMPLETED) content += $"<td class=\"table-status table-row status-completed\">Выполнено</td>" + Environment.NewLine;
                                 if (step[0] == Report.WARNING) content += $"<td class=\"table-status table-row status-warning\">Предупреждение</td>" + Environment.NewLine;
-                                if (step[0] == Report.ERROR) content += $"<td class=\"table-status table-row status-error\">ОШИБКА</td>" + Environment.NewLine;
+                                if (step[0] == Report.ERROR) content += $"<td class=\"table-status table-row status-error\">Ошибка</td>" + Environment.NewLine;
                                 if (step[0] == Report.SCREENSHOT) content += $"<td class=\"table-status table-row status-screenshot\">Скриншот</td>" + Environment.NewLine;
                             }
                             else
@@ -298,11 +338,12 @@ img { min-width: 700px; max-width: 700px; }
                     Config.browserForm.consoleMsg(ex.ToString());
                 }
                 content += "</tbody>" + Environment.NewLine;
-                content += "<tfoot>" + Environment.NewLine;
-                content += "<td class=\"table-status\">Ошибок: </td>" + Environment.NewLine;
-                content += $"<td class=\"table-action\">{Report.CountErrors}</td>" + Environment.NewLine;
-                content += "<td class=\"table-comment\"></td>" + Environment.NewLine;
-                content += "</tfoot>" + Environment.NewLine;
+                //content += "<tfoot>" + Environment.NewLine;
+                //if (Config.languageEngReportMail == false) content += "<td class=\"table-status\">Ошибок: </td>" + Environment.NewLine;
+                //else content += "<td class=\"table-status\">Errors: </td>" + Environment.NewLine;
+                //content += $"<td class=\"table-action\">{Report.CountErrors}</td>" + Environment.NewLine;
+                //content += "<td class=\"table-comment\"></td>" + Environment.NewLine;
+                //content += "</tfoot>" + Environment.NewLine;
                 content += "</table>" + Environment.NewLine;
                 content += "</section>" + Environment.NewLine;
             }
