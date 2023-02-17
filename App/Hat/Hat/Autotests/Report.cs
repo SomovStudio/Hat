@@ -278,14 +278,14 @@ img { min-width: 700px; max-width: 700px; }
                             }
                             else
                             {
-                                if (step[0] == Report.PASSED) content += $"<td class=\"table-status table-row status-passed\">{step[0]}</td>" + Environment.NewLine;
-                                if (step[0] == Report.FAILED) content += $"<td class=\"table-status table-row status-failed\">{step[0]}</td>" + Environment.NewLine;
-                                if (step[0] == Report.STOPPED) content += $"<td class=\"table-status table-row status-stopped\">{step[0]}</td>" + Environment.NewLine;
-                                if (step[0] == Report.PROCESS) content += $"<td class=\"table-status table-row status-process\">{step[0]}</td>" + Environment.NewLine;
-                                if (step[0] == Report.COMPLETED) content += $"<td class=\"table-status table-row status-completed\">{step[0]}</td>" + Environment.NewLine;
-                                if (step[0] == Report.WARNING) content += $"<td class=\"table-status table-row status-warning\">{step[0]}</td>" + Environment.NewLine;
-                                if (step[0] == Report.ERROR) content += $"<td class=\"table-status table-row status-error\">{step[0]}</td>" + Environment.NewLine;
-                                if (step[0] == Report.SCREENSHOT) content += $"<td class=\"table-status table-row status-screenshot\">{step[0]}</td>" + Environment.NewLine;
+                                if (step[0] == Report.PASSED) content += $"<td class=\"table-status table-row status-passed\">Passed</td>" + Environment.NewLine;
+                                if (step[0] == Report.FAILED) content += $"<td class=\"table-status table-row status-failed\">Failed</td>" + Environment.NewLine;
+                                if (step[0] == Report.STOPPED) content += $"<td class=\"table-status table-row status-stopped\">Stopped</td>" + Environment.NewLine;
+                                if (step[0] == Report.PROCESS) content += $"<td class=\"table-status table-row status-process\">Process</td>" + Environment.NewLine;
+                                if (step[0] == Report.COMPLETED) content += $"<td class=\"table-status table-row status-completed\">Completed</td>" + Environment.NewLine;
+                                if (step[0] == Report.WARNING) content += $"<td class=\"table-status table-row status-warning\">Warning</td>" + Environment.NewLine;
+                                if (step[0] == Report.ERROR) content += $"<td class=\"table-status table-row status-error\">Error</td>" + Environment.NewLine;
+                                if (step[0] == Report.SCREENSHOT) content += $"<td class=\"table-status table-row status-screenshot\">Screenshot</td>" + Environment.NewLine;
                             }
                             content += $"<td class=\"table-action table-row\">{step[1]}</td>" + Environment.NewLine;
                             content += $"<td class=\"table-comment table-row\">{step[2]}</td>" + Environment.NewLine;

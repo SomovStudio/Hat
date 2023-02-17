@@ -2969,6 +2969,7 @@ tester.ConsoleMsg(events);\par
             data.Add(new CompletionData("ConsoleMsg", "ConsoleMsg(string message)"));
             data.Add(new CompletionData("ConsoleMsgError", "ConsoleMsgError(string message)"));
             data.Add(new CompletionData("DefineTestStop", "DefineTestStop(int stepIndex)"));
+            data.Add(new CompletionData("Description", "Description(string text)"));
             data.Add(new CompletionData("EditMessage", "EditMessage(int index, string action, string status, string comment, int image)"));
             data.Add(new CompletionData("ExecuteJavaScriptAsync", "ExecuteJavaScriptAsync(string script)"));
             data.Add(new CompletionData("FAILED", "FAILED"));

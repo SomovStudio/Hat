@@ -500,8 +500,14 @@ namespace Hat
                             }
                             else
                             {
-                                if (step[0] == Report.FAILED) content += $"<td style=\"color:#FF0000\">{step[0]}</td>";
-                                else if (step[0] == Report.ERROR) content += $"<td style=\"color:#FF0000\">{step[0]}</td>";
+                                if (step[0] == Report.FAILED) content += $"<td style=\"color:#FF0000\">Failed</td>";
+                                else if (step[0] == Report.PASSED) content += $"<td style=\"color:#34AF00\">Passed</td>";
+                                else if (step[0] == Report.ERROR) content += $"<td style=\"color:#FF0000\">Error</td>";
+                                else if (step[0] == Report.STOPPED) content += $"<td style=\"color:#000000\">Stopped</td>";
+                                else if (step[0] == Report.PROCESS) content += $"<td style=\"color:#000000\">Process</td>";
+                                else if (step[0] == Report.COMPLETED) content += $"<td style=\"color:#000000\">Completed</td>";
+                                else if (step[0] == Report.WARNING) content += $"<td style=\"color:#CCAA00\">Warning</td>";
+                                else if (step[0] == Report.SCREENSHOT) content += $"<td style=\"color:#000000\">Screenshot</td>";
                                 else content += $"<td>{step[0]}</td>";
                             }
                             content += $"<td>{step[1]}</td>";
@@ -548,7 +554,7 @@ namespace Hat
                             {
                                 if (step[0] == Report.FAILED) content += $"<td style=\"color:#FF0000\">Провально</td>";
                                 else if (step[0] == Report.PASSED) content += $"<td style=\"color:#34AF00\">Успешно</td>";
-                                else if (step[0] == Report.ERROR) content += $"<td style=\"color:#FF0000\">ОШИБКА</td>";
+                                else if (step[0] == Report.ERROR) content += $"<td style=\"color:#FF0000\">Ошибка</td>";
                                 else if (step[0] == Report.STOPPED) content += $"<td style=\"color:#000000\">Остановлен</td>";
                                 else if (step[0] == Report.PROCESS) content += $"<td style=\"color:#000000\">В процессе</td>";
                                 else if (step[0] == Report.COMPLETED) content += $"<td style=\"color:#000000\">Выполнено</td>";
@@ -558,10 +564,14 @@ namespace Hat
                             }
                             else
                             {
-                                if (step[0] == Report.PASSED) content += $"<td style=\"color:#34AF00\">{step[0]}</td>";
-                                else if (step[0] == Report.FAILED) content += $"<td style=\"color:#FF0000\">{step[0]}</td>";
-                                else if (step[0] == Report.ERROR) content += $"<td style=\"color:#FF0000\">{step[0]}</td>";
-                                else if (step[0] == Report.WARNING) content += $"<td style=\"color:#CCAA00\">{step[0]}</td>";
+                                if (step[0] == Report.FAILED) content += $"<td style=\"color:#FF0000\">Failed</td>";
+                                else if (step[0] == Report.PASSED) content += $"<td style=\"color:#34AF00\">Passed</td>";
+                                else if (step[0] == Report.ERROR) content += $"<td style=\"color:#FF0000\">Error</td>";
+                                else if (step[0] == Report.STOPPED) content += $"<td style=\"color:#000000\">Stopped</td>";
+                                else if (step[0] == Report.PROCESS) content += $"<td style=\"color:#000000\">Process</td>";
+                                else if (step[0] == Report.COMPLETED) content += $"<td style=\"color:#000000\">Completed</td>";
+                                else if (step[0] == Report.WARNING) content += $"<td style=\"color:#CCAA00\">Warning</td>";
+                                else if (step[0] == Report.SCREENSHOT) content += $"<td style=\"color:#000000\">Screenshot</td>";
                                 else content += $"<td>{step[0]}</td>";
                             }
                             content += $"<td>{step[1]}</td>";
