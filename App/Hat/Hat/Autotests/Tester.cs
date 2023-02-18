@@ -327,7 +327,6 @@ namespace HatFrameworkDev
             }
         }
 
-        /*
         public int SendMessage(string action, string status, string comment, int image)
         {
             try
@@ -346,6 +345,7 @@ namespace HatFrameworkDev
                         else if (status == PROCESS) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { "PROCESS", default, default, default, false });
                         else if (status == COMPLETED) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { "COMPLETED", default, default, default, false });
                         else if (status == STOPPED) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { "STOPPED", default, default, default, false });
+                        else browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { status, default, default, default, false });
                     }
                     else
                     {
@@ -356,21 +356,11 @@ namespace HatFrameworkDev
                         else if (status == PROCESS) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { "В ПРОЦЕССЕ", default, default, default, false });
                         else if (status == COMPLETED) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { "ВЫПОЛНЕНО", default, default, default, false });
                         else if (status == STOPPED) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { "ОСТАНОВЛЕНО", default, default, default, false });
+                        else browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { status, default, default, default, false });
                     }
 
                     if (action != null && action != "") browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { " - " + action, default, default, default, false });
-                    if (comment != null)
-                    {
-                        if (Regex.IsMatch(comment, @"\p{IsCyrillic}") == true) // в комментарии присутствует русский текст
-                        {
-                            if (languageEngConsole == true) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { "", default, default, default, false }); // комментарий на русском языке | английский включен
-                            else browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { " - " + comment, default, default, default, false }); // комментарий на русском языке | английский отключен
-                        }
-                        else
-                        {
-                            browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { " - " + comment, default, default, default, false });
-                        }
-                    }
+                    if (comment != null) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { " - " + comment, default, default, default, false });
                 }
 
                 // вывод сообщения в таблицу браузера
@@ -404,6 +394,7 @@ namespace HatFrameworkDev
                         else if (status == PROCESS) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { "PROCESS", default, default, default, false });
                         else if (status == COMPLETED) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { "COMPLETED", default, default, default, false });
                         else if (status == STOPPED) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { "STOPPED", default, default, default, false });
+                        else browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { status, default, default, default, false });
                     }
                     else
                     {
@@ -414,22 +405,12 @@ namespace HatFrameworkDev
                         else if (status == PROCESS) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { "В ПРОЦЕССЕ", default, default, default, false });
                         else if (status == COMPLETED) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { "ВЫПОЛНЕНО", default, default, default, false });
                         else if (status == STOPPED) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { "ОСТАНОВЛЕНО", default, default, default, false });
+                        else browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { status, default, default, default, false });
                     }
 
                     if (action != null && action != "") browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { " - " + action, default, default, default, false });
-                    if (comment != null)
-                    {
-                        if (Regex.IsMatch(comment, @"\p{IsCyrillic}") == true) // в комментарии присутствует русский текст
-                        {
-                            if (languageEngConsole == true) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { "", default, default, default, false }); // комментарий на русском языке | английский включен
-                            else browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { " - " + comment, default, default, default, false }); // комментарий на русском языке | английский отключен
-                        }
-                        else
-                        {
-                            browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { " - " + comment, default, default, default, false });
-                        }
-                    }
-
+                    if (comment != null) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { " - " + comment, default, default, default, false });
+     
                     browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { "", default, default, default, true }); // вставляется пустая строка
                 }
 
@@ -441,7 +422,7 @@ namespace HatFrameworkDev
                 ConsoleMsgError(ex.ToString());
             }
         }
-        */
+
 
         public int SendMessageDebug(string actionRus, string actionEng, string status,  string commentRus, string commentEng, int image)
         {
@@ -463,7 +444,8 @@ namespace HatFrameworkDev
                         else if (status == STOPPED) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { "STOPPED", default, default, default, false });
                         else
                         {
-                            if (Regex.IsMatch(status, @"\p{IsCyrillic}") == false) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { status, default, default, default, false }); // если в статусе не присутствует русский язык
+                            //if (Regex.IsMatch(status, @"\p{IsCyrillic}") == false) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { status, default, default, default, false }); // если в статусе не присутствует русский язык
+                            browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { status, default, default, default, false });
                         }
 
                         if (actionEng != null && actionEng != "")
@@ -542,7 +524,8 @@ namespace HatFrameworkDev
                         else if (status == STOPPED) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { "STOPPED", default, default, default, false });
                         else
                         {
-                            if (Regex.IsMatch(status, @"\p{IsCyrillic}") == false) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { status, default, default, default, false }); // если в статусе не присутствует русский язык
+                            //if (Regex.IsMatch(status, @"\p{IsCyrillic}") == false) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { status, default, default, default, false }); // если в статусе не присутствует русский язык
+                            browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { status, default, default, default, false });
                         }
 
                         if (actionEng != null && actionEng != "")
