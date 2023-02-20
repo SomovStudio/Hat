@@ -826,8 +826,8 @@
             // toolStripStatusLabel4
             // 
             this.toolStripStatusLabel4.Name = "toolStripStatusLabel4";
-            this.toolStripStatusLabel4.Size = new System.Drawing.Size(98, 17);
-            this.toolStripStatusLabel4.Text = "файл или папка:";
+            this.toolStripStatusLabel4.Size = new System.Drawing.Size(39, 17);
+            this.toolStripStatusLabel4.Text = "файл:";
             // 
             // toolStripStatusLabelProjectFolderFile
             // 
