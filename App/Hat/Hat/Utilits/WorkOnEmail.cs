@@ -76,11 +76,11 @@ namespace Hat
                 // отправка письма
                 smtp.Send(message);
 
-                Config.browserForm.consoleMsg($"Отправлено писем: {count}");
+                Config.browserForm.ConsoleMsg($"Отправлено писем: {count}");
             }
             catch (Exception ex)
             {
-                Config.browserForm.consoleMsgError(ex.ToString());
+                Config.browserForm.ConsoleMsgError(ex.ToString());
             }
         }
 

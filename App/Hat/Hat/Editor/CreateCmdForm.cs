@@ -22,11 +22,11 @@ namespace Hat
             try
             {
                 Clipboard.SetText(textBox.Text);
-                Config.browserForm.consoleMsg("Команда запуска скопирована в буфер обмена");
+                Config.browserForm.ConsoleMsg("Команда запуска скопирована в буфер обмена");
             }
             catch (Exception ex)
             {
-                Config.browserForm.consoleMsg(ex.Message);
+                Config.browserForm.ConsoleMsg(ex.Message);
             }
         }
     }

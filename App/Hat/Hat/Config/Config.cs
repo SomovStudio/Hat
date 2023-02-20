@@ -96,7 +96,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                browserForm.consoleMsgError(ex.ToString());
+                browserForm.ConsoleMsgError(ex.ToString());
             }
             return content;
         }
@@ -129,7 +129,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                browserForm.consoleMsgError(ex.ToString());
+                browserForm.ConsoleMsgError(ex.ToString());
             }
         }
 
@@ -154,7 +154,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                browserForm.consoleMsgError(ex.ToString());
+                browserForm.ConsoleMsgError(ex.ToString());
             }
         }
 

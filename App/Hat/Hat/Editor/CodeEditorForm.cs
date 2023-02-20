@@ -2788,7 +2788,7 @@ tester.ConsoleMsg(events);\par
             }
             catch (Exception ex)
             {
-                parent.consoleMsgError(ex.ToString());
+                parent.ConsoleMsgError(ex.ToString());
             }
 
             /*
@@ -2843,7 +2843,7 @@ tester.ConsoleMsg(events);\par
             }
             catch (Exception ex)
             {
-                parent.consoleMsgError(ex.ToString());
+                parent.ConsoleMsgError(ex.ToString());
             }
         }
 
@@ -2858,7 +2858,7 @@ tester.ConsoleMsg(events);\par
                     {
                         if (files[i][1].ToString() == path)
                         {
-                            parent.consoleMsg($"Файл {filename} уже открыт в редакторе");
+                            parent.ConsoleMsg($"Файл {filename} уже открыт в редакторе");
                             return;
                         }
                     }
@@ -2898,7 +2898,7 @@ tester.ConsoleMsg(events);\par
             }
             catch (Exception ex)
             {
-                parent.consoleMsgError(ex.ToString());
+                parent.ConsoleMsgError(ex.ToString());
             }
         }
 
@@ -3145,13 +3145,13 @@ tester.ConsoleMsg(events);\par
 
                         if (dialogResult == DialogResult.Cancel)
                         {
-                            //parent.consoleMsg("Отмена закрытия файла");
+                            //parent.ConsoleMsg("Отмена закрытия файла");
                         }
                         else if (dialogResult == DialogResult.No)
                         {
                             tabControl1.TabPages.Remove(tabControl1.SelectedTab);
                             files.RemoveAt(index);
-                            parent.consoleMsg($"Файл {filename} - закрыт без сохранения");
+                            parent.ConsoleMsg($"Файл {filename} - закрыт без сохранения");
                             updateListFiles();
                         }
                         else if (dialogResult == DialogResult.Yes)
@@ -3160,25 +3160,25 @@ tester.ConsoleMsg(events);\par
                             tabControl1.TabPages.Remove(tabControl1.SelectedTab);
                             files.RemoveAt(index);
                             updateListFiles();
-                            parent.consoleMsg($"Файл {filename} - закрыт");
+                            parent.ConsoleMsg($"Файл {filename} - закрыт");
                         }
                     }
                     else
                     {
                         tabControl1.TabPages.Remove(tabControl1.SelectedTab);
                         files.RemoveAt(index);
-                        parent.consoleMsg($"Файл {filename} - закрыт");
+                        parent.ConsoleMsg($"Файл {filename} - закрыт");
                         updateListFiles();
                     }
                 }
                 else
                 {
-                    parent.consoleMsg($"Файл {filename} - неудалось закрыть");
+                    parent.ConsoleMsg($"Файл {filename} - неудалось закрыть");
                 }
             }
             catch (Exception ex)
             {
-                parent.consoleMsgError(ex.ToString());
+                parent.ConsoleMsgError(ex.ToString());
             }
         }
 
@@ -3191,12 +3191,12 @@ tester.ConsoleMsg(events);\par
                 {
                     files[i][3] = i.ToString();
                     (files[i][5] as TextEditor).Tag = i.ToString();
-                    //parent.consoleMsg($"{files[i][0]} | {files[i][1]} | {files[i][2]} | {files[i][3]} | {files[i][4]} | {(files[i][5] as TextEditorControl).Tag} | ");
+                    //parent.ConsoleMsg($"{files[i][0]} | {files[i][1]} | {files[i][2]} | {files[i][3]} | {files[i][4]} | {(files[i][5] as TextEditorControl).Tag} | ");
                 }
             }
             catch (Exception ex)
             {
-                parent.consoleMsgError(ex.ToString());
+                parent.ConsoleMsgError(ex.ToString());
             }
         }
 
@@ -3220,7 +3220,7 @@ tester.ConsoleMsg(events);\par
             }
             catch (Exception ex)
             {
-                parent.consoleMsgError(ex.ToString());
+                parent.ConsoleMsgError(ex.ToString());
             }
             
         }
@@ -3243,11 +3243,11 @@ tester.ConsoleMsg(events);\par
                 (files[index][4] as TabPage).Text = filename;
                 files[index][2] = STATUS_SAVED;
 
-                parent.consoleMsg($"Файл {filename} - сохранён");
+                parent.ConsoleMsg($"Файл {filename} - сохранён");
             }
             catch (Exception ex)
             {
-                parent.consoleMsgError(ex.ToString());
+                parent.ConsoleMsgError(ex.ToString());
             }
         }
 
@@ -3273,13 +3273,13 @@ tester.ConsoleMsg(events);\par
                     files[index][2] = STATUS_SAVED;
 
                     toolStripStatusLabel5.Text = path;
-                    Config.browserForm.consoleMsg($"Файл {filename} - сохранён");
+                    Config.browserForm.ConsoleMsg($"Файл {filename} - сохранён");
                     Config.browserForm.projectUpdate();
                 }
             }
             catch (Exception ex)
             {
-                parent.consoleMsgError(ex.ToString());
+                parent.ConsoleMsgError(ex.ToString());
             }
         }
 
@@ -3305,7 +3305,7 @@ tester.ConsoleMsg(events);\par
                         (files[i][4] as TabPage).Text = filename;
                         files[i][2] = STATUS_SAVED;
 
-                        parent.consoleMsg($"Файл {filename} - сохранён");
+                        parent.ConsoleMsg($"Файл {filename} - сохранён");
                     }
                 }
 
@@ -3313,7 +3313,7 @@ tester.ConsoleMsg(events);\par
             }
             catch (Exception ex)
             {
-                parent.consoleMsgError(ex.ToString());
+                parent.ConsoleMsgError(ex.ToString());
             }
         }
 
@@ -3364,12 +3364,12 @@ tester.ConsoleMsg(events);\par
                 }
                 else
                 {
-                    Config.browserForm.consoleMsg("Проект не открыт");
+                    Config.browserForm.ConsoleMsg("Проект не открыт");
                 }
             }
             catch (Exception ex)
             {
-                Config.browserForm.consoleMsgError(ex.ToString());
+                Config.browserForm.ConsoleMsgError(ex.ToString());
             }
         }
 
@@ -3399,7 +3399,7 @@ tester.ConsoleMsg(events);\par
             }
             catch (Exception ex)
             {
-                Config.browserForm.consoleMsgError(ex.ToString());
+                Config.browserForm.ConsoleMsgError(ex.ToString());
             }
         }
 
@@ -3675,7 +3675,7 @@ tester.ConsoleMsg(events);\par
             }
             catch (Exception ex)
             {
-                Config.browserForm.consoleMsgError(ex.ToString());
+                Config.browserForm.ConsoleMsgError(ex.ToString());
             }
         }
 
@@ -3733,7 +3733,7 @@ tester.ConsoleMsg(events);\par
             }
             catch (Exception ex)
             {
-                Config.browserForm.consoleMsgError(ex.ToString());
+                Config.browserForm.ConsoleMsgError(ex.ToString());
             }
         }
 
@@ -3760,7 +3760,7 @@ tester.ConsoleMsg(events);\par
             }
             catch (Exception ex)
             {
-                Config.browserForm.consoleMsgError(ex.ToString());
+                Config.browserForm.ConsoleMsgError(ex.ToString());
             }
         }
     }

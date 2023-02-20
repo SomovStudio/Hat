@@ -47,7 +47,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                Config.browserForm.consoleMsgError(ex.ToString());
+                Config.browserForm.ConsoleMsgError(ex.ToString());
             }
         }
         
@@ -65,7 +65,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                Config.browserForm.consoleMsgError(ex.ToString());
+                Config.browserForm.ConsoleMsgError(ex.ToString());
             }
         }
 
@@ -79,7 +79,7 @@ namespace Hat
                 {
                     Directory.CreateDirectory(Report.FolderName);
                     Directory.CreateDirectory(Report.FolderImagesName);
-                    Config.browserForm.consoleMsg("Создана папка для отчетов");
+                    Config.browserForm.ConsoleMsg("Создана папка для отчетов");
                     Config.browserForm.updateProjectTree();
                 }
                 if (Directory.Exists(Report.FolderName))
@@ -90,15 +90,15 @@ namespace Hat
                         writer.writeFile(GetHead() + GetBody() + GetFooter(), WorkOnFiles.UTF_8_BOM, Report.FolderName + Report.FileName);
                         if (File.Exists(Report.FolderName + Report.FileName))
                         {
-                            Config.browserForm.consoleMsg($"Создан файл отчета {Report.FileName}");
-                            if (Config.languageEngConsole == false) Config.browserForm.systemConsoleMsg($"Создан файл отчета {Report.FileName}" + Environment.NewLine, default, ConsoleColor.DarkGray, ConsoleColor.White, true);
-                            else Config.browserForm.systemConsoleMsg($"Report file created {Report.FileName}" + Environment.NewLine, default, ConsoleColor.DarkGray, ConsoleColor.White, true);
+                            Config.browserForm.ConsoleMsg($"Создан файл отчета {Report.FileName}");
+                            if (Config.languageEngConsole == false) Config.browserForm.SystemConsoleMsg($"Создан файл отчета {Report.FileName}" + Environment.NewLine, default, ConsoleColor.DarkGray, ConsoleColor.White, true);
+                            else Config.browserForm.SystemConsoleMsg($"Report file created {Report.FileName}" + Environment.NewLine, default, ConsoleColor.DarkGray, ConsoleColor.White, true);
                         }
                         else
                         {
-                            Config.browserForm.consoleMsg($"Не удалось создать файл отчета {Report.FileName} по адресу {Report.FolderName}");
-                            if (Config.languageEngConsole == false) Config.browserForm.systemConsoleMsg($"Не удалось создать файл отчета {Report.FileName} по адресу {Report.FolderName}" + Environment.NewLine, default, ConsoleColor.DarkGray, ConsoleColor.White, true);
-                            else Config.browserForm.systemConsoleMsg($"Failed to create report file {Report.FileName} in the folder {Report.FolderName}" + Environment.NewLine, default, ConsoleColor.DarkGray, ConsoleColor.White, true);
+                            Config.browserForm.ConsoleMsg($"Не удалось создать файл отчета {Report.FileName} по адресу {Report.FolderName}");
+                            if (Config.languageEngConsole == false) Config.browserForm.SystemConsoleMsg($"Не удалось создать файл отчета {Report.FileName} по адресу {Report.FolderName}" + Environment.NewLine, default, ConsoleColor.DarkGray, ConsoleColor.White, true);
+                            else Config.browserForm.SystemConsoleMsg($"Failed to create report file {Report.FileName} in the folder {Report.FolderName}" + Environment.NewLine, default, ConsoleColor.DarkGray, ConsoleColor.White, true);
                         }
                         Config.browserForm.updateProjectTree();
                     }
@@ -108,28 +108,28 @@ namespace Hat
                         writer.writeFile(GetHead() + GetBody() + GetFooter(), WorkOnFiles.UTF_8_BOM, Report.FolderName + Report.FileName);
                         if (File.Exists(Report.FolderName + Report.FileName))
                         {
-                            Config.browserForm.consoleMsg($"Обновлен файл отчета {Report.FileName}");
-                            if (Config.languageEngConsole == false) Config.browserForm.systemConsoleMsg($"Обновлен файл отчета {Report.FileName}" + Environment.NewLine, default, ConsoleColor.DarkGray, ConsoleColor.White, true);
-                            else Config.browserForm.systemConsoleMsg($"Updated report file {Report.FileName}" + Environment.NewLine, default, ConsoleColor.DarkGray, ConsoleColor.White, true);
+                            Config.browserForm.ConsoleMsg($"Обновлен файл отчета {Report.FileName}");
+                            if (Config.languageEngConsole == false) Config.browserForm.SystemConsoleMsg($"Обновлен файл отчета {Report.FileName}" + Environment.NewLine, default, ConsoleColor.DarkGray, ConsoleColor.White, true);
+                            else Config.browserForm.SystemConsoleMsg($"Updated report file {Report.FileName}" + Environment.NewLine, default, ConsoleColor.DarkGray, ConsoleColor.White, true);
                         }
                         else
                         {
-                            Config.browserForm.consoleMsg($"Отсутствует файл отчета {Report.FileName} по адресу {Report.FolderName}");
-                            if (Config.languageEngConsole == false) Config.browserForm.systemConsoleMsg($"Отсутствует файл отчета {Report.FileName} по адресу {Report.FolderName}" + Environment.NewLine, default, ConsoleColor.DarkGray, ConsoleColor.White, true);
-                            else Config.browserForm.systemConsoleMsg($"The report file is missing {Report.FileName} in the folder {Report.FolderName}" + Environment.NewLine, default, ConsoleColor.DarkGray, ConsoleColor.White, true);
+                            Config.browserForm.ConsoleMsg($"Отсутствует файл отчета {Report.FileName} по адресу {Report.FolderName}");
+                            if (Config.languageEngConsole == false) Config.browserForm.SystemConsoleMsg($"Отсутствует файл отчета {Report.FileName} по адресу {Report.FolderName}" + Environment.NewLine, default, ConsoleColor.DarkGray, ConsoleColor.White, true);
+                            else Config.browserForm.SystemConsoleMsg($"The report file is missing {Report.FileName} in the folder {Report.FolderName}" + Environment.NewLine, default, ConsoleColor.DarkGray, ConsoleColor.White, true);
                         }
                     }
                 }
                 else
                 {
-                    Config.browserForm.consoleMsg($"Не удалось создать папку для отчетов по адресу {Report.FolderName}");
-                    if (Config.languageEngConsole == false) Config.browserForm.systemConsoleMsg($"Не удалось создать папку для отчетов по адресу {Report.FolderName}" + Environment.NewLine, default, ConsoleColor.DarkGray, ConsoleColor.White, true);
-                    else Config.browserForm.systemConsoleMsg($"Failed to create a folder for reports at {Report.FolderName}" + Environment.NewLine, default, ConsoleColor.DarkGray, ConsoleColor.White, true);
+                    Config.browserForm.ConsoleMsg($"Не удалось создать папку для отчетов по адресу {Report.FolderName}");
+                    if (Config.languageEngConsole == false) Config.browserForm.SystemConsoleMsg($"Не удалось создать папку для отчетов по адресу {Report.FolderName}" + Environment.NewLine, default, ConsoleColor.DarkGray, ConsoleColor.White, true);
+                    else Config.browserForm.SystemConsoleMsg($"Failed to create a folder for reports at {Report.FolderName}" + Environment.NewLine, default, ConsoleColor.DarkGray, ConsoleColor.White, true);
                 }
             }
             catch (Exception ex)
             {
-                Config.browserForm.consoleMsgError(ex.ToString());
+                Config.browserForm.ConsoleMsgError(ex.ToString());
             }
         }
 
@@ -148,32 +148,32 @@ namespace Hat
                     Report.AddStep(Report.SCREENSHOT, $"Файл: <a href=\"./screenshots/{filename}\">{filename}</a>", $"<img src=\"./screenshots/{filename}\" />");
                     using (System.IO.FileStream file = System.IO.File.Create(Report.FolderImagesName + filename))
                     {
-                        await Config.browserForm.getWebView().CoreWebView2.CapturePreviewAsync(CoreWebView2CapturePreviewImageFormat.Jpeg, file);
+                        await Config.browserForm.GetWebView().CoreWebView2.CapturePreviewAsync(CoreWebView2CapturePreviewImageFormat.Jpeg, file);
                         if (File.Exists(Report.FolderImagesName + filename))
                         {
-                            Config.browserForm.consoleMsg($"Скриншот {filename} - сохранён");
-                            if (Config.languageEngConsole == false) Config.browserForm.systemConsoleMsg($"Скриншот {filename}" + Environment.NewLine, default, ConsoleColor.DarkGray, ConsoleColor.White, true);
-                            else Config.browserForm.systemConsoleMsg($"Screenshot {filename}" + Environment.NewLine, default, ConsoleColor.DarkGray, ConsoleColor.White, true);
+                            Config.browserForm.ConsoleMsg($"Скриншот {filename} - сохранён");
+                            if (Config.languageEngConsole == false) Config.browserForm.SystemConsoleMsg($"Скриншот {filename}" + Environment.NewLine, default, ConsoleColor.DarkGray, ConsoleColor.White, true);
+                            else Config.browserForm.SystemConsoleMsg($"Screenshot {filename}" + Environment.NewLine, default, ConsoleColor.DarkGray, ConsoleColor.White, true);
                             Config.browserForm.updateProjectTree();
                         }
                         else
                         {
-                            Config.browserForm.consoleMsg($"Не удалось сохранить скриншот {filename} по адресу {Report.FolderImagesName}");
-                            if (Config.languageEngConsole == false) Config.browserForm.systemConsoleMsg($"Не удалось сохранить скриншот {filename} по адресу {Report.FolderImagesName}" + Environment.NewLine, default, ConsoleColor.DarkGray, ConsoleColor.White, true);
-                            else Config.browserForm.systemConsoleMsg($"Failed to save screenshot {filename} in the folder {Report.FolderImagesName}" + Environment.NewLine, default, ConsoleColor.DarkGray, ConsoleColor.White, true);
+                            Config.browserForm.ConsoleMsg($"Не удалось сохранить скриншот {filename} по адресу {Report.FolderImagesName}");
+                            if (Config.languageEngConsole == false) Config.browserForm.SystemConsoleMsg($"Не удалось сохранить скриншот {filename} по адресу {Report.FolderImagesName}" + Environment.NewLine, default, ConsoleColor.DarkGray, ConsoleColor.White, true);
+                            else Config.browserForm.SystemConsoleMsg($"Failed to save screenshot {filename} in the folder {Report.FolderImagesName}" + Environment.NewLine, default, ConsoleColor.DarkGray, ConsoleColor.White, true);
                         }
                     }
                 }
                 else
                 {
-                    Config.browserForm.consoleMsg($"Не удалось сохранить скриншот потому что отсутствует папка {Report.FolderImagesName}");
-                    if (Config.languageEngConsole == false) Config.browserForm.systemConsoleMsg($"Не удалось сохранить скриншот потому что отсутствует папка {Report.FolderImagesName}" + Environment.NewLine, default, ConsoleColor.DarkGray, ConsoleColor.White, true);
-                    else Config.browserForm.systemConsoleMsg($"The screenshot could not be saved because the folder is missing {Report.FolderImagesName}" + Environment.NewLine, default, ConsoleColor.DarkGray, ConsoleColor.White, true);
+                    Config.browserForm.ConsoleMsg($"Не удалось сохранить скриншот потому что отсутствует папка {Report.FolderImagesName}");
+                    if (Config.languageEngConsole == false) Config.browserForm.SystemConsoleMsg($"Не удалось сохранить скриншот потому что отсутствует папка {Report.FolderImagesName}" + Environment.NewLine, default, ConsoleColor.DarkGray, ConsoleColor.White, true);
+                    else Config.browserForm.SystemConsoleMsg($"The screenshot could not be saved because the folder is missing {Report.FolderImagesName}" + Environment.NewLine, default, ConsoleColor.DarkGray, ConsoleColor.White, true);
                 }
             }
             catch (Exception ex)
             {
-                Config.browserForm.consoleMsgError(ex.ToString());
+                Config.browserForm.ConsoleMsgError(ex.ToString());
             }
         }
 
@@ -335,7 +335,7 @@ img { min-width: 700px; max-width: 700px; }
                 }
                 catch (Exception ex)
                 {
-                    Config.browserForm.consoleMsg(ex.ToString());
+                    Config.browserForm.ConsoleMsg(ex.ToString());
                 }
                 content += "</tbody>" + Environment.NewLine;
                 //content += "<tfoot>" + Environment.NewLine;

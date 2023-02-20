@@ -29,28 +29,28 @@ namespace Hat
             Config.encoding = WorkOnFiles.UTF_8_BOM;
             toolStripStatusLabelFileEncoding.Text = Config.encoding;
             Config.browserForm = this;
-            consoleMsg($"Браузер Hat версия {Config.currentBrowserVersion} ({Config.dateBrowserUpdate})");
-            systemConsoleMsg("", default, default, default, true);
-            if(Config.languageEngConsole == false) systemConsoleMsg($"Браузер Hat версия {Config.currentBrowserVersion} ({Config.dateBrowserUpdate})", default, ConsoleColor.DarkGray, ConsoleColor.White, true);
-            else systemConsoleMsg($"Browser Hat version {Config.currentBrowserVersion} ({Config.dateBrowserUpdate})", default, ConsoleColor.DarkGray, ConsoleColor.White, true);
+            ConsoleMsg($"Браузер Hat версия {Config.currentBrowserVersion} ({Config.dateBrowserUpdate})");
+            SystemConsoleMsg("", default, default, default, true);
+            if(Config.languageEngConsole == false) SystemConsoleMsg($"Браузер Hat версия {Config.currentBrowserVersion} ({Config.dateBrowserUpdate})", default, ConsoleColor.DarkGray, ConsoleColor.White, true);
+            else SystemConsoleMsg($"Browser Hat version {Config.currentBrowserVersion} ({Config.dateBrowserUpdate})", default, ConsoleColor.DarkGray, ConsoleColor.White, true);
 
             if (Config.statucCacheClear == "true")
             {
-                if (Config.languageEngConsole == false) systemConsoleMsg("Кэш браузера очишен", default, ConsoleColor.DarkGray, ConsoleColor.White, true);
-                else systemConsoleMsg("The browser cache has been cleared", default, ConsoleColor.DarkGray, ConsoleColor.White, true);
-                consoleMsg("Кэш браузера очишен");
+                if (Config.languageEngConsole == false) SystemConsoleMsg("Кэш браузера очишен", default, ConsoleColor.DarkGray, ConsoleColor.White, true);
+                else SystemConsoleMsg("The browser cache has been cleared", default, ConsoleColor.DarkGray, ConsoleColor.White, true);
+                ConsoleMsg("Кэш браузера очишен");
             }
             else if (Config.statucCacheClear == "false")
             {
-                if (Config.languageEngConsole == false) systemConsoleMsg("Кэш браузера неудалось очистить, удалите папку " + Config.cacheFolder + " вручную", default, ConsoleColor.DarkGray, ConsoleColor.White, true);
-                else systemConsoleMsg("Browser cache could not be cleared. Delete the folder " + Config.cacheFolder, default, ConsoleColor.DarkGray, ConsoleColor.White, true);
-                consoleMsg("Кэш браузера неудалось очистить, удалите папку " + Config.cacheFolder + " вручную");
+                if (Config.languageEngConsole == false) SystemConsoleMsg("Кэш браузера неудалось очистить, удалите папку " + Config.cacheFolder + " вручную", default, ConsoleColor.DarkGray, ConsoleColor.White, true);
+                else SystemConsoleMsg("Browser cache could not be cleared. Delete the folder " + Config.cacheFolder, default, ConsoleColor.DarkGray, ConsoleColor.White, true);
+                ConsoleMsg("Кэш браузера неудалось очистить, удалите папку " + Config.cacheFolder + " вручную");
             }
             else
             {
-                if (Config.languageEngConsole == false) systemConsoleMsg("Кэш не очищен, произошла ошибка: " + Config.statucCacheClear, default, ConsoleColor.DarkGray, ConsoleColor.White, true);
-                else systemConsoleMsg("The cache has not been cleared, an error has occurred: " + Config.statucCacheClear, default, ConsoleColor.DarkGray, ConsoleColor.White, true);
-                consoleMsg("Кэш не очищен, произошла ошибка: " + Config.statucCacheClear);
+                if (Config.languageEngConsole == false) SystemConsoleMsg("Кэш не очищен, произошла ошибка: " + Config.statucCacheClear, default, ConsoleColor.DarkGray, ConsoleColor.White, true);
+                else SystemConsoleMsg("The cache has not been cleared, an error has occurred: " + Config.statucCacheClear, default, ConsoleColor.DarkGray, ConsoleColor.White, true);
+                ConsoleMsg("Кэш не очищен, произошла ошибка: " + Config.statucCacheClear);
             }
         }
               
@@ -76,9 +76,9 @@ namespace Hat
 
                 if (Config.commandLineMode == true)
                 {
-                    if (Config.languageEngConsole == false) systemConsoleMsg("Запуск браузера...", default, ConsoleColor.DarkGray, ConsoleColor.White, true);
-                    else systemConsoleMsg("Launching the browser...", default, ConsoleColor.DarkGray, ConsoleColor.White, true);
-                    consoleMsg("Запуск браузера Hat из командной строки");
+                    if (Config.languageEngConsole == false) SystemConsoleMsg("Запуск браузера...", default, ConsoleColor.DarkGray, ConsoleColor.White, true);
+                    else SystemConsoleMsg("Launching the browser...", default, ConsoleColor.DarkGray, ConsoleColor.White, true);
+                    ConsoleMsg("Запуск браузера Hat из командной строки");
                     toolStripStatusLabelProjectPath.Text = Config.projectPath;
                     // Строится дерево папок и файлов
                     treeViewProject.Nodes.Clear();
@@ -91,16 +91,16 @@ namespace Hat
                     showLibs();
                     changeEncoding();
                     changeEditorTopMost();
-                    if (Config.languageEngConsole == false) systemConsoleMsg($"Проект открыт (версия проекта: {Config.version})", default, ConsoleColor.DarkGray, ConsoleColor.White, true);
-                    else systemConsoleMsg($"The project is open (project version: {Config.version})", default, ConsoleColor.DarkGray, ConsoleColor.White, true);
-                    consoleMsg($"Проект открыт (версия проекта: {Config.version})");
+                    if (Config.languageEngConsole == false) SystemConsoleMsg($"Проект открыт (версия проекта: {Config.version})", default, ConsoleColor.DarkGray, ConsoleColor.White, true);
+                    else SystemConsoleMsg($"The project is open (project version: {Config.version})", default, ConsoleColor.DarkGray, ConsoleColor.White, true);
+                    ConsoleMsg($"Проект открыт (версия проекта: {Config.version})");
                     toolStripStatusLabelProjectFolderFile.Text = Config.selectName;
                     PlayTest(Config.selectName);
                 }
             }
             catch (Exception ex)
             {
-                consoleMsgError(ex.ToString());
+                ConsoleMsgError(ex.ToString());
             }
         }
 
@@ -126,16 +126,16 @@ namespace Hat
 
             if (testSuccess == false)
             {
-                systemConsoleMsg(Environment.NewLine + "==============================", default, default, default, true);
-                if (Config.languageEngConsole == false) systemConsoleMsg("Тестирование завершено ПРОВАЛЬНО", default, ConsoleColor.DarkRed, ConsoleColor.White, true);
-                else systemConsoleMsg("Tests ended. Finished: FAILURE", default, ConsoleColor.DarkRed, ConsoleColor.White, true);
+                SystemConsoleMsg(Environment.NewLine + "==============================", default, default, default, true);
+                if (Config.languageEngConsole == false) SystemConsoleMsg("Тестирование завершено ПРОВАЛЬНО", default, ConsoleColor.DarkRed, ConsoleColor.White, true);
+                else SystemConsoleMsg("Tests ended. Finished: FAILURE", default, ConsoleColor.DarkRed, ConsoleColor.White, true);
                 Environment.Exit(1);
             }
             else
             {
-                systemConsoleMsg(Environment.NewLine + "==============================", default, default, default, true);
-                if (Config.languageEngConsole == false) systemConsoleMsg("Тестирование завершено УСПЕШНО", default, ConsoleColor.DarkGreen, ConsoleColor.White, true);
-                else systemConsoleMsg("Tests ended. Finished: SUCCESS", default, ConsoleColor.DarkGreen, ConsoleColor.White, true);
+                SystemConsoleMsg(Environment.NewLine + "==============================", default, default, default, true);
+                if (Config.languageEngConsole == false) SystemConsoleMsg("Тестирование завершено УСПЕШНО", default, ConsoleColor.DarkGreen, ConsoleColor.White, true);
+                else SystemConsoleMsg("Tests ended. Finished: SUCCESS", default, ConsoleColor.DarkGreen, ConsoleColor.White, true);
                 Environment.Exit(0);
             }
         }
@@ -150,7 +150,7 @@ namespace Hat
         {
             try
             {
-                consoleMsg("Начало инициализации WebView");
+                ConsoleMsg("Начало инициализации WebView");
                 webView2.EnsureCoreWebView2Async();
 
                 /* Microsoft Edge DevTools Protocol: https://learn.microsoft.com/en-us/microsoft-edge/devtools-protocol-chromium/
@@ -165,26 +165,26 @@ namespace Hat
                 webView2.CoreWebView2.CallDevToolsProtocolMethodAsync("Runtime.enable", "{}");
                 //webView2.CoreWebView2.GetDevToolsProtocolEventReceiver("Network.loadingFailed").DevToolsProtocolEventReceived += errorEvents;
                 //webView2.CoreWebView2.CallDevToolsProtocolMethodAsync("Network.enable", "{}");
-                consoleMsg("Запущен монитор ошибок на страницах");
+                ConsoleMsg("Запущен монитор ошибок на страницах");
 
                 webView2.CoreWebView2.CallDevToolsProtocolMethodAsync("Network.enable", "{}");
                 webView2.CoreWebView2.CallDevToolsProtocolMethodAsync("Network.clearBrowserCache", "{}");
                 webView2.CoreWebView2.CallDevToolsProtocolMethodAsync("Network.setCacheDisabled", @"{""cacheDisabled"":true}");
-                consoleMsg("Выполнена очистка кэша WebView");
+                ConsoleMsg("Выполнена очистка кэша WebView");
 
                 webView2.CoreWebView2.CallDevToolsProtocolMethodAsync("Security.setIgnoreCertificateErrors", "{\"ignore\": true}");
-                consoleMsg("Включено игнорирование сертификата Security.setIgnoreCertificateErrors (true)");
+                ConsoleMsg("Включено игнорирование сертификата Security.setIgnoreCertificateErrors (true)");
 
                 if (Config.defaultUserAgent == "") Config.defaultUserAgent = webView2.CoreWebView2.Settings.UserAgent;
-                consoleMsg($"Опция User-Agent по умолчанию {Config.defaultUserAgent}");
+                ConsoleMsg($"Опция User-Agent по умолчанию {Config.defaultUserAgent}");
 
                 webView2.CoreWebView2.Settings.AreDefaultScriptDialogsEnabled = false;
-                consoleMsg("Выполнена настройка WebView (отключаны alert, prompt, confirm)");
-                consoleMsg("Инициализация WebView - завершена");
+                ConsoleMsg("Выполнена настройка WebView (отключаны alert, prompt, confirm)");
+                ConsoleMsg("Инициализация WebView - завершена");
             }
             catch (Exception ex)
             {
-                consoleMsgError(ex.ToString());
+                ConsoleMsgError(ex.ToString());
             }
 
         }
@@ -209,7 +209,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsgError(ex.ToString());
+                ConsoleMsgError(ex.ToString());
             }
         }
 
@@ -219,11 +219,11 @@ namespace Hat
             try
             {
                 await webView2.CoreWebView2.CallDevToolsProtocolMethodAsync("Security.setIgnoreCertificateErrors", "{\"ignore\": true}");
-                consoleMsg("Опция Security.setIgnoreCertificateErrors - включен параметр ignore: true");
+                ConsoleMsg("Опция Security.setIgnoreCertificateErrors - включен параметр ignore: true");
             }
             catch (Exception ex)
             {
-                consoleMsgError(ex.ToString());
+                ConsoleMsgError(ex.ToString());
             }
         }
 
@@ -235,11 +235,11 @@ namespace Hat
                 await webView2.EnsureCoreWebView2Async();
                 await webView2.CoreWebView2.CallDevToolsProtocolMethodAsync("Network.clearBrowserCache", "{}");
                 await webView2.CoreWebView2.CallDevToolsProtocolMethodAsync("Network.setCacheDisabled", @"{""cacheDisabled"":true}");
-                consoleMsg("Выполнена очистка кэша");
+                ConsoleMsg("Выполнена очистка кэша");
             }
             catch (Exception ex)
             {
-                consoleMsgError(ex.ToString());
+                ConsoleMsgError(ex.ToString());
             }
         }
 
@@ -298,8 +298,16 @@ namespace Hat
             richTextBoxErrors.Text = "";
         }
 
-        /* Сообщение в консоль */
-        public void consoleMsg(string message)
+        /* |-----------------------------------------------------------------------------------------------------------|
+         * |== ПУБЛИЧНЫЕ МЕТОДЫ ДЛЯ ФРЕЙМВОРКА ========================================================================|
+         * |-----------------------------------------------------------------------------------------------------------|
+         */
+        public Microsoft.Web.WebView2.WinForms.WebView2 GetWebView()
+        {
+            return webView2; // Возвращает браузер
+        }
+
+        public void ConsoleMsg(string message) // вывод сообщения в консоль приложения
         {
             try
             {
@@ -308,41 +316,23 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsgError(ex.ToString());
+                ConsoleMsgError(ex.ToString());
             }
         }
 
-        public void consoleMsgErrorReport(string message)
-        {
-            Report.AddStep(Report.ERROR, "", message);
-            Report.SaveReport(testSuccess);
-
-            richTextBoxConsole.AppendText("[" + DateTime.Now.ToString() + "] ОШИБКА: " + message + Environment.NewLine);
-            richTextBoxConsole.ScrollToCaret();
-            
-            systemConsoleMsg("- - - - - - - - - - - - - - - - - - - - - - - - - - - -", default, default, default, true);
-            if (Config.languageEngConsole == false) systemConsoleMsg("Произошла ошибка:", default, ConsoleColor.Black, ConsoleColor.Red, true);
-            else systemConsoleMsg("An error has occurred:", default, ConsoleColor.Black, ConsoleColor.Red, true);
-            systemConsoleMsg(message, default, default, default, true);
-            systemConsoleMsg("- - - - - - - - - - - - - - - - - - - - - - - - - - - -", default, default, default, true);
-            systemConsoleMsg("", default, default, default, true);
-            resultAutotest(false);
-            if (Config.commandLineMode == true) Close();
-        }
-
-        public void consoleMsgError(string message)
+        public void ConsoleMsgError(string message) // вывод сообщения об ошибке
         {
             try
             {
                 richTextBoxConsole.AppendText("[" + DateTime.Now.ToString() + "] ОШИБКА: " + message + Environment.NewLine);
                 richTextBoxConsole.ScrollToCaret();
-                systemConsoleMsg("- - - - - - - - - - - - - - - - - - - - - - - - - - - -", default, default, default, true);
-                if (Config.languageEngConsole == false) systemConsoleMsg("Произошла ошибка:", default, ConsoleColor.Black, ConsoleColor.Red, true);
-                else systemConsoleMsg("An error has occurred:", default, ConsoleColor.Black, ConsoleColor.Red, true);
-                systemConsoleMsg(message, default, default, default, true);
-                systemConsoleMsg("- - - - - - - - - - - - - - - - - - - - - - - - - - - -", default, default, default, true);
-                systemConsoleMsg("", default, default, default, true);
-                resultAutotest(false);
+                SystemConsoleMsg("- - - - - - - - - - - - - - - - - - - - - - - - - - - -", default, default, default, true);
+                if (Config.languageEngConsole == false) SystemConsoleMsg("Произошла ошибка:", default, ConsoleColor.Black, ConsoleColor.Red, true);
+                else SystemConsoleMsg("An error has occurred:", default, ConsoleColor.Black, ConsoleColor.Red, true);
+                SystemConsoleMsg(message, default, default, default, true);
+                SystemConsoleMsg("- - - - - - - - - - - - - - - - - - - - - - - - - - - -", default, default, default, true);
+                SystemConsoleMsg("", default, default, default, true);
+                ResultAutotest(false);
                 if (Config.commandLineMode == true) Close();
             }
             catch (Exception ex)
@@ -351,7 +341,25 @@ namespace Hat
             }
         }
 
-        public void systemConsoleMsg(string message, Encoding encoding, ConsoleColor backgroundColor, ConsoleColor foregroundColor, bool newLine)
+        public void ConsoleMsgErrorReport(string message) // вывод сообщения об ошибке в консоль приложения
+        {
+            Report.AddStep(Report.ERROR, "", message);
+            Report.SaveReport(testSuccess);
+
+            richTextBoxConsole.AppendText("[" + DateTime.Now.ToString() + "] ОШИБКА: " + message + Environment.NewLine);
+            richTextBoxConsole.ScrollToCaret();
+
+            SystemConsoleMsg("- - - - - - - - - - - - - - - - - - - - - - - - - - - -", default, default, default, true);
+            if (Config.languageEngConsole == false) SystemConsoleMsg("Произошла ошибка:", default, ConsoleColor.Black, ConsoleColor.Red, true);
+            else SystemConsoleMsg("An error has occurred:", default, ConsoleColor.Black, ConsoleColor.Red, true);
+            SystemConsoleMsg(message, default, default, default, true);
+            SystemConsoleMsg("- - - - - - - - - - - - - - - - - - - - - - - - - - - -", default, default, default, true);
+            SystemConsoleMsg("", default, default, default, true);
+            ResultAutotest(false);
+            if (Config.commandLineMode == true) Close();
+        }
+
+        public void SystemConsoleMsg(string message, Encoding encoding, ConsoleColor backgroundColor, ConsoleColor foregroundColor, bool newLine) // вывод сообщения в системную консоль
         {
             // Console.BackgroundColor - Возвращает или задает цвет фона консоли. (Значение из перечисления, задающее фоновый цвет консоли, то есть цвет, на фоне которого выводятся символы. Значением по умолчанию является Black.)
             // Console.ForegroundColor - Возвращает или задает цвет фона консоли. (Значение из перечисления ConsoleColor, задающее цвет переднего плана консоли, то есть цвет, которым выводятся символы. По умолчанию задано значение Gray.)
@@ -380,24 +388,7 @@ namespace Hat
             System.Console.ResetColor();
         }
 
-        /* Описание автотеста (для отчета) */
-        public void description(string text)
-        {
-            try
-            {
-                Report.SetDescription(text);
-                if (Config.languageEngConsole == false) systemConsoleMsg("Описание: " + text, default, default, default, true);
-                else systemConsoleMsg("Description: " + text, default, default, default, true);
-                consoleMsg("Описание: " + text);
-            }
-            catch (Exception ex)
-            {
-                consoleMsgError(ex.ToString());
-            }
-        }
-
-        /* Сообщение в таблицу */
-        public void cleadMessageStep()
+        public void CleadMessageStep() // очистка всех шагов в таблице "тест"
         {
             try
             {
@@ -405,11 +396,11 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsgError(ex.ToString());
+                ConsoleMsgError(ex.ToString());
             }
         }
 
-        public int sendMessageStep(string step, string status, string comment, int image)
+        public int SendMessageStep(string step, string status, string comment, int image) // отправляет сообщение в таблицу "тест"
         {
             Report.AddStep(status, step, comment);
 
@@ -427,13 +418,13 @@ namespace Hat
             item.SubItems.Add(subitem);
             item.ImageIndex = image;
             listViewTest.Items.Add(item);
-            int index = listViewTest.Items.Count-1;
+            int index = listViewTest.Items.Count - 1;
             listViewTest.Items[index].Selected = true;
             listViewTest.Items[index].EnsureVisible();
             return index;
         }
 
-        public void editMessageStep(int index, string step, string status, string comment, int image)
+        public void EditMessageStep(int index, string step, string status, string comment, int image) // изменить уже отправленное сообщение в таблице "тест"
         {
             try
             {
@@ -446,24 +437,97 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsgError(ex.ToString());
+                ConsoleMsgError(ex.ToString());
             }
         }
 
-        /* Сохранить отчет и скриншот */
-        public void saveReport()
+        public void BrowserResize(int width, int height) // изменить размер браузера
+        {
+            try
+            {
+                if (width > 0 && height > 0)
+                {
+                    radioButton2.Checked = true;
+                    numericUpDownBrowserWidth.Value = width;
+                    numericUpDownBrowserHeight.Value = height;
+                }
+                else
+                {
+                    radioButton1.Checked = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                ConsoleMsgError(ex.ToString());
+            }
+        }
+
+        public void UserAgent(string value) // Настройка UserAgent
+        {
+            if (Config.defaultUserAgent == "" && webView2.CoreWebView2.Settings.UserAgent != null)
+            {
+                Config.defaultUserAgent = webView2.CoreWebView2.Settings.UserAgent;
+            }
+
+            textBoxUserAgent.Text = value;
+            webView2.CoreWebView2.Settings.UserAgent = textBoxUserAgent.Text;
+            checkBoxUserAgent.Checked = false;
+            textBoxUserAgent.ReadOnly = false;
+        }
+
+        public List<string> GetBowserErrors() // Возвращает данные из Console браузера (предупреждения и ошибки)
+        {
+            List<string> list = new List<string>();
+            foreach (string line in richTextBoxErrors.Lines)
+            {
+                list.Add(line);
+            }
+            return list;
+        }
+
+        public bool CheckStopTest() 
+        {
+            return stopTest; // Возврат статус автотеста (остановка)
+        }
+
+        public void ResultAutotest(bool success) // Результат выполнения автотеста
+        {
+            if (testSuccess == false) return;   // автотест был ранее провален
+            testSuccess = success; // true - автотест был выполнен успешно | false - автотест был провелен
+        }
+
+        public bool GetStatusDebugJavaScript()
+        {
+            return Config.debugJavaScript; // возвращает статус отладки
+        }
+
+        public string GetNameAutotest()
+        {
+            return Config.selectName; // Возвращает имя автотеста
+        }
+
+        public bool GetlanguageEngConsole()
+        {
+            return Config.languageEngConsole; // Возвращает выбранный язык вывода в командной строке
+        }
+
+        public bool GetlanguageEngReportMail()
+        {
+            return Config.languageEngReportMail; // Возвращает выбранный язык вывода в отчет и письмо
+        }
+
+        public void SaveReport() // Сохранить отчет и скриншот
         {
             Report.AddStep("", "", "");
             Report.SaveReport(testSuccess);
         }
 
-        public async Task saveReportScreenshotAsync()
+        public async Task SaveReportScreenshotAsync() // Сохраняет скриншот текущего состояния браузера
         {
             await Report.SaveReportScreenshotAsync();
         }
 
-        /* Отправить письмо с отчетом о провале FAILURE */
-        public void sendMailFailure()
+        public void SendMailFailure() // Отправить письмо с отчетом о провале FAILURE
         {
             try
             {
@@ -541,13 +605,12 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsgError(ex.Message);
+                ConsoleMsgError(ex.Message);
             }
 
         }
 
-        /* Отправить письмо с отчетом о провале SUCCESS */
-        public void sendMailSuccess()
+        public void SendMailSuccess() // Отправить письмо с отчетом о провале SUCCESS
         {
             try
             {
@@ -626,11 +689,11 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsgError(ex.Message);
+                ConsoleMsgError(ex.Message);
             }
         }
 
-        public void sendMail(string subject, string body)
+        public void SendMail(string subject, string body) // отправка письма на почту
         {
             try
             {
@@ -638,61 +701,26 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsgError(ex.Message);
+                ConsoleMsgError(ex.Message);
             }
         }
 
-
-        /* Возвращает браузер */
-        public Microsoft.Web.WebView2.WinForms.WebView2 getWebView()
+        public void Description(string text) // Описание автотеста (для отчета)
         {
-            return webView2;
-        }
-
-        /* Возврат статус автотеста (остановка) */
-        public bool checkStopTest()
-        {
-            return stopTest;
-        }
-
-        /* Результат выполнения автотеста */
-        public void resultAutotest(bool success)
-        {
-            if (testSuccess == false) return;   // автотест был ранее провален
-            testSuccess = success; // true - автотест был выполнен успешно | false - автотест был провелен
-        }
-
-        /* Возвращает имя автотеста */
-        public string getNameAutotest()
-        {
-            return Config.selectName;
-        }
-
-        /* Настройка UserAgent */
-        public void userAgent(string value)
-        {
-            if (Config.defaultUserAgent == "" && webView2.CoreWebView2.Settings.UserAgent != null)
+            try
             {
-                Config.defaultUserAgent = webView2.CoreWebView2.Settings.UserAgent;
+                Report.SetDescription(text);
+                if (Config.languageEngConsole == false) SystemConsoleMsg("Описание: " + text, default, default, default, true);
+                else SystemConsoleMsg("Description: " + text, default, default, default, true);
+                ConsoleMsg("Описание: " + text);
             }
-            
-            textBoxUserAgent.Text = value;
-            webView2.CoreWebView2.Settings.UserAgent = textBoxUserAgent.Text;
-            checkBoxUserAgent.Checked = false;
-            textBoxUserAgent.ReadOnly = false;
+            catch (Exception ex)
+            {
+                ConsoleMsgError(ex.ToString());
+            }
         }
+        /* |== ПУБЛИЧНЫЕ МЕТОДЫ ДЛЯ ФРЕЙМВОРКА ========================================================================| */
 
-        /* Возвращает выбранный язык вывода в командной строке */
-        public bool getlanguageEngConsole()
-        {
-            return Config.languageEngConsole;
-        }
-
-        /* Возвращает выбранный язык вывода в отчет и письмо */
-        public bool getlanguageEngReportMail()
-        {
-            return Config.languageEngReportMail;
-        }
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
@@ -724,7 +752,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsgError(ex.ToString());
+                ConsoleMsgError(ex.ToString());
             }
         }
 
@@ -736,7 +764,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsgError(ex.ToString());
+                ConsoleMsgError(ex.ToString());
             }
         }
 
@@ -753,7 +781,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsgError(ex.ToString());
+                ConsoleMsgError(ex.ToString());
             }
         }
 
@@ -765,7 +793,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsgError(ex.ToString());
+                ConsoleMsgError(ex.ToString());
             }
         }
 
@@ -774,11 +802,11 @@ namespace Hat
             try
             {
                 toolStripComboBoxUrl.Text = webView2.Source.ToString();
-                consoleMsg("Загрузка страницы: " + webView2.Source.ToString());
+                ConsoleMsg("Загрузка страницы: " + webView2.Source.ToString());
             }
             catch (Exception ex)
             {
-                consoleMsgError(ex.ToString());
+                ConsoleMsgError(ex.ToString());
             }
         }
 
@@ -787,17 +815,17 @@ namespace Hat
             try
             {
                 toolStripComboBoxUrl.Text = webView2.Source.ToString();
-                consoleMsg("Выполнена загрузка страницы: " + webView2.Source.ToString());
+                ConsoleMsg("Выполнена загрузка страницы: " + webView2.Source.ToString());
                 if (webView2.CoreWebView2.Settings.UserAgent != null && Config.defaultUserAgent == "")
                 {
                     Config.defaultUserAgent = webView2.CoreWebView2.Settings.UserAgent;
                     textBoxUserAgent.Text = Config.defaultUserAgent;
                 }
-                if (Config.defaultUserAgent != webView2.CoreWebView2.Settings.UserAgent) consoleMsg("Текущий User-Agent: " + webView2.CoreWebView2.Settings.UserAgent);
+                if (Config.defaultUserAgent != webView2.CoreWebView2.Settings.UserAgent) ConsoleMsg("Текущий User-Agent: " + webView2.CoreWebView2.Settings.UserAgent);
             }
             catch (Exception ex)
             {
-                consoleMsgError(ex.ToString());
+                ConsoleMsgError(ex.ToString());
             }
         }
 
@@ -817,7 +845,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsgError(ex.Message);
+                ConsoleMsgError(ex.Message);
             }
         }
 
@@ -838,7 +866,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsgError(ex.ToString());
+                ConsoleMsgError(ex.ToString());
             }
         }
 
@@ -903,11 +931,11 @@ namespace Hat
                         Directory.Exists(Config.projectPath + folderSupportStepObjects) &&
                         Directory.Exists(Config.projectPath + folderTests))
                     {
-                        consoleMsg("Создание проекта: все необходимые папки созданы");
+                        ConsoleMsg("Создание проекта: все необходимые папки созданы");
                     }
                     else
                     {
-                        consoleMsg("Создание проекта: процесс прерван (невозможно создать все необходимые папки)");
+                        ConsoleMsg("Создание проекта: процесс прерван (невозможно создать все необходимые папки)");
                         return;
                     }
 
@@ -939,15 +967,15 @@ namespace Hat
                         File.Exists(Config.projectPath + fileTestsExample1) &&
                         File.Exists(Config.projectPath + fileTestsExample2))
                     {
-                        consoleMsg("Создание проекта: все необходимые файлы созданы");
+                        ConsoleMsg("Создание проекта: все необходимые файлы созданы");
                     }
                     else
                     {
-                        consoleMsg("Создание проекта: процесс прерван (невозможно создать все необходимые файлы)");
+                        ConsoleMsg("Создание проекта: процесс прерван (невозможно создать все необходимые файлы)");
                         return;
                     }
 
-                    consoleMsg("Создание проекта: успешно завершено (версия проекта: " + Config.version + ")");
+                    ConsoleMsg("Создание проекта: успешно завершено (версия проекта: " + Config.version + ")");
 
                     // Строится дерево папок и файлов
                     treeViewProject.Nodes.Clear();
@@ -965,7 +993,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsgError(ex.ToString());
+                ConsoleMsgError(ex.ToString());
             }
         }
 
@@ -978,7 +1006,7 @@ namespace Hat
                 inputBox.ShowDialog();
                 string projectName = inputBox.textBox.Text;
                 if (projectName == "" || projectName == null || projectName.Contains(" ") == true) {
-                    consoleMsg("Вы ввели некорректное имя проекта");
+                    ConsoleMsg("Вы ввели некорректное имя проекта");
                     return;
                 }
 
@@ -1009,11 +1037,11 @@ namespace Hat
                         Directory.Exists(Config.projectPath + folderSupportStepObjects) &&
                         Directory.Exists(Config.projectPath + folderTests))
                     {
-                        consoleMsg("Создание проекта: все необходимые папки созданы");
+                        ConsoleMsg("Создание проекта: все необходимые папки созданы");
                     }
                     else
                     {
-                        consoleMsg("Создание проекта: процесс прерван (невозможно создать все необходимые папки)");
+                        ConsoleMsg("Создание проекта: процесс прерван (невозможно создать все необходимые папки)");
                         return;
                     }
 
@@ -1058,15 +1086,15 @@ namespace Hat
                         File.Exists(Config.projectPath + fileTestsExample1) &&
                         File.Exists(Config.projectPath + fileTestsExample2))
                     {
-                        consoleMsg("Создание проекта: все необходимые файлы созданы");
+                        ConsoleMsg("Создание проекта: все необходимые файлы созданы");
                     }
                     else
                     {
-                        consoleMsg("Создание проекта: процесс прерван (невозможно создать все необходимые файлы)");
+                        ConsoleMsg("Создание проекта: процесс прерван (невозможно создать все необходимые файлы)");
                         return;
                     }
 
-                    consoleMsg("Создание проекта: успешно завершено (версия проекта: " + Config.version + ")");
+                    ConsoleMsg("Создание проекта: успешно завершено (версия проекта: " + Config.version + ")");
 
                     Config.projectPath += "\\Tests";
                     fileProject = "\\project.hat";
@@ -1087,7 +1115,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsgError(ex.ToString());
+                ConsoleMsgError(ex.ToString());
             }
         }
 
@@ -1131,21 +1159,21 @@ namespace Hat
                     changeEditorTopMost();
                     showDataMail();
 
-                    consoleMsg("Проект открыт (версия проекта: " + Config.version + ")");
-                    if (Config.languageEngConsole == false) systemConsoleMsg($"Проект открыт (версия проекта: {Config.version})", default, ConsoleColor.DarkGray, ConsoleColor.White, true);
-                    else systemConsoleMsg($"The project is open (project version: {Config.version})", default, ConsoleColor.DarkGray, ConsoleColor.White, true);
+                    ConsoleMsg("Проект открыт (версия проекта: " + Config.version + ")");
+                    if (Config.languageEngConsole == false) SystemConsoleMsg($"Проект открыт (версия проекта: {Config.version})", default, ConsoleColor.DarkGray, ConsoleColor.White, true);
+                    else SystemConsoleMsg($"The project is open (project version: {Config.version})", default, ConsoleColor.DarkGray, ConsoleColor.White, true);
 
                     if (Config.version != Config.currentBrowserVersion)
                     {
-                        consoleMsg($"Предупреждение: версия проекта {Config.version} не совпадает с версией браузера {Config.currentBrowserVersion}");
-                        if (Config.languageEngConsole == false) systemConsoleMsg($"Предупреждение: версия проекта {Config.version} не совпадает с версией браузера {Config.currentBrowserVersion}", default, ConsoleColor.DarkGray, ConsoleColor.White, true);
-                        else systemConsoleMsg($"Warning: project version {Config.version} does not match the browser version {Config.currentBrowserVersion}", default, ConsoleColor.DarkGray, ConsoleColor.White, true);
+                        ConsoleMsg($"Предупреждение: версия проекта {Config.version} не совпадает с версией браузера {Config.currentBrowserVersion}");
+                        if (Config.languageEngConsole == false) SystemConsoleMsg($"Предупреждение: версия проекта {Config.version} не совпадает с версией браузера {Config.currentBrowserVersion}", default, ConsoleColor.DarkGray, ConsoleColor.White, true);
+                        else SystemConsoleMsg($"Warning: project version {Config.version} does not match the browser version {Config.currentBrowserVersion}", default, ConsoleColor.DarkGray, ConsoleColor.White, true);
                     }
                 }
              }
             catch (Exception ex)
             {
-                consoleMsgError(ex.ToString());
+                ConsoleMsgError(ex.ToString());
             }
         }
 
@@ -1160,13 +1188,13 @@ namespace Hat
                 {
                     treeViewProject.Nodes.Add(Config.projectPath, getFolderName(Config.projectPath), 0, 0);
                     openProjectFolder(Config.projectPath, treeViewProject.Nodes);
-                    consoleMsg("Данные в проводнике - обновлены");
+                    ConsoleMsg("Данные в проводнике - обновлены");
                     TreeViewExtensions.SetExpansionState(treeViewProject.Nodes, saveExtensions);
                 }
             }
             catch (Exception ex)
             {
-                consoleMsgError(ex.ToString());
+                ConsoleMsgError(ex.ToString());
             }
         }
 
@@ -1181,11 +1209,11 @@ namespace Hat
                     textBoxLibs.Text += Config.libraries[i];
                     if (i < Config.libraries.Length-1) textBoxLibs.Text += Environment.NewLine;
                 }
-                consoleMsg("Список библиотек - загружен");
+                ConsoleMsg("Список библиотек - загружен");
             }
             catch (Exception ex)
             {
-                consoleMsgError(ex.ToString());
+                ConsoleMsgError(ex.ToString());
             }
         }
 
@@ -1223,11 +1251,11 @@ namespace Hat
                     wINDOWS1251ToolStripMenuItem.Checked = true;
                     toolStripMenuItemWINDOWS1251.Checked = true;
                 }
-                consoleMsg("Кодировка файлов - выбрана");
+                ConsoleMsg("Кодировка файлов - выбрана");
             }
             catch (Exception ex)
             {
-                consoleMsgError(ex.ToString());
+                ConsoleMsgError(ex.ToString());
             }
         }
 
@@ -1242,7 +1270,7 @@ namespace Hat
                     languageRusToolStripMenuItem1.Checked = true;
                     languageEngToolStripMenuItem.Checked = false;
                     languageEngToolStripMenuItem1.Checked = false;
-                    consoleMsg("Язык вывода в командной строке - русский");
+                    ConsoleMsg("Язык вывода в командной строке - русский");
                 }
                 else
                 {
@@ -1250,7 +1278,7 @@ namespace Hat
                     languageRusToolStripMenuItem1.Checked = false;
                     languageEngToolStripMenuItem.Checked = true;
                     languageEngToolStripMenuItem1.Checked = true;
-                    consoleMsg("Язык вывода в командной строке - английский");
+                    ConsoleMsg("Язык вывода в командной строке - английский");
                 }
 
                 if(Config.languageEngReportMail == false)
@@ -1259,7 +1287,7 @@ namespace Hat
                     languageReportEmailRusToolStripMenuItem1.Checked = true;
                     languageReportEmailEngToolStripMenuItem.Checked = false;
                     languageReportEmailEngToolStripMenuItem1.Checked = false;
-                    consoleMsg("Язык вывода в отчет и письмо - русский");
+                    ConsoleMsg("Язык вывода в отчет и письмо - русский");
                 }
                 else
                 {
@@ -1267,12 +1295,12 @@ namespace Hat
                     languageReportEmailRusToolStripMenuItem1.Checked = false;
                     languageReportEmailEngToolStripMenuItem.Checked = true;
                     languageReportEmailEngToolStripMenuItem1.Checked = true;
-                    consoleMsg("Язык вывода в отчет и письмо - английский");
+                    ConsoleMsg("Язык вывода в отчет и письмо - английский");
                 }
             }
             catch (Exception ex)
             {
-                consoleMsgError(ex.ToString());
+                ConsoleMsgError(ex.ToString());
             }
         }
 
@@ -1284,11 +1312,11 @@ namespace Hat
             {
                 editorTopMostToolStripMenuItem.Checked = Config.editorTopMost;
                 toolStripMenuItemEditorTopMost.Checked = Config.editorTopMost;
-                consoleMsg("Способ отображение редактора - выбран");
+                ConsoleMsg("Способ отображение редактора - выбран");
             }
             catch (Exception ex)
             {
-                consoleMsgError(ex.ToString());
+                ConsoleMsgError(ex.ToString());
             }
         }
 
@@ -1305,11 +1333,11 @@ namespace Hat
                 if (Config.dataMail[6] == "true") sslCheckBox.Checked = true;
                 else sslCheckBox.Checked = false;
                 toMailsTextBox.Text = Config.dataMail[3];
-                consoleMsg("Настройки почты - загружены");
+                ConsoleMsg("Настройки почты - загружены");
             }
             catch (Exception ex)
             {
-                consoleMsgError(ex.ToString());
+                ConsoleMsgError(ex.ToString());
             }
         }
 
@@ -1353,7 +1381,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsgError(ex.ToString());
+                ConsoleMsgError(ex.ToString());
             }
         }
 
@@ -1394,7 +1422,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsgError(ex.ToString());
+                ConsoleMsgError(ex.ToString());
             }
         }
 
@@ -1415,11 +1443,11 @@ namespace Hat
                 Config.encoding = WorkOnFiles.DEFAULT;
                 toolStripStatusLabelFileEncoding.Text = Config.encoding;
                 if (Config.projectPath != "(не открыт)") Config.saveConfigJson(Config.projectPath + "/project.hat");
-                consoleMsg("Кодировка файлов - изменена");
+                ConsoleMsg("Кодировка файлов - изменена");
             }
             catch (Exception ex)
             {
-                consoleMsgError(ex.ToString());
+                ConsoleMsgError(ex.ToString());
             }
         }
 
@@ -1440,11 +1468,11 @@ namespace Hat
                 Config.encoding = WorkOnFiles.UTF_8;
                 toolStripStatusLabelFileEncoding.Text = Config.encoding;
                 if (Config.projectPath != "(не открыт)") Config.saveConfigJson(Config.projectPath + "/project.hat");
-                consoleMsg("Кодировка файлов - изменена");
+                ConsoleMsg("Кодировка файлов - изменена");
             }
             catch (Exception ex)
             {
-                consoleMsgError(ex.ToString());
+                ConsoleMsgError(ex.ToString());
             }
         }
 
@@ -1465,11 +1493,11 @@ namespace Hat
                 Config.encoding = WorkOnFiles.UTF_8_BOM;
                 toolStripStatusLabelFileEncoding.Text = Config.encoding;
                 if (Config.projectPath != "(не открыт)") Config.saveConfigJson(Config.projectPath + "/project.hat");
-                consoleMsg("Кодировка файлов - изменена");
+                ConsoleMsg("Кодировка файлов - изменена");
             }
             catch (Exception ex)
             {
-                consoleMsgError(ex.ToString());
+                ConsoleMsgError(ex.ToString());
             }
         }
 
@@ -1490,11 +1518,11 @@ namespace Hat
                 Config.encoding = WorkOnFiles.WINDOWS_1251;
                 toolStripStatusLabelFileEncoding.Text = Config.encoding;
                 if (Config.projectPath != "(не открыт)") Config.saveConfigJson(Config.projectPath + "/project.hat");
-                consoleMsg("Кодировка файлов - изменена");
+                ConsoleMsg("Кодировка файлов - изменена");
             }
             catch (Exception ex)
             {
-                consoleMsgError(ex.ToString());
+                ConsoleMsgError(ex.ToString());
             }
         }
 
@@ -1507,7 +1535,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsgError(ex.ToString());
+                ConsoleMsgError(ex.ToString());
             }
 
         }
@@ -1517,11 +1545,11 @@ namespace Hat
             try
             {
                 if (Config.projectPath != "(не открыт)") Process.Start(Config.projectPath);
-                else consoleMsg("Проект не открыт");
+                else ConsoleMsg("Проект не открыт");
             }
             catch (Exception ex)
             {
-                consoleMsgError(ex.ToString());
+                ConsoleMsgError(ex.ToString());
             }
         }
 
@@ -1543,11 +1571,11 @@ namespace Hat
                 toolStripStatusLabelFileEncoding.Text = Config.encoding;
 
                 if (Config.projectPath != "(не открыт)") Config.saveConfigJson(Config.projectPath + "/project.hat");
-                consoleMsg("Кодировка файлов - изменена");
+                ConsoleMsg("Кодировка файлов - изменена");
             }
             catch (Exception ex)
             {
-                consoleMsgError(ex.ToString());
+                ConsoleMsgError(ex.ToString());
             }
         }
 
@@ -1568,11 +1596,11 @@ namespace Hat
                 Config.encoding = WorkOnFiles.UTF_8;
                 toolStripStatusLabelFileEncoding.Text = Config.encoding;
                 if (Config.projectPath != "(не открыт)") Config.saveConfigJson(Config.projectPath + "/project.hat");
-                consoleMsg("Кодировка файлов - изменена");
+                ConsoleMsg("Кодировка файлов - изменена");
             }
             catch (Exception ex)
             {
-                consoleMsgError(ex.ToString());
+                ConsoleMsgError(ex.ToString());
             }
         }
 
@@ -1593,11 +1621,11 @@ namespace Hat
                 Config.encoding = WorkOnFiles.UTF_8_BOM;
                 toolStripStatusLabelFileEncoding.Text = Config.encoding;
                 if (Config.projectPath != "(не открыт)") Config.saveConfigJson(Config.projectPath + "/project.hat");
-                consoleMsg("Кодировка файлов - изменена");
+                ConsoleMsg("Кодировка файлов - изменена");
             }
             catch (Exception ex)
             {
-                consoleMsgError(ex.ToString());
+                ConsoleMsgError(ex.ToString());
             }
         }
 
@@ -1618,11 +1646,11 @@ namespace Hat
                 Config.encoding = WorkOnFiles.WINDOWS_1251;
                 toolStripStatusLabelFileEncoding.Text = Config.encoding;
                 if (Config.projectPath != "(не открыт)") Config.saveConfigJson(Config.projectPath + "/project.hat");
-                consoleMsg("Кодировка файлов - изменена");
+                ConsoleMsg("Кодировка файлов - изменена");
             }
             catch (Exception ex)
             {
-                consoleMsgError(ex.ToString());
+                ConsoleMsgError(ex.ToString());
             }
         }
 
@@ -1639,7 +1667,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsgError(ex.ToString());
+                ConsoleMsgError(ex.ToString());
             }
         }
 
@@ -1656,7 +1684,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsgError(ex.ToString());
+                ConsoleMsgError(ex.ToString());
             }
         }
 
@@ -1680,17 +1708,17 @@ namespace Hat
                     showLibs();
                     changeEncoding();
                     changeEditorTopMost();
-                    consoleMsg("Обновлено дерево папок и файлов в окне проекта");
+                    ConsoleMsg("Обновлено дерево папок и файлов в окне проекта");
                 }
                 else
                 {
-                    consoleMsg("Проект не открыт");
+                    ConsoleMsg("Проект не открыт");
                 }
 
             }
             catch (Exception ex)
             {
-                consoleMsgError(ex.ToString());
+                ConsoleMsgError(ex.ToString());
             }
         }
 
@@ -1704,12 +1732,12 @@ namespace Hat
                 }
                 else
                 {
-                    consoleMsg("Проект не открыт");
+                    ConsoleMsg("Проект не открыт");
                 }
             }
             catch (Exception ex)
             {
-                consoleMsgError(ex.ToString());
+                ConsoleMsgError(ex.ToString());
             }
         }
 
@@ -1723,7 +1751,7 @@ namespace Hat
             try
             {
                 testSuccess = true;
-                cleadMessageStep();
+                CleadMessageStep();
                 if (Config.selectName.Contains(".cs"))
                 {
                     stopTest = false;
@@ -1733,12 +1761,12 @@ namespace Hat
                 }
                 else
                 {
-                    consoleMsg("Вы не выбрали файл для запуска. (выберите *.cs файл автотеста в окне проекта)");
+                    ConsoleMsg("Вы не выбрали файл для запуска. (выберите *.cs файл автотеста в окне проекта)");
                 }
             }
             catch (Exception ex)
             {
-                consoleMsgError(ex.ToString());
+                ConsoleMsgError(ex.ToString());
             }
         }
 
@@ -1746,7 +1774,7 @@ namespace Hat
         {
             stopTest = true;
             //Autotests.stopAsync();
-            consoleMsg("Остановка автотеста");
+            ConsoleMsg("Остановка автотеста");
         }
 
         private void toolStripButton2_Click_1(object sender, EventArgs e)
@@ -1801,7 +1829,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsgError(ex.ToString());
+                ConsoleMsgError(ex.ToString());
             }
         }
 
@@ -1838,7 +1866,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsgError(ex.ToString());
+                ConsoleMsgError(ex.ToString());
             }
         }
 
@@ -1857,29 +1885,29 @@ namespace Hat
                     WorkOnFiles folder = new WorkOnFiles();
                     if (folder.folderCreate(Config.selectValue, foldername) == true)
                     {
-                        consoleMsg($"Папка \"{foldername}\" - успешно создана");
+                        ConsoleMsg($"Папка \"{foldername}\" - успешно создана");
                         projectUpdate();
                     }
                     else
                     {
-                        consoleMsg($"Папка \"{foldername}\" - не создана");
+                        ConsoleMsg($"Папка \"{foldername}\" - не создана");
                     }
                 }
                 else
                 {
-                    consoleMsg("Вы не выбрали папку");
+                    ConsoleMsg("Вы не выбрали папку");
                 }
             }
             catch (Exception ex)
             {
-                consoleMsgError(ex.ToString());
+                ConsoleMsgError(ex.ToString());
             }
         }
 
         private void создатьПапкуToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (Config.projectPath != "(не открыт)") createFolder();
-            else consoleMsg("Проект не открыт");
+            else ConsoleMsg("Проект не открыт");
         }
 
         private void переименоватьПапкуToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1896,22 +1924,22 @@ namespace Hat
                     WorkOnFiles folder = new WorkOnFiles();
                     if (folder.folderDelete(Config.selectValue) == true)
                     {
-                        consoleMsg($"Папка \"{Config.selectName}\" - успешно удалена");
+                        ConsoleMsg($"Папка \"{Config.selectName}\" - успешно удалена");
                         projectUpdate();
                     }
                     else
                     {
-                        consoleMsg($"Папка \"{Config.selectName}\" - не удалена");
+                        ConsoleMsg($"Папка \"{Config.selectName}\" - не удалена");
                     }
                 }
                 else
                 {
-                    consoleMsg("Вы не выбрали папку");
+                    ConsoleMsg("Вы не выбрали папку");
                 }
             }
             catch (Exception ex)
             {
-                consoleMsgError(ex.ToString());
+                ConsoleMsgError(ex.ToString());
             }
         }
 
@@ -1919,7 +1947,7 @@ namespace Hat
         {
             
             if (Config.projectPath != "(не открыт)") deleteFolder();
-            else consoleMsg("Проект не открыт");
+            else ConsoleMsg("Проект не открыт");
         }
 
         private void fileOpen()
@@ -1950,7 +1978,7 @@ namespace Hat
                             }
                             catch (Exception ex)
                             {
-                                consoleMsg(ex.Message);
+                                ConsoleMsg(ex.Message);
                             }
                         }
                         else
@@ -1961,27 +1989,27 @@ namespace Hat
                             }
                             catch (Exception ex)
                             {
-                                consoleMsg(ex.Message);
+                                ConsoleMsg(ex.Message);
                             }
                         }
                     }
                 }
                 else
                 {
-                    consoleMsg("Проект еще не открыть, откройте или создайте новый проект.");
+                    ConsoleMsg("Проект еще не открыть, откройте или создайте новый проект.");
                     projectOpen();
                 }
             }
             catch (Exception ex)
             {
-                consoleMsgError(ex.ToString());
+                ConsoleMsgError(ex.ToString());
             }
         }
 
         private void открытьФайлToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (Config.projectPath != "(не открыт)") fileOpen();
-            else consoleMsg("Проект не открыт");
+            else ConsoleMsg("Проект не открыт");
         }
 
         private void createFile(string type)
@@ -2007,7 +2035,7 @@ namespace Hat
                     {
                         if (csFile.Contains(filename))
                         {
-                            consoleMsg("Не удалось создать файл с именем " + filename + " по скольку он уже существует в проекте");
+                            ConsoleMsg("Не удалось создать файл с именем " + filename + " по скольку он уже существует в проекте");
                             return;
                         }
                     }
@@ -2021,68 +2049,68 @@ namespace Hat
 
                         if (File.Exists(path + filename + ".cs"))
                         {
-                            consoleMsg("Новый файл теста " + filename + ".cs - успешно создан");
+                            ConsoleMsg("Новый файл теста " + filename + ".cs - успешно создан");
                             projectUpdate();
                         }
-                        else consoleMsg("Новый файл теста " + filename + ".cs - не удалось создать");
+                        else ConsoleMsg("Новый файл теста " + filename + ".cs - не удалось создать");
                     }
                     else
                     {
-                        consoleMsg("Файл " + path + filename + ".cs - уже существует");
+                        ConsoleMsg("Файл " + path + filename + ".cs - уже существует");
                     }
                 }
                 else
                 {
-                    consoleMsg("Проект еще не открыть, откройте или создайте новый проект.");
+                    ConsoleMsg("Проект еще не открыть, откройте или создайте новый проект.");
                     projectOpen();
                 }
             }
             catch (Exception ex)
             {
-                consoleMsgError(ex.ToString());
+                ConsoleMsgError(ex.ToString());
             }
         }
 
         private void создатьФайлCToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (Config.projectPath != "(не открыт)") createFile("autotest");
-            else consoleMsg("Проект не открыт");
+            else ConsoleMsg("Проект не открыт");
         }
 
         private void createFileAutotestToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (Config.projectPath != "(не открыт)") createFile("autotest");
-            else consoleMsg("Проект не открыт");
+            else ConsoleMsg("Проект не открыт");
         }
 
         private void createFilePageObjectsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (Config.projectPath != "(не открыт)") createFile("page_objects");
-            else consoleMsg("Проект не открыт");
+            else ConsoleMsg("Проект не открыт");
         }
 
         private void createFileStepObjectToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (Config.projectPath != "(не открыт)") createFile("step_objects");
-            else consoleMsg("Проект не открыт");
+            else ConsoleMsg("Проект не открыт");
         }
 
         private void toolStripMenuItem12_Click(object sender, EventArgs e)
         {
             if (Config.projectPath != "(не открыт)") createFile("autotest");
-            else consoleMsg("Проект не открыт");
+            else ConsoleMsg("Проект не открыт");
         }
 
         private void toolStripMenuItem13_Click(object sender, EventArgs e)
         {
             if (Config.projectPath != "(не открыт)") createFile("page_objects");
-            else consoleMsg("Проект не открыт");
+            else ConsoleMsg("Проект не открыт");
         }
 
         private void toolStripMenuItem14_Click(object sender, EventArgs e)
         {
             if (Config.projectPath != "(не открыт)") createFile("step_objects");
-            else consoleMsg("Проект не открыт");
+            else ConsoleMsg("Проект не открыт");
         }
 
         private void переименоватьФайлToolStripMenuItem_Click(object sender, EventArgs e)
@@ -2107,33 +2135,33 @@ namespace Hat
                             File.Delete(Config.selectValue);
                             if (!File.Exists(Config.selectValue))
                             {
-                                consoleMsg("Файл " + Config.selectValue + " - был успешно удалён");
+                                ConsoleMsg("Файл " + Config.selectValue + " - был успешно удалён");
                                 projectUpdate();
                             }
-                            else consoleMsg("Файл " + Config.selectValue + "- не удалось удалить");
+                            else ConsoleMsg("Файл " + Config.selectValue + "- не удалось удалить");
                         }
                     }
                     else
                     {
-                        consoleMsg("Файл " + Config.selectValue + " - не существует существует");
+                        ConsoleMsg("Файл " + Config.selectValue + " - не существует существует");
                     }
                 }
                 else
                 {
-                    consoleMsg("Проект еще не открыть, откройте или создайте новый проект.");
+                    ConsoleMsg("Проект еще не открыть, откройте или создайте новый проект.");
                     projectOpen();
                 }
             }
             catch (Exception ex)
             {
-                consoleMsgError(ex.ToString());
+                ConsoleMsgError(ex.ToString());
             }
         }
 
         private void удалитьФайлToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (Config.projectPath != "(не открыт)") deleteFile();
-            else consoleMsg("Проект не открыт");
+            else ConsoleMsg("Проект не открыт");
         }
 
         private void toolStripButton12_Click(object sender, EventArgs e)
@@ -2146,12 +2174,12 @@ namespace Hat
                     Config.libraries = textBoxLibs.Text.Split(delimiter, StringSplitOptions.None);
                     Config.saveConfigJson(Config.projectPath + "/project.hat");
                     showLibs();
-                    consoleMsg("Скисок библиотек сохранён в файл project.hat");
+                    ConsoleMsg("Скисок библиотек сохранён в файл project.hat");
                 }
             }
             catch (Exception ex)
             {
-                consoleMsgError(ex.ToString());
+                ConsoleMsgError(ex.ToString());
             }
         }
 
@@ -2175,7 +2203,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsgError(ex.ToString());
+                ConsoleMsgError(ex.ToString());
             }
         }
 
@@ -2198,7 +2226,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsgError(ex.ToString());
+                ConsoleMsgError(ex.ToString());
             }
         }
 
@@ -2211,7 +2239,7 @@ namespace Hat
         {
             stopTest = true;
             //Autotests.stopAsync();
-            consoleMsg("Остановка автотеста");
+            ConsoleMsg("Остановка автотеста");
         }
 
         /* Поиск по таблице */
@@ -2246,7 +2274,7 @@ namespace Hat
                     _status = item.SubItems[2].Text;
                     _comment = item.SubItems[3].Text;
 
-                    consoleMsg(_action + " | " + _status + " | " + _comment);
+                    ConsoleMsg(_action + " | " + _status + " | " + _comment);
 
                     if (_action.Contains(_tabFindText) == true || _status.Contains(_tabFindText) == true || _comment.Contains(_tabFindText) == true)
                     {
@@ -2260,7 +2288,7 @@ namespace Hat
 
                 if (_tabFindIndex >= count)
                 {
-                    consoleMsg("Поиск в таблице шагов выполнения теста - завершен");
+                    ConsoleMsg("Поиск в таблице шагов выполнения теста - завершен");
                     _tabFindIndex = 0;
                     _tabFindLast = 0;
                     _tabFindText = _cbox.Text;
@@ -2268,7 +2296,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsgError(ex.ToString());
+                ConsoleMsgError(ex.ToString());
             }
         }
 
@@ -2285,31 +2313,31 @@ namespace Hat
         private void toolStripMenuItem9_Click(object sender, EventArgs e)
         {
             if (Config.projectPath != "(не открыт)") fileOpen();
-            else consoleMsg("Проект не открыт");
+            else ConsoleMsg("Проект не открыт");
         }
 
         private void toolStripMenuItem6_Click(object sender, EventArgs e)
         {
             if (Config.projectPath != "(не открыт)") createFile("autotest");
-            else consoleMsg("Проект не открыт");
+            else ConsoleMsg("Проект не открыт");
         }
 
         private void toolStripMenuItem8_Click(object sender, EventArgs e)
         {
             if (Config.projectPath != "(не открыт)") deleteFile();
-            else consoleMsg("Проект не открыт");
+            else ConsoleMsg("Проект не открыт");
         }
 
         private void toolStripMenuItem2_Click(object sender, EventArgs e)
         {
             if (Config.projectPath != "(не открыт)") createFolder();
-            else consoleMsg("Проект не открыт");
+            else ConsoleMsg("Проект не открыт");
         }
 
         private void toolStripMenuItem5_Click(object sender, EventArgs e)
         {
             if (Config.projectPath != "(не открыт)") deleteFolder();
-            else consoleMsg("Проект не открыт");
+            else ConsoleMsg("Проект не открыт");
         }
 
 
@@ -2329,41 +2357,19 @@ namespace Hat
                 }
                 else
                 {
-                    consoleMsg("Вы не выбрали файл для запуска. (выберите *.cs файл автотеста в окне проекта)");
+                    ConsoleMsg("Вы не выбрали файл для запуска. (выберите *.cs файл автотеста в окне проекта)");
                 }
             }
             catch (Exception ex)
             {
-                consoleMsgError(ex.ToString());
+                ConsoleMsgError(ex.ToString());
             }
         }
 
         private void остановитьТестToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             stopTest = true;
-            consoleMsg("Остановка автотеста");
-        }
-
-        public void browserResize(int width, int height)
-        {
-            try
-            {
-                if (width > 0 && height > 0)
-                {
-                    radioButton2.Checked = true;
-                    numericUpDownBrowserWidth.Value = width;
-                    numericUpDownBrowserHeight.Value = height;
-                }
-                else
-                {
-                    radioButton1.Checked = true;
-                }
-                //consoleMsg("Размер браузера - изменён");
-            }
-            catch (Exception ex)
-            {
-                consoleMsgError(ex.ToString());
-            }
+            ConsoleMsg("Остановка автотеста");
         }
 
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
@@ -2378,11 +2384,11 @@ namespace Hat
                     numericUpDownBrowserHeight.Value = panel1.Height;
                     numericUpDownBrowserHeight.ReadOnly = true;
                 }
-                //consoleMsg("Размер браузера - изменён");
+                //ConsoleMsg("Размер браузера - изменён");
             }
             catch (Exception ex)
             {
-                consoleMsgError(ex.ToString());
+                ConsoleMsgError(ex.ToString());
             }
         }
 
@@ -2398,11 +2404,11 @@ namespace Hat
                     panel1.Height = (int)numericUpDownBrowserHeight.Value;
                     numericUpDownBrowserHeight.ReadOnly = false;
                 }
-                //consoleMsg("Размер браузера - изменён");
+                //ConsoleMsg("Размер браузера - изменён");
             }
             catch (Exception ex)
             {
-                consoleMsgError(ex.ToString());
+                ConsoleMsgError(ex.ToString());
             }
         }
 
@@ -2415,11 +2421,11 @@ namespace Hat
                     numericUpDownBrowserWidth.Value = panel1.Width;
                     numericUpDownBrowserHeight.Value = panel1.Height;
                 }
-                //consoleMsg("Размер браузера - изменён");
+                //ConsoleMsg("Размер браузера - изменён");
             }
             catch (Exception ex)
             {
-                consoleMsgError(ex.ToString());
+                ConsoleMsgError(ex.ToString());
             }
         }
 
@@ -2431,7 +2437,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsgError(ex.ToString());
+                ConsoleMsgError(ex.ToString());
             }
         }
 
@@ -2443,7 +2449,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsgError(ex.ToString());
+                ConsoleMsgError(ex.ToString());
             }
         }
 
@@ -2454,7 +2460,7 @@ namespace Hat
             //sendMail();
 
             /*
-            cleadMessageStep();
+            CleadMessageStep();
             Report.Init();
             Autotests.devTestStutsAsync();
             */
@@ -2492,7 +2498,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsgError(ex.ToString());
+                ConsoleMsgError(ex.ToString());
             }
         }
 
@@ -2514,12 +2520,12 @@ namespace Hat
                 if (saveFileLogDialog.ShowDialog() == DialogResult.OK)
                 {
                     richTextBoxConsole.SaveFile(saveFileLogDialog.FileName, RichTextBoxStreamType.PlainText);
-                    consoleMsg($"Лог вывода сохранён в файл: {saveFileLogDialog.FileName}");
+                    ConsoleMsg($"Лог вывода сохранён в файл: {saveFileLogDialog.FileName}");
                 }
             }
             catch (Exception ex)
             {
-                consoleMsgError(ex.ToString());
+                ConsoleMsgError(ex.ToString());
             }
         }
 
@@ -2531,12 +2537,12 @@ namespace Hat
                 if (saveFileLogDialog.ShowDialog() == DialogResult.OK)
                 {
                     richTextBoxErrors.SaveFile(saveFileLogDialog.FileName, RichTextBoxStreamType.PlainText);
-                    consoleMsg($"Лог ошибок на странице сохранён в файл: {saveFileLogDialog.FileName}");
+                    ConsoleMsg($"Лог ошибок на странице сохранён в файл: {saveFileLogDialog.FileName}");
                 }
             }
             catch (Exception ex)
             {
-                consoleMsgError(ex.ToString());
+                ConsoleMsgError(ex.ToString());
             }
         }
 
@@ -2548,12 +2554,12 @@ namespace Hat
                 if (saveFileLogDialog.ShowDialog() == DialogResult.OK)
                 {
                     richTextBoxEvents.SaveFile(saveFileLogDialog.FileName, RichTextBoxStreamType.PlainText);
-                    consoleMsg($"Лог событий на странице сохранён в файл: {saveFileLogDialog.FileName}");
+                    ConsoleMsg($"Лог событий на странице сохранён в файл: {saveFileLogDialog.FileName}");
                 }
             }
             catch (Exception ex)
             {
-                consoleMsgError(ex.ToString());
+                ConsoleMsgError(ex.ToString());
             }
         }
 
@@ -2602,7 +2608,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsgError(ex.Message);
+                ConsoleMsgError(ex.Message);
             }
         }
 
@@ -2629,45 +2635,29 @@ namespace Hat
                 }
                 else
                 {
-                    consoleMsg("Проект не открыт");
+                    ConsoleMsg("Проект не открыт");
                 }
             }
             catch (Exception ex)
             {
-                consoleMsgError(ex.ToString());
+                ConsoleMsgError(ex.ToString());
             }
         }
-
-        /* Возвращает данные из Console браузера (предупреждения и ошибки) */
-        public List<string> getBowserErrors()
-        {
-            List<string> list = new List<string>();
-            foreach (string line in richTextBoxErrors.Lines)
-            {
-                list.Add(line);
-            }
-            return list;
-        }
-
+        
         private void debugJavaScriptToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (Config.debugJavaScript == true)
             {
                 Config.debugJavaScript = false;
-                consoleMsg("Отключен режим отладки при выполнении JavaScript кода");
+                ConsoleMsg("Отключен режим отладки при выполнении JavaScript кода");
             }
             else
             {
                 Config.debugJavaScript = true;
-                consoleMsg("Включен режим отладки при выполнении JavaScript кода");
+                ConsoleMsg("Включен режим отладки при выполнении JavaScript кода");
             }
             debugJavaScriptToolStripMenuItem.Checked = Config.debugJavaScript;
             debugJavaScriptToolStripMenuItem1.Checked = Config.debugJavaScript;
-        }
-
-        public bool getStatusDebugJavaScript()
-        {
-            return Config.debugJavaScript;
         }
 
         private void documentationToolStripMenuItem_Click(object sender, EventArgs e)
@@ -2678,13 +2668,13 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                consoleMsgError(ex.ToString());
+                ConsoleMsgError(ex.ToString());
             }
         }
 
         private void testTableClearToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            cleadMessageStep();
+            CleadMessageStep();
         }
 
         private void toolStripButton22_Click(object sender, EventArgs e)
@@ -2703,12 +2693,12 @@ namespace Hat
                     Config.dataMail[3] = toMailsTextBox.Text;
                     Config.saveConfigJson(Config.projectPath + "/project.hat");
                     showDataMail();
-                    consoleMsg("Настройки почты сохранены в файл project.hat");
+                    ConsoleMsg("Настройки почты сохранены в файл project.hat");
                 }
             }
             catch (Exception ex)
             {
-                consoleMsgError(ex.ToString());
+                ConsoleMsgError(ex.ToString());
             }
         }
 
@@ -2718,11 +2708,11 @@ namespace Hat
             {
                 WebBrowser webBrowser = new WebBrowser();
                 webBrowser.Navigate(toolStripComboBoxUrl.Text, "_blank");
-                consoleMsg("Открыт браузер Internet Explorer 11");
+                ConsoleMsg("Открыт браузер Internet Explorer 11");
             }
             catch (Exception ex)
             {
-                consoleMsgError(ex.ToString());
+                ConsoleMsgError(ex.ToString());
             }
         }
 
@@ -2733,11 +2723,11 @@ namespace Hat
                 menuStrip1.Visible = false;
                 toolStrip1.Visible = false;
                 splitContainer1.Panel2Collapsed = true;
-                consoleMsg("Интерфейс браузера отключен");
+                ConsoleMsg("Интерфейс браузера отключен");
             }
             catch (Exception ex)
             {
-                consoleMsgError(ex.ToString());
+                ConsoleMsgError(ex.ToString());
             }
         }
 
@@ -2788,7 +2778,7 @@ namespace Hat
         private void toolStripButton23_Click(object sender, EventArgs e)
         {
             try { Process.Start("cmd.exe"); }
-            catch (Exception ex) { consoleMsgError(ex.ToString()); }
+            catch (Exception ex) { ConsoleMsgError(ex.ToString()); }
         }
 
         private void languageRusToolStripMenuItem_Click(object sender, EventArgs e)
@@ -2802,11 +2792,11 @@ namespace Hat
                 languageEngToolStripMenuItem1.Checked = false;
                 Config.languageEngConsole = false;
                 if (Config.projectPath != "(не открыт)") Config.saveConfigJson(Config.projectPath + "/project.hat");
-                consoleMsg("Язык вывода в командной строке изменен на русский");
+                ConsoleMsg("Язык вывода в командной строке изменен на русский");
             }
             catch (Exception ex)
             {
-                consoleMsgError(ex.ToString());
+                ConsoleMsgError(ex.ToString());
             }
         }
 
@@ -2821,11 +2811,11 @@ namespace Hat
                 languageEngToolStripMenuItem1.Checked = false;
                 Config.languageEngConsole = false;
                 if (Config.projectPath != "(не открыт)") Config.saveConfigJson(Config.projectPath + "/project.hat");
-                consoleMsg("Язык вывода в командной строке изменен на русский");
+                ConsoleMsg("Язык вывода в командной строке изменен на русский");
             }
             catch (Exception ex)
             {
-                consoleMsgError(ex.ToString());
+                ConsoleMsgError(ex.ToString());
             }
         }
 
@@ -2840,11 +2830,11 @@ namespace Hat
                 languageEngToolStripMenuItem1.Checked = true;
                 Config.languageEngConsole = true;
                 if (Config.projectPath != "(не открыт)") Config.saveConfigJson(Config.projectPath + "/project.hat");
-                consoleMsg("Язык вывода в командной строке изменен на английский");
+                ConsoleMsg("Язык вывода в командной строке изменен на английский");
             }
             catch (Exception ex)
             {
-                consoleMsgError(ex.ToString());
+                ConsoleMsgError(ex.ToString());
             }
         }
         
@@ -2860,11 +2850,11 @@ namespace Hat
                 languageEngToolStripMenuItem1.Checked = true;
                 Config.languageEngConsole = true;
                 if (Config.projectPath != "(не открыт)") Config.saveConfigJson(Config.projectPath + "/project.hat");
-                consoleMsg("Язык вывода в командной строке изменен на английский");
+                ConsoleMsg("Язык вывода в командной строке изменен на английский");
             }
             catch (Exception ex)
             {
-                consoleMsgError(ex.ToString());
+                ConsoleMsgError(ex.ToString());
             }
         }
 
@@ -2879,11 +2869,11 @@ namespace Hat
                 languageReportEmailEngToolStripMenuItem1.Checked = false;
                 Config.languageEngReportMail = false;
                 if (Config.projectPath != "(не открыт)") Config.saveConfigJson(Config.projectPath + "/project.hat");
-                consoleMsg("Язык вывода в отчет и письмо изменен на русский");
+                ConsoleMsg("Язык вывода в отчет и письмо изменен на русский");
             }
             catch (Exception ex)
             {
-                consoleMsgError(ex.ToString());
+                ConsoleMsgError(ex.ToString());
             }
         }
 
@@ -2898,11 +2888,11 @@ namespace Hat
                 languageReportEmailEngToolStripMenuItem1.Checked = true;
                 Config.languageEngReportMail = true;
                 if (Config.projectPath != "(не открыт)") Config.saveConfigJson(Config.projectPath + "/project.hat");
-                consoleMsg("Язык вывода в отчет и письмо изменен на английский");
+                ConsoleMsg("Язык вывода в отчет и письмо изменен на английский");
             }
             catch (Exception ex)
             {
-                consoleMsgError(ex.ToString());
+                ConsoleMsgError(ex.ToString());
             }
         }
 
@@ -2917,11 +2907,11 @@ namespace Hat
                 languageReportEmailEngToolStripMenuItem1.Checked = false;
                 Config.languageEngReportMail = false;
                 if (Config.projectPath != "(не открыт)") Config.saveConfigJson(Config.projectPath + "/project.hat");
-                consoleMsg("Язык вывода в отчет и письмо изменен на русский");
+                ConsoleMsg("Язык вывода в отчет и письмо изменен на русский");
             }
             catch (Exception ex)
             {
-                consoleMsgError(ex.ToString());
+                ConsoleMsgError(ex.ToString());
             }
         }
 
@@ -2936,11 +2926,11 @@ namespace Hat
                 languageReportEmailEngToolStripMenuItem1.Checked = true;
                 Config.languageEngReportMail = true;
                 if (Config.projectPath != "(не открыт)") Config.saveConfigJson(Config.projectPath + "/project.hat");
-                consoleMsg("Язык вывода в отчет и письмо изменен на английский");
+                ConsoleMsg("Язык вывода в отчет и письмо изменен на английский");
             }
             catch (Exception ex)
             {
-                consoleMsgError(ex.ToString());
+                ConsoleMsgError(ex.ToString());
             }
         }
     }

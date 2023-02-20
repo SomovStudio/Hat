@@ -45,27 +45,27 @@ namespace HatFrameworkDev
         private const string BY_NAME = "BY_NAME";
         private const string BY_TAG = "BY_TAG";        
 
-        private MethodInfo browserConsoleMsg;       // функция: consoleMsg - вывод сообщения в консоль приложения
-        private MethodInfo browserConsoleMsgError;  // функция: consoleMsgErrorReport - вывод сообщения об ошибке в консоль приложения
-        private MethodInfo browserSystemConsoleMsg; // функция: systemConsoleMsg - вывод сообщения в системную консоль
-        private MethodInfo browserCleadMessageStep; // функция: cleadMessageStep - очистка всех шагов в таблице "тест"
-        private MethodInfo browserSendMessageStep;  // функция: sendMessageStep - вывести сообщение в таблицу "тест"
-        private MethodInfo browserEditMessageStep;  // функция: editMessageStep - изменить уже выведенное сообщение в таблице "тест"
-        private MethodInfo browserResize;           // функция: browserResize - изменить размер браузера
-        private MethodInfo browserUserAgent;        // функция: userAgent - настройка user-agent параметра
-        private MethodInfo browserGetErrors;        // Функция: getBowserErrors - получить список ошибок и предупреждений браузера
-        private MethodInfo checkStopTest;           // функция: checkStopTest - получить статус остановки процесса тестирования
-        private MethodInfo resultAutotest;          // функция: resultAutotest - устанавливает флаг общего результата выполнения теста
-        private MethodInfo debugJavaScript;         // функция: getDebug - возвращает статус отладки
-        private MethodInfo getNameAutotest;         // Функция: getNameAutotest - возвращает имя запущенного автотеста
-        private MethodInfo getlanguageEngConsole;   // Функция: getlanguageEngConsole - возвращает статус английского языка для вывода в командную строку (true/false)
-        private MethodInfo getlanguageEngReportMail;// Функция: getlanguageEngReportMail - возвращает статус английского языка для вывода в отчет и письмо (true/false)
-        private MethodInfo saveReport;              // функция: saveReport - вызывает метод сохранения отчета
-        private MethodInfo saveReportScreenshotAsync; // функция: saveReportScreenshotAsync - сохраняет скриншот текущего состояния браузера
-        private MethodInfo sendMailFailure;         // функция: sendMailFailure - отправка отчета о Failure автотеста по почте
-        private MethodInfo sendMailSuccess;         // функция: sendMailSuccess - отправка отчета о Success автотеста по почте
-        private MethodInfo sendMail;                // функция: sendMail - отправка письма на почту
-        private MethodInfo description;             // функция: description - добавляет описание автотеста для его вывода в отчет
+        private MethodInfo browserConsoleMsg;       // функция: ConsoleMsg - вывод сообщения в консоль приложения
+        private MethodInfo browserConsoleMsgError;  // функция: ConsoleMsgErrorReport - вывод сообщения об ошибке в консоль приложения
+        private MethodInfo browserSystemConsoleMsg; // функция: SystemConsoleMsg - вывод сообщения в системную консоль
+        private MethodInfo browserCleadMessageStep; // функция: CleadMessageStep - очистка всех шагов в таблице "тест"
+        private MethodInfo browserSendMessageStep;  // функция: SendMessageStep - вывести сообщение в таблицу "тест"
+        private MethodInfo browserEditMessageStep;  // функция: EditMessageStep - изменить уже выведенное сообщение в таблице "тест"
+        private MethodInfo browserResize;           // функция: BrowserResize - изменить размер браузера
+        private MethodInfo browserUserAgent;        // функция: UserAgent - настройка user-agent параметра
+        private MethodInfo browserGetErrors;        // Функция: GetBowserErrors - получить список ошибок и предупреждений браузера
+        private MethodInfo checkStopTest;           // функция: CheckStopTest - получить статус остановки процесса тестирования
+        private MethodInfo resultAutotest;          // функция: ResultAutotest - устанавливает флаг общего результата выполнения теста
+        private MethodInfo debugJavaScript;         // функция: GetStatusDebugJavaScript - возвращает статус отладки
+        private MethodInfo getNameAutotest;         // Функция: GetNameAutotest - возвращает имя запущенного автотеста
+        private MethodInfo getlanguageEngConsole;   // Функция: GetlanguageEngConsole - возвращает статус английского языка для вывода в командную строку (true/false)
+        private MethodInfo getlanguageEngReportMail;// Функция: GetlanguageEngReportMail - возвращает статус английского языка для вывода в отчет и письмо (true/false)
+        private MethodInfo saveReport;              // функция: SaveReport - вызывает метод сохранения отчета
+        private MethodInfo saveReportScreenshotAsync; // функция: SaveReportScreenshotAsync - сохраняет скриншот текущего состояния браузера
+        private MethodInfo sendMailFailure;         // функция: SendMailFailure - отправка отчета о Failure автотеста по почте
+        private MethodInfo sendMailSuccess;         // функция: SendMailSuccess - отправка отчета о Success автотеста по почте
+        private MethodInfo sendMail;                // функция: SendMail - отправка письма на почту
+        private MethodInfo description;             // функция: Description - добавляет описание автотеста для его вывода в отчет
 
         private bool languageEngConsole = false;    // флаг: английский язык для вывода в командной строке
         private bool languageEngReportEmail = false;// флаг: английский язык для вывода в отчет и письмо
@@ -83,29 +83,29 @@ namespace HatFrameworkDev
                 listRedirects = new List<string>();
 
                 BrowserWindow = browserForm;
-                browserConsoleMsg = BrowserWindow.GetType().GetMethod("consoleMsg");
-                browserConsoleMsgError = BrowserWindow.GetType().GetMethod("consoleMsgErrorReport");
-                browserSystemConsoleMsg = BrowserWindow.GetType().GetMethod("systemConsoleMsg");
-                browserCleadMessageStep = BrowserWindow.GetType().GetMethod("cleadMessageStep");
-                browserSendMessageStep = BrowserWindow.GetType().GetMethod("sendMessageStep");
-                browserEditMessageStep = BrowserWindow.GetType().GetMethod("editMessageStep");
-                browserResize = BrowserWindow.GetType().GetMethod("browserResize");
-                browserUserAgent = BrowserWindow.GetType().GetMethod("userAgent");
-                browserGetErrors = BrowserWindow.GetType().GetMethod("getBowserErrors");
-                checkStopTest = BrowserWindow.GetType().GetMethod("checkStopTest");
-                resultAutotest = BrowserWindow.GetType().GetMethod("resultAutotest");
-                debugJavaScript = BrowserWindow.GetType().GetMethod("getStatusDebugJavaScript");
-                getNameAutotest = BrowserWindow.GetType().GetMethod("getNameAutotest");
-                getlanguageEngConsole = BrowserWindow.GetType().GetMethod("getlanguageEngConsole");
-                getlanguageEngReportMail = BrowserWindow.GetType().GetMethod("getlanguageEngReportMail");
-                saveReport = BrowserWindow.GetType().GetMethod("saveReport");
-                saveReportScreenshotAsync = BrowserWindow.GetType().GetMethod("saveReportScreenshotAsync");
-                sendMailFailure = BrowserWindow.GetType().GetMethod("sendMailFailure");
-                sendMailSuccess = BrowserWindow.GetType().GetMethod("sendMailSuccess");
-                sendMail = BrowserWindow.GetType().GetMethod("sendMail");
-                description = BrowserWindow.GetType().GetMethod("description");
+                browserConsoleMsg = BrowserWindow.GetType().GetMethod("ConsoleMsg");
+                browserConsoleMsgError = BrowserWindow.GetType().GetMethod("ConsoleMsgErrorReport");
+                browserSystemConsoleMsg = BrowserWindow.GetType().GetMethod("SystemConsoleMsg");
+                browserCleadMessageStep = BrowserWindow.GetType().GetMethod("CleadMessageStep");
+                browserSendMessageStep = BrowserWindow.GetType().GetMethod("SendMessageStep");
+                browserEditMessageStep = BrowserWindow.GetType().GetMethod("EditMessageStep");
+                browserResize = BrowserWindow.GetType().GetMethod("BrowserResize");
+                browserUserAgent = BrowserWindow.GetType().GetMethod("UserAgent");
+                browserGetErrors = BrowserWindow.GetType().GetMethod("GetBowserErrors");
+                checkStopTest = BrowserWindow.GetType().GetMethod("CheckStopTest");
+                resultAutotest = BrowserWindow.GetType().GetMethod("ResultAutotest");
+                debugJavaScript = BrowserWindow.GetType().GetMethod("GetStatusDebugJavaScript");
+                getNameAutotest = BrowserWindow.GetType().GetMethod("GetNameAutotest");
+                getlanguageEngConsole = BrowserWindow.GetType().GetMethod("GetlanguageEngConsole");
+                getlanguageEngReportMail = BrowserWindow.GetType().GetMethod("GetlanguageEngReportMail");
+                saveReport = BrowserWindow.GetType().GetMethod("SaveReport");
+                saveReportScreenshotAsync = BrowserWindow.GetType().GetMethod("SaveReportScreenshotAsync");
+                sendMailFailure = BrowserWindow.GetType().GetMethod("SendMailFailure");
+                sendMailSuccess = BrowserWindow.GetType().GetMethod("SendMailSuccess");
+                sendMail = BrowserWindow.GetType().GetMethod("SendMail");
+                description = BrowserWindow.GetType().GetMethod("Description");
 
-                MethodInfo mi = BrowserWindow.GetType().GetMethod("getWebView");
+                MethodInfo mi = BrowserWindow.GetType().GetMethod("GetWebView");
                 BrowserView = (Microsoft.Web.WebView2.WinForms.WebView2)mi.Invoke(BrowserWindow, null);
                 BrowserView.ContentLoading += contentLoading;
                 BrowserView.NavigationCompleted += navigationCompleted;

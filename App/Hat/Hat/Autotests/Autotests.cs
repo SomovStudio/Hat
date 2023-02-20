@@ -19,9 +19,9 @@ namespace Hat
 
         public static void play(string testFilename)
         {
-            Config.browserForm.consoleMsg($"Запущен файл автотеста: {testFilename}");
-            if (Config.languageEngConsole == false) Config.browserForm.systemConsoleMsg($"Запущен файл автотеста: {testFilename}", default, ConsoleColor.DarkCyan, ConsoleColor.White, true);
-            else Config.browserForm.systemConsoleMsg($"The autotest file is running: {testFilename}", default, ConsoleColor.DarkCyan, ConsoleColor.White, true);
+            Config.browserForm.ConsoleMsg($"Запущен файл автотеста: {testFilename}");
+            if (Config.languageEngConsole == false) Config.browserForm.SystemConsoleMsg($"Запущен файл автотеста: {testFilename}", default, ConsoleColor.DarkCyan, ConsoleColor.White, true);
+            else Config.browserForm.SystemConsoleMsg($"The autotest file is running: {testFilename}", default, ConsoleColor.DarkCyan, ConsoleColor.White, true);
 
             try
             {
@@ -49,7 +49,7 @@ namespace Hat
                 {
                     foreach (var error in results.Errors)
                     {
-                        Config.browserForm.consoleMsgErrorReport(error.ToString());
+                        Config.browserForm.ConsoleMsgErrorReport(error.ToString());
                     }
                 }
                 else
@@ -70,7 +70,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                Config.browserForm.consoleMsgErrorReport(ex.Message);
+                Config.browserForm.ConsoleMsgErrorReport(ex.Message);
             }
         }
 
@@ -198,7 +198,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                Config.browserForm.consoleMsgError(ex.ToString());
+                Config.browserForm.ConsoleMsgError(ex.ToString());
             }
         }
 
@@ -214,7 +214,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                Config.browserForm.consoleMsgError(ex.ToString());
+                Config.browserForm.ConsoleMsgError(ex.ToString());
             }
 
             string[] result = new string[files.Count];
@@ -227,7 +227,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                Config.browserForm.consoleMsgError(ex.ToString());
+                Config.browserForm.ConsoleMsgError(ex.ToString());
             }
 
             return result;
