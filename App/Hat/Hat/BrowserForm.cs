@@ -404,7 +404,14 @@ namespace Hat
 
         public int SendMessageStep(string action, string status, string comment, int image, bool debug) // отправляет сообщение в таблицу "тест"
         {
-            Report.AddStep(status, action, comment);
+            if (debug == true)
+            {
+                if (Config.fullReport == true) Report.AddStep(status, action, comment);
+            }
+            else
+            {
+                Report.AddStep(status, action, comment);
+            }
 
             ListViewItem item;
             ListViewItem.ListViewSubItem subitem;
@@ -435,7 +442,14 @@ namespace Hat
                 if (status != null) listViewTest.Items[index].SubItems[2].Text = status;
                 if (comment != null) listViewTest.Items[index].SubItems[3].Text = comment;
 
-                Report.AddStep(listViewTest.Items[index].SubItems[2].Text, listViewTest.Items[index].SubItems[1].Text, listViewTest.Items[index].SubItems[3].Text);
+                if (debug == true)
+                {
+                    if (Config.fullReport == true) Report.AddStep(listViewTest.Items[index].SubItems[2].Text, listViewTest.Items[index].SubItems[1].Text, listViewTest.Items[index].SubItems[3].Text);
+                }
+                else
+                {
+                    Report.AddStep(listViewTest.Items[index].SubItems[2].Text, listViewTest.Items[index].SubItems[1].Text, listViewTest.Items[index].SubItems[3].Text);
+                }
             }
             catch (Exception ex)
             {
@@ -958,7 +972,7 @@ namespace Hat
                     if (!File.Exists(Config.projectPath + fileProject))
                     {
                         Config.defaultDataMail();
-                        Config.defaultLanguage();
+                        Config.defaultFlags();
                         writer.writeFile(Config.getConfig(), WorkOnFiles.UTF_8_BOM, Config.projectPath + fileProject);
                     }
                     if (!File.Exists(Config.projectPath + fileSupportHelper)) writer.writeFile(Autotests.getContentFileHelper(), Config.encoding, Config.projectPath + fileSupportHelper);
@@ -1164,6 +1178,7 @@ namespace Hat
 ;                   changeEncoding();
                     changeLanguage();
                     changeEditorTopMost();
+                    changeFullShortReport();
                     showDataMail();
 
                     ConsoleMsg("Проект открыт (версия проекта: " + Config.version + ")");
@@ -1206,7 +1221,7 @@ namespace Hat
         }
 
         /* Список подключенный библиотек */
-        public void showLibs()
+        private void showLibs()
         {
             try
             {
@@ -1225,7 +1240,7 @@ namespace Hat
         }
 
         /* Кодировка из файла конфигурации */
-        public void changeEncoding()
+        private void changeEncoding()
         {
             try
             {
@@ -1267,7 +1282,7 @@ namespace Hat
         }
 
         /* Язык вывода (русский / английский) */
-        public void changeLanguage()
+        private void changeLanguage()
         {
             try
             {
@@ -1311,9 +1326,36 @@ namespace Hat
             }
         }
 
+        /* Режим вывода сообщений в отчет */
+        private void changeFullShortReport()
+        {
+            try
+            {
+                if (Config.fullReport == true)
+                {
+                    fullReportToolStripMenuItem.Checked = true;
+                    fullReportToolStripMenuItem1.Checked = true;
+                    shortReportToolStripMenuItem.Checked = false;
+                    shortReportToolStripMenuItem1.Checked = false;
+                    ConsoleMsg("Режим вывода сообщений - полный отчет");
+                }
+                else
+                {
+                    fullReportToolStripMenuItem.Checked = false;
+                    fullReportToolStripMenuItem1.Checked = false;
+                    shortReportToolStripMenuItem.Checked = true;
+                    shortReportToolStripMenuItem1.Checked = true;
+                    ConsoleMsg("Режим вывода сообщений - краткий отчет");
+                }
+            }
+            catch (Exception ex)
+            {
+                ConsoleMsgError(ex.ToString());
+            }
+        }
 
         /* Способ открытия редактора (поверх окон) */
-        public void changeEditorTopMost()
+        private void changeEditorTopMost()
         {
             try
             {
@@ -1328,7 +1370,7 @@ namespace Hat
         }
 
         /* Настройки почты (проект) */
-        public void showDataMail()
+        private void showDataMail()
         {
             try
             {
@@ -2934,6 +2976,82 @@ namespace Hat
                 Config.languageEngReportMail = true;
                 if (Config.projectPath != "(не открыт)") Config.saveConfigJson(Config.projectPath + "/project.hat");
                 ConsoleMsg("Язык вывода в отчет и письмо изменен на английский");
+            }
+            catch (Exception ex)
+            {
+                ConsoleMsgError(ex.ToString());
+            }
+        }
+
+        private void fullReportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // полный отчет
+            try
+            {
+                fullReportToolStripMenuItem.Checked = true;
+                fullReportToolStripMenuItem1.Checked = true;
+                shortReportToolStripMenuItem.Checked = false;
+                shortReportToolStripMenuItem1.Checked = false;
+                Config.fullReport = true;
+                if (Config.projectPath != "(не открыт)") Config.saveConfigJson(Config.projectPath + "/project.hat");
+                ConsoleMsg("Режим вывода сообщений - полный отчет");
+            }
+            catch (Exception ex)
+            {
+                ConsoleMsgError(ex.ToString());
+            }
+        }
+
+        private void shortReportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // краткий отчет
+            try
+            {
+                fullReportToolStripMenuItem.Checked = false;
+                fullReportToolStripMenuItem1.Checked = false;
+                shortReportToolStripMenuItem.Checked = true;
+                shortReportToolStripMenuItem1.Checked = true;
+                Config.fullReport = false;
+                if (Config.projectPath != "(не открыт)") Config.saveConfigJson(Config.projectPath + "/project.hat");
+                ConsoleMsg("Режим вывода сообщений - краткий отчет");
+            }
+            catch (Exception ex)
+            {
+                ConsoleMsgError(ex.ToString());
+            }
+        }
+
+        private void toolStripMenuItem16_Click(object sender, EventArgs e)
+        {
+            // полный отчет
+            try
+            {
+                fullReportToolStripMenuItem.Checked = true;
+                fullReportToolStripMenuItem1.Checked = true;
+                shortReportToolStripMenuItem.Checked = false;
+                shortReportToolStripMenuItem1.Checked = false;
+                Config.fullReport = true;
+                if (Config.projectPath != "(не открыт)") Config.saveConfigJson(Config.projectPath + "/project.hat");
+                ConsoleMsg("Режим вывода сообщений - полный отчет");
+            }
+            catch (Exception ex)
+            {
+                ConsoleMsgError(ex.ToString());
+            }
+        }
+
+        private void toolStripMenuItem17_Click(object sender, EventArgs e)
+        {
+            // краткий отчет
+            try
+            {
+                fullReportToolStripMenuItem.Checked = false;
+                fullReportToolStripMenuItem1.Checked = false;
+                shortReportToolStripMenuItem.Checked = true;
+                shortReportToolStripMenuItem1.Checked = true;
+                Config.fullReport = false;
+                if (Config.projectPath != "(не открыт)") Config.saveConfigJson(Config.projectPath + "/project.hat");
+                ConsoleMsg("Режим вывода сообщений - краткий отчет");
             }
             catch (Exception ex)
             {

@@ -16,6 +16,7 @@ namespace Hat
         public bool LanguageEngConsole { get; set; }
         public bool LanguageEngReportMail { get; set; }
         public bool EditorTopMost { get; set; }
+        public bool FullReport { get; set; }
         public string[] Libraries { get; set; }
         public string[] DataMail { get; set; }
     }
@@ -45,6 +46,7 @@ namespace Hat
         public static bool languageEngConsole = true;           // поддержка английского языка в консоли (по умолчанию английский)
         public static bool languageEngReportMail = false;       // поддержка английского языка в отече и письме (по умолчанию русский)
         public static bool editorTopMost = false;               // настройка отображения редактора
+        public static bool fullReport = true;                   // режим вывода (полный отчет или краткий отчет)
         public static string[] libraries = new string[]         // библиотека подключаемых dll файлов
         {
             "HatFramework.dll",
@@ -90,6 +92,7 @@ namespace Hat
                 jsonConfig.LanguageEngConsole= languageEngConsole;
                 jsonConfig.LanguageEngReportMail = languageEngReportMail;
                 jsonConfig.EditorTopMost = editorTopMost;
+                jsonConfig.FullReport = fullReport;
                 jsonConfig.Libraries = libraries;
                 jsonConfig.DataMail = dataMail;
                 content = JsonConvert.SerializeObject(jsonConfig);
@@ -114,10 +117,11 @@ namespace Hat
             };
         }
 
-        public static void defaultLanguage()
+        public static void defaultFlags()
         {
             Config.languageEngConsole = true;
             Config.languageEngReportMail = false;
+            Config.fullReport = true;
         }
 
         public static void saveConfigJson(string filename)
@@ -149,6 +153,7 @@ namespace Hat
                 languageEngConsole = jsonConfig.LanguageEngConsole;
                 languageEngReportMail = jsonConfig.LanguageEngReportMail;
                 editorTopMost = jsonConfig.EditorTopMost;
+                fullReport = jsonConfig.FullReport;
                 libraries = jsonConfig.Libraries;
                 dataMail = jsonConfig.DataMail;
             }

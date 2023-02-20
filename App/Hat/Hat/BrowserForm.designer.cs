@@ -56,6 +56,10 @@
             this.uTF8ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.uTF8BOMToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.wINDOWS1251ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem15 = new System.Windows.Forms.ToolStripMenuItem();
+            this.fullReportToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.shortReportToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator25 = new System.Windows.Forms.ToolStripSeparator();
             this.languageReportMailToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.languageReportEmailRusToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.languageReportEmailEngToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -148,6 +152,10 @@
             this.toolStripMenuItemUTF8 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemUTF8BOM = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemWINDOWS1251 = new System.Windows.Forms.ToolStripMenuItem();
+            this.showEventsReportEmailToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.fullReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.shortReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator24 = new System.Windows.Forms.ToolStripSeparator();
             this.languageReportMailToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.languageReportEmailRusToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.languageReportEmailEngToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -465,6 +473,8 @@
             this.настройкиToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItem4,
             this.кодировкаФайловToolStripMenuItem,
+            this.toolStripMenuItem15,
+            this.toolStripSeparator25,
             this.languageReportMailToolStripMenuItem1,
             this.languageEngRusToolStripMenuItem1,
             this.toolStripSeparator18,
@@ -479,7 +489,7 @@
             this.toolStripMenuItem4.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItemEditorTopMost});
             this.toolStripMenuItem4.Name = "toolStripMenuItem4";
-            this.toolStripMenuItem4.Size = new System.Drawing.Size(296, 22);
+            this.toolStripMenuItem4.Size = new System.Drawing.Size(362, 22);
             this.toolStripMenuItem4.Text = "Окно редактора";
             // 
             // toolStripMenuItemEditorTopMost
@@ -497,7 +507,7 @@
             this.uTF8BOMToolStripMenuItem,
             this.wINDOWS1251ToolStripMenuItem});
             this.кодировкаФайловToolStripMenuItem.Name = "кодировкаФайловToolStripMenuItem";
-            this.кодировкаФайловToolStripMenuItem.Size = new System.Drawing.Size(296, 22);
+            this.кодировкаФайловToolStripMenuItem.Size = new System.Drawing.Size(362, 22);
             this.кодировкаФайловToolStripMenuItem.Text = "Кодировка файлов:";
             // 
             // dEFAULTToolStripMenuItem
@@ -530,13 +540,43 @@
             this.wINDOWS1251ToolStripMenuItem.Text = "WINDOWS-1251";
             this.wINDOWS1251ToolStripMenuItem.Click += new System.EventHandler(this.wINDOWS1251ToolStripMenuItem_Click);
             // 
+            // toolStripMenuItem15
+            // 
+            this.toolStripMenuItem15.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fullReportToolStripMenuItem1,
+            this.shortReportToolStripMenuItem1});
+            this.toolStripMenuItem15.Name = "toolStripMenuItem15";
+            this.toolStripMenuItem15.Size = new System.Drawing.Size(362, 22);
+            this.toolStripMenuItem15.Text = "Вывод сообщений (командная строка, отчет, почта)";
+            // 
+            // fullReportToolStripMenuItem1
+            // 
+            this.fullReportToolStripMenuItem1.Checked = true;
+            this.fullReportToolStripMenuItem1.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.fullReportToolStripMenuItem1.Name = "fullReportToolStripMenuItem1";
+            this.fullReportToolStripMenuItem1.Size = new System.Drawing.Size(371, 22);
+            this.fullReportToolStripMenuItem1.Text = "Полный отчет (сообщения всех шагов)";
+            this.fullReportToolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem16_Click);
+            // 
+            // shortReportToolStripMenuItem1
+            // 
+            this.shortReportToolStripMenuItem1.Name = "shortReportToolStripMenuItem1";
+            this.shortReportToolStripMenuItem1.Size = new System.Drawing.Size(371, 22);
+            this.shortReportToolStripMenuItem1.Text = "Краткий отчет (только пользовательские сообщения)";
+            this.shortReportToolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem17_Click);
+            // 
+            // toolStripSeparator25
+            // 
+            this.toolStripSeparator25.Name = "toolStripSeparator25";
+            this.toolStripSeparator25.Size = new System.Drawing.Size(359, 6);
+            // 
             // languageReportMailToolStripMenuItem1
             // 
             this.languageReportMailToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.languageReportEmailRusToolStripMenuItem1,
             this.languageReportEmailEngToolStripMenuItem1});
             this.languageReportMailToolStripMenuItem1.Name = "languageReportMailToolStripMenuItem1";
-            this.languageReportMailToolStripMenuItem1.Size = new System.Drawing.Size(296, 22);
+            this.languageReportMailToolStripMenuItem1.Size = new System.Drawing.Size(362, 22);
             this.languageReportMailToolStripMenuItem1.Text = "Язык вывода в отчете и письме";
             // 
             // languageReportEmailRusToolStripMenuItem1
@@ -544,14 +584,14 @@
             this.languageReportEmailRusToolStripMenuItem1.Checked = true;
             this.languageReportEmailRusToolStripMenuItem1.CheckState = System.Windows.Forms.CheckState.Checked;
             this.languageReportEmailRusToolStripMenuItem1.Name = "languageReportEmailRusToolStripMenuItem1";
-            this.languageReportEmailRusToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.languageReportEmailRusToolStripMenuItem1.Size = new System.Drawing.Size(141, 22);
             this.languageReportEmailRusToolStripMenuItem1.Text = "Русский";
             this.languageReportEmailRusToolStripMenuItem1.Click += new System.EventHandler(this.languageReportEmailRusToolStripMenuItem1_Click);
             // 
             // languageReportEmailEngToolStripMenuItem1
             // 
             this.languageReportEmailEngToolStripMenuItem1.Name = "languageReportEmailEngToolStripMenuItem1";
-            this.languageReportEmailEngToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.languageReportEmailEngToolStripMenuItem1.Size = new System.Drawing.Size(141, 22);
             this.languageReportEmailEngToolStripMenuItem1.Text = "Английский";
             this.languageReportEmailEngToolStripMenuItem1.Click += new System.EventHandler(this.languageReportEmailEngToolStripMenuItem1_Click);
             // 
@@ -561,7 +601,7 @@
             this.languageRusToolStripMenuItem1,
             this.languageEngToolStripMenuItem1});
             this.languageEngRusToolStripMenuItem1.Name = "languageEngRusToolStripMenuItem1";
-            this.languageEngRusToolStripMenuItem1.Size = new System.Drawing.Size(296, 22);
+            this.languageEngRusToolStripMenuItem1.Size = new System.Drawing.Size(362, 22);
             this.languageEngRusToolStripMenuItem1.Text = "Язык вывода в командной строке (cmd):";
             // 
             // languageRusToolStripMenuItem1
@@ -583,12 +623,12 @@
             // toolStripSeparator18
             // 
             this.toolStripSeparator18.Name = "toolStripSeparator18";
-            this.toolStripSeparator18.Size = new System.Drawing.Size(293, 6);
+            this.toolStripSeparator18.Size = new System.Drawing.Size(359, 6);
             // 
             // debugJavaScriptToolStripMenuItem
             // 
             this.debugJavaScriptToolStripMenuItem.Name = "debugJavaScriptToolStripMenuItem";
-            this.debugJavaScriptToolStripMenuItem.Size = new System.Drawing.Size(296, 22);
+            this.debugJavaScriptToolStripMenuItem.Size = new System.Drawing.Size(362, 22);
             this.debugJavaScriptToolStripMenuItem.Text = "Отладка выполнения JavaScript";
             this.debugJavaScriptToolStripMenuItem.Click += new System.EventHandler(this.debugJavaScriptToolStripMenuItem_Click);
             // 
@@ -1324,6 +1364,8 @@
             this.toolStripDropDownButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.окноРедактораToolStripMenuItem,
             this.toolStripMenuItem1,
+            this.showEventsReportEmailToolStripMenuItem,
+            this.toolStripSeparator24,
             this.languageReportMailToolStripMenuItem,
             this.languageEngRusToolStripMenuItem,
             this.toolStripSeparator19,
@@ -1340,7 +1382,7 @@
             this.окноРедактораToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.editorTopMostToolStripMenuItem});
             this.окноРедактораToolStripMenuItem.Name = "окноРедактораToolStripMenuItem";
-            this.окноРедактораToolStripMenuItem.Size = new System.Drawing.Size(296, 22);
+            this.окноРедактораToolStripMenuItem.Size = new System.Drawing.Size(362, 22);
             this.окноРедактораToolStripMenuItem.Text = "Окно редактора";
             // 
             // editorTopMostToolStripMenuItem
@@ -1358,7 +1400,7 @@
             this.toolStripMenuItemUTF8BOM,
             this.toolStripMenuItemWINDOWS1251});
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(296, 22);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(362, 22);
             this.toolStripMenuItem1.Text = "Кодировка файлов:";
             // 
             // toolStripMenuItemDEFAULT
@@ -1391,13 +1433,43 @@
             this.toolStripMenuItemWINDOWS1251.Text = "WINDOWS-1251";
             this.toolStripMenuItemWINDOWS1251.Click += new System.EventHandler(this.toolStripMenuItemWINDOWS1251_Click);
             // 
+            // showEventsReportEmailToolStripMenuItem
+            // 
+            this.showEventsReportEmailToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fullReportToolStripMenuItem,
+            this.shortReportToolStripMenuItem});
+            this.showEventsReportEmailToolStripMenuItem.Name = "showEventsReportEmailToolStripMenuItem";
+            this.showEventsReportEmailToolStripMenuItem.Size = new System.Drawing.Size(362, 22);
+            this.showEventsReportEmailToolStripMenuItem.Text = "Вывод сообщений (командная строка, отчет, почта)";
+            // 
+            // fullReportToolStripMenuItem
+            // 
+            this.fullReportToolStripMenuItem.Checked = true;
+            this.fullReportToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.fullReportToolStripMenuItem.Name = "fullReportToolStripMenuItem";
+            this.fullReportToolStripMenuItem.Size = new System.Drawing.Size(371, 22);
+            this.fullReportToolStripMenuItem.Text = "Полный отчет (сообщения всех шагов)";
+            this.fullReportToolStripMenuItem.Click += new System.EventHandler(this.fullReportToolStripMenuItem_Click);
+            // 
+            // shortReportToolStripMenuItem
+            // 
+            this.shortReportToolStripMenuItem.Name = "shortReportToolStripMenuItem";
+            this.shortReportToolStripMenuItem.Size = new System.Drawing.Size(371, 22);
+            this.shortReportToolStripMenuItem.Text = "Краткий отчет (только пользовательские сообщения)";
+            this.shortReportToolStripMenuItem.Click += new System.EventHandler(this.shortReportToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator24
+            // 
+            this.toolStripSeparator24.Name = "toolStripSeparator24";
+            this.toolStripSeparator24.Size = new System.Drawing.Size(359, 6);
+            // 
             // languageReportMailToolStripMenuItem
             // 
             this.languageReportMailToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.languageReportEmailRusToolStripMenuItem,
             this.languageReportEmailEngToolStripMenuItem});
             this.languageReportMailToolStripMenuItem.Name = "languageReportMailToolStripMenuItem";
-            this.languageReportMailToolStripMenuItem.Size = new System.Drawing.Size(296, 22);
+            this.languageReportMailToolStripMenuItem.Size = new System.Drawing.Size(362, 22);
             this.languageReportMailToolStripMenuItem.Text = "Язык вывода в отчете и письме";
             // 
             // languageReportEmailRusToolStripMenuItem
@@ -1405,14 +1477,14 @@
             this.languageReportEmailRusToolStripMenuItem.Checked = true;
             this.languageReportEmailRusToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.languageReportEmailRusToolStripMenuItem.Name = "languageReportEmailRusToolStripMenuItem";
-            this.languageReportEmailRusToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.languageReportEmailRusToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
             this.languageReportEmailRusToolStripMenuItem.Text = "Русский";
             this.languageReportEmailRusToolStripMenuItem.Click += new System.EventHandler(this.languageReportEmailRusToolStripMenuItem_Click);
             // 
             // languageReportEmailEngToolStripMenuItem
             // 
             this.languageReportEmailEngToolStripMenuItem.Name = "languageReportEmailEngToolStripMenuItem";
-            this.languageReportEmailEngToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.languageReportEmailEngToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
             this.languageReportEmailEngToolStripMenuItem.Text = "Английский";
             this.languageReportEmailEngToolStripMenuItem.Click += new System.EventHandler(this.languageReportEmailEngToolStripMenuItem_Click);
             // 
@@ -1422,13 +1494,13 @@
             this.languageRusToolStripMenuItem,
             this.languageEngToolStripMenuItem});
             this.languageEngRusToolStripMenuItem.Name = "languageEngRusToolStripMenuItem";
-            this.languageEngRusToolStripMenuItem.Size = new System.Drawing.Size(296, 22);
+            this.languageEngRusToolStripMenuItem.Size = new System.Drawing.Size(362, 22);
             this.languageEngRusToolStripMenuItem.Text = "Язык вывода в командной строке (cmd):";
             // 
             // languageRusToolStripMenuItem
             // 
             this.languageRusToolStripMenuItem.Name = "languageRusToolStripMenuItem";
-            this.languageRusToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
+            this.languageRusToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.languageRusToolStripMenuItem.Text = "Русский";
             this.languageRusToolStripMenuItem.Click += new System.EventHandler(this.languageRusToolStripMenuItem_Click);
             // 
@@ -1437,26 +1509,26 @@
             this.languageEngToolStripMenuItem.Checked = true;
             this.languageEngToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.languageEngToolStripMenuItem.Name = "languageEngToolStripMenuItem";
-            this.languageEngToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
+            this.languageEngToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.languageEngToolStripMenuItem.Text = "Английский";
             this.languageEngToolStripMenuItem.Click += new System.EventHandler(this.languageEngToolStripMenuItem_Click);
             // 
             // toolStripSeparator19
             // 
             this.toolStripSeparator19.Name = "toolStripSeparator19";
-            this.toolStripSeparator19.Size = new System.Drawing.Size(293, 6);
+            this.toolStripSeparator19.Size = new System.Drawing.Size(359, 6);
             // 
             // debugJavaScriptToolStripMenuItem1
             // 
             this.debugJavaScriptToolStripMenuItem1.Name = "debugJavaScriptToolStripMenuItem1";
-            this.debugJavaScriptToolStripMenuItem1.Size = new System.Drawing.Size(296, 22);
+            this.debugJavaScriptToolStripMenuItem1.Size = new System.Drawing.Size(362, 22);
             this.debugJavaScriptToolStripMenuItem1.Text = "Отладка выполнения JavaScript";
             this.debugJavaScriptToolStripMenuItem1.Click += new System.EventHandler(this.debugJavaScriptToolStripMenuItem_Click);
             // 
             // openTreeToolStripMenuItem
             // 
             this.openTreeToolStripMenuItem.Name = "openTreeToolStripMenuItem";
-            this.openTreeToolStripMenuItem.Size = new System.Drawing.Size(296, 22);
+            this.openTreeToolStripMenuItem.Size = new System.Drawing.Size(362, 22);
             this.openTreeToolStripMenuItem.Text = "Развернуть дерево папок";
             this.openTreeToolStripMenuItem.Click += new System.EventHandler(this.openTreeToolStripMenuItem_Click);
             // 
@@ -2819,6 +2891,14 @@
         private System.Windows.Forms.ToolStripMenuItem languageReportMailToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem languageReportEmailRusToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem languageReportEmailEngToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator24;
+        private System.Windows.Forms.ToolStripMenuItem showEventsReportEmailToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem fullReportToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem shortReportToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem15;
+        private System.Windows.Forms.ToolStripMenuItem fullReportToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem shortReportToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator25;
     }
 }
 
