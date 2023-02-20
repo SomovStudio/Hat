@@ -63,7 +63,7 @@ namespace HatFrameworkDev
         private MethodInfo sendMailSuccess;         // функция: SendMailSuccess - отправка отчета о Success автотеста по почте
         private MethodInfo sendMail;                // функция: SendMail - отправка письма на почту
         private MethodInfo description;             // функция: Description - добавляет описание автотеста для его вывода в отчет
-        private MethodInfo reportAddMessage;        // функция: ReportAddMessage - // добавляет сообщение в отчет (письмо)
+        private MethodInfo reportAddMessage;        // функция: ReportAddMessage - добавляет сообщение в отчет (письмо)
 
         private bool languageEngConsole = false;    // флаг: английский язык для вывода в командной строке
         private bool languageEngReportEmail = false;// флаг: английский язык для вывода в отчет и письмо

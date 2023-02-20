@@ -406,7 +406,8 @@ namespace Hat
         {
             if (debug == true)
             {
-                if (Config.fullReport == true) Report.AddStep(status, action, comment);
+                if (Config.fullReport == true || status == Report.ERROR || status == Report.FAILED) 
+                    Report.AddStep(status, action, comment);
             }
             else
             {
@@ -444,7 +445,8 @@ namespace Hat
 
                 if (debug == true)
                 {
-                    if (Config.fullReport == true) Report.AddStep(listViewTest.Items[index].SubItems[2].Text, listViewTest.Items[index].SubItems[1].Text, listViewTest.Items[index].SubItems[3].Text);
+                    if (Config.fullReport == true || status == Report.ERROR || status == Report.FAILED) 
+                        Report.AddStep(listViewTest.Items[index].SubItems[2].Text, listViewTest.Items[index].SubItems[1].Text, listViewTest.Items[index].SubItems[3].Text);
                 }
                 else
                 {
