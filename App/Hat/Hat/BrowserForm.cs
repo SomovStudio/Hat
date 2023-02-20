@@ -518,7 +518,6 @@ namespace Hat
 
         public void SaveReport() // Сохранить отчет и скриншот
         {
-            Report.AddStep("", "", "");
             Report.SaveReport(testSuccess);
         }
 
