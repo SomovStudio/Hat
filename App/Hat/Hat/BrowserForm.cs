@@ -13,6 +13,8 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Microsoft.Web.WebView2.Core;
 using HatFramework;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using System.Xml.Linq;
 
 namespace Hat
 {
@@ -400,15 +402,15 @@ namespace Hat
             }
         }
 
-        public int SendMessageStep(string step, string status, string comment, int image) // отправляет сообщение в таблицу "тест"
+        public int SendMessageStep(string action, string status, string comment, int image, bool debug) // отправляет сообщение в таблицу "тест"
         {
-            Report.AddStep(status, step, comment);
+            Report.AddStep(status, action, comment);
 
             ListViewItem item;
             ListViewItem.ListViewSubItem subitem;
             item = new ListViewItem();
             subitem = new ListViewItem.ListViewSubItem();
-            subitem.Text = step;
+            subitem.Text = action;
             item.SubItems.Add(subitem);
             subitem = new ListViewItem.ListViewSubItem();
             subitem.Text = status;
@@ -424,12 +426,12 @@ namespace Hat
             return index;
         }
 
-        public void EditMessageStep(int index, string step, string status, string comment, int image) // изменить уже отправленное сообщение в таблице "тест"
+        public void EditMessageStep(int index, string action, string status, string comment, int image, bool debug) // изменить уже отправленное сообщение в таблице "тест"
         {
             try
             {
                 if (image != null) listViewTest.Items[index].ImageIndex = image;
-                if (step != null) listViewTest.Items[index].SubItems[1].Text = step;
+                if (action != null) listViewTest.Items[index].SubItems[1].Text = action;
                 if (status != null) listViewTest.Items[index].SubItems[2].Text = status;
                 if (comment != null) listViewTest.Items[index].SubItems[3].Text = comment;
 
@@ -718,6 +720,12 @@ namespace Hat
                 ConsoleMsgError(ex.ToString());
             }
         }
+
+        public void ReportAddMessage(string status, string action, string comment) // добавляет сообщение в отчет (письмо)
+        {
+            Report.AddStep(status, action, comment);
+        }
+
         /* |== ПУБЛИЧНЫЕ МЕТОДЫ ДЛЯ ФРЕЙМВОРКА ========================================================================| */
 
 

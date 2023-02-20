@@ -12,9 +12,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Newtonsoft.Json;
-using System.Text.RegularExpressions;
-using System.Xml.Linq;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace HatFrameworkDev
 {
@@ -66,6 +63,7 @@ namespace HatFrameworkDev
         private MethodInfo sendMailSuccess;         // функция: SendMailSuccess - отправка отчета о Success автотеста по почте
         private MethodInfo sendMail;                // функция: SendMail - отправка письма на почту
         private MethodInfo description;             // функция: Description - добавляет описание автотеста для его вывода в отчет
+        private MethodInfo reportAddMessage;        // функция: ReportAddMessage - // добавляет сообщение в отчет (письмо)
 
         private bool languageEngConsole = false;    // флаг: английский язык для вывода в командной строке
         private bool languageEngReportEmail = false;// флаг: английский язык для вывода в отчет и письмо
@@ -104,6 +102,7 @@ namespace HatFrameworkDev
                 sendMailSuccess = BrowserWindow.GetType().GetMethod("SendMailSuccess");
                 sendMail = BrowserWindow.GetType().GetMethod("SendMail");
                 description = BrowserWindow.GetType().GetMethod("Description");
+                reportAddMessage = BrowserWindow.GetType().GetMethod("ReportAddMessage");
 
                 MethodInfo mi = BrowserWindow.GetType().GetMethod("GetWebView");
                 BrowserView = (Microsoft.Web.WebView2.WinForms.WebView2)mi.Invoke(BrowserWindow, null);
@@ -364,7 +363,7 @@ namespace HatFrameworkDev
                 }
 
                 // вывод сообщения в таблицу браузера
-                int index = (int)browserSendMessageStep.Invoke(BrowserWindow, new object[] { action, status, comment, image }); 
+                int index = (int)browserSendMessageStep.Invoke(BrowserWindow, new object[] { action, status, comment, image, false });
 
                 // индекс сообщения
                 return index;
@@ -415,7 +414,7 @@ namespace HatFrameworkDev
                 }
 
                 // изменяем сообщения в таблицу браузера
-                browserEditMessageStep.Invoke(BrowserWindow, new object[] { index, action, status, comment, image });
+                browserEditMessageStep.Invoke(BrowserWindow, new object[] { index, action, status, comment, image, false });
             }
             catch (Exception ex)
             {
@@ -486,13 +485,19 @@ namespace HatFrameworkDev
 
                 // вывод сообщения в таблицу браузера
                 string action = "";
-                if (actionEng != null) action = actionEng;
-                if (actionRus != null) action = actionRus;
                 string comment = "";
-                if (commentEng != null) comment = commentEng;
-                if (commentRus != null) comment = commentRus;
-
-                int index = (int)browserSendMessageStep.Invoke(BrowserWindow, new object[] { action, status, comment, image });
+                if (languageEngReportEmail == true)
+                {
+                    if (actionEng != null) action = actionEng;
+                    if (commentEng != null) comment = commentEng;
+                }
+                else
+                {
+                    if (actionRus != null) action = actionRus;
+                    if (commentRus != null) comment = commentRus;
+                }
+                
+                int index = (int)browserSendMessageStep.Invoke(BrowserWindow, new object[] { action, status, comment, image, true });
 
                 // индекс сообщения
                 return index;
@@ -568,13 +573,18 @@ namespace HatFrameworkDev
 
                 // изменяем сообщения в таблицу браузера
                 string action = null;
-                if (actionEng != null) action = actionEng;
-                if (actionRus != null) action = actionRus;
                 string comment = null;
-                if (commentEng != null) comment = commentEng;
-                if (commentRus != null) comment = commentRus;
-
-                browserEditMessageStep.Invoke(BrowserWindow, new object[] { index, action, status, comment, image });
+                if (languageEngReportEmail == true)
+                {
+                    if (actionEng != null) action = actionEng;
+                    if (commentEng != null) comment = commentEng;
+                }
+                else
+                {
+                    if (actionRus != null) action = actionRus;
+                    if (commentRus != null) comment = commentRus;
+                }
+                browserEditMessageStep.Invoke(BrowserWindow, new object[] { index, action, status, comment, image, true });
             }
             catch (Exception ex)
             {
