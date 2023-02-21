@@ -1453,6 +1453,15 @@ namespace Hat
             return value;
         }
 
+        public string getFolderName2(string path)
+        {
+            // Регулярные выражения онлайн http://regexstorm.net/tester
+            //string pattern = @"\w{1,}$";
+            string pattern = @"[^//]{1,}\w{1,}$";
+            string value = Regex.Match(path, pattern).Value;
+            return value;
+        }
+
         public string getFileName(string path)
         {
             //string pattern = @"\w{1,}.\w{1,}$";

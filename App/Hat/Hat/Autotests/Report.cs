@@ -687,7 +687,7 @@ ZTptb2RpZnkAMjAyMy0wMi0yMVQxMDoxMzo0MSswMDowMN/S9FIAAAAASUVORK5CYII="" />
                         content += $"<td class=\"table-description table-row\">{test[1]}</td>" + Environment.NewLine;
                         content += $"<td class=\"table-date table-row\">{test[2]}</td>" + Environment.NewLine;
                         content += $"<td class=\"table-file table-row\">{test[3]}</td>" + Environment.NewLine;
-                        content += $"<td class=\"table-report table-row\"><a href=\"{test[4]}\">{test[4]}</a></td>" + Environment.NewLine;
+                        content += $"<td class=\"table-report table-row\"><a href=\"{test[4]}\">{Config.browserForm.getFolderName2(test[4])}</a></td>" + Environment.NewLine;
                         content += "</tr>" + Environment.NewLine;
                     }
                 }
