@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Shapes;
 
 namespace Hat
 {
@@ -375,6 +376,42 @@ img { min-width: 700px; max-width: 700px; }
         /* =======================================================================================
          * Страница полного отчета для всех автотестов
          * */
+
+        public static void SaveResultReport()
+        {
+            try
+            {
+                if (Report.FolderName == null) Report.FolderName = Config.projectPath + "/reports/";
+                if (Report.FolderImagesName == null) Report.FolderImagesName = Config.projectPath + "/reports/screenshots/";
+
+                if (!Directory.Exists(Report.FolderName))
+                {
+                    Directory.CreateDirectory(Report.FolderName);
+                    Directory.CreateDirectory(Report.FolderImagesName);
+                    Config.browserForm.ConsoleMsg("Создана папка для отчетов");
+                    Config.browserForm.updateProjectTree();
+                }
+
+                if (Directory.Exists(Report.FolderName))
+                {
+                    foreach (string file in Directory.GetFiles(Report.FolderName))
+                    {
+                        Config.browserForm.ConsoleMsg($"{file}");
+                    }
+                }
+                else
+                {
+                    Config.browserForm.ConsoleMsg($"Не удалось создать папку для отчетов по адресу {Report.FolderName}");
+                    if (Config.languageEngConsole == false) Config.browserForm.SystemConsoleMsg($"Не удалось создать папку для отчетов по адресу {Report.FolderName}" + Environment.NewLine, default, ConsoleColor.DarkGray, ConsoleColor.White, true);
+                    else Config.browserForm.SystemConsoleMsg($"Failed to create a folder for reports at {Report.FolderName}" + Environment.NewLine, default, ConsoleColor.DarkGray, ConsoleColor.White, true);
+                }
+            }
+            catch (Exception ex)
+            {
+                Config.browserForm.ConsoleMsgError(ex.ToString());
+            }
+        }
+
 
         public static string GetResultHead()
         {

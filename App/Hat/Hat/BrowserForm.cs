@@ -3068,5 +3068,11 @@ namespace Hat
                 ConsoleMsgError(ex.ToString());
             }
         }
+
+        private void createResultReportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (Config.projectPath == "(не открыт)") ConsoleMsg("Проект не открыт! Невозможно сформировать отчет с результатами всех тестов");
+            else Report.SaveResultReport();
+        }
     }
 }

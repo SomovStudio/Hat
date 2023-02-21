@@ -270,6 +270,8 @@
             this.folderBrowserDialogProjectCreate = new System.Windows.Forms.FolderBrowserDialog();
             this.openFileProjectDialog = new System.Windows.Forms.OpenFileDialog();
             this.saveFileLogDialog = new System.Windows.Forms.SaveFileDialog();
+            this.toolStripSeparator26 = new System.Windows.Forms.ToolStripSeparator();
+            this.createResultReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -408,7 +410,7 @@
             this.createProjectVSToolStripMenuItem1});
             this.toolStripMenuItem7.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItem7.Image")));
             this.toolStripMenuItem7.Name = "toolStripMenuItem7";
-            this.toolStripMenuItem7.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuItem7.Size = new System.Drawing.Size(163, 22);
             this.toolStripMenuItem7.Text = "Создать проект";
             // 
             // createProjectToolStripMenuItem1
@@ -429,7 +431,7 @@
             // 
             this.создатьПроектToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("создатьПроектToolStripMenuItem.Image")));
             this.создатьПроектToolStripMenuItem.Name = "создатьПроектToolStripMenuItem";
-            this.создатьПроектToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.создатьПроектToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
             this.создатьПроектToolStripMenuItem.Text = "Создать проект";
             this.создатьПроектToolStripMenuItem.Visible = false;
             this.создатьПроектToolStripMenuItem.Click += new System.EventHandler(this.создатьПроектToolStripMenuItem_Click);
@@ -438,20 +440,20 @@
             // 
             this.открытьПроектToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("открытьПроектToolStripMenuItem.Image")));
             this.открытьПроектToolStripMenuItem.Name = "открытьПроектToolStripMenuItem";
-            this.открытьПроектToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.открытьПроектToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
             this.открытьПроектToolStripMenuItem.Text = "Открыть проект";
             this.открытьПроектToolStripMenuItem.Click += new System.EventHandler(this.открытьПроектToolStripMenuItem_Click);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(160, 6);
             // 
             // запуститьТестToolStripMenuItem
             // 
             this.запуститьТестToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("запуститьТестToolStripMenuItem.Image")));
             this.запуститьТестToolStripMenuItem.Name = "запуститьТестToolStripMenuItem";
-            this.запуститьТестToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.запуститьТестToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
             this.запуститьТестToolStripMenuItem.Text = "Запустить тест";
             this.запуститьТестToolStripMenuItem.Click += new System.EventHandler(this.запуститьТестToolStripMenuItem_Click);
             // 
@@ -459,14 +461,14 @@
             // 
             this.остановитьТестToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("остановитьТестToolStripMenuItem.Image")));
             this.остановитьТестToolStripMenuItem.Name = "остановитьТестToolStripMenuItem";
-            this.остановитьТестToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.остановитьТестToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
             this.остановитьТестToolStripMenuItem.Text = "Остановить тест";
             this.остановитьТестToolStripMenuItem.Click += new System.EventHandler(this.остановитьТестToolStripMenuItem_Click);
             // 
             // toolStripSeparator8
             // 
             this.toolStripSeparator8.Name = "toolStripSeparator8";
-            this.toolStripSeparator8.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator8.Size = new System.Drawing.Size(160, 6);
             // 
             // настройкиToolStripMenuItem
             // 
@@ -481,7 +483,7 @@
             this.debugJavaScriptToolStripMenuItem});
             this.настройкиToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("настройкиToolStripMenuItem.Image")));
             this.настройкиToolStripMenuItem.Name = "настройкиToolStripMenuItem";
-            this.настройкиToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.настройкиToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
             this.настройкиToolStripMenuItem.Text = "Настройки";
             // 
             // toolStripMenuItem4
@@ -554,7 +556,7 @@
             this.fullReportToolStripMenuItem1.Checked = true;
             this.fullReportToolStripMenuItem1.CheckState = System.Windows.Forms.CheckState.Checked;
             this.fullReportToolStripMenuItem1.Name = "fullReportToolStripMenuItem1";
-            this.fullReportToolStripMenuItem1.Size = new System.Drawing.Size(371, 22);
+            this.fullReportToolStripMenuItem1.Size = new System.Drawing.Size(429, 22);
             this.fullReportToolStripMenuItem1.Text = "Полный отчет (сообщения всех шагов)";
             this.fullReportToolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem16_Click);
             // 
@@ -1437,7 +1439,9 @@
             // 
             this.showEventsReportEmailToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fullReportToolStripMenuItem,
-            this.shortReportToolStripMenuItem});
+            this.shortReportToolStripMenuItem,
+            this.toolStripSeparator26,
+            this.createResultReportToolStripMenuItem});
             this.showEventsReportEmailToolStripMenuItem.Name = "showEventsReportEmailToolStripMenuItem";
             this.showEventsReportEmailToolStripMenuItem.Size = new System.Drawing.Size(296, 22);
             this.showEventsReportEmailToolStripMenuItem.Text = "Отчет (настройка вывода сообщений)";
@@ -1447,7 +1451,7 @@
             this.fullReportToolStripMenuItem.Checked = true;
             this.fullReportToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.fullReportToolStripMenuItem.Name = "fullReportToolStripMenuItem";
-            this.fullReportToolStripMenuItem.Size = new System.Drawing.Size(371, 22);
+            this.fullReportToolStripMenuItem.Size = new System.Drawing.Size(429, 22);
             this.fullReportToolStripMenuItem.Text = "Полный отчет (сообщения всех шагов)";
             this.fullReportToolStripMenuItem.Click += new System.EventHandler(this.fullReportToolStripMenuItem_Click);
             // 
@@ -1477,14 +1481,14 @@
             this.languageReportEmailRusToolStripMenuItem.Checked = true;
             this.languageReportEmailRusToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.languageReportEmailRusToolStripMenuItem.Name = "languageReportEmailRusToolStripMenuItem";
-            this.languageReportEmailRusToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.languageReportEmailRusToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
             this.languageReportEmailRusToolStripMenuItem.Text = "Русский";
             this.languageReportEmailRusToolStripMenuItem.Click += new System.EventHandler(this.languageReportEmailRusToolStripMenuItem_Click);
             // 
             // languageReportEmailEngToolStripMenuItem
             // 
             this.languageReportEmailEngToolStripMenuItem.Name = "languageReportEmailEngToolStripMenuItem";
-            this.languageReportEmailEngToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.languageReportEmailEngToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
             this.languageReportEmailEngToolStripMenuItem.Text = "Английский";
             this.languageReportEmailEngToolStripMenuItem.Click += new System.EventHandler(this.languageReportEmailEngToolStripMenuItem_Click);
             // 
@@ -2569,6 +2573,18 @@
             // 
             this.saveFileLogDialog.Filter = "*.txt|*.txt";
             // 
+            // toolStripSeparator26
+            // 
+            this.toolStripSeparator26.Name = "toolStripSeparator26";
+            this.toolStripSeparator26.Size = new System.Drawing.Size(426, 6);
+            // 
+            // createResultReportToolStripMenuItem
+            // 
+            this.createResultReportToolStripMenuItem.Name = "createResultReportToolStripMenuItem";
+            this.createResultReportToolStripMenuItem.Size = new System.Drawing.Size(429, 22);
+            this.createResultReportToolStripMenuItem.Text = "Сформировать отчет с результатами всех тестов";
+            this.createResultReportToolStripMenuItem.Click += new System.EventHandler(this.createResultReportToolStripMenuItem_Click);
+            // 
             // BrowserForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2899,6 +2915,8 @@
         private System.Windows.Forms.ToolStripMenuItem fullReportToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem shortReportToolStripMenuItem1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator25;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator26;
+        private System.Windows.Forms.ToolStripMenuItem createResultReportToolStripMenuItem;
     }
 }
 
