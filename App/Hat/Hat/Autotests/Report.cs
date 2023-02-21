@@ -453,6 +453,7 @@ img { min-width: 700px; max-width: 700px; }
                             }
                             else
                             {
+                                amountWorkTests++;
                                 test.Add(Report.AT_WORK);   // Статус теста
                                 test.Add("..."); // Описание теста
                                 test.Add("..."); // Дата завершения
@@ -467,8 +468,8 @@ img { min-width: 700px; max-width: 700px; }
                     failureRate = (amountFailureTests / amountTests) * 100;
                     workRate = (amountWorkTests / amountTests) * 100;
 
-                    Config.browserForm.ConsoleMsg($"{amountTests} | {amountSuccessTests} | {amountFailureTests} | {amountWorkTests}");
-                    Config.browserForm.ConsoleMsg($"{successRate} | {failureRate} | {workRate}");
+                    //Config.browserForm.ConsoleMsg($"{amountTests} | {amountSuccessTests} | {amountFailureTests} | {amountWorkTests}");
+                    //Config.browserForm.ConsoleMsg($"{successRate} | {failureRate} | {workRate}");
 
                     workFiles.writeFile(GetResultHead() + GetResultBody(tests, (int)successRate, (int)failureRate, (int)workRate, (int)amountSuccessTests, (int)amountFailureTests, (int)amountWorkTests, (int)amountTests) + GetResultFooter(), WorkOnFiles.UTF_8_BOM, Report.FolderName + "index.html");
                     if (File.Exists(Report.FolderName + "index.html"))
