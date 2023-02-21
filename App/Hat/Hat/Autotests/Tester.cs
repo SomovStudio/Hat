@@ -932,7 +932,7 @@ namespace HatFrameworkDev
                     if (DefineTestStop(step) == true) return;
                 }
 
-                if (statusPageLoad == true) EditMessageDebug(step, null, null, PASSED, "Выполнено действие браузера - назад", "Browser action performed - back", IMAGE_STATUS_PASSED);
+                if (statusPageLoad == true) EditMessageDebug(step, null, null, COMPLETED, "Выполнено действие браузера - назад", "Browser action performed - back", IMAGE_STATUS_MESSAGE);
                 else
                 {
                     EditMessageDebug(step, null, null, FAILED, "Не выполнено действие браузера - назад (cтраница не загружена)", "Browser action failed - back (page not loaded)", IMAGE_STATUS_FAILED);
@@ -968,7 +968,7 @@ namespace HatFrameworkDev
                     if (DefineTestStop(step) == true) return;
                 }
 
-                if (statusPageLoad == true) EditMessageDebug(step, null, null, PASSED, "Выполнено действие браузера - вперед", "Browser action performed - forward", IMAGE_STATUS_PASSED);
+                if (statusPageLoad == true) EditMessageDebug(step, null, null, COMPLETED, "Выполнено действие браузера - вперед", "Browser action performed - forward", IMAGE_STATUS_MESSAGE);
                 else
                 {
                     EditMessageDebug(step, null, null, FAILED, "Не выполнено действие браузера - вперед (cтраница не загружена)", "Browser action failed - forward (page not loaded)", IMAGE_STATUS_FAILED);
@@ -1025,7 +1025,7 @@ namespace HatFrameworkDev
             {
                 sendFailureReportByMail = byFailure;
                 sendSuccessReportByMail = bySuccess;
-                EditMessageDebug(step, null, null, PASSED, "Включена опция отправки отчета на почту", "The option to send a report to the mail is enabled", IMAGE_STATUS_MESSAGE);
+                EditMessageDebug(step, null, null, COMPLETED, "Включена опция отправки отчета на почту", "The option to send a report to the mail is enabled", IMAGE_STATUS_MESSAGE);
             }
             catch (Exception ex)
             {
@@ -1062,7 +1062,7 @@ namespace HatFrameworkDev
                     if (DefineTestStop(step) == true) return;
                 }
 
-                if (statusPageLoad == true) EditMessageDebug(step, null, null, PASSED, "Перезагрузка страницы выполнена", "Page reload completed", IMAGE_STATUS_MESSAGE);
+                if (statusPageLoad == true) EditMessageDebug(step, null, null, COMPLETED, "Перезагрузка страницы выполнена", "Page reload completed", IMAGE_STATUS_MESSAGE);
                 else
                 {
                     EditMessageDebug(step, null, null, FAILED, "Страница не загружена", "The page is not loaded", IMAGE_STATUS_FAILED);
