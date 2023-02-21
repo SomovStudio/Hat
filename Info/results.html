@@ -16,26 +16,25 @@ html { margin: 0; padding: 0; border: 0;}
 body { background-color: #F9F7FF; font-family: "Source Sans Pro", Helvetica, sans-serif; font-size: 10pt; }
 .wrapper { margin-left: auto; margin-right: auto; position: relative; max-width: 1440px; }
 header { display: block; position: fixed; top: 0px; background-color: #F9F7FF; border-bottom: 1px solid #eaeff2; min-width: 1400px; max-width: 1400px; z-index: 1000; }
-#diagram { float: left; box-shadow: 0 0 5px rgba(0,0,0,0.3); border: 1px solid #CCCCCC; padding: 10px; margin-bottom:10px; margin-left: 5px; min-width: 45%; min-height: 150px; }
-#canvas {min-width: 300px; min-height: 150px;}
-#description { float: right; box-shadow: 0 0 5px rgba(0,0,0,0.3); border: 1px solid #CCCCCC; padding: 10px; min-width: 50%; min-height: 150px; margin-right: 5px;}
+#Diagram { float: left; box-shadow: 0 0 5px rgba(0,0,0,0.3); border: 1px solid #CCCCCC; padding: 10px; margin-bottom:10px; margin-left: 5px; min-width: 45%; min-height: 150px; background-color: #FFFFFF; }
+#DiagramCanvas {min-width: 300px; min-height: 150px;}
+#DiagramDescription { float: right; min-width: 300px; }
+#Description { float: right; box-shadow: 0 0 5px rgba(0,0,0,0.3); border: 1px solid #CCCCCC; padding: 10px; min-width: 50%; min-height: 150px; margin-right: 5px; background-color: #FFFFFF;}
 section { display: block; position: relative; min-width: 1400px; max-width: 1400px; }
 table { margin: 0px; min-width: 1400px; max-width: 1400px; }
 thead { background-color: #4d545d; color: #FFF; }
 .table { position: relative; top: 270px; z-index: 1; }
-.table-status { padding: 10px; min-width: 100px; max-width: 100px; }
-.table-action { padding: 10px; min-width: 450px; max-width: 450px; }
-.table-comment { padding: 10px; min-width: 700px; max-width: 700px; }
+.table-status { padding: 10px; min-width: 60px; max-width: 60px; }
+.table-description { padding: 10px; min-width: 350px; max-width: 350px; }
+.table-date { padding: 10px; min-width: 100px; max-width: 100px; }
+.table-file { padding: 10px; min-width: 100px; max-width: 100px; overflow: hidden; }
+.table-report { padding: 10px; min-width: 100px; max-width: 100px; overflow: hidden; }
 .table-row { background-color: #FFF; border-bottom: 1px solid #eaeff2; }
 .table-row-empty { background-color: #F9F7FF;  }
 .status-passed { background-color: #98C900; color: #FFFFFF; }
 .status-failed { background-color: #E94B31; color: #FFFFFF; }
-.status-stopped { background-color: #858585; color: #FFFFFF; }
-.status-process { background-color: #FFFFFF; color: #222222; }
-.status-completed { background-color: #0094FF; color: #FFFFFF; }
-.status-warning { background-color: #FFE97F; color: #222222; }
+.status-process { background-color: #858585; color: #FFFFFF; }
 .status-error { background-color: #F4CCCC; color: #FF0000; }
-.status-screenshot { background-color: #FFFFFF; color: #222222; }
 .table-footer { padding-top: 50px; padding-right: 10px; padding-bottom: 20px; float: right; }
 img { min-width: 700px; max-width: 700px; }
 .result-passed { color: #007F0E; }
@@ -44,64 +43,81 @@ img { min-width: 700px; max-width: 700px; }
 </head>
 <body>
 <div class="wrapper">
-<header>
 
-<h2>Полный список всех тестов</h2>
-<div id="diagram">
-	<canvas id="canvas"></canvas>
-</div>
-<div id="description">
-	<p><b>Всего тестов: </b>10</p>
-	<p><b>Успешных тестов: </b>10</p>
-	<p><b>Неудачных тестов: </b>10</p>
-	<p><b>Тесты в работе: </b>10</p>
-	<p><b>Дата отчета: </b>01.01.2023 12:00</p>
-</div>
+	<header>
+		<h2>Полный список всех тестов</h2>
 
+		<div id="Diagram">
+			<canvas id="DiagramCanvas"></canvas>
+			<div id="DiagramDescription">
+				<p>График результатов всех тестов в процентах:</p><br>
+				<p>Успех: 50%</p>
+				<p>Неудача: 25%</p>
+				<p>В работе: 25%</p>
+			</div>
+		</div>
+		<div id="Description">
+			<p><b>Всего тестов: </b>12</p>
+			<p><b>Успешных тестов: </b>6</p>
+			<p><b>Неудачных тестов: </b>3</p>
+			<p><b>Тесты в работе: </b>3</p>
+			<p><b>Дата отчета: </b>01.01.2023 12:00</p>
+		</div>
 
+		<table>
+		<thead>
+		<tr>
+		<th class="table-status">Статус теста</th>
+		<th class="table-description">Описание теста</th>
+		<th class="table-date">Дата завершения</th>
+		<th class="table-file">Файл</th>
+		<th class="table-report">Отчет</th>
+		</tr> 
+		</thead>
+		</table>
+	</header>
 
-<table>
-<thead>
-<tr>
-<th class="table-status">Статус</th>
-<th class="table-action">Действие</th>
-<th class="table-comment">Комментарий</th>
-</tr> 
-</thead>
-</table>
-</header>
-<section>
-<table class="table">
-<tbody>
-<tr>
-<td class="table-status table-row status-completed">Выполнено</td>
-<td class="table-action table-row">Тестирование началось</td>
-<td class="table-comment table-row">Выполнена инициализация теста</td>
-</tr>
-<tr>
-<td class="table-status table-row status-passed">Успешно</td>
-<td class="table-action table-row">GoToUrlAsync('https://somovstudio.github.io/test.html', 5)</td>
-<td class="table-comment table-row">Страница загружена</td>
-</tr>
-<tr>
-<td class="table-status table-row status-failed">Провально</td>
-<td class="table-action table-row">Тестирование завершено</td>
-<td class="table-comment table-row">Тест завершен - шаги теста выполнены неуспешно</td>
-</tr>
-</tbody>
-<tfoot>
-<td></td>
-<td></td>
-<td class="table-footer">Browser Hat 1.2.1</td>
-</tfoot>
-</table>
-</section>
+	<section>
+		<table class="table">
+		<tbody>
+		<tr>
+		<td class="table-status table-row status-process">В работе</td>
+		<td class="table-description table-row">Тест проверяет авторизацию на сайте</td>
+		<td class="table-date table-row">21.02.2023 10:32:11</td>
+		<td class="table-file table-row">ExampleTest1.cs</td>
+		<td class="table-report table-row">Report-ExampleTest1.html</td>
+		</tr>
+		<tr>
+		<td class="table-status table-row status-passed">Успешно</td>
+		<td class="table-description table-row">Тест проверяет авторизацию на сайте Тест проверяет авторизацию на сайте Тест проверяет авторизацию на сайте Тест проверяет авторизацию на сайте Тест проверяет авторизацию на сайте Тест проверяет авторизацию на сайте</td>
+		<td class="table-date table-row">21.02.2023 10:32:11</td>
+		<td class="table-file table-row">ExampleTest1.cs</td>
+		<td class="table-report table-row">Report-ExampleTest1.html</td>
+		</tr>
+		<tr>
+		<td class="table-status table-row status-failed">Провально</td>
+		<td class="table-description table-row">Тест проверяет авторизацию на сайте</td>
+		<td class="table-date table-row">21.02.2023 10:32:11</td>
+		<td class="table-file table-row">ExampleTest1ExampleTest1ExampleTest1.cs</td>
+		<td class="table-report table-row">ReportExampleTest1ReportExampleTest1Report-ExampleTest1.html</td>
+		</tr>
+		</tbody>
+		<tfoot>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td class="table-footer">Browser Hat 1.2.1</td>
+		</tfoot>
+		</table>
+	</section>
+
 </div>
 
 <script type="text/javascript">
 	(function(){ 
 
-		var canvas = document.getElementById('canvas');
+		var canvas = document.getElementById('DiagramCanvas');
 		var ctx = canvas.getContext('2d');
 		ctx.fillStyle = "black";
 		ctx.lineWidth = 2.0;
