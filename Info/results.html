@@ -194,6 +194,15 @@ img { min-width: 700px; max-width: 700px; }
 		for(var i=0; i<3; i++) { 
 	    	ctx.fillText(labels[i], 50 + (i * 70), 148); 
 		}
+
+		let dataValue = [ 50, 25, 25 ]; // значения в процентах 50%, 25%, 25% нужно указывать тут
+		let dataColor = [ "green", "red", "gray" ];
+		for(var i=0; i<dataValue.length; i++) { 
+			ctx.fillStyle = dataColor[i];
+			var value = dataValue[i]; 
+			ctx.fillRect(40 + (i * 75), 134 - (125 / 100 * value), 45, (125 / 100 * value));
+		}
+		
 	}());
 </script>
 </body>
