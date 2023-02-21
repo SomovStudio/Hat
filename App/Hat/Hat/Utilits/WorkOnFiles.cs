@@ -56,6 +56,48 @@ namespace Hat
             return content;
         }
 
+        public List<string> readFileLines(string encoding, string filename, int count)
+        {
+            List<string> lines = new List<string>();
+            try
+            {
+                StreamReader reader;
+                if (encoding == DEFAULT)
+                {
+                    reader = new StreamReader(filename, Encoding.Default);
+                }
+                else if (encoding == UTF_8)
+                {
+                    reader = new StreamReader(filename, new UTF8Encoding(false));
+                }
+                else if (encoding == UTF_8_BOM)
+                {
+                    reader = new StreamReader(filename, new UTF8Encoding(true));
+                }
+                else if (encoding == WINDOWS_1251)
+                {
+                    reader = new StreamReader(filename, Encoding.GetEncoding("Windows-1251"));
+                }
+                else
+                {
+                    reader = new StreamReader(filename, Encoding.Default);
+                }
+
+                for (int i = 0; i < count; i++)
+                {
+                    lines.Add(reader.ReadLine());
+                }
+                
+                reader.Close();
+            }
+            catch (Exception ex)
+            {
+                Config.browserForm.ConsoleMsgError(ex.ToString());
+            }
+            return lines;
+        }
+
+
         public void writeFile(string content, string encoding, string filename)
         {
             try

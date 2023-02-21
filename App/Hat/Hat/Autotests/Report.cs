@@ -394,10 +394,87 @@ img { min-width: 700px; max-width: 700px; }
 
                 if (Directory.Exists(Report.FolderName))
                 {
-                    foreach (string file in Directory.GetFiles(Report.FolderName))
+                    List<List<string>> tests = new List<List<string>>();
+                    List<string> test = new List<string>();
+                    int successRate = 0;
+                    int failureRate = 0;
+                    int workRate = 0;
+                    int amountSuccessTests = 0;
+                    int amountFailureTests = 0;
+                    int amountWorkTests = 0;
+
+                    WorkOnFiles workFiles = new WorkOnFiles();
+                    List<string> lines = new List<string>();
+
+                    foreach (string filename in Directory.GetFiles(Report.FolderName))
                     {
-                        Config.browserForm.ConsoleMsg($"{file}");
+                        if (filename.Contains("index.html") == true) continue;
+                        
+                        /* 0    <!--
+                         * 1    FAILURE
+                         * 2    ExampleTest1.cs
+                         * 3    Тест проверяет авторизацию на сайте
+                         * 4    21.02.2023 10:32:11
+                         * 5    -->
+                         */
+
+                        lines = new List<string>();
+                        lines = workFiles.readFileLines(WorkOnFiles.UTF_8_BOM, filename, 6);
+                        if (lines.Count > 0)
+                        {
+                            Config.browserForm.ConsoleMsg($"{filename} | {lines[0]} | {lines[1]} | {lines[2]} | {lines[3]} | {lines[4]} | {lines[5]}");
+
+                            if (lines[0] == "<!--" && lines[5] == "-->")
+                            {
+                                test = new List<string>();
+                                if (lines[1] == Report.SUCCESS)
+                                {
+                                    test.Add(Report.SUCCESS);   // Статус теста
+                                    amountSuccessTests++;
+                                }
+                                else if (lines[1] == Report.FAILURE)
+                                {
+                                    test.Add(Report.FAILURE);   // Статус теста
+                                    amountFailureTests++;
+                                }
+                                else
+                                {
+                                    test.Add(Report.AT_WORK);   // Статус теста
+                                    amountWorkTests++;
+                                }
+
+                                test.Add(lines[3]); // Описание теста
+                                test.Add(lines[4]); // Дата завершения
+                                test.Add(lines[2]); // Файл
+                                test.Add(filename); // Отчет
+                                tests.Add(test);
+                            }
+                            else
+                            {
+                                test.Add(Report.AT_WORK);   // Статус теста
+                                test.Add("..."); // Описание теста
+                                test.Add("..."); // Дата завершения
+                                test.Add("..."); // Файл
+                                test.Add("..."); // Отчет
+                                tests.Add(test);
+                            }
+                        }
                     }
+
+                    workFiles.writeFile(GetResultHead() + GetResultBody(tests, successRate, failureRate, workRate, amountSuccessTests, amountFailureTests, amountWorkTests) + GetResultFooter(), WorkOnFiles.UTF_8_BOM, Report.FolderName + "index.html");
+                    if (File.Exists(Report.FolderName + "index.html"))
+                    {
+                        Config.browserForm.ConsoleMsg("Создан отчет с результатами всех тестов");
+                        if (Config.languageEngConsole == false) Config.browserForm.SystemConsoleMsg("Создан отчет с результатами всех тестов" + Environment.NewLine, default, ConsoleColor.DarkGray, ConsoleColor.White, true);
+                        else Config.browserForm.SystemConsoleMsg("A report has been created with the results of all tests" + Environment.NewLine, default, ConsoleColor.DarkGray, ConsoleColor.White, true);
+                    }
+                    else
+                    {
+                        Config.browserForm.ConsoleMsg($"Не удалось создать отчет с результатами всех тестов по адресу {Report.FolderName}/index.html");
+                        if (Config.languageEngConsole == false) Config.browserForm.SystemConsoleMsg($"Не удалось создать отчет с результатами всех тестов по адресу {Report.FolderName}/index.html" + Environment.NewLine, default, ConsoleColor.DarkGray, ConsoleColor.White, true);
+                        else Config.browserForm.SystemConsoleMsg($"It was not possible to create a report with the results of all tests at folder {Report.FolderName}/index.html" + Environment.NewLine, default, ConsoleColor.DarkGray, ConsoleColor.White, true);
+                    }
+                    Config.browserForm.updateProjectTree();
                 }
                 else
                 {
