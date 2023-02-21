@@ -20,6 +20,10 @@ namespace Hat
         public const string ERROR = "ERROR";
         public const string SCREENSHOT = "SCREENSHOT";
 
+        public const string SUCCESS = "SUCCESS";
+        public const string FAILURE = "FAILURE";
+        public const string AT_WORK = "AT_WORK";
+
         public static string Description;
         public static string Date;
         public static string TestFileName;
@@ -179,11 +183,15 @@ namespace Hat
             }
         }
 
+        /* =======================================================================================
+         * Страница отчета автотестов
+         * */
+
         public static string GetHead()
         {
             string content = "<!--" + Environment.NewLine;
-            if (Report.TestSuccess == true) content += "SUCCESS" + Environment.NewLine;
-            else content += "FAILURE" + Environment.NewLine;
+            if (Report.TestSuccess == true) content += Report.SUCCESS + Environment.NewLine;
+            else content += Report.FAILURE + Environment.NewLine;
             content += Report.TestFileName + Environment.NewLine;
             content += Report.Description + Environment.NewLine;
             content += Report.Date + Environment.NewLine;
@@ -360,6 +368,270 @@ img { min-width: 700px; max-width: 700px; }
             }
 
             content += "</div>" + Environment.NewLine;
+            content += "</body>" + Environment.NewLine;
+            return content;
+        }
+
+        /* =======================================================================================
+         * Страница полного отчета для всех автотестов
+         * */
+
+        public static string GetResultHead()
+        {
+            string content = "";
+            if (Config.languageEngReportMail == false)
+            {
+                content += "<!DOCTYPE html>" + Environment.NewLine;
+                content += "<html lang=\"ru-RU\">" + Environment.NewLine;
+                content += "<head>" + Environment.NewLine;
+                content += "<title>Полный список результатов всех тестов</title>" + Environment.NewLine;
+            }
+            else
+            {
+                content += "<!DOCTYPE html>" + Environment.NewLine;
+                content += "<html lang=\"en-EN\">" + Environment.NewLine;
+                content += "<head>" + Environment.NewLine;
+                content += "<title>Full list of all test results</title>" + Environment.NewLine;
+            }
+            content +=
+@"<meta charset=""UTF-8"" />
+<meta name=""viewport"" content=""width=device-width, initial-scale=1.0"" />
+<meta http-equiv=""X-UA-Compatible"" content=""ie=edge"" />
+<style type=""text/css"">
+html { margin: 0; padding: 0; border: 0;}
+body { background-color: #F9F7FF; font-family: ""Source Sans Pro"", Helvetica, sans-serif; font-size: 10pt; }
+.wrapper { margin-left: auto; margin-right: auto; position: relative; max-width: 1440px; }
+header { display: block; position: fixed; top: 0px; background-color: #F9F7FF; border-bottom: 1px solid #eaeff2; min-width: 1400px; max-width: 1400px; z-index: 1000; }
+#Hat { text-align: right;  margin-right: 80px; margin-top: 10px;}
+#HatImage { display: block; margin: 0 auto; }
+#HatTitle { font-weight: bold; font-family: ""Arial"", sens-serif; font-size: 25px; margin-right: -40px; }
+#Diagram { float: left; box-shadow: 0 0 5px rgba(0,0,0,0.3); border: 1px solid #CCCCCC; padding: 10px; margin-bottom:10px; margin-left: 5px; min-width: 45%; min-height: 150px; background-color: #FFFFFF; }
+#DiagramCanvas {min-width: 300px; min-height: 150px;}
+#DiagramDescription { float: right; min-width: 300px; }
+#Description { float: right; box-shadow: 0 0 5px rgba(0,0,0,0.3); border: 1px solid #CCCCCC; padding: 10px; min-width: 50%; min-height: 150px; margin-right: 5px; background-color: #FFFFFF;}
+section { display: block; position: relative; min-width: 1400px; max-width: 1400px; }
+table { margin: 0px; min-width: 1400px; max-width: 1400px; }
+thead { background-color: #4d545d; color: #FFF; }
+.table { position: relative; top: 380px; z-index: 1; }
+.table-status { padding: 10px; min-width: 60px; max-width: 60px; }
+.table-description { padding: 10px; min-width: 350px; max-width: 350px; }
+.table-date { padding: 10px; min-width: 100px; max-width: 100px; }
+.table-file { padding: 10px; min-width: 100px; max-width: 100px; overflow: hidden; }
+.table-report { padding: 10px; min-width: 100px; max-width: 100px; overflow: hidden; }
+.table-row { background-color: #FFF; border-bottom: 1px solid #eaeff2; }
+.table-row-empty { background-color: #F9F7FF;  }
+.status-passed { background-color: #98C900; color: #FFFFFF; }
+.status-failed { background-color: #E94B31; color: #FFFFFF; }
+.status-process { background-color: #858585; color: #FFFFFF; }
+.status-error { background-color: #F4CCCC; color: #FF0000; }
+.table-footer { padding-top: 50px; padding-right: 10px; padding-bottom: 20px; float: right; }
+img { min-width: 700px; max-width: 700px; }
+.result-passed { color: #007F0E; }
+.result-failed { color: #7F0000; }
+</style>
+</head>";
+            return content;
+        }
+
+        public static string GetResultFooter()
+        {
+            string content = "</html>";
+            return content;
+        }
+
+        public static string GetResultBody(List<List<string>> tests, int successRate, int failureRate, int workRate, int amountSuccessTests, int amountFailureTests, int amountWorkTests)
+        {
+            string content = Environment.NewLine + "<body>" + Environment.NewLine;
+            content += "<div class=\"wrapper\">" + Environment.NewLine;
+            content += "<header>" + Environment.NewLine;
+            content +=
+@"<div id=""Hat"">
+<svg version=""1.1"" id=""Layer_1"" xmlns=""http://www.w3.org/2000/svg"" xmlns:xlink=""http://www.w3.org/1999/xlink"" x=""0px"" y=""0px"" width=""64px"" height=""64px"" viewBox=""0 0 64 64"" enable-background=""new 0 0 64 64"" xml:space=""preserve""><image id=""HatImage"" width=""64"" height=""64"" x=""0"" y=""0""
+href=""data:image/png;base64,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"" />
+</svg>
+<div id=""HatTitle"">Browser Hat</div>
+</div>" + Environment.NewLine;
+
+            if (Config.languageEngReportMail == false)
+            {
+                content += "<h2>Полный список результатов всех тестов</h2>" + Environment.NewLine;
+                content += "<div id=\"Diagram\">" + Environment.NewLine;
+                content += "<canvas id=\"DiagramCanvas\"></canvas>" + Environment.NewLine;
+                content += "<div id=\"DiagramDescription\">" + Environment.NewLine;
+                content += "<p>График результатов всех тестов в процентах:</p><br>" + Environment.NewLine;
+                content += $"<p>Успех: {successRate.ToString()}%</p>" + Environment.NewLine;
+                content += $"<p>Неудача: {failureRate.ToString()}%</p>" + Environment.NewLine;
+                content += $"<p>В работе: {workRate.ToString()}%</p>" + Environment.NewLine;
+                content += "</div>" + Environment.NewLine;
+                content += "</div>" + Environment.NewLine;
+                content += "<div id=\"Description\">" + Environment.NewLine;
+                content += $"<p><b>Всего тестов: </b>{(amountSuccessTests + amountFailureTests + amountWorkTests).ToString()}</p>" + Environment.NewLine;
+                content += $"<p><b>Успешных тестов: </b>{amountSuccessTests.ToString()}</p>" + Environment.NewLine;
+                content += $"<p><b>Неудачных тестов: </b>{amountFailureTests.ToString()}</p>" + Environment.NewLine;
+                content += $"<p><b>Тесты в работе: </b>{amountWorkTests.ToString()}</p>" + Environment.NewLine;
+                content += $"<p><b>Дата отчета: </b>{DateTime.Now.ToString()}</p>" + Environment.NewLine;
+                content += "</div>" + Environment.NewLine;
+
+                content += "<table>" + Environment.NewLine;
+                content += "<thead>" + Environment.NewLine;
+                content += "<tr>" + Environment.NewLine;
+                content += "<th class=\"table-status\">Статус теста</th>" + Environment.NewLine;
+                content += "<th class=\"table-description\">Описание теста</th>" + Environment.NewLine;
+                content += "<th class=\"table-date\">Дата завершения</th>" + Environment.NewLine;
+                content += "<th class=\"table-file\">Файл</th>" + Environment.NewLine;
+                content += "<th class=\"table-report\">Отчет</th>" + Environment.NewLine;
+                content += "</tr> " + Environment.NewLine;
+                content += "</thead>" + Environment.NewLine;
+                content += "</table>" + Environment.NewLine;
+
+                content += "</header>" + Environment.NewLine;
+            }
+            else
+            {
+                content += "<h2>Full list of all test results</h2>" + Environment.NewLine;
+                content += "<div id=\"Diagram\">" + Environment.NewLine;
+                content += "<canvas id=\"DiagramCanvas\"></canvas>" + Environment.NewLine;
+                content += "<div id=\"DiagramDescription\">" + Environment.NewLine;
+                content += "<p>Chart of the results of all tests as a percentage:</p><br>" + Environment.NewLine;
+                content += $"<p>Success: {successRate.ToString()}%</p>" + Environment.NewLine;
+                content += $"<p>Failure: {failureRate.ToString()}%</p>" + Environment.NewLine;
+                content += $"<p>At work: {workRate.ToString()}%</p>" + Environment.NewLine;
+                content += "</div>" + Environment.NewLine;
+                content += "</div>" + Environment.NewLine;
+                content += "<div id=\"Description\">" + Environment.NewLine;
+                content += $"<p><b>Total tests: </b>{(amountSuccessTests + amountFailureTests + amountWorkTests).ToString()}</p>" + Environment.NewLine;
+                content += $"<p><b>Successful tests: </b>{amountSuccessTests.ToString()}</p>" + Environment.NewLine;
+                content += $"<p><b>Failed tests: </b>{amountFailureTests.ToString()}</p>" + Environment.NewLine;
+                content += $"<p><b>Tests in progress: </b>{amountWorkTests.ToString()}</p>" + Environment.NewLine;
+                content += $"<p><b>Report date: </b>{DateTime.Now.ToString()}</p>" + Environment.NewLine;
+                content += "</div>" + Environment.NewLine;
+
+                content += "<table>" + Environment.NewLine;
+                content += "<thead>" + Environment.NewLine;
+                content += "<tr>" + Environment.NewLine;
+                content += "<th class=\"table-status\">Test status</th>" + Environment.NewLine;
+                content += "<th class=\"table-description\">Test Description</th>" + Environment.NewLine;
+                content += "<th class=\"table-date\">Completion date</th>" + Environment.NewLine;
+                content += "<th class=\"table-file\">File</th>" + Environment.NewLine;
+                content += "<th class=\"table-report\">Report</th>" + Environment.NewLine;
+                content += "</tr> " + Environment.NewLine;
+                content += "</thead>" + Environment.NewLine;
+                content += "</table>" + Environment.NewLine;
+
+                content += "</header>" + Environment.NewLine;
+            }
+
+            content += "<section>" + Environment.NewLine;
+            content += "<table class=\"table\">" + Environment.NewLine;
+            content += "<tbody>" + Environment.NewLine;
+
+            try
+            {
+                if (tests.Count > 0)
+                {
+                    foreach (List<string> test in tests)
+                    {
+                        content += "<tr>" + Environment.NewLine;
+                        if (Config.languageEngReportMail == false)
+                        {
+                            if (test[0] == Report.SUCCESS) content += $"<td class=\"table-status table-row status-passed\">Успех</td>" + Environment.NewLine;
+                            if (test[0] == Report.FAILURE) content += $"<td class=\"table-status table-row status-failed\">Неудача</td>" + Environment.NewLine;
+                            if (test[0] == Report.AT_WORK) content += $"<td class=\"table-status table-row status-process\">В работе</td>" + Environment.NewLine;
+                        }
+                        else
+                        {
+                            if (test[0] == Report.SUCCESS) content += $"<td class=\"table-status table-row status-passed\">Success</td>" + Environment.NewLine;
+                            if (test[0] == Report.FAILURE) content += $"<td class=\"table-status table-row status-failed\">Failure</td>" + Environment.NewLine;
+                            if (test[0] == Report.AT_WORK) content += $"<td class=\"table-status table-row status-process\">At work</td>" + Environment.NewLine;
+                        }
+                        content += $"<td class=\"table-description table-row\">{test[1]}</td>" + Environment.NewLine;
+                        content += $"<td class=\"table-date table-row\">{test[2]}</td>" + Environment.NewLine;
+                        content += $"<td class=\"able-file table-row\">{test[3]}</td>" + Environment.NewLine;
+                        content += $"<td class=\"table-report table-row\"><a href=\"{test[4]}\">{test[4]}</a></td>" + Environment.NewLine;
+                        content += "</tr>" + Environment.NewLine;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Config.browserForm.ConsoleMsg(ex.ToString());
+            }
+
+            content += "</tbody>" + Environment.NewLine;
+            content += "<tfoot>" + Environment.NewLine;
+            content += "<td></td>" + Environment.NewLine;
+            content += "<td></td>" + Environment.NewLine;
+            content += "<td></td>" + Environment.NewLine;
+            content += "<td></td>" + Environment.NewLine;
+            content += $"<td class=\"table-footer\">Browser Hat {Config.version}</td>" + Environment.NewLine;
+            content += "</tfoot>" + Environment.NewLine;
+            content += "</table>" + Environment.NewLine;
+            content += "</section>" + Environment.NewLine;
+            content += "</div>" + Environment.NewLine;
+
+            content += "<script type=\"text/javascript\">" + Environment.NewLine;
+            content += "(function(){" + Environment.NewLine;
+            content += "var canvas = document.getElementById('DiagramCanvas');" + Environment.NewLine;
+            content += "var ctx = canvas.getContext('2d');" + Environment.NewLine;
+            content += "ctx.fillStyle = \"black\";" + Environment.NewLine;
+            content += "ctx.lineWidth = 2.0;" + Environment.NewLine;
+            content += "ctx.beginPath();" + Environment.NewLine;
+            content += "ctx.moveTo(35, 10);" + Environment.NewLine;
+            content += "ctx.lineTo(35, 135);" + Environment.NewLine;
+            content += "ctx.lineTo(250, 135);" + Environment.NewLine;
+            content += "ctx.stroke();" + Environment.NewLine;
+            
+            content += "ctx.fillStyle = \"black\";" + Environment.NewLine;
+            content += "for(let i = 0; i < 6; i++) {" + Environment.NewLine;
+            content += "ctx.fillText((5 - i) * 20 + \"%\", 0, i * 25 + 10);" + Environment.NewLine;
+            content += "ctx.beginPath();" + Environment.NewLine;
+            content += "ctx.moveTo(30, i * 25 + 10);" + Environment.NewLine;
+            content += "ctx.lineTo(35, i * 25 + 10);" + Environment.NewLine;
+            content += "ctx.stroke(); " + Environment.NewLine;
+            content += "}" + Environment.NewLine;
+            
+            content += "let labels = [\"Успех\", \"Неудача\", \"В работе\"];" + Environment.NewLine;
+            content += "for(var i=0; i<3; i++) { " + Environment.NewLine;
+            content += "ctx.fillText(labels[i], 50 + (i * 70), 148);" + Environment.NewLine;
+            content += "}" + Environment.NewLine;
+            
+            content += $"let dataValue = [ {successRate}, {failureRate}, {workRate} ];" + Environment.NewLine;
+            content += "let dataColor = [ \"green\", \"red\", \"gray\" ];" + Environment.NewLine;
+            content += "for(var i=0; i<dataValue.length; i++) {" + Environment.NewLine;
+            content += "ctx.fillStyle = dataColor[i];" + Environment.NewLine;
+            content += "var value = dataValue[i];" + Environment.NewLine;
+            content += "ctx.fillRect(40 + (i * 75), 134 - (125 / 100 * value), 45, (125 / 100 * value));" + Environment.NewLine;
+            content += "}" + Environment.NewLine;
+
+            content += "}());" + Environment.NewLine;
+            content += "</script>" + Environment.NewLine;
+
             content += "</body>" + Environment.NewLine;
             return content;
         }
