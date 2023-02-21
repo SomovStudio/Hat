@@ -3838,7 +3838,7 @@ namespace HatFrameworkDev
             }
         }
 
-        public async Task<bool> AssertNoErrorsAsync()
+        public async Task<bool> AssertNoErrorsAsync(string[] listIgnored = null)
         {
             List<string> errors = await BrowserGetErrorsAsync();
             int step = SendMessageDebug("AssertNoErrors()", "AssertNoErrors()", PROCESS, "Проверка отсутствия ошибок в консоли", "Checking for errors in the console", IMAGE_STATUS_PROCESS);
@@ -3846,10 +3846,30 @@ namespace HatFrameworkDev
 
             int countErrors = 0;
             string textErrors = "";
+            bool ignor = false;
             foreach (string error in errors)
             {
-                if (error.Contains("stats.g.doubleclick.net") == true) continue;
-                if (error.Contains("\"level\":\"error\"") == true)
+                ignor = false;
+                
+                if (listIgnored != null)
+                {
+                    if (listIgnored.Length > 0)
+                    {
+                        foreach (string valueIgnor in listIgnored)
+                        {
+                            if (error.Contains(valueIgnor) == true)
+                            {
+                                ignor = true;
+                                break;
+                            }
+                        }
+                    }
+                }
+
+                //if (error.Contains("stats.g.doubleclick.net") == true) continue;
+                if (ignor == true) continue;
+
+                if (error.Contains("error") == true || error.Contains("Error") == true || error.Contains("failed") == true || error.Contains("Failed") == true )
                 {
                     textErrors += error + Environment.NewLine;
                     countErrors++;
