@@ -253,11 +253,11 @@ img { min-width: 700px; max-width: 700px; }
             if (Config.languageEngReportMail == false)
             {
                 content += "<h2>Отчет о работе автотеста</h2>" + Environment.NewLine;
-                content += $"<b id=\"description\">Описание: </b>{Report.Description}" + Environment.NewLine;
-                content += $"<br><b id=\"file\">Файл: </b>{Report.TestFileName}" + Environment.NewLine;
-                content += $"<br><b id=\"file\">Дата: </b>{Report.Date}" + Environment.NewLine;
-                if (Report.TestSuccess == true) content += "<h3 id=\"result\">Результат: <span class=\"result-passed\">Успешно</span></h3>" + Environment.NewLine;
-                else content += "<h3 id=\"result\">Результат: <span class=\"result-failed\">Провально</span></h3>" + Environment.NewLine;
+                content += $"<b>Описание: </b>{Report.Description}" + Environment.NewLine;
+                content += $"<br><b>Файл: </b>{Report.TestFileName}" + Environment.NewLine;
+                content += $"<br><b>Дата: </b>{Report.Date}" + Environment.NewLine;
+                if (Report.TestSuccess == true) content += "<h3>Результат: <span class=\"result-passed\">Успешно</span></h3>" + Environment.NewLine;
+                else content += "<h3>Результат: <span class=\"result-failed\">Провально</span></h3>" + Environment.NewLine;
                 content += "<table>" + Environment.NewLine;
                 content += "<thead>" + Environment.NewLine;
                 content += "<tr>" + Environment.NewLine;
@@ -272,11 +272,11 @@ img { min-width: 700px; max-width: 700px; }
             else
             {
                 content += "<h2>Autotest Report</h2>" + Environment.NewLine;
-                content += $"<b id=\"description\">Description: </b>{Report.Description}" + Environment.NewLine;
-                content += $"<br><b id=\"file\">File: </b>{Report.TestFileName}" + Environment.NewLine;
-                content += $"<br><b id=\"file\">Date: </b>{Report.Date}" + Environment.NewLine;
-                if (Report.TestSuccess == true) content += "<h3 id=\"result\">Result: <span class=\"result-passed\">Success</span></h3>" + Environment.NewLine;
-                else content += "<h3 id=\"result\">Result: <span class=\"result-failed\">Failure</span></h3>" + Environment.NewLine;
+                content += $"<b>Description: </b>{Report.Description}" + Environment.NewLine;
+                content += $"<br><b>File: </b>{Report.TestFileName}" + Environment.NewLine;
+                content += $"<br><b>Date: </b>{Report.Date}" + Environment.NewLine;
+                if (Report.TestSuccess == true) content += "<h3>Result: <span class=\"result-passed\">Success</span></h3>" + Environment.NewLine;
+                else content += "<h3>Result: <span class=\"result-failed\">Failure</span></h3>" + Environment.NewLine;
                 content += "<table>" + Environment.NewLine;
                 content += "<thead>" + Environment.NewLine;
                 content += "<tr>" + Environment.NewLine;

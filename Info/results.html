@@ -1,0 +1,171 @@
+﻿<!--
+FAILURE
+ExampleTest1.cs
+Тест проверяет авторизацию на сайте
+21.02.2023 10:32:11
+-->
+<!DOCTYPE html>
+<html lang="ru-RU">
+<head>
+<title>Отчет</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+<style type="text/css">
+html { margin: 0; padding: 0; border: 0;}
+body { background-color: #F9F7FF; font-family: "Source Sans Pro", Helvetica, sans-serif; font-size: 10pt; }
+.wrapper { margin-left: auto; margin-right: auto; position: relative; max-width: 1440px; }
+header { display: block; position: fixed; top: 0px; background-color: #F9F7FF; border-bottom: 1px solid #eaeff2; min-width: 1400px; max-width: 1400px; z-index: 1000; }
+#diagram { float: left; box-shadow: 0 0 5px rgba(0,0,0,0.3); border: 1px solid #CCCCCC; padding: 10px; margin-bottom:10px; margin-left: 5px; min-width: 45%; min-height: 150px; }
+#canvas {min-width: 300px; min-height: 150px;}
+#description { float: right; box-shadow: 0 0 5px rgba(0,0,0,0.3); border: 1px solid #CCCCCC; padding: 10px; min-width: 50%; min-height: 150px; margin-right: 5px;}
+section { display: block; position: relative; min-width: 1400px; max-width: 1400px; }
+table { margin: 0px; min-width: 1400px; max-width: 1400px; }
+thead { background-color: #4d545d; color: #FFF; }
+.table { position: relative; top: 270px; z-index: 1; }
+.table-status { padding: 10px; min-width: 100px; max-width: 100px; }
+.table-action { padding: 10px; min-width: 450px; max-width: 450px; }
+.table-comment { padding: 10px; min-width: 700px; max-width: 700px; }
+.table-row { background-color: #FFF; border-bottom: 1px solid #eaeff2; }
+.table-row-empty { background-color: #F9F7FF;  }
+.status-passed { background-color: #98C900; color: #FFFFFF; }
+.status-failed { background-color: #E94B31; color: #FFFFFF; }
+.status-stopped { background-color: #858585; color: #FFFFFF; }
+.status-process { background-color: #FFFFFF; color: #222222; }
+.status-completed { background-color: #0094FF; color: #FFFFFF; }
+.status-warning { background-color: #FFE97F; color: #222222; }
+.status-error { background-color: #F4CCCC; color: #FF0000; }
+.status-screenshot { background-color: #FFFFFF; color: #222222; }
+.table-footer { padding-top: 50px; padding-right: 10px; padding-bottom: 20px; float: right; }
+img { min-width: 700px; max-width: 700px; }
+.result-passed { color: #007F0E; }
+.result-failed { color: #7F0000; }
+</style>
+</head>
+<body>
+<div class="wrapper">
+<header>
+
+<h2>Полный список всех проверок</h2>
+<div id="diagram">
+	<canvas id="canvas"></canvas>
+</div>
+<div id="description">
+	<b>Всего тестов: </b>10
+	<br><b>Успешных тестов: </b>10
+	<br><b>Неудачных тестов: </b>10
+	<br><b>Тесты в работе: </b>10
+	<br><b>Дата отчета: </b>01.01.2023 12:00
+</div>
+
+
+
+<table>
+<thead>
+<tr>
+<th class="table-status">Статус</th>
+<th class="table-action">Действие</th>
+<th class="table-comment">Комментарий</th>
+</tr> 
+</thead>
+</table>
+</header>
+<section>
+<table class="table">
+<tbody>
+<tr>
+<td class="table-status table-row status-completed">Выполнено</td>
+<td class="table-action table-row">Сообщение</td>
+<td class="table-comment table-row">Запущен автотест из файла: ExampleTest1.cs</td>
+</tr>
+<tr>
+<td class="table-status table-row status-completed">Выполнено</td>
+<td class="table-action table-row">BrowserFullScreenAsync()</td>
+<td class="table-comment table-row">Размер браузера изменён</td>
+</tr>
+<tr>
+<td class="table-status table-row status-completed">Выполнено</td>
+<td class="table-action table-row">BrowserEnableSendMailAsync("True", "False")</td>
+<td class="table-comment table-row">Включена опция отправки отчета на почту</td>
+</tr>
+<tr>
+<td class="table-status table-row status-completed">Выполнено</td>
+<td class="table-action table-row">Тестирование началось</td>
+<td class="table-comment table-row">Выполнена инициализация теста</td>
+</tr>
+<tr>
+<td class="table-status table-row status-passed">Успешно</td>
+<td class="table-action table-row">Корректные страницы</td>
+<td class="table-comment table-row">https://somovstudio.github.io/test1.html <br> https://somovstudio.github.io/test2.html <br> https://somovstudio.github.io/test3.html <br> https://somovstudio.github.io/test4.html</td>
+</tr>
+<tr>
+<td class="table-status table-row status-passed">Успешно</td>
+<td class="table-action table-row">GoToUrlAsync('https://somovstudio.github.io/test.html', 5)</td>
+<td class="table-comment table-row">Страница загружена</td>
+</tr>
+<tr>
+<td class="table-status table-row status-passed">Успешно</td>
+<td class="table-action table-row">WaitVisibleElementByIdAsync('login', 15)</td>
+<td class="table-comment table-row">Ожидание элемента - завершено (элемент отображается)</td>
+</tr>
+<tr>
+<td class="table-status table-row status-passed">Успешно</td>
+<td class="table-action table-row">SetValueInElementByIdAsync('login', 'admin')</td>
+<td class="table-comment table-row">Значение введено в элемент</td>
+</tr>
+<tr>
+<td class="table-status table-row status-passed">Успешно</td>
+<td class="table-action table-row">WaitAsync(2)</td>
+<td class="table-comment table-row">Ожидание 2 секунд - завершено</td>
+</tr>
+<tr>
+<td class="table-status table-row status-passed">Успешно</td>
+<td class="table-action table-row">SetValueInElementByIdAsync('pass', '0001')</td>
+<td class="table-comment table-row">Значение введено в элемент</td>
+</tr>
+<tr>
+<td class="table-status table-row status-passed">Успешно</td>
+<td class="table-action table-row">WaitAsync(2)</td>
+<td class="table-comment table-row">Ожидание 2 секунд - завершено</td>
+</tr>
+<tr>
+<td class="table-status table-row status-passed">Успешно</td>
+<td class="table-action table-row">ClickElementByIdAsync('buttonLogin')</td>
+<td class="table-comment table-row">Элемент нажат</td>
+</tr>
+<tr>
+<td class="table-status table-row status-passed">Успешно</td>
+<td class="table-action table-row">WaitVisibleElementByIdAsync('result', 5)</td>
+<td class="table-comment table-row">Ожидание элемента - завершено (элемент отображается)</td>
+</tr>
+<tr>
+<td class="table-status table-row status-passed">Успешно</td>
+<td class="table-action table-row">GetValueFromElementByIdAsync('textarea')</td>
+<td class="table-comment table-row">Получено значение из элемента</td>
+</tr>
+<tr>
+<td class="table-status table-row status-failed">Провально</td>
+<td class="table-action table-row">AssertEqualsAsync(Вы успешно авторизованы, Неверный логин или пароль)</td>
+<td class="table-comment table-row">Ожидаемое и актуальное значение не совпадают</td>
+</tr>
+<tr>
+<td class="table-status table-row status-failed">Провально</td>
+<td class="table-action table-row">Тестирование завершено</td>
+<td class="table-comment table-row">Тест завершен - шаги теста выполнены неуспешно</td>
+</tr>
+<tr>
+<td class="table-status table-row status-screenshot">Скриншот</td>
+<td class="table-action table-row">Файл: <a href="./screenshots/image-21-32-2023-10-32-17.jpeg">image-21-32-2023-10-32-17.jpeg</a></td>
+<td class="table-comment table-row"><img src="./screenshots/image-21-32-2023-10-32-17.jpeg" /></td>
+</tr>
+</tbody>
+<tfoot>
+<td></td>
+<td></td>
+<td class="table-footer">Browser Hat 1.2.1</td>
+</tfoot>
+</table>
+</section>
+</div>
+</body>
+</html>
