@@ -46,16 +46,16 @@ img { min-width: 700px; max-width: 700px; }
 <div class="wrapper">
 <header>
 
-<h2>Полный список всех проверок</h2>
+<h2>Полный список всех тестов</h2>
 <div id="diagram">
 	<canvas id="canvas"></canvas>
 </div>
 <div id="description">
-	<b>Всего тестов: </b>10
-	<br><b>Успешных тестов: </b>10
-	<br><b>Неудачных тестов: </b>10
-	<br><b>Тесты в работе: </b>10
-	<br><b>Дата отчета: </b>01.01.2023 12:00
+	<p><b>Всего тестов: </b>10</p>
+	<p><b>Успешных тестов: </b>10</p>
+	<p><b>Неудачных тестов: </b>10</p>
+	<p><b>Тесты в работе: </b>10</p>
+	<p><b>Дата отчета: </b>01.01.2023 12:00</p>
 </div>
 
 
@@ -167,5 +167,30 @@ img { min-width: 700px; max-width: 700px; }
 </table>
 </section>
 </div>
+
+<script type="text/javascript">
+	(function(){ 
+
+		var canvas = document.getElementById('canvas');
+		var ctx = canvas.getContext('2d');
+		ctx.fillStyle = "black";
+		ctx.lineWidth = 2.0;
+		ctx.beginPath();
+		ctx.moveTo(35, 10);
+		ctx.lineTo(35, 140);
+		ctx.lineTo(250, 140);
+		ctx.stroke();
+
+		ctx.fillStyle = "black";
+		for(let i = 0; i < 6; i++) { 
+		    ctx.fillText((5 - i) * 20 + "%", 0, i * 25 + 15); 
+		    ctx.beginPath(); 
+		    ctx.moveTo(30, i * 25 + 15); 
+		    ctx.lineTo(35, i * 25 + 15); 
+		    ctx.stroke(); 
+		}
+
+	}());
+</script>
 </body>
 </html>
