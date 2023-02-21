@@ -396,12 +396,13 @@ img { min-width: 700px; max-width: 700px; }
                 {
                     List<List<string>> tests = new List<List<string>>();
                     List<string> test = new List<string>();
-                    int successRate = 0;
-                    int failureRate = 0;
-                    int workRate = 0;
-                    int amountSuccessTests = 0;
-                    int amountFailureTests = 0;
-                    int amountWorkTests = 0;
+                    double successRate = 0;
+                    double failureRate = 0;
+                    double workRate = 0;
+                    double amountTests = 0;
+                    double amountSuccessTests = 0;
+                    double amountFailureTests = 0;
+                    double amountWorkTests = 0;
 
                     WorkOnFiles workFiles = new WorkOnFiles();
                     List<string> lines = new List<string>();
@@ -409,7 +410,8 @@ img { min-width: 700px; max-width: 700px; }
                     foreach (string filename in Directory.GetFiles(Report.FolderName))
                     {
                         if (filename.Contains("index.html") == true) continue;
-                        
+                        amountTests++;
+
                         /* 0    <!--
                          * 1    FAILURE
                          * 2    ExampleTest1.cs
@@ -461,7 +463,14 @@ img { min-width: 700px; max-width: 700px; }
                         }
                     }
 
-                    workFiles.writeFile(GetResultHead() + GetResultBody(tests, successRate, failureRate, workRate, amountSuccessTests, amountFailureTests, amountWorkTests) + GetResultFooter(), WorkOnFiles.UTF_8_BOM, Report.FolderName + "index.html");
+                    successRate = (amountSuccessTests / amountTests) * 100;
+                    failureRate = (amountFailureTests / amountTests) * 100;
+                    workRate = (amountWorkTests / amountTests) * 100;
+
+                    Config.browserForm.ConsoleMsg($"{amountTests} | {amountSuccessTests} | {amountFailureTests} | {amountWorkTests}");
+                    Config.browserForm.ConsoleMsg($"{successRate} | {failureRate} | {workRate}");
+
+                    workFiles.writeFile(GetResultHead() + GetResultBody(tests, (int)successRate, (int)failureRate, (int)workRate, (int)amountSuccessTests, (int)amountFailureTests, (int)amountWorkTests, (int)amountTests) + GetResultFooter(), WorkOnFiles.UTF_8_BOM, Report.FolderName + "index.html");
                     if (File.Exists(Report.FolderName + "index.html"))
                     {
                         Config.browserForm.ConsoleMsg("Создан отчет с результатами всех тестов");
@@ -553,7 +562,7 @@ img { min-width: 700px; max-width: 700px; }
             return content;
         }
 
-        public static string GetResultBody(List<List<string>> tests, int successRate, int failureRate, int workRate, int amountSuccessTests, int amountFailureTests, int amountWorkTests)
+        public static string GetResultBody(List<List<string>> tests, int successRate, int failureRate, int workRate, int amountSuccessTests, int amountFailureTests, int amountWorkTests, int amountTests)
         {
             string content = Environment.NewLine + "<body>" + Environment.NewLine;
             content += "<div class=\"wrapper\">" + Environment.NewLine;
@@ -605,7 +614,7 @@ ZTptb2RpZnkAMjAyMy0wMi0yMVQxMDoxMzo0MSswMDowMN/S9FIAAAAASUVORK5CYII="" />
                 content += "</div>" + Environment.NewLine;
                 content += "</div>" + Environment.NewLine;
                 content += "<div id=\"Description\">" + Environment.NewLine;
-                content += $"<p><b>Всего тестов: </b>{(amountSuccessTests + amountFailureTests + amountWorkTests).ToString()}</p>" + Environment.NewLine;
+                content += $"<p><b>Всего тестов: </b>{amountTests.ToString()}</p>" + Environment.NewLine;
                 content += $"<p><b>Успешных тестов: </b>{amountSuccessTests.ToString()}</p>" + Environment.NewLine;
                 content += $"<p><b>Неудачных тестов: </b>{amountFailureTests.ToString()}</p>" + Environment.NewLine;
                 content += $"<p><b>Тесты в работе: </b>{amountWorkTests.ToString()}</p>" + Environment.NewLine;
