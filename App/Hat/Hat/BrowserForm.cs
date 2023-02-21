@@ -406,8 +406,12 @@ namespace Hat
         {
             if (debug == true)
             {
-                if (Config.fullReport == true || status == Report.ERROR || status == Report.FAILED) 
+                if (Config.fullReport == true || status == Report.ERROR || status == Report.FAILED 
+                    || action == "Testing has started" || action == "Testing completed"
+                    || action == "Тестирование началось" || action == "Тестирование завершено")
+                {
                     Report.AddStep(status, action, comment);
+                }
             }
             else
             {
@@ -445,8 +449,12 @@ namespace Hat
 
                 if (debug == true)
                 {
-                    if (Config.fullReport == true || status == Report.ERROR || status == Report.FAILED) 
+                    if (Config.fullReport == true || listViewTest.Items[index].SubItems[2].Text == Report.ERROR || listViewTest.Items[index].SubItems[2].Text == Report.FAILED 
+                        || listViewTest.Items[index].SubItems[1].Text == "Testing has started" || listViewTest.Items[index].SubItems[1].Text == "Testing completed" 
+                        || listViewTest.Items[index].SubItems[1].Text == "Тестирование началось" || listViewTest.Items[index].SubItems[1].Text == "Тестирование завершено")
+                    {
                         Report.AddStep(listViewTest.Items[index].SubItems[2].Text, listViewTest.Items[index].SubItems[1].Text, listViewTest.Items[index].SubItems[3].Text);
+                    }
                 }
                 else
                 {

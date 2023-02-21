@@ -64,7 +64,7 @@ namespace HatFramework
         private MethodInfo sendMailSuccess;         // функция: SendMailSuccess - отправка отчета о Success автотеста по почте
         private MethodInfo sendMail;                // функция: SendMail - отправка письма на почту
         private MethodInfo description;             // функция: Description - добавляет описание автотеста для его вывода в отчет
-        private MethodInfo reportAddMessage;        // функция: ReportAddMessage - // добавляет сообщение в отчет (письмо)
+        private MethodInfo reportAddMessage;        // функция: ReportAddMessage - добавляет сообщение в отчет (письмо)
 
         private bool languageEngConsole = false;    // флаг: английский язык для вывода в командной строке
         private bool languageEngReportEmail = false;// флаг: английский язык для вывода в отчет и письмо
@@ -664,10 +664,12 @@ namespace HatFramework
             {
                 testStop = false;
                 assertStatus = null;
-                int step = SendMessageDebug("TestBeginAsync()", "TestBeginAsync()", PROCESS, "Инициализация теста", "Initializing the test", IMAGE_STATUS_PROCESS);
+                //int step = SendMessageDebug("TestBeginAsync()", "TestBeginAsync()", PROCESS, "Инициализация теста", "Initializing the test", IMAGE_STATUS_PROCESS);
+                int step = SendMessageDebug("Тестирование началось", "Testing has started", PROCESS, "Инициализация теста", "Initializing the test", IMAGE_STATUS_PROCESS);
                 await BrowserView.EnsureCoreWebView2Async();
                 Debug = (bool)debugJavaScript.Invoke(BrowserWindow, null);
-                EditMessageDebug(step, null, null, PASSED, "Выполнена инициализация теста", "Initialization of the test has been performed", IMAGE_STATUS_PASSED);
+                //EditMessageDebug(step, null, null, PASSED, "Выполнена инициализация теста", "Initialization of the test has been performed", IMAGE_STATUS_PASSED);
+                EditMessageDebug(step, null, null, COMPLETED, "Выполнена инициализация теста", "Initialization of the test has been performed", IMAGE_STATUS_MESSAGE);
                 ConsoleMsg("Тест начинается...");
 
                 browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { "" + Environment.NewLine, default, default, default, false });
@@ -684,7 +686,8 @@ namespace HatFramework
         {
             try
             {
-                int step = SendMessageDebug("TestEndAsync()", "TestEndAsync()", PROCESS, "Завершение теста", "Completing the test", IMAGE_STATUS_PROCESS);
+                //int step = SendMessageDebug("TestEndAsync()", "TestEndAsync()", PROCESS, "Завершение теста", "Completing the test", IMAGE_STATUS_PROCESS);
+                int step = SendMessageDebug("Тестирование завершено", "Testing completed", PROCESS, "Завершение теста", "Completing the test", IMAGE_STATUS_PROCESS);
                 if (assertStatus == FAILED)
                 {
                     ConsoleMsg("Тест завершен - провально");
@@ -3839,7 +3842,7 @@ namespace HatFramework
             }
         }
 
-        public async Task<bool> AssertNoErrorsAsync()
+        public async Task<bool> AssertNoErrorsAsync(string[] listIgnored = null)
         {
             List<string> errors = await BrowserGetErrorsAsync();
             int step = SendMessageDebug("AssertNoErrors()", "AssertNoErrors()", PROCESS, "Проверка отсутствия ошибок в консоли", "Checking for errors in the console", IMAGE_STATUS_PROCESS);
@@ -3847,10 +3850,30 @@ namespace HatFramework
 
             int countErrors = 0;
             string textErrors = "";
+            bool ignor = false;
             foreach (string error in errors)
             {
-                if (error.Contains("stats.g.doubleclick.net") == true) continue;
-                if (error.Contains("\"level\":\"error\"") == true)
+                ignor = false;
+
+                if (listIgnored != null)
+                {
+                    if (listIgnored.Length > 0)
+                    {
+                        foreach (string valueIgnor in listIgnored)
+                        {
+                            if (error.Contains(valueIgnor) == true)
+                            {
+                                ignor = true;
+                                break;
+                            }
+                        }
+                    }
+                }
+
+                //if (error.Contains("stats.g.doubleclick.net") == true) continue;
+                if (ignor == true) continue;
+
+                if (error.Contains("error") == true || error.Contains("Error") == true || error.Contains("failed") == true || error.Contains("Failed") == true)
                 {
                     textErrors += error + Environment.NewLine;
                     countErrors++;

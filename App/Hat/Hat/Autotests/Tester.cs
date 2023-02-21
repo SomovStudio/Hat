@@ -663,10 +663,12 @@ namespace HatFrameworkDev
             {
                 testStop = false;
                 assertStatus = null;
-                int step = SendMessageDebug("TestBeginAsync()", "TestBeginAsync()", PROCESS, "Инициализация теста", "Initializing the test", IMAGE_STATUS_PROCESS);
+                //int step = SendMessageDebug("TestBeginAsync()", "TestBeginAsync()", PROCESS, "Инициализация теста", "Initializing the test", IMAGE_STATUS_PROCESS);
+                int step = SendMessageDebug("Тестирование началось", "Testing has started", PROCESS, "Инициализация теста", "Initializing the test", IMAGE_STATUS_PROCESS);
                 await BrowserView.EnsureCoreWebView2Async();
                 Debug = (bool)debugJavaScript.Invoke(BrowserWindow, null);
-                EditMessageDebug(step, null, null, PASSED, "Выполнена инициализация теста", "Initialization of the test has been performed", IMAGE_STATUS_PASSED);
+                //EditMessageDebug(step, null, null, PASSED, "Выполнена инициализация теста", "Initialization of the test has been performed", IMAGE_STATUS_PASSED);
+                EditMessageDebug(step, null, null, COMPLETED, "Выполнена инициализация теста", "Initialization of the test has been performed", IMAGE_STATUS_MESSAGE);
                 ConsoleMsg("Тест начинается...");
 
                 browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { "" + Environment.NewLine, default, default, default, false });
@@ -683,7 +685,8 @@ namespace HatFrameworkDev
         {
             try
             {
-                int step = SendMessageDebug("TestEndAsync()", "TestEndAsync()", PROCESS, "Завершение теста", "Completing the test", IMAGE_STATUS_PROCESS);
+                //int step = SendMessageDebug("TestEndAsync()", "TestEndAsync()", PROCESS, "Завершение теста", "Completing the test", IMAGE_STATUS_PROCESS);
+                int step = SendMessageDebug("Тестирование завершено", "Testing completed", PROCESS, "Завершение теста", "Completing the test", IMAGE_STATUS_PROCESS);
                 if (assertStatus == FAILED)
                 {
                     ConsoleMsg("Тест завершен - провально");
