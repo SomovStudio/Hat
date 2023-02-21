@@ -422,7 +422,7 @@ img { min-width: 700px; max-width: 700px; }
                         lines = workFiles.readFileLines(WorkOnFiles.UTF_8_BOM, filename, 6);
                         if (lines.Count > 0)
                         {
-                            Config.browserForm.ConsoleMsg($"{filename} | {lines[0]} | {lines[1]} | {lines[2]} | {lines[3]} | {lines[4]} | {lines[5]}");
+                            //Config.browserForm.ConsoleMsg($"{filename} | {lines[0]} | {lines[1]} | {lines[2]} | {lines[3]} | {lines[4]} | {lines[5]}");
 
                             if (lines[0] == "<!--" && lines[5] == "-->")
                             {
@@ -686,7 +686,7 @@ ZTptb2RpZnkAMjAyMy0wMi0yMVQxMDoxMzo0MSswMDowMN/S9FIAAAAASUVORK5CYII="" />
                         }
                         content += $"<td class=\"table-description table-row\">{test[1]}</td>" + Environment.NewLine;
                         content += $"<td class=\"table-date table-row\">{test[2]}</td>" + Environment.NewLine;
-                        content += $"<td class=\"able-file table-row\">{test[3]}</td>" + Environment.NewLine;
+                        content += $"<td class=\"table-file table-row\">{test[3]}</td>" + Environment.NewLine;
                         content += $"<td class=\"table-report table-row\"><a href=\"{test[4]}\">{test[4]}</a></td>" + Environment.NewLine;
                         content += "</tr>" + Environment.NewLine;
                     }
