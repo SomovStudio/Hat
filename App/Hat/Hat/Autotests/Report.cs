@@ -21,6 +21,7 @@ namespace Hat
         public const string SCREENSHOT = "SCREENSHOT";
 
         public static string Description;
+        public static string Date;
         public static string TestFileName;
         public static string FileName;
         public static string FolderName;
@@ -34,6 +35,7 @@ namespace Hat
             try
             {
                 Report.Description = "";
+                Report.Date = DateTime.Now.ToString();
                 Report.TestFileName = Config.selectName;
                 Report.FileName = $"Report-{Report.TestFileName}.html";
                 Report.FileName = Report.FileName.Replace(".cs", "");
@@ -184,6 +186,7 @@ namespace Hat
             else content += "FAILURE" + Environment.NewLine;
             content += Report.TestFileName + Environment.NewLine;
             content += Report.Description + Environment.NewLine;
+            content += Report.Date + Environment.NewLine;
             content += "-->" + Environment.NewLine;
 
             if (Config.languageEngReportMail == false)
@@ -212,7 +215,7 @@ header { display: block; position: fixed; top: 0px; background-color: #F9F7FF; b
 section { display: block; position: relative; min-width: 1400px; max-width: 1400px; }
 table { margin: 0px; min-width: 1400px; max-width: 1400px; }
 thead { background-color: #4d545d; color: #FFF; }
-.table { position: relative; top: 165px; z-index: 1; }
+.table { position: relative; top: 180px; z-index: 1; }
 .table-status { padding: 10px; min-width: 100px; max-width: 100px; }
 .table-action { padding: 10px; min-width: 450px; max-width: 450px; }
 .table-comment { padding: 10px; min-width: 700px; max-width: 700px; }
@@ -226,6 +229,7 @@ thead { background-color: #4d545d; color: #FFF; }
 .status-warning { background-color: #FFE97F; color: #222222; }
 .status-error { background-color: #F4CCCC; color: #FF0000; }
 .status-screenshot { background-color: #FFFFFF; color: #222222; }
+.table-footer { padding-top: 50px; padding-right: 10px; padding-bottom: 20px; float: right; }
 img { min-width: 700px; max-width: 700px; }
 .result-passed { color: #007F0E; }
 .result-failed { color: #7F0000; }
@@ -251,6 +255,7 @@ img { min-width: 700px; max-width: 700px; }
                 content += "<h2>Отчет о работе автотеста</h2>" + Environment.NewLine;
                 content += $"<b id=\"description\">Описание: </b>{Report.Description}" + Environment.NewLine;
                 content += $"<br><b id=\"file\">Файл: </b>{Report.TestFileName}" + Environment.NewLine;
+                content += $"<br><b id=\"file\">Дата: </b>{Report.Date}" + Environment.NewLine;
                 if (Report.TestSuccess == true) content += "<h3 id=\"result\">Результат: <span class=\"result-passed\">Успешно</span></h3>" + Environment.NewLine;
                 else content += "<h3 id=\"result\">Результат: <span class=\"result-failed\">Провально</span></h3>" + Environment.NewLine;
                 content += "<table>" + Environment.NewLine;
@@ -269,6 +274,7 @@ img { min-width: 700px; max-width: 700px; }
                 content += "<h2>Autotest Report</h2>" + Environment.NewLine;
                 content += $"<b id=\"description\">Description: </b>{Report.Description}" + Environment.NewLine;
                 content += $"<br><b id=\"file\">File: </b>{Report.TestFileName}" + Environment.NewLine;
+                content += $"<br><b id=\"file\">Date: </b>{Report.Date}" + Environment.NewLine;
                 if (Report.TestSuccess == true) content += "<h3 id=\"result\">Result: <span class=\"result-passed\">Success</span></h3>" + Environment.NewLine;
                 else content += "<h3 id=\"result\">Result: <span class=\"result-failed\">Failure</span></h3>" + Environment.NewLine;
                 content += "<table>" + Environment.NewLine;
@@ -338,12 +344,17 @@ img { min-width: 700px; max-width: 700px; }
                     Config.browserForm.ConsoleMsg(ex.ToString());
                 }
                 content += "</tbody>" + Environment.NewLine;
-                //content += "<tfoot>" + Environment.NewLine;
-                //if (Config.languageEngReportMail == false) content += "<td class=\"table-status\">Ошибок: </td>" + Environment.NewLine;
-                //else content += "<td class=\"table-status\">Errors: </td>" + Environment.NewLine;
-                //content += $"<td class=\"table-action\">{Report.CountErrors}</td>" + Environment.NewLine;
-                //content += "<td class=\"table-comment\"></td>" + Environment.NewLine;
-                //content += "</tfoot>" + Environment.NewLine;
+                content += "<tfoot>" + Environment.NewLine;
+                /*
+                if (Config.languageEngReportMail == false) content += "<td class=\"table-status\">Ошибок: </td>" + Environment.NewLine;
+                else content += "<td class=\"table-status\">Errors: </td>" + Environment.NewLine;
+                content += $"<td class=\"table-action\">{Report.CountErrors}</td>" + Environment.NewLine;
+                content += "<td class=\"table-comment\"></td>" + Environment.NewLine;
+                */
+                content += "<td></td>" + Environment.NewLine;
+                content += "<td></td>" + Environment.NewLine;
+                content += $"<td class=\"table-footer\">Browser Hat {Config.version}</td>" + Environment.NewLine;
+                content += "</tfoot>" + Environment.NewLine;
                 content += "</table>" + Environment.NewLine;
                 content += "</section>" + Environment.NewLine;
             }
