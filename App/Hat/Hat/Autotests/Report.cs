@@ -78,7 +78,6 @@ namespace Hat
 
         public static void SaveReport(bool testSuccess, bool init = false)
         {
-            Config.browserForm.ConsoleMsg("SaveReport INIT: " + init.ToString());
             try
             {
                 Report.TestSuccess = testSuccess;
@@ -193,7 +192,6 @@ namespace Hat
 
         public static string GetHead(bool init = false)
         {
-            Config.browserForm.ConsoleMsg("GetHead INIT: " + init.ToString());
             string content = "<!--" + Environment.NewLine;
             if (init == true) content += Report.AT_WORK + Environment.NewLine;
             if (init == false && Report.TestSuccess == true) content += Report.SUCCESS + Environment.NewLine;
