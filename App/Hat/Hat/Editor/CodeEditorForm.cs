@@ -2766,6 +2766,51 @@ tester.ConsoleMsg(statusCode.ToString());\par
 tester.ConsoleMsg(events);\par
 }",
 
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 Description\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'f3\'f1\'f2\'e0\'ed\'e0\'e2\'eb\'e8\'e2\'e0\'e5\'f2 \'ee\'ef\'e8\'f1\'e0\'ed\'e8\'e5 \'f2\'e5\'f1\'f2\'e0 \'ea\'ee\'f2\'ee\'f0\'ee\'e5 \'ef\'ee\'f2\'ee\'ec \'e2\'fb\'e2\'ee\'e4\'e8\'f2\'ff \'e2 \'ee\'f2\'f7\'e5\'f2\'e5 \'e8 \'ef\'e8\'f1\'fc\'ec\'e5\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \f0\lang1033 Description(string text)\f1\lang1049\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0\f0\lang1033 public async Task setUp()\par
+\{\par
+\tab tester.Description(""\f1\lang1049\'d2\'e5\'f1\'f2 \'ef\'f0\'ee\'e2\'e5\'f0\'ff\'e5\'f2 \'e0\'e2\'f2\'ee\'f0\'e8\'e7\'e0\'f6\'e8\'fe \'ed\'e0 \'f1\'e0\'e9\'f2\'e5"");\par
+\}\f0\lang1033\par
+}",
+
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 SendMessageDebug\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'fb\'e2\'ee\'e4\'e8\'f2 \'ee\'f2\'eb\'e0\'e4\'ee\'f7\'ed\'ee\'e5 \'f1\'ee\'ee\'e1\'f9\'e5\'ed\'e8\'e5 \'ea\'ee\'f2\'ee\'f0\'ee\'e5 \'ec\'ee\'e6\'e5\'f2 \'e1\'fb\'f2\'fc \'ee\'f2\'ea\'eb\'fe\'f7\'e5\'ed\'ee \'e4\'eb\'ff \'e2\'fb\'e2\'ee\'e4\'e0 \'e2 \'ee\'f2\'f7\'e5\'f2 \'e8 \'ef\'e8\'f1\'fc\'ec\'ee\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : SendMessageDebug(string actionRus, string actionEng, string status,  string commentRus, string commentEng, int image)\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0 int step = \f0\lang1033 tester.\f1\lang1049 SendMessageDebug(""\'e4\'e5\'e9\'f1\'f2\'e2\'e8\'ff"", \f0\lang1033 ""action"",\f1\lang1049  \f0\lang1033 Tester.\f1\lang1049 PROCESS, ""\'ea\'ee\'ec\'ec\'e5\'ed\'f2\'e0\'f0\'e8\'e9"", \f0\lang1033 ""comment"", \f1\lang1049  \f0\lang1033 Tester.\f1\lang1049 IMAGE_STATUS_PROCESS);\par
+
+\pard\sa200\sl276\slmult1\f0\fs22\lang9\par
+}",
+
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 EditMessage\lang1033 Debug\cf0\lang9\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e8\'e7\'ec\'e5\'ed\'ff\'e5\'f2 \'f0\'e0\'ed\'e5\'e5 \'e2\'fb\'e2\'e5\'e4\'e5\'ed\'ed\'ee\'e5\f0\lang1033  \f1\lang1049\'ee\'f2\'eb\'e0\'e4\'ee\'f7\'ed\'ee\'e5 \'f1\'ee\'ee\'e1\'f9\'e5\'ed\'e8\'e5 \'ea\'ee\'f2\'ee\'f0\'ee\'e5 \'ec\'ee\'e6\'e5\'f2 \'e1\'fb\'f2\'fc \'ee\'f2\'ea\'eb\'fe\'f7\'e5\'ed\'ee \'e4\'eb\'ff \'e2\'fb\'e2\'ee\'e4\'e0 \'e2 \'ee\'f2\'f7\'e5\'f2 \'e8 \'ef\'e8\'f1\'fc\'ec\'ee\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : EditMessageDebug(int index, string actionRus, string actionEng, string status, string commentRus, string commentEng, int image)\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0\f0\lang1033 tester.\f1\lang1049 EditMessageDebug(step, ""\'e4\'e5\'e9\'f1\'f2\'e2\'e8\'ff"",\f0\lang1033  ""action"", Tester.\f1\lang1049 PASSED, ""\'ea\'ee\'ec\'ec\'e5\'ed\'f2\'e0\'f0\'e8\'e9"", \f0\lang1033 ""comment"", \f1\lang1049  \f0\lang1033 Tester.\f1\lang1049 IMAGE_STATUS_PASSED);\par
+\par
+\f0\lang1033 tester.\f1\lang1049 EditMessageDebug(step, \f0\lang1033 null\f1\lang1049 ,\f0\lang1033  null,\f1\lang1049  \f0\lang1033 Tester.\f1\lang1049 FAILED, ""\'ea\'ee\'ec\'ec\'e5\'ed\'f2\'e0\'f0\'e8\'e9"", \f0\lang1033 ""comment"",\f1\lang1049  \f0\lang1033 Tester.\f1\lang1049 IMAGE_STATUS_FAILED);\par
+\par
+
+\pard\sa200\sl276\slmult1\f0\fs22\lang9\par
+}",
+
+@"",
+@"",
 @"",
 @"",
 @"",
@@ -2971,6 +3016,7 @@ tester.ConsoleMsg(events);\par
             data.Add(new CompletionData("DefineTestStop", "DefineTestStop(int stepIndex)"));
             data.Add(new CompletionData("Description", "Description(string text)"));
             data.Add(new CompletionData("EditMessage", "EditMessage(int index, string action, string status, string comment, int image)"));
+            data.Add(new CompletionData("EditMessageDebug", "EditMessageDebug(int index, string actionRus, string actionEng, string status, string commentRus, string commentEng, int image)"));
             data.Add(new CompletionData("ExecuteJavaScriptAsync", "ExecuteJavaScriptAsync(string script)"));
             data.Add(new CompletionData("FAILED", "FAILED"));
             data.Add(new CompletionData("FindElementAsync", "FindElementAsync(string by, string locator, int sec)"));
@@ -3046,6 +3092,7 @@ tester.ConsoleMsg(events);\par
             data.Add(new CompletionData("ScrollToElementAsync", "ScrollToElementAsync(string by, string locator, bool behaviorSmooth = false)"));
             data.Add(new CompletionData("SelectOptionAsync", "SelectOptionAsync(string by, string value)"));
             data.Add(new CompletionData("SendMessage", "SendMessage(string action, string status, string comment, int image)"));
+            data.Add(new CompletionData("SendMessageDebug", "SendMessageDebug(string actionRus, string actionEng, string status,  string commentRus, string commentEng, int image)"));
             data.Add(new CompletionData("SendMsgToMailAsync", "SendMsgToMailAsync(string subject, string body, string filename = \"\")"));
             data.Add(new CompletionData("SendMsgToTelegramAsync", "SendMsgToTelegramAsync(string botToken, string chatId, string text, string charset = \"UTF-8\")"));
             data.Add(new CompletionData("SetAttributeAsync", "GetAttributeAsync(string name)"));
@@ -3655,11 +3702,11 @@ tester.ConsoleMsg(events);\par
 
                     if (value == "RestGetStatusCodeAsync" && tag == "Tester") richTextBox1.Rtf = handbook[197];
                     if (value == "BrowserClearNetworkAsync" && tag == "Tester") richTextBox1.Rtf = handbook[198];
+                    if (value == "Description" && tag == "Tester") richTextBox1.Rtf = handbook[199];
+                    if (value == "SendMessageDebug" && tag == "Tester") richTextBox1.Rtf = handbook[200];
+                    if (value == "EditMessageDebug" && tag == "Tester") richTextBox1.Rtf = handbook[201];
 
                     /*
-                    if (value == "" && tag == "") richTextBox1.Rtf = handbook[199];
-                    if (value == "" && tag == "") richTextBox1.Rtf = handbook[200];
-                    if (value == "" && tag == "") richTextBox1.Rtf = handbook[201];
                     if (value == "" && tag == "") richTextBox1.Rtf = handbook[202];
                     if (value == "" && tag == "") richTextBox1.Rtf = handbook[203];
                     if (value == "" && tag == "") richTextBox1.Rtf = handbook[204];
