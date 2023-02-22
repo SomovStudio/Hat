@@ -11,6 +11,13 @@
 - Отчет с полным списком результатов всех тестов
 - В методе SendMsgToMailAsync добавлена возможность отправлять вложенный файла
 
+- Добавлен метод для получения CSS стиля элемента
+
+let color = window.getComputedStyle(document.getElementById('buttonLogin')).getPropertyValue("color");
+let bgcolor = window.getComputedStyle(document.getElementById('buttonLogin')).getPropertyValue("background-color");
+let btnwidth = window.getComputedStyle(document.getElementById('buttonLogin')).getPropertyValue("width");
+
+
 -----------------------------
 
 Обновление браузера Hat 1.2.0 (07.02.2023)
