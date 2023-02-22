@@ -558,6 +558,7 @@ namespace Hat
             {
                 if (Report.TestSuccess == false)
                 {
+                    string filename = "";
                     string content = "";
 
                     if (Config.languageEngReportMail == false)
@@ -593,6 +594,8 @@ namespace Hat
                     {
                         foreach (string[] step in Report.Steps)
                         {
+                            if (step[0] == Report.SCREENSHOT) filename = step[2];
+
                             content += "<tr>";
                             if (Config.languageEngReportMail == false)
                             {
@@ -624,8 +627,8 @@ namespace Hat
                         }
                     }
                     content += "</table>";
-                    if (Config.languageEngReportMail == false) WorkOnEmail.SendEmail("Failed автотест " + Report.TestFileName + " - " + Report.Description, content);
-                    else WorkOnEmail.SendEmail("Failed autotest " + Report.TestFileName + " - " + Report.Description, content);
+                    if (Config.languageEngReportMail == false) WorkOnEmail.SendEmail("Failed автотест " + Report.TestFileName + " - " + Report.Description, content, filename);
+                    else WorkOnEmail.SendEmail("Failed autotest " + Report.TestFileName + " - " + Report.Description, content, filename);
                 }
             }
             catch (Exception ex)
@@ -641,7 +644,7 @@ namespace Hat
             {
                 if (Report.TestSuccess == true)
                 {
-
+                    string filename = "";
                     string content = "";
 
                     if (Config.languageEngReportMail == false)
@@ -677,6 +680,8 @@ namespace Hat
                     {
                         foreach (string[] step in Report.Steps)
                         {
+                            if (step[0] == Report.SCREENSHOT) filename = step[2];
+
                             content += "<tr>";
                             if (Config.languageEngReportMail == false)
                             {
@@ -708,8 +713,8 @@ namespace Hat
                         }
                     }
                     content += "</table>";
-                    if (Config.languageEngReportMail == false) WorkOnEmail.SendEmail("Success автотест " + Report.TestFileName + " - " + Report.Description, content);
-                    else WorkOnEmail.SendEmail("Success autotest " + Report.TestFileName + " - " + Report.Description, content);
+                    if (Config.languageEngReportMail == false) WorkOnEmail.SendEmail("Success автотест " + Report.TestFileName + " - " + Report.Description, content, filename);
+                    else WorkOnEmail.SendEmail("Success autotest " + Report.TestFileName + " - " + Report.Description, content, filename);
                 }
             }
             catch (Exception ex)
@@ -718,11 +723,11 @@ namespace Hat
             }
         }
 
-        public void SendMail(string subject, string body) // отправка письма на почту
+        public void SendMail(string subject, string body, string filename) // отправка письма на почту
         {
             try
             {
-                WorkOnEmail.SendEmail(subject, body);
+                WorkOnEmail.SendEmail(subject, body, filename);
             }
             catch (Exception ex)
             {

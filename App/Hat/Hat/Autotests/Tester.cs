@@ -595,12 +595,12 @@ namespace HatFrameworkDev
         /*
          * Методы для отправки сообщения на почту и телеграм
          */
-        public async Task SendMsgToMailAsync(string subject, string body)
+        public async Task SendMsgToMailAsync(string subject, string body, string filename = "")
         {
-            int step = SendMessageDebug($"SendMsgToMail(\"{subject}\", \"{body}\")", $"SendMsgToMail(\"{subject}\", \"{body}\")", PROCESS, "Отправка письма", "Sending a email", IMAGE_STATUS_PROCESS);
+            int step = SendMessageDebug($"SendMsgToMail(\"{subject}\", \"{body}\")", $"SendMsgToMail(\"{subject}\", \"{body}\", \"{filename}\")", PROCESS, "Отправка письма", "Sending a email", IMAGE_STATUS_PROCESS);
             try
             {
-                sendMail.Invoke(BrowserWindow, new Object[] { subject, body });
+                sendMail.Invoke(BrowserWindow, new Object[] { subject, body, filename });
                 EditMessageDebug(step, null, null, COMPLETED, "Письмо отправлено", "the email has been sent", IMAGE_STATUS_MESSAGE);
             }
             catch (Exception ex)
