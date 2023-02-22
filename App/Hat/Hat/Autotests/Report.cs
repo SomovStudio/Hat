@@ -50,7 +50,7 @@ namespace Hat
                 Report.TestSuccess = false;
                 Report.Steps = new List<string[]>();
 
-                SaveReport(Report.TestSuccess);
+                SaveReport(Report.TestSuccess, true);
             }
             catch (Exception ex)
             {
@@ -76,8 +76,9 @@ namespace Hat
             }
         }
 
-        public static void SaveReport(bool testSuccess)
+        public static void SaveReport(bool testSuccess, bool init = false)
         {
+            Config.browserForm.ConsoleMsg("SaveReport INIT: " + init.ToString());
             try
             {
                 Report.TestSuccess = testSuccess;
@@ -94,7 +95,7 @@ namespace Hat
                     WorkOnFiles writer = new WorkOnFiles();
                     if (!File.Exists(Report.FolderName + Report.FileName))
                     {
-                        writer.writeFile(GetHead() + GetBody() + GetFooter(), WorkOnFiles.UTF_8_BOM, Report.FolderName + Report.FileName);
+                        writer.writeFile(GetHead(init) + GetBody() + GetFooter(), WorkOnFiles.UTF_8_BOM, Report.FolderName + Report.FileName);
                         if (File.Exists(Report.FolderName + Report.FileName))
                         {
                             Config.browserForm.ConsoleMsg($"Создан файл отчета {Report.FileName}");
@@ -112,7 +113,7 @@ namespace Hat
                     else
                     {
                         File.Delete(Report.FolderName + Report.FileName);
-                        writer.writeFile(GetHead() + GetBody() + GetFooter(), WorkOnFiles.UTF_8_BOM, Report.FolderName + Report.FileName);
+                        writer.writeFile(GetHead(init) + GetBody() + GetFooter(), WorkOnFiles.UTF_8_BOM, Report.FolderName + Report.FileName);
                         if (File.Exists(Report.FolderName + Report.FileName))
                         {
                             Config.browserForm.ConsoleMsg($"Обновлен файл отчета {Report.FileName}");
@@ -138,6 +139,8 @@ namespace Hat
             {
                 Config.browserForm.ConsoleMsgError(ex.ToString());
             }
+
+            Report.SaveResultReport();
         }
 
         public static async Task SaveReportScreenshotAsync()
@@ -188,11 +191,13 @@ namespace Hat
          * Страница отчета автотестов
          * */
 
-        public static string GetHead()
+        public static string GetHead(bool init = false)
         {
+            Config.browserForm.ConsoleMsg("GetHead INIT: " + init.ToString());
             string content = "<!--" + Environment.NewLine;
-            if (Report.TestSuccess == true) content += Report.SUCCESS + Environment.NewLine;
-            else content += Report.FAILURE + Environment.NewLine;
+            if (init == true) content += Report.AT_WORK + Environment.NewLine;
+            if (init == false && Report.TestSuccess == true) content += Report.SUCCESS + Environment.NewLine;
+            if (init == false && Report.TestSuccess == false) content += Report.FAILURE + Environment.NewLine;
             content += Report.TestFileName + Environment.NewLine;
             content += Report.Description + Environment.NewLine;
             content += Report.Date + Environment.NewLine;
@@ -409,9 +414,7 @@ img { min-width: 700px; max-width: 700px; }
 
                     foreach (string filename in Directory.GetFiles(Report.FolderName))
                     {
-                        if (filename.Contains("index.html") == true) continue;
-                        amountTests++;
-
+                        
                         /* 0    <!--
                          * 1    FAILURE
                          * 2    ExampleTest1.cs
@@ -428,6 +431,7 @@ img { min-width: 700px; max-width: 700px; }
 
                             if (lines[0] == "<!--" && lines[5] == "-->")
                             {
+                                amountTests++;
                                 test = new List<string>();
                                 if (lines[1] == Report.SUCCESS)
                                 {
@@ -439,9 +443,14 @@ img { min-width: 700px; max-width: 700px; }
                                     test.Add(Report.FAILURE);   // Статус теста
                                     amountFailureTests++;
                                 }
-                                else
+                                else if (lines[1] == Report.AT_WORK)
                                 {
                                     test.Add(Report.AT_WORK);   // Статус теста
+                                    amountWorkTests++;
+                                }
+                                else
+                                {
+                                    test.Add("");               // Статус теста
                                     amountWorkTests++;
                                 }
 
@@ -449,16 +458,6 @@ img { min-width: 700px; max-width: 700px; }
                                 test.Add(lines[4]); // Дата завершения
                                 test.Add(lines[2]); // Файл
                                 test.Add(filename); // Отчет
-                                tests.Add(test);
-                            }
-                            else
-                            {
-                                amountWorkTests++;
-                                test.Add(Report.AT_WORK);   // Статус теста
-                                test.Add("..."); // Описание теста
-                                test.Add("..."); // Дата завершения
-                                test.Add("..."); // Файл
-                                test.Add("..."); // Отчет
                                 tests.Add(test);
                             }
                         }
