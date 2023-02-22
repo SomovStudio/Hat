@@ -154,7 +154,9 @@ namespace Hat
 
                 if (Directory.Exists(Report.FolderImagesName))
                 {
-                    Report.AddStep(Report.SCREENSHOT, $"Файл: <a href=\"./screenshots/{filename}\">{filename}</a>", $"<img src=\"./screenshots/{filename}\" />");
+                    if (Config.languageEngReportMail == false) Report.AddStep(Report.SCREENSHOT, $"Файл: <a href=\"./screenshots/{filename}\">{filename}</a>", $"<img src=\"./screenshots/{filename}\" />");
+                    else Report.AddStep(Report.SCREENSHOT, $"File: <a href=\"./screenshots/{filename}\">{filename}</a>", $"<img src=\"./screenshots/{filename}\" />");
+
                     using (System.IO.FileStream file = System.IO.File.Create(Report.FolderImagesName + filename))
                     {
                         await Config.browserForm.GetWebView().CoreWebView2.CapturePreviewAsync(CoreWebView2CapturePreviewImageFormat.Jpeg, file);
