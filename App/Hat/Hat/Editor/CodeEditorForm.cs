@@ -2530,13 +2530,13 @@ tester.ConsoleMsg(""Time "" + result.TotalSeconds);\par
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 AssertNoErrorsAsync\cf0\par
 \cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'fb\'ef\'ee\'eb\'ed\'ff\'e5\'f2 \'ef\'f0\'ee\'e2\'e5\'f0\'ea\'f3 \'ee\'f2\'f1\'f3\'f2\'f1\'f2\'e2\'e8\'ff \'ee\'f8\'e8\'e1\'ee\'ea \'ed\'e0 \'f1\'f2\'f0\'e0\'ed\'e8\'f6\'e5 \'e8 \'e5\'f1\'eb\'e8 \'ee\'f8\'e8\'e1\'ea\'e8 \'ef\'f0\'e8\'f1\'f3\'f2\'f1\'f2\'e2\'f3\'fe\'f2 \'ef\'f0\'ee\'e2\'e5\'f0\'ea\'e0 \'e1\'f3\'e4\'e5\'f2 \'f1\'f7\'e8\'f2\'e0\'f2\'fc\'f1\'ff \'ef\'f0\'ee\'e2\'e0\'eb\'fc\'ed\'ee\'e9\par
-\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \f0\lang1033 AssertNoErrorsAsync()\f1\lang1049\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \f0\lang1033 AssertNoErrorsAsync(string[] listIgnored = null)\f1\lang1049\par
 \cf3\par
 \cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
 \cf0\f0\lang1033 Tester tester = new Tester(browserForm);\par
 await tester.TestBeginAsync();\par
 await tester.GoToUrlAsync(""https://www.nvidia.com/"", 5);\par
-await tester.AssertNoErrorsAsync();\par
+await tester.AssertNoErrorsAsync(new string[1] \{""stats.g.doubleclick.net""\});\par
 await tester.TestEndAsync();\par
 }",
 
@@ -2931,7 +2931,7 @@ tester.ConsoleMsg(events);\par
             data.Add(new CompletionData("AssertEqualsAsync", "AssertEqualsAsync(dynamic expected, dynamic actual)"));
             data.Add(new CompletionData("AssertFalseAsync", "AssertFalseAsync(bool condition)"));
             data.Add(new CompletionData("AssertNetworkEventsAsync", "AssertNetworkEventsAsync(bool presence, string[] events)"));
-            data.Add(new CompletionData("AssertNoErrorsAsync", "AssertNoErrorsAsync()"));
+            data.Add(new CompletionData("AssertNoErrorsAsync", "AssertNoErrorsAsync(string[] listIgnored = null)"));
             data.Add(new CompletionData("AssertNotEqualsAsync", "AssertNotEqualsAsync(dynamic expected, dynamic actual)"));
             data.Add(new CompletionData("AssertNotNullAsync", "AssertNotNullAsync(dynamic obj)"));
             data.Add(new CompletionData("AssertNullAsync", "AssertNullAsync(dynamic obj)"));
