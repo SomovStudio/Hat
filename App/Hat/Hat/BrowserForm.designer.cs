@@ -155,6 +155,8 @@
             this.showEventsReportEmailToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.fullReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.shortReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator26 = new System.Windows.Forms.ToolStripSeparator();
+            this.createResultReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator24 = new System.Windows.Forms.ToolStripSeparator();
             this.languageReportMailToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.languageReportEmailRusToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -270,8 +272,6 @@
             this.folderBrowserDialogProjectCreate = new System.Windows.Forms.FolderBrowserDialog();
             this.openFileProjectDialog = new System.Windows.Forms.OpenFileDialog();
             this.saveFileLogDialog = new System.Windows.Forms.SaveFileDialog();
-            this.toolStripSeparator26 = new System.Windows.Forms.ToolStripSeparator();
-            this.createResultReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -1462,6 +1462,18 @@
             this.shortReportToolStripMenuItem.Text = "Краткий отчет (только ошибки и пользовательские сообщения)";
             this.shortReportToolStripMenuItem.Click += new System.EventHandler(this.shortReportToolStripMenuItem_Click);
             // 
+            // toolStripSeparator26
+            // 
+            this.toolStripSeparator26.Name = "toolStripSeparator26";
+            this.toolStripSeparator26.Size = new System.Drawing.Size(426, 6);
+            // 
+            // createResultReportToolStripMenuItem
+            // 
+            this.createResultReportToolStripMenuItem.Name = "createResultReportToolStripMenuItem";
+            this.createResultReportToolStripMenuItem.Size = new System.Drawing.Size(429, 22);
+            this.createResultReportToolStripMenuItem.Text = "Сформировать отчет с результатами всех тестов";
+            this.createResultReportToolStripMenuItem.Click += new System.EventHandler(this.createResultReportToolStripMenuItem_Click);
+            // 
             // toolStripSeparator24
             // 
             this.toolStripSeparator24.Name = "toolStripSeparator24";
@@ -1744,12 +1756,12 @@
             // columnHeader3
             // 
             this.columnHeader3.Text = "Статус";
-            this.columnHeader3.Width = 100;
+            this.columnHeader3.Width = 90;
             // 
             // columnHeader4
             // 
             this.columnHeader4.Text = "Комментарий";
-            this.columnHeader4.Width = 500;
+            this.columnHeader4.Width = 450;
             // 
             // contextMenuStripTest
             // 
@@ -2572,18 +2584,6 @@
             // saveFileLogDialog
             // 
             this.saveFileLogDialog.Filter = "*.txt|*.txt";
-            // 
-            // toolStripSeparator26
-            // 
-            this.toolStripSeparator26.Name = "toolStripSeparator26";
-            this.toolStripSeparator26.Size = new System.Drawing.Size(426, 6);
-            // 
-            // createResultReportToolStripMenuItem
-            // 
-            this.createResultReportToolStripMenuItem.Name = "createResultReportToolStripMenuItem";
-            this.createResultReportToolStripMenuItem.Size = new System.Drawing.Size(429, 22);
-            this.createResultReportToolStripMenuItem.Text = "Сформировать отчет с результатами всех тестов";
-            this.createResultReportToolStripMenuItem.Click += new System.EventHandler(this.createResultReportToolStripMenuItem_Click);
             // 
             // BrowserForm
             // 
