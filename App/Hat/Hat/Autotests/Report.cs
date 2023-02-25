@@ -229,7 +229,9 @@ header { display: block; position: fixed; top: 0px; background-color: #F9F7FF; b
 section { display: block; position: relative; min-width: 1400px; max-width: 1400px; }
 table { margin: 0px; min-width: 1400px; max-width: 1400px; }
 thead { background-color: #4d545d; color: #FFF; }
-.table { position: relative; top: 180px; z-index: 1; }
+.content-hidden { overflow: hidden; }
+.content-scroll { overflow: scroll; }
+.table { position: relative; top: 180px; z-index: 1; overflow: hidden; }
 .table-status { padding: 10px; min-width: 100px; max-width: 100px; }
 .table-action { padding: 10px; min-width: 450px; max-width: 450px; }
 .table-comment { padding: 10px; min-width: 700px; max-width: 700px; }
@@ -320,7 +322,8 @@ img { min-width: 700px; max-width: 700px; }
                             content += "<tr>" + Environment.NewLine;
                             content += $"<td class=\"table-status table-row-empty\">{step[0]}</td>" + Environment.NewLine;
                             content += $"<td class=\"table-action table-row-empty\">{step[1]}</td>" + Environment.NewLine;
-                            content += $"<td class=\"table-comment table-row-empty\">{step[2]}</td>" + Environment.NewLine;
+                            if (step[2].Length > 1000) content += $"<td class=\"table-comment table-row-empty content-scroll\">{step[2]}</td>" + Environment.NewLine;
+                            else content += $"<td class=\"table-comment table-row-empty\">{step[2]}</td>" + Environment.NewLine;
                             content += "</tr>" + Environment.NewLine;
                         }
                         else
@@ -348,7 +351,8 @@ img { min-width: 700px; max-width: 700px; }
                                 if (step[0] == Report.SCREENSHOT) content += $"<td class=\"table-status table-row status-screenshot\">Screenshot</td>" + Environment.NewLine;
                             }
                             content += $"<td class=\"table-action table-row\">{step[1]}</td>" + Environment.NewLine;
-                            content += $"<td class=\"table-comment table-row\">{step[2]}</td>" + Environment.NewLine;
+                            if (step[2].Length > 1000) content += $"<td class=\"table-comment table-row content-scroll\">{step[2]}</td>" + Environment.NewLine;
+                            else content += $"<td class=\"table-comment table-row\">{step[2]}</td>" + Environment.NewLine;
                             content += "</tr>" + Environment.NewLine;
                         }
                     }
@@ -535,7 +539,7 @@ header { display: block; position: fixed; top: 0px; background-color: #F9F7FF; b
 section { display: block; position: relative; min-width: 1400px; max-width: 1400px; }
 table { margin: 0px; min-width: 1400px; max-width: 1400px; }
 thead { background-color: #4d545d; color: #FFF; }
-.table { position: relative; top: 380px; z-index: 1; }
+.table { position: relative; top: 380px; z-index: 1; overflow: hidden; }
 .table-status { padding: 10px; min-width: 60px; max-width: 60px; }
 .table-description { padding: 10px; min-width: 350px; max-width: 350px; }
 .table-date { padding: 10px; min-width: 100px; max-width: 100px; }
@@ -551,6 +555,8 @@ thead { background-color: #4d545d; color: #FFF; }
 img { min-width: 700px; max-width: 700px; }
 .result-passed { color: #007F0E; }
 .result-failed { color: #7F0000; }
+.content-hidden { overflow: hidden; }
+.content-scroll { overflow: scroll; }
 </style>
 </head>";
             return content;
