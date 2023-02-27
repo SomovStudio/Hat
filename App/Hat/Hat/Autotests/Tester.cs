@@ -3841,7 +3841,7 @@ namespace HatFrameworkDev
             }
         }
 
-        public async Task<bool> AssertNoErrorsAsync(string[] listIgnored = null)
+        public async Task<bool> AssertNoErrorsAsync(bool showListErrors = false, string[] listIgnored = null)
         {
             List<string> errors = await BrowserGetErrorsAsync();
             int step = SendMessageDebug("AssertNoErrors()", "AssertNoErrors()", PROCESS, "Проверка отсутствия ошибок в консоли", "Checking for errors in the console", IMAGE_STATUS_PROCESS);
@@ -3882,9 +3882,22 @@ namespace HatFrameworkDev
             bool result;
             if (countErrors > 0)
             {
-                EditMessageDebug(step, null, null, FAILED, "В консоли присутствует " + countErrors.ToString() + " ошибок." + Environment.NewLine + textErrors,
-                    "There are " + countErrors.ToString() + " errors in the console." + Environment.NewLine + textErrors,
+                if (showListErrors == true)
+                {
+                    textErrors = textErrors.Replace("\n", "<br>" + Environment.NewLine);
+                    EditMessageDebug(step, null, null, FAILED, 
+                        "В консоли присутствует " + countErrors.ToString() + " ошибок. <br>" + Environment.NewLine + textErrors,
+                        "There are " + countErrors.ToString() + " errors in the console. <br>" + Environment.NewLine + textErrors,
                     Tester.IMAGE_STATUS_FAILED);
+                }
+                else
+                {
+                    EditMessageDebug(step, null, null, FAILED, 
+                        "В консоли присутствует " + countErrors.ToString() + " ошибок.",
+                        "There are " + countErrors.ToString() + " errors in the console.",
+                        Tester.IMAGE_STATUS_FAILED);
+                }
+                
                 if (assertStatus == null || assertStatus == PASSED) assertStatus = FAILED;
                 TestStopAsync();
                 result = false;
