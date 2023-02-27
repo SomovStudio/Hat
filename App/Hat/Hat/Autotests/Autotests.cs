@@ -105,6 +105,14 @@ namespace Hat
             tester.ConsoleMsg("width: " + style);
             */
 
+            await tester.GoToUrlAsync("https://somovstudio.github.io/test.html", 25);
+            //ок await tester.SetStyleInElementAsync(HatFrameworkDev.Tester.BY_XPATH, "//div[@id='auth']", "background-color: #000000;");
+            //ок await tester.SetStyleInElementAsync(HatFrameworkDev.Tester.BY_CSS, "#auth", "background-color: #000000;");
+            //ок await tester.SetStyleInElementByIdAsync("buttonLogin", "background-color: #123456;");
+            //ok await tester.SetStyleInElementByClassAsync("text-field", 0, "background-color: #123456;");
+            //ok await tester.SetStyleInElementByNameAsync("pass", 0, "background-color: #123456;");
+            //ok await tester.SetStyleInElementByTagAsync("h2", 0, "background-color: #123456;");
+
             await tester.TestEndAsync();
 
             /*

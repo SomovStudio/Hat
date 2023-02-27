@@ -3723,7 +3723,7 @@ namespace HatFrameworkDev
                 script += $"var style = window.getComputedStyle(element).getPropertyValue(\"{property}\"); ";
                 script += "return style; ";
                 script += "}());";
-                value = await execute(script, step, "Стиль из элемента прочитан", "Style from the read element", $"Не удалось прочитать стиль из элемента по локатору: {locator}", $"Could not read the style from the element by the locator: {locator}");
+                value = await execute(script, step, "Стиль из элемента прочитан", "Style from the read element", $"Не удалось прочитать стиль '{property}' из элемента по локатору: {locator}", $"Could not read the style '{property}' from the element by the locator: {locator}");
                 if (value.Length > 1 && value != "null") value = value.Substring(1, value.Length - 2);
             }
             catch (Exception ex)
@@ -3752,7 +3752,7 @@ namespace HatFrameworkDev
                 script += $"var style = window.getComputedStyle(element).getPropertyValue(\"{property}\"); ";
                 script += "return style; ";
                 script += "}());";
-                value = await execute(script, step, "Стиль из элемента прочитан", "Style from the read element", $"Не удалось найти или прочитать стиль из элемента с ID: {id}", $"Could not find or read the style from the element with ID: {id}");
+                value = await execute(script, step, "Стиль из элемента прочитан", "Style from the read element", $"Не удалось найти или прочитать стиль '{property}' из элемента с ID: {id}", $"Could not find or read the style '{property}' from the element with ID: {id}");
                 if (value.Length > 1 && value != "null") value = value.Substring(1, value.Length - 2);
             }
             catch (Exception ex)
@@ -3781,7 +3781,7 @@ namespace HatFrameworkDev
                 script += $"var style = window.getComputedStyle(element).getPropertyValue(\"{property}\"); ";
                 script += "return style; ";
                 script += "}());";
-                value = await execute(script, step, "Стиль из элемента прочитан", "Style from the read element", $"Не удалось найти или прочитать стиль из элемента по Class: {_class} (Index: {index})", $"Could not find or read the style from the element by Class: {_class} (Index: {index})");
+                value = await execute(script, step, "Стиль из элемента прочитан", "Style from the read element", $"Не удалось найти или прочитать стиль '{property}' из элемента по Class: {_class} (Index: {index})", $"Could not find or read the style '{property}' from the element by Class: {_class} (Index: {index})");
                 if (value.Length > 1 && value != "null") value = value.Substring(1, value.Length - 2);
             }
             catch (Exception ex)
@@ -3810,7 +3810,7 @@ namespace HatFrameworkDev
                 script += $"var style = window.getComputedStyle(element).getPropertyValue(\"{property}\"); ";
                 script += "return style; ";
                 script += "}());";
-                value = await execute(script, step, "Стиль из элемента прочитан", "Style from the read element", $"Не удалось найти или прочитать стиль из элемента по Name: {name} (Index: {index})", $"Could not find or read the style from the element by Name: {name} (Index: {index})");
+                value = await execute(script, step, "Стиль из элемента прочитан", "Style from the read element", $"Не удалось найти или прочитать стиль '{property}' из элемента по Name: {name} (Index: {index})", $"Could not find or read the style '{property}' from the element by Name: {name} (Index: {index})");
                 if (value.Length > 1 && value != "null") value = value.Substring(1, value.Length - 2);
             }
             catch (Exception ex)
@@ -3839,7 +3839,7 @@ namespace HatFrameworkDev
                 script += $"var style = window.getComputedStyle(element).getPropertyValue(\"{property}\"); ";
                 script += "return style; ";
                 script += "}());";
-                value = await execute(script, step, "Стиль из элемента прочитан", "Style from the read element", $"Не удалось найти или прочитать стиль из элемента по Tag: {tag} (Index: {index})", $"Could not find or read the style from the element by Tag: {tag} (Index: {index})");
+                value = await execute(script, step, "Стиль из элемента прочитан", "Style from the read element", $"Не удалось найти или прочитать стиль '{property}' из элемента по Tag: {tag} (Index: {index})", $"Could not find or read the style '{property}' from the element by Tag: {tag} (Index: {index})");
                 if (value.Length > 1 && value != "null") value = value.Substring(1, value.Length - 2);
             }
             catch (Exception ex)
