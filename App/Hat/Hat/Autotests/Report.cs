@@ -320,10 +320,10 @@ img { min-width: 700px; max-width: 700px; }
                         if(step[0] == "")
                         {
                             content += "<tr>" + Environment.NewLine;
-                            content += $"<td class=\"table-status table-row-empty\">{step[0]}</td>" + Environment.NewLine;
-                            content += $"<td class=\"table-action table-row-empty\">{step[1]}</td>" + Environment.NewLine;
+                            content += $"<td class=\"table-status table-row-empty content-hidden\">{step[0]}</td>" + Environment.NewLine;
+                            content += $"<td class=\"table-action table-row-empty content-hidden\">{step[1]}</td>" + Environment.NewLine;
                             if (step[2].Length > 1000) content += $"<td class=\"table-comment table-row-empty content-scroll\">{step[2]}</td>" + Environment.NewLine;
-                            else content += $"<td class=\"table-comment table-row-empty\">{step[2]}</td>" + Environment.NewLine;
+                            else content += $"<td class=\"table-comment table-row-empty content-hidden\">{step[2]}</td>" + Environment.NewLine;
                             content += "</tr>" + Environment.NewLine;
                         }
                         else
@@ -350,9 +350,9 @@ img { min-width: 700px; max-width: 700px; }
                                 if (step[0] == Report.ERROR) content += $"<td class=\"table-status table-row status-error\">Error</td>" + Environment.NewLine;
                                 if (step[0] == Report.SCREENSHOT) content += $"<td class=\"table-status table-row status-screenshot\">Screenshot</td>" + Environment.NewLine;
                             }
-                            content += $"<td class=\"table-action table-row\">{step[1]}</td>" + Environment.NewLine;
+                            content += $"<td class=\"table-action table-row content-hidden\">{step[1]}</td>" + Environment.NewLine;
                             if (step[2].Length > 1000) content += $"<td class=\"table-comment table-row content-scroll\">{step[2]}</td>" + Environment.NewLine;
-                            else content += $"<td class=\"table-comment table-row\">{step[2]}</td>" + Environment.NewLine;
+                            else content += $"<td class=\"table-comment table-row content-hidden\">{step[2]}</td>" + Environment.NewLine;
                             content += "</tr>" + Environment.NewLine;
                         }
                     }
@@ -699,10 +699,10 @@ ZTptb2RpZnkAMjAyMy0wMi0yMVQxMDoxMzo0MSswMDowMN/S9FIAAAAASUVORK5CYII="" />
                             if (test[0] == Report.FAILURE) content += $"<td class=\"table-status table-row status-failed\">Failure</td>" + Environment.NewLine;
                             if (test[0] == Report.AT_WORK) content += $"<td class=\"table-status table-row status-process\">At work</td>" + Environment.NewLine;
                         }
-                        content += $"<td class=\"table-description table-row\">{test[1]}</td>" + Environment.NewLine;
-                        content += $"<td class=\"table-date table-row\">{test[2]}</td>" + Environment.NewLine;
-                        content += $"<td class=\"table-file table-row\">{test[3]}</td>" + Environment.NewLine;
-                        content += $"<td class=\"table-report table-row\"><a href=\"{test[4]}\">{Config.browserForm.getFolderName2(test[4])}</a></td>" + Environment.NewLine;
+                        content += $"<td class=\"table-description table-row content-hidden\">{test[1]}</td>" + Environment.NewLine;
+                        content += $"<td class=\"table-date table-row content-hidden\">{test[2]}</td>" + Environment.NewLine;
+                        content += $"<td class=\"table-file table-row content-hidden\">{test[3]}</td>" + Environment.NewLine;
+                        content += $"<td class=\"table-report table-row content-hidden\"><a href=\"{test[4]}\">{Config.browserForm.getFolderName2(test[4])}</a></td>" + Environment.NewLine;
                         content += "</tr>" + Environment.NewLine;
                     }
                 }
