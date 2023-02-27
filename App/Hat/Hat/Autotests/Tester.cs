@@ -3856,7 +3856,74 @@ namespace HatFrameworkDev
             return value;
         }
 
+        public async Task SetStyleInElementAsync(string by, string locator, string cssText)
+        {
+            int step = SendMessageDebug($"SetStyleInElementAsync(\"{by}\", \"{locator}\", \"{cssText}\")", $"SetStyleInElementAsync(\"{by}\", \"{locator}\", \"{cssText}\")", PROCESS, "Ввод стиля в элемент", "Entering style into an element", IMAGE_STATUS_PROCESS);
+            if (DefineTestStop(step) == true) return;
+
+            string script = "(function(){";
+            if (by == BY_CSS) script += $"var element = document.querySelector(\"{locator}\");";
+            else if (by == BY_XPATH) script += $"var element = document.evaluate(\"{locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
+            script += $"element.style.cssText = '{cssText}';";
+            script += "return element;";
+            script += "}());";
+            await execute(script, step, "Стиль введен в элемент", "The style is entered in the element", $"Не удалось найти или ввести стиль в элемент по локатору: {locator}", $"Could not find or enter style in the element by locator: {locator}");
+        }
+
+        public async Task SetStyleInElementByIdAsync(string id, string cssText)
+        {
+            int step = SendMessageDebug($"SetStyleInElementByIdAsync(\"{id}\", \"{cssText}\")", $"SetStyleInElementByIdAsync(\"{id}\", \"{cssText}\")", PROCESS, "Ввод стиля в элемент", "Entering style into an element", IMAGE_STATUS_PROCESS);
+            if (DefineTestStop(step) == true) return;
+
+            string script = "(function(){";
+            script += $"var element = document.getElementById('{id}');";
+            script += $"element.style.cssText = '{cssText}';";
+            script += "return element;";
+            script += "}());";
+            await execute(script, step, "Стиль введен в элемент", "The style is entered in the element", $"Не удалось найти или ввести стиль в элемент с ID: {id}", $"Could not find or enter style in the element with ID: {id}");
+        }
+
+        public async Task SetStyleInElementByClassAsync(string _class, int index, string cssText)
+        {
+            int step = SendMessageDebug($"SetStyleInElementByClassAsync(\"{_class}\", {index}, \"{cssText}\")", $"SetStyleInElementByClassAsync(\"{_class}\", {index}, \"{cssText}\")", PROCESS, "Ввод стиля в элемент", "Entering style into an element", IMAGE_STATUS_PROCESS);
+            if (DefineTestStop(step) == true) return;
+
+            string script = "(function(){";
+            script += $"var element = document.getElementsByClassName('{_class}')[{index}];";
+            script += $"element.style.cssText = '{cssText}';";
+            script += "return element;";
+            script += "}());";
+            await execute(script, step, "Стиль введен в элемент", "The style is entered in the element", $"Не удалось найти или ввести стиль в элемент по Class: {_class} (Index: {index})", $"Could not find or enter style in the element by Class: {_class} (Index: {index})");
+        }
+
+        public async Task SetStyleInElementByNameAsync(string name, int index, string cssText)
+        {
+            int step = SendMessageDebug($"SetStyleInElementByNameAsync(\"{name}\", {index}, \"{cssText}\")", $"SetStyleInElementByNameAsync(\"{name}\", {index}, \"{cssText}\")", PROCESS, "Ввод стиля в элемент", "Entering style into an element", IMAGE_STATUS_PROCESS);
+            if (DefineTestStop(step) == true) return;
+
+            string script = "(function(){";
+            script += $"var element = document.getElementsByName('{name}')[{index}];";
+            script += $"element.style.cssText = '{cssText}';";
+            script += "return element;";
+            script += "}());";
+            await execute(script, step, "Стиль введен в элемент", "The style is entered in the element", $"Не удалось найти или ввести стиль в элемент по Name: {name} (Index: {index})", $"Could not find or enter style in the element by Name: {name} (Index: {index})");
+        }
+
+        public async Task SetStyleInElementByTagAsync(string tag, int index, string cssText)
+        {
+            int step = SendMessageDebug($"SetStyleInElementByTagAsync(\"{tag}\", {index}, \"{cssText}\")", $"SetStyleInElementByTagAsync(\"{tag}\", {index}, \"{cssText}\")", PROCESS, "Ввод стиля в элемент", "Entering style into an element", IMAGE_STATUS_PROCESS);
+            if (DefineTestStop(step) == true) return;
+
+            string script = "(function(){";
+            script += $"var element = document.getElementsByTagName('{tag}')[{index}];";
+            script += $"element.style.cssText = '{cssText}';";
+            script += "return element;";
+            script += "}());";
+            await execute(script, step, "Стиль введен в элемент", "The style is entered in the element", $"Не удалось найти или ввести текст в элемент по Tag: {tag} (Index: {index})", $"Could not find or enter text in the element by Tag: {tag} (Index: {index})");
+        }
+
         
+
 
 
 

@@ -79,7 +79,8 @@ namespace Hat
             HatFrameworkDev.Tester tester = new HatFrameworkDev.Tester(Config.browserForm);
             await tester.TestBeginAsync();
             await tester.GoToUrlAsync("https://somovstudio.github.io/test_error.html", 25);
-            await tester.AssertNoErrorsAsync(true, new string[1] { "stats.g.doubleclick.net" });
+            //await tester.AssertNoErrorsAsync(true, new string[1] { "stats.g.doubleclick.net" });
+            //await tester.AssertNoErrorsAsync();
 
             //await tester.GoToUrlAsync("https://somovstudio.github.io/test.html", 25);
             //HatFrameworkDev.HTMLElement element = await tester.GetElementAsync(HatFrameworkDev.Tester.BY_XPATH, "//div[@id='auth']");
