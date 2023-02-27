@@ -3863,6 +3863,9 @@ namespace HatFrameworkDev
 
 
 
+
+
+
         /* 
          * Методы для проверки результата ===========================================================
          * https://junit.org/junit4/javadoc/4.8/org/junit/Assert.html
@@ -3996,7 +3999,7 @@ namespace HatFrameworkDev
         public async Task<bool> AssertNoErrorsAsync(bool showListErrors = false, string[] listIgnored = null)
         {
             List<string> errors = await BrowserGetErrorsAsync();
-            int step = SendMessageDebug("AssertNoErrors()", "AssertNoErrors()", PROCESS, "Проверка отсутствия ошибок в консоли", "Checking for errors in the console", IMAGE_STATUS_PROCESS);
+            int step = SendMessageDebug($"AssertNoErrors({showListErrors}, \"{listIgnored}\")", "AssertNoErrors()", PROCESS, "Проверка отсутствия ошибок в консоли", "Checking for errors in the console", IMAGE_STATUS_PROCESS); ; ;
             if (DefineTestStop(step) == true) return false;
 
             int countErrors = 0;

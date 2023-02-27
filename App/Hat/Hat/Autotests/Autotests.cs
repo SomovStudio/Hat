@@ -78,8 +78,8 @@ namespace Hat
         {
             HatFrameworkDev.Tester tester = new HatFrameworkDev.Tester(Config.browserForm);
             await tester.TestBeginAsync();
-            //await tester.GoToUrlAsync("https://somovstudio.github.io/test_error.html", 25);
-            //await tester.AssertNoErrorsAsync(true, new string[1] { "stats.g.doubleclick.net" });
+            await tester.GoToUrlAsync("https://somovstudio.github.io/test_error.html", 25);
+            await tester.AssertNoErrorsAsync(true, new string[1] { "stats.g.doubleclick.net" });
 
             //await tester.GoToUrlAsync("https://somovstudio.github.io/test.html", 25);
             //HatFrameworkDev.HTMLElement element = await tester.GetElementAsync(HatFrameworkDev.Tester.BY_XPATH, "//div[@id='auth']");
@@ -87,6 +87,7 @@ namespace Hat
             //tester.ConsoleMsg(style);
             //await element.SetStyleAsync("background-color: yellow; color: red; width: 100px;");
 
+            /*
             string style = "";
             await tester.GoToUrlAsync("https://somovstudio.github.io/test.html", 25);
             style = await tester.GetStyleFromElementAsync(HatFrameworkDev.Tester.BY_XPATH, "//div[@id='auth']", "position");
@@ -101,6 +102,7 @@ namespace Hat
             tester.ConsoleMsg("height: " + style);
             style = await tester.GetStyleFromElementByTagAsync("h2", 0, "width");
             tester.ConsoleMsg("width: " + style);
+            */
 
             await tester.TestEndAsync();
 
