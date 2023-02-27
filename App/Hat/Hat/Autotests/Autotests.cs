@@ -78,11 +78,29 @@ namespace Hat
         {
             HatFrameworkDev.Tester tester = new HatFrameworkDev.Tester(Config.browserForm);
             await tester.TestBeginAsync();
+            //await tester.GoToUrlAsync("https://somovstudio.github.io/test_error.html", 25);
+            //await tester.AssertNoErrorsAsync(true, new string[1] { "stats.g.doubleclick.net" });
+
+            //await tester.GoToUrlAsync("https://somovstudio.github.io/test.html", 25);
+            //HatFrameworkDev.HTMLElement element = await tester.GetElementAsync(HatFrameworkDev.Tester.BY_XPATH, "//div[@id='auth']");
+            //string style = await element.GetStyleAsync("width");
+            //tester.ConsoleMsg(style);
+            //await element.SetStyleAsync("background-color: yellow; color: red; width: 100px;");
+
+            string style = "";
             await tester.GoToUrlAsync("https://somovstudio.github.io/test.html", 25);
-            HatFrameworkDev.HTMLElement element = await tester.GetElementAsync(HatFrameworkDev.Tester.BY_XPATH, "//input[@id='buttonLogin']");
-            await element.ClickMouseAsync();
-
-
+            style = await tester.GetStyleFromElementAsync(HatFrameworkDev.Tester.BY_XPATH, "//div[@id='auth']", "position");
+            tester.ConsoleMsg("position: " + style);
+            style = await tester.GetStyleFromElementAsync(HatFrameworkDev.Tester.BY_CSS, "#auth", "padding");
+            tester.ConsoleMsg("padding: " + style);
+            style = await tester.GetStyleFromElementByIdAsync("buttonLogin", "background-color");
+            tester.ConsoleMsg("background-color: " + style);
+            style = await tester.GetStyleFromElementByClassAsync("text-field", 0, "border");
+            tester.ConsoleMsg("border: " + style);
+            style = await tester.GetStyleFromElementByNameAsync("pass", 0, "height");
+            tester.ConsoleMsg("height: " + style);
+            style = await tester.GetStyleFromElementByTagAsync("h2", 0, "width");
+            tester.ConsoleMsg("width: " + style);
 
             await tester.TestEndAsync();
 

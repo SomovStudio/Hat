@@ -2546,7 +2546,7 @@ namespace HatFrameworkDev
             string value = "";
             try
             {
-                string script = "(function(){ var element = document.getElementsByClassName('" + _class + "')[" + index + "]; return element.innerText; ";
+                string script = "(function(){ var element = document.getElementsByClassName('" + _class + "')[" + index + "]; ";
                 script += "if(element.innerText == '' && element.value != null) { return element.value; } ";
                 script += "else { return element.innerText; } ";
                 script += "}());";
@@ -3708,6 +3708,158 @@ namespace HatFrameworkDev
             }
             return result;
         }
+
+        public async Task<string> GetStyleFromElementAsync(string by, string locator, string property)
+        {
+            int step = SendMessageDebug($"GetStyleFromElementAsync(\"{by}\", \"{locator}\", \"{property}\")", $"GetStyleFromElementAsync(\"{by}\", \"{locator}\")", PROCESS, "Получение стиля из элемента", "Getting a style from an element", IMAGE_STATUS_PROCESS);
+            if (DefineTestStop(step) == true) return "";
+
+            string value = "";
+            try
+            {
+                string script = "(function(){";
+                if (by == BY_CSS) script += "var element = document.querySelector(\"" + locator + "\"); ";
+                else if (by == BY_XPATH) script += $"var element = document.evaluate(\"{locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue; ";
+                script += $"var style = window.getComputedStyle(element).getPropertyValue(\"{property}\"); ";
+                script += "return style; ";
+                script += "}());";
+                value = await execute(script, step, "Стиль из элемента прочитан", "Style from the read element", $"Не удалось прочитать стиль из элемента по локатору: {locator}", $"Could not read the style from the element by the locator: {locator}");
+                if (value.Length > 1 && value != "null") value = value.Substring(1, value.Length - 2);
+            }
+            catch (Exception ex)
+            {
+                EditMessageDebug(step, null, null, Tester.FAILED,
+                    "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(),
+                    "Error: " + ex.Message + Environment.NewLine + Environment.NewLine + "Full description of the error: " + ex.ToString(),
+                    Tester.IMAGE_STATUS_FAILED);
+                TestStopAsync();
+                ConsoleMsgError(ex.ToString());
+            }
+
+            if (value == "") EditMessageDebug(step, null, null, COMPLETED, "Не удалось получить стиль из элемента", "Couldn't get the style from the element", IMAGE_STATUS_WARNING);
+            return value;
+        }
+
+        public async Task<string> GetStyleFromElementByIdAsync(string id, string property)
+        {
+            int step = SendMessageDebug($"GetStyleFromElementByIdAsync(\"{id}\", \"{property}\")", $"GetStyleFromElementByIdAsync(\"{id}\", \"{property}\")", PROCESS, "Получение стиля из элемента", "Getting a style from an element", IMAGE_STATUS_PROCESS);
+            if (DefineTestStop(step) == true) return "";
+
+            string value = "";
+            try
+            {
+                string script = "(function(){ var element = document.getElementById('" + id + "'); ";
+                script += $"var style = window.getComputedStyle(element).getPropertyValue(\"{property}\"); ";
+                script += "return style; ";
+                script += "}());";
+                value = await execute(script, step, "Стиль из элемента прочитан", "Style from the read element", $"Не удалось найти или прочитать стиль из элемента с ID: {id}", $"Could not find or read the style from the element with ID: {id}");
+                if (value.Length > 1 && value != "null") value = value.Substring(1, value.Length - 2);
+            }
+            catch (Exception ex)
+            {
+                EditMessageDebug(step, null, null, Tester.FAILED,
+                     "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(),
+                     "Error: " + ex.Message + Environment.NewLine + Environment.NewLine + "Full description of the error: " + ex.ToString(),
+                     Tester.IMAGE_STATUS_FAILED);
+                TestStopAsync();
+                ConsoleMsgError(ex.ToString());
+            }
+
+            if (value == "") EditMessageDebug(step, null, null, COMPLETED, "Не удалось получить стиль из элемента", "Couldn't get the style from the element", IMAGE_STATUS_WARNING);
+            return value;
+        }
+
+        public async Task<string> GetStyleFromElementByClassAsync(string _class, int index, string property)
+        {
+            int step = SendMessageDebug($"GetStyleFromElementByClassAsync('{_class}', {index}, \"{property}\")", $"GetStyleFromElementByClassAsync('{_class}', {index}, \"{property}\")", PROCESS, "Получение стиля из элемента", "Getting a style from an element", IMAGE_STATUS_PROCESS);
+            if (DefineTestStop(step) == true) return "";
+
+            string value = "";
+            try
+            {
+                string script = "(function(){ var element = document.getElementsByClassName('" + _class + "')[" + index + "]; ";
+                script += $"var style = window.getComputedStyle(element).getPropertyValue(\"{property}\"); ";
+                script += "return style; ";
+                script += "}());";
+                value = await execute(script, step, "Стиль из элемента прочитан", "Style from the read element", $"Не удалось найти или прочитать стиль из элемента по Class: {_class} (Index: {index})", $"Could not find or read the style from the element by Class: {_class} (Index: {index})");
+                if (value.Length > 1 && value != "null") value = value.Substring(1, value.Length - 2);
+            }
+            catch (Exception ex)
+            {
+                EditMessageDebug(step, null, null, Tester.FAILED,
+                    "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(),
+                    "Error: " + ex.Message + Environment.NewLine + Environment.NewLine + "Full description of the error: " + ex.ToString(),
+                    Tester.IMAGE_STATUS_FAILED);
+                TestStopAsync();
+                ConsoleMsgError(ex.ToString());
+            }
+
+            if (value == "") EditMessageDebug(step, null, null, COMPLETED, "Не удалось получить стиль из элемента", "Couldn't get the style from the element", IMAGE_STATUS_WARNING);
+            return value;
+        }
+
+        public async Task<string> GetStyleFromElementByNameAsync(string name, int index, string property)
+        {
+            int step = SendMessageDebug($"GetStyleFromElementByNameAsync('{name}', {index}, \"{property}\")", $"GetStyleFromElementByNameAsync('{name}', {index}, \"{property}\")", PROCESS, "Получение стиля из элемента", "Getting a style from an element", IMAGE_STATUS_PROCESS);
+            if (DefineTestStop(step) == true) return "";
+
+            string value = "";
+            try
+            {
+                string script = "(function(){ var element = document.getElementsByName('" + name + "')[" + index + "]; ";
+                script += $"var style = window.getComputedStyle(element).getPropertyValue(\"{property}\"); ";
+                script += "return style; ";
+                script += "}());";
+                value = await execute(script, step, "Стиль из элемента прочитан", "Style from the read element", $"Не удалось найти или прочитать стиль из элемента по Name: {name} (Index: {index})", $"Could not find or read the style from the element by Name: {name} (Index: {index})");
+                if (value.Length > 1 && value != "null") value = value.Substring(1, value.Length - 2);
+            }
+            catch (Exception ex)
+            {
+                EditMessageDebug(step, null, null, Tester.FAILED,
+                    "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(),
+                    "Error: " + ex.Message + Environment.NewLine + Environment.NewLine + "Full description of the error: " + ex.ToString(),
+                    Tester.IMAGE_STATUS_FAILED);
+                TestStopAsync();
+                ConsoleMsgError(ex.ToString());
+            }
+
+            if (value == "") EditMessageDebug(step, null, null, COMPLETED, "Не удалось получить стиль из элемента", "Couldn't get the style from the element", IMAGE_STATUS_WARNING);
+            return value;
+        }
+
+        public async Task<string> GetStyleFromElementByTagAsync(string tag, int index, string property)
+        {
+            int step = SendMessageDebug($"GetStyleFromElementByTagAsync('{tag}', {index}, \"{property}\")", $"GetStyleFromElementByTagAsync('{tag}', {index}, \"{property}\")", PROCESS, "Получение стиля из элемента", "Getting a style from an element", IMAGE_STATUS_PROCESS);
+            if (DefineTestStop(step) == true) return "";
+
+            string value = "";
+            try
+            {
+                string script = "(function(){ var element = document.getElementsByTagName('" + tag + "')[" + index + "]; ";
+                script += $"var style = window.getComputedStyle(element).getPropertyValue(\"{property}\"); ";
+                script += "return style; ";
+                script += "}());";
+                value = await execute(script, step, "Стиль из элемента прочитан", "Style from the read element", $"Не удалось найти или прочитать стиль из элемента по Tag: {tag} (Index: {index})", $"Could not find or read the style from the element by Tag: {tag} (Index: {index})");
+                if (value.Length > 1 && value != "null") value = value.Substring(1, value.Length - 2);
+            }
+            catch (Exception ex)
+            {
+                EditMessageDebug(step, null, null, Tester.FAILED,
+                    "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(),
+                    "Error: " + ex.Message + Environment.NewLine + Environment.NewLine + "Full description of the error: " + ex.ToString(),
+                    Tester.IMAGE_STATUS_FAILED);
+                TestStopAsync();
+                ConsoleMsgError(ex.ToString());
+            }
+
+            if (value == "") EditMessageDebug(step, null, null, COMPLETED, "Не удалось получить стиль из элемента", "Couldn't get the style from the element", IMAGE_STATUS_WARNING);
+            return value;
+        }
+
+        
+
+
+
 
 
 

@@ -7,7 +7,7 @@
 - Выбор языка для вывода в командной строке
 - Выбор языка для вывода в отчеты и письма
 - Возможность отключения вывода шагов в отчете и письме
-- Добавлен список игнорируемых ошибок для метода AssertNoErrorsAsync
+- Доработан метод AssertNoErrorsAsync проверяющий ошибки на странице
 - Отчет с полным списком результатов всех тестов
 - В методе SendMsgToMailAsync добавлена возможность отправлять вложенный файла
 
@@ -17,6 +17,7 @@ let color = window.getComputedStyle(document.getElementById('buttonLogin')).getP
 let bgcolor = window.getComputedStyle(document.getElementById('buttonLogin')).getPropertyValue("background-color");
 let btnwidth = window.getComputedStyle(document.getElementById('buttonLogin')).getPropertyValue("width");
 
+showListErrors
 
 -----------------------------
 
