@@ -305,7 +305,7 @@ namespace HatFramework
 
         public async Task<string> GetAttributeAsync(string name)
         {
-            int step = _tester.SendMessageDebug($"GetAttributeAsync('{name}')", $"GetAttributeAsync('{name}')", Tester.PROCESS, "Получение атрибута из элемента", "Getting an attribute from an element", Tester.IMAGE_STATUS_PROCESS);
+            int step = _tester.SendMessageDebug($"GetAttributeAsync(\"{name}\")", $"GetAttributeAsync(\"{name}\")", Tester.PROCESS, "Получение атрибута из элемента", "Getting an attribute from an element", Tester.IMAGE_STATUS_PROCESS);
             if (_tester.DefineTestStop(step) == true) return null;
 
             string result = "";
@@ -343,7 +343,7 @@ namespace HatFramework
 
         public async Task SetAttributeAsync(string name, string value)
         {
-            int step = _tester.SendMessageDebug($"SetAttributeAsync('{name}', '{value}')", $"SetAttributeAsync('{name}', '{value}')", Tester.PROCESS, "Ввод атрибута в элемент", "Entering an attribute into an element", Tester.IMAGE_STATUS_PROCESS);
+            int step = _tester.SendMessageDebug($"SetAttributeAsync(\"{name}\", \"{value}\")", $"SetAttributeAsync(\"{name}\", \"{value}\")", Tester.PROCESS, "Ввод атрибута в элемент", "Entering an attribute into an element", Tester.IMAGE_STATUS_PROCESS);
             if (_tester.DefineTestStop(step) == true) return;
 
             string script = null;
@@ -394,7 +394,7 @@ namespace HatFramework
 
         public async Task SetHtmlAsync(string html)
         {
-            int step = _tester.SendMessageDebug($"SetHtmlAsync('{html}')", $"SetHtmlAsync('{html}')", Tester.PROCESS, "Ввод html в элемент", "Entering html into an element", Tester.IMAGE_STATUS_PROCESS);
+            int step = _tester.SendMessageDebug($"SetHtmlAsync(\"{html}\")", $"SetHtmlAsync(\"{html}\")", Tester.PROCESS, "Ввод html в элемент", "Entering html into an element", Tester.IMAGE_STATUS_PROCESS);
             if (_tester.DefineTestStop(step) == true) return;
 
             string script = null;
@@ -419,7 +419,7 @@ namespace HatFramework
 
         public async Task ScrollToAsync(bool behaviorSmooth = false)
         {
-            int step = _tester.SendMessageDebug($"ScrollToAsync('{behaviorSmooth}')", $"ScrollToAsync('{behaviorSmooth}')", Tester.PROCESS, "Прокрутить к элементу", "Fasten to the element", Tester.IMAGE_STATUS_PROCESS);
+            int step = _tester.SendMessageDebug($"ScrollToAsync(\"{behaviorSmooth}\")", $"ScrollToAsync(\"{behaviorSmooth}\")", Tester.PROCESS, "Прокрутить к элементу", "Fasten to the element", Tester.IMAGE_STATUS_PROCESS);
             if (_tester.DefineTestStop(step) == true) return;
 
             string script = null;
@@ -512,7 +512,7 @@ namespace HatFramework
 
         public async Task SelectOptionAsync(string by, string value)
         {
-            int step = _tester.SendMessageDebug($"SelectOptionAsync({by}, {value})", $"SelectOptionAsync({by}, {value})", Tester.PROCESS, $"Выбирается опция", "The option is selected", Tester.IMAGE_STATUS_PROCESS);
+            int step = _tester.SendMessageDebug($"SelectOptionAsync(\"{by}\", \"{value}\")", $"SelectOptionAsync({by}, {value})", Tester.PROCESS, $"Выбирается опция", "The option is selected", Tester.IMAGE_STATUS_PROCESS);
             if (_tester.DefineTestStop(step) == true) return;
 
             string script = "(function(){";
@@ -606,6 +606,72 @@ namespace HatFramework
 
             _tester.SendMessageDebug($"GetLocatorAsync()", $"GetLocatorAsync()", Tester.PASSED, "Получен локатор элемента: " + _locator, "The element locator is received: " + _locator, Tester.IMAGE_STATUS_PASSED);
             return _locator;
+        }
+
+        public async Task<string> GetStyleAsync(string property)
+        {
+            int step = _tester.SendMessageDebug($"GetStyleAsync(\"{property}\")", $"GetStyleAsync(\"{property}\")", Tester.PROCESS, "Получение стиля из элемента", "Getting a style from an element", Tester.IMAGE_STATUS_PROCESS);
+            if (_tester.DefineTestStop(step) == true) return null;
+
+            string result = "";
+            try
+            {
+                string script = null;
+                if (_by == Tester.BY_CSS)
+                {
+                    script = "(function(){";
+                    script += $"var element = document.querySelector(\"{_locator}\"); ";
+                    script += $"var style = window.getComputedStyle(element).getPropertyValue(\"{property}\"); ";
+                    script += "return style; ";
+                    script += "}());";
+                }
+                else if (_by == Tester.BY_XPATH)
+                {
+                    script = "(function(){";
+                    script += $"var element = document.evaluate(\"{_locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue; ";
+                    script += $"var style = window.getComputedStyle(element).getPropertyValue(\"{property}\"); ";
+                    script += "return style; ";
+                    script += "}());";
+                }
+                result = await execute(script, step, "Стиль из элемента прочитан", "Style from the read element", "Не удалось прочитать стиль из элемента", "Could not read the style from the element");
+                if (result.Length > 1) result = result.Substring(1, result.Length - 2);
+            }
+            catch (Exception ex)
+            {
+                _tester.EditMessageDebug(step, null, null, Tester.FAILED,
+                    "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(),
+                    "Error: " + ex.Message + Environment.NewLine + Environment.NewLine + "Full description of the error: " + ex.ToString(),
+                    Tester.IMAGE_STATUS_FAILED);
+                _tester.TestStopAsync();
+                _tester.ConsoleMsgError(ex.ToString());
+            }
+
+            if (result == "") _tester.EditMessageDebug(step, null, null, Tester.COMPLETED, "Не удалось получить стиль из элемента", "Couldn't get the style from the element", Tester.IMAGE_STATUS_WARNING);
+            return result;
+        }
+        public async Task SetStyleAsync(string cssText)
+        {
+            int step = _tester.SendMessageDebug($"SetStyleAsync(\"{cssText}\")", $"SetStyleAsync(\"{cssText}\")", Tester.PROCESS, "Ввод стиля в элемент", "Entering style into an element", Tester.IMAGE_STATUS_PROCESS);
+            if (_tester.DefineTestStop(step) == true) return;
+
+            string script = null;
+            if (_by == Tester.BY_CSS)
+            {
+                script = "(function(){";
+                script += $"var element = document.querySelector(\"{_locator}\");";
+                script += $"element.style.cssText = '{cssText}';";
+                script += "return element;";
+                script += "}());";
+            }
+            else if (_by == Tester.BY_XPATH)
+            {
+                script = "(function(){";
+                script += $"var element = document.evaluate(\"{_locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
+                script += $"element.style.cssText = '{cssText}';";
+                script += "return element;";
+                script += "}());";
+            }
+            await execute(script, step, "Стиль введен в элемент", "The style is entered in the element", "Не удалось ввести стиль в элемент", "Could not enter style in the element");
         }
 
     }

@@ -754,7 +754,71 @@ namespace HatFramework
             await execute(script, step, "Опцыя выбрана", "Option selected", "Не удалось выбрать опцию", "Failed to select an option");
         }
 
+        public async Task<string> GetStyleFromElementAsync(string by, string locator, string property)
+        {
+            int step = _tester.SendMessageDebug($"GetStyleFromElementAsync(\"{by}\", \"{locator}\", \"{property}\")", $"GetStyleFromElementAsync(\"{by}\", \"{locator}\", \"{property}\")", Tester.PROCESS, "Получение стиля из элемента", "Getting a style from an element", Tester.IMAGE_STATUS_PROCESS);
+            if (_tester.DefineTestStop(step) == true) return null;
 
+            string result = "";
+            try
+            {
+                string script = null;
+                if (by == Tester.BY_CSS)
+                {
+                    script = "(function(){";
+                    script += $"var element = document.querySelector(\"{locator}\"); ";
+                    script += $"var style = window.getComputedStyle(element).getPropertyValue(\"{property}\"); ";
+                    script += "return style; ";
+                    script += "}());";
+                }
+                else if (by == Tester.BY_XPATH)
+                {
+                    script = "(function(){";
+                    script += $"var element = document.evaluate(\"{locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue; ";
+                    script += $"var style = window.getComputedStyle(element).getPropertyValue(\"{property}\"); ";
+                    script += "return style; ";
+                    script += "}());";
+                }
+                result = await execute(script, step, "Стиль из элемента прочитан", "Style from the read element", "Не удалось прочитать стиль из элемента", "Could not read the style from the element");
+                if (result.Length > 1) result = result.Substring(1, result.Length - 2);
+            }
+            catch (Exception ex)
+            {
+                _tester.EditMessageDebug(step, null, null, Tester.FAILED,
+                    "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(),
+                    "Error: " + ex.Message + Environment.NewLine + Environment.NewLine + "Full description of the error: " + ex.ToString(),
+                    Tester.IMAGE_STATUS_FAILED);
+                _tester.TestStopAsync();
+                _tester.ConsoleMsgError(ex.ToString());
+            }
+
+            if (result == "") _tester.EditMessageDebug(step, null, null, Tester.COMPLETED, "Не удалось получить стиль из элемента", "Couldn't get the style from the element", Tester.IMAGE_STATUS_WARNING);
+            return result;
+        }
+        public async Task SetStyleInElementAsync(string by, string locator, string cssText)
+        {
+            int step = _tester.SendMessageDebug($"SetStyleInElementAsync(\"{by}\", \"{locator}\", \"{cssText}\")", $"SetStyleInElementAsync(\"{by}\", \"{locator}\", \"{cssText}\")", Tester.PROCESS, "Ввод стиля в элемент", "Entering style into an element", Tester.IMAGE_STATUS_PROCESS);
+            if (_tester.DefineTestStop(step) == true) return;
+
+            string script = null;
+            if (by == Tester.BY_CSS)
+            {
+                script = "(function(){";
+                script += $"var element = document.querySelector(\"{locator}\");";
+                script += $"element.style.cssText = '{cssText}';";
+                script += "return element;";
+                script += "}());";
+            }
+            else if (by == Tester.BY_XPATH)
+            {
+                script = "(function(){";
+                script += $"var element = document.evaluate(\"{locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
+                script += $"element.style.cssText = '{cssText}';";
+                script += "return element;";
+                script += "}());";
+            }
+            await execute(script, step, "Стиль введен в элемент", "The style is entered in the element", "Не удалось ввести стиль в элемент", "Could not enter style in the element");
+        }
 
     }
 }
