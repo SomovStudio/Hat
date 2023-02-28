@@ -382,6 +382,7 @@ namespace Hat
 
         public async Task setUp()
         {
+            tester.Description(""Тест #1 проверяет авторизацию на сайте"");
             await tester.BrowserFullScreenAsync();
         }
 
@@ -451,6 +452,7 @@ namespace Hat
 
         public async Task setUp()
         {
+            tester.Description(""Тест #2 проверяет авторизацию на сайте"");
             await tester.BrowserFullScreenAsync();
         }
 
