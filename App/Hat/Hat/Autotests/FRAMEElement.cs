@@ -753,9 +753,9 @@ namespace HatFrameworkDev
             await execute(script, step, "Опцыя выбрана", "Option selected", "Не удалось выбрать опцию", "Failed to select an option");
         }
 
-        public async Task<string> GetStyleAsync(string by, string locator, string property)
+        public async Task<string> GetStyleFromElementAsync(string by, string locator, string property)
         {
-            int step = _tester.SendMessageDebug($"GetStyleAsync(\"{by}\", \"{locator}\", \"{property}\")", $"GetStyleAsync(\"{by}\", \"{locator}\", \"{property}\")", Tester.PROCESS, "Получение стиля из элемента", "Getting a style from an element", Tester.IMAGE_STATUS_PROCESS);
+            int step = _tester.SendMessageDebug($"GetStyleFromElementAsync(\"{by}\", \"{locator}\", \"{property}\")", $"GetStyleFromElementAsync(\"{by}\", \"{locator}\", \"{property}\")", Tester.PROCESS, "Получение стиля из элемента", "Getting a style from an element", Tester.IMAGE_STATUS_PROCESS);
             if (_tester.DefineTestStop(step) == true) return null;
 
             string result = "";
@@ -794,9 +794,9 @@ namespace HatFrameworkDev
             if (result == "") _tester.EditMessageDebug(step, null, null, Tester.COMPLETED, "Не удалось получить стиль из элемента", "Couldn't get the style from the element", Tester.IMAGE_STATUS_WARNING);
             return result;
         }
-        public async Task SetStyleAsync(string by, string locator, string cssText)
+        public async Task SetStyleInElementAsync(string by, string locator, string cssText)
         {
-            int step = _tester.SendMessageDebug($"SetStyleAsync(\"{by}\", \"{locator}\", \"{cssText}\")", $"SetStyleAsync(\"{by}\", \"{locator}\", \"{cssText}\")", Tester.PROCESS, "Ввод стиля в элемент", "Entering style into an element", Tester.IMAGE_STATUS_PROCESS);
+            int step = _tester.SendMessageDebug($"SetStyleInElementAsync(\"{by}\", \"{locator}\", \"{cssText}\")", $"SetStyleInElementAsync(\"{by}\", \"{locator}\", \"{cssText}\")", Tester.PROCESS, "Ввод стиля в элемент", "Entering style into an element", Tester.IMAGE_STATUS_PROCESS);
             if (_tester.DefineTestStop(step) == true) return;
 
             string script = null;
