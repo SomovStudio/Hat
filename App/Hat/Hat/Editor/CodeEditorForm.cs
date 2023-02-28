@@ -17,6 +17,9 @@ using ICSharpCode.AvalonEdit.Search;
 using System.Windows.Media;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
 using System.Windows.Input;
+using ICSharpCode.AvalonEdit.CodeCompletion;
+using Hat.Editor;
+using ICSharpCode.AvalonEdit.Editing;
 
 namespace Hat
 {
@@ -30,6 +33,7 @@ namespace Hat
         const string STATUS_SAVED = "status_saved";
         const string STATUS_NOT_SAVE = "status_not_saved";
 
+        CompletionWindow completionWindow;
         public BrowserForm parent;
         List<object[]> files; // [ 0 - имя файла | 1 - путь файла | 2 - статус | 3 - индекс | 4 - TabPage (вкладка) | 5 - TextEditorControl (редактор)]
 
@@ -2526,13 +2530,13 @@ tester.ConsoleMsg(""Time "" + result.TotalSeconds);\par
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 AssertNoErrorsAsync\cf0\par
 \cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'fb\'ef\'ee\'eb\'ed\'ff\'e5\'f2 \'ef\'f0\'ee\'e2\'e5\'f0\'ea\'f3 \'ee\'f2\'f1\'f3\'f2\'f1\'f2\'e2\'e8\'ff \'ee\'f8\'e8\'e1\'ee\'ea \'ed\'e0 \'f1\'f2\'f0\'e0\'ed\'e8\'f6\'e5 \'e8 \'e5\'f1\'eb\'e8 \'ee\'f8\'e8\'e1\'ea\'e8 \'ef\'f0\'e8\'f1\'f3\'f2\'f1\'f2\'e2\'f3\'fe\'f2 \'ef\'f0\'ee\'e2\'e5\'f0\'ea\'e0 \'e1\'f3\'e4\'e5\'f2 \'f1\'f7\'e8\'f2\'e0\'f2\'fc\'f1\'ff \'ef\'f0\'ee\'e2\'e0\'eb\'fc\'ed\'ee\'e9\par
-\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \f0\lang1033 AssertNoErrorsAsync()\f1\lang1049\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \f0\lang1033 AssertNoErrorsAsync(bool showListErrors = false, string[] listIgnored = null)\f1\lang1049\par
 \cf3\par
 \cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
 \cf0\f0\lang1033 Tester tester = new Tester(browserForm);\par
 await tester.TestBeginAsync();\par
-await tester.GoToUrlAsync(""https://www.nvidia.com/"", 5);\par
-await tester.AssertNoErrorsAsync();\par
+await tester.GoToUrlAsync(""https://somovstudio.github.io/test_error.html"", 25);\par
+await tester.AssertNoErrorsAsync(true, new string[1] { ""stats.g.doubleclick.net"" });\par
 await tester.TestEndAsync();\par
 }",
 
@@ -2554,7 +2558,7 @@ await tester.TestEndAsync();\par
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 SendMsgToMailAsync\cf0\par
 \cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'ee\'f2\'ef\'f0\'e0\'e2\'eb\'ff\'e5\'f2 \'ef\'e8\'f1\'fc\'ec\'ee \'ed\'e0 \'ef\'ee\'f7\'f2\'f3\par
-\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \f0\lang1033 SendMsgToMailAsync(string subject, string body)\f1\lang1049\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \f0\lang1033 SendMsgToMailAsync(string subject, string body, string filename = """")\f1\lang1049\par
 \cf3\par
 \cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
 \cf0\f0\lang1033 Tester tester = new Tester(browserForm);\par
@@ -2762,6 +2766,217 @@ tester.ConsoleMsg(statusCode.ToString());\par
 tester.ConsoleMsg(events);\par
 }",
 
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 Description\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'f3\'f1\'f2\'e0\'ed\'e0\'e2\'eb\'e8\'e2\'e0\'e5\'f2 \'ee\'ef\'e8\'f1\'e0\'ed\'e8\'e5 \'f2\'e5\'f1\'f2\'e0 \'ea\'ee\'f2\'ee\'f0\'ee\'e5 \'ef\'ee\'f2\'ee\'ec \'e2\'fb\'e2\'ee\'e4\'e8\'f2\'ff \'e2 \'ee\'f2\'f7\'e5\'f2\'e5 \'e8 \'ef\'e8\'f1\'fc\'ec\'e5\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \f0\lang1033 Description(string text)\f1\lang1049\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0\f0\lang1033 public async Task setUp()\par
+\{\par
+\tab tester.Description(""\f1\lang1049\'d2\'e5\'f1\'f2 \'ef\'f0\'ee\'e2\'e5\'f0\'ff\'e5\'f2 \'e0\'e2\'f2\'ee\'f0\'e8\'e7\'e0\'f6\'e8\'fe \'ed\'e0 \'f1\'e0\'e9\'f2\'e5"");\par
+\}\f0\lang1033\par
+}",
+
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 SendMessageDebug\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'fb\'e2\'ee\'e4\'e8\'f2 \'ee\'f2\'eb\'e0\'e4\'ee\'f7\'ed\'ee\'e5 \'f1\'ee\'ee\'e1\'f9\'e5\'ed\'e8\'e5 \'ea\'ee\'f2\'ee\'f0\'ee\'e5 \'ec\'ee\'e6\'e5\'f2 \'e1\'fb\'f2\'fc \'ee\'f2\'ea\'eb\'fe\'f7\'e5\'ed\'ee \'e4\'eb\'ff \'e2\'fb\'e2\'ee\'e4\'e0 \'e2 \'ee\'f2\'f7\'e5\'f2 \'e8 \'ef\'e8\'f1\'fc\'ec\'ee\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : SendMessageDebug(string actionRus, string actionEng, string status,  string commentRus, string commentEng, int image)\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0 int step = \f0\lang1033 tester.\f1\lang1049 SendMessageDebug(""\'e4\'e5\'e9\'f1\'f2\'e2\'e8\'ff"", \f0\lang1033 ""action"",\f1\lang1049  \f0\lang1033 Tester.\f1\lang1049 PROCESS, ""\'ea\'ee\'ec\'ec\'e5\'ed\'f2\'e0\'f0\'e8\'e9"", \f0\lang1033 ""comment"", \f1\lang1049  \f0\lang1033 Tester.\f1\lang1049 IMAGE_STATUS_PROCESS);\par
+
+\pard\sa200\sl276\slmult1\f0\fs22\lang9\par
+}",
+
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 EditMessage\lang1033 Debug\cf0\lang9\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e8\'e7\'ec\'e5\'ed\'ff\'e5\'f2 \'f0\'e0\'ed\'e5\'e5 \'e2\'fb\'e2\'e5\'e4\'e5\'ed\'ed\'ee\'e5\f0\lang1033  \f1\lang1049\'ee\'f2\'eb\'e0\'e4\'ee\'f7\'ed\'ee\'e5 \'f1\'ee\'ee\'e1\'f9\'e5\'ed\'e8\'e5 \'ea\'ee\'f2\'ee\'f0\'ee\'e5 \'ec\'ee\'e6\'e5\'f2 \'e1\'fb\'f2\'fc \'ee\'f2\'ea\'eb\'fe\'f7\'e5\'ed\'ee \'e4\'eb\'ff \'e2\'fb\'e2\'ee\'e4\'e0 \'e2 \'ee\'f2\'f7\'e5\'f2 \'e8 \'ef\'e8\'f1\'fc\'ec\'ee\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : EditMessageDebug(int index, string actionRus, string actionEng, string status, string commentRus, string commentEng, int image)\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0\f0\lang1033 tester.\f1\lang1049 EditMessageDebug(step, ""\'e4\'e5\'e9\'f1\'f2\'e2\'e8\'ff"",\f0\lang1033  ""action"", Tester.\f1\lang1049 PASSED, ""\'ea\'ee\'ec\'ec\'e5\'ed\'f2\'e0\'f0\'e8\'e9"", \f0\lang1033 ""comment"", \f1\lang1049  \f0\lang1033 Tester.\f1\lang1049 IMAGE_STATUS_PASSED);\par
+\par
+\f0\lang1033 tester.\f1\lang1049 EditMessageDebug(step, \f0\lang1033 null\f1\lang1049 ,\f0\lang1033  null,\f1\lang1049  \f0\lang1033 Tester.\f1\lang1049 FAILED, ""\'ea\'ee\'ec\'ec\'e5\'ed\'f2\'e0\'f0\'e8\'e9"", \f0\lang1033 ""comment"",\f1\lang1049  \f0\lang1033 Tester.\f1\lang1049 IMAGE_STATUS_FAILED);\par
+\par
+\pard\sa200\sl276\slmult1\f0\fs22\lang9\par
+}",
+
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 GetStyleAsync\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2 \'f1\'f2\'e8\'eb\'fc \'fd\'eb\'e5\'ec\'e5\'ed\'f2\'e0 \'e8\'e7 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'ee\'e3\'ee \'f1\'e2\'ee\'e9\'f1\'f2\'e2\'e0\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : GetStyleAsync(string property)\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0\f0\lang1033 string style = await element.GetStyleAsync(""width"");\f1\lang1049\par
+\pard\sa200\sl276\slmult1\f0\fs22\lang9\par
+}",
+
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 SetStyleAsync\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'f3\'f1\'f2\'e0\'ed\'e0\'e2\'eb\'e8\'e2\'e0\'e5\'f2 \'f1\'f2\'e8\'eb\'fc \'fd\'eb\'e5\'ec\'e5\'ed\'f2\'e0\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : SetStyleAsync(string cssText)\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0\f0\lang1033 await element.\f1\lang1049 SetStyleAsync\f0\lang1033 (""width: 250px; background-color: #000000;"");\par
+}",
+
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 GetStyleFromElementAsync\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2 \'f1\'f2\'e8\'eb\'fc \'fd\'eb\'e5\'ec\'e5\'ed\'f2\'e0 \'e8\'e7 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'ee\'e3\'ee \'f1\'e2\'ee\'e9\'f1\'f2\'e2\'e0\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : GetStyleFromElementAsync(string by, string locator, string property)\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0\f0\lang1033 FRAMEElement frame = await tester.GetFrameAsync(0);\par
+string style = await frame.GetStyleFromElementAsync(Tester.BY_CSS, ""#auth > h2"", ""width"");\f1\lang1049\par
+\par
+\f0\lang1033 string style = await frame.GetStyleFromElementAsync(Tester.BY_XPATH, ""//div[@id='auth']"", ""width"");\fs22\lang9\par
+}",
+
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 SetStyleInElementAsync\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'f3\'f1\'f2\'e0\'ed\'e0\'e2\'eb\'e8\'e2\'e0\'e5\'f2 \'f1\'f2\'e8\'eb\'fc \'fd\'eb\'e5\'ec\'e5\'ed\'f2\'e0\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : SetStyleInElementAsync(string by, string locator, string cssText)\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0\f0\lang1033 FRAMEElement frame = await tester.GetFrameAsync(0);\par
+await frame .SetStyleInElementAsync(Tester.BY_XPATH, ""//div[@id='auth']"", ""background-color: #000000;"");\par
+\par
+await frame .SetStyleInElementAsync(Tester.BY_CSS, ""#auth"", ""background-color: #000000;"");\par
+}",
+
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 GetStyleFromElementAsync\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2 \'f1\'f2\'e8\'eb\'fc \'fd\'eb\'e5\'ec\'e5\'ed\'f2\'e0 \'e8\'e7 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'ee\'e3\'ee \'f1\'e2\'ee\'e9\'f1\'f2\'e2\'e0\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : GetStyleFromElementAsync(string by, string locator, string property)\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0\f0\lang1033 string style = await tester.GetStyleFromElementAsync(Tester.BY_CSS, ""#auth"", ""padding"");\f1\lang1049\par
+\par
+\f0\lang1033 string style = await tester.GetStyleFromElementAsync(Tester.BY_XPATH, ""//div[@id='auth']"", ""position"");\fs22\lang9\par
+}",
+
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 GetStyleFromElementByClassAsync\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2 \'f1\'f2\'e8\'eb\'fc \'fd\'eb\'e5\'ec\'e5\'ed\'f2\'e0 \'e8\'e7 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'ee\'e3\'ee \'f1\'e2\'ee\'e9\'f1\'f2\'e2\'e0\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : GetStyleFromElementByClassAsync(string _class, int index, string property)\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0\f0\lang1033 string style = await tester.GetStyleFromElementByClassAsync(""text-field"", 0, ""border"");\par
+}",
+
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 GetStyleFromElementByIdAsync\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2 \'f1\'f2\'e8\'eb\'fc \'fd\'eb\'e5\'ec\'e5\'ed\'f2\'e0 \'e8\'e7 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'ee\'e3\'ee \'f1\'e2\'ee\'e9\'f1\'f2\'e2\'e0\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : GetStyleFromElementByIdAsync(string id, string property)\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0\f0\lang1033 string style = await tester.GetStyleFromElementByIdAsync(""buttonLogin"", ""background-color"");\par
+}",
+
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 GetStyleFromElementByNameAsync\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2 \'f1\'f2\'e8\'eb\'fc \'fd\'eb\'e5\'ec\'e5\'ed\'f2\'e0 \'e8\'e7 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'ee\'e3\'ee \'f1\'e2\'ee\'e9\'f1\'f2\'e2\'e0\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : GetStyleFromElementByNameAsync(string name, int index, string property)\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0\f0\lang1033 string style = await tester.GetStyleFromElementByNameAsync(""pass"", 0, ""height"");\par
+}",
+
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 GetStyleFromElementByTagAsync\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2 \'f1\'f2\'e8\'eb\'fc \'fd\'eb\'e5\'ec\'e5\'ed\'f2\'e0 \'e8\'e7 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'ee\'e3\'ee \'f1\'e2\'ee\'e9\'f1\'f2\'e2\'e0\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : GetStyleFromElementByTagAsync(string tag, int index, string property)\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0\f0\lang1033 string style = await tester.GetStyleFromElementByTagAsync(""h2"", 0, ""width"");\par
+}",
+
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 SetStyleInElementAsync\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'f3\'f1\'f2\'e0\'ed\'e0\'e2\'eb\'e8\'e2\'e0\'e5\'f2 \'f1\'f2\'e8\'eb\'fc \'fd\'eb\'e5\'ec\'e5\'ed\'f2\'e0\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : SetStyleInElementAsync(string by, string locator, string cssText)\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0\f0\lang1033 await tester.SetStyleInElementAsync(Tester.BY_XPATH, ""//div[@id='auth']"", ""width: 250px; color: white; background-color: #000000;"");\par
+\par
+await tester.SetStyleInElementAsync(Tester.BY_CSS, ""#auth"", ""width: 250px; color: white; background-color: #000000;"");\par
+}",
+
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 SetStyleInElementByClassAsync\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'f3\'f1\'f2\'e0\'ed\'e0\'e2\'eb\'e8\'e2\'e0\'e5\'f2 \'f1\'f2\'e8\'eb\'fc \'fd\'eb\'e5\'ec\'e5\'ed\'f2\'e0\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : SetStyleInElementByClassAsync(string _class, int index, string cssText)\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0\f0\lang1033 await tester.SetStyleInElementByClassAsync(""text-field"", 0, ""background-color: #123456;"");\par
+}",
+
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 SetStyleInElementByIdAsync\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'f3\'f1\'f2\'e0\'ed\'e0\'e2\'eb\'e8\'e2\'e0\'e5\'f2 \'f1\'f2\'e8\'eb\'fc \'fd\'eb\'e5\'ec\'e5\'ed\'f2\'e0\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : SetStyleInElementByIdAsync(string id, string cssText)\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0\f0\lang1033 await tester.SetStyleInElementByIdAsync(""buttonLogin"", ""background-color: #123456;"");\par
+}",
+
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 SetStyleInElementByNameAsync\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'f3\'f1\'f2\'e0\'ed\'e0\'e2\'eb\'e8\'e2\'e0\'e5\'f2 \'f1\'f2\'e8\'eb\'fc \'fd\'eb\'e5\'ec\'e5\'ed\'f2\'e0\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : SetStyleInElementByNameAsync(string name, int index, string cssText)\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0\f0\lang1033 await tester.SetStyleInElementByNameAsync(""pass"", 0, ""background-color: #123456;"");\par
+}",
+
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 SetStyleInElementByTagAsync\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'f3\'f1\'f2\'e0\'ed\'e0\'e2\'eb\'e8\'e2\'e0\'e5\'f2 \'f1\'f2\'e8\'eb\'fc \'fd\'eb\'e5\'ec\'e5\'ed\'f2\'e0\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : SetStyleInElementByTagAsync(string tag, int index, string cssText)\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0\f0\lang1033 await tester.SetStyleInElementByTagAsync(""h2"", 0, ""background-color: #123456;"");\par
+}",
+
+@"",
+@"",
+@"",
+@"",
 @"",
 @"",
 @"",
@@ -2784,7 +2999,7 @@ tester.ConsoleMsg(events);\par
             }
             catch (Exception ex)
             {
-                parent.consoleMsgError(ex.ToString());
+                parent.ConsoleMsgError(ex.ToString());
             }
 
             /*
@@ -2839,7 +3054,7 @@ tester.ConsoleMsg(events);\par
             }
             catch (Exception ex)
             {
-                parent.consoleMsgError(ex.ToString());
+                parent.ConsoleMsgError(ex.ToString());
             }
         }
 
@@ -2854,7 +3069,7 @@ tester.ConsoleMsg(events);\par
                     {
                         if (files[i][1].ToString() == path)
                         {
-                            parent.consoleMsg($"Файл {filename} уже открыт в редакторе");
+                            parent.ConsoleMsg($"Файл {filename} уже открыт в редакторе");
                             return;
                         }
                     }
@@ -2877,6 +3092,8 @@ tester.ConsoleMsg(events);\par
                 textEditorControl.FontSize = 14;
                 textEditorControl.TextChanged += new System.EventHandler(this.textEditorControl_TextChanged);
                 textEditorControl.KeyDown += new System.Windows.Input.KeyEventHandler(textEditorControl_KeyDown);
+                textEditorControl.TextArea.TextEntering += textEditor_TextArea_TextEntering;
+                textEditorControl.TextArea.TextEntered += textEditor_TextArea_TextEntered;
                 SearchPanel.Install(textEditorControl);
 
                 host.Child = textEditorControl;
@@ -2892,7 +3109,7 @@ tester.ConsoleMsg(events);\par
             }
             catch (Exception ex)
             {
-                parent.consoleMsgError(ex.ToString());
+                parent.ConsoleMsgError(ex.ToString());
             }
         }
 
@@ -2902,6 +3119,11 @@ tester.ConsoleMsg(events);\par
             {
                 e.Handled = true;
                 saveFile();
+            }
+            if (e.Key == Key.Space && ModifierKeys == Keys.Control)
+            {
+                e.Handled = true;
+                showCompletionWindow(((TextEditor)sender).TextArea);
             }
         }
 
@@ -2913,6 +3135,220 @@ tester.ConsoleMsg(events);\par
             (files[index][4] as TabPage).Text = files[index][0].ToString() + " *";
         }
 
+        private void showCompletionWindow(TextArea textArea)
+        {
+            completionWindow = new CompletionWindow(textArea);
+            IList<ICompletionData> data = completionWindow.CompletionList.CompletionData;
+            data.Add(new CompletionData("AssertEqualsAsync", "AssertEqualsAsync(dynamic expected, dynamic actual)"));
+            data.Add(new CompletionData("AssertFalseAsync", "AssertFalseAsync(bool condition)"));
+            data.Add(new CompletionData("AssertNetworkEventsAsync", "AssertNetworkEventsAsync(bool presence, string[] events)"));
+            data.Add(new CompletionData("AssertNoErrorsAsync", "AssertNoErrorsAsync(bool showListErrors = false, string[] listIgnored = null)"));
+            data.Add(new CompletionData("AssertNotEqualsAsync", "AssertNotEqualsAsync(dynamic expected, dynamic actual)"));
+            data.Add(new CompletionData("AssertNotNullAsync", "AssertNotNullAsync(dynamic obj)"));
+            data.Add(new CompletionData("AssertNullAsync", "AssertNullAsync(dynamic obj)"));
+            data.Add(new CompletionData("AssertTrueAsync", "AssertTrueAsync(bool condition)"));
+            data.Add(new CompletionData("BrowserBasicAuthenticationAsync", "BrowserBasicAuthenticationAsync(string user, string pass)"));
+            data.Add(new CompletionData("BrowserClearNetworkAsync", "BrowserClearNetworkAsync()"));
+            data.Add(new CompletionData("BrowserCloseAsync", "BrowserCloseAsync()"));
+            data.Add(new CompletionData("BrowserEnableSendMailAsync", "BrowserEnableSendMailAsync(bool byFailure = true, bool bySuccess = true)"));
+            data.Add(new CompletionData("BrowserFullScreenAsync", "BrowserFullScreenAsync()"));
+            data.Add(new CompletionData("BrowserGetErrorsAsync", "BrowserGetErrorsAsync()"));
+            data.Add(new CompletionData("BrowserGetNetworkAsync", "BrowserGetNetworkAsync()"));
+            data.Add(new CompletionData("BrowserGetUserAgentAsync", "BrowserGetUserAgentAsync()"));
+            data.Add(new CompletionData("BrowserGoBackAsync", "BrowserGoBackAsync(int sec)"));
+            data.Add(new CompletionData("BrowserGoForwardAsync", "BrowserGoForwardAsync(int sec)"));
+            data.Add(new CompletionData("BrowserPageReloadAsync", "BrowserPageReloadAsync(int sec)"));
+            data.Add(new CompletionData("BrowserSetUserAgentAsync", "BrowserSetUserAgentAsync(string value)"));
+            data.Add(new CompletionData("BrowserSizeAsync", "BrowserSizeAsync(int width, int height)"));
+            data.Add(new CompletionData("BrowserView", "WebView2 BrowserView"));
+            data.Add(new CompletionData("BrowserWindow", "Form BrowserWindow"));
+            data.Add(new CompletionData("BY_CSS", "BY_CSS"));
+            data.Add(new CompletionData("BY_INDEX", "BY_INDEX"));
+            data.Add(new CompletionData("BY_TEXT", "BY_TEXT"));
+            data.Add(new CompletionData("BY_VALUE", "BY_VALUE"));
+            data.Add(new CompletionData("BY_XPATH", "BY_XPATH"));
+            data.Add(new CompletionData("Class", "string Class { get; set; }"));
+            data.Add(new CompletionData("ClearMessage", "ClearMessage()"));
+            data.Add(new CompletionData("ClickAsync", "ClickAsync()"));
+            data.Add(new CompletionData("ClickElementAsync", "ClickElementAsync(string by, string locator)"));
+            data.Add(new CompletionData("ClickElementByClassAsync", "ClickElementByClassAsync(string _class, int index);"));
+            data.Add(new CompletionData("ClickElementByIdAsync", "ClickElementByIdAsync(string id)"));
+            data.Add(new CompletionData("ClickElementByNameAsync", "ClickElementByNameAsync(string name, int index)"));
+            data.Add(new CompletionData("ClickElementByTagAsync", "ClickElementByTagAsync(string tag, int index)"));
+            data.Add(new CompletionData("ClickMouseAsync", "ClickMouseAsync()"));
+            data.Add(new CompletionData("COMPLETED", "COMPLETED"));
+            data.Add(new CompletionData("ConsoleMsg", "ConsoleMsg(string message)"));
+            data.Add(new CompletionData("ConsoleMsgError", "ConsoleMsgError(string message)"));
+            data.Add(new CompletionData("DefineTestStop", "DefineTestStop(int stepIndex)"));
+            data.Add(new CompletionData("Description", "Description(string text)"));
+            data.Add(new CompletionData("EditMessage", "EditMessage(int index, string action, string status, string comment, int image)"));
+            data.Add(new CompletionData("EditMessageDebug", "EditMessageDebug(int index, string actionRus, string actionEng, string status, string commentRus, string commentEng, int image)"));
+            data.Add(new CompletionData("ExecuteJavaScriptAsync", "ExecuteJavaScriptAsync(string script)"));
+            data.Add(new CompletionData("FAILED", "FAILED"));
+            data.Add(new CompletionData("FindElementAsync", "FindElementAsync(string by, string locator, int sec)"));
+            data.Add(new CompletionData("FindElementByClassAsync", "FindElementByClassAsync(string _class, int index, int sec)"));
+            data.Add(new CompletionData("FindElementByIdAsync", "FindElementByIdAsync(string id, int sec)"));
+            data.Add(new CompletionData("FindElementByNameAsync", "FindElementByNameAsync(string name, int index, int sec)"));
+            data.Add(new CompletionData("FindElementByTagAsync", "FindElementByTagAsync(string tag, int index, int sec)"));
+            data.Add(new CompletionData("FindVisibleElementAsync", "FindVisibleElementAsync(string by, string locator, int sec)"));
+            data.Add(new CompletionData("FindVisibleElementByClassAsync", "FindVisibleElementByClassAsync(string _class, int index, int sec)"));
+            data.Add(new CompletionData("FindVisibleElementByIdAsync", "FindVisibleElementByIdAsync(string id, int sec)"));
+            data.Add(new CompletionData("FindVisibleElementByNameAsync", "FindVisibleElementByNameAsync(string name, int index, int sec)"));
+            data.Add(new CompletionData("FindVisibleElementByTagAsync", "FindVisibleElementByTagAsync(string tag, int index, int sec)"));
+            data.Add(new CompletionData("GetAttributeAsync", "GetAttributeAsync(string name)"));
+            data.Add(new CompletionData("GetAttributeFromElementAsync", "GetAttributeFromElementAsync(string by, string locator, string attribute)"));
+            data.Add(new CompletionData("GetAttributeFromElementByClassAsync", "GetAttributeFromElementByClassAsync(string _class, int index, string attribute)"));
+            data.Add(new CompletionData("GetAttributeFromElementByIdAsync", "GetAttributeFromElementByIdAsync(string id, string attribute)"));
+            data.Add(new CompletionData("GetAttributeFromElementByNameAsync", "GetAttributeFromElementByNameAsync(string name, int index, string attribute)"));
+            data.Add(new CompletionData("GetAttributeFromElementByTagAsync", "GetAttributeFromElementByTagAsync(string tag, int index, string attribute)"));
+            data.Add(new CompletionData("GetAttributeFromElementsAsync", "GetAttributeFromElementsAsync(string by, string locator, string attribute)"));
+            data.Add(new CompletionData("GetAttributeFromElementsByClassAsync", "GetAttributeFromElementsByClassAsync(string _class, string attribute)"));
+            data.Add(new CompletionData("GetAttributeFromElementsByNameAsync", "GetAttributeFromElementsByNameAsync(string name, string attribute)"));
+            data.Add(new CompletionData("GetAttributeFromElementsByTagAsync", "GetAttributeFromElementsByTagAsync(string tag, string attribute)"));
+            data.Add(new CompletionData("GetCountElementsAsync", "GetCountElementsAsync(string by, string locator)"));
+            data.Add(new CompletionData("GetCountElementsByClassAsync", "GetCountElementsByClassAsync(string _class)"));
+            data.Add(new CompletionData("GetCountElementsByNameAsync", "GetCountElementsByNameAsync(string name)"));
+            data.Add(new CompletionData("GetCountElementsByTagAsync", "GetCountElementsByTagAsync(string tag)"));
+            data.Add(new CompletionData("GetElementAsync", "GetElementAsync(string by, string locator)"));
+            data.Add(new CompletionData("GetFrameAsync", "GetFrameAsync(int index)"));
+            data.Add(new CompletionData("GetHtmlAsync", "GetHtmlAsync()"));
+            data.Add(new CompletionData("GetHtmlFromElementAsync", "GetHtmlFromElementAsync(string by, string locator)"));
+            data.Add(new CompletionData("GetHtmlFromElementByClassAsync", "GetHtmlFromElementByClassAsync(string _class, int index)"));
+            data.Add(new CompletionData("GetHtmlFromElementByIdAsync", "GetHtmlFromElementByIdAsync(string id)"));
+            data.Add(new CompletionData("GetHtmlFromElementByNameAsync", "GetHtmlFromElementByNameAsync(string name, int index)"));
+            data.Add(new CompletionData("GetHtmlFromElementByTagAsync", "GetHtmlFromElementByTagAsync(string tag, int index)"));
+            data.Add(new CompletionData("GetListRedirectUrlAsync", "GetListRedirectUrlAsync()"));
+            data.Add(new CompletionData("GetLocatorAsync", "GetLocatorAsync()"));
+            data.Add(new CompletionData("GetOptionAsync", "GetOptionAsync(string by)"));
+            data.Add(new CompletionData("GetStyleAsync", "GetStyleAsync(string property)"));
+            data.Add(new CompletionData("GetStyleFromElementAsync", "GetStyleFromElementAsync(string by, string locator, string property)"));
+            data.Add(new CompletionData("GetStyleFromElementByClassAsync", "GetStyleFromElementByClassAsync(string _class, int index, string property)"));
+            data.Add(new CompletionData("GetStyleFromElementByIdAsync", "GetStyleFromElementByIdAsync(string id, string property)"));
+            data.Add(new CompletionData("GetStyleFromElementByNameAsync", "GetStyleFromElementByNameAsync(string name, int index, string property)"));
+            data.Add(new CompletionData("GetStyleFromElementByTagAsync", "GetStyleFromElementByTagAsync(string tag, int index, string property)"));
+            data.Add(new CompletionData("GetTestResult", "GetTestResult()"));
+            data.Add(new CompletionData("GetTextAsync", "GetTextAsync()"));
+            data.Add(new CompletionData("GetTextFromElementAsync", "GetTextFromElementAsync(string by, string locator)"));
+            data.Add(new CompletionData("GetTextFromElementByClassAsync", "GetTextFromElementByClassAsync(string _class, int index)"));
+            data.Add(new CompletionData("GetTextFromElementByIdAsync", "GetTextFromElementByIdAsync(string id)"));
+            data.Add(new CompletionData("GetTextFromElementByNameAsync", "GetTextFromElementByNameAsync(string name, int index)"));
+            data.Add(new CompletionData("GetTextFromElementByTagAsync", "GetTextFromElementByTagAsync(string tag, int index)"));
+            data.Add(new CompletionData("GetTitleAsync", "GetTitleAsync()"));
+            data.Add(new CompletionData("GetUrlAsync", "GetUrlAsync()"));
+            data.Add(new CompletionData("GetUrlResponseAsync", "GetUrlResponseAsync(string url)"));
+            data.Add(new CompletionData("GetValueAsync", "GetValueAsync()"));
+            data.Add(new CompletionData("GetValueFromElementAsync", "GetValueFromElementAsync(string by, string locator)"));
+            data.Add(new CompletionData("GetValueFromElementByClassAsync", "GetValueFromElementByClassAsync(string _class, int index)"));
+            data.Add(new CompletionData("GetValueFromElementByIdAsync", "GetValueFromElementByIdAsync(string id)"));
+            data.Add(new CompletionData("GetValueFromElementByNameAsync", "GetValueFromElementByNameAsync(string name, int index)"));
+            data.Add(new CompletionData("GetValueFromElementByTagAsync", "GetValueFromElementByTagAsync(string tag, int index)"));
+            data.Add(new CompletionData("GoToUrlAsync", "GoToUrlAsync(string url, int sec)"));
+            data.Add(new CompletionData("GoToUrlBaseAuthAsync", "GoToUrlBaseAuthAsync(string url, string login, string pass, int sec)"));
+            data.Add(new CompletionData("Id", "string Id { get; set; }"));
+            data.Add(new CompletionData("IMAGE_STATUS_FAILED", "IMAGE_STATUS_FAILED"));
+            data.Add(new CompletionData("IMAGE_STATUS_MESSAGE", "IMAGE_STATUS_MESSAGE"));
+            data.Add(new CompletionData("IMAGE_STATUS_PASSED", "IMAGE_STATUS_PASSED"));
+            data.Add(new CompletionData("IMAGE_STATUS_PROCESS", "IMAGE_STATUS_PROCESS"));
+            data.Add(new CompletionData("IMAGE_STATUS_WARNING", "IMAGE_STATUS_WARNING"));
+            data.Add(new CompletionData("Index", "int Index { get; set; }"));
+            data.Add(new CompletionData("IsClickableAsync", "IsClickableAsync()"));
+            data.Add(new CompletionData("IsClickableElementAsync", "IsClickableElementAsync(string by, string locator)"));
+            data.Add(new CompletionData("Name", "string Name { get; set; }"));
+            data.Add(new CompletionData("PASSED", "PASSED"));
+            data.Add(new CompletionData("PROCESS", "PROCESS"));
+            data.Add(new CompletionData("RestGetAsync", "RestGetAsync(string url, TimeSpan timeout, string charset = \"UTF-8\")"));
+            data.Add(new CompletionData("RestGetBasicAuthAsync", "RestGetBasicAuthAsync(string login, string pass, string url, TimeSpan timeout, string charset = \"UTF-8\")"));
+            data.Add(new CompletionData("RestGetStatusCodeAsync", "RestGetStatusCodeAsync(string url)"));
+            data.Add(new CompletionData("RestPostAsync", "RestPostAsync(string url, string json, TimeSpan timeout, string charset = \"UTF-8\")"));
+            data.Add(new CompletionData("ScrollToAsync", "ScrollToAsync(bool behaviorSmooth = false)"));
+            data.Add(new CompletionData("ScrollToElementAsync", "ScrollToElementAsync(string by, string locator, bool behaviorSmooth = false)"));
+            data.Add(new CompletionData("SelectOptionAsync", "SelectOptionAsync(string by, string value)"));
+            data.Add(new CompletionData("SendMessage", "SendMessage(string action, string status, string comment, int image)"));
+            data.Add(new CompletionData("SendMessageDebug", "SendMessageDebug(string actionRus, string actionEng, string status,  string commentRus, string commentEng, int image)"));
+            data.Add(new CompletionData("SendMsgToMailAsync", "SendMsgToMailAsync(string subject, string body, string filename = \"\")"));
+            data.Add(new CompletionData("SendMsgToTelegramAsync", "SendMsgToTelegramAsync(string botToken, string chatId, string text, string charset = \"UTF-8\")"));
+            data.Add(new CompletionData("SetAttributeAsync", "GetAttributeAsync(string name)"));
+            data.Add(new CompletionData("SetAttributeInElementAsync", "SetAttributeInElementAsync(string by, string locator, string attribute, string value)"));
+            data.Add(new CompletionData("SetAttributeInElementByClassAsync", "SetAttributeInElementByClassAsync(string _class, int index, string attribute, string value)"));
+            data.Add(new CompletionData("SetAttributeInElementByIdAsync", "SetAttributeInElementByIdAsync(string id, string attribute, string value)"));
+            data.Add(new CompletionData("SetAttributeInElementByNameAsync", "SetAttributeInElementByNameAsync(string name, int index, string attribute, string value)"));
+            data.Add(new CompletionData("SetAttributeInElementByTagAsync", "SetAttributeInElementByTagAsync(string tag, int index, string attribute, string value)"));
+            data.Add(new CompletionData("SetAttributeInElementsAsync", "SetAttributeInElementsAsync(string by, string locator, string attribute, string value)"));
+            data.Add(new CompletionData("SetAttributeInElementsByClassAsync", "SetAttributeInElementsByClassAsync(string _class, string attribute, string value)"));
+            data.Add(new CompletionData("SetAttributeInElementsByNameAsync", "SetAttributeInElementsByNameAsync(string name, string attribute, string value)"));
+            data.Add(new CompletionData("SetAttributeInElementsByTagAsync", "SetAttributeInElementsByTagAsync(string tag, string attribute, string value)"));
+            data.Add(new CompletionData("SetHtmlAsync", "SetHtmlAsync(string html)"));
+            data.Add(new CompletionData("SetHtmlInElementAsync", "SetHtmlInElementAsync(string by, string locator, string html)"));
+            data.Add(new CompletionData("SetHtmlInElementByClassAsync", "SetHtmlInElementByClassAsync(string _class, int index, string html)"));
+            data.Add(new CompletionData("SetHtmlInElementByIdAsync", "SetHtmlInElementByIdAsync(string id, string html)"));
+            data.Add(new CompletionData("SetHtmlInElementByNameAsync", "SetHtmlInElementByNameAsync(string name, int index, string html)"));
+            data.Add(new CompletionData("SetHtmlInElementByTagAsync", "SetHtmlInElementByTagAsync(string tag, int index, string html)"));
+            data.Add(new CompletionData("SetStyleAsync", "SetStyleAsync(string cssText)"));
+            data.Add(new CompletionData("SetStyleInElementAsync", "SetStyleInElementAsync(string by, string locator, string cssText)"));
+            data.Add(new CompletionData("SetStyleInElementByClassAsync", "SetStyleInElementByClassAsync(string _class, int index, string cssText)"));
+            data.Add(new CompletionData("SetStyleInElementByIdAsync", "SetStyleInElementByIdAsync(string id, string cssText)"));
+            data.Add(new CompletionData("SetStyleInElementByNameAsync", "SetStyleInElementByNameAsync(string name, int index, string cssText)"));
+            data.Add(new CompletionData("SetStyleInElementByTagAsync", "SetStyleInElementByTagAsync(string tag, int index, string cssText)"));
+            data.Add(new CompletionData("SetTextAsync", "SetTextAsync(string text)"));
+            data.Add(new CompletionData("SetTextInElementAsync", "SetTextInElementAsync(string by, string locator, string text)"));
+            data.Add(new CompletionData("SetTextInElementByClassAsync", "SetTextInElementByClassAsync(string _class, int index, string text)"));
+            data.Add(new CompletionData("SetTextInElementByIdAsync", "SetTextInElementByIdAsync(string id, string text)"));
+            data.Add(new CompletionData("SetTextInElementByNameAsync", "SetTextInElementByNameAsync(string name, int index, string text)"));
+            data.Add(new CompletionData("SetTextInElementByTagAsync", "SetTextInElementByTagAsync(string tag, int index, string text)"));
+            data.Add(new CompletionData("SetValueAsync", "SetValueAsync(string value)"));
+            data.Add(new CompletionData("SetValueInElementAsync", "SetValueInElementAsync(string by, string locator, string value)"));
+            data.Add(new CompletionData("SetValueInElementByClassAsync", "SetValueInElementByClassAsync(string _class, int index, string value)"));
+            data.Add(new CompletionData("SetValueInElementByIdAsync", "SetValueInElementByIdAsync(string id, string value)"));
+            data.Add(new CompletionData("SetValueInElementByNameAsync", "SetValueInElementByNameAsync(string name, int index, string value)"));
+            data.Add(new CompletionData("SetValueInElementByTagAsync", "SetValueInElementByTagAsync(string tag, int index, string value)"));
+            data.Add(new CompletionData("STOPPED", "STOPPED"));
+            data.Add(new CompletionData("TestBeginAsync", "TestBeginAsync()"));
+            data.Add(new CompletionData("TestEndAsync", "TestEndAsync()"));
+            data.Add(new CompletionData("TestStopAsync", "TestStopAsync()"));
+            data.Add(new CompletionData("TimerStart", "TimerStart()"));
+            data.Add(new CompletionData("TimerStop", "TimerStop(DateTime start)"));
+            data.Add(new CompletionData("Type", "string Type { get; set; }"));
+            data.Add(new CompletionData("WaitAsync", "WaitAsync(int sec)"));
+            data.Add(new CompletionData("WaitElementInDomAsync", "WaitElementInDomAsync(string by, string locator, int sec)"));
+            data.Add(new CompletionData("WaitElementNotDomAsync", "WaitElementNotDomAsync(string by, string locator, int sec)"));
+            data.Add(new CompletionData("WaitNotVisibleAsync", "WaitNotVisibleAsync(int sec)"));
+            data.Add(new CompletionData("WaitNotVisibleElementAsync", "WaitNotVisibleElementAsync(string by, string locator, int sec)"));
+            data.Add(new CompletionData("WaitNotVisibleElementByClassAsync", "WaitNotVisibleElementByClassAsync(string _class, int index, int sec)"));
+            data.Add(new CompletionData("WaitNotVisibleElementByIdAsync", "WaitNotVisibleElementByIdAsync(string id, int sec)"));
+            data.Add(new CompletionData("WaitNotVisibleElementByNameAsync", "WaitNotVisibleElementByNameAsync(string name, int index, int sec)"));
+            data.Add(new CompletionData("WaitNotVisibleElementByTagAsync", "WaitNotVisibleElementByTagAsync(string tag, int index, int sec)"));
+            data.Add(new CompletionData("WaitVisibleAsync", "WaitVisibleAsync(int sec)"));
+            data.Add(new CompletionData("WaitVisibleElementAsync", "WaitVisibleElementAsync(string by, string locator, int sec)"));
+            data.Add(new CompletionData("WaitVisibleElementByClassAsync", "WaitVisibleElementByClassAsync(string _class, int index, int sec)"));
+            data.Add(new CompletionData("WaitVisibleElementByIdAsync", "WaitVisibleElementByIdAsync(string id, int sec)"));
+            data.Add(new CompletionData("WaitVisibleElementByNameAsync", "WaitVisibleElementByNameAsync(string name, int index, int sec)"));
+            data.Add(new CompletionData("WaitVisibleElementByTagAsync", "WaitVisibleElementByTagAsync(string tag, int index, int sec)"));
+            data.Add(new CompletionData("WARNING", "WARNING"));
+            completionWindow.Width = 250;
+            completionWindow.Show();
+            completionWindow.Closed += delegate {
+                completionWindow = null;
+            };
+        }
+
+        private void textEditor_TextArea_TextEntered(object sender, TextCompositionEventArgs e)
+        {
+            if (e.Text == ".")
+            {
+                showCompletionWindow((TextArea)sender);
+            }
+        }
+
+        void textEditor_TextArea_TextEntering(object sender, TextCompositionEventArgs e)
+        {
+            if (e.Text.Length > 0 && completionWindow != null)
+            {
+                if (!char.IsLetterOrDigit(e.Text[0]))
+                {
+                    completionWindow.CompletionList.RequestInsertion(e);
+                }
+            }
+        }
 
         private void closeFile()
         {
@@ -2934,13 +3370,13 @@ tester.ConsoleMsg(events);\par
 
                         if (dialogResult == DialogResult.Cancel)
                         {
-                            //parent.consoleMsg("Отмена закрытия файла");
+                            //parent.ConsoleMsg("Отмена закрытия файла");
                         }
                         else if (dialogResult == DialogResult.No)
                         {
                             tabControl1.TabPages.Remove(tabControl1.SelectedTab);
                             files.RemoveAt(index);
-                            parent.consoleMsg($"Файл {filename} - закрыт без сохранения");
+                            parent.ConsoleMsg($"Файл {filename} - закрыт без сохранения");
                             updateListFiles();
                         }
                         else if (dialogResult == DialogResult.Yes)
@@ -2949,25 +3385,25 @@ tester.ConsoleMsg(events);\par
                             tabControl1.TabPages.Remove(tabControl1.SelectedTab);
                             files.RemoveAt(index);
                             updateListFiles();
-                            parent.consoleMsg($"Файл {filename} - закрыт");
+                            parent.ConsoleMsg($"Файл {filename} - закрыт");
                         }
                     }
                     else
                     {
                         tabControl1.TabPages.Remove(tabControl1.SelectedTab);
                         files.RemoveAt(index);
-                        parent.consoleMsg($"Файл {filename} - закрыт");
+                        parent.ConsoleMsg($"Файл {filename} - закрыт");
                         updateListFiles();
                     }
                 }
                 else
                 {
-                    parent.consoleMsg($"Файл {filename} - неудалось закрыть");
+                    parent.ConsoleMsg($"Файл {filename} - неудалось закрыть");
                 }
             }
             catch (Exception ex)
             {
-                parent.consoleMsgError(ex.ToString());
+                parent.ConsoleMsgError(ex.ToString());
             }
         }
 
@@ -2980,12 +3416,12 @@ tester.ConsoleMsg(events);\par
                 {
                     files[i][3] = i.ToString();
                     (files[i][5] as TextEditor).Tag = i.ToString();
-                    //parent.consoleMsg($"{files[i][0]} | {files[i][1]} | {files[i][2]} | {files[i][3]} | {files[i][4]} | {(files[i][5] as TextEditorControl).Tag} | ");
+                    //parent.ConsoleMsg($"{files[i][0]} | {files[i][1]} | {files[i][2]} | {files[i][3]} | {files[i][4]} | {(files[i][5] as TextEditorControl).Tag} | ");
                 }
             }
             catch (Exception ex)
             {
-                parent.consoleMsgError(ex.ToString());
+                parent.ConsoleMsgError(ex.ToString());
             }
         }
 
@@ -3009,7 +3445,7 @@ tester.ConsoleMsg(events);\par
             }
             catch (Exception ex)
             {
-                parent.consoleMsgError(ex.ToString());
+                parent.ConsoleMsgError(ex.ToString());
             }
             
         }
@@ -3032,11 +3468,11 @@ tester.ConsoleMsg(events);\par
                 (files[index][4] as TabPage).Text = filename;
                 files[index][2] = STATUS_SAVED;
 
-                parent.consoleMsg($"Файл {filename} - сохранён");
+                parent.ConsoleMsg($"Файл {filename} - сохранён");
             }
             catch (Exception ex)
             {
-                parent.consoleMsgError(ex.ToString());
+                parent.ConsoleMsgError(ex.ToString());
             }
         }
 
@@ -3062,13 +3498,13 @@ tester.ConsoleMsg(events);\par
                     files[index][2] = STATUS_SAVED;
 
                     toolStripStatusLabel5.Text = path;
-                    Config.browserForm.consoleMsg($"Файл {filename} - сохранён");
+                    Config.browserForm.ConsoleMsg($"Файл {filename} - сохранён");
                     Config.browserForm.projectUpdate();
                 }
             }
             catch (Exception ex)
             {
-                parent.consoleMsgError(ex.ToString());
+                parent.ConsoleMsgError(ex.ToString());
             }
         }
 
@@ -3094,7 +3530,7 @@ tester.ConsoleMsg(events);\par
                         (files[i][4] as TabPage).Text = filename;
                         files[i][2] = STATUS_SAVED;
 
-                        parent.consoleMsg($"Файл {filename} - сохранён");
+                        parent.ConsoleMsg($"Файл {filename} - сохранён");
                     }
                 }
 
@@ -3102,7 +3538,7 @@ tester.ConsoleMsg(events);\par
             }
             catch (Exception ex)
             {
-                parent.consoleMsgError(ex.ToString());
+                parent.ConsoleMsgError(ex.ToString());
             }
         }
 
@@ -3153,12 +3589,12 @@ tester.ConsoleMsg(events);\par
                 }
                 else
                 {
-                    Config.browserForm.consoleMsg("Проект не открыт");
+                    Config.browserForm.ConsoleMsg("Проект не открыт");
                 }
             }
             catch (Exception ex)
             {
-                Config.browserForm.consoleMsgError(ex.ToString());
+                Config.browserForm.ConsoleMsgError(ex.ToString());
             }
         }
 
@@ -3188,7 +3624,7 @@ tester.ConsoleMsg(events);\par
             }
             catch (Exception ex)
             {
-                Config.browserForm.consoleMsgError(ex.ToString());
+                Config.browserForm.ConsoleMsgError(ex.ToString());
             }
         }
 
@@ -3239,27 +3675,22 @@ tester.ConsoleMsg(events);\par
                     if (value == "PROCESS" && tag == "Tester") richTextBox1.Rtf = handbook[9];
                     if (value == "COMPLETED" && tag == "Tester") richTextBox1.Rtf = handbook[10];
                     if (value == "WARNING" && tag == "Tester") richTextBox1.Rtf = handbook[11];
-
                     if (value == "BrowserView" && tag == "Tester") richTextBox1.Rtf = handbook[12];
                     if (value == "BrowserWindow" && tag == "Tester") richTextBox1.Rtf = handbook[13];
-
                     if (value == "BrowserCloseAsync" && tag == "Tester") richTextBox1.Rtf = handbook[14];
                     if (value == "BrowserSizeAsync" && tag == "Tester") richTextBox1.Rtf = handbook[15];
                     if (value == "BrowserFullScreenAsync" && tag == "Tester") richTextBox1.Rtf = handbook[16];
                     if (value == "BrowserSetUserAgentAsync" && tag == "Tester") richTextBox1.Rtf = handbook[17];
                     if (value == "BrowserGetUserAgentAsync" && tag == "Tester") richTextBox1.Rtf = handbook[18];
-
                     if (value == "ConsoleMsg" && tag == "Tester") richTextBox1.Rtf = handbook[19];
                     if (value == "ConsoleMsgError" && tag == "Tester") richTextBox1.Rtf = handbook[20];
                     if (value == "ClearMessage" && tag == "Tester") richTextBox1.Rtf = handbook[21];
                     if (value == "SendMessage" && tag == "Tester") richTextBox1.Rtf = handbook[22];
                     if (value == "EditMessage" && tag == "Tester") richTextBox1.Rtf = handbook[23];
-
                     if (value == "TestBeginAsync" && tag == "Tester") richTextBox1.Rtf = handbook[24];
                     if (value == "TestEndAsync" && tag == "Tester") richTextBox1.Rtf = handbook[25];
                     if (value == "TestStopAsync" && tag == "Tester") richTextBox1.Rtf = handbook[26];
                     if (value == "DefineTestStop" && tag == "Tester") richTextBox1.Rtf = handbook[27];
-
                     if (value == "ClickElementByClassAsync" && tag == "Tester") richTextBox1.Rtf = handbook[28];
                     if (value == "ClickElementAsync" && tag == "Tester") richTextBox1.Rtf = handbook[29];
                     if (value == "ClickElementByIdAsync" && tag == "Tester") richTextBox1.Rtf = handbook[30];
@@ -3326,17 +3757,13 @@ tester.ConsoleMsg(events);\par
                     if (value == "WaitVisibleElementByIdAsync" && tag == "Tester") richTextBox1.Rtf = handbook[91];
                     if (value == "WaitVisibleElementByNameAsync" && tag == "Tester") richTextBox1.Rtf = handbook[92];
                     if (value == "WaitVisibleElementByTagAsync" && tag == "Tester") richTextBox1.Rtf = handbook[93];
-
                     if (value == "ExecuteJavaScriptAsync" && tag == "Tester") richTextBox1.Rtf = handbook[94];
-
                     if (value == "AssertEqualsAsync" && tag == "Tester") richTextBox1.Rtf = handbook[95];
                     if (value == "AssertNotEqualsAsync" && tag == "Tester") richTextBox1.Rtf = handbook[96];
                     if (value == "AssertTrueAsync" && tag == "Tester") richTextBox1.Rtf = handbook[97];
                     if (value == "AssertFalseAsync" && tag == "Tester") richTextBox1.Rtf = handbook[98];
-
                     if (value == "BrowserGetErrorsAsync" && tag == "Tester") richTextBox1.Rtf = handbook[99];
                     if (value == "BrowserGetNetworkAsync" && tag == "Tester") richTextBox1.Rtf = handbook[100];
-
                     if (value == "GetAttributeFromElementsByClassAsync" && tag == "Tester") richTextBox1.Rtf = handbook[101];
                     if (value == "GetAttributeFromElementsByNameAsync" && tag == "Tester") richTextBox1.Rtf = handbook[102];
                     if (value == "GetAttributeFromElementsByTagAsync" && tag == "Tester") richTextBox1.Rtf = handbook[103];
@@ -3354,7 +3781,6 @@ tester.ConsoleMsg(events);\par
                     if (value == "SetHtmlInElementByIdAsync" && tag == "Tester") richTextBox1.Rtf = handbook[115];
                     if (value == "SetHtmlInElementByNameAsync" && tag == "Tester") richTextBox1.Rtf = handbook[116];
                     if (value == "SetHtmlInElementByTagAsync" && tag == "Tester") richTextBox1.Rtf = handbook[117];
-
                     if (value == "HTMLElement" && tag == "HTMLElement") richTextBox1.Rtf = handbook[118];
                     if (value == "Id" && tag == "HTMLElement") richTextBox1.Rtf = handbook[119];
                     if (value == "Name" && tag == "HTMLElement") richTextBox1.Rtf = handbook[120];
@@ -3372,17 +3798,14 @@ tester.ConsoleMsg(events);\par
                     if (value == "SetValueAsync" && tag == "HTMLElement") richTextBox1.Rtf = handbook[132];
                     if (value == "WaitNotVisibleAsync" && tag == "HTMLElement") richTextBox1.Rtf = handbook[133];
                     if (value == "WaitVisibleAsync" && tag == "HTMLElement") richTextBox1.Rtf = handbook[134];
-
                     if (value == "BY_CSS" && tag == "Tester") richTextBox1.Rtf = handbook[135];
                     if (value == "BY_XPATH" && tag == "Tester") richTextBox1.Rtf = handbook[136];
-
                     if (value == "RestGetAsync" && tag == "Tester") richTextBox1.Rtf = handbook[137];
                     if (value == "RestGetBasicAuthAsync" && tag == "Tester") richTextBox1.Rtf = handbook[138];
                     if (value == "BrowserGoBackAsync" && tag == "Tester") richTextBox1.Rtf = handbook[139];
                     if (value == "BrowserGoForwardAsync" && tag == "Tester") richTextBox1.Rtf = handbook[140];
                     if (value == "BrowserBasicAuthenticationAsync" && tag == "Tester") richTextBox1.Rtf = handbook[141];
                     if (value == "BrowserEnableSendMailAsync" && tag == "Tester") richTextBox1.Rtf = handbook[142];
-                    
                     if (value == "SelectOptionAsync" && tag == "HTMLElement") richTextBox1.Rtf = handbook[143];
                     if (value == "GetOptionAsync" && tag == "HTMLElement") richTextBox1.Rtf = handbook[144];
                     if (value == "BY_INDEX" && tag == "HTMLElement") richTextBox1.Rtf = handbook[145];
@@ -3390,7 +3813,6 @@ tester.ConsoleMsg(events);\par
                     if (value == "BY_VALUE" && tag == "HTMLElement") richTextBox1.Rtf = handbook[147];
                     if (value == "IsClickableAsync" && tag == "HTMLElement") richTextBox1.Rtf = handbook[148];
                     if (value == "IsClickableElementAsync" && tag == "Tester") richTextBox1.Rtf = handbook[149];
-
                     if (value == "GetFrameAsync") richTextBox1.Rtf = handbook[150];
                     if (value == "FRAMEElement" && tag == "FRAMEElement") richTextBox1.Rtf = handbook[151];
                     if (value == "BY_INDEX" && tag == "FRAMEElement") richTextBox1.Rtf = handbook[152];
@@ -3398,7 +3820,6 @@ tester.ConsoleMsg(events);\par
                     if (value == "BY_VALUE" && tag == "FRAMEElement") richTextBox1.Rtf = handbook[154];
                     if (value == "Name" && tag == "FRAMEElement") richTextBox1.Rtf = handbook[155];
                     if (value == "Index" && tag == "FRAMEElement") richTextBox1.Rtf = handbook[156];
-
                     if (value == "ClickElementAsync" && tag == "FRAMEElement") richTextBox1.Rtf = handbook[157];
                     if (value == "FindElementAsync" && tag == "FRAMEElement") richTextBox1.Rtf = handbook[158];
                     if (value == "FindVisibleElementAsync" && tag == "FRAMEElement") richTextBox1.Rtf = handbook[159];
@@ -3421,7 +3842,6 @@ tester.ConsoleMsg(events);\par
                     if (value == "SetValueInElementAsync" && tag == "FRAMEElement") richTextBox1.Rtf = handbook[176];
                     if (value == "WaitNotVisibleElementAsync" && tag == "FRAMEElement") richTextBox1.Rtf = handbook[177];
                     if (value == "WaitVisibleElementAsync" && tag == "FRAMEElement") richTextBox1.Rtf = handbook[178];
-
                     if (value == "GetTestResult" && tag == "Tester") richTextBox1.Rtf = handbook[179];
                     if (value == "TimerStart" && tag == "Tester") richTextBox1.Rtf = handbook[180];
                     if (value == "TimerStop" && tag == "Tester") richTextBox1.Rtf = handbook[181];
@@ -3438,33 +3858,42 @@ tester.ConsoleMsg(events);\par
                     if (value == "GetListRedirectUrlAsync" && tag == "Tester") richTextBox1.Rtf = handbook[192];
                     if (value == "GetUrlResponseAsync" && tag == "Tester") richTextBox1.Rtf = handbook[193];
                     if (value == "RestPostAsync" && tag == "Tester") richTextBox1.Rtf = handbook[194];
-
                     if (value == "GetLocatorAsync" && tag == "HTMLElement") richTextBox1.Rtf = handbook[195];
                     if (value == "ClickMouseAsync" && tag == "HTMLElement") richTextBox1.Rtf = handbook[196];
-
                     if (value == "RestGetStatusCodeAsync" && tag == "Tester") richTextBox1.Rtf = handbook[197];
                     if (value == "BrowserClearNetworkAsync" && tag == "Tester") richTextBox1.Rtf = handbook[198];
+                    if (value == "Description" && tag == "Tester") richTextBox1.Rtf = handbook[199];
+                    if (value == "SendMessageDebug" && tag == "Tester") richTextBox1.Rtf = handbook[200];
+                    if (value == "EditMessageDebug" && tag == "Tester") richTextBox1.Rtf = handbook[201];
+
+                    if (value == "GetStyleAsync" && tag == "HTMLElement") richTextBox1.Rtf = handbook[202];
+                    if (value == "SetStyleAsync" && tag == "HTMLElement") richTextBox1.Rtf = handbook[203];
+                    if (value == "GetStyleFromElementAsync" && tag == "FRAMEElement") richTextBox1.Rtf = handbook[204];
+                    if (value == "SetStyleInElementAsync" && tag == "FRAMEElement") richTextBox1.Rtf = handbook[205];
+                    if (value == "GetStyleFromElementAsync" && tag == "Tester") richTextBox1.Rtf = handbook[206];
+                    if (value == "GetStyleFromElementByClassAsync" && tag == "Tester") richTextBox1.Rtf = handbook[207];
+                    if (value == "GetStyleFromElementByIdAsync" && tag == "Tester") richTextBox1.Rtf = handbook[208];
+                    if (value == "GetStyleFromElementByNameAsync" && tag == "Tester") richTextBox1.Rtf = handbook[209];
+                    if (value == "GetStyleFromElementByTagAsync" && tag == "Tester") richTextBox1.Rtf = handbook[210];
+                    if (value == "SetStyleInElementAsync" && tag == "Tester") richTextBox1.Rtf = handbook[211];
+                    if (value == "SetStyleInElementByClassAsync" && tag == "Tester") richTextBox1.Rtf = handbook[212];
+                    if (value == "SetStyleInElementByIdAsync" && tag == "Tester") richTextBox1.Rtf = handbook[213];
+                    if (value == "SetStyleInElementByNameAsync" && tag == "Tester") richTextBox1.Rtf = handbook[214];
+                    if (value == "SetStyleInElementByTagAsync" && tag == "Tester") richTextBox1.Rtf = handbook[215];
 
                     /*
-                    if (value == "" && tag == "") richTextBox1.Rtf = handbook[199];
-                    if (value == "" && tag == "") richTextBox1.Rtf = handbook[200];
-                    if (value == "" && tag == "") richTextBox1.Rtf = handbook[201];
-                    if (value == "" && tag == "") richTextBox1.Rtf = handbook[202];
-                    if (value == "" && tag == "") richTextBox1.Rtf = handbook[203];
-                    if (value == "" && tag == "") richTextBox1.Rtf = handbook[204];
-                    if (value == "" && tag == "") richTextBox1.Rtf = handbook[205];
-                    if (value == "" && tag == "") richTextBox1.Rtf = handbook[206];
-                    if (value == "" && tag == "") richTextBox1.Rtf = handbook[207];
-                    if (value == "" && tag == "") richTextBox1.Rtf = handbook[208];
-                    if (value == "" && tag == "") richTextBox1.Rtf = handbook[209];
-                    if (value == "" && tag == "") richTextBox1.Rtf = handbook[210];
+                    if (value == "" && tag == "") richTextBox1.Rtf = handbook[216];
+                    if (value == "" && tag == "") richTextBox1.Rtf = handbook[217];
+                    if (value == "" && tag == "") richTextBox1.Rtf = handbook[218];
+                    if (value == "" && tag == "") richTextBox1.Rtf = handbook[219];
+                    if (value == "" && tag == "") richTextBox1.Rtf = handbook[220];
                     */
 
                 }
             }
             catch (Exception ex)
             {
-                Config.browserForm.consoleMsgError(ex.ToString());
+                Config.browserForm.ConsoleMsgError(ex.ToString());
             }
         }
 
@@ -3492,6 +3921,7 @@ tester.ConsoleMsg(events);\par
                     if (treeView1.SelectedNode.Text == "Атрибуты") return;
                     if (treeView1.SelectedNode.Text == "Объекты") return;
                     if (treeView1.SelectedNode.Text == "Текст") return;
+                    if (treeView1.SelectedNode.Text == "Стили") return;
                     if (treeView1.SelectedNode.Text == "Страница") return;
                     if (treeView1.SelectedNode.Text == "Значение") return;
                     if (treeView1.SelectedNode.Text == "Ожидание") return;
@@ -3501,7 +3931,6 @@ tester.ConsoleMsg(events);\par
                     if (treeView1.SelectedNode.Text == "Методы для замера затраченного времени") return;
                     if (treeView1.SelectedNode.Text == "Методы для отправки email и message") return;
                     if (treeView1.SelectedNode.Text == "Методы для проверки результата") return;
-
 
                     if (treeView1.SelectedNode.Text == "Класс: FRAMEElement") return;
                     if (treeView1.SelectedNode.Text == "Класс: HTMLElement") return;
@@ -3522,7 +3951,7 @@ tester.ConsoleMsg(events);\par
             }
             catch (Exception ex)
             {
-                Config.browserForm.consoleMsgError(ex.ToString());
+                Config.browserForm.ConsoleMsgError(ex.ToString());
             }
         }
 
@@ -3549,7 +3978,7 @@ tester.ConsoleMsg(events);\par
             }
             catch (Exception ex)
             {
-                Config.browserForm.consoleMsgError(ex.ToString());
+                Config.browserForm.ConsoleMsgError(ex.ToString());
             }
         }
     }

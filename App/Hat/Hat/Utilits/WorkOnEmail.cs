@@ -8,6 +8,9 @@ using System.Net;
 using System.IO;
 using System.ComponentModel;
 using System.Web;
+using System.Net.Mime;
+using System.Text.RegularExpressions;
+using System.Windows.Shapes;
 
 namespace Hat
 {
@@ -17,7 +20,7 @@ namespace Hat
          * Отправка почты
          * Источник: https://metanit.com/sharp/net/8.1.php
          */
-        public static void SendEmail(string subject, string body)
+        public static void SendEmail(string subject, string body, string filename)
         {
             try
             {
@@ -30,19 +33,6 @@ namespace Hat
                 string portServer = Config.dataMail[5];
                 string ssl = Config.dataMail[6];
 
-                /*
-                Config.browserForm.consoleMsg($"mailFrom: {mailFrom}");
-                Config.browserForm.consoleMsg($"userFrom: {userFrom}");
-                Config.browserForm.consoleMsg($"passFrom: {passFrom}");
-                Config.browserForm.consoleMsg($"mailsTo: {mailsTo}");
-                Config.browserForm.consoleMsg($"smtpServer: {smtpServer}");
-                Config.browserForm.consoleMsg($"portServer: {portServer}");
-                Config.browserForm.consoleMsg($"ssl: {ssl}");
-
-                Config.browserForm.consoleMsg($"subject: {subject}");
-                Config.browserForm.consoleMsg($"body: {body}");
-                */
-
                 string[] mails = mailsTo.Split(' ');
                 int count = mails.Length;
 
@@ -50,10 +40,29 @@ namespace Hat
                 MailAddress from = new MailAddress(mailFrom, "Browser Hat");    // отправитель
                 MailAddress to = new MailAddress(mails[0]);                     // получатель
 
+                // вложенный файл
+                Attachment attachment = null;
+                if (filename != "")
+                {
+                    string pattern = @"(/i)(.*)[^""\s/>]";
+                    string file = Regex.Match(filename, pattern).Value;         // получим имя файла /image-22-51-2023-10-51-44.jpeg
+                    file = file.Substring(1);                                   // коррекция имени файла
+                    file = Report.FolderImagesName + file;                      // конечный путь к файлу
+                    file = file.Replace("/", "\\");                             // коррекция пути
+                    Config.browserForm.ConsoleMsg($"Вложенный файл в письме: {file}");
+
+                    attachment = new Attachment(file, MediaTypeNames.Application.Octet);
+                    ContentDisposition disposition = attachment.ContentDisposition;
+                    disposition.CreationDate = System.IO.File.GetCreationTime(file);
+                    disposition.ModificationDate = System.IO.File.GetLastWriteTime(file);
+                    disposition.ReadDate = System.IO.File.GetLastAccessTime(file);
+                }
+
                 // создаем объект сообщения
                 MailMessage message = new MailMessage(from, to);
                 message.Subject = subject;                                      // тема письма
                 message.Body = body;                                            // текст письма
+                if (attachment != null) message.Attachments.Add(attachment);    // файл в письме
                 message.IsBodyHtml = true;                                      // письмо представляет код html
 
                 // копии письма
@@ -76,11 +85,11 @@ namespace Hat
                 // отправка письма
                 smtp.Send(message);
 
-                Config.browserForm.consoleMsg($"Отправлено писем: {count}");
+                Config.browserForm.ConsoleMsg($"Отправлено писем: {count}");
             }
             catch (Exception ex)
             {
-                Config.browserForm.consoleMsgError(ex.ToString());
+                Config.browserForm.ConsoleMsgError(ex.ToString());
             }
         }
 

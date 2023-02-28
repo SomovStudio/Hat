@@ -19,9 +19,9 @@ namespace Hat
 
         public static void play(string testFilename)
         {
-            Config.browserForm.consoleMsg($"Запущен файл автотеста: {testFilename}");
-            if (Config.languageEng == false) Config.browserForm.systemConsoleMsg($"Запущен файл автотеста: {testFilename}", default, ConsoleColor.DarkCyan, ConsoleColor.White, true);
-            else Config.browserForm.systemConsoleMsg($"The autotest file is running: {testFilename}", default, ConsoleColor.DarkCyan, ConsoleColor.White, true);
+            Config.browserForm.ConsoleMsg($"Запущен файл автотеста: {testFilename}");
+            if (Config.languageEngConsole == false) Config.browserForm.SystemConsoleMsg($"Запущен файл автотеста: {testFilename}", default, ConsoleColor.DarkCyan, ConsoleColor.White, true);
+            else Config.browserForm.SystemConsoleMsg($"The autotest file is running: {testFilename}", default, ConsoleColor.DarkCyan, ConsoleColor.White, true);
 
             try
             {
@@ -49,7 +49,7 @@ namespace Hat
                 {
                     foreach (var error in results.Errors)
                     {
-                        Config.browserForm.consoleMsgErrorReport(error.ToString());
+                        Config.browserForm.ConsoleMsgErrorReport(error.ToString());
                     }
                 }
                 else
@@ -70,7 +70,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                Config.browserForm.consoleMsgErrorReport(ex.Message);
+                Config.browserForm.ConsoleMsgErrorReport(ex.Message);
             }
         }
 
@@ -78,11 +78,40 @@ namespace Hat
         {
             HatFrameworkDev.Tester tester = new HatFrameworkDev.Tester(Config.browserForm);
             await tester.TestBeginAsync();
+            await tester.GoToUrlAsync("https://somovstudio.github.io/test_error.html", 25);
+            //await tester.AssertNoErrorsAsync(true, new string[1] { "stats.g.doubleclick.net" });
+            //await tester.AssertNoErrorsAsync();
+
+            //await tester.GoToUrlAsync("https://somovstudio.github.io/test.html", 25);
+            //HatFrameworkDev.HTMLElement element = await tester.GetElementAsync(HatFrameworkDev.Tester.BY_XPATH, "//div[@id='auth']");
+            //string style = await element.GetStyleAsync("width");
+            //tester.ConsoleMsg(style);
+            //await element.SetStyleAsync("background-color: yellow; color: red; width: 100px;");
+
+            /*
+            string style = "";
             await tester.GoToUrlAsync("https://somovstudio.github.io/test.html", 25);
-            HatFrameworkDev.HTMLElement element = await tester.GetElementAsync(HatFrameworkDev.Tester.BY_XPATH, "//input[@id='buttonLogin']");
-            await element.ClickMouseAsync();
+            style = await tester.GetStyleFromElementAsync(HatFrameworkDev.Tester.BY_XPATH, "//div[@id='auth']", "position");
+            tester.ConsoleMsg("position: " + style);
+            style = await tester.GetStyleFromElementAsync(HatFrameworkDev.Tester.BY_CSS, "#auth", "padding");
+            tester.ConsoleMsg("padding: " + style);
+            style = await tester.GetStyleFromElementByIdAsync("buttonLogin", "background-color");
+            tester.ConsoleMsg("background-color: " + style);
+            style = await tester.GetStyleFromElementByClassAsync("text-field", 0, "border");
+            tester.ConsoleMsg("border: " + style);
+            style = await tester.GetStyleFromElementByNameAsync("pass", 0, "height");
+            tester.ConsoleMsg("height: " + style);
+            style = await tester.GetStyleFromElementByTagAsync("h2", 0, "width");
+            tester.ConsoleMsg("width: " + style);
+            */
 
-
+            await tester.GoToUrlAsync("https://somovstudio.github.io/test.html", 25);
+            //ок await tester.SetStyleInElementAsync(HatFrameworkDev.Tester.BY_XPATH, "//div[@id='auth']", "background-color: #000000;");
+            //ок await tester.SetStyleInElementAsync(HatFrameworkDev.Tester.BY_CSS, "#auth", "background-color: #000000;");
+            //ок await tester.SetStyleInElementByIdAsync("buttonLogin", "background-color: #123456;");
+            //ok await tester.SetStyleInElementByClassAsync("text-field", 0, "background-color: #123456;");
+            //ok await tester.SetStyleInElementByNameAsync("pass", 0, "background-color: #123456;");
+            //ok await tester.SetStyleInElementByTagAsync("h2", 0, "background-color: #123456;");
 
             await tester.TestEndAsync();
 
@@ -198,7 +227,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                Config.browserForm.consoleMsgError(ex.ToString());
+                Config.browserForm.ConsoleMsgError(ex.ToString());
             }
         }
 
@@ -214,7 +243,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                Config.browserForm.consoleMsgError(ex.ToString());
+                Config.browserForm.ConsoleMsgError(ex.ToString());
             }
 
             string[] result = new string[files.Count];
@@ -227,7 +256,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                Config.browserForm.consoleMsgError(ex.ToString());
+                Config.browserForm.ConsoleMsgError(ex.ToString());
             }
 
             return result;
@@ -353,6 +382,7 @@ namespace Hat
 
         public async Task setUp()
         {
+            tester.Description(""Тест #1 проверяет авторизацию на сайте"");
             await tester.BrowserFullScreenAsync();
         }
 
@@ -422,6 +452,7 @@ namespace Hat
 
         public async Task setUp()
         {
+            tester.Description(""Тест #2 проверяет авторизацию на сайте"");
             await tester.BrowserFullScreenAsync();
         }
 
