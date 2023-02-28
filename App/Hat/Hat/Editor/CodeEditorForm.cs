@@ -3063,6 +3063,12 @@ tester.ConsoleMsg(events);\par
             data.Add(new CompletionData("GetListRedirectUrlAsync", "GetListRedirectUrlAsync()"));
             data.Add(new CompletionData("GetLocatorAsync", "GetLocatorAsync()"));
             data.Add(new CompletionData("GetOptionAsync", "GetOptionAsync(string by)"));
+            data.Add(new CompletionData("GetStyleAsync", "GetStyleAsync(string property)"));
+            data.Add(new CompletionData("GetStyleFromElementAsync", "GetStyleFromElementAsync(string by, string locator, string property)"));
+            data.Add(new CompletionData("GetStyleFromElementByClassAsync", "GetStyleFromElementByClassAsync(string _class, int index, string property)"));
+            data.Add(new CompletionData("GetStyleFromElementByIdAsync", "GetStyleFromElementByIdAsync(string id, string property)"));
+            data.Add(new CompletionData("GetStyleFromElementByNameAsync", "GetStyleFromElementByNameAsync(string name, int index, string property)"));
+            data.Add(new CompletionData("GetStyleFromElementByTagAsync", "GetStyleFromElementByTagAsync(string tag, int index, string property)"));
             data.Add(new CompletionData("GetTestResult", "GetTestResult()"));
             data.Add(new CompletionData("GetTextAsync", "GetTextAsync()"));
             data.Add(new CompletionData("GetTextFromElementAsync", "GetTextFromElementAsync(string by, string locator)"));
@@ -3120,6 +3126,12 @@ tester.ConsoleMsg(events);\par
             data.Add(new CompletionData("SetHtmlInElementByIdAsync", "SetHtmlInElementByIdAsync(string id, string html)"));
             data.Add(new CompletionData("SetHtmlInElementByNameAsync", "SetHtmlInElementByNameAsync(string name, int index, string html)"));
             data.Add(new CompletionData("SetHtmlInElementByTagAsync", "SetHtmlInElementByTagAsync(string tag, int index, string html)"));
+            data.Add(new CompletionData("SetStyleAsync", "SetStyleAsync(string cssText)"));
+            data.Add(new CompletionData("SetStyleInElementAsync", "SetStyleInElementAsync(string by, string locator, string cssText)"));
+            data.Add(new CompletionData("SetStyleInElementByClassAsync", "SetStyleInElementByClassAsync(string _class, int index, string cssText)"));
+            data.Add(new CompletionData("SetStyleInElementByIdAsync", "SetStyleInElementByIdAsync(string id, string cssText)"));
+            data.Add(new CompletionData("SetStyleInElementByNameAsync", "SetStyleInElementByNameAsync(string name, int index, string cssText)"));
+            data.Add(new CompletionData("SetStyleInElementByTagAsync", "SetStyleInElementByTagAsync(string tag, int index, string cssText)"));
             data.Add(new CompletionData("SetTextAsync", "SetTextAsync(string text)"));
             data.Add(new CompletionData("SetTextInElementAsync", "SetTextInElementAsync(string by, string locator, string text)"));
             data.Add(new CompletionData("SetTextInElementByClassAsync", "SetTextInElementByClassAsync(string _class, int index, string text)"));
