@@ -10,14 +10,7 @@
 - Доработан метод AssertNoErrorsAsync проверяющий ошибки на странице
 - Отчет с полным списком результатов всех тестов
 - В методе SendMsgToMailAsync добавлена возможность отправлять вложенный файла
-
-- Добавлен метод для получения CSS стиля элемента
-
-let color = window.getComputedStyle(document.getElementById('buttonLogin')).getPropertyValue("color");
-let bgcolor = window.getComputedStyle(document.getElementById('buttonLogin')).getPropertyValue("background-color");
-let btnwidth = window.getComputedStyle(document.getElementById('buttonLogin')).getPropertyValue("width");
-
-showListErrors
+- Добавлен метод для получения CSS стилей элемента
 
 -----------------------------
 
