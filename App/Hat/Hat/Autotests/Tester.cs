@@ -3922,15 +3922,6 @@ namespace HatFrameworkDev
             await execute(script, step, "Стиль введен в элемент", "The style is entered in the element", $"Не удалось найти или ввести текст в элемент по Tag: {tag} (Index: {index})", $"Could not find or enter text in the element by Tag: {tag} (Index: {index})");
         }
 
-        
-
-
-
-
-
-
-
-
 
 
         /* 
