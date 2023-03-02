@@ -26,8 +26,8 @@ namespace Hat
         /* переменные для браузера */
         public static BrowserForm browserForm;                  // окно браузера (форма)
         public static string defaultUserAgent = "";             // значение user-agent по умолчанию
-        public static string currentBrowserVersion = "1.2.1";   // текущая версия браузера
-        public static string dateBrowserUpdate = "01.03.2023";  // дата последнего обновления
+        public static string currentBrowserVersion = "1.2.2";   // текущая версия браузера
+        public static string dateBrowserUpdate = "01.04.2023";  // дата последнего обновления
 
         public static string openHtmlFile = null;             // имя открываемого html файла при запуске браузера
         public static bool commandLineMode = false;         // флаг показывающий запуск приложения из командной строки
@@ -41,7 +41,7 @@ namespace Hat
         public static string statucCacheClear = "false";        // статус очистки кэша
 
         /* переменные для файла project.hat */
-        public static string version = "1.2.1";                 // версия проекта
+        public static string version = "1.2.2";                 // версия проекта
         public static string encoding = WorkOnFiles.UTF_8_BOM;  // кодировка
         public static bool languageEngConsole = true;           // поддержка английского языка в консоли (по умолчанию английский)
         public static bool languageEngReportMail = false;       // поддержка английского языка в отече и письме (по умолчанию русский)
