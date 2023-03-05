@@ -3155,9 +3155,9 @@ await tester.SetStyleInElementAsync(Tester.BY_CSS, ""#auth"", ""width: 250px; co
             data.Add(new CompletionData("BrowserGetErrorsAsync", "BrowserGetErrorsAsync()"));
             data.Add(new CompletionData("BrowserGetNetworkAsync", "BrowserGetNetworkAsync()"));
             data.Add(new CompletionData("BrowserGetUserAgentAsync", "BrowserGetUserAgentAsync()"));
-            data.Add(new CompletionData("BrowserGoBackAsync", "BrowserGoBackAsync(int sec)"));
-            data.Add(new CompletionData("BrowserGoForwardAsync", "BrowserGoForwardAsync(int sec)"));
-            data.Add(new CompletionData("BrowserPageReloadAsync", "BrowserPageReloadAsync(int sec)"));
+            data.Add(new CompletionData("BrowserGoBackAsync", "BrowserGoBackAsync(int sec, bool abortLoadAfterTime = false)"));
+            data.Add(new CompletionData("BrowserGoForwardAsync", "BrowserGoForwardAsync(int sec, bool abortLoadAfterTime = false)"));
+            data.Add(new CompletionData("BrowserPageReloadAsync", "BrowserPageReloadAsync(int sec, bool abortLoadAfterTime = false)"));
             data.Add(new CompletionData("BrowserSetUserAgentAsync", "BrowserSetUserAgentAsync(string value)"));
             data.Add(new CompletionData("BrowserSizeAsync", "BrowserSizeAsync(int width, int height)"));
             data.Add(new CompletionData("BrowserView", "WebView2 BrowserView"));
@@ -3242,8 +3242,8 @@ await tester.SetStyleInElementAsync(Tester.BY_CSS, ""#auth"", ""width: 250px; co
             data.Add(new CompletionData("GetValueFromElementByIdAsync", "GetValueFromElementByIdAsync(string id)"));
             data.Add(new CompletionData("GetValueFromElementByNameAsync", "GetValueFromElementByNameAsync(string name, int index)"));
             data.Add(new CompletionData("GetValueFromElementByTagAsync", "GetValueFromElementByTagAsync(string tag, int index)"));
-            data.Add(new CompletionData("GoToUrlAsync", "GoToUrlAsync(string url, int sec)"));
-            data.Add(new CompletionData("GoToUrlBaseAuthAsync", "GoToUrlBaseAuthAsync(string url, string login, string pass, int sec)"));
+            data.Add(new CompletionData("GoToUrlAsync", "GoToUrlAsync(string url, int sec, bool abortLoadAfterTime = false)"));
+            data.Add(new CompletionData("GoToUrlBaseAuthAsync", "GoToUrlBaseAuthAsync(string url, string login, string pass, int sec, bool abortLoadAfterTime = false)"));
             data.Add(new CompletionData("Id", "string Id { get; set; }"));
             data.Add(new CompletionData("IMAGE_STATUS_FAILED", "IMAGE_STATUS_FAILED"));
             data.Add(new CompletionData("IMAGE_STATUS_MESSAGE", "IMAGE_STATUS_MESSAGE"));

@@ -916,12 +916,12 @@ namespace HatFrameworkDev
             return events;
         }
 
-        public async Task BrowserGoBackAsync(int sec)
+        public async Task BrowserGoBackAsync(int sec, bool abortLoadAfterTime = false)
         {
             listRedirects.Clear();
             statusPageLoad = false;
             statusContentLoad = false;
-            int step = SendMessageDebug($"BrowserGoBackAsync()", $"BrowserGoBackAsync()", PROCESS, "Выполняется действие браузера - назад", "the browser performs the action - back", IMAGE_STATUS_PROCESS);
+            int step = SendMessageDebug($"BrowserGoBackAsync({sec}, {abortLoadAfterTime})", $"BrowserGoBackAsync({sec}, {abortLoadAfterTime})", PROCESS, "Выполняется действие браузера - назад", "the browser performs the action - back", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return;
 
             try
@@ -935,11 +935,30 @@ namespace HatFrameworkDev
                     if (DefineTestStop(step) == true) return;
                 }
 
-                if (statusPageLoad == true) EditMessageDebug(step, null, null, COMPLETED, "Выполнено действие браузера - назад", "Browser action performed - back", IMAGE_STATUS_MESSAGE);
+                if (abortLoadAfterTime == true)
+                {
+                    if (statusPageLoad == true || statusContentLoad == true)
+                    {
+                        BrowserView.CoreWebView2.Stop();
+                        EditMessageDebug(step, null, null, WARNING, "Загрузка страницы остановлена (Выполнено действие браузера - назад)", "Page loading stopped (Browser action performed - back)", IMAGE_STATUS_WARNING);
+                    }
+                    else
+                    {
+                        EditMessageDebug(step, null, null, FAILED, "Не выполнено действие браузера - назад (cтраница не загружена)", "Browser action failed - back (page not loaded)", IMAGE_STATUS_FAILED);
+                        TestStopAsync();
+                    }
+                }
                 else
                 {
-                    EditMessageDebug(step, null, null, FAILED, "Не выполнено действие браузера - назад (cтраница не загружена)", "Browser action failed - back (page not loaded)", IMAGE_STATUS_FAILED);
-                    TestStopAsync();
+                    if (statusPageLoad == true)
+                    {
+                        EditMessageDebug(step, null, null, COMPLETED, "Выполнено действие браузера - назад", "Browser action performed - back", IMAGE_STATUS_MESSAGE);
+                    }
+                    else
+                    {
+                        EditMessageDebug(step, null, null, FAILED, "Не выполнено действие браузера - назад (cтраница не загружена)", "Browser action failed - back (page not loaded)", IMAGE_STATUS_FAILED);
+                        TestStopAsync();
+                    }
                 }
             }
             catch (Exception ex)
@@ -953,7 +972,7 @@ namespace HatFrameworkDev
             }
         }
 
-        public async Task BrowserGoForwardAsync(int sec)
+        public async Task BrowserGoForwardAsync(int sec, bool abortLoadAfterTime = false)
         {
             listRedirects.Clear();
             statusPageLoad = false;
@@ -972,12 +991,33 @@ namespace HatFrameworkDev
                     if (DefineTestStop(step) == true) return;
                 }
 
-                if (statusPageLoad == true) EditMessageDebug(step, null, null, COMPLETED, "Выполнено действие браузера - вперед", "Browser action performed - forward", IMAGE_STATUS_MESSAGE);
+                if (abortLoadAfterTime == true)
+                {
+                    if (statusPageLoad == true || statusContentLoad == true)
+                    {
+                        BrowserView.CoreWebView2.Stop();
+                        EditMessageDebug(step, null, null, WARNING, "Загрузка страницы остановлена (Выполнено действие браузера - вперед)", "Page loading stopped (Browser action performed - forward)", IMAGE_STATUS_WARNING);
+                    }
+                    else
+                    {
+                        EditMessageDebug(step, null, null, FAILED, "Не выполнено действие браузера - вперед (cтраница не загружена)", "Browser action failed - forward (page not loaded)", IMAGE_STATUS_FAILED);
+                        TestStopAsync();
+                    }
+                }
                 else
                 {
-                    EditMessageDebug(step, null, null, FAILED, "Не выполнено действие браузера - вперед (cтраница не загружена)", "Browser action failed - forward (page not loaded)", IMAGE_STATUS_FAILED);
-                    TestStopAsync();
+                    if (statusPageLoad == true)
+                    {
+                        EditMessageDebug(step, null, null, COMPLETED, "Выполнено действие браузера - вперед", "Browser action performed - forward", IMAGE_STATUS_MESSAGE);
+                    }
+                    else
+                    {
+                        EditMessageDebug(step, null, null, FAILED, "Не выполнено действие браузера - вперед (cтраница не загружена)", "Browser action failed - forward (page not loaded)", IMAGE_STATUS_FAILED);
+                        TestStopAsync();
+                    }
                 }
+
+                
             }
             catch (Exception ex)
             {
@@ -1043,12 +1083,12 @@ namespace HatFrameworkDev
             }
         }
 
-        public async Task BrowserPageReloadAsync(int sec)
+        public async Task BrowserPageReloadAsync(int sec, bool abortLoadAfterTime = false)
         {
             listRedirects.Clear();
             statusPageLoad = false;
             statusContentLoad = false;
-            int step = SendMessageDebug($"BrowserPageReloadAsync({sec})", $"BrowserPageReloadAsync({sec})", PROCESS, "Перезагрузка страницы", "Page Reload", IMAGE_STATUS_PROCESS);
+            int step = SendMessageDebug($"BrowserPageReloadAsync({sec}, {abortLoadAfterTime})", $"BrowserPageReloadAsync({sec}, {abortLoadAfterTime})", PROCESS, "Перезагрузка страницы", "Page Reload", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return;
 
             try
@@ -1068,12 +1108,33 @@ namespace HatFrameworkDev
                     if (DefineTestStop(step) == true) return;
                 }
 
-                if (statusPageLoad == true) EditMessageDebug(step, null, null, COMPLETED, "Перезагрузка страницы выполнена", "Page reload completed", IMAGE_STATUS_MESSAGE);
+                if (abortLoadAfterTime == true)
+                {
+                    if (statusPageLoad == true || statusContentLoad == true)
+                    {
+                        BrowserView.CoreWebView2.Stop();
+                        EditMessageDebug(step, null, null, WARNING, "Перезагрузка страницы остановлена", "Page reload stopped", IMAGE_STATUS_WARNING);
+                    }
+                    else
+                    {
+                        EditMessageDebug(step, null, null, FAILED, "Страница не загружена", "The page is not loaded", IMAGE_STATUS_FAILED);
+                        TestStopAsync();
+                    }
+                }
                 else
                 {
-                    EditMessageDebug(step, null, null, FAILED, "Страница не загружена", "The page is not loaded", IMAGE_STATUS_FAILED);
-                    TestStopAsync();
+                    if (statusPageLoad == true)
+                    {
+                        EditMessageDebug(step, null, null, COMPLETED, "Перезагрузка страницы выполнена", "Page reload completed", IMAGE_STATUS_MESSAGE);
+                    }
+                    else
+                    {
+                        EditMessageDebug(step, null, null, FAILED, "Страница не загружена", "The page is not loaded", IMAGE_STATUS_FAILED);
+                        TestStopAsync();
+                    }
                 }
+
+                
             }
             catch (Exception ex)
             {
