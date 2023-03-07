@@ -84,6 +84,7 @@ namespace JenkinsAgentRun
             {
                 if (P != null)
                 {
+                    P.CloseMainWindow();
                     P.Close();
                     P.Kill();
                 }
