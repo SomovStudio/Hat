@@ -84,9 +84,13 @@ namespace JenkinsAgentRun
             {
                 if (P != null)
                 {
-                    P.CloseMainWindow();
-                    P.Close();
+                    //P.CloseMainWindow();
+                    //P.Close();
                     P.Kill();
+                }
+                foreach (var p in Process.GetProcessesByName("agent.jar"))
+                {
+                    p.Kill();
                 }
             }
             catch (Exception ex)
@@ -123,6 +127,11 @@ namespace JenkinsAgentRun
         {
             CancelClose = false;
             Close();
+        }
+
+        private void createBatFile()
+        {
+            // java -Dfile.encoding=UTF8 -jar agent.jar -jnlpUrl http://192.168.0.1:8080/computer/agent/slave-agent.jnlp -secret 0000000000000000000000000000000000000000000000000000000000000000 -workDir "C:\Hat\jenkins\workspace_proxy"
         }
     }
 }
