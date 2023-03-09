@@ -32,12 +32,15 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.файлToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.выключитьАгентаToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.consoleRichTextBox = new System.Windows.Forms.RichTextBox();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.выключитьАгентаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.выключитьАгентаToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.consoleRichTextBox = new System.Windows.Forms.RichTextBox();
+            this.startToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.stopToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.menuStrip1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -55,10 +58,20 @@
             // файлToolStripMenuItem
             // 
             this.файлToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.startToolStripMenuItem,
+            this.stopToolStripMenuItem,
+            this.toolStripSeparator1,
             this.выключитьАгентаToolStripMenuItem1});
             this.файлToolStripMenuItem.Name = "файлToolStripMenuItem";
             this.файлToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
             this.файлToolStripMenuItem.Text = "Файл";
+            // 
+            // выключитьАгентаToolStripMenuItem1
+            // 
+            this.выключитьАгентаToolStripMenuItem1.Name = "выключитьАгентаToolStripMenuItem1";
+            this.выключитьАгентаToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.выключитьАгентаToolStripMenuItem1.Text = "Выключить агента";
+            this.выключитьАгентаToolStripMenuItem1.Click += new System.EventHandler(this.выключитьАгентаToolStripMenuItem1_Click);
             // 
             // notifyIcon1
             // 
@@ -67,6 +80,20 @@
             this.notifyIcon1.Text = "Jenkins Agent";
             this.notifyIcon1.Visible = true;
             this.notifyIcon1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.notifyIcon1_MouseDoubleClick);
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.выключитьАгентаToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(181, 48);
+            // 
+            // выключитьАгентаToolStripMenuItem
+            // 
+            this.выключитьАгентаToolStripMenuItem.Name = "выключитьАгентаToolStripMenuItem";
+            this.выключитьАгентаToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.выключитьАгентаToolStripMenuItem.Text = "Выключить агента";
+            this.выключитьАгентаToolStripMenuItem.Click += new System.EventHandler(this.выключитьАгентаToolStripMenuItem_Click);
             // 
             // statusStrip1
             // 
@@ -88,26 +115,24 @@
             this.consoleRichTextBox.Text = "";
             this.consoleRichTextBox.WordWrap = false;
             // 
-            // contextMenuStrip1
+            // startToolStripMenuItem
             // 
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.выключитьАгентаToolStripMenuItem});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(177, 26);
+            this.startToolStripMenuItem.Name = "startToolStripMenuItem";
+            this.startToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.startToolStripMenuItem.Text = "Запустить агента";
+            this.startToolStripMenuItem.Click += new System.EventHandler(this.startToolStripMenuItem_Click);
             // 
-            // выключитьАгентаToolStripMenuItem
+            // stopToolStripMenuItem
             // 
-            this.выключитьАгентаToolStripMenuItem.Name = "выключитьАгентаToolStripMenuItem";
-            this.выключитьАгентаToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
-            this.выключитьАгентаToolStripMenuItem.Text = "Выключить агента";
-            this.выключитьАгентаToolStripMenuItem.Click += new System.EventHandler(this.выключитьАгентаToolStripMenuItem_Click);
+            this.stopToolStripMenuItem.Name = "stopToolStripMenuItem";
+            this.stopToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.stopToolStripMenuItem.Text = "Остановить агента";
+            this.stopToolStripMenuItem.Click += new System.EventHandler(this.stopToolStripMenuItem_Click);
             // 
-            // выключитьАгентаToolStripMenuItem1
+            // toolStripSeparator1
             // 
-            this.выключитьАгентаToolStripMenuItem1.Name = "выключитьАгентаToolStripMenuItem1";
-            this.выключитьАгентаToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
-            this.выключитьАгентаToolStripMenuItem1.Text = "Выключить агента";
-            this.выключитьАгентаToolStripMenuItem1.Click += new System.EventHandler(this.выключитьАгентаToolStripMenuItem1_Click);
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
             // 
             // Form1
             // 
@@ -142,6 +167,9 @@
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem выключитьАгентаToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem выключитьАгентаToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem startToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem stopToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
     }
 }
 
