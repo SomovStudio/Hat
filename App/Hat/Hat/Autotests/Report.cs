@@ -229,6 +229,7 @@ header { display: block; position: fixed; top: 0px; background-color: #F9F7FF; b
 section { display: block; position: relative; min-width: 1400px; max-width: 1400px; }
 table { margin: 0px; min-width: 1400px; max-width: 1400px; }
 thead { background-color: #4d545d; color: #FFF; }
+tr:hover .content-hidden{  background: #EEEEEE; }
 .content-hidden { overflow: hidden; }
 .content-scroll { overflow: scroll; }
 .table { position: relative; top: 180px; z-index: 1; overflow: hidden; }
@@ -539,6 +540,7 @@ header { display: block; position: fixed; top: 0px; background-color: #F9F7FF; b
 section { display: block; position: relative; min-width: 1400px; max-width: 1400px; }
 table { margin: 0px; min-width: 1400px; max-width: 1400px; }
 thead { background-color: #4d545d; color: #FFF; }
+tr:hover .content-hidden{  background: #EEEEEE; }
 .table { position: relative; top: 380px; z-index: 1; overflow: hidden; }
 .table-status { padding: 10px; min-width: 60px; max-width: 60px; }
 .table-description { padding: 10px; min-width: 350px; max-width: 350px; }
