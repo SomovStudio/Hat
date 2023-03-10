@@ -11,6 +11,7 @@ using System.Runtime.InteropServices.ComTypes;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ProgressBar;
 
 namespace JenkinsAgentRun
 {
@@ -43,39 +44,25 @@ namespace JenkinsAgentRun
                     createReadme();
                 }
 
-                if (File.Exists("run-agent.bat") == false)
+                if (File.Exists("config.txt") == false)
                 {
-                    consoleMessage("Файл run-agent.bat - отсутствует");
-                    createBatFile();
-                    return;
+                    consoleMessage("config.txt - отсутствует");
+                    saveConfigFile();
+                }
+                else
+                {
+                    readConfigFile();
                 }
 
                 if (File.Exists("agent.jar") == false)
                 {
                     consoleMessage("Файл agent.jar - отсутствует");
-                    return;
                 }
 
                 if (File.Exists("slave-agent.jnlp") == false)
                 {
                     consoleMessage("Файл slave-agent.jnlp - отсутствует");
-                    return;
                 }
-
-
-                P = new Process();
-                P.StartInfo.FileName = "run-agent.bat";
-                P.StartInfo.Arguments = "/k";
-                P.StartInfo.RedirectStandardError = true;
-                P.StartInfo.RedirectStandardInput = true;
-                P.StartInfo.RedirectStandardOutput = true;
-                P.StartInfo.CreateNoWindow = true;
-                P.StartInfo.UseShellExecute = false;
-                P.ErrorDataReceived += P_ErrorDataReceived;
-                P.OutputDataReceived += P_OutputDataReceived;
-                P.Start();
-                P.BeginErrorReadLine();
-                P.BeginOutputReadLine();
             }
             catch (Exception ex)
             {
@@ -112,21 +99,16 @@ namespace JenkinsAgentRun
             {
                 if (P != null)
                 {
-                    P.Kill();
-                    Process[] processlist = Process.GetProcesses();
-                    foreach (Process theprocess in processlist)
+                    if (P.HasExited == false)
                     {
-                        if (theprocess.ProcessName == "java" && theprocess.SessionId > 0)
-                        {
-                            theprocess.Kill();
-                            consoleMessage("Kill process: " + theprocess.ProcessName + " | " + theprocess.Id.ToString() + " | " + theprocess.SessionId.ToString() + " | " + theprocess.ToString());
-                        }
+                        P.Kill();
                     }
                 }
+
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                consoleMessage(ex.Message);
             }
         }
 
@@ -160,92 +142,62 @@ namespace JenkinsAgentRun
             Close();
         }
 
-        private void startToolStripMenuItem_Click(object sender, EventArgs e)
+        private void saveConfigFile()
         {
-            try
-            {
-                if (File.Exists("readme.txt") == false)
-                {
-                    createReadme();
-                }
+            //  java -Dfile.encoding=UTF8 -jar agent.jar -jnlpUrl http://localhost:8080/computer/agent/slave-agent.jnlp -secret 0000000000000000000000000000000000000000000000000000000000000000 -workDir "C:\Hat\jenkins\workspace_proxy"
 
-                if (File.Exists("run-agent.bat") == false)
-                {
-                    consoleMessage("Файл run-agent.bat - отсутствует");
-                    createBatFile();
-                    return;
-                }
-
-                if (File.Exists("agent.jar") == false)
-                {
-                    consoleMessage("Файл agent.jar - отсутствует");
-                    return;
-                }
-
-                if (File.Exists("slave-agent.jnlp") == false)
-                {
-                    consoleMessage("Файл slave-agent.jnlp - отсутствует");
-                    return;
-                }
-
-                P = new Process();
-                P.StartInfo.FileName = "run-agent.bat";
-                P.StartInfo.Arguments = "/k";
-                P.StartInfo.RedirectStandardError = true;
-                P.StartInfo.RedirectStandardInput = true;
-                P.StartInfo.RedirectStandardOutput = true;
-                P.StartInfo.CreateNoWindow = true;
-                P.StartInfo.UseShellExecute = false;
-                P.ErrorDataReceived += P_ErrorDataReceived;
-                P.OutputDataReceived += P_OutputDataReceived;
-                P.Start();
-                P.BeginErrorReadLine();
-                P.BeginOutputReadLine();
-            }
-            catch (Exception ex)
-            {
-                consoleMessage(ex.Message);
-            }
-        }
-
-        private void stopToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                Process[] processlist = Process.GetProcesses();
-                foreach (Process theprocess in processlist)
-                {
-                    if (theprocess.ProcessName == "java" && theprocess.SessionId > 0)
-                    {
-                        theprocess.Kill();
-                        consoleMessage("Kill process: " + theprocess.ProcessName + " | " + theprocess.Id.ToString() + " | " + theprocess.SessionId.ToString() + " | " + theprocess.ToString());
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                consoleMessage(ex.Message);
-            }
-        }
-
-        private void createBatFile()
-        {
             try
             {
                 StreamWriter writer;
-                //    writer = new StreamWriter(filename, false, Encoding.Default);
-                writer = new StreamWriter("run-agent.bat", false, new UTF8Encoding(false));
+                writer = new StreamWriter("config.txt", false, new UTF8Encoding(false));
                 //    writer = new StreamWriter(filename, false, new UTF8Encoding(true));
                 //    writer = new StreamWriter(filename, false, Encoding.GetEncoding("Windows-1251"));
                 //    writer = new StreamWriter(filename, false, Encoding.Default);
-                writer.Write("java -Dfile.encoding=UTF8 -jar agent.jar -jnlpUrl http://localhost:8080/computer/agent/slave-agent.jnlp -secret 0000000000000000000000000000000000000000000000000000000000000000 -workDir \"C:\\Hat\\jenkins\\workspace_proxy\"");
+
+                string config = textBox1.Text + Environment.NewLine;
+                config += textBox2.Text + Environment.NewLine;
+                config += textBox3.Text + Environment.NewLine;
+                config += textBox4.Text + Environment.NewLine;
+                config += textBox5.Text + Environment.NewLine;
+                config += textBox6.Text;
+
+                writer.Write(config);
                 writer.Close();
-                consoleMessage("Создан файл run-agent.bat со значениями по умолчанию");
+                consoleMessage("Сохранён файл config.txt");
             }
             catch (Exception ex)
             {
                 consoleMessage(ex.Message);
             }
+        }
+
+        private void readConfigFile()
+        {
+            try
+            {
+                StreamReader reader;
+                reader = new StreamReader("config.txt", new UTF8Encoding(false));
+                //reader = new StreamReader(filename, new UTF8Encoding(true));
+                //reader = new StreamReader(filename, Encoding.GetEncoding("Windows-1251"));
+                //reader = new StreamReader(filename, Encoding.Default);
+
+                for (int i = 1; i <= 6; i++)
+                {
+                    if (i == 1) textBox1.Text = reader.ReadLine();
+                    if (i == 2) textBox2.Text = reader.ReadLine();
+                    if (i == 3) textBox3.Text = reader.ReadLine();
+                    if (i == 4) textBox4.Text = reader.ReadLine();
+                    if (i == 5) textBox5.Text = reader.ReadLine();
+                    if (i == 6) textBox6.Text = reader.ReadLine();
+                }
+
+                reader.Close();
+            }
+            catch (Exception ex)
+            {
+                consoleMessage(ex.Message);
+            }
+
         }
 
         private void createReadme()
@@ -303,6 +255,85 @@ namespace JenkinsAgentRun
             {
                 consoleMessage(ex.Message);
             }
+        }
+
+        private void запуститьАгентаToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (File.Exists("config.txt") == false)
+                {
+                    consoleMessage("config.txt - отсутствует");
+                    saveConfigFile();
+                    return;
+                }
+                else
+                {
+                    readConfigFile();
+                }
+
+                if (File.Exists("agent.jar") == false)
+                {
+                    consoleMessage("Файл agent.jar - отсутствует");
+                    return;
+                }
+
+                if (File.Exists("slave-agent.jnlp") == false)
+                {
+                    consoleMessage("Файл slave-agent.jnlp - отсутствует");
+                    return;
+                }
+
+                consoleMessage("Запуск агента");
+                string arguments = textBox2.Text + " -jar " + textBox3.Text + " -jnlpUrl " + textBox4.Text + " -secret " + textBox5.Text + " -workDir \"" + textBox6.Text + "\"";
+                toolStripStatusLabel1.Text = arguments;
+                consoleMessage("Команда для закуска: " + textBox1.Text + " " + arguments);
+
+                P = new Process();
+                P.StartInfo.FileName = textBox1.Text;
+                P.StartInfo.Arguments = arguments;
+                //P.StartInfo.FileName = "java";
+                //P.StartInfo.Arguments = @"-Dfile.encoding=UTF8 -jar agent.jar -jnlpUrl http://192.168.201.1:8081/computer/agent/slave-agent.jnlp -secret 61394e3055fcf3262be9edb83cf65358e0dc08519ea53880f6c41a5d3b666139 -workDir ""C:\Autotests\test.mgts.git\jenkins\workspace_proxy""";
+                P.StartInfo.RedirectStandardError = true;
+                P.StartInfo.RedirectStandardInput = true;
+                P.StartInfo.RedirectStandardOutput = true;
+                P.StartInfo.CreateNoWindow = true;
+                P.StartInfo.UseShellExecute = false;
+                P.ErrorDataReceived += P_ErrorDataReceived;
+                P.OutputDataReceived += P_OutputDataReceived;
+                P.Start();
+                P.BeginErrorReadLine();
+                P.BeginOutputReadLine();
+            }
+            catch (Exception ex)
+            {
+                consoleMessage(ex.Message);
+            }
+        }
+
+        private void остановитьАгентаToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                consoleMessage("Остановка агента");
+
+                if (P != null)
+                {
+                    if (P.HasExited == false)
+                    {
+                        P.Kill();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                consoleMessage(ex.Message);
+            }
+        }
+
+        private void сохранитьНастройкиToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            saveConfigFile();
         }
     }
 }
