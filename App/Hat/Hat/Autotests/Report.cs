@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security.Permissions;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Shapes;
@@ -229,7 +230,7 @@ header { display: block; position: fixed; top: 0px; background-color: #F9F7FF; b
 section { display: block; position: relative; min-width: 1400px; max-width: 1400px; }
 table { margin: 0px; min-width: 1400px; max-width: 1400px; }
 thead { background-color: #4d545d; color: #FFF; }
-tr:hover .content-hidden{  background: #EEEEEE; }
+tr:hover .content-hidden{  background: #EFF7FF; }
 .content-hidden { overflow: hidden; }
 .content-scroll { overflow: scroll; }
 .table { position: relative; top: 180px; z-index: 1; overflow: hidden; }
@@ -540,7 +541,7 @@ header { display: block; position: fixed; top: 0px; background-color: #F9F7FF; b
 section { display: block; position: relative; min-width: 1400px; max-width: 1400px; }
 table { margin: 0px; min-width: 1400px; max-width: 1400px; }
 thead { background-color: #4d545d; color: #FFF; }
-tr:hover .content-hidden{  background: #EEEEEE; }
+tr:hover .content-hidden{  background: #EFF7FF; }
 .table { position: relative; top: 380px; z-index: 1; overflow: hidden; }
 .table-status { padding: 10px; min-width: 60px; max-width: 60px; }
 .table-description { padding: 10px; min-width: 350px; max-width: 350px; }

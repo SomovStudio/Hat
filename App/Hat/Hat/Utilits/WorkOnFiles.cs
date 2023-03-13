@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using HatFramework;
 
 namespace Hat
 {
@@ -128,7 +129,9 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                Config.browserForm.ConsoleMsgError(ex.ToString());
+                //Config.browserForm.ConsoleMsgError(ex.ToString());
+                Config.browserForm.ConsoleMsg("Сохранение файла: " + filename + " - неудалось сохранить из за ошибки: " + ex.Message);
+                Config.browserForm.ReportAddMessage(Tester.WARNING, "Сохранение файла: " + filename, "Неудалось сохранить файл из за ошибки: " + ex.Message);
             }
         }
 
