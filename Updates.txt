@@ -2,7 +2,9 @@
 
 Список внесённых изменений:
 
-- Добавлена остановка загрузки страницы в методах GoToUrlAsync, GoToUrlBaseAuthAsync, BrowserGoBackAsync, BrowserGoForwardAsync, BrowserPageReloadAsync
+- Добавлена остановка загрузки страницы в методах GoToUrlAsync, GoToUrlBaseAuthAsync, 
+- Добавлена остановка загрузки страницы в методах BrowserGoBackAsync, BrowserGoForwardAsync, BrowserPageReloadAsync
+- 
 
 -----------------------------
 
