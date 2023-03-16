@@ -6,6 +6,7 @@
 - Добавлена остановка загрузки страницы в методах BrowserGoBackAsync, BrowserGoForwardAsync, BrowserPageReloadAsync
 - Добавлены методы FileReadAsync, FileWriteAsync, FileDownloadAsync, FileGetHashAsync
 
+
 public const string DEFAULT = "DEFAULT";            // кодировка для файлов (по умолчанию)
 public const string UTF8 = "UTF-8";                 // кодировка для файлов UTF-8
 public const string UTF8BOM = "UTF-8 BOM";          // кодировка для файлов UTF-8 BOM
