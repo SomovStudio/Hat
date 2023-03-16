@@ -4151,7 +4151,7 @@ namespace HatFrameworkDev
                 while (webClient.IsBusy)
                 {
                     waiting++;
-                    await this.WaitAsync(2);
+                    await this.WaitAsync(1);
                     if (this.DefineTestStop(step) == true) break;
                     if (waiting == waitingSec) break;
                 }
@@ -4179,7 +4179,37 @@ namespace HatFrameworkDev
             }
         }
 
+        public async Task<string> FileGetHashMD5Async(string filename)
+        {
+            int step = SendMessageDebug($"FileGetHashMD5Async(\"{filename}\")", $"FileGetHashMD5Async(\"{filename}\")", PROCESS, "Получение Hash кода файла", "Getting the Hash code of the file", IMAGE_STATUS_PROCESS);
+            if (DefineTestStop(step) == true) return "";
 
+            try
+            {
+                using (var md5 = System.Security.Cryptography.MD5.Create())
+                {
+                    using (var stream = File.OpenRead(filename))
+                    {
+                        var hash = md5.ComputeHash(stream);
+                        string result = BitConverter.ToString(hash).Replace("-", "");
+                        EditMessageDebug(step, null, null, PASSED, "Получен Hash код: " + result, "Got the hash code: " + result, IMAGE_STATUS_PASSED);
+                        return result;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                EditMessageDebug(step, null, null, Tester.FAILED,
+                     "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(),
+                     "Error: " + ex.Message + Environment.NewLine + Environment.NewLine + "Full description of the error: " + ex.ToString(),
+                     Tester.IMAGE_STATUS_FAILED);
+                TestStopAsync();
+                ConsoleMsgError(ex.ToString());
+            }
+
+            EditMessageDebug(step, null, null, WARNING, "Не удалось получить Hash код", "Failed to get Hash code", IMAGE_STATUS_WARNING);
+            return "";
+        }
 
 
 
