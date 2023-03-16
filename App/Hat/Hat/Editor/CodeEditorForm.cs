@@ -2973,10 +2973,54 @@ await tester.SetStyleInElementAsync(Tester.BY_CSS, ""#auth"", ""width: 250px; co
 \cf0\f0\lang1033 await tester.SetStyleInElementByTagAsync(""h2"", 0, ""background-color: #123456;"");\par
 }",
 
-@"",
-@"",
-@"",
-@"",
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 DEFAULT\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ea\'ee\'ed\'f1\'f2\'e0\'ed\'f2\'e0 \'ee\'e1\'ee\'e7\'ed\'e0\'f7\'e0\'e5\'f2 \'f2\'e8\'ef \'ea\'ee\'e4\'e8\'f0\'ee\'e2\'ea\'e8 \'e4\'eb\'ff \'f4\'e0\'e9\'eb\'e0\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : DEFAULT = ""DEFAULT""\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0\f0\lang1033 string text = await tester.FileReadAsync(Tester.\f1\lang1049 DEFAULT\f0\lang1033 , ""C:\\\\Hat\\\\file.txt"");\par
+await tester.FileWriteAsync(text, Tester.\f1\lang1049 DEFAULT\f0\lang1033 , ""C:\\\\Hat\\\\file_copy.txt"");\par
+}",
+
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 UTF8\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ea\'ee\'ed\'f1\'f2\'e0\'ed\'f2\'e0 \'ee\'e1\'ee\'e7\'ed\'e0\'f7\'e0\'e5\'f2 \'f2\'e8\'ef \'ea\'ee\'e4\'e8\'f0\'ee\'e2\'ea\'e8 \'e4\'eb\'ff \'f4\'e0\'e9\'eb\'e0\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : UTF8 = ""UTF-8""\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0\f0\lang1033 string text = await tester.FileReadAsync(Tester.\f1\lang1049 UTF8\f0\lang1033 , ""C:\\\\Hat\\\\file.txt"");\par
+await tester.FileWriteAsync(text, Tester.\f1\lang1049 UTF8\f0\lang1033 , ""C:\\\\Hat\\\\file_copy.txt"");\par
+}",
+
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 UTF8BOM\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ea\'ee\'ed\'f1\'f2\'e0\'ed\'f2\'e0 \'ee\'e1\'ee\'e7\'ed\'e0\'f7\'e0\'e5\'f2 \'f2\'e8\'ef \'ea\'ee\'e4\'e8\'f0\'ee\'e2\'ea\'e8 \'e4\'eb\'ff \'f4\'e0\'e9\'eb\'e0\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : UTF8BOM = ""UTF-8 BOM""\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0\f0\lang1033 string text = await tester.FileReadAsync(Tester.\f1\lang1049 UTF8BOM\f0\lang1033 , ""C:\\\\Hat\\\\file.txt"");\par
+await tester.FileWriteAsync(text, Tester.\f1\lang1049 UTF8BOM\f0\lang1033 , ""C:\\\\Hat\\\\file_copy.txt"");\par
+}",
+
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 WINDOWS1251\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ea\'ee\'ed\'f1\'f2\'e0\'ed\'f2\'e0 \'ee\'e1\'ee\'e7\'ed\'e0\'f7\'e0\'e5\'f2 \'f2\'e8\'ef \'ea\'ee\'e4\'e8\'f0\'ee\'e2\'ea\'e8 \'e4\'eb\'ff \'f4\'e0\'e9\'eb\'e0\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : WINDOWS1251 = ""WINDOWS-1251""\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0\f0\lang1033 string text = await tester.FileReadAsync(Tester.\f1\lang1049 WINDOWS1251\f0\lang1033 , ""C:\\\\Hat\\\\file.txt"");\par
+await tester.FileWriteAsync(text, Tester.\f1\lang1049 WINDOWS1251\f0\lang1033 , ""C:\\\\Hat\\\\file_copy.txt"");\par
+}",
+
 @"",
 @"",
 @"",
@@ -3313,8 +3357,8 @@ await tester.SetStyleInElementAsync(Tester.BY_CSS, ""#auth"", ""width: 250px; co
             data.Add(new CompletionData("TimerStart", "TimerStart()"));
             data.Add(new CompletionData("TimerStop", "TimerStop(DateTime start)"));
             data.Add(new CompletionData("Type", "string Type { get; set; }"));
-            data.Add(new CompletionData("UTF8", "UTF8"));
-            data.Add(new CompletionData("UTF8BOM", "UTF8BOM"));
+            data.Add(new CompletionData("UTF8", "UTF-8"));
+            data.Add(new CompletionData("UTF8BOM", "UTF-8 BOM"));
             data.Add(new CompletionData("WaitAsync", "WaitAsync(int sec)"));
             data.Add(new CompletionData("WaitElementInDomAsync", "WaitElementInDomAsync(string by, string locator, int sec)"));
             data.Add(new CompletionData("WaitElementNotDomAsync", "WaitElementNotDomAsync(string by, string locator, int sec)"));
@@ -3331,7 +3375,7 @@ await tester.SetStyleInElementAsync(Tester.BY_CSS, ""#auth"", ""width: 250px; co
             data.Add(new CompletionData("WaitVisibleElementByNameAsync", "WaitVisibleElementByNameAsync(string name, int index, int sec)"));
             data.Add(new CompletionData("WaitVisibleElementByTagAsync", "WaitVisibleElementByTagAsync(string tag, int index, int sec)"));
             data.Add(new CompletionData("WARNING", "WARNING"));
-            data.Add(new CompletionData("WINDOWS1251", "WINDOWS1251"));
+            data.Add(new CompletionData("WINDOWS1251", "WINDOWS-1251"));
             completionWindow.Width = 250;
             completionWindow.Show();
             completionWindow.Closed += delegate {
