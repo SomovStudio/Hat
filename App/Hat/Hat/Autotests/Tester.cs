@@ -13,7 +13,6 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Newtonsoft.Json;
 using HatFramework;
-using static System.Windows.Forms.LinkLabel;
 
 namespace HatFrameworkDev
 {
