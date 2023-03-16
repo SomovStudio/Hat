@@ -32,6 +32,11 @@ namespace HatFrameworkDev
         public const string BY_CSS = "BY_CSS";     // тип локатора css
         public const string BY_XPATH = "BY_XPATH"; // тип локатора xpath
 
+        public const string DEFAULT = "DEFAULT";            // кодировка для файлов (по умолчанию)
+        public const string UTF8 = "UTF-8";                 // кодировка для файлов UTF-8
+        public const string UTF8BOM = "UTF-8 BOM";          // кодировка для файлов UTF-8 BOM
+        public const string WINDOWS1251 = "WINDOWS-1251";   // кодировка для файлов WINDOWS-1251
+
         public Form BrowserWindow;      // объект: окно приложения
         public WebView2 BrowserView;    // объект: браузер
         public bool Debug = false;      // флаг: режим отладки при выполнении JS скриптов
@@ -4028,6 +4033,108 @@ namespace HatFrameworkDev
             script += "}());";
             await execute(script, step, "Стиль введен в элемент", "The style is entered in the element", $"Не удалось найти или ввести текст в элемент по Tag: {tag} (Index: {index})", $"Could not find or enter text in the element by Tag: {tag} (Index: {index})");
         }
+
+        /*
+         * Методы для работы с файлами ===========================================================
+         */
+
+        public async Task<string> FileReadAsync(string encoding, string filename)
+        {
+            int step = SendMessageDebug($"FileReadAsync(\"{encoding}\"', \"{filename}\")", $"FileReadAsync(\"{encoding}\"', \"{filename}\")", PROCESS, "Чтение файла", "Reading a file", IMAGE_STATUS_PROCESS);
+            if (DefineTestStop(step) == true) return "";
+
+            string content = "";
+            try
+            {
+                StreamReader reader;
+                if (encoding == Tester.DEFAULT)
+                {
+                    reader = new StreamReader(filename, Encoding.Default);
+                }
+                else if (encoding == Tester.UTF8)
+                {
+                    reader = new StreamReader(filename, new UTF8Encoding(false));
+                }
+                else if (encoding == Tester.UTF8BOM)
+                {
+                    reader = new StreamReader(filename, new UTF8Encoding(true));
+                }
+                else if (encoding == Tester.WINDOWS1251)
+                {
+                    reader = new StreamReader(filename, Encoding.GetEncoding("Windows-1251"));
+                }
+                else
+                {
+                    reader = new StreamReader(filename, Encoding.Default);
+                }
+                content = await reader.ReadToEndAsync();
+                reader.Close();
+            }
+            catch (Exception ex)
+            {
+                EditMessageDebug(step, null, null, Tester.FAILED,
+                     "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(),
+                     "Error: " + ex.Message + Environment.NewLine + Environment.NewLine + "Full description of the error: " + ex.ToString(),
+                     Tester.IMAGE_STATUS_FAILED);
+                TestStopAsync();
+                ConsoleMsgError(ex.ToString());
+            }
+
+            if (content == "") EditMessageDebug(step, null, null, WARNING, "Не удалось прочитать файл (или файл пустой)", "Could not read the file (or the file is empty)", IMAGE_STATUS_WARNING);
+            else EditMessageDebug(step, null, null, PASSED, "Файл прочитан", "The file has been read", IMAGE_STATUS_PASSED);
+
+            return content;
+        }
+
+        public async Task FileWriteAsync(string content, string encoding, string filename)
+        {
+            string contentShort = "";
+            if (content.Length > 10) contentShort = content.Remove(10, content.Length - 1);
+            else contentShort = content;
+
+            int step = SendMessageDebug($"FileWriteAsync(\"{contentShort}...\", \"{encoding}\"', \"{filename}\")", $"FileWriteAsync(\"{contentShort}...\", \"{encoding}\"', \"{filename}\")", PROCESS, "Сохранение файла", "Saving a file", IMAGE_STATUS_PROCESS);
+            if (DefineTestStop(step) == true) return;
+
+            try
+            {
+                StreamWriter writer;
+                if (encoding == Tester.DEFAULT)
+                {
+                    writer = new StreamWriter(filename, false, Encoding.Default);
+                }
+                else if (encoding == Tester.UTF8)
+                {
+                    writer = new StreamWriter(filename, false, new UTF8Encoding(false));
+                }
+                else if (encoding == Tester.UTF8BOM)
+                {
+                    writer = new StreamWriter(filename, false, new UTF8Encoding(true));
+                }
+                else if (encoding == Tester.WINDOWS1251)
+                {
+                    writer = new StreamWriter(filename, false, Encoding.GetEncoding("Windows-1251"));
+                }
+                else
+                {
+                    writer = new StreamWriter(filename, false, Encoding.Default);
+                }
+                await writer.WriteAsync(content);
+                writer.Close();
+
+                EditMessageDebug(step, null, null, PASSED, "Файл сохранён", "File saved", IMAGE_STATUS_PASSED);
+            }
+            catch (Exception ex)
+            {
+                EditMessageDebug(step, null, null, Tester.FAILED,
+                     "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(),
+                     "Error: " + ex.Message + Environment.NewLine + Environment.NewLine + "Full description of the error: " + ex.ToString(),
+                     Tester.IMAGE_STATUS_FAILED);
+                TestStopAsync();
+                ConsoleMsgError(ex.ToString());
+            }
+        }
+
+
 
 
 
