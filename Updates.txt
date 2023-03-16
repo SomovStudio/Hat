@@ -1,23 +1,10 @@
-Обновление браузера Hat 1.2.2 (01.04.2023)
+Обновление браузера Hat 1.2.2 (16.03.2023)
 
 Список внесённых изменений:
 
 - Добавлена остановка загрузки страницы в методах GoToUrlAsync, GoToUrlBaseAuthAsync, 
 - Добавлена остановка загрузки страницы в методах BrowserGoBackAsync, BrowserGoForwardAsync, BrowserPageReloadAsync
 - Добавлены методы FileReadAsync, FileWriteAsync, FileDownloadAsync, FileGetHashMD5Async
-
-
-public const string DEFAULT = "DEFAULT";            // кодировка для файлов (по умолчанию)
-public const string UTF8 = "UTF-8";                 // кодировка для файлов UTF-8
-public const string UTF8BOM = "UTF-8 BOM";          // кодировка для файлов UTF-8 BOM
-public const string WINDOWS1251 = "WINDOWS-1251";   // кодировка для файлов WINDOWS-1251
-
-public async Task<string> FileReadAsync(string encoding, string filename)
-public async Task FileWriteAsync(string content, string encoding, string filename)
-public async Task FileDownloadAsync(string fileURL, string filename, int waitingSec = 60)
-public async Task<string> FileGetHashMD5Async(string filename)
-
-
 - Исправлены ошибки при формировании отчетов
 - Обновлен плагин Newtonsoft.Json до версии 13.0.3
 
