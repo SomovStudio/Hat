@@ -4090,11 +4090,7 @@ namespace HatFrameworkDev
 
         public async Task FileWriteAsync(string content, string encoding, string filename)
         {
-            string contentShort = "";
-            if (content.Length > 10) contentShort = content.Remove(10, content.Length - 1);
-            else contentShort = content;
-
-            int step = SendMessageDebug($"FileWriteAsync(\"{contentShort}...\", \"{encoding}\"', \"{filename}\")", $"FileWriteAsync(\"{contentShort}...\", \"{encoding}\"', \"{filename}\")", PROCESS, "Сохранение файла", "Saving a file", IMAGE_STATUS_PROCESS);
+            int step = SendMessageDebug($"FileWriteAsync(\"...\", \"{encoding}\"', \"{filename}\")", $"FileWriteAsync(\"...\", \"{encoding}\"', \"{filename}\")", PROCESS, "Сохранение файла", "Saving a file", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return;
 
             try
@@ -4136,18 +4132,17 @@ namespace HatFrameworkDev
             }
         }
 
-        public async Task FileDownloadAsync(string fileURL, string folder, int waitingSec = 60)
+        public async Task FileDownloadAsync(string fileURL, string filename, int waitingSec = 60)
         {
-            int step = SendMessageDebug($"FileDownloadAsync(\"{fileURL}\"', \"{folder}\", {waitingSec.ToString()})", $"FileDownloadAsync(\"{fileURL}\"', \"{folder}\", {waitingSec.ToString()})", PROCESS, "Скачивание файла", "Downloading a file", IMAGE_STATUS_PROCESS);
+            int step = SendMessageDebug($"FileDownloadAsync(\"{fileURL}\"', \"{filename}\", {waitingSec.ToString()})", $"FileDownloadAsync(\"{fileURL}\"', \"{filename}\", {waitingSec.ToString()})", PROCESS, "Скачивание файла", "Downloading a file", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return;
 
             try
             {
                 int waiting = 0;
-                string file = Path.GetFileName(fileURL);
-
                 WebClient webClient = new WebClient();
-                webClient.DownloadFileAsync(new Uri(fileURL), folder);
+
+                webClient.DownloadFileAsync(new Uri(fileURL), filename);
                 while (webClient.IsBusy)
                 {
                     waiting++;
@@ -4158,13 +4153,13 @@ namespace HatFrameworkDev
 
                 if (DefineTestStop(step) == true) return;
 
-                if (File.Exists(folder + file) == true)
+                if (File.Exists(filename) == true)
                 {
                     EditMessageDebug(step, null, null, PASSED, "Скачивание файла - завершено", "File download - completed", IMAGE_STATUS_PASSED);
                 }
                 else
                 {
-                    EditMessageDebug(step, null, null, FAILED, "Неудалось скачать файл " + file, "Failed to download file" + file, IMAGE_STATUS_FAILED);
+                    EditMessageDebug(step, null, null, FAILED, "Неудалось скачать файл", "Failed to download file", IMAGE_STATUS_FAILED);
                     TestStopAsync();
                 }
             }
