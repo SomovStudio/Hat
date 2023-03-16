@@ -6,6 +6,7 @@ using System.Linq;
 using System.Security.Permissions;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using System.Windows.Shapes;
 
 namespace Hat
@@ -25,6 +26,11 @@ namespace Hat
         public const string SUCCESS = "SUCCESS";
         public const string FAILURE = "FAILURE";
         public const string AT_WORK = "AT_WORK";
+
+        public const string DEFAULT = "DEFAULT";
+        public const string UTF_8 = "UTF-8";
+        public const string UTF_8_BOM = "UTF-8 BOM";
+        public const string WINDOWS_1251 = "WINDOWS-1251";
 
         public static string Description;
         public static string Date;
@@ -55,13 +61,23 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                Config.browserForm.ConsoleMsgError(ex.ToString());
+                Report.ShowErrorInSystemConsole(ex.ToString());
             }
         }
         
         public static void SetDescription(string text)
         {
             Description = text;
+        }
+
+        public static void ShowErrorInSystemConsole(string message)
+        {
+            Config.browserForm.SystemConsoleMsg("- - - - - - - - - - - - - - - - - - - - - - - - - - - -", default, default, default, true);
+            if (Config.languageEngConsole == false) Config.browserForm.SystemConsoleMsg("Произошла ошибка:", default, ConsoleColor.Black, ConsoleColor.Red, true);
+            else Config.browserForm.SystemConsoleMsg("An error has occurred:", default, ConsoleColor.Black, ConsoleColor.Red, true);
+            Config.browserForm.SystemConsoleMsg(message, default, default, default, true);
+            Config.browserForm.SystemConsoleMsg("- - - - - - - - - - - - - - - - - - - - - - - - - - - -", default, default, default, true);
+            Config.browserForm.SystemConsoleMsg("", default, default, default, true);
         }
 
         public static void AddStep(string status, string action, string comment)
@@ -73,7 +89,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                Config.browserForm.ConsoleMsgError(ex.ToString());
+                Report.ShowErrorInSystemConsole(ex.ToString());
             }
         }
 
@@ -92,10 +108,9 @@ namespace Hat
                 }
                 if (Directory.Exists(Report.FolderName))
                 {
-                    WorkOnFiles writer = new WorkOnFiles();
                     if (!File.Exists(Report.FolderName + Report.FileName))
                     {
-                        writer.writeFile(GetHead(init) + GetBody() + GetFooter(), WorkOnFiles.UTF_8_BOM, Report.FolderName + Report.FileName);
+                        Report.writeFile(GetHead(init) + GetBody() + GetFooter(), Report.UTF_8_BOM, Report.FolderName + Report.FileName);
                         if (File.Exists(Report.FolderName + Report.FileName))
                         {
                             Config.browserForm.ConsoleMsg($"Создан файл отчета {Report.FileName}");
@@ -113,7 +128,7 @@ namespace Hat
                     else
                     {
                         File.Delete(Report.FolderName + Report.FileName);
-                        writer.writeFile(GetHead(init) + GetBody() + GetFooter(), WorkOnFiles.UTF_8_BOM, Report.FolderName + Report.FileName);
+                        Report.writeFile(GetHead(init) + GetBody() + GetFooter(), Report.UTF_8_BOM, Report.FolderName + Report.FileName);
                         if (File.Exists(Report.FolderName + Report.FileName))
                         {
                             Config.browserForm.ConsoleMsg($"Обновлен файл отчета {Report.FileName}");
@@ -137,7 +152,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                Config.browserForm.ConsoleMsgError(ex.ToString());
+                Report.ShowErrorInSystemConsole(ex.ToString());
             }
 
             Report.SaveResultReport();
@@ -185,7 +200,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                Config.browserForm.ConsoleMsgError(ex.ToString());
+                Report.ShowErrorInSystemConsole(ex.ToString());
             }
         }
 
@@ -415,12 +430,11 @@ img { min-width: 700px; max-width: 700px; }
                     double amountFailureTests = 0;
                     double amountWorkTests = 0;
 
-                    WorkOnFiles workFiles = new WorkOnFiles();
                     List<string> lines = new List<string>();
 
                     foreach (string filename in Directory.GetFiles(Report.FolderName))
                     {
-                        
+
                         /* 0    <!--
                          * 1    FAILURE
                          * 2    ExampleTest1.cs
@@ -429,8 +443,10 @@ img { min-width: 700px; max-width: 700px; }
                          * 5    -->
                          */
 
+                        if (File.Exists(filename) == false) continue;
+
                         lines = new List<string>();
-                        lines = workFiles.readFileLines(WorkOnFiles.UTF_8_BOM, filename, 6);
+                        lines = Report.readFileLines(Report.UTF_8_BOM, filename, 6);
                         if (lines.Count > 0)
                         {
                             //Config.browserForm.ConsoleMsg($"{filename} | {lines[0]} | {lines[1]} | {lines[2]} | {lines[3]} | {lines[4]} | {lines[5]}");
@@ -476,7 +492,7 @@ img { min-width: 700px; max-width: 700px; }
                     //Config.browserForm.ConsoleMsg($"{amountTests} | {amountSuccessTests} | {amountFailureTests} | {amountWorkTests}");
                     //Config.browserForm.ConsoleMsg($"{successRate} | {failureRate} | {workRate}");
 
-                    workFiles.writeFile(GetResultHead() + GetResultBody(tests, (int)successRate, (int)failureRate, (int)workRate, (int)amountSuccessTests, (int)amountFailureTests, (int)amountWorkTests, (int)amountTests) + GetResultFooter(), WorkOnFiles.UTF_8_BOM, Report.FolderName + "index.html");
+                    Report.writeFile(GetResultHead() + GetResultBody(tests, (int)successRate, (int)failureRate, (int)workRate, (int)amountSuccessTests, (int)amountFailureTests, (int)amountWorkTests, (int)amountTests) + GetResultFooter(), Report.UTF_8_BOM, Report.FolderName + "index.html");
                     if (File.Exists(Report.FolderName + "index.html"))
                     {
                         Config.browserForm.ConsoleMsg("Создан отчет с результатами всех тестов");
@@ -500,7 +516,7 @@ img { min-width: 700px; max-width: 700px; }
             }
             catch (Exception ex)
             {
-                Config.browserForm.ConsoleMsgError(ex.ToString());
+                Report.ShowErrorInSystemConsole(ex.ToString());
             }
         }
 
@@ -768,6 +784,120 @@ ZTptb2RpZnkAMjAyMy0wMi0yMVQxMDoxMzo0MSswMDowMN/S9FIAAAAASUVORK5CYII="" />
             return content;
         }
 
+        public static string readFile(string encoding, string filename)
+        {
+            string content = "";
+            try
+            {
+                StreamReader reader;
+                if (encoding == DEFAULT)
+                {
+                    reader = new StreamReader(filename, Encoding.Default);
+                }
+                else if (encoding == UTF_8)
+                {
+                    reader = new StreamReader(filename, new UTF8Encoding(false));
+                }
+                else if (encoding == UTF_8_BOM)
+                {
+                    reader = new StreamReader(filename, new UTF8Encoding(true));
+                }
+                else if (encoding == WINDOWS_1251)
+                {
+                    reader = new StreamReader(filename, Encoding.GetEncoding("Windows-1251"));
+                }
+                else
+                {
+                    reader = new StreamReader(filename, Encoding.Default);
+                }
+                content = reader.ReadToEnd();
+                reader.Close();
+            }
+            catch (Exception ex)
+            {
+                Config.browserForm.ConsoleMsg("Чтение файла: " + filename + " - неудалось прочитать из за ошибки: " + ex.Message);
+                AddStep(WARNING, "Чтение файла: " + filename, "Неудалось прочитать файл из за ошибки: " + ex.Message);
+            }
+            return content;
+        }
+
+        public static List<string> readFileLines(string encoding, string filename, int count)
+        {
+            List<string> lines = new List<string>();
+            try
+            {
+                StreamReader reader;
+                if (encoding == DEFAULT)
+                {
+                    reader = new StreamReader(filename, Encoding.Default);
+                }
+                else if (encoding == UTF_8)
+                {
+                    reader = new StreamReader(filename, new UTF8Encoding(false));
+                }
+                else if (encoding == UTF_8_BOM)
+                {
+                    reader = new StreamReader(filename, new UTF8Encoding(true));
+                }
+                else if (encoding == WINDOWS_1251)
+                {
+                    reader = new StreamReader(filename, Encoding.GetEncoding("Windows-1251"));
+                }
+                else
+                {
+                    reader = new StreamReader(filename, Encoding.Default);
+                }
+
+                for (int i = 0; i < count; i++)
+                {
+                    lines.Add(reader.ReadLine());
+                }
+
+                reader.Close();
+            }
+            catch (Exception ex)
+            {
+                Config.browserForm.ConsoleMsg("Чтение файла: " + filename + " - неудалось прочитать из за ошибки: " + ex.Message);
+                AddStep(WARNING, "Чтение файла: " + filename, "Неудалось прочитать файл из за ошибки: " + ex.Message);
+            }
+            return lines;
+        }
+
+
+        public static void writeFile(string content, string encoding, string filename)
+        {
+            try
+            {
+                StreamWriter writer;
+                if (encoding == DEFAULT)
+                {
+                    writer = new StreamWriter(filename, false, Encoding.Default);
+                }
+                else if (encoding == UTF_8)
+                {
+                    writer = new StreamWriter(filename, false, new UTF8Encoding(false));
+                }
+                else if (encoding == UTF_8_BOM)
+                {
+                    writer = new StreamWriter(filename, false, new UTF8Encoding(true));
+                }
+                else if (encoding == WINDOWS_1251)
+                {
+                    writer = new StreamWriter(filename, false, Encoding.GetEncoding("Windows-1251"));
+                }
+                else
+                {
+                    writer = new StreamWriter(filename, false, Encoding.Default);
+                }
+                writer.Write(content);
+                writer.Close();
+            }
+            catch (Exception ex)
+            {
+                Config.browserForm.ConsoleMsg("Сохранение файла: " + filename + " - неудалось сохранить из за ошибки: " + ex.Message);
+                AddStep(WARNING, "Сохранение файла: " + filename, "Неудалось сохранить файл из за ошибки: " + ex.Message);
+            }
+        }
 
     }
 }
