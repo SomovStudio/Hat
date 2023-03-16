@@ -1833,6 +1833,7 @@
             treeNode188.Tag = "Tester";
             treeNode188.Text = "FileWriteAsync";
             treeNode189.Name = "Узел4";
+            treeNode189.Tag = "Tester";
             treeNode189.Text = "Методы для работы с файлами";
             treeNode190.Name = "Узел0";
             treeNode190.Tag = "Tester";
