@@ -3179,6 +3179,7 @@ await tester.SetStyleInElementAsync(Tester.BY_CSS, ""#auth"", ""width: 250px; co
             data.Add(new CompletionData("COMPLETED", "COMPLETED"));
             data.Add(new CompletionData("ConsoleMsg", "ConsoleMsg(string message)"));
             data.Add(new CompletionData("ConsoleMsgError", "ConsoleMsgError(string message)"));
+            data.Add(new CompletionData("DEFAULT", "DEFAULT"));
             data.Add(new CompletionData("DefineTestStop", "DefineTestStop(int stepIndex)"));
             data.Add(new CompletionData("Description", "Description(string text)"));
             data.Add(new CompletionData("EditMessage", "EditMessage(int index, string action, string status, string comment, int image)"));
@@ -3195,6 +3196,10 @@ await tester.SetStyleInElementAsync(Tester.BY_CSS, ""#auth"", ""width: 250px; co
             data.Add(new CompletionData("FindVisibleElementByIdAsync", "FindVisibleElementByIdAsync(string id, int sec)"));
             data.Add(new CompletionData("FindVisibleElementByNameAsync", "FindVisibleElementByNameAsync(string name, int index, int sec)"));
             data.Add(new CompletionData("FindVisibleElementByTagAsync", "FindVisibleElementByTagAsync(string tag, int index, int sec)"));
+            data.Add(new CompletionData("FileDownloadAsync", "FileDownloadAsync(string fileURL, string filename, int waitingSec = 60)"));
+            data.Add(new CompletionData("FileGetHashMD5Async", "FileGetHashMD5Async(string filename)"));
+            data.Add(new CompletionData("FileReadAsync", "FileReadAsync(string encoding, string filename)"));
+            data.Add(new CompletionData("FileWriteAsync", "FileWriteAsync(string content, string encoding, string filename)"));
             data.Add(new CompletionData("GetAttributeAsync", "GetAttributeAsync(string name)"));
             data.Add(new CompletionData("GetAttributeFromElementAsync", "GetAttributeFromElementAsync(string by, string locator, string attribute)"));
             data.Add(new CompletionData("GetAttributeFromElementByClassAsync", "GetAttributeFromElementByClassAsync(string _class, int index, string attribute)"));
@@ -3308,6 +3313,8 @@ await tester.SetStyleInElementAsync(Tester.BY_CSS, ""#auth"", ""width: 250px; co
             data.Add(new CompletionData("TimerStart", "TimerStart()"));
             data.Add(new CompletionData("TimerStop", "TimerStop(DateTime start)"));
             data.Add(new CompletionData("Type", "string Type { get; set; }"));
+            data.Add(new CompletionData("UTF8", "UTF8"));
+            data.Add(new CompletionData("UTF8BOM", "UTF8BOM"));
             data.Add(new CompletionData("WaitAsync", "WaitAsync(int sec)"));
             data.Add(new CompletionData("WaitElementInDomAsync", "WaitElementInDomAsync(string by, string locator, int sec)"));
             data.Add(new CompletionData("WaitElementNotDomAsync", "WaitElementNotDomAsync(string by, string locator, int sec)"));
@@ -3324,6 +3331,7 @@ await tester.SetStyleInElementAsync(Tester.BY_CSS, ""#auth"", ""width: 250px; co
             data.Add(new CompletionData("WaitVisibleElementByNameAsync", "WaitVisibleElementByNameAsync(string name, int index, int sec)"));
             data.Add(new CompletionData("WaitVisibleElementByTagAsync", "WaitVisibleElementByTagAsync(string tag, int index, int sec)"));
             data.Add(new CompletionData("WARNING", "WARNING"));
+            data.Add(new CompletionData("WINDOWS1251", "WINDOWS1251"));
             completionWindow.Width = 250;
             completionWindow.Show();
             completionWindow.Closed += delegate {
@@ -3881,12 +3889,23 @@ await tester.SetStyleInElementAsync(Tester.BY_CSS, ""#auth"", ""width: 250px; co
                     if (value == "SetStyleInElementByNameAsync" && tag == "Tester") richTextBox1.Rtf = handbook[214];
                     if (value == "SetStyleInElementByTagAsync" && tag == "Tester") richTextBox1.Rtf = handbook[215];
 
+                    if (value == "DEFAULT" && tag == "Tester") richTextBox1.Rtf = handbook[216];
+                    if (value == "UTF8" && tag == "Tester") richTextBox1.Rtf = handbook[217];
+                    if (value == "UTF8BOM" && tag == "Tester") richTextBox1.Rtf = handbook[218];
+                    if (value == "WINDOWS1251" && tag == "Tester") richTextBox1.Rtf = handbook[219];
+                    if (value == "FileReadAsync" && tag == "Tester") richTextBox1.Rtf = handbook[220];
+                    if (value == "FileWriteAsync" && tag == "Tester") richTextBox1.Rtf = handbook[221];
+                    if (value == "FileDownloadAsync" && tag == "Tester") richTextBox1.Rtf = handbook[222];
+                    if (value == "FileGetHashMD5Async" && tag == "Tester") richTextBox1.Rtf = handbook[223];
+
                     /*
-                    if (value == "" && tag == "") richTextBox1.Rtf = handbook[216];
-                    if (value == "" && tag == "") richTextBox1.Rtf = handbook[217];
-                    if (value == "" && tag == "") richTextBox1.Rtf = handbook[218];
-                    if (value == "" && tag == "") richTextBox1.Rtf = handbook[219];
-                    if (value == "" && tag == "") richTextBox1.Rtf = handbook[220];
+                    if (value == "" && tag == "") richTextBox1.Rtf = handbook[224];
+                    if (value == "" && tag == "") richTextBox1.Rtf = handbook[225];
+                    if (value == "" && tag == "") richTextBox1.Rtf = handbook[226];
+                    if (value == "" && tag == "") richTextBox1.Rtf = handbook[227];
+                    if (value == "" && tag == "") richTextBox1.Rtf = handbook[228];
+                    if (value == "" && tag == "") richTextBox1.Rtf = handbook[229];
+                    if (value == "" && tag == "") richTextBox1.Rtf = handbook[230];
                     */
 
                 }
@@ -3931,6 +3950,7 @@ await tester.SetStyleInElementAsync(Tester.BY_CSS, ""#auth"", ""width: 250px; co
                     if (treeView1.SelectedNode.Text == "Методы для замера затраченного времени") return;
                     if (treeView1.SelectedNode.Text == "Методы для отправки email и message") return;
                     if (treeView1.SelectedNode.Text == "Методы для проверки результата") return;
+                    if (treeView1.SelectedNode.Text == "Методы для работы с файлами") return;
 
                     if (treeView1.SelectedNode.Text == "Класс: FRAMEElement") return;
                     if (treeView1.SelectedNode.Text == "Класс: HTMLElement") return;

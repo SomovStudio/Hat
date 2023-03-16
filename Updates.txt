@@ -14,7 +14,7 @@ public const string WINDOWS1251 = "WINDOWS-1251";   // кодировка для
 
 public async Task<string> FileReadAsync(string encoding, string filename)
 public async Task FileWriteAsync(string content, string encoding, string filename)
-public async Task FileDownloadAsync(string fileURL, string folder, int waitingSec = 60)
+public async Task FileDownloadAsync(string fileURL, string filename, int waitingSec = 60)
 public async Task<string> FileGetHashMD5Async(string filename)
 
 
