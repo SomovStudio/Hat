@@ -12,6 +12,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Newtonsoft.Json;
+using HatFramework;
+using static System.Windows.Forms.LinkLabel;
 
 namespace HatFrameworkDev
 {
@@ -4133,6 +4135,52 @@ namespace HatFrameworkDev
                 ConsoleMsgError(ex.ToString());
             }
         }
+
+        public async Task FileDownloadAsync(string fileURL, string folder, int waitingSec = 60)
+        {
+            int step = SendMessageDebug($"FileDownloadAsync(\"{fileURL}\"', \"{folder}\", {waitingSec.ToString()})", $"FileDownloadAsync(\"{fileURL}\"', \"{folder}\", {waitingSec.ToString()})", PROCESS, "Скачивание файла", "Downloading a file", IMAGE_STATUS_PROCESS);
+            if (DefineTestStop(step) == true) return;
+
+            try
+            {
+                int waiting = 0;
+                string file = Path.GetFileName(fileURL);
+
+                WebClient webClient = new WebClient();
+                webClient.DownloadFileAsync(new Uri(fileURL), folder);
+                while (webClient.IsBusy)
+                {
+                    waiting++;
+                    await this.WaitAsync(2);
+                    if (this.DefineTestStop(step) == true) break;
+                    if (waiting == waitingSec) break;
+                }
+
+                if (DefineTestStop(step) == true) return;
+
+                if (File.Exists(folder + file) == true)
+                {
+                    EditMessageDebug(step, null, null, PASSED, "Скачивание файла - завершено", "File download - completed", IMAGE_STATUS_PASSED);
+                }
+                else
+                {
+                    EditMessageDebug(step, null, null, FAILED, "Неудалось скачать файл " + file, "Failed to download file" + file, IMAGE_STATUS_FAILED);
+                    TestStopAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                EditMessageDebug(step, null, null, Tester.FAILED,
+                     "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(),
+                     "Error: " + ex.Message + Environment.NewLine + Environment.NewLine + "Full description of the error: " + ex.ToString(),
+                     Tester.IMAGE_STATUS_FAILED);
+                TestStopAsync();
+                ConsoleMsgError(ex.ToString());
+            }
+        }
+
+
+
 
 
 
