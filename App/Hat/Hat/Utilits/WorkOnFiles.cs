@@ -129,9 +129,7 @@ namespace Hat
             }
             catch (Exception ex)
             {
-                //Config.browserForm.ConsoleMsgError(ex.ToString());
-                Config.browserForm.ConsoleMsg("Сохранение файла: " + filename + " - неудалось сохранить из за ошибки: " + ex.Message);
-                Config.browserForm.ReportAddMessage(Tester.WARNING, "Сохранение файла: " + filename, "Неудалось сохранить файл из за ошибки: " + ex.Message);
+                Config.browserForm.ConsoleMsgError(ex.ToString());
             }
         }
 
@@ -176,25 +174,6 @@ namespace Hat
             }
             return false;
         }
-
-        public bool folderRename(string path, string folderName)
-        {
-            try
-            {
-                if (Directory.Exists(path) == true)
-                {
-                    if (path[path.Count() - 1].ToString() != "/") path += "/";
-                    // не реализовано
-                }
-            }
-            catch (Exception ex)
-            {
-                Config.browserForm.ConsoleMsgError(ex.ToString());
-            }
-            return false;
-        }
-
- 
 
     }
 }
