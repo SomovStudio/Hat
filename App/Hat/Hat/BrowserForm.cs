@@ -118,10 +118,11 @@ namespace Hat
 
         private void BrowserForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            e.Cancel = true;
+            //e.Cancel = true;
 
             if (codeEditorForm != null)
             {
+                e.Cancel = true;
                 MessageBox.Show("Редактор кода по прежнему открыт, возможно есть файлы которые не были сохранены. Закройте похалуйста редактор кода.");
                 return;
             }
@@ -131,14 +132,14 @@ namespace Hat
                 SystemConsoleMsg(Environment.NewLine + "==============================", default, default, default, true);
                 if (Config.languageEngConsole == false) SystemConsoleMsg("Тестирование завершено ПРОВАЛЬНО", default, ConsoleColor.DarkRed, ConsoleColor.White, true);
                 else SystemConsoleMsg("Tests ended. Finished: FAILURE", default, ConsoleColor.DarkRed, ConsoleColor.White, true);
-                Environment.Exit(1);
+                //Environment.Exit(1);
             }
             else
             {
                 SystemConsoleMsg(Environment.NewLine + "==============================", default, default, default, true);
                 if (Config.languageEngConsole == false) SystemConsoleMsg("Тестирование завершено УСПЕШНО", default, ConsoleColor.DarkGreen, ConsoleColor.White, true);
                 else SystemConsoleMsg("Tests ended. Finished: SUCCESS", default, ConsoleColor.DarkGreen, ConsoleColor.White, true);
-                Environment.Exit(0);
+                //Environment.Exit(0);
             }
         }
 

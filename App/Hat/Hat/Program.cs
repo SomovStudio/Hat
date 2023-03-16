@@ -46,6 +46,7 @@ namespace Hat
             ShowWindow(hWnd, 0);
 
             Application.ThreadException += new System.Threading.ThreadExceptionEventHandler(Application_ThreadException);
+            Application.ThreadExit += new EventHandler(Application_ThreadExit);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new BrowserForm());
@@ -74,5 +75,13 @@ namespace Hat
 
             Environment.Exit(1);
         }
+
+        static void Application_ThreadExit(Object sender, EventArgs e)
+        {
+            Application.ThreadExit -= Application_ThreadExit;
+            if (Report.TestSuccess == true) Environment.Exit(0);
+            else Environment.Exit(1);
+        }
+
     }
 }
