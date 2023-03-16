@@ -871,7 +871,7 @@ string value = await tester.GetValueFromElementAsync(Tester.BY_XPATH, ""//input[
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 GoToUrlAsync\cf0\par
 \cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'fb\'ef\'ee\'eb\'ed\'ff\'e5\'f2 \'e7\'e0\'e3\'f0\'f3\'e7\'ea\'f3 \'e2\'e5\'e1 \'f1\'e0\'e9\'f2\'e0 \'ef\'ee \'f3\'ea\'e0\'e7\'e0\'ed\'ee\'ec\'f3 \f0\lang1033 URL \f1\lang1049\'f1 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'fb\'ec \'ee\'e6\'e8\'e4\'e0\'ed\'e8\'e5\'ec \'e2 \'f1\'e5\'ea\'f3\'ed\'e4\'e0\'f5\par
-\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : GoToUrlAsync(string url, int sec)\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : GoToUrlAsync(string url, int sec, bool abortLoadAfterTime = false)\par
 \cf3\par
 \cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
 \cf0\f0\lang1033 await tester.GoToUrlAsync(@""https://www.google.com/"", 25);\f1\lang1049\par
@@ -1800,7 +1800,7 @@ if (response.IsSuccessStatusCode)\par
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 BrowserGoBackAsync\cf0\par
 \cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'ed\'e0\'e2\'e8\'e3\'e0\'f6\'e8\'e8 \'e1\'f0\'e0\'f3\'e7\'e5\'f0\'e0 \'e2\'fb\'ef\'ee\'eb\'ed\'ff\'e5\'f2 \'e4\'e5\'e9\'f1\'f2\'e2\'e8\'e5 \'ed\'e0\'e7\'e0\'e4 \'f1 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'fb\'ec \'ee\'e6\'e8\'e4\'e0\'ed\'e8\'e5\'ec \'e2 \'f1\'e5\'ea\'f3\'ed\'e4\'e0\'f5\par
-\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \f0\lang1033 BrowserGoBackAsync(int sec)\f1\lang1049\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \f0\lang1033 BrowserGoBackAsync(int sec, bool abortLoadAfterTime = false)\f1\lang1049\par
 \cf3\par
 \cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
 \cf0\f0\lang1033 Tester tester = new Tester(browserForm);\par
@@ -1828,7 +1828,7 @@ await tester.TestEndAsync();\par
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 BrowserGoForwardAsync\cf0\par
 \cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'ed\'e0\'e2\'e8\'e3\'e0\'f6\'e8\'e8 \'e1\'f0\'e0\'f3\'e7\'e5\'f0\'e0 \'e2\'fb\'ef\'ee\'eb\'ed\'ff\'e5\'f2 \'e4\'e5\'e9\'f1\'f2\'e2\'e8\'e5 \'e2\'ef\'e5\'f0\'e5\'e4 \'f1 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'fb\'ec \'ee\'e6\'e8\'e4\'e0\'ed\'e8\'e5\'ec \'e2 \'f1\'e5\'ea\'f3\'ed\'e4\'e0\'f5\par
-\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \f0\lang1033 BrowserGoForwardAsync(int sec)\f1\lang1049\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \f0\lang1033 BrowserGoForwardAsync(int sec, bool abortLoadAfterTime = false)\f1\lang1049\par
 \cf3\par
 \cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
 \cf0\f0\lang1033 Tester tester = new Tester(browserForm);\par
@@ -2642,7 +2642,7 @@ await tester.WaitElementNotDomAsync(Tester.BY_CSS, ""#element"", 5);\par
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 GoToUrlBaseAuthAsync\cf0\par
 \cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'fb\'ef\'ee\'eb\'ed\'ff\'e5\'f2 \'e7\'e0\'e3\'f0\'f3\'e7\'ea\'f3 \'e2\'e5\'e1 \'f1\'e0\'e9\'f2\'e0 \'ef\'ee \'f3\'ea\'e0\'e7\'e0\'ed\'ee\'ec\'f3 URL \'ef\'f0\'e8 \'e1\'e0\'e7\'ee\'e2\'ee\'e9 \'e0\'e2\'f2\'ee\'f0\'e8\'e7\'e0\'f6\'e8\'e8 \'f1 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'fb\'ec \'ee\'e6\'e8\'e4\'e0\'ed\'e8\'e5\'ec \'e2 \'f1\'e5\'ea\'f3\'ed\'e4\'e0\'f5\par
-\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \f0\lang1033 GoToUrlBaseAuthAsync(string url, string login, string pass, int sec)\f1\lang1049\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \f0\lang1033 GoToUrlBaseAuthAsync(string url, string login, string pass, int sec, bool abortLoadAfterTime = false)\f1\lang1049\par
 \cf3\par
 \cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
 \cf0\f0\lang1033 await tester.GoToUrlBaseAuthAsync(""https://dev.site.com"", ""login"", ""pass"", 25);\par
@@ -2653,7 +2653,7 @@ await tester.WaitElementNotDomAsync(Tester.BY_CSS, ""#element"", 5);\par
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 BrowserPageReloadAsync\cf0\par
 \cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'fb\'ef\'ee\'eb\'ed\'ff\'e5\'f2 \'ef\'e5\'f0\'e5\'e7\'e0\'e3\'f0\'f3\'e7\'ea\'f3 \'ee\'f2\'ea\'f0\'fb\'f2\'ee\'e9 \'f1\'f2\'f0\'e0\'ed\'e8\'f6\'fb \'e2 \'e1\'f0\'e0\'f3\'e7\'e5\'f0\'e5\par
-\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \f0\lang1033 BrowserPageReloadAsync(int sec)\f1\lang1049\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \f0\lang1033 BrowserPageReloadAsync(int sec, bool abortLoadAfterTime = false)\f1\lang1049\par
 \cf3\par
 \cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
 \cf0\f0\lang1033 await tester.BrowserPageReloadAsync(25);\par
@@ -2973,14 +2973,100 @@ await tester.SetStyleInElementAsync(Tester.BY_CSS, ""#auth"", ""width: 250px; co
 \cf0\f0\lang1033 await tester.SetStyleInElementByTagAsync(""h2"", 0, ""background-color: #123456;"");\par
 }",
 
-@"",
-@"",
-@"",
-@"",
-@"",
-@"",
-@"",
-@"",
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 DEFAULT\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ea\'ee\'ed\'f1\'f2\'e0\'ed\'f2\'e0 \'ee\'e1\'ee\'e7\'ed\'e0\'f7\'e0\'e5\'f2 \'f2\'e8\'ef \'ea\'ee\'e4\'e8\'f0\'ee\'e2\'ea\'e8 \'e4\'eb\'ff \'f4\'e0\'e9\'eb\'e0\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : DEFAULT = ""DEFAULT""\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0\f0\lang1033 string text = await tester.FileReadAsync(Tester.\f1\lang1049 DEFAULT\f0\lang1033 , ""C:\\\\Hat\\\\file.txt"");\par
+await tester.FileWriteAsync(text, Tester.\f1\lang1049 DEFAULT\f0\lang1033 , ""C:\\\\Hat\\\\file_copy.txt"");\par
+}",
+
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 UTF8\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ea\'ee\'ed\'f1\'f2\'e0\'ed\'f2\'e0 \'ee\'e1\'ee\'e7\'ed\'e0\'f7\'e0\'e5\'f2 \'f2\'e8\'ef \'ea\'ee\'e4\'e8\'f0\'ee\'e2\'ea\'e8 \'e4\'eb\'ff \'f4\'e0\'e9\'eb\'e0\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : UTF8 = ""UTF-8""\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0\f0\lang1033 string text = await tester.FileReadAsync(Tester.\f1\lang1049 UTF8\f0\lang1033 , ""C:\\\\Hat\\\\file.txt"");\par
+await tester.FileWriteAsync(text, Tester.\f1\lang1049 UTF8\f0\lang1033 , ""C:\\\\Hat\\\\file_copy.txt"");\par
+}",
+
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 UTF8BOM\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ea\'ee\'ed\'f1\'f2\'e0\'ed\'f2\'e0 \'ee\'e1\'ee\'e7\'ed\'e0\'f7\'e0\'e5\'f2 \'f2\'e8\'ef \'ea\'ee\'e4\'e8\'f0\'ee\'e2\'ea\'e8 \'e4\'eb\'ff \'f4\'e0\'e9\'eb\'e0\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : UTF8BOM = ""UTF-8 BOM""\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0\f0\lang1033 string text = await tester.FileReadAsync(Tester.\f1\lang1049 UTF8BOM\f0\lang1033 , ""C:\\\\Hat\\\\file.txt"");\par
+await tester.FileWriteAsync(text, Tester.\f1\lang1049 UTF8BOM\f0\lang1033 , ""C:\\\\Hat\\\\file_copy.txt"");\par
+}",
+
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 WINDOWS1251\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ea\'ee\'ed\'f1\'f2\'e0\'ed\'f2\'e0 \'ee\'e1\'ee\'e7\'ed\'e0\'f7\'e0\'e5\'f2 \'f2\'e8\'ef \'ea\'ee\'e4\'e8\'f0\'ee\'e2\'ea\'e8 \'e4\'eb\'ff \'f4\'e0\'e9\'eb\'e0\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : WINDOWS1251 = ""WINDOWS-1251""\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0\f0\lang1033 string text = await tester.FileReadAsync(Tester.\f1\lang1049 WINDOWS1251\f0\lang1033 , ""C:\\\\Hat\\\\file.txt"");\par
+await tester.FileWriteAsync(text, Tester.\f1\lang1049 WINDOWS1251\f0\lang1033 , ""C:\\\\Hat\\\\file_copy.txt"");\par
+}",
+
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 FileReadAsync\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'fb\'ef\'ee\'eb\'ed\'ff\'e5\'f2 \'f7\'f2\'e5\'ed\'e8\'e5 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'ee\'e3\'ee \'f4\'e0\'e9\'eb\'e0\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : FileReadAsync(string encoding, string filename)\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0\f0\lang1033 string text = await tester.FileReadAsync(Tester.\f1\lang1049 UTF8\f0\lang1033 , ""C:\\\\Hat\\\\file.txt"");\par
+}",
+
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 FileWriteAsync\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'fb\'ef\'ee\'eb\'ed\'ff\'e5\'f2 \'e7\'e0\'ef\'e8\'f1\'fc \'f2\'e5\'ea\'f1\'f2\'e0 \'e2 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'fb\'e9 \'f4\'e0\'e9\'eb\'e0\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : FileWriteAsync(string content, string encoding, string filename)\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0\f0\lang1033 string text = ""my text"";\par
+await tester.FileWriteAsync(text, Tester.UTF8, ""C:\\\\Hat\\\\file.txt"");\par
+}",
+
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 FileDownloadAsync\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'f1\'ea\'e0\'f7\'e8\'e2\'e0\'e5\'f2 \'f4\'e0\'e9\'eb\'e0 \'ef\'ee \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'ee\'ec\'f3 \f0\lang1033 URL\f1\lang1049\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : FileDownloadAsync(string fileURL, string filename, int waitingSec = 60)\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0\f0\lang1033 await tester.FileDownloadAsync(""https://somovstudio.github.io/img/logo.png"", \par
+""C:\\\\download\\\\logo.png"", 60);\par
+}",
+
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 FileGetHashMD5Async\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'ee\'ef\'f0\'e5\'e4\'e5\'eb\'ff\'e5\'f2 \f0\lang1033 HashMD5 \f1\lang1049\'ea\'ee\'e4 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'ee\'e3\'ee \'f4\'e0\'e9\'eb\'e0\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : FileGetHashMD5Async(string filename)\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0\f0\lang1033 string hash = await tester.FileGetHashMD5Async(""C:\\\\download\\\\logo.png"");\par
+}",
+
 @"",
 @"",
 @"",
@@ -3155,9 +3241,9 @@ await tester.SetStyleInElementAsync(Tester.BY_CSS, ""#auth"", ""width: 250px; co
             data.Add(new CompletionData("BrowserGetErrorsAsync", "BrowserGetErrorsAsync()"));
             data.Add(new CompletionData("BrowserGetNetworkAsync", "BrowserGetNetworkAsync()"));
             data.Add(new CompletionData("BrowserGetUserAgentAsync", "BrowserGetUserAgentAsync()"));
-            data.Add(new CompletionData("BrowserGoBackAsync", "BrowserGoBackAsync(int sec)"));
-            data.Add(new CompletionData("BrowserGoForwardAsync", "BrowserGoForwardAsync(int sec)"));
-            data.Add(new CompletionData("BrowserPageReloadAsync", "BrowserPageReloadAsync(int sec)"));
+            data.Add(new CompletionData("BrowserGoBackAsync", "BrowserGoBackAsync(int sec, bool abortLoadAfterTime = false)"));
+            data.Add(new CompletionData("BrowserGoForwardAsync", "BrowserGoForwardAsync(int sec, bool abortLoadAfterTime = false)"));
+            data.Add(new CompletionData("BrowserPageReloadAsync", "BrowserPageReloadAsync(int sec, bool abortLoadAfterTime = false)"));
             data.Add(new CompletionData("BrowserSetUserAgentAsync", "BrowserSetUserAgentAsync(string value)"));
             data.Add(new CompletionData("BrowserSizeAsync", "BrowserSizeAsync(int width, int height)"));
             data.Add(new CompletionData("BrowserView", "WebView2 BrowserView"));
@@ -3179,6 +3265,7 @@ await tester.SetStyleInElementAsync(Tester.BY_CSS, ""#auth"", ""width: 250px; co
             data.Add(new CompletionData("COMPLETED", "COMPLETED"));
             data.Add(new CompletionData("ConsoleMsg", "ConsoleMsg(string message)"));
             data.Add(new CompletionData("ConsoleMsgError", "ConsoleMsgError(string message)"));
+            data.Add(new CompletionData("DEFAULT", "DEFAULT"));
             data.Add(new CompletionData("DefineTestStop", "DefineTestStop(int stepIndex)"));
             data.Add(new CompletionData("Description", "Description(string text)"));
             data.Add(new CompletionData("EditMessage", "EditMessage(int index, string action, string status, string comment, int image)"));
@@ -3195,6 +3282,10 @@ await tester.SetStyleInElementAsync(Tester.BY_CSS, ""#auth"", ""width: 250px; co
             data.Add(new CompletionData("FindVisibleElementByIdAsync", "FindVisibleElementByIdAsync(string id, int sec)"));
             data.Add(new CompletionData("FindVisibleElementByNameAsync", "FindVisibleElementByNameAsync(string name, int index, int sec)"));
             data.Add(new CompletionData("FindVisibleElementByTagAsync", "FindVisibleElementByTagAsync(string tag, int index, int sec)"));
+            data.Add(new CompletionData("FileDownloadAsync", "FileDownloadAsync(string fileURL, string filename, int waitingSec = 60)"));
+            data.Add(new CompletionData("FileGetHashMD5Async", "FileGetHashMD5Async(string filename)"));
+            data.Add(new CompletionData("FileReadAsync", "FileReadAsync(string encoding, string filename)"));
+            data.Add(new CompletionData("FileWriteAsync", "FileWriteAsync(string content, string encoding, string filename)"));
             data.Add(new CompletionData("GetAttributeAsync", "GetAttributeAsync(string name)"));
             data.Add(new CompletionData("GetAttributeFromElementAsync", "GetAttributeFromElementAsync(string by, string locator, string attribute)"));
             data.Add(new CompletionData("GetAttributeFromElementByClassAsync", "GetAttributeFromElementByClassAsync(string _class, int index, string attribute)"));
@@ -3242,8 +3333,8 @@ await tester.SetStyleInElementAsync(Tester.BY_CSS, ""#auth"", ""width: 250px; co
             data.Add(new CompletionData("GetValueFromElementByIdAsync", "GetValueFromElementByIdAsync(string id)"));
             data.Add(new CompletionData("GetValueFromElementByNameAsync", "GetValueFromElementByNameAsync(string name, int index)"));
             data.Add(new CompletionData("GetValueFromElementByTagAsync", "GetValueFromElementByTagAsync(string tag, int index)"));
-            data.Add(new CompletionData("GoToUrlAsync", "GoToUrlAsync(string url, int sec)"));
-            data.Add(new CompletionData("GoToUrlBaseAuthAsync", "GoToUrlBaseAuthAsync(string url, string login, string pass, int sec)"));
+            data.Add(new CompletionData("GoToUrlAsync", "GoToUrlAsync(string url, int sec, bool abortLoadAfterTime = false)"));
+            data.Add(new CompletionData("GoToUrlBaseAuthAsync", "GoToUrlBaseAuthAsync(string url, string login, string pass, int sec, bool abortLoadAfterTime = false)"));
             data.Add(new CompletionData("Id", "string Id { get; set; }"));
             data.Add(new CompletionData("IMAGE_STATUS_FAILED", "IMAGE_STATUS_FAILED"));
             data.Add(new CompletionData("IMAGE_STATUS_MESSAGE", "IMAGE_STATUS_MESSAGE"));
@@ -3308,6 +3399,8 @@ await tester.SetStyleInElementAsync(Tester.BY_CSS, ""#auth"", ""width: 250px; co
             data.Add(new CompletionData("TimerStart", "TimerStart()"));
             data.Add(new CompletionData("TimerStop", "TimerStop(DateTime start)"));
             data.Add(new CompletionData("Type", "string Type { get; set; }"));
+            data.Add(new CompletionData("UTF8", "UTF-8"));
+            data.Add(new CompletionData("UTF8BOM", "UTF-8 BOM"));
             data.Add(new CompletionData("WaitAsync", "WaitAsync(int sec)"));
             data.Add(new CompletionData("WaitElementInDomAsync", "WaitElementInDomAsync(string by, string locator, int sec)"));
             data.Add(new CompletionData("WaitElementNotDomAsync", "WaitElementNotDomAsync(string by, string locator, int sec)"));
@@ -3324,6 +3417,7 @@ await tester.SetStyleInElementAsync(Tester.BY_CSS, ""#auth"", ""width: 250px; co
             data.Add(new CompletionData("WaitVisibleElementByNameAsync", "WaitVisibleElementByNameAsync(string name, int index, int sec)"));
             data.Add(new CompletionData("WaitVisibleElementByTagAsync", "WaitVisibleElementByTagAsync(string tag, int index, int sec)"));
             data.Add(new CompletionData("WARNING", "WARNING"));
+            data.Add(new CompletionData("WINDOWS1251", "WINDOWS-1251"));
             completionWindow.Width = 250;
             completionWindow.Show();
             completionWindow.Closed += delegate {
@@ -3881,12 +3975,23 @@ await tester.SetStyleInElementAsync(Tester.BY_CSS, ""#auth"", ""width: 250px; co
                     if (value == "SetStyleInElementByNameAsync" && tag == "Tester") richTextBox1.Rtf = handbook[214];
                     if (value == "SetStyleInElementByTagAsync" && tag == "Tester") richTextBox1.Rtf = handbook[215];
 
+                    if (value == "DEFAULT" && tag == "Tester") richTextBox1.Rtf = handbook[216];
+                    if (value == "UTF8" && tag == "Tester") richTextBox1.Rtf = handbook[217];
+                    if (value == "UTF8BOM" && tag == "Tester") richTextBox1.Rtf = handbook[218];
+                    if (value == "WINDOWS1251" && tag == "Tester") richTextBox1.Rtf = handbook[219];
+                    if (value == "FileReadAsync" && tag == "Tester") richTextBox1.Rtf = handbook[220];
+                    if (value == "FileWriteAsync" && tag == "Tester") richTextBox1.Rtf = handbook[221];
+                    if (value == "FileDownloadAsync" && tag == "Tester") richTextBox1.Rtf = handbook[222];
+                    if (value == "FileGetHashMD5Async" && tag == "Tester") richTextBox1.Rtf = handbook[223];
+
                     /*
-                    if (value == "" && tag == "") richTextBox1.Rtf = handbook[216];
-                    if (value == "" && tag == "") richTextBox1.Rtf = handbook[217];
-                    if (value == "" && tag == "") richTextBox1.Rtf = handbook[218];
-                    if (value == "" && tag == "") richTextBox1.Rtf = handbook[219];
-                    if (value == "" && tag == "") richTextBox1.Rtf = handbook[220];
+                    if (value == "" && tag == "") richTextBox1.Rtf = handbook[224];
+                    if (value == "" && tag == "") richTextBox1.Rtf = handbook[225];
+                    if (value == "" && tag == "") richTextBox1.Rtf = handbook[226];
+                    if (value == "" && tag == "") richTextBox1.Rtf = handbook[227];
+                    if (value == "" && tag == "") richTextBox1.Rtf = handbook[228];
+                    if (value == "" && tag == "") richTextBox1.Rtf = handbook[229];
+                    if (value == "" && tag == "") richTextBox1.Rtf = handbook[230];
                     */
 
                 }
@@ -3931,6 +4036,7 @@ await tester.SetStyleInElementAsync(Tester.BY_CSS, ""#auth"", ""width: 250px; co
                     if (treeView1.SelectedNode.Text == "Методы для замера затраченного времени") return;
                     if (treeView1.SelectedNode.Text == "Методы для отправки email и message") return;
                     if (treeView1.SelectedNode.Text == "Методы для проверки результата") return;
+                    if (treeView1.SelectedNode.Text == "Методы для работы с файлами") return;
 
                     if (treeView1.SelectedNode.Text == "Класс: FRAMEElement") return;
                     if (treeView1.SelectedNode.Text == "Класс: HTMLElement") return;

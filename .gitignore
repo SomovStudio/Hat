@@ -14,3 +14,6 @@ Lib/HatFramework/HatFramework/bin/Release/Newtonsoft.Json.dll
 Lib/HatFramework/HatFramework/bin/Release/Newtonsoft.Json.xml
 Lib/HatFramework/.vs/
 Lib/HatFramework/.vs/HatFramework/v17/.suo
+Jenkins/JenkinsAgentRun/.vs/
+Jenkins/JenkinsAgentRun/JenkinsAgentRun/bin/
+Jenkins/JenkinsAgentRun/JenkinsAgentRun/obj/

@@ -1,3 +1,16 @@
+Обновление браузера Hat 1.2.2 (16.03.2023)
+
+Список внесённых изменений:
+
+- Добавлена остановка загрузки страницы в методах GoToUrlAsync, GoToUrlBaseAuthAsync, 
+- Добавлена остановка загрузки страницы в методах BrowserGoBackAsync, BrowserGoForwardAsync, BrowserPageReloadAsync
+- Добавлены методы FileReadAsync, FileWriteAsync, FileDownloadAsync, FileGetHashMD5Async
+- Исправлены ошибки при формировании отчетов
+- Обновлен плагин Newtonsoft.Json до версии 13.0.3
+
+-----------------------------
+
+
 Обновление браузера Hat 1.2.1 (01.03.2023)
 
 Список внесённых изменений:

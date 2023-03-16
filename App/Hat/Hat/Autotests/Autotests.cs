@@ -76,74 +76,6 @@ namespace Hat
 
         public static async Task devTestAsync()
         {
-            HatFrameworkDev.Tester tester = new HatFrameworkDev.Tester(Config.browserForm);
-            await tester.TestBeginAsync();
-            await tester.GoToUrlAsync("https://somovstudio.github.io/test_error.html", 25);
-            //await tester.AssertNoErrorsAsync(true, new string[1] { "stats.g.doubleclick.net" });
-            //await tester.AssertNoErrorsAsync();
-
-            //await tester.GoToUrlAsync("https://somovstudio.github.io/test.html", 25);
-            //HatFrameworkDev.HTMLElement element = await tester.GetElementAsync(HatFrameworkDev.Tester.BY_XPATH, "//div[@id='auth']");
-            //string style = await element.GetStyleAsync("width");
-            //tester.ConsoleMsg(style);
-            //await element.SetStyleAsync("background-color: yellow; color: red; width: 100px;");
-
-            /*
-            string style = "";
-            await tester.GoToUrlAsync("https://somovstudio.github.io/test.html", 25);
-            style = await tester.GetStyleFromElementAsync(HatFrameworkDev.Tester.BY_XPATH, "//div[@id='auth']", "position");
-            tester.ConsoleMsg("position: " + style);
-            style = await tester.GetStyleFromElementAsync(HatFrameworkDev.Tester.BY_CSS, "#auth", "padding");
-            tester.ConsoleMsg("padding: " + style);
-            style = await tester.GetStyleFromElementByIdAsync("buttonLogin", "background-color");
-            tester.ConsoleMsg("background-color: " + style);
-            style = await tester.GetStyleFromElementByClassAsync("text-field", 0, "border");
-            tester.ConsoleMsg("border: " + style);
-            style = await tester.GetStyleFromElementByNameAsync("pass", 0, "height");
-            tester.ConsoleMsg("height: " + style);
-            style = await tester.GetStyleFromElementByTagAsync("h2", 0, "width");
-            tester.ConsoleMsg("width: " + style);
-            */
-
-            await tester.GoToUrlAsync("https://somovstudio.github.io/test.html", 25);
-            //ок await tester.SetStyleInElementAsync(HatFrameworkDev.Tester.BY_XPATH, "//div[@id='auth']", "background-color: #000000;");
-            //ок await tester.SetStyleInElementAsync(HatFrameworkDev.Tester.BY_CSS, "#auth", "background-color: #000000;");
-            //ок await tester.SetStyleInElementByIdAsync("buttonLogin", "background-color: #123456;");
-            //ok await tester.SetStyleInElementByClassAsync("text-field", 0, "background-color: #123456;");
-            //ok await tester.SetStyleInElementByNameAsync("pass", 0, "background-color: #123456;");
-            //ok await tester.SetStyleInElementByTagAsync("h2", 0, "background-color: #123456;");
-
-            await tester.TestEndAsync();
-
-            /*
-            HatFrameworkDev.Tester tester = new HatFrameworkDev.Tester(Config.browserForm);
-            await tester.TestBeginAsync();
-            await tester.GoToUrlAsync("https://somovstudio.github.io/test.html", 25);
-            await tester.ClickElementByIdAsync("buttonLogin");
-            await tester.WaitAsync(2);
-            await tester.WaitVisibleElementByIdAsync("result", 5);
-            //string text = await tester.GetTextFromElementAsync(HatFrameworkDev.Tester.BY_XPATH, "//textarea");
-            //string text = await tester.GetTextFromElementByTagAsync("textarea", 0);
-            string text = await tester.GetTextFromElementByIdAsync("textarea");
-            tester.ConsoleMsg("TEXT: " + text);
-            await tester.TestEndAsync();
-            */
-
-
-            /*
-            HatFrameworkDev.Tester tester = new HatFrameworkDev.Tester(Config.browserForm);
-            await tester.TestBeginAsync();
-            await tester.GoToUrlAsync("https://somovstudio.github.io/test_error.html", 25);
-            //await tester.GoToUrlAsync("https://rutube.sport/video/angliya-senegal-obzor-matcha-chm-2022/", 25);
-            List<string> errors = await tester.BrowserGetErrorsAsync();
-            foreach (string error in errors)
-            {
-                tester.ConsoleMsg(error);
-            }
-            await tester.TestEndAsync();
-            */
-
-
             /*
             HatFrameworkDev.Tester tester = new HatFrameworkDev.Tester(Config.browserForm);
             await tester.TestBeginAsync();
@@ -159,52 +91,6 @@ namespace Hat
             string actual = await tester.GetValueFromElementByIdAsync("textarea");
             string expected = "Вы успешно авторизованы";
             await tester.AssertEqualsAsync(expected, actual);
-            await tester.TestEndAsync();
-            */
-
-
-            /*
-            HatFrameworkDev.Tester tester = new HatFrameworkDev.Tester(Config.browserForm);
-            await tester.TestBeginAsync();
-            await tester.GoToUrlAsync("https://somovstudio.github.io/test.html", 5);
-            await tester.SetValueInElementByIdAsync("login", "admin");
-            await tester.WaitAsync(2);
-            await tester.SetValueInElementByIdAsync("pass", "0000");
-            await tester.WaitAsync(2);
-            await tester.ClickElementByIdAsync("buttonLogin");
-            await tester.WaitAsync(2);
-            await tester.WaitVisibleElementByIdAsync("result", 5);
-            
-            string actual = await tester.GetValueFromElementByIdAsync("textarea");
-            string expected = "Вы успешно авторизованы";
-            await tester.AssertEqualsAsync(expected, actual);
-
-            actual = await tester.GetTextFromElementByTagAsync("h3", 0);
-            expected = "Результат авторизации";
-            await tester.AssertEqualsAsync(expected, actual);
-
-            string attribute = await tester.GetAttributeFromElementAsync(Tester.BY_XPATH, "/html/body/div[1]/input[1]", "placeholder");
-            tester.ConsoleMsg("[ATTRIBUTE]: " + attribute);
-            await tester.TestEndAsync();
-            */
-
-
-            /*
-            HatFrameworkDev.Tester tester = new HatFrameworkDev.Tester(Config.browserForm);
-            await tester.TestBeginAsync();
-            await tester.GoToUrlAsync("https://somovstudio.github.io/test2.html", 5);
-            HatFrameworkDev.HTMLElement element = await tester.GetElementAsync(HatFrameworkDev.Tester.BY_XPATH, "//*[@id='MySelect']");
-            await element.SelectOptionAsync(HatFrameworkDev.HTMLElement.BY_INDEX, "2");
-            await tester.WaitAsync(5);
-            await element.SelectOptionAsync(HatFrameworkDev.HTMLElement.BY_VALUE, "Mobile");
-            await tester.WaitAsync(5);
-            await element.SelectOptionAsync(HatFrameworkDev.HTMLElement.BY_TEXT, "Other");
-            string index = await element.GetOptionAsync(HatFrameworkDev.HTMLElement.BY_INDEX);
-            string text = await element.GetOptionAsync(HatFrameworkDev.HTMLElement.BY_TEXT);
-            string value = await element.GetOptionAsync(HatFrameworkDev.HTMLElement.BY_VALUE);
-            await tester.AssertEqualsAsync("2", index);
-            await tester.AssertEqualsAsync("\"Other\"", text);
-            await tester.AssertEqualsAsync("\"Other\"", value);
             await tester.TestEndAsync();
             */
         }

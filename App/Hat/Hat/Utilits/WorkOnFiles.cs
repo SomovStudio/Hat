@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using HatFramework;
 
 namespace Hat
 {
@@ -173,25 +174,6 @@ namespace Hat
             }
             return false;
         }
-
-        public bool folderRename(string path, string folderName)
-        {
-            try
-            {
-                if (Directory.Exists(path) == true)
-                {
-                    if (path[path.Count() - 1].ToString() != "/") path += "/";
-                    // не реализовано
-                }
-            }
-            catch (Exception ex)
-            {
-                Config.browserForm.ConsoleMsgError(ex.ToString());
-            }
-            return false;
-        }
-
- 
 
     }
 }
