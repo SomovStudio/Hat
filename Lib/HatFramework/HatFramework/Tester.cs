@@ -1000,7 +1000,7 @@ namespace HatFramework
             listRedirects.Clear();
             statusPageLoad = false;
             statusContentLoad = false;
-            int step = SendMessageDebug($"BrowserGoForwardAsync()", $"BrowserGoForwardAsync()", PROCESS, "Выполняется действие браузера - вперед", "the browser performs the action - forward", IMAGE_STATUS_PROCESS);
+            int step = SendMessageDebug($"BrowserGoForwardAsync({sec}, {abortLoadAfterTime})", $"BrowserGoForwardAsync({sec}, {abortLoadAfterTime})", PROCESS, "Выполняется действие браузера - вперед", "the browser performs the action - forward", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return;
 
             try
@@ -1305,7 +1305,7 @@ namespace HatFramework
             listRedirects.Clear();
             statusPageLoad = false;
             statusContentLoad = false;
-            int step = SendMessageDebug($"GoToUrlAsync('{url}', {sec})", $"GoToUrlAsync('{url}', {sec})", PROCESS, "Загрузка страницы", "Page Loading", IMAGE_STATUS_PROCESS);
+            int step = SendMessageDebug($"GoToUrlAsync('{url}', {sec}, {abortLoadAfterTime})", $"GoToUrlAsync('{url}', {sec}, {abortLoadAfterTime})", PROCESS, $"Загрузка страницы {url}", $"Page Loading {url}", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return;
 
             try
@@ -1361,8 +1361,8 @@ namespace HatFramework
             listRedirects.Clear();
             statusPageLoad = false;
             statusContentLoad = false;
-            int step = SendMessageDebug($"GoToUrlBaseAuthAsync('{url}', '{login}', '{pass}', {sec})", $"GoToUrlBaseAuthAsync('{url}', '{login}', '{pass}', {sec})",
-                PROCESS, "Загрузка страницы (базовая авторизация)", "Page loading (basic authorization)", IMAGE_STATUS_PROCESS);
+            int step = SendMessageDebug($"GoToUrlBaseAuthAsync('{url}', '{login}', '{pass}', {sec}, {abortLoadAfterTime})", $"GoToUrlBaseAuthAsync('{url}', '{login}', '{pass}', {sec}, {abortLoadAfterTime})",
+                PROCESS, $"Загрузка страницы (базовая авторизация) {url}", $"Page loading (basic authorization) {url}", IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return;
 
             try
