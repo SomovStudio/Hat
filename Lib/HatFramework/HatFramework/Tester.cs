@@ -358,8 +358,9 @@ namespace HatFramework
                         else if (status == STOPPED) step += "stopped";
                         else step += status;
                         step += "]: ";
-                        if (status == FAILED && assertStatus != FAILED) step += " " + action + " ";
-                        if (status == WARNING && assertStatus != FAILED) step += " " + action + " ";
+                        if (status == "") step += action + " ";
+                        if (status == FAILED && assertStatus != FAILED) step += action + " ";
+                        if (status == WARNING && assertStatus != FAILED) step += action + " ";
                         step += comment;
 
 
@@ -379,8 +380,9 @@ namespace HatFramework
                         else if (status == STOPPED) step += "остановлено";
                         else step += status;
                         step += "]: ";
-                        if (status == FAILED && assertStatus != FAILED) step += " " + action + " ";
-                        if (status == WARNING && assertStatus != FAILED) step += " " + action + " ";
+                        if (status == "") step += action + " ";
+                        if (status == FAILED && assertStatus != FAILED) step += action + " ";
+                        if (status == WARNING && assertStatus != FAILED) step += action + " ";
                         step += comment;
 
                         if (status == FAILED && assertStatus != FAILED) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { step, default, ConsoleColor.Black, ConsoleColor.DarkRed, true });
@@ -422,15 +424,20 @@ namespace HatFramework
                         else if (status == STOPPED) step += "stopped";
                         else step += status;
                         step += "]: ";
+                        if (status == "")
+                        {
+                            if (action == null && actions.Length > 0) step += actions[0] + " ";
+                            else step += action + " ";
+                        }
                         if (status == FAILED && assertStatus != FAILED)
                         {
-                            if (action == null && actions.Length > 0) step += " " + actions[0] + " ";
-                            else step += " " + action + " ";
+                            if (action == null && actions.Length > 0) step += actions[0] + " ";
+                            else step += action + " ";
                         }
                         if (status == WARNING && assertStatus != FAILED)
                         {
-                            if (action == null && actions.Length > 0) step += " " + actions[0] + " ";
-                            else step += " " + action + " ";
+                            if (action == null && actions.Length > 0) step += actions[0] + " ";
+                            else step += action + " ";
                         }
                         step += comment;
 
@@ -451,15 +458,20 @@ namespace HatFramework
                         else if (status == STOPPED) step += "остановлено";
                         else step += status;
                         step += "]: ";
+                        if (status == "")
+                        {
+                            if (action == null && actions.Length > 0) step += actions[0] + " ";
+                            else step += action + " ";
+                        }
                         if (status == FAILED && assertStatus != FAILED)
                         {
-                            if (action == null && actions.Length > 0) step += " " + actions[0] + " ";
-                            else step += " " + action + " ";
+                            if (action == null && actions.Length > 0) step += actions[0] + " ";
+                            else step += action + " ";
                         }
                         if (status == WARNING && assertStatus != FAILED)
                         {
-                            if (action == null && actions.Length > 0) step += " " + actions[0] + " ";
-                            else step += " " + action + " ";
+                            if (action == null && actions.Length > 0) step += actions[0] + " ";
+                            else step += action + " ";
                         }
                         step += comment;
 
@@ -501,8 +513,9 @@ namespace HatFramework
                         else if (status == STOPPED) step += "stopped";
                         else step += status;
                         step += "]: ";
-                        if (status == FAILED && assertStatus != FAILED) step += " " + actionEng + " ";
-                        if (status == WARNING && assertStatus != FAILED) step += " " + actionEng + " ";
+                        if (status == "") step += actionEng + " ";
+                        if (status == FAILED && assertStatus != FAILED) step += actionEng + " ";
+                        if (status == WARNING && assertStatus != FAILED) step += actionEng + " ";
                         step += commentEng;
 
 
@@ -522,8 +535,9 @@ namespace HatFramework
                         else if (status == STOPPED) step += "остановлено";
                         else step += status;
                         step += "]: ";
-                        if (status == FAILED && assertStatus != FAILED) step += " " + actionRus + " ";
-                        if (status == WARNING && assertStatus != FAILED) step += " " + actionRus + " ";
+                        if (status == "") step += actionRus + " ";
+                        if (status == FAILED && assertStatus != FAILED) step += actionRus + " ";
+                        if (status == WARNING && assertStatus != FAILED) step += actionRus + " ";
                         step += commentRus;
 
 
@@ -578,15 +592,20 @@ namespace HatFramework
                         else if (status == STOPPED) step += "stopped";
                         else step += status;
                         step += "]: ";
+                        if (status == "")
+                        {
+                            if (actionEng == null && actions.Length > 0) step += actions[1] + " ";
+                            else step += actionEng + " ";
+                        }
                         if (status == FAILED && assertStatus != FAILED)
                         {
-                            if (actionEng == null && actions.Length > 0) step += " " + actions[1] + " ";
-                            else step += " " + actionEng + " ";
+                            if (actionEng == null && actions.Length > 0) step += actions[1] + " ";
+                            else step += actionEng + " ";
                         }
                         if (status == WARNING && assertStatus != FAILED)
                         {
-                            if (actionEng == null && actions.Length > 0) step += " " + actions[1] + " ";
-                            else step += " " + actionEng + " ";
+                            if (actionEng == null && actions.Length > 0) step += actions[1] + " ";
+                            else step += actionEng + " ";
                         }
                         step += commentEng;
 
@@ -606,15 +625,20 @@ namespace HatFramework
                         else if (status == STOPPED) step += "остановлено";
                         else step += status;
                         step += "]: ";
+                        if (status == "")
+                        {
+                            if (actionRus == null && actions.Length > 0) step += actions[0] + " ";
+                            else step += actionRus + " ";
+                        }
                         if (status == FAILED && assertStatus != FAILED)
                         {
-                            if (actionRus == null && actions.Length > 0) step += " " + actions[0] + " ";
-                            else step += " " + actionRus + " ";
+                            if (actionRus == null && actions.Length > 0) step += actions[0] + " ";
+                            else step += actionRus + " ";
                         }
                         if (status == WARNING && assertStatus != FAILED)
                         {
-                            if (actionRus == null && actions.Length > 0) step += " " + actions[0] + " ";
-                            else step += " " + actionRus + " ";
+                            if (actionRus == null && actions.Length > 0) step += actions[0] + " ";
+                            else step += actionRus + " ";
                         }
                         step += commentRus;
 
