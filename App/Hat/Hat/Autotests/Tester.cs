@@ -81,6 +81,8 @@ namespace HatFrameworkDev
         private string assertStatus = null;         // флаг: рузельтат проверки
         private List<string> listRedirects;         // список редиректов
 
+        private string[] actions = new string[] { }; // список действияй (методы SendMessageDebug, EditMessageDebug, SendMessage, EditMessage)
+
         public Tester(Form browserForm)
         {
             try
@@ -338,6 +340,8 @@ namespace HatFrameworkDev
         {
             try
             {
+                this.actions = new string[] { action };
+                
                 // вывод сообщения в системную консоль
                 string step = "";
                 if (assertStatus != FAILED)
@@ -416,7 +420,11 @@ namespace HatFrameworkDev
                         else step += status;
                         step += "]: ";
                         step += comment;
-                        if (status == FAILED && assertStatus != FAILED) step += " " + action;
+                        if (status == FAILED && assertStatus != FAILED)
+                        {
+                            if (action == null && actions.Length > 0) step += " " + actions[0];
+                            else step += " " + action;
+                        }
 
                         if (status == FAILED && assertStatus != FAILED) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { step, default, ConsoleColor.Black, ConsoleColor.DarkRed, true });
                         else if (status == WARNING && assertStatus != FAILED) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { step, default, ConsoleColor.Black, ConsoleColor.DarkYellow, true });
@@ -435,7 +443,11 @@ namespace HatFrameworkDev
                         else step += status;
                         step += "]: ";
                         step += comment;
-                        if (status == FAILED && assertStatus != FAILED) step += " " + action;
+                        if (status == FAILED && assertStatus != FAILED)
+                        {
+                            if (action == null && actions.Length > 0) step += " " + actions[0];
+                            else step += " " + action;
+                        }
 
                         if (status == FAILED && assertStatus != FAILED) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { step, default, ConsoleColor.Black, ConsoleColor.DarkRed, true });
                         else if (status == WARNING && assertStatus != FAILED) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { step, default, ConsoleColor.Black, ConsoleColor.DarkYellow, true });
@@ -457,6 +469,8 @@ namespace HatFrameworkDev
         {
             try
             {
+                this.actions = new string[] { actionRus, actionEng};
+
                 // вывод сообщения в системную консоль
                 string step = "";
                 if (assertStatus != FAILED)
@@ -547,7 +561,11 @@ namespace HatFrameworkDev
                         else step += status;
                         step += "]: ";
                         step += commentEng;
-                        if (status == FAILED && assertStatus != FAILED) step += " " + actionEng;
+                        if (status == FAILED && assertStatus != FAILED)
+                        {
+                            if (actionEng == null && actions.Length > 0) step += " " + actions[1];
+                            else step += " " + actionEng;
+                        }
 
                         if (status == FAILED && assertStatus != FAILED) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { step, default, ConsoleColor.Black, ConsoleColor.DarkRed, true });
                         else if (status == WARNING && assertStatus != FAILED) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { step, default, ConsoleColor.Black, ConsoleColor.DarkYellow, true });
@@ -566,7 +584,11 @@ namespace HatFrameworkDev
                         else step += status;
                         step += "]: ";
                         step += commentRus;
-                        if (status == FAILED && assertStatus != FAILED) step += " " + actionRus;
+                        if (status == FAILED && assertStatus != FAILED)
+                        {
+                            if (actionRus == null && actions.Length > 0) step += " " + actions[0];
+                            else step += " " + actionRus;
+                        }
 
                         if (status == FAILED && assertStatus != FAILED) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { step, default, ConsoleColor.Black, ConsoleColor.DarkRed, true });
                         else if (status == WARNING && assertStatus != FAILED) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { step, default, ConsoleColor.Black, ConsoleColor.DarkYellow, true });
