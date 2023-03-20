@@ -2794,8 +2794,8 @@ namespace Hat
         {
             try
             {
-                menuStrip1.Visible = false;
-                toolStrip1.Visible = false;
+                //menuStrip1.Visible = false;
+                //toolStrip1.Visible = false;
                 splitContainer1.Panel2Collapsed = true;
                 ConsoleMsg("Интерфейс браузера отключен");
             }
