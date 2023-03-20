@@ -1,8 +1,16 @@
+Обновление браузера Hat 1.2.3 (1.04.2023)
+
+Список внесённых изменений:
+
+- Изменён вывод действий в консоль при выполнении автотеста
+
+-----------------------------
+
 Обновление браузера Hat 1.2.2 (16.03.2023)
 
 Список внесённых изменений:
 
-- Добавлена остановка загрузки страницы в методах GoToUrlAsync, GoToUrlBaseAuthAsync, 
+- Добавлена остановка загрузки страницы в методах GoToUrlAsync, GoToUrlBaseAuthAsync
 - Добавлена остановка загрузки страницы в методах BrowserGoBackAsync, BrowserGoForwardAsync, BrowserPageReloadAsync
 - Добавлены методы FileReadAsync, FileWriteAsync, FileDownloadAsync, FileGetHashMD5Async
 - Исправлены ошибки при формировании отчетов
