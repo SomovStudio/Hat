@@ -1514,7 +1514,7 @@ namespace HatFrameworkDev
 
         public async Task<int> GetUrlResponseAsync(string url)
         {
-            int step = SendMessageDebug($"GetUrlResponseAsync('{url}')", $"GetUrlResponseAsync('{url}')", PROCESS, "Получаю HTTP ответ запрашиваемого URL", "I get the HTTP response of the requested URL", IMAGE_STATUS_PROCESS);
+            int step = SendMessageDebug($"GetUrlResponseAsync('{url}')", $"GetUrlResponseAsync('{url}')", PROCESS, "Получаю HTTP ответ запрашиваемого URL: " + url, "I get the HTTP response of the requested URL: " + url, IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return 0;
 
             int statusCode = 0;
@@ -3675,7 +3675,7 @@ namespace HatFrameworkDev
          */
         public async Task<string> RestGetAsync(string url, TimeSpan timeout, string charset = "UTF-8")
         {
-            int step = SendMessageDebug($"RestGetAsync(\"{url}\", \"{timeout}\", \"{charset}\")", $"RestGetAsync(\"{url}\", \"{timeout}\", \"{charset}\")", PROCESS, "Выполнение Get Rest запроса", "Executing a Get Rest request", IMAGE_STATUS_PROCESS);
+            int step = SendMessageDebug($"RestGetAsync(\"{url}\", \"{timeout}\", \"{charset}\")", $"RestGetAsync(\"{url}\", \"{timeout}\", \"{charset}\")", PROCESS, "Выполнение Get Rest запроса " + url, "Executing a Get Rest request " + url, IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return null;
 
             string result = null;
@@ -3720,7 +3720,7 @@ namespace HatFrameworkDev
 
         public async Task<string> RestGetBasicAuthAsync(string login, string pass, string url, TimeSpan timeout, string charset = "UTF-8")
         {
-            int step = SendMessageDebug($"RestGetAuthAsync(\"{login}\", \"{pass}\", \"{url}\", \"{timeout}\", \"{charset}\")", $"RestGetAuthAsync(\"{login}\", \"{pass}\", \"{url}\", \"{timeout}\", \"{charset}\")", PROCESS, "Выполнение Get Rest запроса", "Executing a Get Rest request", IMAGE_STATUS_PROCESS);
+            int step = SendMessageDebug($"RestGetAuthAsync(\"{login}\", \"{pass}\", \"{url}\", \"{timeout}\", \"{charset}\")", $"RestGetAuthAsync(\"{login}\", \"{pass}\", \"{url}\", \"{timeout}\", \"{charset}\")", PROCESS, "Выполнение Get Rest запроса " + url, "Executing a Get Rest request " + url, IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return null;
 
             string result = null;
@@ -3769,7 +3769,7 @@ namespace HatFrameworkDev
         {
             int result = 0;
 
-            int step = SendMessageDebug($"RestGetStatusCodeAsync(\"{url}\")", $"RestGetStatusCodeAsync(\"{url}\")", PROCESS, "Выполнение Get Rest запроса и получение статуса", "Executing a Get Rest request and getting the status", IMAGE_STATUS_PROCESS);
+            int step = SendMessageDebug($"RestGetStatusCodeAsync(\"{url}\")", $"RestGetStatusCodeAsync(\"{url}\")", PROCESS, "Выполнение Get Rest запроса и получение статуса " + url, "Executing a Get Rest request and getting the status " + url, IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return result;
             
             try
@@ -3803,7 +3803,7 @@ namespace HatFrameworkDev
 
         public async Task<string> RestPostAsync(string url, string json, TimeSpan timeout, string charset = "UTF-8")
         {
-            int step = SendMessageDebug($"RestPostAsync(\"{url}\", \"JSON\", \"{timeout}\", \"{charset}\")", $"RestPostAsync(\"{url}\", \"JSON\", \"{timeout}\", \"{charset}\")", PROCESS, "Выполнение Post Rest запроса", "Executing a Post Rest request", IMAGE_STATUS_PROCESS);
+            int step = SendMessageDebug($"RestPostAsync(\"{url}\", \"JSON\", \"{timeout}\", \"{charset}\")", $"RestPostAsync(\"{url}\", \"JSON\", \"{timeout}\", \"{charset}\")", PROCESS, "Выполнение Post Rest запроса " + url, "Executing a Post Rest request " + url, IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return null;
 
             string result = null;
