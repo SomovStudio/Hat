@@ -672,12 +672,12 @@ namespace HatFramework
         /*
          * Методы для отправки сообщения на почту и телеграм
          */
-        public async Task SendMsgToMailAsync(string subject, string body, string filename = "")
+        public async Task SendMsgToMailAsync(string subject, string body, string filename = "", string addresses = "")
         {
-            int step = SendMessageDebug($"SendMsgToMail(\"{subject}\", \"{body}\")", $"SendMsgToMail(\"{subject}\", \"{body}\", \"{filename}\")", PROCESS, "Отправка письма", "Sending a email", IMAGE_STATUS_PROCESS);
+            int step = SendMessageDebug($"SendMsgToMailAsync(\"{subject}\", \"{body}\", \"{filename}\", \"{addresses}\")", $"SendMsgToMailAsync(\"{subject}\", \"{body}\", \"{filename}\", \"{addresses}\")", PROCESS, "Отправка письма", "Sending a email", IMAGE_STATUS_PROCESS);
             try
             {
-                sendMail.Invoke(BrowserWindow, new Object[] { subject, body, filename });
+                sendMail.Invoke(BrowserWindow, new Object[] { subject, body, filename, addresses });
                 EditMessageDebug(step, null, null, COMPLETED, "Письмо отправлено", "the email has been sent", IMAGE_STATUS_MESSAGE);
             }
             catch (Exception ex)
@@ -1514,7 +1514,7 @@ namespace HatFramework
 
         public async Task<int> GetUrlResponseAsync(string url)
         {
-            int step = SendMessageDebug($"GetUrlResponseAsync('{url}')", $"GetUrlResponseAsync('{url}')", PROCESS, "Получаю HTTP ответ запрашиваемого URL", "I get the HTTP response of the requested URL", IMAGE_STATUS_PROCESS);
+            int step = SendMessageDebug($"GetUrlResponseAsync('{url}')", $"GetUrlResponseAsync('{url}')", PROCESS, "Получаю HTTP ответ запрашиваемого URL: " + url, "I get the HTTP response of the requested URL: " + url, IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return 0;
 
             int statusCode = 0;
@@ -2023,8 +2023,8 @@ namespace HatFramework
                     await Task.Delay(1000);
                 }
 
-                if (found == true) EditMessageDebug(step, null, null, PASSED, "Поиск элемента - завершен (элемент найден)", "Element search - completed (element found)", IMAGE_STATUS_PASSED);
-                else EditMessageDebug(step, null, null, WARNING, "Поиск элемента - завершен (элемент не найден)", "Element search - completed (element not found)", IMAGE_STATUS_WARNING);
+                if (found == true) EditMessageDebug(step, null, null, COMPLETED, "Поиск элемента - завершен (элемент найден)", "Element search - completed (element found)", IMAGE_STATUS_MESSAGE);
+                else EditMessageDebug(step, null, null, COMPLETED, "Поиск элемента - завершен (элемент не найден)", "Element search - completed (element not found)", IMAGE_STATUS_MESSAGE);
             }
             catch (Exception ex)
             {
@@ -2065,8 +2065,8 @@ namespace HatFramework
                     await Task.Delay(1000);
                 }
 
-                if (found == true) EditMessageDebug(step, null, null, PASSED, "Поиск элемента - завершен (элемент найден)", "Element search - completed (element found)", IMAGE_STATUS_PASSED);
-                else EditMessageDebug(step, null, null, WARNING, "Поиск элемента - завершен (элемент не найден)", "Element search - completed (element not found)", IMAGE_STATUS_WARNING);
+                if (found == true) EditMessageDebug(step, null, null, COMPLETED, "Поиск элемента - завершен (элемент найден)", "Element search - completed (element found)", IMAGE_STATUS_MESSAGE);
+                else EditMessageDebug(step, null, null, COMPLETED, "Поиск элемента - завершен (элемент не найден)", "Element search - completed (element not found)", IMAGE_STATUS_MESSAGE);
             }
             catch (Exception ex)
             {
@@ -2107,8 +2107,8 @@ namespace HatFramework
                     await Task.Delay(1000);
                 }
 
-                if (found == true) EditMessageDebug(step, null, null, PASSED, "Поиск элемента - завершен (элемент найден)", "Element search - completed (element found)", IMAGE_STATUS_PASSED);
-                else EditMessageDebug(step, null, null, WARNING, "Поиск элемента - завершен (элемент не найден)", "Element search - completed (element not found)", IMAGE_STATUS_WARNING);
+                if (found == true) EditMessageDebug(step, null, null, COMPLETED, "Поиск элемента - завершен (элемент найден)", "Element search - completed (element found)", IMAGE_STATUS_MESSAGE);
+                else EditMessageDebug(step, null, null, COMPLETED, "Поиск элемента - завершен (элемент не найден)", "Element search - completed (element not found)", IMAGE_STATUS_MESSAGE);
             }
             catch (Exception ex)
             {
@@ -2149,8 +2149,8 @@ namespace HatFramework
                     await Task.Delay(1000);
                 }
 
-                if (found == true) EditMessageDebug(step, null, null, PASSED, "Поиск элемента - завершен (элемент найден)", "Element search - completed (element found)", IMAGE_STATUS_PASSED);
-                else EditMessageDebug(step, null, null, WARNING, "Поиск элемента - завершен (элемент не найден)", "Element search - completed (element not found)", IMAGE_STATUS_WARNING);
+                if (found == true) EditMessageDebug(step, null, null, COMPLETED, "Поиск элемента - завершен (элемент найден)", "Element search - completed (element found)", IMAGE_STATUS_MESSAGE);
+                else EditMessageDebug(step, null, null, COMPLETED, "Поиск элемента - завершен (элемент не найден)", "Element search - completed (element not found)", IMAGE_STATUS_MESSAGE);
             }
             catch (Exception ex)
             {
@@ -2192,8 +2192,8 @@ namespace HatFramework
                     await Task.Delay(1000);
                 }
 
-                if (found == true) EditMessageDebug(step, null, null, PASSED, "Поиск элемента - завершен (элемент найден)", "Element search - completed (element found)", IMAGE_STATUS_PASSED);
-                else EditMessageDebug(step, null, null, WARNING, "Поиск элемента - завершен (элемент не найден)", "Element search - completed (element not found)", IMAGE_STATUS_WARNING);
+                if (found == true) EditMessageDebug(step, null, null, COMPLETED, "Поиск элемента - завершен (элемент найден)", "Element search - completed (element found)", IMAGE_STATUS_MESSAGE);
+                else EditMessageDebug(step, null, null, COMPLETED, "Поиск элемента - завершен (элемент не найден)", "Element search - completed (element not found)", IMAGE_STATUS_MESSAGE);
             }
             catch (Exception ex)
             {
@@ -3675,7 +3675,7 @@ namespace HatFramework
          */
         public async Task<string> RestGetAsync(string url, TimeSpan timeout, string charset = "UTF-8")
         {
-            int step = SendMessageDebug($"RestGetAsync(\"{url}\", \"{timeout}\", \"{charset}\")", $"RestGetAsync(\"{url}\", \"{timeout}\", \"{charset}\")", PROCESS, "Выполнение Get Rest запроса", "Executing a Get Rest request", IMAGE_STATUS_PROCESS);
+            int step = SendMessageDebug($"RestGetAsync(\"{url}\", \"{timeout}\", \"{charset}\")", $"RestGetAsync(\"{url}\", \"{timeout}\", \"{charset}\")", PROCESS, "Выполнение Get Rest запроса " + url, "Executing a Get Rest request " + url, IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return null;
 
             string result = null;
@@ -3720,7 +3720,7 @@ namespace HatFramework
 
         public async Task<string> RestGetBasicAuthAsync(string login, string pass, string url, TimeSpan timeout, string charset = "UTF-8")
         {
-            int step = SendMessageDebug($"RestGetAuthAsync(\"{login}\", \"{pass}\", \"{url}\", \"{timeout}\", \"{charset}\")", $"RestGetAuthAsync(\"{login}\", \"{pass}\", \"{url}\", \"{timeout}\", \"{charset}\")", PROCESS, "Выполнение Get Rest запроса", "Executing a Get Rest request", IMAGE_STATUS_PROCESS);
+            int step = SendMessageDebug($"RestGetAuthAsync(\"{login}\", \"{pass}\", \"{url}\", \"{timeout}\", \"{charset}\")", $"RestGetAuthAsync(\"{login}\", \"{pass}\", \"{url}\", \"{timeout}\", \"{charset}\")", PROCESS, "Выполнение Get Rest запроса " + url, "Executing a Get Rest request " + url, IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return null;
 
             string result = null;
@@ -3769,7 +3769,7 @@ namespace HatFramework
         {
             int result = 0;
 
-            int step = SendMessageDebug($"RestGetStatusCodeAsync(\"{url}\")", $"RestGetStatusCodeAsync(\"{url}\")", PROCESS, "Выполнение Get Rest запроса и получение статуса", "Executing a Get Rest request and getting the status", IMAGE_STATUS_PROCESS);
+            int step = SendMessageDebug($"RestGetStatusCodeAsync(\"{url}\")", $"RestGetStatusCodeAsync(\"{url}\")", PROCESS, "Выполнение Get Rest запроса и получение статуса " + url, "Executing a Get Rest request and getting the status " + url, IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return result;
 
             try
@@ -3803,7 +3803,7 @@ namespace HatFramework
 
         public async Task<string> RestPostAsync(string url, string json, TimeSpan timeout, string charset = "UTF-8")
         {
-            int step = SendMessageDebug($"RestPostAsync(\"{url}\", \"JSON\", \"{timeout}\", \"{charset}\")", $"RestPostAsync(\"{url}\", \"JSON\", \"{timeout}\", \"{charset}\")", PROCESS, "Выполнение Post Rest запроса", "Executing a Post Rest request", IMAGE_STATUS_PROCESS);
+            int step = SendMessageDebug($"RestPostAsync(\"{url}\", \"JSON\", \"{timeout}\", \"{charset}\")", $"RestPostAsync(\"{url}\", \"JSON\", \"{timeout}\", \"{charset}\")", PROCESS, "Выполнение Post Rest запроса " + url, "Executing a Post Rest request " + url, IMAGE_STATUS_PROCESS);
             if (DefineTestStop(step) == true) return null;
 
             string result = null;
