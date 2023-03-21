@@ -2023,8 +2023,8 @@ namespace HatFrameworkDev
                     await Task.Delay(1000);
                 }
 
-                if (found == true) EditMessageDebug(step, null, null, PASSED, "Поиск элемента - завершен (элемент найден)", "Element search - completed (element found)", IMAGE_STATUS_PASSED);
-                else EditMessageDebug(step, null, null, WARNING, "Поиск элемента - завершен (элемент не найден)", "Element search - completed (element not found)", IMAGE_STATUS_WARNING);
+                if (found == true) EditMessageDebug(step, null, null, COMPLETED, "Поиск элемента - завершен (элемент найден)", "Element search - completed (element found)", IMAGE_STATUS_MESSAGE);
+                else EditMessageDebug(step, null, null, COMPLETED, "Поиск элемента - завершен (элемент не найден)", "Element search - completed (element not found)", IMAGE_STATUS_MESSAGE);
             }
             catch (Exception ex)
             {
@@ -2065,8 +2065,8 @@ namespace HatFrameworkDev
                     await Task.Delay(1000);
                 }
 
-                if (found == true) EditMessageDebug(step, null, null, PASSED, "Поиск элемента - завершен (элемент найден)", "Element search - completed (element found)", IMAGE_STATUS_PASSED);
-                else EditMessageDebug(step, null, null, WARNING, "Поиск элемента - завершен (элемент не найден)", "Element search - completed (element not found)", IMAGE_STATUS_WARNING);
+                if (found == true) EditMessageDebug(step, null, null, COMPLETED, "Поиск элемента - завершен (элемент найден)", "Element search - completed (element found)", IMAGE_STATUS_MESSAGE);
+                else EditMessageDebug(step, null, null, COMPLETED, "Поиск элемента - завершен (элемент не найден)", "Element search - completed (element not found)", IMAGE_STATUS_MESSAGE);
             }
             catch (Exception ex)
             {
@@ -2107,8 +2107,8 @@ namespace HatFrameworkDev
                     await Task.Delay(1000);
                 }
 
-                if (found == true) EditMessageDebug(step, null, null, PASSED, "Поиск элемента - завершен (элемент найден)", "Element search - completed (element found)", IMAGE_STATUS_PASSED);
-                else EditMessageDebug(step, null, null, WARNING, "Поиск элемента - завершен (элемент не найден)", "Element search - completed (element not found)", IMAGE_STATUS_WARNING);
+                if (found == true) EditMessageDebug(step, null, null, COMPLETED, "Поиск элемента - завершен (элемент найден)", "Element search - completed (element found)", IMAGE_STATUS_MESSAGE);
+                else EditMessageDebug(step, null, null, COMPLETED, "Поиск элемента - завершен (элемент не найден)", "Element search - completed (element not found)", IMAGE_STATUS_MESSAGE);
             }
             catch (Exception ex)
             {
@@ -2149,8 +2149,8 @@ namespace HatFrameworkDev
                     await Task.Delay(1000);
                 }
 
-                if (found == true) EditMessageDebug(step, null, null, PASSED, "Поиск элемента - завершен (элемент найден)", "Element search - completed (element found)", IMAGE_STATUS_PASSED);
-                else EditMessageDebug(step, null, null, WARNING, "Поиск элемента - завершен (элемент не найден)", "Element search - completed (element not found)", IMAGE_STATUS_WARNING);
+                if (found == true) EditMessageDebug(step, null, null, COMPLETED, "Поиск элемента - завершен (элемент найден)", "Element search - completed (element found)", IMAGE_STATUS_MESSAGE);
+                else EditMessageDebug(step, null, null, COMPLETED, "Поиск элемента - завершен (элемент не найден)", "Element search - completed (element not found)", IMAGE_STATUS_MESSAGE);
             }
             catch (Exception ex)
             {
@@ -2192,8 +2192,8 @@ namespace HatFrameworkDev
                     await Task.Delay(1000);
                 }
 
-                if (found == true) EditMessageDebug(step, null, null, PASSED, "Поиск элемента - завершен (элемент найден)", "Element search - completed (element found)", IMAGE_STATUS_PASSED);
-                else EditMessageDebug(step, null, null, WARNING, "Поиск элемента - завершен (элемент не найден)", "Element search - completed (element not found)", IMAGE_STATUS_WARNING);
+                if (found == true) EditMessageDebug(step, null, null, COMPLETED, "Поиск элемента - завершен (элемент найден)", "Element search - completed (element found)", IMAGE_STATUS_MESSAGE);
+                else EditMessageDebug(step, null, null, COMPLETED, "Поиск элемента - завершен (элемент не найден)", "Element search - completed (element not found)", IMAGE_STATUS_MESSAGE);
             }
             catch (Exception ex)
             {

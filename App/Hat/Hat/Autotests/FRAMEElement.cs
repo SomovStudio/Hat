@@ -548,8 +548,8 @@ namespace HatFrameworkDev
                     await Task.Delay(1000);
                 }
 
-                if (found == true) _tester.EditMessageDebug(step, null, null, Tester.PASSED, "Поиск элемента - завершен (элемент найден)", "Element search - completed (element found)", Tester.IMAGE_STATUS_PASSED);
-                else _tester.EditMessageDebug(step, null, null, Tester.WARNING, "Поиск элемента - завершен (элемент не найден)", "Element search - completed (element not found)", Tester.IMAGE_STATUS_WARNING);
+                if (found == true) _tester.EditMessageDebug(step, null, null, Tester.COMPLETED, "Поиск элемента - завершен (элемент найден)", "Element search - completed (element found)", Tester.IMAGE_STATUS_MESSAGE);
+                else _tester.EditMessageDebug(step, null, null, Tester.COMPLETED, "Поиск элемента - завершен (элемент не найден)", "Element search - completed (element not found)", Tester.IMAGE_STATUS_MESSAGE);
             }
             catch (Exception ex)
             {
