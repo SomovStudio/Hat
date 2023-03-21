@@ -20,7 +20,7 @@ namespace Hat
          * Отправка почты
          * Источник: https://metanit.com/sharp/net/8.1.php
          */
-        public static void SendEmail(string subject, string body, string filename)
+        public static void SendEmail(string subject, string body, string filename, string addresses = null)
         {
             try
             {
@@ -33,8 +33,18 @@ namespace Hat
                 string portServer = Config.dataMail[5];
                 string ssl = Config.dataMail[6];
 
-                string[] mails = mailsTo.Split(' ');
-                int count = mails.Length;
+                string[] mails;
+                int count = 0;
+                if (addresses == null)
+                {
+                    mails = mailsTo.Split(' ');
+                    count = mails.Length;
+                }
+                else
+                {
+                    mails = addresses.Split(' ');
+                    count = mails.Length;
+                }
 
                 // отправитель и получатель
                 MailAddress from = new MailAddress(mailFrom, "Browser Hat");    // отправитель

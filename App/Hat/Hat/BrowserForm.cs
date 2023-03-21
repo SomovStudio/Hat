@@ -724,11 +724,11 @@ namespace Hat
             }
         }
 
-        public void SendMail(string subject, string body, string filename) // отправка письма на почту
+        public void SendMail(string subject, string body, string filename, string addresses = null) // отправка письма на почту
         {
             try
             {
-                WorkOnEmail.SendEmail(subject, body, filename);
+                WorkOnEmail.SendEmail(subject, body, filename, addresses);
             }
             catch (Exception ex)
             {
