@@ -20,7 +20,7 @@ namespace Hat
          * Отправка почты
          * Источник: https://metanit.com/sharp/net/8.1.php
          */
-        public static void SendEmail(string subject, string body, string filename, string addresses = null)
+        public static void SendEmail(string subject, string body, string filename, string addresses = "")
         {
             try
             {
@@ -35,7 +35,7 @@ namespace Hat
 
                 string[] mails;
                 int count = 0;
-                if (addresses == null)
+                if (addresses == "")
                 {
                     mails = mailsTo.Split(' ');
                     count = mails.Length;

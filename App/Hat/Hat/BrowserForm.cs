@@ -724,7 +724,7 @@ namespace Hat
             }
         }
 
-        public void SendMail(string subject, string body, string filename, string addresses = null) // отправка письма на почту
+        public void SendMail(string subject, string body, string filename, string addresses = "") // отправка письма на почту
         {
             try
             {

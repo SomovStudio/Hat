@@ -672,9 +672,9 @@ namespace HatFrameworkDev
         /*
          * Методы для отправки сообщения на почту и телеграм
          */
-        public async Task SendMsgToMailAsync(string subject, string body, string filename = "", string addresses = null)
+        public async Task SendMsgToMailAsync(string subject, string body, string filename = "", string addresses = "")
         {
-            int step = SendMessageDebug($"SendMsgToMail(\"{subject}\", \"{body}\")", $"SendMsgToMail(\"{subject}\", \"{body}\", \"{filename}\")", PROCESS, "Отправка письма", "Sending a email", IMAGE_STATUS_PROCESS);
+            int step = SendMessageDebug($"SendMsgToMailAsync(\"{subject}\", \"{body}\", \"{filename}\", \"{addresses}\")", $"SendMsgToMailAsync(\"{subject}\", \"{body}\", \"{filename}\", \"{addresses}\")", PROCESS, "Отправка письма", "Sending a email", IMAGE_STATUS_PROCESS);
             try
             {
                 sendMail.Invoke(BrowserWindow, new Object[] { subject, body, filename, addresses });
