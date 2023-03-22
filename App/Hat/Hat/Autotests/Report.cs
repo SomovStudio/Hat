@@ -395,7 +395,7 @@ img { min-width: 700px; max-width: 700px; }
                 */
                 content += "<td></td>" + Environment.NewLine;
                 content += "<td></td>" + Environment.NewLine;
-                content += $"<td class=\"table-footer\">Browser Hat {Config.version}</td>" + Environment.NewLine;
+                content += $"<td class=\"table-footer\">Browser Hat {Config.currentBrowserVersion}</td>" + Environment.NewLine;
                 content += "</tfoot>" + Environment.NewLine;
                 content += "</table>" + Environment.NewLine;
                 content += "</section>" + Environment.NewLine;
@@ -744,7 +744,7 @@ ZTptb2RpZnkAMjAyMy0wMi0yMVQxMDoxMzo0MSswMDowMN/S9FIAAAAASUVORK5CYII="" />
             content += "<td></td>" + Environment.NewLine;
             content += "<td></td>" + Environment.NewLine;
             content += "<td></td>" + Environment.NewLine;
-            content += $"<td class=\"table-footer\">Browser Hat {Config.version}</td>" + Environment.NewLine;
+            content += $"<td class=\"table-footer\">Browser Hat {Config.currentBrowserVersion}</td>" + Environment.NewLine;
             content += "</tfoot>" + Environment.NewLine;
             content += "</table>" + Environment.NewLine;
             content += "</section>" + Environment.NewLine;
