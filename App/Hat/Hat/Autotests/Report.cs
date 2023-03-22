@@ -84,8 +84,15 @@ namespace Hat
         {
             try
             {
-                if (status == Report.FAILED || status == Report.ERROR) Report.CountErrors++;
-                if (Report.Steps != null && status != Report.STOPPED && status != Report.PROCESS) Report.Steps.Add(new string[] { status, action, comment });
+                if (status == null)
+                {
+                    Report.Steps.Add(new string[] { "", action, comment });
+                }
+                else
+                {
+                    if (status == Report.FAILED || status == Report.ERROR) Report.CountErrors++;
+                    if (Report.Steps != null && status != Report.STOPPED && status != Report.PROCESS) Report.Steps.Add(new string[] { status, action, comment });
+                }
             }
             catch (Exception ex)
             {
