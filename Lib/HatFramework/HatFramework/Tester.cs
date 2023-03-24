@@ -13,6 +13,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Newtonsoft.Json;
 using HatFramework;
+using Newtonsoft.Json.Linq;
+using System.Security.Cryptography;
 
 namespace HatFramework
 {
@@ -4302,7 +4304,35 @@ namespace HatFramework
             return "";
         }
 
+        public async Task<string> CreateHashMD5FromTextAsync(string text)
+        {
+            int step = SendMessageDebug($"CreateHashMD5FromTextAsync(\"{text}\")", $"CreateHashMD5FromTextAsync(\"{text}\")", PROCESS, "Создается код Hash MD5 для указанного текста", "An MD5 Hash code is created for the text", IMAGE_STATUS_PROCESS);
+            if (DefineTestStop(step) == true) return "";
 
+            string result = "";
+
+            try
+            {
+                var hash = MD5.Create().ComputeHash(Encoding.UTF8.GetBytes((text).ToCharArray()));
+                foreach (byte h in hash)
+                {
+                    result += h.ToString("x2");
+                }
+            }
+            catch (Exception ex)
+            {
+                EditMessageDebug(step, null, null, Tester.FAILED,
+                     "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(),
+                     "Error: " + ex.Message + Environment.NewLine + Environment.NewLine + "Full description of the error: " + ex.ToString(),
+                     Tester.IMAGE_STATUS_FAILED);
+                TestStopAsync();
+                ConsoleMsgError(ex.ToString());
+            }
+
+            if (result != "") EditMessageDebug(step, null, null, PASSED, "Код Hash MD5 создан " + result, "MD5 Hash code created " + result, IMAGE_STATUS_PASSED);
+            else EditMessageDebug(step, null, null, WARNING, "Не удалось создать Hash MD5 код", "Failed to create MD5 Hash code", IMAGE_STATUS_WARNING);
+            return result;
+        }
 
 
 
