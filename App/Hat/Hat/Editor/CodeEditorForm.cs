@@ -3067,7 +3067,19 @@ await tester.FileWriteAsync(text, Tester.UTF8, ""C:\\\\Hat\\\\file.txt"");\par
 \cf0\f0\lang1033 string hash = await tester.FileGetHashMD5Async(""C:\\\\download\\\\logo.png"");\par
 }",
 
-@"",
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 CreateHashMD5FromTextAsync\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'f1\'ee\'e7\'e4\'e0\'e5\'f2 \f0\lang1033 HashDM5 \f1\lang1049\'ea\'ee\'e4 \'e8\'e7 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'ee\'e3\'ee \'f2\'e5\'ea\'f1\'f2\'e0\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : CreateHashMD5FromTextAsync(string text)\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0\f0\lang1033 string text = ""Hello World"";\par
+string hash = await tester.CreateHashMD5FromTextAsync(text);\par
+tester.ConsoleMsg(hash);\par
+}",
+
 @"",
 @"",
 @"",
@@ -3265,6 +3277,7 @@ await tester.FileWriteAsync(text, Tester.UTF8, ""C:\\\\Hat\\\\file.txt"");\par
             data.Add(new CompletionData("COMPLETED", "COMPLETED"));
             data.Add(new CompletionData("ConsoleMsg", "ConsoleMsg(string message)"));
             data.Add(new CompletionData("ConsoleMsgError", "ConsoleMsgError(string message)"));
+            data.Add(new CompletionData("CreateHashMD5FromTextAsync", "CreateHashMD5FromTextAsync(string text)"));
             data.Add(new CompletionData("DEFAULT", "DEFAULT"));
             data.Add(new CompletionData("DefineTestStop", "DefineTestStop(int stepIndex)"));
             data.Add(new CompletionData("Description", "Description(string text)"));
@@ -3983,9 +3996,9 @@ await tester.FileWriteAsync(text, Tester.UTF8, ""C:\\\\Hat\\\\file.txt"");\par
                     if (value == "FileWriteAsync" && tag == "Tester") richTextBox1.Rtf = handbook[221];
                     if (value == "FileDownloadAsync" && tag == "Tester") richTextBox1.Rtf = handbook[222];
                     if (value == "FileGetHashMD5Async" && tag == "Tester") richTextBox1.Rtf = handbook[223];
+                    if (value == "CreateHashMD5FromTextAsync" && tag == "Tester") richTextBox1.Rtf = handbook[224];
 
                     /*
-                    if (value == "" && tag == "") richTextBox1.Rtf = handbook[224];
                     if (value == "" && tag == "") richTextBox1.Rtf = handbook[225];
                     if (value == "" && tag == "") richTextBox1.Rtf = handbook[226];
                     if (value == "" && tag == "") richTextBox1.Rtf = handbook[227];
@@ -4018,7 +4031,7 @@ await tester.FileWriteAsync(text, Tester.UTF8, ""C:\\\\Hat\\\\file.txt"");\par
                     if (treeView1.SelectedNode.Text == "Переменные") return;
                     if (treeView1.SelectedNode.Text == "Методы для работы с браузером") return;
                     if (treeView1.SelectedNode.Text == "Методы для вывода сообщений") return;
-                    if (treeView1.SelectedNode.Text == "Методы для подготовки и завершению тестирования") return;
+                    if (treeView1.SelectedNode.Text == "Методы для подготовки и завершения тестирования") return;
 
                     if (treeView1.SelectedNode.Text == "Методы для выполнения действий") return;
                     if (treeView1.SelectedNode.Text == "Нажатие") return;
@@ -4037,6 +4050,7 @@ await tester.FileWriteAsync(text, Tester.UTF8, ""C:\\\\Hat\\\\file.txt"");\par
                     if (treeView1.SelectedNode.Text == "Методы для отправки email и message") return;
                     if (treeView1.SelectedNode.Text == "Методы для проверки результата") return;
                     if (treeView1.SelectedNode.Text == "Методы для работы с файлами") return;
+                    if (treeView1.SelectedNode.Text == "Методы для разных задач") return;
 
                     if (treeView1.SelectedNode.Text == "Класс: FRAMEElement") return;
                     if (treeView1.SelectedNode.Text == "Класс: HTMLElement") return;
