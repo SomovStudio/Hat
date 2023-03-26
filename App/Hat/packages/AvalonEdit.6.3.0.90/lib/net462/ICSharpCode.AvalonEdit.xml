@@ -1126,7 +1126,7 @@
         </member>
         <member name="F:ICSharpCode.AvalonEdit.Document.AnchorMovementType.AfterInsertion">
             <summary>
-            Behave like an end marker - when text is insered at the anchor position, the anchor will move
+            Behave like an end marker - when text is inserted at the anchor position, the anchor will move
             after the inserted text.
             </summary>
         </member>
@@ -1267,7 +1267,7 @@
             Represents a version identifier for a text source.
             </summary>
             <remarks>
-            Verions can be used to efficiently detect whether a document has changed and needs reparsing;
+            Versions can be used to efficiently detect whether a document has changed and needs reparsing;
             or even to implement incremental parsers.
             It is a separate class from ITextSource to allow the GC to collect the text source while
             the version checkpoint is still in use.
@@ -2559,7 +2559,7 @@
             <summary>
             Gets the length of the segment.
             </summary>
-            <remarks>For line segments (IDocumentLine), the length does not include the line delimeter.</remarks>
+            <remarks>For line segments (IDocumentLine), the length does not include the line delimiter.</remarks>
         </member>
         <member name="P:ICSharpCode.AvalonEdit.Document.ISegment.EndOffset">
             <summary>
@@ -2936,7 +2936,7 @@
             undo stack is reverting/repeating a set of changes
         </member>
         <member name="F:ICSharpCode.AvalonEdit.Document.UndoStack.state">
-            state is used for checking that noone but the UndoStack performs changes
+            state is used for checking that no one but the UndoStack performs changes
             during Undo events
         </member>
         <member name="F:ICSharpCode.AvalonEdit.Document.UndoStack.elementsOnUndoUntilOriginalFile">
@@ -4652,7 +4652,7 @@
         </member>
         <member name="P:ICSharpCode.AvalonEdit.Highlighting.DocumentHighlighter.InitialSpanStack">
             <summary>
-            Gets/sets the the initial span stack of the document. Default value is <see cref="F:ICSharpCode.AvalonEdit.Utils.ImmutableStack`1.Empty" />.
+            Gets/sets the initial span stack of the document. Default value is <see cref="F:ICSharpCode.AvalonEdit.Utils.ImmutableStack`1.Empty" />.
             </summary>
         </member>
         <member name="M:ICSharpCode.AvalonEdit.Highlighting.DocumentHighlighter.InvalidateHighlighting">
@@ -5196,7 +5196,7 @@
             Manages a list of syntax highlighting definitions.
             </summary>
             <remarks>
-            All memers on this class (including instance members) are thread-safe.
+            All members on this class (including instance members) are thread-safe.
             </remarks>
         </member>
         <member name="M:ICSharpCode.AvalonEdit.Highlighting.HighlightingManager.GetDefinition(System.String)">
@@ -5828,7 +5828,7 @@
         </member>
         <member name="M:ICSharpCode.AvalonEdit.Highlighting.Xshd.HighlightingLoader.LoadXshd(System.Xml.XmlReader)">
             <summary>
-            Lodas a syntax definition from the xml reader.
+            Loads a syntax definition from the xml reader.
             </summary>
         </member>
         <member name="M:ICSharpCode.AvalonEdit.Highlighting.Xshd.HighlightingLoader.Load(ICSharpCode.AvalonEdit.Highlighting.Xshd.XshdSyntaxDefinition,ICSharpCode.AvalonEdit.Highlighting.IHighlightingDefinitionReferenceResolver)">
@@ -9139,7 +9139,7 @@
         </member>
         <member name="T:ICSharpCode.AvalonEdit.Snippets.SnippetEventArgs">
             <summary>
-            Provides information about the event that occured during use of snippets.
+            Provides information about the event that occurred during use of snippets.
             </summary>
         </member>
         <member name="P:ICSharpCode.AvalonEdit.Snippets.SnippetEventArgs.Reason">
@@ -10174,7 +10174,7 @@
             <summary>
             Creates a new CompressingTreeList instance.
             </summary>
-            <param name="equalityComparer">The equality comparer used for comparing consequtive values.
+            <param name="equalityComparer">The equality comparer used for comparing consecutive values.
             A single node may be used to store the multiple values that are considered equal.</param>
         </member>
         <member name="M:ICSharpCode.AvalonEdit.Utils.CompressingTreeList`1.#ctor(System.Func{`0,`0,System.Boolean})">
@@ -10219,7 +10219,7 @@
         </member>
         <member name="M:ICSharpCode.AvalonEdit.Utils.CompressingTreeList`1.GetStartOfRun(System.Int32)">
             <summary>
-            Gets the the first index so that all values from the result index to <paramref name="index"/>
+            Gets the first index so that all values from the result index to <paramref name="index"/>
             are equal.
             </summary>
         </member>
@@ -10366,7 +10366,7 @@
             We can use up quite a few digits in front of the decimal point (due to visual positions being relative to document origin),
             and there's no need to be too accurate (we're dealing with pixels here),
             so we will use the value 0.01.
-            Previosly we used 1e-8 but that was causing issues:
+            Previously we used 1e-8 but that was causing issues:
             http://community.sharpdevelop.net/forums/t/16048.aspx
             </summary>
         </member>
@@ -10387,7 +10387,7 @@
         </member>
         <member name="M:ICSharpCode.AvalonEdit.Utils.ExtensionMethods.CoerceValue(System.Double,System.Double,System.Double)">
             <summary>
-            Forces the value to stay between mininum and maximum.
+            Forces the value to stay between minimum and maximum.
             </summary>
             <returns>minimum, if value is less than minimum.
             Maximum, if value is greater than maximum.
@@ -10395,7 +10395,7 @@
         </member>
         <member name="M:ICSharpCode.AvalonEdit.Utils.ExtensionMethods.CoerceValue(System.Int32,System.Int32,System.Int32)">
             <summary>
-            Forces the value to stay between mininum and maximum.
+            Forces the value to stay between minimum and maximum.
             </summary>
             <returns>minimum, if value is less than minimum.
             Maximum, if value is greater than maximum.
@@ -10766,7 +10766,7 @@
             Also has cheap Clone() and SubRope() implementations.
             </summary>
             <remarks>
-            This class is not thread-safe: multiple concurrent write operations or writes concurrent to reads have undefined behaviour.
+            This class is not thread-safe: multiple concurrent write operations or writes concurrent to reads have undefined behavior.
             Concurrent reads, however, are safe.
             However, clones of a rope are safe to use on other threads even though they share data with the original rope.
             </remarks>
@@ -10856,7 +10856,7 @@
         </member>
         <member name="M:ICSharpCode.AvalonEdit.Utils.Rope`1.InsertRange(System.Int32,System.Collections.Generic.IEnumerable{`0})">
             <summary>
-            Inserts new elemetns into this rope.
+            Inserts new elements into this rope.
             Runs in O(lg N + M), where N is the length of this rope and M is the number of new elements.
             </summary>
             <exception cref="T:System.ArgumentNullException">newElements is null.</exception>
@@ -10954,10 +10954,10 @@
         </member>
         <member name="M:ICSharpCode.AvalonEdit.Utils.Rope`1.IndexOf(`0)">
             <summary>
-            Finds the first occurance of item.
+            Finds the first occurrence of item.
             Runs in O(N).
             </summary>
-            <returns>The index of the first occurance of item, or -1 if it cannot be found.</returns>
+            <returns>The index of the first occurrence of item, or -1 if it cannot be found.</returns>
             <remarks>
             This method counts as a read access and may be called concurrently to other read accesses.
             </remarks>
@@ -11037,7 +11037,7 @@
         </member>
         <member name="M:ICSharpCode.AvalonEdit.Utils.Rope`1.Remove(`0)">
             <summary>
-            Removes the first occurance of an item from the rope.
+            Removes the first occurrence of an item from the rope.
             Runs in O(N).
             </summary>
         </member>
