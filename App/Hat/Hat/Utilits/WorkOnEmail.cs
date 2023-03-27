@@ -86,11 +86,15 @@ namespace Hat
                 
                 // адрес smtp-сервера и порт, с которого будем отправлять письмо
                 SmtpClient smtp = new SmtpClient(smtpServer, Convert.ToInt32(portServer));
-                
-                // логин и пароль
-                smtp.Credentials = new NetworkCredential(userFrom, passFrom);
+                smtp.UseDefaultCredentials = false;
+                smtp.DeliveryFormat = SmtpDeliveryFormat.International;
+                smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
                 if (ssl == "true") smtp.EnableSsl = true;
                 else smtp.EnableSsl = false;
+                smtp.Timeout = 60000; // 60000 - 60 секунд
+
+                // логин и пароль
+                smtp.Credentials = new NetworkCredential(userFrom, passFrom);
 
                 // отправка письма
                 smtp.Send(message);
