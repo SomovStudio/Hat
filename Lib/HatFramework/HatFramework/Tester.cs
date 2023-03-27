@@ -1040,11 +1040,11 @@ namespace HatFramework
                     if (DefineTestStop(step) == true) return;
                 }
 
-                if (abortLoadAfterTime == true)
+                if (abortLoadAfterTime == true && statusPageLoad == false)
                 {
+                    BrowserView.CoreWebView2.Stop();
                     if (statusPageLoad == true || statusContentLoad == true)
                     {
-                        BrowserView.CoreWebView2.Stop();
                         EditMessageDebug(step, null, null, WARNING, "Загрузка страницы остановлена (Выполнено действие браузера - назад)", "Page loading stopped (Browser action performed - back)", IMAGE_STATUS_WARNING);
                     }
                     else
@@ -1096,11 +1096,11 @@ namespace HatFramework
                     if (DefineTestStop(step) == true) return;
                 }
 
-                if (abortLoadAfterTime == true)
+                if (abortLoadAfterTime == true && statusPageLoad == false)
                 {
+                    BrowserView.CoreWebView2.Stop();
                     if (statusPageLoad == true || statusContentLoad == true)
                     {
-                        BrowserView.CoreWebView2.Stop();
                         EditMessageDebug(step, null, null, WARNING, "Загрузка страницы остановлена (Выполнено действие браузера - вперед)", "Page loading stopped (Browser action performed - forward)", IMAGE_STATUS_WARNING);
                     }
                     else
@@ -1213,11 +1213,11 @@ namespace HatFramework
                     if (DefineTestStop(step) == true) return;
                 }
 
-                if (abortLoadAfterTime == true)
+                if (abortLoadAfterTime == true && statusPageLoad == false)
                 {
+                    BrowserView.CoreWebView2.Stop();
                     if (statusPageLoad == true || statusContentLoad == true)
                     {
-                        BrowserView.CoreWebView2.Stop();
                         EditMessageDebug(step, null, null, WARNING, "Перезагрузка страницы остановлена", "Page reload stopped", IMAGE_STATUS_WARNING);
                     }
                     else
@@ -1401,11 +1401,11 @@ namespace HatFramework
                     if (DefineTestStop(step) == true) return;
                 }
 
-                if (abortLoadAfterTime == true)
+                if (abortLoadAfterTime == true && statusPageLoad == false)
                 {
+                    BrowserView.CoreWebView2.Stop();
                     if (statusPageLoad == true || statusContentLoad == true)
                     {
-                        BrowserView.CoreWebView2.Stop();
                         EditMessageDebug(step, null, null, WARNING, "Загрузка страницы остановлена", "Page loading stopped", IMAGE_STATUS_WARNING);
                     }
                     else
@@ -1474,11 +1474,11 @@ namespace HatFramework
                     if (DefineTestStop(step) == true) return;
                 }
 
-                if (abortLoadAfterTime == true)
+                if (abortLoadAfterTime == true && statusPageLoad == false)
                 {
+                    BrowserView.CoreWebView2.Stop();
                     if (statusPageLoad == true || statusContentLoad == true)
                     {
-                        BrowserView.CoreWebView2.Stop();
                         EditMessageDebug(step, null, null, WARNING, "Загрузка страницы остановлена (базовая авторизация)", "Page loading stopped (basic authorization)", IMAGE_STATUS_WARNING);
                     }
                     else
