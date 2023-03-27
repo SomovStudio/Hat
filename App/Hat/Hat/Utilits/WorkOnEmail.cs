@@ -33,6 +33,8 @@ namespace Hat
                 string portServer = Config.dataMail[5];
                 string ssl = Config.dataMail[6];
 
+                Config.browserForm.ConsoleMsg($"Данные почты: {smtpServer} | {portServer} | {ssl} | {userFrom} | {passFrom}");
+
                 string[] mails;
                 int count = 0;
                 if (addresses == "")
@@ -45,6 +47,10 @@ namespace Hat
                     mails = addresses.Split(' ');
                     count = mails.Length;
                 }
+
+                ServicePointManager.Expect100Continue = true;
+                ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+                ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
 
                 // отправитель и получатель
                 MailAddress from = new MailAddress(mailFrom, "Browser Hat");    // отправитель
