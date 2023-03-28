@@ -15,7 +15,6 @@ using System.Windows.Forms.Integration;
 using ICSharpCode.AvalonEdit;
 using ICSharpCode.AvalonEdit.Search;
 using System.Windows.Media;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
 using System.Windows.Input;
 using ICSharpCode.AvalonEdit.CodeCompletion;
 using Hat.Editor;

@@ -34,6 +34,8 @@ namespace Hat
                 string ssl = Config.dataMail[6];
 
                 Config.browserForm.ConsoleMsg($"Данные почты: {smtpServer} | {portServer} | {ssl} | {userFrom} | {passFrom}");
+                if (Config.languageEngConsole == false) Config.browserForm.SystemConsoleMsg($"Данные почты: SMTP: {smtpServer} | Port: {portServer} | SSL: {ssl} | Login: {userFrom} | Pass: *******", default, ConsoleColor.DarkGray, ConsoleColor.White, true);
+                else Config.browserForm.SystemConsoleMsg($"Mail Data: SMTP: {smtpServer} | Port: {portServer} | SSL: {ssl} | Login: {userFrom} | Pass: *******", default, ConsoleColor.DarkGray, ConsoleColor.White, true);
 
                 string[] mails;
                 int count = 0;
@@ -105,7 +107,9 @@ namespace Hat
                 // отправка письма
                 smtp.Send(message);
 
-                Config.browserForm.ConsoleMsg($"Отправлено писем: {count}");
+                Config.browserForm.ConsoleMsg($"Писем было отправлено: {count}");
+                if (Config.languageEngConsole == false) Config.browserForm.SystemConsoleMsg("Писем было отправлено: " + count.ToString(), default, ConsoleColor.DarkGray, ConsoleColor.White, true);
+                else Config.browserForm.SystemConsoleMsg(count.ToString() + " emails were sent", default, ConsoleColor.DarkGray, ConsoleColor.White, true);
             }
             catch (Exception ex)
             {
