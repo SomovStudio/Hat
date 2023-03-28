@@ -1150,7 +1150,7 @@ namespace HatFramework
                 {
                     args.Response.UserName = user;
                     args.Response.Password = pass;
-                    EditMessageDebug(step, null, null, COMPLETED, "Баговая авторизация - выполнена", "Basic authorization - completed", IMAGE_STATUS_MESSAGE);
+                    EditMessageDebug(step, null, null, COMPLETED, "Базовая авторизация - выполнена", "Basic authorization - completed", IMAGE_STATUS_MESSAGE);
                 };
             }
             catch (Exception ex)
