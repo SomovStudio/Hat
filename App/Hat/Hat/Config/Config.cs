@@ -28,7 +28,7 @@ namespace Hat
         public static bool testSuccess = true;                  // статус тестирования
         public static string defaultUserAgent = "";             // значение user-agent по умолчанию
         public static string currentBrowserVersion = "1.2.3";   // текущая версия браузера
-        public static string dateBrowserUpdate = "1.04.2023";  // дата последнего обновления
+        public static string dateBrowserUpdate = "3.04.2023";  // дата последнего обновления
 
         public static string openHtmlFile = null;             // имя открываемого html файла при запуске браузера
         public static bool commandLineMode = false;         // флаг показывающий запуск приложения из командной строки
