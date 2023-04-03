@@ -55,6 +55,7 @@ namespace Hat
         static void Application_ThreadException(object sender, System.Threading.ThreadExceptionEventArgs e)
         {
             Report.AddStep(Report.ERROR, "", e.Exception.ToString());
+            Config.testSuccess = false;
             Report.SaveReport(false);
 
             Console.OutputEncoding = System.Text.Encoding.UTF8;
@@ -79,7 +80,7 @@ namespace Hat
         static void Application_ThreadExit(Object sender, EventArgs e)
         {
             Application.ThreadExit -= Application_ThreadExit;
-            if (Report.TestSuccess == true) Environment.Exit(0);
+            if (Config.testSuccess == true) Environment.Exit(0);
             else Environment.Exit(1);
         }
 

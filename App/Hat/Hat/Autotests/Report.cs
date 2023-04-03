@@ -84,8 +84,15 @@ namespace Hat
         {
             try
             {
-                if (status == Report.FAILED || status == Report.ERROR) Report.CountErrors++;
-                if (Report.Steps != null && status != Report.STOPPED && status != Report.PROCESS) Report.Steps.Add(new string[] { status, action, comment });
+                if (status == null)
+                {
+                    Report.Steps.Add(new string[] { "", action, comment });
+                }
+                else
+                {
+                    if (status == Report.FAILED || status == Report.ERROR) Report.CountErrors++;
+                    if (Report.Steps != null && status != Report.STOPPED && status != Report.PROCESS) Report.Steps.Add(new string[] { status, action, comment });
+                }
             }
             catch (Exception ex)
             {
@@ -388,7 +395,7 @@ img { min-width: 700px; max-width: 700px; }
                 */
                 content += "<td></td>" + Environment.NewLine;
                 content += "<td></td>" + Environment.NewLine;
-                content += $"<td class=\"table-footer\">Browser Hat {Config.version}</td>" + Environment.NewLine;
+                content += $"<td class=\"table-footer\">Browser Hat {Config.currentBrowserVersion}</td>" + Environment.NewLine;
                 content += "</tfoot>" + Environment.NewLine;
                 content += "</table>" + Environment.NewLine;
                 content += "</section>" + Environment.NewLine;
@@ -737,7 +744,7 @@ ZTptb2RpZnkAMjAyMy0wMi0yMVQxMDoxMzo0MSswMDowMN/S9FIAAAAASUVORK5CYII="" />
             content += "<td></td>" + Environment.NewLine;
             content += "<td></td>" + Environment.NewLine;
             content += "<td></td>" + Environment.NewLine;
-            content += $"<td class=\"table-footer\">Browser Hat {Config.version}</td>" + Environment.NewLine;
+            content += $"<td class=\"table-footer\">Browser Hat {Config.currentBrowserVersion}</td>" + Environment.NewLine;
             content += "</tfoot>" + Environment.NewLine;
             content += "</table>" + Environment.NewLine;
             content += "</section>" + Environment.NewLine;

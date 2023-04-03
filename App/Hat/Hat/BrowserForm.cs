@@ -13,7 +13,6 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Microsoft.Web.WebView2.Core;
 using HatFramework;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using System.Xml.Linq;
 
 namespace Hat
@@ -58,7 +57,7 @@ namespace Hat
               
 
         private bool stopTest = false;
-        private bool testSuccess = true;
+        //private bool testSuccess = true;
         private StepTestForm stepTestForm;
         private CodeEditorForm codeEditorForm;
 
@@ -127,7 +126,7 @@ namespace Hat
                 return;
             }
 
-            if (testSuccess == false)
+            if (Config.testSuccess == false)
             {
                 SystemConsoleMsg(Environment.NewLine + "==============================", default, default, default, true);
                 if (Config.languageEngConsole == false) SystemConsoleMsg("Тестирование завершено ПРОВАЛЬНО", default, ConsoleColor.DarkRed, ConsoleColor.White, true);
@@ -346,8 +345,9 @@ namespace Hat
 
         public void ConsoleMsgErrorReport(string message) // вывод сообщения об ошибке в консоль приложения
         {
+            Config.testSuccess = false;
             Report.AddStep(Report.ERROR, "", message);
-            Report.SaveReport(testSuccess);
+            Report.SaveReport(Config.testSuccess);
 
             richTextBoxConsole.AppendText("[" + DateTime.Now.ToString() + "] ОШИБКА: " + message + Environment.NewLine);
             richTextBoxConsole.ScrollToCaret();
@@ -519,8 +519,8 @@ namespace Hat
 
         public void ResultAutotest(bool success) // Результат выполнения автотеста
         {
-            if (testSuccess == false) return;   // автотест был ранее провален
-            testSuccess = success; // true - автотест был выполнен успешно | false - автотест был провелен
+            if (Config.testSuccess == false) return;   // автотест был ранее провален
+            Config.testSuccess = success; // true - автотест был выполнен успешно | false - автотест был провелен
         }
 
         public bool GetStatusDebugJavaScript()
@@ -545,7 +545,7 @@ namespace Hat
 
         public void SaveReport() // Сохранить отчет и скриншот
         {
-            Report.SaveReport(testSuccess);
+            Report.SaveReport(Config.testSuccess);
         }
 
         public async Task SaveReportScreenshotAsync() // Сохраняет скриншот текущего состояния браузера
@@ -724,11 +724,11 @@ namespace Hat
             }
         }
 
-        public void SendMail(string subject, string body, string filename) // отправка письма на почту
+        public void SendMail(string subject, string body, string filename, string addresses = "") // отправка письма на почту
         {
             try
             {
-                WorkOnEmail.SendEmail(subject, body, filename);
+                WorkOnEmail.SendEmail(subject, body, filename, addresses);
             }
             catch (Exception ex)
             {
@@ -1824,7 +1824,7 @@ namespace Hat
         {
             try
             {
-                testSuccess = true;
+                Config.testSuccess = true;
                 CleadMessageStep();
                 if (Config.selectName.Contains(".cs"))
                 {
@@ -2794,8 +2794,8 @@ namespace Hat
         {
             try
             {
-                menuStrip1.Visible = false;
-                toolStrip1.Visible = false;
+                //menuStrip1.Visible = false;
+                //toolStrip1.Visible = false;
                 splitContainer1.Panel2Collapsed = true;
                 ConsoleMsg("Интерфейс браузера отключен");
             }

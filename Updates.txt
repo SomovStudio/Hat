@@ -1,8 +1,22 @@
+Обновление браузера Hat 1.2.3 (3.04.2023)
+
+Список внесённых изменений:
+
+- Изменён вывод действий в консоль при выполнении автотеста
+- Изменения в методах FindElement
+- Изменён метод SendMsgToMailAsync (добавлено поле адресов)
+- Добавлен метод CreateHashMD5FromTextAsync для формирования MD5 кода
+- Изменения в функциональности по работе с почтой
+- Обновлен плагин WebView до версии 2.1.0.1661.34
+- Обновлен плагин AvalonEdit до версии 6.3.0.90
+
+-----------------------------
+
 Обновление браузера Hat 1.2.2 (16.03.2023)
 
 Список внесённых изменений:
 
-- Добавлена остановка загрузки страницы в методах GoToUrlAsync, GoToUrlBaseAuthAsync, 
+- Добавлена остановка загрузки страницы в методах GoToUrlAsync, GoToUrlBaseAuthAsync
 - Добавлена остановка загрузки страницы в методах BrowserGoBackAsync, BrowserGoForwardAsync, BrowserPageReloadAsync
 - Добавлены методы FileReadAsync, FileWriteAsync, FileDownloadAsync, FileGetHashMD5Async
 - Исправлены ошибки при формировании отчетов

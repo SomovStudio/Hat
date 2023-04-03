@@ -20,7 +20,7 @@ namespace Hat
          * Отправка почты
          * Источник: https://metanit.com/sharp/net/8.1.php
          */
-        public static void SendEmail(string subject, string body, string filename)
+        public static void SendEmail(string subject, string body, string filename, string addresses = "")
         {
             try
             {
@@ -33,8 +33,26 @@ namespace Hat
                 string portServer = Config.dataMail[5];
                 string ssl = Config.dataMail[6];
 
-                string[] mails = mailsTo.Split(' ');
-                int count = mails.Length;
+                Config.browserForm.ConsoleMsg($"Данные почты: {smtpServer} | {portServer} | {ssl} | {userFrom} | {passFrom}");
+                if (Config.languageEngConsole == false) Config.browserForm.SystemConsoleMsg($"Данные почты: SMTP: {smtpServer} | Port: {portServer} | SSL: {ssl} | Login: {userFrom} | Pass: *******", default, ConsoleColor.DarkGray, ConsoleColor.White, true);
+                else Config.browserForm.SystemConsoleMsg($"Mail Data: SMTP: {smtpServer} | Port: {portServer} | SSL: {ssl} | Login: {userFrom} | Pass: *******", default, ConsoleColor.DarkGray, ConsoleColor.White, true);
+
+                string[] mails;
+                int count = 0;
+                if (addresses == "")
+                {
+                    mails = mailsTo.Split(' ');
+                    count = mails.Length;
+                }
+                else
+                {
+                    mails = addresses.Split(' ');
+                    count = mails.Length;
+                }
+
+                ServicePointManager.Expect100Continue = true;
+                ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+                ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
 
                 // отправитель и получатель
                 MailAddress from = new MailAddress(mailFrom, "Browser Hat");    // отправитель
@@ -76,16 +94,22 @@ namespace Hat
                 
                 // адрес smtp-сервера и порт, с которого будем отправлять письмо
                 SmtpClient smtp = new SmtpClient(smtpServer, Convert.ToInt32(portServer));
-                
-                // логин и пароль
-                smtp.Credentials = new NetworkCredential(userFrom, passFrom);
+                smtp.UseDefaultCredentials = false;
+                smtp.DeliveryFormat = SmtpDeliveryFormat.International;
+                smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
                 if (ssl == "true") smtp.EnableSsl = true;
                 else smtp.EnableSsl = false;
+                smtp.Timeout = 60000; // 60000 - 60 секунд
+
+                // логин и пароль
+                smtp.Credentials = new NetworkCredential(userFrom, passFrom);
 
                 // отправка письма
                 smtp.Send(message);
 
-                Config.browserForm.ConsoleMsg($"Отправлено писем: {count}");
+                Config.browserForm.ConsoleMsg($"Писем было отправлено: {count}");
+                if (Config.languageEngConsole == false) Config.browserForm.SystemConsoleMsg("Писем было отправлено: " + count.ToString(), default, ConsoleColor.DarkGray, ConsoleColor.White, true);
+                else Config.browserForm.SystemConsoleMsg(count.ToString() + " emails were sent", default, ConsoleColor.DarkGray, ConsoleColor.White, true);
             }
             catch (Exception ex)
             {
