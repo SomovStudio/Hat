@@ -1135,6 +1135,7 @@ namespace Hat
 
                     Config.projectPath += "\\Tests";
                     fileProject = "\\project.hat";
+                    toolStripStatusLabelProjectPath.Text = Config.projectPath;
 
                     // Строится дерево папок и файлов
                     treeViewProject.Nodes.Clear();
