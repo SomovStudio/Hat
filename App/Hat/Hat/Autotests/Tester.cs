@@ -238,7 +238,7 @@ namespace HatFrameworkDev
             return found;
         }
 
-        private async Task<string> execute(string script, int step, string commentPassedRus, string commentPassedEng,  string commentfailedRus, string commentfailedEng)
+        private async Task<string> execute(string script, int step, string commentPassedRus, string commentPassedEng,  string commentfailedRus, string commentfailedEng, bool returnResult = false)
         {
             string result = null;
             try
@@ -253,7 +253,8 @@ namespace HatFrameworkDev
                 }
                 else
                 {
-                    EditMessageDebug(step, null, null, Tester.PASSED, commentPassedRus, commentPassedEng, Tester.IMAGE_STATUS_PASSED);
+                    if (returnResult == true) EditMessageDebug(step, null, null, Tester.PASSED, commentPassedRus + " | " + result, commentPassedEng, Tester.IMAGE_STATUS_PASSED);
+                    else EditMessageDebug(step, null, null, Tester.PASSED, commentPassedRus, commentPassedEng, Tester.IMAGE_STATUS_PASSED);
                 }
             }
             catch (Exception ex)
@@ -2456,7 +2457,7 @@ namespace HatFrameworkDev
             script += "element.dispatchEvent(new Event('change', { bubbles: true }));";
             script += "return element.value;";
             script += "}());";
-            await execute(script, step, "Значение введено в элемент", "The value was entered into the element", $"Не удалось найти или ввести значение в элемент с ID: {id}", $"Could not find or enter a value in an element with ID: {id}");
+            await execute(script, step, "Значение введено в элемент", "The value was entered into the element", $"Не удалось найти или ввести значение в элемент с ID: {id}", $"Could not find or enter a value in an element with ID: {id}", true);
         }
 
         public async Task SetValueInElementByClassAsync(string _class, int index, string value)
@@ -2474,7 +2475,7 @@ namespace HatFrameworkDev
             script += "element.dispatchEvent(new Event('change', { bubbles: true }));";
             script += "return element.value;";
             script += "}());";
-            await execute(script, step, "Значение введено в элемент", "The value was entered into the element", $"Не удалось найти или ввести значение в элемент по Class: {_class} (Index: {index})", $"Could not find or enter a value in the element by Class: {_class} (Index: {index})");
+            await execute(script, step, "Значение введено в элемент", "The value was entered into the element", $"Не удалось найти или ввести значение в элемент по Class: {_class} (Index: {index})", $"Could not find or enter a value in the element by Class: {_class} (Index: {index})", true);
         }
 
         public async Task SetValueInElementByNameAsync(string name, int index, string value)
@@ -2492,7 +2493,7 @@ namespace HatFrameworkDev
             script += "element.dispatchEvent(new Event('change', { bubbles: true }));";
             script += "return element.value;";
             script += "}());";
-            await execute(script, step, "Значение введено в элемент", "The value was entered into the element", $"Не удалось найти или ввести значение в элемент по Name: {name} (Index: {index})", $"Could not find or enter a value in the element by Name: {name} (Index: {index})");
+            await execute(script, step, "Значение введено в элемент", "The value was entered into the element", $"Не удалось найти или ввести значение в элемент по Name: {name} (Index: {index})", $"Could not find or enter a value in the element by Name: {name} (Index: {index})", true);
         }
 
         public async Task SetValueInElementByTagAsync(string tag, int index, string value)
@@ -2510,7 +2511,7 @@ namespace HatFrameworkDev
             script += "element.dispatchEvent(new Event('change', { bubbles: true }));";
             script += "return element.value;";
             script += "}());";
-            await execute(script, step, "Значение введено в элемент", "The value was entered into the element", $"Не удалось найти или ввести значение в элемент по Tag: {tag} (Index: {index})", $"Could not find or enter a value in the element by Tag: {tag} (Index: {index})");
+            await execute(script, step, "Значение введено в элемент", "The value was entered into the element", $"Не удалось найти или ввести значение в элемент по Tag: {tag} (Index: {index})", $"Could not find or enter a value in the element by Tag: {tag} (Index: {index})", true);
         }
 
         public async Task SetValueInElementAsync(string by, string locator, string value)
@@ -2529,7 +2530,7 @@ namespace HatFrameworkDev
             script += "element.dispatchEvent(new Event('change', { bubbles: true }));";
             script += "return element.value;";
             script += "}());";
-            await execute(script, step, "Значение введено в элемент", "The value was entered into the element", $"Не удалось найти или ввести значение в элемент по локатору: {locator}", $"Could not find or enter a value in the element by locator: {locator}");
+            await execute(script, step, "Значение введено в элемент", "The value was entered into the element", $"Не удалось найти или ввести значение в элемент по локатору: {locator}", $"Could not find or enter a value in the element by locator: {locator}", true);
         }
 
         public async Task<string> GetValueFromElementByIdAsync(string id)
@@ -2541,7 +2542,7 @@ namespace HatFrameworkDev
             try
             {
                 string script = "(function(){ var element = document.getElementById('" + id + "'); return element.value; }());";
-                value = await execute(script, step, "Получено значение из элемента", "Got the value from the element", $"Не удалось найти или получить данные из элемента с ID: {id}", $"Could not find or get data from an element with ID: {id}");
+                value = await execute(script, step, "Получено значение из элемента", "Got the value from the element", $"Не удалось найти или получить данные из элемента с ID: {id}", $"Could not find or get data from an element with ID: {id}", true);
                 if (value.Length > 1) value = value.Substring(1, value.Length - 2);
             }
             catch (Exception ex)
@@ -2565,7 +2566,7 @@ namespace HatFrameworkDev
             try
             {
                 string script = "(function(){ var element = document.getElementsByClassName('" + _class + "')[" + index + "]; return element.value; }());";
-                value = await execute(script, step, "Получено значение из элемента", "Got the value from the element", $"Не удалось найти или получить данные из элемента по Class: {_class} (Index: {index})", $"Could not find or get data from the element by Class: {_class} (Index: {index})");
+                value = await execute(script, step, "Получено значение из элемента", "Got the value from the element", $"Не удалось найти или получить данные из элемента по Class: {_class} (Index: {index})", $"Could not find or get data from the element by Class: {_class} (Index: {index})", true);
                 if (value.Length > 1) value = value.Substring(1, value.Length - 2);
             }
             catch (Exception ex)
@@ -2589,7 +2590,7 @@ namespace HatFrameworkDev
             try
             {
                 string script = "(function(){ var element = document.getElementsByName('" + name + "')[" + index + "]; return element.value; }());";
-                value = await execute(script, step, "Получено значение из элемента", "Got the value from the element", $"Не удалось найти или получить данные из элемента по Name: {name} (Index: {index})", $"Could not find or get data from the element by Name: {name} (Index: {index})");
+                value = await execute(script, step, "Получено значение из элемента", "Got the value from the element", $"Не удалось найти или получить данные из элемента по Name: {name} (Index: {index})", $"Could not find or get data from the element by Name: {name} (Index: {index})", true);
                 if (value.Length > 1) value = value.Substring(1, value.Length - 2);
             }
             catch (Exception ex)
@@ -2613,7 +2614,7 @@ namespace HatFrameworkDev
             try
             {
                 string script = "(function(){ var element = document.getElementsByTagName('" + tag + "')[" + index + "]; return element.value; }());";
-                value = await execute(script, step, "Получено значение из элемента", "Got the value from the element", $"Не удалось найти или получить данные из элемента по Tag: {tag} (Index: {index})", $"Could not find or get data from the element by Tag: {tag} (Index: {index})");
+                value = await execute(script, step, "Получено значение из элемента", "Got the value from the element", $"Не удалось найти или получить данные из элемента по Tag: {tag} (Index: {index})", $"Could not find or get data from the element by Tag: {tag} (Index: {index})", true);
                 if (value.Length > 1) value = value.Substring(1, value.Length - 2);
             }
             catch (Exception ex)
@@ -2640,7 +2641,7 @@ namespace HatFrameworkDev
                 if (by == BY_CSS) script += $"var element = document.querySelector(\"{locator}\"); return element.value;";
                 else if (by == BY_XPATH) script += $"var element = document.evaluate(\"{locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue; return element.value;";
                 script += "}());";
-                value = await execute(script, step, "Получено значение из элемента", "Got the value from the element", $"Не удалось найти или получить данные из элемента по локатору: {locator}", $"Could not find or get data from the element by Locator: {locator}");
+                value = await execute(script, step, "Получено значение из элемента", "Got the value from the element", $"Не удалось найти или получить данные из элемента по локатору: {locator}", $"Could not find or get data from the element by Locator: {locator}", true);
                 if (value.Length > 1) value = value.Substring(1, value.Length - 2);
             }
             catch (Exception ex)
@@ -2665,7 +2666,7 @@ namespace HatFrameworkDev
             script += $"element.innerText = '{text}';";
             script += "return element.innerText;";
             script += "}());";
-            await execute(script, step, "Текст введен в элемент", "The text was entered into the element", $"Не удалось найти или ввести текст в элемент с ID: {id}", $"Could not find or enter text in the element with ID: {id}");
+            await execute(script, step, "Текст введен в элемент", "The text was entered into the element", $"Не удалось найти или ввести текст в элемент с ID: {id}", $"Could not find or enter text in the element with ID: {id}", true);
         }
 
         public async Task SetTextInElementByClassAsync(string _class, int index, string text)
@@ -2678,7 +2679,7 @@ namespace HatFrameworkDev
             script += $"element.innerText = '{text}';";
             script += "return element.innerText;";
             script += "}());";
-            await execute(script, step, "Текст введен в элемент", "The text was entered into the element", $"Не удалось найти или ввести текст в элемент по Class: {_class} (Index: {index})", $"Could not find or enter text in the element by Class: {_class} (Index: {index})");
+            await execute(script, step, "Текст введен в элемент", "The text was entered into the element", $"Не удалось найти или ввести текст в элемент по Class: {_class} (Index: {index})", $"Could not find or enter text in the element by Class: {_class} (Index: {index})", true);
         }
 
         public async Task SetTextInElementByNameAsync(string name, int index, string text)
@@ -2691,7 +2692,7 @@ namespace HatFrameworkDev
             script += $"element.innerText = '{text}';";
             script += "return element.innerText;";
             script += "}());";
-            await execute(script, step, "Текст введен в элемент", "The text was entered into the element", $"Не удалось найти или ввести текст в элемент по Name: {name} (Index: {index})", $"Could not find or enter text in the element by Name: {name} (Index: {index})");
+            await execute(script, step, "Текст введен в элемент", "The text was entered into the element", $"Не удалось найти или ввести текст в элемент по Name: {name} (Index: {index})", $"Could not find or enter text in the element by Name: {name} (Index: {index})", true);
         }
 
         public async Task SetTextInElementByTagAsync(string tag, int index, string text)
@@ -2704,7 +2705,7 @@ namespace HatFrameworkDev
             script += $"element.innerText = '{text}';";
             script += "return element.innerText;";
             script += "}());";
-            await execute(script, step, "Текст введен в элемент", "The text was entered into the element", $"Не удалось найти или ввести текст в элемент по Tag: {tag} (Index: {index})", $"Could not find or enter text in the element by Tag: {tag} (Index: {index})");
+            await execute(script, step, "Текст введен в элемент", "The text was entered into the element", $"Не удалось найти или ввести текст в элемент по Tag: {tag} (Index: {index})", $"Could not find or enter text in the element by Tag: {tag} (Index: {index})", true);
         }
 
         public async Task SetTextInElementAsync(string by, string locator, string text)
@@ -2718,7 +2719,7 @@ namespace HatFrameworkDev
             script += $"element.innerText = '{text}';";
             script += "return element.innerText;";
             script += "}());";
-            await execute(script, step, "Текст введен в элемент", "The text was entered into the element", $"Не удалось найти или ввести текст в элемент по локатору: {locator}", $"Could not find or enter text in the element by locator: {locator}");
+            await execute(script, step, "Текст введен в элемент", "The text was entered into the element", $"Не удалось найти или ввести текст в элемент по локатору: {locator}", $"Could not find or enter text in the element by locator: {locator}", true);
         }
 
         public async Task<string> GetTextFromElementByIdAsync(string id)
@@ -2733,7 +2734,7 @@ namespace HatFrameworkDev
                 script += "if(element.innerText == '' && element.value != null) { return element.value; } ";
                 script += "else { return element.innerText; } ";
                 script += "}());";
-                value = await execute(script, step, "Прочитан текст из элемента", "The text from the element has been read", $"Не удалось найти или прочитать текст из элемента с ID: {id}", $"Could not find or read the text from the element with ID: {id}");
+                value = await execute(script, step, "Прочитан текст из элемента", "The text from the element has been read", $"Не удалось найти или прочитать текст из элемента с ID: {id}", $"Could not find or read the text from the element with ID: {id}", true);
                 if (value.Length > 1 && value != "null") value = value.Substring(1, value.Length - 2);
             }
             catch (Exception ex)
@@ -2762,7 +2763,7 @@ namespace HatFrameworkDev
                 script += "if(element.innerText == '' && element.value != null) { return element.value; } ";
                 script += "else { return element.innerText; } ";
                 script += "}());";
-                value = await execute(script, step, "Прочитан текст из элемента", "The text from the element has been read", $"Не удалось найти или прочитать текст из элемента по Class: {_class} (Index: {index})", $"Could not find or read the text from the element by Class: {_class} (Index: {index})");
+                value = await execute(script, step, "Прочитан текст из элемента", "The text from the element has been read", $"Не удалось найти или прочитать текст из элемента по Class: {_class} (Index: {index})", $"Could not find or read the text from the element by Class: {_class} (Index: {index})", true);
                 if (value.Length > 1 && value != "null") value = value.Substring(1, value.Length - 2);
             }
             catch (Exception ex)
@@ -2791,7 +2792,7 @@ namespace HatFrameworkDev
                 script += "if(element.innerText == '' && element.value != null) { return element.value; } ";
                 script += "else { return element.innerText; } ";
                 script += "}());";
-                value = await execute(script, step, "Прочитан текст из элемента", "The text from the element has been read", $"Не удалось найти или прочитать текст из элемента по Name: {name} (Index: {index})", $"Could not find or read the text from the element by Name: {name} (Index: {index})");
+                value = await execute(script, step, "Прочитан текст из элемента", "The text from the element has been read", $"Не удалось найти или прочитать текст из элемента по Name: {name} (Index: {index})", $"Could not find or read the text from the element by Name: {name} (Index: {index})", true);
                 if (value.Length > 1 && value != "null") value = value.Substring(1, value.Length - 2);
             }
             catch (Exception ex)
@@ -2820,7 +2821,7 @@ namespace HatFrameworkDev
                 script += "if(element.innerText == '' && element.value != null) { return element.value; } ";
                 script += "else { return element.innerText; } ";
                 script += "}());";
-                value = await execute(script, step, "Прочитан текст из элемента", "The text from the element has been read", $"Не удалось найти или прочитать текст из элемента по Tag: {tag} (Index: {index})", $"Could not find or read the text from the element by Tag: {tag} (Index: {index})");
+                value = await execute(script, step, "Прочитан текст из элемента", "The text from the element has been read", $"Не удалось найти или прочитать текст из элемента по Tag: {tag} (Index: {index})", $"Could not find or read the text from the element by Tag: {tag} (Index: {index})", true);
                 if (value.Length > 1 && value != "null") value = value.Substring(1, value.Length - 2);
             }
             catch (Exception ex)
@@ -2851,7 +2852,7 @@ namespace HatFrameworkDev
                 script += "if(element.innerText == '' && element.value != null) { return element.value; } ";
                 script += "else { return element.innerText; } ";
                 script += "}());";
-                value = await execute(script, step, "Прочитан текст из элемента", "The text from the element has been read", $"Не удалось найти или прочитать текст из элемента по локатору: {locator}", $"Could not find or read the text from the element by the locator: {locator}");
+                value = await execute(script, step, "Прочитан текст из элемента", "The text from the element has been read", $"Не удалось найти или прочитать текст из элемента по локатору: {locator}", $"Could not find or read the text from the element by the locator: {locator}", true);
                 if (value.Length > 1 && value != "null") value = value.Substring(1, value.Length - 2);
             }
             catch (Exception ex)
@@ -3935,7 +3936,7 @@ namespace HatFrameworkDev
                 script += $"var style = window.getComputedStyle(element).getPropertyValue(\"{property}\"); ";
                 script += "return style; ";
                 script += "}());";
-                value = await execute(script, step, "Стиль из элемента прочитан", "Style from the read element", $"Не удалось прочитать стиль '{property}' из элемента по локатору: {locator}", $"Could not read the style '{property}' from the element by the locator: {locator}");
+                value = await execute(script, step, "Стиль из элемента прочитан", "Style from the read element", $"Не удалось прочитать стиль '{property}' из элемента по локатору: {locator}", $"Could not read the style '{property}' from the element by the locator: {locator}", true);
                 if (value.Length > 1 && value != "null") value = value.Substring(1, value.Length - 2);
             }
             catch (Exception ex)
@@ -3964,7 +3965,7 @@ namespace HatFrameworkDev
                 script += $"var style = window.getComputedStyle(element).getPropertyValue(\"{property}\"); ";
                 script += "return style; ";
                 script += "}());";
-                value = await execute(script, step, "Стиль из элемента прочитан", "Style from the read element", $"Не удалось найти или прочитать стиль '{property}' из элемента с ID: {id}", $"Could not find or read the style '{property}' from the element with ID: {id}");
+                value = await execute(script, step, "Стиль из элемента прочитан", "Style from the read element", $"Не удалось найти или прочитать стиль '{property}' из элемента с ID: {id}", $"Could not find or read the style '{property}' from the element with ID: {id}", true);
                 if (value.Length > 1 && value != "null") value = value.Substring(1, value.Length - 2);
             }
             catch (Exception ex)
@@ -3993,7 +3994,7 @@ namespace HatFrameworkDev
                 script += $"var style = window.getComputedStyle(element).getPropertyValue(\"{property}\"); ";
                 script += "return style; ";
                 script += "}());";
-                value = await execute(script, step, "Стиль из элемента прочитан", "Style from the read element", $"Не удалось найти или прочитать стиль '{property}' из элемента по Class: {_class} (Index: {index})", $"Could not find or read the style '{property}' from the element by Class: {_class} (Index: {index})");
+                value = await execute(script, step, "Стиль из элемента прочитан", "Style from the read element", $"Не удалось найти или прочитать стиль '{property}' из элемента по Class: {_class} (Index: {index})", $"Could not find or read the style '{property}' from the element by Class: {_class} (Index: {index})", true);
                 if (value.Length > 1 && value != "null") value = value.Substring(1, value.Length - 2);
             }
             catch (Exception ex)
@@ -4022,7 +4023,7 @@ namespace HatFrameworkDev
                 script += $"var style = window.getComputedStyle(element).getPropertyValue(\"{property}\"); ";
                 script += "return style; ";
                 script += "}());";
-                value = await execute(script, step, "Стиль из элемента прочитан", "Style from the read element", $"Не удалось найти или прочитать стиль '{property}' из элемента по Name: {name} (Index: {index})", $"Could not find or read the style '{property}' from the element by Name: {name} (Index: {index})");
+                value = await execute(script, step, "Стиль из элемента прочитан", "Style from the read element", $"Не удалось найти или прочитать стиль '{property}' из элемента по Name: {name} (Index: {index})", $"Could not find or read the style '{property}' from the element by Name: {name} (Index: {index})", true);
                 if (value.Length > 1 && value != "null") value = value.Substring(1, value.Length - 2);
             }
             catch (Exception ex)
@@ -4051,7 +4052,7 @@ namespace HatFrameworkDev
                 script += $"var style = window.getComputedStyle(element).getPropertyValue(\"{property}\"); ";
                 script += "return style; ";
                 script += "}());";
-                value = await execute(script, step, "Стиль из элемента прочитан", "Style from the read element", $"Не удалось найти или прочитать стиль '{property}' из элемента по Tag: {tag} (Index: {index})", $"Could not find or read the style '{property}' from the element by Tag: {tag} (Index: {index})");
+                value = await execute(script, step, "Стиль из элемента прочитан", "Style from the read element", $"Не удалось найти или прочитать стиль '{property}' из элемента по Tag: {tag} (Index: {index})", $"Could not find or read the style '{property}' from the element by Tag: {tag} (Index: {index})", true);
                 if (value.Length > 1 && value != "null") value = value.Substring(1, value.Length - 2);
             }
             catch (Exception ex)
@@ -4079,7 +4080,7 @@ namespace HatFrameworkDev
             script += $"element.style.cssText = '{cssText}';";
             script += "return element;";
             script += "}());";
-            await execute(script, step, "Стиль введен в элемент", "The style is entered in the element", $"Не удалось найти или ввести стиль в элемент по локатору: {locator}", $"Could not find or enter style in the element by locator: {locator}");
+            await execute(script, step, "Стиль введен в элемент", "The style is entered in the element", $"Не удалось найти или ввести стиль в элемент по локатору: {locator}", $"Could not find or enter style in the element by locator: {locator}", true);
         }
 
         public async Task SetStyleInElementByIdAsync(string id, string cssText)
@@ -4092,7 +4093,7 @@ namespace HatFrameworkDev
             script += $"element.style.cssText = '{cssText}';";
             script += "return element;";
             script += "}());";
-            await execute(script, step, "Стиль введен в элемент", "The style is entered in the element", $"Не удалось найти или ввести стиль в элемент с ID: {id}", $"Could not find or enter style in the element with ID: {id}");
+            await execute(script, step, "Стиль введен в элемент", "The style is entered in the element", $"Не удалось найти или ввести стиль в элемент с ID: {id}", $"Could not find or enter style in the element with ID: {id}", true);
         }
 
         public async Task SetStyleInElementByClassAsync(string _class, int index, string cssText)
@@ -4105,7 +4106,7 @@ namespace HatFrameworkDev
             script += $"element.style.cssText = '{cssText}';";
             script += "return element;";
             script += "}());";
-            await execute(script, step, "Стиль введен в элемент", "The style is entered in the element", $"Не удалось найти или ввести стиль в элемент по Class: {_class} (Index: {index})", $"Could not find or enter style in the element by Class: {_class} (Index: {index})");
+            await execute(script, step, "Стиль введен в элемент", "The style is entered in the element", $"Не удалось найти или ввести стиль в элемент по Class: {_class} (Index: {index})", $"Could not find or enter style in the element by Class: {_class} (Index: {index})", true);
         }
 
         public async Task SetStyleInElementByNameAsync(string name, int index, string cssText)
@@ -4118,7 +4119,7 @@ namespace HatFrameworkDev
             script += $"element.style.cssText = '{cssText}';";
             script += "return element;";
             script += "}());";
-            await execute(script, step, "Стиль введен в элемент", "The style is entered in the element", $"Не удалось найти или ввести стиль в элемент по Name: {name} (Index: {index})", $"Could not find or enter style in the element by Name: {name} (Index: {index})");
+            await execute(script, step, "Стиль введен в элемент", "The style is entered in the element", $"Не удалось найти или ввести стиль в элемент по Name: {name} (Index: {index})", $"Could not find or enter style in the element by Name: {name} (Index: {index})", true);
         }
 
         public async Task SetStyleInElementByTagAsync(string tag, int index, string cssText)
@@ -4131,7 +4132,7 @@ namespace HatFrameworkDev
             script += $"element.style.cssText = '{cssText}';";
             script += "return element;";
             script += "}());";
-            await execute(script, step, "Стиль введен в элемент", "The style is entered in the element", $"Не удалось найти или ввести текст в элемент по Tag: {tag} (Index: {index})", $"Could not find or enter text in the element by Tag: {tag} (Index: {index})");
+            await execute(script, step, "Стиль введен в элемент", "The style is entered in the element", $"Не удалось найти или ввести текст в элемент по Tag: {tag} (Index: {index})", $"Could not find or enter text in the element by Tag: {tag} (Index: {index})", true);
         }
 
         /*
