@@ -16,7 +16,6 @@ using HatFramework;
 using Newtonsoft.Json.Linq;
 using System.Security.Cryptography;
 using System.Xml.Linq;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace HatFrameworkDev
 {
@@ -513,7 +512,6 @@ namespace HatFrameworkDev
         {
             try
             {
-                if (DefineTestStop() == true) return;
                 this.actions = new string[] { actionRus, actionEng};
 
                 // вывод сообщения в системную консоль
@@ -3097,18 +3095,27 @@ namespace HatFrameworkDev
 
         public async Task<string> GetTitleAsync()
         {
-            int step = SendMessageDebug($"GetTitleAsync()", $"GetTitleAsync()", PROCESS, "Чтение текста из заголовка", "Reading the text from the title", IMAGE_STATUS_PROCESS);
-            if (DefineTestStop(step) == true) return "";
+            if (DefineTestStop() == true) return "";
 
             string script = "(function(){ var element = document.querySelector('title'); return element.innerText; }());";
-            string value = await execute(script, step, "Прочитан текст из заголовка", "The text from the title has been read", "Не удалось найти заголовок на странице", "Couldn't find the title on the page");
+            string value = await execute(script, $"GetTitleAsync()");
+            if (value == "null" || value == null)
+            {
+                SendMessageDebug($"GetTitleAsync()", $"GetTitleAsync()", Tester.FAILED, "Не удалось найти заголовок на странице", "Couldn't find the title on the page", Tester.IMAGE_STATUS_FAILED);
+                TestStopAsync();
+            }
+            else
+            {
+                if (value.Length > 1) value = value.Substring(1, value.Length - 2);
+                SendMessageDebug($"GetTitleAsync()", $"GetTitleAsync()", Tester.PASSED, "Прочитан текст из заголовка | " + value, "The text from the title has been read | " + value, Tester.IMAGE_STATUS_PASSED);
+            }
             return value;
         }
 
         public async Task<string> GetAttributeFromElementByIdAsync(string id, string attribute)
         {
-            int step = SendMessageDebug($"GetAttributeFromElementByIdAsync('{id}', '{attribute}')", $"GetAttributeFromElementByIdAsync('{id}', '{attribute}')", PROCESS, $"Получение аттрибута {attribute} из элемент", $"Getting an attribute {attribute} from elements", IMAGE_STATUS_PROCESS);
-            if (DefineTestStop(step) == true) return "";
+            //int step = SendMessageDebug($"GetAttributeFromElementByIdAsync('{id}', '{attribute}')", $"GetAttributeFromElementByIdAsync('{id}', '{attribute}')", PROCESS, $"Получение аттрибута {attribute} из элемент", $"Getting an attribute {attribute} from elements", IMAGE_STATUS_PROCESS);
+            if (DefineTestStop() == true) return "";
 
             string value = "";
             try
