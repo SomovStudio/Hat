@@ -873,6 +873,8 @@
             // 
             // toolStripComboBoxUrl
             // 
+            this.toolStripComboBoxUrl.AutoSize = false;
+            this.toolStripComboBoxUrl.DropDownWidth = 850;
             this.toolStripComboBoxUrl.Items.AddRange(new object[] {
             "https://www.google.com/",
             "https://yandex.ru/"});
@@ -2603,6 +2605,7 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.BrowserForm_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.BrowserForm_FormClosed);
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.Resize += new System.EventHandler(this.BrowserForm_Resize);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.statusStrip1.ResumeLayout(false);

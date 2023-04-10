@@ -105,6 +105,11 @@ namespace Hat
             }
         }
 
+        private void BrowserForm_Resize(object sender, EventArgs e)
+        {
+            toolStripComboBoxUrl.Width = this.Width / 2;
+        }
+
         private void закрытьToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Close();
@@ -3090,5 +3095,7 @@ namespace Hat
             if (Config.projectPath == "(не открыт)") ConsoleMsg("Проект не открыт! Невозможно сформировать отчет с результатами всех тестов");
             else Report.SaveResultReport();
         }
+
+        
     }
 }
