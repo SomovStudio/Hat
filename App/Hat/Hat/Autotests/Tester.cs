@@ -15,6 +15,8 @@ using Newtonsoft.Json;
 using HatFramework;
 using Newtonsoft.Json.Linq;
 using System.Security.Cryptography;
+using System.Xml.Linq;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace HatFrameworkDev
 {
@@ -55,7 +57,7 @@ namespace HatFrameworkDev
         private MethodInfo browserSystemConsoleMsg; // функция: SystemConsoleMsg - вывод сообщения в системную консоль
         private MethodInfo browserCleadMessageStep; // функция: CleadMessageStep - очистка всех шагов в таблице "тест"
         private MethodInfo browserSendMessageStep;  // функция: SendMessageStep - вывести сообщение в таблицу "тест"
-        private MethodInfo browserEditMessageStep;  // функция: EditMessageStep - изменить уже выведенное сообщение в таблице "тест"
+        // УДАЛИТЬ - private MethodInfo browserEditMessageStep;  // функция: EditMessageStep - изменить уже выведенное сообщение в таблице "тест"
         private MethodInfo browserResize;           // функция: BrowserResize - изменить размер браузера
         private MethodInfo browserUserAgent;        // функция: UserAgent - настройка user-agent параметра
         private MethodInfo browserGetErrors;        // Функция: GetBowserErrors - получить список ошибок и предупреждений браузера
@@ -97,7 +99,7 @@ namespace HatFrameworkDev
                 browserSystemConsoleMsg = BrowserWindow.GetType().GetMethod("SystemConsoleMsg");
                 browserCleadMessageStep = BrowserWindow.GetType().GetMethod("CleadMessageStep");
                 browserSendMessageStep = BrowserWindow.GetType().GetMethod("SendMessageStep");
-                browserEditMessageStep = BrowserWindow.GetType().GetMethod("EditMessageStep");
+                // УДАЛИТЬ - browserEditMessageStep = BrowserWindow.GetType().GetMethod("EditMessageStep");
                 browserResize = BrowserWindow.GetType().GetMethod("BrowserResize");
                 browserUserAgent = BrowserWindow.GetType().GetMethod("UserAgent");
                 browserGetErrors = BrowserWindow.GetType().GetMethod("GetBowserErrors");
@@ -186,9 +188,9 @@ namespace HatFrameworkDev
         {
             try
             {
-                int step = SendMessageDebug("Сообщение", "Message", PROCESS, "Запуск автотеста", "Launching the autotest", IMAGE_STATUS_MESSAGE);
+                SendMessageDebug("Сообщение", "Message", PROCESS, "Запуск автотеста", "Launching the autotest", IMAGE_STATUS_MESSAGE);
                 string filename = (string)getNameAutotest.Invoke(BrowserWindow, null);
-                EditMessageDebug(step, "Сообщение", "Message", COMPLETED, $"Запущен автотест из файла: {filename}", $"The autotest file is running: {filename}", IMAGE_STATUS_MESSAGE);
+                SendMessageDebug("Сообщение", "Message", PROCESS, $"Запущен автотест из файла: {filename}", $"The autotest file is running: {filename}", IMAGE_STATUS_MESSAGE);
             }
             catch (Exception ex)
             {
@@ -238,7 +240,7 @@ namespace HatFrameworkDev
             return found;
         }
 
-        private async Task<string> execute(string script, int step, string commentPassedRus, string commentPassedEng,  string commentfailedRus, string commentfailedEng, bool returnResult = false)
+        private async Task<string> execute(string script, string action)
         {
             string result = null;
             try
@@ -248,25 +250,21 @@ namespace HatFrameworkDev
                 if (Debug == true) ConsoleMsg($"[DEBUG] JS результат: {result}");
                 if (result == "null" || result == null)
                 {
-                    EditMessageDebug(step, null, null, Tester.FAILED, commentfailedRus, commentfailedEng, Tester.IMAGE_STATUS_FAILED);
+                    SendMessageDebug(action, action, Tester.FAILED, "В результате выполнения JavaScript получено NULL. Неудалось корректно выполнить JavaScript: " + script, "The result of JavaScript execution is NULL. Failed to execute JavaScript correctly: " + script, Tester.IMAGE_STATUS_FAILED);
                     TestStopAsync();
-                }
-                else
-                {
-                    if (returnResult == true) EditMessageDebug(step, null, null, Tester.PASSED, commentPassedRus + " | " + result, commentPassedEng, Tester.IMAGE_STATUS_PASSED);
-                    else EditMessageDebug(step, null, null, Tester.PASSED, commentPassedRus, commentPassedEng, Tester.IMAGE_STATUS_PASSED);
                 }
             }
             catch (Exception ex)
             {
-                EditMessageDebug(step, null, null, Tester.FAILED, 
-                    "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(),
-                    "Error: " + ex.Message + Environment.NewLine + Environment.NewLine + "Full description of the error: " + ex.ToString(),
+                result = "null";
+                SendMessageDebug(action, action, Tester.FAILED,
+                    "Ошибка при выполнении JavaScript: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(),
+                    "Error when executing JavaScript: " + ex.Message + Environment.NewLine + Environment.NewLine + "Full description of the error: " + ex.ToString(),
                     Tester.IMAGE_STATUS_FAILED);
                 TestStopAsync();
                 ConsoleMsgError(ex.ToString());
             }
-            return result;
+            return result.ToString();
         }
 
         private async Task<string> executeJS(string script)
@@ -339,10 +337,11 @@ namespace HatFrameworkDev
             }
         }
 
-        public int SendMessage(string action, string status, string comment, int image)
+        public void SendMessage(string action, string status, string comment)
         {
             try
             {
+                if (DefineTestStop() == true) return;
                 this.actions = new string[] { action };
                 
                 // вывод сообщения в системную консоль
@@ -398,18 +397,20 @@ namespace HatFrameworkDev
                 }
 
                 // вывод сообщения в таблицу браузера
-                int index = (int)browserSendMessageStep.Invoke(BrowserWindow, new object[] { action, status, comment, image, false });
-
-                // индекс сообщения
-                return index;
+                if (status == PASSED) browserSendMessageStep.Invoke(BrowserWindow, new object[] { action, status, comment, IMAGE_STATUS_PASSED, false });
+                else if (status == FAILED) browserSendMessageStep.Invoke(BrowserWindow, new object[] { action, status, comment, IMAGE_STATUS_FAILED, false });
+                else if (status == WARNING) browserSendMessageStep.Invoke(BrowserWindow, new object[] { action, status, comment, IMAGE_STATUS_WARNING, false });
+                else if (status == STOPPED) browserSendMessageStep.Invoke(BrowserWindow, new object[] { action, status, comment, IMAGE_STATUS_WARNING, false });
+                else if (status == PROCESS) browserSendMessageStep.Invoke(BrowserWindow, new object[] { action, status, comment, IMAGE_STATUS_PROCESS, false });
+                else if (status == COMPLETED) browserSendMessageStep.Invoke(BrowserWindow, new object[] { action, status, comment, IMAGE_STATUS_MESSAGE, false });
+                else browserSendMessageStep.Invoke(BrowserWindow, new object[] { action, status, comment, IMAGE_STATUS_MESSAGE, false });
             }
             catch (Exception ex)
             {
                 ConsoleMsgError(ex.ToString());
             }
-            return -1;
         }
-
+        /* УДАЛИТЬ 
         public void EditMessage(int index, string action, string status, string comment, int image)
         {
             try
@@ -506,12 +507,13 @@ namespace HatFrameworkDev
                 ConsoleMsgError(ex.ToString());
             }
         }
+        */
 
-
-        public int SendMessageDebug(string actionRus, string actionEng, string status, string commentRus, string commentEng, int image)
+        public void SendMessageDebug(string actionRus, string actionEng, string status, string commentRus, string commentEng, int image)
         {
             try
             {
+                if (DefineTestStop() == true) return;
                 this.actions = new string[] { actionRus, actionEng};
 
                 // вывод сообщения в системную консоль
@@ -579,18 +581,15 @@ namespace HatFrameworkDev
                     if (actionRus != null) action = actionRus;
                     if (commentRus != null) comment = commentRus;
                 }
-                int index = (int)browserSendMessageStep.Invoke(BrowserWindow, new object[] { action, status, comment, image, true });
-
-                // индекс сообщения
-                return index;
+                browserSendMessageStep.Invoke(BrowserWindow, new object[] { action, status, comment, image, true });
             }
             catch (Exception ex)
             {
                 ConsoleMsgError(ex.ToString());
             }
-            return -1;
         }
 
+        /* УДАЛИТЬ 
         public void EditMessageDebug(int index, string actionRus, string actionEng, string status, string commentRus, string commentEng, int image)
         {
             try
@@ -699,21 +698,21 @@ namespace HatFrameworkDev
                 ConsoleMsgError(ex.ToString());
             }
         }
+        */
 
         /*
          * Методы для отправки сообщения на почту и телеграм
          */
         public async Task SendMsgToMailAsync(string subject, string body, string filename = "", string addresses = "")
         {
-            int step = SendMessageDebug($"SendMsgToMailAsync(\"{subject}\", \"{body}\", \"{filename}\", \"{addresses}\")", $"SendMsgToMailAsync(\"{subject}\", \"{body}\", \"{filename}\", \"{addresses}\")", PROCESS, "Отправка письма", "Sending a email", IMAGE_STATUS_PROCESS);
             try
             {
                 sendMail.Invoke(BrowserWindow, new Object[] { subject, body, filename, addresses });
-                EditMessageDebug(step, null, null, COMPLETED, "Письмо отправлено", "the email has been sent", IMAGE_STATUS_MESSAGE);
+                SendMessageDebug($"SendMsgToMailAsync(\"{subject}\", \"{body}\", \"{filename}\", \"{addresses}\")", $"SendMsgToMailAsync(\"{subject}\", \"{body}\", \"{filename}\", \"{addresses}\")", COMPLETED, "Письмо отправлено", "the email has been sent", IMAGE_STATUS_MESSAGE);
             }
             catch (Exception ex)
             {
-                EditMessageDebug(step, null, null, Tester.FAILED,
+                SendMessageDebug($"SendMsgToMailAsync(\"{subject}\", \"{body}\", \"{filename}\", \"{addresses}\")", $"SendMsgToMailAsync(\"{subject}\", \"{body}\", \"{filename}\", \"{addresses}\")", Tester.FAILED,
                     "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(),
                     "Error: " + ex.Message + Environment.NewLine + Environment.NewLine + "Full description of the error: " + ex.ToString(),
                     Tester.IMAGE_STATUS_FAILED);
@@ -723,10 +722,6 @@ namespace HatFrameworkDev
 
         public async Task SendMsgToTelegramAsync(string botToken, string chatId, string text, string charset = "UTF-8")
         {
-            int step = SendMessageDebug($"SendMsgToTelegramAsync(\"{botToken}\", \"{chatId}\", \"{text}\", \"{charset}\")",
-                $"SendMsgToTelegramAsync(\"{botToken}\", \"{chatId}\", \"{text}\", \"{charset}\")",
-                PROCESS, "Отправка сообщения в Телеграм", "Sending a message in Telegrams", IMAGE_STATUS_PROCESS);
-
             try
             {
                 string url = $"https://api.telegram.org/bot{botToken}/sendMessage?chat_id={chatId}&text={text}";
@@ -741,11 +736,14 @@ namespace HatFrameworkDev
                 HttpResponseMessage response = await client.GetAsync(url);
                 if (response.IsSuccessStatusCode)
                 {
-                    EditMessageDebug(step, null, null, PASSED, "Сообщение отправлено в Телеграм", "The message was sent in a Telegram", IMAGE_STATUS_PASSED);
+                    SendMessageDebug($"SendMsgToTelegramAsync(\"{botToken}\", \"{chatId}\", \"{text}\", \"{charset}\")",
+                        $"SendMsgToTelegramAsync(\"{botToken}\", \"{chatId}\", \"{text}\", \"{charset}\")",
+                        PASSED, "Сообщение отправлено в Телеграм", "The message was sent in a Telegram", IMAGE_STATUS_PASSED);
                 }
                 else
                 {
-                    EditMessageDebug(step, null, null, FAILED, 
+                    SendMessageDebug($"SendMsgToTelegramAsync(\"{botToken}\", \"{chatId}\", \"{text}\", \"{charset}\")",
+                        $"SendMsgToTelegramAsync(\"{botToken}\", \"{chatId}\", \"{text}\", \"{charset}\")", FAILED,
                         "Не удалось отправить сообщение в Телеграм " + Environment.NewLine + "Статус запроса: " + Environment.NewLine + response.StatusCode.ToString(),
                         "Failed to send message in Telegram " + Environment.NewLine + "Request status: " + Environment.NewLine + response.StatusCode.ToString(),
                         IMAGE_STATUS_FAILED);
@@ -753,7 +751,8 @@ namespace HatFrameworkDev
             }
             catch (Exception ex)
             {
-                EditMessageDebug(step, null, null, Tester.FAILED,
+                SendMessageDebug($"SendMsgToTelegramAsync(\"{botToken}\", \"{chatId}\", \"{text}\", \"{charset}\")",
+                    $"SendMsgToTelegramAsync(\"{botToken}\", \"{chatId}\", \"{text}\", \"{charset}\")", Tester.FAILED,
                     "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(),
                     "Error: " + ex.Message + Environment.NewLine + Environment.NewLine + "Full description of the error: " + ex.ToString(),
                     Tester.IMAGE_STATUS_FAILED);
@@ -771,12 +770,10 @@ namespace HatFrameworkDev
             {
                 testStop = false;
                 assertStatus = null;
-                //int step = SendMessageDebug("TestBeginAsync()", "TestBeginAsync()", PROCESS, "Инициализация теста", "Initializing the test", IMAGE_STATUS_PROCESS);
-                int step = SendMessageDebug("Тестирование началось", "Testing has started", PROCESS, "Инициализация теста", "Initializing the test", IMAGE_STATUS_PROCESS);
+                SendMessageDebug("Тестирование началось", "Testing has started", Tester.COMPLETED, "Инициализация теста", "Initializing the test", IMAGE_STATUS_MESSAGE);
                 await BrowserView.EnsureCoreWebView2Async();
                 Debug = (bool)debugJavaScript.Invoke(BrowserWindow, null);
-                //EditMessageDebug(step, null, null, PASSED, "Выполнена инициализация теста", "Initialization of the test has been performed", IMAGE_STATUS_PASSED);
-                EditMessageDebug(step, null, null, COMPLETED, "Выполнена инициализация теста", "Initialization of the test has been performed", IMAGE_STATUS_MESSAGE);
+                SendMessageDebug("Инициализация теста", "Initializing the test", COMPLETED, "Выполнена инициализация теста", "Initialization of the test has been performed", IMAGE_STATUS_MESSAGE);
                 ConsoleMsg("Тест начинается...");
 
                 browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { "" + Environment.NewLine, default, default, default, false });
@@ -793,12 +790,10 @@ namespace HatFrameworkDev
         {
             try
             {
-                //int step = SendMessageDebug("TestEndAsync()", "TestEndAsync()", PROCESS, "Завершение теста", "Completing the test", IMAGE_STATUS_PROCESS);
-                int step = SendMessageDebug("Тестирование завершено", "Testing completed", PROCESS, "Завершение теста", "Completing the test", IMAGE_STATUS_PROCESS);
                 if (assertStatus == FAILED)
                 {
                     ConsoleMsg("Тест завершен - провально");
-                    EditMessageDebug(step, null, null, FAILED, "Тест завершен - шаги теста выполнены неуспешно", "Test completed - the test steps were executed unsuccessfully", IMAGE_STATUS_FAILED);
+                    SendMessageDebug("Тестирование завершено", "Testing completed", FAILED, "Тест завершен - шаги теста выполнены неуспешно", "Test completed - the test steps were executed unsuccessfully", IMAGE_STATUS_FAILED);
                     resultAutotestSuccess(false);
 
                     if (languageEngConsole == false) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { Environment.NewLine + "Тест завершен - провально", default, ConsoleColor.DarkRed, ConsoleColor.White, true });
@@ -811,7 +806,7 @@ namespace HatFrameworkDev
                 else
                 {
                     ConsoleMsg("Тест завершен - успешено");
-                    EditMessageDebug(step, null, null, PASSED, "Тест завершен - все шаги выполнены успешно", "The test is completed - all steps are completed successfully", IMAGE_STATUS_PASSED);
+                    SendMessageDebug("Тестирование завершено", "Testing completed", PASSED, "Тест завершен - все шаги выполнены успешно", "The test is completed - all steps are completed successfully", IMAGE_STATUS_PASSED);
                     resultAutotestSuccess(true);
 
                     if (languageEngConsole == false) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { Environment.NewLine + "Тест завершен - успешено", default, ConsoleColor.DarkGreen, ConsoleColor.White, true });
@@ -836,13 +831,15 @@ namespace HatFrameworkDev
             resultAutotestSuccess(false);
         }
 
-        public bool DefineTestStop(int stepIndex)
+        public bool DefineTestStop()
         {
             try
             {
-                if (testStop != true) testStop = (bool)checkStopTest.Invoke(BrowserWindow, null);
-                if (testStop == true && stepIndex < 0) SendMessageDebug("DefineTestStop()", "DefineTestStop()", STOPPED, "Выполнение теста остановлено", "Test execution stopped", IMAGE_STATUS_WARNING);
-                if (testStop == true && stepIndex >= 0) EditMessageDebug(stepIndex, null, null, STOPPED, "Выполнение шага остановлено", "Step execution stopped", IMAGE_STATUS_WARNING);
+                if (testStop == false)
+                {
+                    testStop = (bool)checkStopTest.Invoke(BrowserWindow, null);
+                    if (testStop == true) SendMessageDebug("DefineTestStop()", "DefineTestStop()", STOPPED, "Выполнение теста остановлено", "Test execution stopped", IMAGE_STATUS_WARNING);
+                }
                 return testStop;
             }
             catch (Exception ex)
@@ -857,9 +854,8 @@ namespace HatFrameworkDev
             string result = PASSED;
             try
             {
-                int step = SendMessageDebug("GetTestResult()", "GetTestResult()", PROCESS, "Определяется результат теста", "The test result is determined", IMAGE_STATUS_MESSAGE);
                 if (assertStatus != null) result = assertStatus;
-                EditMessageDebug(step, null, null, COMPLETED, $"Результат теста получен: {result}", $"The test result is received: {result}", IMAGE_STATUS_MESSAGE);
+                SendMessageDebug("GetTestResult()", "GetTestResult()", COMPLETED, $"Результат теста получен: {result}", $"The test result is received: {result}", IMAGE_STATUS_MESSAGE);
             }
             catch (Exception ex)
             {
@@ -872,9 +868,8 @@ namespace HatFrameworkDev
         {
             try
             {
-                int step = SendMessageDebug("BrowserCloseAsync()", "BrowserCloseAsync()", PROCESS, "Браузер закрывается", "The browser is closing", IMAGE_STATUS_PROCESS);
                 BrowserWindow.Close();
-                EditMessageDebug(step, null, null, COMPLETED, "Закрытие браузера - выполнено", "Closing the browser - completed", IMAGE_STATUS_MESSAGE);
+                SendMessageDebug("BrowserCloseAsync()", "BrowserCloseAsync()", COMPLETED, "Браузер закрыт", "Closing the browser - completed", IMAGE_STATUS_MESSAGE);
             }
             catch (Exception ex)
             {
@@ -886,11 +881,9 @@ namespace HatFrameworkDev
         {
             try
             {
-                int step = SendMessageDebug($"BrowserSizeAsync({width}, {height})", $"BrowserSizeAsync({width}, {height})", PROCESS, "Изменяется размер браузера", "Browser size changes", IMAGE_STATUS_PROCESS);
-                if (DefineTestStop(step) == true) return;
-
+                if (DefineTestStop() == true) return;
                 browserResize.Invoke(BrowserWindow, new object[] { width, height });
-                EditMessageDebug(step, null, null, COMPLETED, "Размер браузера изменён", "Browser size changed", IMAGE_STATUS_MESSAGE);
+                SendMessageDebug($"BrowserSizeAsync({width}, {height})", $"BrowserSizeAsync({width}, {height})", COMPLETED, "Размер браузера изменён", "Browser size changed", IMAGE_STATUS_MESSAGE);
             }
             catch (Exception ex)
             {
@@ -902,11 +895,9 @@ namespace HatFrameworkDev
         {
             try
             {
-                int step = SendMessageDebug($"BrowserFullScreenAsync()", $"BrowserFullScreenAsync()", PROCESS, "Изменяется размер браузера", "Browser size changes", IMAGE_STATUS_PROCESS);
-                if (DefineTestStop(step) == true) return;
-
+                if (DefineTestStop() == true) return;
                 browserResize.Invoke(BrowserWindow, new object[] { -1, -1 });
-                EditMessageDebug(step, null, null, COMPLETED, "Размер браузера изменён", "Browser size changed", IMAGE_STATUS_MESSAGE);
+                SendMessageDebug("BrowserFullScreenAsync()", "BrowserFullScreenAsync()", COMPLETED, "Размер браузера изменён", "Browser size changed", IMAGE_STATUS_MESSAGE);
             }
             catch (Exception ex)
             {
@@ -918,11 +909,9 @@ namespace HatFrameworkDev
         {
             try
             {
-                int step = SendMessageDebug($"BrowserSetUserAgentAsync({value})", $"BrowserSetUserAgentAsync({value})", PROCESS, "Изменяется значение User-Agent", "The User-Agent value changes", IMAGE_STATUS_PROCESS);
-                if (DefineTestStop(step) == true) return;
-
+                if (DefineTestStop() == true) return;
                 browserUserAgent.Invoke(BrowserWindow, new object[] { value });
-                EditMessageDebug(step, null, null, COMPLETED, "Значение User-Agent изменено", "User-Agent value changed", IMAGE_STATUS_MESSAGE);
+                SendMessageDebug($"BrowserSetUserAgentAsync({value})", $"BrowserSetUserAgentAsync({value})", COMPLETED, "Значение User-Agent изменено", "User-Agent value changed", IMAGE_STATUS_MESSAGE);
             }
             catch (Exception ex)
             {
@@ -935,11 +924,9 @@ namespace HatFrameworkDev
             string userAgent = null;
             try
             {
-                int step = SendMessageDebug($"BrowserGetUserAgentAsync()", $"BrowserGetUserAgentAsync()", PROCESS, "Получение значения User-Agent", "Getting the User-Agent value", IMAGE_STATUS_PROCESS);
-                if (DefineTestStop(step) == true) return "";
-
+                if (DefineTestStop() == true) return "";
                 userAgent = BrowserView.CoreWebView2.Settings.UserAgent;
-                EditMessageDebug(step, null, null, COMPLETED, $"Из User-Agent получено значение: {userAgent}", $"The value was obtained from the User-Agent: {userAgent}", IMAGE_STATUS_MESSAGE);
+                SendMessageDebug("BrowserGetUserAgentAsync()", "BrowserGetUserAgentAsync()", COMPLETED, $"Из User-Agent получено значение: {userAgent}", $"The value was obtained from the User-Agent: {userAgent}", IMAGE_STATUS_MESSAGE);
             }
             catch (Exception ex)
             {
@@ -953,11 +940,9 @@ namespace HatFrameworkDev
             List<string> list = new List<string>();
             try
             {
-                int step = SendMessageDebug($"BrowserGetErrorsAsync()", $"BrowserGetErrorsAsync()", PROCESS, "Получение списка ошибок и предупреждений браузера", "Getting a list of browser errors and warnings", IMAGE_STATUS_PROCESS);
-                if (DefineTestStop(step) == true) return list;
-
+                if (DefineTestStop() == true) return list;
                 list = (List<string>)browserGetErrors.Invoke(BrowserWindow, null);
-                EditMessageDebug(step, null, null, COMPLETED, "Получен список ошибок и предупреждений браузера", "Received a list of browser errors and warnings", IMAGE_STATUS_MESSAGE);
+                SendMessageDebug($"BrowserGetErrorsAsync()", $"BrowserGetErrorsAsync()", COMPLETED, "Получен список ошибок и предупреждений браузера", "Received a list of browser errors and warnings", IMAGE_STATUS_MESSAGE);
             }
             catch (Exception ex)
             {
@@ -968,11 +953,10 @@ namespace HatFrameworkDev
 
         public async Task<string> BrowserGetNetworkAsync()
         {
-            string events = null;
+            string events = "";
             try
             {
-                int step = SendMessageDebug($"BrowserGetNetworkAsync()", $"BrowserGetNetworkAsync()", PROCESS, "Получение списка событий браузера (network)", "Getting a list of browser events (network)", IMAGE_STATUS_PROCESS);
-                if (DefineTestStop(step) == true) return "";
+                if (DefineTestStop() == true) return "";
 
                 string script =
                 @"(function(){
@@ -984,7 +968,7 @@ namespace HatFrameworkDev
                 string jsonText = await executeJS(script);
                 dynamic result = JsonConvert.DeserializeObject(jsonText);
                 events = result;
-                EditMessageDebug(step, null, null, COMPLETED, "Получен список событий браузера (network)", "Received a list of browser events (network)", IMAGE_STATUS_MESSAGE);
+                SendMessageDebug("BrowserGetNetworkAsync()", "BrowserGetNetworkAsync()", COMPLETED, "Получен список событий браузера (network)", "Received a list of browser events (network)", IMAGE_STATUS_MESSAGE);
             }
             catch (Exception ex)
             {
@@ -998,8 +982,7 @@ namespace HatFrameworkDev
             string events = null;
             try
             {
-                int step = SendMessageDebug($"BrowserClearNetworkAsync()", $"BrowserClearNetworkAsync()", PROCESS, "Очистка списка событий браузера (network)", "Clearing the list of browser events (network)", IMAGE_STATUS_PROCESS);
-                if (DefineTestStop(step) == true) return "";
+                if (DefineTestStop() == true) return "";
 
                 string script =
                 @"(function(){
@@ -1010,7 +993,7 @@ namespace HatFrameworkDev
                 }());";
 
                 events = await executeJS(script);
-                EditMessageDebug(step, null, null, COMPLETED, 
+                SendMessageDebug("BrowserClearNetworkAsync()", "BrowserClearNetworkAsync()", COMPLETED, 
                     "Выполнена очистка событий браузера (network) " + Environment.NewLine + "Текущее состояние Network: " + events.ToString(),
                     "Browser events have been cleared (network) " + Environment.NewLine + "Current status of the Network: " + events.ToString(), 
                     IMAGE_STATUS_MESSAGE);
@@ -1027,8 +1010,7 @@ namespace HatFrameworkDev
             listRedirects.Clear();
             statusPageLoad = false;
             statusContentLoad = false;
-            int step = SendMessageDebug($"BrowserGoBackAsync({sec}, {abortLoadAfterTime})", $"BrowserGoBackAsync({sec}, {abortLoadAfterTime})", PROCESS, "Выполняется действие браузера - назад", "the browser performs the action - back", IMAGE_STATUS_PROCESS);
-            if (DefineTestStop(step) == true) return;
+            if (DefineTestStop() == true) return;
 
             try
             {
@@ -1038,7 +1020,7 @@ namespace HatFrameworkDev
                 {
                     await Task.Delay(1000);
                     if (statusPageLoad == true) break;
-                    if (DefineTestStop(step) == true) return;
+                    if (DefineTestStop() == true) return;
                 }
 
                 if (abortLoadAfterTime == true && statusPageLoad == false)
@@ -1046,11 +1028,11 @@ namespace HatFrameworkDev
                     BrowserView.CoreWebView2.Stop();
                     if (statusPageLoad == true || statusContentLoad == true)
                     {
-                        EditMessageDebug(step, null, null, WARNING, "Загрузка страницы остановлена (Выполнено действие браузера - назад)", "Page loading stopped (Browser action performed - back)", IMAGE_STATUS_WARNING);
+                        SendMessageDebug($"BrowserGoBackAsync({sec}, {abortLoadAfterTime})", $"BrowserGoBackAsync({sec}, {abortLoadAfterTime})", WARNING, "Загрузка страницы остановлена (Выполнено действие браузера - назад)", "Page loading stopped (Browser action performed - back)", IMAGE_STATUS_WARNING);
                     }
                     else
                     {
-                        EditMessageDebug(step, null, null, FAILED, "Не выполнено действие браузера - назад (cтраница не загружена)", "Browser action failed - back (page not loaded)", IMAGE_STATUS_FAILED);
+                        SendMessageDebug($"BrowserGoBackAsync({sec}, {abortLoadAfterTime})", $"BrowserGoBackAsync({sec}, {abortLoadAfterTime})", FAILED, "Не выполнено действие браузера - назад (cтраница не загружена)", "Browser action failed - back (page not loaded)", IMAGE_STATUS_FAILED);
                         TestStopAsync();
                     }
                 }
@@ -1058,18 +1040,18 @@ namespace HatFrameworkDev
                 {
                     if (statusPageLoad == true)
                     {
-                        EditMessageDebug(step, null, null, COMPLETED, "Выполнено действие браузера - назад", "Browser action performed - back", IMAGE_STATUS_MESSAGE);
+                        SendMessageDebug($"BrowserGoBackAsync({sec}, {abortLoadAfterTime})", $"BrowserGoBackAsync({sec}, {abortLoadAfterTime})", COMPLETED, "Выполнено действие браузера - назад", "Browser action performed - back", IMAGE_STATUS_MESSAGE);
                     }
                     else
                     {
-                        EditMessageDebug(step, null, null, FAILED, "Не выполнено действие браузера - назад (cтраница не загружена)", "Browser action failed - back (page not loaded)", IMAGE_STATUS_FAILED);
+                        SendMessageDebug($"BrowserGoBackAsync({sec}, {abortLoadAfterTime})", $"BrowserGoBackAsync({sec}, {abortLoadAfterTime})", FAILED, "Не выполнено действие браузера - назад (cтраница не загружена)", "Browser action failed - back (page not loaded)", IMAGE_STATUS_FAILED);
                         TestStopAsync();
                     }
                 }
             }
             catch (Exception ex)
             {
-                EditMessageDebug(step, null, null, Tester.FAILED,
+                SendMessageDebug($"BrowserGoBackAsync({sec}, {abortLoadAfterTime})", $"BrowserGoBackAsync({sec}, {abortLoadAfterTime})", Tester.FAILED,
                     "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(),
                     "Error: " + ex.Message + Environment.NewLine + Environment.NewLine + "Full description of the error: " + ex.ToString(),
                     Tester.IMAGE_STATUS_FAILED);
@@ -1083,8 +1065,7 @@ namespace HatFrameworkDev
             listRedirects.Clear();
             statusPageLoad = false;
             statusContentLoad = false;
-            int step = SendMessageDebug($"BrowserGoForwardAsync({sec}, {abortLoadAfterTime})", $"BrowserGoForwardAsync({sec}, {abortLoadAfterTime})", PROCESS, "Выполняется действие браузера - вперед", "the browser performs the action - forward", IMAGE_STATUS_PROCESS);
-            if (DefineTestStop(step) == true) return;
+            if (DefineTestStop() == true) return;
 
             try
             {
@@ -1094,7 +1075,7 @@ namespace HatFrameworkDev
                 {
                     await Task.Delay(1000);
                     if (statusPageLoad == true) break;
-                    if (DefineTestStop(step) == true) return;
+                    if (DefineTestStop() == true) return;
                 }
 
                 if (abortLoadAfterTime == true && statusPageLoad == false)
@@ -1102,11 +1083,11 @@ namespace HatFrameworkDev
                     BrowserView.CoreWebView2.Stop();
                     if (statusPageLoad == true || statusContentLoad == true)
                     {
-                        EditMessageDebug(step, null, null, WARNING, "Загрузка страницы остановлена (Выполнено действие браузера - вперед)", "Page loading stopped (Browser action performed - forward)", IMAGE_STATUS_WARNING);
+                        SendMessageDebug($"BrowserGoForwardAsync({sec}, {abortLoadAfterTime})", $"BrowserGoForwardAsync({sec}, {abortLoadAfterTime})", WARNING, "Загрузка страницы остановлена (Выполнено действие браузера - вперед)", "Page loading stopped (Browser action performed - forward)", IMAGE_STATUS_WARNING);
                     }
                     else
                     {
-                        EditMessageDebug(step, null, null, FAILED, "Не выполнено действие браузера - вперед (cтраница не загружена)", "Browser action failed - forward (page not loaded)", IMAGE_STATUS_FAILED);
+                        SendMessageDebug($"BrowserGoForwardAsync({sec}, {abortLoadAfterTime})", $"BrowserGoForwardAsync({sec}, {abortLoadAfterTime})", FAILED, "Не выполнено действие браузера - вперед (cтраница не загружена)", "Browser action failed - forward (page not loaded)", IMAGE_STATUS_FAILED);
                         TestStopAsync();
                     }
                 }
@@ -1114,11 +1095,11 @@ namespace HatFrameworkDev
                 {
                     if (statusPageLoad == true)
                     {
-                        EditMessageDebug(step, null, null, COMPLETED, "Выполнено действие браузера - вперед", "Browser action performed - forward", IMAGE_STATUS_MESSAGE);
+                        SendMessageDebug($"BrowserGoForwardAsync({sec}, {abortLoadAfterTime})", $"BrowserGoForwardAsync({sec}, {abortLoadAfterTime})", COMPLETED, "Выполнено действие браузера - вперед", "Browser action performed - forward", IMAGE_STATUS_MESSAGE);
                     }
                     else
                     {
-                        EditMessageDebug(step, null, null, FAILED, "Не выполнено действие браузера - вперед (cтраница не загружена)", "Browser action failed - forward (page not loaded)", IMAGE_STATUS_FAILED);
+                        SendMessageDebug($"BrowserGoForwardAsync({sec}, {abortLoadAfterTime})", $"BrowserGoForwardAsync({sec}, {abortLoadAfterTime})", FAILED, "Не выполнено действие браузера - вперед (cтраница не загружена)", "Browser action failed - forward (page not loaded)", IMAGE_STATUS_FAILED);
                         TestStopAsync();
                     }
                 }
@@ -1127,7 +1108,7 @@ namespace HatFrameworkDev
             }
             catch (Exception ex)
             {
-                EditMessageDebug(step, null, null, Tester.FAILED,
+                SendMessageDebug($"BrowserGoForwardAsync({sec}, {abortLoadAfterTime})", $"BrowserGoForwardAsync({sec}, {abortLoadAfterTime})", Tester.FAILED,
                     "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(),
                     "Error: " + ex.Message + Environment.NewLine + Environment.NewLine + "Full description of the error: " + ex.ToString(),
                     Tester.IMAGE_STATUS_FAILED);
@@ -1140,10 +1121,7 @@ namespace HatFrameworkDev
         {
             statusPageLoad = false;
             statusContentLoad = false;
-            int step = SendMessageDebug($"BrowserBasicAuthentication(\"{user}\", \"{pass}\")",
-                $"BrowserBasicAuthentication(\"{user}\", \"{pass}\")", 
-                PROCESS, "Выполняется базовая авторизация", "Basic authorization is being performed", IMAGE_STATUS_PROCESS);
-            if (DefineTestStop(step) == true) return;
+            if (DefineTestStop() == true) return;
 
             try
             {
@@ -1151,12 +1129,12 @@ namespace HatFrameworkDev
                 {
                     args.Response.UserName = user;
                     args.Response.Password = pass;
-                    EditMessageDebug(step, null, null, COMPLETED, "Базовая авторизация - выполнена", "Basic authorization - completed", IMAGE_STATUS_MESSAGE);
+                    SendMessageDebug($"BrowserBasicAuthentication(\"{user}\", \"{pass}\")", $"BrowserBasicAuthentication(\"{user}\", \"{pass}\")", COMPLETED, "Базовая авторизация - выполнена", "Basic authorization - completed", IMAGE_STATUS_MESSAGE);
                 };
             }
             catch (Exception ex)
             {
-                EditMessageDebug(step, null, null, Tester.FAILED,
+                SendMessageDebug($"BrowserBasicAuthentication(\"{user}\", \"{pass}\")", $"BrowserBasicAuthentication(\"{user}\", \"{pass}\")", Tester.FAILED,
                     "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(),
                     "Error: " + ex.Message + Environment.NewLine + Environment.NewLine + "Full description of the error: " + ex.ToString(),
                     Tester.IMAGE_STATUS_FAILED);
@@ -1167,20 +1145,17 @@ namespace HatFrameworkDev
 
         public async Task BrowserEnableSendMailAsync(bool byFailure = true, bool bySuccess = true)
         {
-            int step = SendMessageDebug($"BrowserEnableSendMailAsync(\"{byFailure}\", \"{bySuccess}\")",
-                $"BrowserEnableSendMailAsync(\"{byFailure}\", \"{bySuccess}\")", 
-                PROCESS, "Включение опции отправки отчета на почту", "Enabling the option to send a report to the mail", IMAGE_STATUS_PROCESS);
-            if (DefineTestStop(step) == true) return;
+            if (DefineTestStop() == true) return;
 
             try
             {
                 sendFailureReportByMail = byFailure;
                 sendSuccessReportByMail = bySuccess;
-                EditMessageDebug(step, null, null, COMPLETED, "Включена опция отправки отчета на почту", "The option to send a report to the mail is enabled", IMAGE_STATUS_MESSAGE);
+                SendMessageDebug($"BrowserEnableSendMailAsync(\"{byFailure}\", \"{bySuccess}\")", $"BrowserEnableSendMailAsync(\"{byFailure}\", \"{bySuccess}\")", COMPLETED, "Включена опция отправки отчета на почту", "The option to send a report to the mail is enabled", IMAGE_STATUS_MESSAGE);
             }
             catch (Exception ex)
             {
-                EditMessageDebug(step, null, null, Tester.FAILED,
+                SendMessageDebug($"BrowserEnableSendMailAsync(\"{byFailure}\", \"{bySuccess}\")", $"BrowserEnableSendMailAsync(\"{byFailure}\", \"{bySuccess}\")", Tester.FAILED,
                     "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(),
                     "Error: " + ex.Message + Environment.NewLine + Environment.NewLine + "Full description of the error: " + ex.ToString(),
                     Tester.IMAGE_STATUS_FAILED);
@@ -1194,8 +1169,7 @@ namespace HatFrameworkDev
             listRedirects.Clear();
             statusPageLoad = false;
             statusContentLoad = false;
-            int step = SendMessageDebug($"BrowserPageReloadAsync({sec}, {abortLoadAfterTime})", $"BrowserPageReloadAsync({sec}, {abortLoadAfterTime})", PROCESS, "Перезагрузка страницы", "Page Reload", IMAGE_STATUS_PROCESS);
-            if (DefineTestStop(step) == true) return;
+            if (DefineTestStop() == true) return;
 
             try
             {
@@ -1211,7 +1185,7 @@ namespace HatFrameworkDev
                 {
                     await Task.Delay(1000);
                     if (statusPageLoad == true) break;
-                    if (DefineTestStop(step) == true) return;
+                    if (DefineTestStop() == true) return;
                 }
 
                 if (abortLoadAfterTime == true && statusPageLoad == false)
@@ -1219,11 +1193,11 @@ namespace HatFrameworkDev
                     BrowserView.CoreWebView2.Stop();
                     if (statusPageLoad == true || statusContentLoad == true)
                     {
-                        EditMessageDebug(step, null, null, WARNING, "Перезагрузка страницы остановлена", "Page reload stopped", IMAGE_STATUS_WARNING);
+                        SendMessageDebug($"BrowserPageReloadAsync({sec}, {abortLoadAfterTime})", $"BrowserPageReloadAsync({sec}, {abortLoadAfterTime})", WARNING, "Перезагрузка страницы остановлена", "Page reload stopped", IMAGE_STATUS_WARNING);
                     }
                     else
                     {
-                        EditMessageDebug(step, null, null, FAILED, "Страница не загружена", "The page is not loaded", IMAGE_STATUS_FAILED);
+                        SendMessageDebug($"BrowserPageReloadAsync({sec}, {abortLoadAfterTime})", $"BrowserPageReloadAsync({sec}, {abortLoadAfterTime})", FAILED, "Страница не загружена", "The page is not loaded", IMAGE_STATUS_FAILED);
                         TestStopAsync();
                     }
                 }
@@ -1231,11 +1205,11 @@ namespace HatFrameworkDev
                 {
                     if (statusPageLoad == true)
                     {
-                        EditMessageDebug(step, null, null, COMPLETED, "Перезагрузка страницы выполнена", "Page reload completed", IMAGE_STATUS_MESSAGE);
+                        SendMessageDebug($"BrowserPageReloadAsync({sec}, {abortLoadAfterTime})", $"BrowserPageReloadAsync({sec}, {abortLoadAfterTime})", COMPLETED, "Перезагрузка страницы выполнена", "Page reload completed", IMAGE_STATUS_MESSAGE);
                     }
                     else
                     {
-                        EditMessageDebug(step, null, null, FAILED, "Страница не загружена", "The page is not loaded", IMAGE_STATUS_FAILED);
+                        SendMessageDebug($"BrowserPageReloadAsync({sec}, {abortLoadAfterTime})", $"BrowserPageReloadAsync({sec}, {abortLoadAfterTime})", FAILED, "Страница не загружена", "The page is not loaded", IMAGE_STATUS_FAILED);
                         TestStopAsync();
                     }
                 }
@@ -1244,7 +1218,7 @@ namespace HatFrameworkDev
             }
             catch (Exception ex)
             {
-                EditMessageDebug(step, null, null, Tester.FAILED,
+                SendMessageDebug($"BrowserPageReloadAsync({sec}, {abortLoadAfterTime})", $"BrowserPageReloadAsync({sec}, {abortLoadAfterTime})", Tester.FAILED,
                     "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(),
                     "Error: " + ex.Message + Environment.NewLine + Environment.NewLine + "Full description of the error: " + ex.ToString(),
                     Tester.IMAGE_STATUS_FAILED);
@@ -1256,20 +1230,18 @@ namespace HatFrameworkDev
         public async Task<string> ExecuteJavaScriptAsync(string script)
         {
             string result = null;
-            int step = SendMessageDebug($"ExecuteJavaScriptAsync(\"{script}\")", $"ExecuteJavaScriptAsync(\"{script}\")", 
-                PROCESS, "Выполнение скрипта", "Script Execution", IMAGE_STATUS_PROCESS);
-            if (DefineTestStop(step) == true) return result;
+            if (DefineTestStop() == true) return result;
 
             try
             {
                 if (Debug == true) ConsoleMsg($"[DEBUG] JS скрипт: {script}");
                 result = await BrowserView.CoreWebView2.ExecuteScriptAsync(script);
                 if (Debug == true) ConsoleMsg($"[DEBUG] JS результат: {result}");
-                EditMessageDebug(step, null, null, PASSED, "Скрипт выполнен", "The script is executed", IMAGE_STATUS_PASSED);
+                SendMessageDebug($"ExecuteJavaScriptAsync(\"{script}\")", $"ExecuteJavaScriptAsync(\"{script}\")", PASSED, "Скрипт выполнен", "The script is executed", IMAGE_STATUS_PASSED);
             }
             catch (Exception ex)
             {
-                EditMessageDebug(step, null, null, Tester.FAILED,
+                SendMessageDebug($"ExecuteJavaScriptAsync(\"{script}\")", $"ExecuteJavaScriptAsync(\"{script}\")", Tester.FAILED,
                     "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(),
                     "Error: " + ex.Message + Environment.NewLine + Environment.NewLine + "Full description of the error: " + ex.ToString(),
                     Tester.IMAGE_STATUS_FAILED);
@@ -1286,10 +1258,7 @@ namespace HatFrameworkDev
         public async Task<HTMLElement> GetElementAsync(string by, string locator)
         {
             int step;
-
-            if (by == BY_XPATH) step = SendMessageDebug($"GetElementAsync(\"{by}\", \"{locator}\")", $"GetElementAsync(\"{by}\", \"{locator}\")", PROCESS, "Получить элемента", "Get an element", IMAGE_STATUS_PROCESS);
-            else step = SendMessageDebug($"GetElementAsync(\"{by}\", '{locator}')", $"GetElementAsync(\"{by}\", '{locator}')", PROCESS, "Получить элемента", "Get an element", IMAGE_STATUS_PROCESS);
-            if (DefineTestStop(step) == true) return null;
+            if (DefineTestStop() == true) return null;
 
             HTMLElement htmlElement = new HTMLElement(this, by, locator);
             try
@@ -1312,7 +1281,7 @@ namespace HatFrameworkDev
                 el = JsonConvert.DeserializeObject<HTMLElement>(obj);
                 if (el == null)
                 {
-                    EditMessageDebug(step, null, null, Tester.FAILED, $"Не удалось получить элемент {locator} ({by})", $"Failed to get the element {locator} ({by})", Tester.IMAGE_STATUS_FAILED);
+                    SendMessageDebug($"GetElementAsync(\"{by}\", \"{locator}\")", $"GetElementAsync(\"{by}\", \"{locator}\")", Tester.FAILED, $"Не удалось получить элемент {locator} ({by})", $"Failed to get the element {locator} ({by})", Tester.IMAGE_STATUS_FAILED);
                     TestStopAsync();
                 }
                 else
@@ -1322,12 +1291,12 @@ namespace HatFrameworkDev
                     htmlElement.Name = el.Name;
                     htmlElement.Class = el.Class;
                     htmlElement.Type = el.Type;
-                    EditMessageDebug(step, null, null, PASSED, "Элемент получен", "The element is received", IMAGE_STATUS_PASSED);
+                    SendMessageDebug($"GetElementAsync(\"{by}\", \"{locator}\")", $"GetElementAsync(\"{by}\", \"{locator}\")", PASSED, "Элемент получен", "The element is received", IMAGE_STATUS_PASSED);
                 }
             }
             catch (Exception ex)
             {
-                EditMessageDebug(step, null, null, Tester.FAILED,
+                SendMessageDebug($"GetElementAsync(\"{by}\", \"{locator}\")", $"GetElementAsync(\"{by}\", \"{locator}\")", Tester.FAILED,
                     "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(),
                     "Error: " + ex.Message + Environment.NewLine + Environment.NewLine + "Full description of the error: " + ex.ToString(),
                     Tester.IMAGE_STATUS_FAILED);
@@ -1340,8 +1309,7 @@ namespace HatFrameworkDev
         public async Task<FRAMEElement> GetFrameAsync(int index)
         {
             int step;
-            step = SendMessageDebug($"GetFrameAsync({index})", $"GetFrameAsync({index})", PROCESS, "Получить фрейм", "Get a frame", IMAGE_STATUS_PROCESS);
-            if (DefineTestStop(step) == true) return null;
+            if (DefineTestStop() == true) return null;
 
             FRAMEElement frameElement = new FRAMEElement(this, index);
             try
@@ -1360,7 +1328,7 @@ namespace HatFrameworkDev
                 el = JsonConvert.DeserializeObject<FRAMEElement>(obj);
                 if (el == null)
                 {
-                    EditMessageDebug(step, null, null, Tester.FAILED, $"Не удалось получить фрейм с индексом {index}", $"Failed to get a frame with index {index}", Tester.IMAGE_STATUS_FAILED);
+                    SendMessageDebug($"GetFrameAsync({index})", $"GetFrameAsync({index})", Tester.FAILED, $"Не удалось получить фрейм с индексом {index}", $"Failed to get a frame with index {index}", Tester.IMAGE_STATUS_FAILED);
                     TestStopAsync();
                 }
                 else
@@ -1368,12 +1336,12 @@ namespace HatFrameworkDev
                     frameElement = new FRAMEElement(this, index);
                     frameElement.Index = el.Index;
                     frameElement.Name = el.Name;
-                    EditMessageDebug(step, null, null, PASSED, "Фрейм получен", "Frame received", IMAGE_STATUS_PASSED);
+                    SendMessageDebug($"GetFrameAsync({index})", $"GetFrameAsync({index})", PASSED, "Фрейм получен", "Frame received", IMAGE_STATUS_PASSED);
                 }
             }
             catch (Exception ex)
             {
-                EditMessageDebug(step, null, null, Tester.FAILED,
+                SendMessageDebug($"GetFrameAsync({index})", $"GetFrameAsync({index})", Tester.FAILED,
                     "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(),
                     "Error: " + ex.Message + Environment.NewLine + Environment.NewLine + "Full description of the error: " + ex.ToString(),
                     Tester.IMAGE_STATUS_FAILED);
@@ -1388,8 +1356,7 @@ namespace HatFrameworkDev
             listRedirects.Clear();
             statusPageLoad = false;
             statusContentLoad = false;
-            int step = SendMessageDebug($"GoToUrlAsync('{url}', {sec}, {abortLoadAfterTime})", $"GoToUrlAsync('{url}', {sec}, {abortLoadAfterTime})", PROCESS, $"Загрузка страницы {url}", $"Page Loading {url}", IMAGE_STATUS_PROCESS);
-            if (DefineTestStop(step) == true) return;
+            if (DefineTestStop() == true) return;
 
             try
             {
@@ -1399,7 +1366,7 @@ namespace HatFrameworkDev
                 {
                     await Task.Delay(1000);
                     if (statusPageLoad == true) break;
-                    if (DefineTestStop(step) == true) return;
+                    if (DefineTestStop() == true) return;
                 }
 
                 if (abortLoadAfterTime == true && statusPageLoad == false)
@@ -1407,11 +1374,11 @@ namespace HatFrameworkDev
                     BrowserView.CoreWebView2.Stop();
                     if (statusPageLoad == true || statusContentLoad == true)
                     {
-                        EditMessageDebug(step, null, null, WARNING, "Загрузка страницы остановлена", "Page loading stopped", IMAGE_STATUS_WARNING);
+                        SendMessageDebug($"GoToUrlAsync('{url}', {sec}, {abortLoadAfterTime})", $"GoToUrlAsync('{url}', {sec}, {abortLoadAfterTime})", WARNING, "Загрузка страницы остановлена", "Page loading stopped", IMAGE_STATUS_WARNING);
                     }
                     else
                     {
-                        EditMessageDebug(step, null, null, FAILED, "Страница не загружена", "The page is not loaded", IMAGE_STATUS_FAILED);
+                        SendMessageDebug($"GoToUrlAsync('{url}', {sec}, {abortLoadAfterTime})", $"GoToUrlAsync('{url}', {sec}, {abortLoadAfterTime})", FAILED, "Страница не загружена", "The page is not loaded", IMAGE_STATUS_FAILED);
                         TestStopAsync();
                     }
                 }
@@ -1419,18 +1386,18 @@ namespace HatFrameworkDev
                 {
                     if (statusPageLoad == true)
                     {
-                        EditMessageDebug(step, null, null, PASSED, "Страница загружена", "Page loaded", IMAGE_STATUS_PASSED);
+                        SendMessageDebug($"GoToUrlAsync('{url}', {sec}, {abortLoadAfterTime})", $"GoToUrlAsync('{url}', {sec}, {abortLoadAfterTime})", PASSED, "Страница загружена", "Page loaded", IMAGE_STATUS_PASSED);
                     }
                     else
                     {
-                        EditMessageDebug(step, null, null, FAILED, "Страница не загружена", "The page is not loaded", IMAGE_STATUS_FAILED);
+                        SendMessageDebug($"GoToUrlAsync('{url}', {sec}, {abortLoadAfterTime})", $"GoToUrlAsync('{url}', {sec}, {abortLoadAfterTime})", FAILED, "Страница не загружена", "The page is not loaded", IMAGE_STATUS_FAILED);
                         TestStopAsync();
                     }
                 }
             }
             catch (Exception ex)
             {
-                EditMessageDebug(step, null, null, Tester.FAILED,
+                SendMessageDebug($"GoToUrlAsync('{url}', {sec}, {abortLoadAfterTime})", $"GoToUrlAsync('{url}', {sec}, {abortLoadAfterTime})", Tester.FAILED,
                     "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(),
                     "Error: " + ex.Message + Environment.NewLine + Environment.NewLine + "Full description of the error: " + ex.ToString(),
                     Tester.IMAGE_STATUS_FAILED);
@@ -1444,9 +1411,7 @@ namespace HatFrameworkDev
             listRedirects.Clear();
             statusPageLoad = false;
             statusContentLoad = false;
-            int step = SendMessageDebug($"GoToUrlBaseAuthAsync('{url}', '{login}', '{pass}', {sec}, {abortLoadAfterTime})", $"GoToUrlBaseAuthAsync('{url}', '{login}', '{pass}', {sec}, {abortLoadAfterTime})",
-                PROCESS, $"Загрузка страницы (базовая авторизация) {url}", $"Page loading (basic authorization) {url}", IMAGE_STATUS_PROCESS);
-            if (DefineTestStop(step) == true) return;
+            if (DefineTestStop() == true) return;
 
             try
             {
@@ -1472,7 +1437,7 @@ namespace HatFrameworkDev
                 {
                     await Task.Delay(1000);
                     if (statusPageLoad == true) break;
-                    if (DefineTestStop(step) == true) return;
+                    if (DefineTestStop() == true) return;
                 }
 
                 if (abortLoadAfterTime == true && statusPageLoad == false)
@@ -1480,11 +1445,11 @@ namespace HatFrameworkDev
                     BrowserView.CoreWebView2.Stop();
                     if (statusPageLoad == true || statusContentLoad == true)
                     {
-                        EditMessageDebug(step, null, null, WARNING, "Загрузка страницы остановлена (базовая авторизация)", "Page loading stopped (basic authorization)", IMAGE_STATUS_WARNING);
+                        SendMessageDebug($"GoToUrlBaseAuthAsync('{url}', '{login}', '{pass}', {sec}, {abortLoadAfterTime})", $"GoToUrlBaseAuthAsync('{url}', '{login}', '{pass}', {sec}, {abortLoadAfterTime})", WARNING, "Загрузка страницы остановлена (базовая авторизация)", "Page loading stopped (basic authorization)", IMAGE_STATUS_WARNING);
                     }
                     else
                     {
-                        EditMessageDebug(step, null, null, FAILED, "Страница не загружена (базовая авторизация)", "The page is not loaded (basic authorization)", IMAGE_STATUS_FAILED);
+                        SendMessageDebug($"GoToUrlBaseAuthAsync('{url}', '{login}', '{pass}', {sec}, {abortLoadAfterTime})", $"GoToUrlBaseAuthAsync('{url}', '{login}', '{pass}', {sec}, {abortLoadAfterTime})", FAILED, "Страница не загружена (базовая авторизация)", "The page is not loaded (basic authorization)", IMAGE_STATUS_FAILED);
                         TestStopAsync();
                     }
                 }
@@ -1492,18 +1457,18 @@ namespace HatFrameworkDev
                 {
                     if (statusPageLoad == true)
                     {
-                        EditMessageDebug(step, null, null, PASSED, "Страница загружена (базовая авторизация)", "Page loaded (basic authorization)", IMAGE_STATUS_PASSED);
+                        SendMessageDebug($"GoToUrlBaseAuthAsync('{url}', '{login}', '{pass}', {sec}, {abortLoadAfterTime})", $"GoToUrlBaseAuthAsync('{url}', '{login}', '{pass}', {sec}, {abortLoadAfterTime})", PASSED, "Страница загружена (базовая авторизация)", "Page loaded (basic authorization)", IMAGE_STATUS_PASSED);
                     }
                     else
                     {
-                        EditMessageDebug(step, null, null, FAILED, "Страница не загружена (базовая авторизация)", "The page is not loaded (basic authorization)", IMAGE_STATUS_FAILED);
+                        SendMessageDebug($"GoToUrlBaseAuthAsync('{url}', '{login}', '{pass}', {sec}, {abortLoadAfterTime})", $"GoToUrlBaseAuthAsync('{url}', '{login}', '{pass}', {sec}, {abortLoadAfterTime})", FAILED, "Страница не загружена (базовая авторизация)", "The page is not loaded (basic authorization)", IMAGE_STATUS_FAILED);
                         TestStopAsync();
                     }
                 }
             }
             catch (Exception ex)
             {
-                EditMessageDebug(step, null, null, Tester.FAILED,
+                SendMessageDebug($"GoToUrlBaseAuthAsync('{url}', '{login}', '{pass}', {sec}, {abortLoadAfterTime})", $"GoToUrlBaseAuthAsync('{url}', '{login}', '{pass}', {sec}, {abortLoadAfterTime})", Tester.FAILED,
                     "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(),
                     "Error: " + ex.Message + Environment.NewLine + Environment.NewLine + "Full description of the error: " + ex.ToString(),
                     Tester.IMAGE_STATUS_FAILED);
@@ -1514,17 +1479,16 @@ namespace HatFrameworkDev
 
         public async Task<string> GetUrlAsync()
         {
-            int step = SendMessageDebug("GetUrlAsync()", "GetUrlAsync()", PROCESS, "Запрашивается текущий URL", "The current URL is requested", IMAGE_STATUS_PROCESS);
-            if (DefineTestStop(step) == true) return null;
+            if (DefineTestStop() == true) return null;
             string url = null;
             try
             {
                 url = BrowserView.Source.ToString();
-                EditMessageDebug(step, null, null, PASSED, $"Получен текущий URL: {url}", $"The current URL was received: {url}", IMAGE_STATUS_PASSED);
+                SendMessageDebug("GetUrlAsync()", "GetUrlAsync()", PASSED, $"Получен текущий URL: {url}", $"The current URL was received: {url}", IMAGE_STATUS_PASSED);
             }
             catch (Exception ex)
             {
-                EditMessageDebug(step, null, null, Tester.FAILED,
+                SendMessageDebug("GetUrlAsync()", "GetUrlAsync()", Tester.FAILED,
                     "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(),
                     "Error: " + ex.Message + Environment.NewLine + Environment.NewLine + "Full description of the error: " + ex.ToString(),
                     Tester.IMAGE_STATUS_FAILED);
@@ -1536,17 +1500,15 @@ namespace HatFrameworkDev
 
         public async Task<List<string>> GetListRedirectUrlAsync()
         {
-            int step = SendMessageDebug("GetListRedirectUrlAsync()", "GetListRedirectUrlAsync()", PROCESS, "Получаю список редиректов", "I get a list of redirects", IMAGE_STATUS_PROCESS);
-            if (DefineTestStop(step) == true) return null;
-            if(listRedirects == null) EditMessageDebug(step, null, null, FAILED, "Список редиректов NULL", "List of redirects is NULL", IMAGE_STATUS_FAILED);
-            else EditMessageDebug(step, null, null, PASSED, "Список редиректов получен", "The list of redirects has been received", IMAGE_STATUS_PASSED);
+            if (DefineTestStop() == true) return null;
+            if(listRedirects == null) SendMessageDebug("GetListRedirectUrlAsync()", "GetListRedirectUrlAsync()", FAILED, "Список редиректов NULL", "List of redirects is NULL", IMAGE_STATUS_FAILED);
+            else SendMessageDebug("GetListRedirectUrlAsync()", "GetListRedirectUrlAsync()", PASSED, "Список редиректов получен", "The list of redirects has been received", IMAGE_STATUS_PASSED);
             return listRedirects;
         }
 
         public async Task<int> GetUrlResponseAsync(string url)
         {
-            int step = SendMessageDebug($"GetUrlResponseAsync('{url}')", $"GetUrlResponseAsync('{url}')", PROCESS, "Получаю HTTP ответ запрашиваемого URL: " + url, "I get the HTTP response of the requested URL: " + url, IMAGE_STATUS_PROCESS);
-            if (DefineTestStop(step) == true) return 0;
+            if (DefineTestStop() == true) return 0;
 
             int statusCode = 0;
             try
@@ -1565,11 +1527,11 @@ namespace HatFrameworkDev
                 response = client.GetAsync(url).Result;
                 statusCode = (int)response.StatusCode;
 
-                EditMessageDebug(step, null, null, PASSED, $"Получен HTTP ответ: {statusCode} по URL: {url}", $"HTTP response received: {statusCode} by URL: {url}", IMAGE_STATUS_PASSED);
+                SendMessageDebug($"GetUrlResponseAsync('{url}')", $"GetUrlResponseAsync('{url}')", PASSED, $"Получен HTTP ответ: {statusCode} по URL: {url}", $"HTTP response received: {statusCode} by URL: {url}", IMAGE_STATUS_PASSED);
             }
             catch (Exception ex)
             {
-                EditMessageDebug(step, null, null, Tester.FAILED,
+                SendMessageDebug($"GetUrlResponseAsync('{url}')", $"GetUrlResponseAsync('{url}')", Tester.FAILED,
                     "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(),
                     "Error: " + ex.Message + Environment.NewLine + Environment.NewLine + "Full description of the error: " + ex.ToString(),
                     Tester.IMAGE_STATUS_FAILED);
@@ -1581,17 +1543,15 @@ namespace HatFrameworkDev
 
         public async Task WaitAsync(int sec)
         {
-            int step = SendMessageDebug($"WaitAsync({sec})", $"WaitAsync({sec})", PROCESS, 
-                $"Ожидание {sec.ToString()} секунд", $"Waiting {sec.ToString()} seconds", IMAGE_STATUS_PROCESS);
-            if (DefineTestStop(step) == true) return;
+            if (DefineTestStop() == true) return;
             try
             {
                 await Task.Delay(sec * 1000);
-                EditMessageDebug(step, null, null, PASSED, $"Ожидание {sec.ToString()} секунд - завершено", $"Waiting {sec.ToString()} seconds - completed", IMAGE_STATUS_PASSED);
+                SendMessageDebug($"WaitAsync({sec})", $"WaitAsync({sec})", PASSED, $"Ожидание {sec.ToString()} секунд - завершено", $"Waiting {sec.ToString()} seconds - completed", IMAGE_STATUS_PASSED);
             }
             catch (Exception ex)
             {
-                EditMessageDebug(step, null, null, Tester.FAILED,
+                SendMessageDebug($"WaitAsync({sec})", $"WaitAsync({sec})", Tester.FAILED,
                     "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(),
                     "Error: " + ex.Message + Environment.NewLine + Environment.NewLine + "Full description of the error: " + ex.ToString(),
                     Tester.IMAGE_STATUS_FAILED);
@@ -1602,9 +1562,7 @@ namespace HatFrameworkDev
 
         public async Task WaitVisibleElementByIdAsync(string id, int sec)
         {
-            int step = SendMessageDebug($"WaitVisibleElementByIdAsync('{id}', {sec})", $"WaitVisibleElementByIdAsync('{id}', {sec})",
-                PROCESS, $"Ожидание элемента {sec.ToString()} секунд", $"Waiting for an element {sec.ToString()} seconds", IMAGE_STATUS_PROCESS);
-            if (DefineTestStop(step) == true) return;
+            if (DefineTestStop() == true) return;
             try
             {
                 bool found = false;
@@ -1615,17 +1573,17 @@ namespace HatFrameworkDev
                     await Task.Delay(1000);
                 }
 
-                if (found == true) EditMessageDebug(step, null, null, 
+                if (found == true) SendMessageDebug($"WaitVisibleElementByIdAsync('{id}', {sec})", $"WaitVisibleElementByIdAsync('{id}', {sec})", 
                     PASSED, $"Ожидание элемента - завершено (элемент отображается)", $"Waiting for an element - completed (the element is displayed)", IMAGE_STATUS_PASSED);
                 else
                 {
-                    EditMessageDebug(step, null, null, FAILED, $"Ожидание элемента - завершено (элемент не отображается)", $"Waiting for an element - completed (the element is not displayed)", IMAGE_STATUS_FAILED);
+                    SendMessageDebug($"WaitVisibleElementByIdAsync('{id}', {sec})", $"WaitVisibleElementByIdAsync('{id}', {sec})", FAILED, $"Ожидание элемента - завершено (элемент не отображается)", $"Waiting for an element - completed (the element is not displayed)", IMAGE_STATUS_FAILED);
                     TestStopAsync();
                 }
             }
             catch (Exception ex)
             {
-                EditMessageDebug(step, null, null, Tester.FAILED,
+                SendMessageDebug($"WaitVisibleElementByIdAsync('{id}', {sec})", $"WaitVisibleElementByIdAsync('{id}', {sec})", Tester.FAILED,
                     "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(),
                     "Error: " + ex.Message + Environment.NewLine + Environment.NewLine + "Full description of the error: " + ex.ToString(),
                     Tester.IMAGE_STATUS_FAILED);
@@ -1636,9 +1594,7 @@ namespace HatFrameworkDev
 
         public async Task WaitVisibleElementByClassAsync(string _class, int index, int sec)
         {
-            int step = SendMessageDebug($"WaitVisibleElementByClassAsync('{_class}', {index}, {sec})", $"WaitVisibleElementByClassAsync('{_class}', {index}, {sec})",
-                PROCESS, $"Ожидание элемента {sec.ToString()} секунд", $"Waiting for an element {sec.ToString()} seconds", IMAGE_STATUS_PROCESS);
-            if (DefineTestStop(step) == true) return;
+            if (DefineTestStop() == true) return;
             try
             {
                 bool found = false;
@@ -1649,16 +1605,16 @@ namespace HatFrameworkDev
                     await Task.Delay(1000);
                 }
 
-                if (found == true) EditMessageDebug(step, null, null, PASSED, $"Ожидание элемента - завершено (элемент отображается)", $"Waiting for an element - completed (the element is displayed)", IMAGE_STATUS_PASSED);
+                if (found == true) SendMessageDebug($"WaitVisibleElementByClassAsync('{_class}', {index}, {sec})", $"WaitVisibleElementByClassAsync('{_class}', {index}, {sec})", PASSED, $"Ожидание элемента - завершено (элемент отображается)", $"Waiting for an element - completed (the element is displayed)", IMAGE_STATUS_PASSED);
                 else
                 {
-                    EditMessageDebug(step, null, null, FAILED, $"Ожидание элемента - завершено (элемент не отображается)", $"Waiting for an element - completed (the element is not displayed)", IMAGE_STATUS_FAILED);
+                    SendMessageDebug($"WaitVisibleElementByClassAsync('{_class}', {index}, {sec})", $"WaitVisibleElementByClassAsync('{_class}', {index}, {sec})", FAILED, $"Ожидание элемента - завершено (элемент не отображается)", $"Waiting for an element - completed (the element is not displayed)", IMAGE_STATUS_FAILED);
                     TestStopAsync();
                 }
             }
             catch (Exception ex)
             {
-                EditMessageDebug(step, null, null, Tester.FAILED,
+                SendMessageDebug($"WaitVisibleElementByClassAsync('{_class}', {index}, {sec})", $"WaitVisibleElementByClassAsync('{_class}', {index}, {sec})", Tester.FAILED,
                     "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(),
                     "Error: " + ex.Message + Environment.NewLine + Environment.NewLine + "Full description of the error: " + ex.ToString(),
                     Tester.IMAGE_STATUS_FAILED);
@@ -1669,9 +1625,7 @@ namespace HatFrameworkDev
 
         public async Task WaitVisibleElementByNameAsync(string name, int index, int sec)
         {
-            int step = SendMessageDebug($"WaitVisibleElementByNameAsync('{name}', {index}, {sec})", $"WaitVisibleElementByNameAsync('{name}', {index}, {sec})", 
-                PROCESS, $"Ожидание элемента {sec.ToString()} секунд", $"Waiting for an element {sec.ToString()} seconds", IMAGE_STATUS_PROCESS);
-            if (DefineTestStop(step) == true) return;
+            if (DefineTestStop() == true) return;
             try
             {
                 bool found = false;
@@ -1682,16 +1636,16 @@ namespace HatFrameworkDev
                     await Task.Delay(1000);
                 }
 
-                if (found == true) EditMessageDebug(step, null, null, PASSED, $"Ожидание элемента - завершено (элемент отображается)", $"Waiting for an element - completed (the element is displayed)", IMAGE_STATUS_PASSED);
+                if (found == true) SendMessageDebug($"WaitVisibleElementByNameAsync('{name}', {index}, {sec})", $"WaitVisibleElementByNameAsync('{name}', {index}, {sec})", PASSED, $"Ожидание элемента - завершено (элемент отображается)", $"Waiting for an element - completed (the element is displayed)", IMAGE_STATUS_PASSED);
                 else
                 {
-                    EditMessageDebug(step, null, null, FAILED, $"Ожидание элемента - завершено (элемент не отображается)", $"Waiting for an element - completed (the element is not displayed)", IMAGE_STATUS_FAILED);
+                    SendMessageDebug($"WaitVisibleElementByNameAsync('{name}', {index}, {sec})", $"WaitVisibleElementByNameAsync('{name}', {index}, {sec})", FAILED, $"Ожидание элемента - завершено (элемент не отображается)", $"Waiting for an element - completed (the element is not displayed)", IMAGE_STATUS_FAILED);
                     TestStopAsync();
                 }
             }
             catch (Exception ex)
             {
-                EditMessageDebug(step, null, null, Tester.FAILED,
+                SendMessageDebug($"WaitVisibleElementByNameAsync('{name}', {index}, {sec})", $"WaitVisibleElementByNameAsync('{name}', {index}, {sec})", Tester.FAILED,
                     "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(),
                     "Error: " + ex.Message + Environment.NewLine + Environment.NewLine + "Full description of the error: " + ex.ToString(),
                     Tester.IMAGE_STATUS_FAILED);
@@ -1702,9 +1656,7 @@ namespace HatFrameworkDev
 
         public async Task WaitVisibleElementByTagAsync(string tag, int index, int sec)
         {
-            int step = SendMessageDebug($"WaitVisibleElementByTagAsync('{tag}', {index}, {sec})", $"WaitVisibleElementByTagAsync('{tag}', {index}, {sec})",
-                PROCESS, $"Ожидание элемента {sec.ToString()} секунд", $"Waiting for an element {sec.ToString()} seconds", IMAGE_STATUS_PROCESS);
-            if (DefineTestStop(step) == true) return;
+            if (DefineTestStop() == true) return;
             try
             {
                 bool found = false;
@@ -1715,16 +1667,16 @@ namespace HatFrameworkDev
                     await Task.Delay(1000);
                 }
 
-                if (found == true) EditMessageDebug(step, null, null, PASSED, $"Ожидание элемента - завершено (элемент отображается)", $"Waiting for an element - completed (the element is displayed)", IMAGE_STATUS_PASSED);
+                if (found == true) SendMessageDebug($"WaitVisibleElementByTagAsync('{tag}', {index}, {sec})", $"WaitVisibleElementByTagAsync('{tag}', {index}, {sec})", PASSED, $"Ожидание элемента - завершено (элемент отображается)", $"Waiting for an element - completed (the element is displayed)", IMAGE_STATUS_PASSED);
                 else
                 {
-                    EditMessageDebug(step, null, null, FAILED, $"Ожидание элемента - завершено (элемент не отображается)", $"Waiting for an element - completed (the element is not displayed)", IMAGE_STATUS_FAILED);
+                    SendMessageDebug($"WaitVisibleElementByTagAsync('{tag}', {index}, {sec})", $"WaitVisibleElementByTagAsync('{tag}', {index}, {sec})", FAILED, $"Ожидание элемента - завершено (элемент не отображается)", $"Waiting for an element - completed (the element is not displayed)", IMAGE_STATUS_FAILED);
                     TestStopAsync();
                 }
             }
             catch (Exception ex)
             {
-                EditMessageDebug(step, null, null, Tester.FAILED,
+                SendMessageDebug($"WaitVisibleElementByTagAsync('{tag}', {index}, {sec})", $"WaitVisibleElementByTagAsync('{tag}', {index}, {sec})", Tester.FAILED,
                     "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(),
                     "Error: " + ex.Message + Environment.NewLine + Environment.NewLine + "Full description of the error: " + ex.ToString(),
                     Tester.IMAGE_STATUS_FAILED);
@@ -1735,9 +1687,7 @@ namespace HatFrameworkDev
 
         public async Task WaitVisibleElementAsync(string by, string locator, int sec)
         {
-            int step = SendMessageDebug($"WaitVisibleElementAsync(\"{by}\", \"{locator}\", {sec})", $"WaitVisibleElementAsync(\"{by}\", \"{locator}\", {sec})",
-                PROCESS, $"Ожидание элемента {sec} секунд", $"Waiting for an element {sec.ToString()} seconds", IMAGE_STATUS_PROCESS);
-            if (DefineTestStop(step) == true) return;
+            if (DefineTestStop() == true) return;
             try
             {
                 bool found = false;
@@ -1749,16 +1699,16 @@ namespace HatFrameworkDev
                     await Task.Delay(1000);
                 }
 
-                if (found == true) EditMessageDebug(step, null, null, PASSED, $"Ожидание элемента - завершено (элемент отображается)", $"Waiting for an element - completed (the element is displayed)", IMAGE_STATUS_PASSED);
+                if (found == true) SendMessageDebug($"WaitVisibleElementAsync(\"{by}\", \"{locator}\", {sec})", $"WaitVisibleElementAsync(\"{by}\", \"{locator}\", {sec})", PASSED, $"Ожидание элемента - завершено (элемент отображается)", $"Waiting for an element - completed (the element is displayed)", IMAGE_STATUS_PASSED);
                 else
                 {
-                    EditMessageDebug(step, null, null, FAILED, $"Ожидание элемента - завершено (элемент не отображается)", $"Waiting for an element - completed (the element is not displayed)", IMAGE_STATUS_FAILED);
+                    SendMessageDebug($"WaitVisibleElementAsync(\"{by}\", \"{locator}\", {sec})", $"WaitVisibleElementAsync(\"{by}\", \"{locator}\", {sec})", FAILED, $"Ожидание элемента - завершено (элемент не отображается)", $"Waiting for an element - completed (the element is not displayed)", IMAGE_STATUS_FAILED);
                     TestStopAsync();
                 }
             }
             catch (Exception ex)
             {
-                EditMessageDebug(step, null, null, Tester.FAILED,
+                SendMessageDebug($"WaitVisibleElementAsync(\"{by}\", \"{locator}\", {sec})", $"WaitVisibleElementAsync(\"{by}\", \"{locator}\", {sec})", Tester.FAILED,
                     "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(),
                     "Error: " + ex.Message + Environment.NewLine + Environment.NewLine + "Full description of the error: " + ex.ToString(),
                     Tester.IMAGE_STATUS_FAILED);
@@ -1769,9 +1719,7 @@ namespace HatFrameworkDev
 
         public async Task WaitNotVisibleElementByIdAsync(string id, int sec)
         {
-            int step = SendMessageDebug($"WaitNotVisibleElementByIdAsync('{id}', {sec})", $"WaitNotVisibleElementByIdAsync('{id}', {sec})",
-                PROCESS, $"Ожидание скрытия элемента {sec.ToString()} секунд", $"Waiting for the element to be hidden {sec.ToString()} seconds", IMAGE_STATUS_PROCESS);
-            if (DefineTestStop(step) == true) return;
+            if (DefineTestStop() == true) return;
             try
             {
                 bool found = true;
@@ -1782,16 +1730,16 @@ namespace HatFrameworkDev
                     await Task.Delay(1000);
                 }
 
-                if (found == false) EditMessageDebug(step, null, null, PASSED, $"Ожидание скрытия элемента - завершено (элемент не отображается)", $"Waiting for the element to be hidden - completed (the element is not displayed)", IMAGE_STATUS_PASSED);
+                if (found == false) SendMessageDebug($"WaitNotVisibleElementByIdAsync('{id}', {sec})", $"WaitNotVisibleElementByIdAsync('{id}', {sec})", PASSED, $"Ожидание скрытия элемента - завершено (элемент не отображается)", $"Waiting for the element to be hidden - completed (the element is not displayed)", IMAGE_STATUS_PASSED);
                 else
                 {
-                    EditMessageDebug(step, null, null, FAILED, $"Ожидание скрытия элемента - завершено (элемент отображается)", $"Waiting for the element to be hidden - completed (the element is displayed)", IMAGE_STATUS_FAILED);
+                    SendMessageDebug($"WaitNotVisibleElementByIdAsync('{id}', {sec})", $"WaitNotVisibleElementByIdAsync('{id}', {sec})", FAILED, $"Ожидание скрытия элемента - завершено (элемент отображается)", $"Waiting for the element to be hidden - completed (the element is displayed)", IMAGE_STATUS_FAILED);
                     TestStopAsync();
                 }
             }
             catch (Exception ex)
             {
-                EditMessageDebug(step, null, null, Tester.FAILED,
+                SendMessageDebug($"WaitNotVisibleElementByIdAsync('{id}', {sec})", $"WaitNotVisibleElementByIdAsync('{id}', {sec})", Tester.FAILED,
                     "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(),
                     "Error: " + ex.Message + Environment.NewLine + Environment.NewLine + "Full description of the error: " + ex.ToString(),
                     Tester.IMAGE_STATUS_FAILED);
@@ -1802,9 +1750,7 @@ namespace HatFrameworkDev
 
         public async Task WaitNotVisibleElementByClassAsync(string _class, int index, int sec)
         {
-            int step = SendMessageDebug($"WaitNotVisibleElementByClassAsync('{_class}', {index}, {sec})", $"WaitNotVisibleElementByClassAsync('{_class}', {index}, {sec})",
-                PROCESS, $"Ожидание скрытия элемента {sec.ToString()} секунд", $"Waiting for the element to be hidden {sec.ToString()} seconds", IMAGE_STATUS_PROCESS);
-            if (DefineTestStop(step) == true) return;
+            if (DefineTestStop() == true) return;
             try
             {
                 bool found = true;
@@ -1815,16 +1761,16 @@ namespace HatFrameworkDev
                     await Task.Delay(1000);
                 }
 
-                if (found == false) EditMessageDebug(step, null, null, PASSED, $"Ожидание скрытия элемента - завершено (элемент не отображается)", $"Waiting for the element to be hidden - completed (the element is not displayed)", IMAGE_STATUS_PASSED);
+                if (found == false) SendMessageDebug($"WaitNotVisibleElementByClassAsync('{_class}', {index}, {sec})", $"WaitNotVisibleElementByClassAsync('{_class}', {index}, {sec})", PASSED, $"Ожидание скрытия элемента - завершено (элемент не отображается)", $"Waiting for the element to be hidden - completed (the element is not displayed)", IMAGE_STATUS_PASSED);
                 else
                 {
-                    EditMessageDebug(step, null, null, FAILED, $"Ожидание скрытия элемента - завершено (элемент отображается)", $"Waiting for the element to be hidden - completed (the element is displayed)", IMAGE_STATUS_FAILED);
+                    SendMessageDebug($"WaitNotVisibleElementByClassAsync('{_class}', {index}, {sec})", $"WaitNotVisibleElementByClassAsync('{_class}', {index}, {sec})", FAILED, $"Ожидание скрытия элемента - завершено (элемент отображается)", $"Waiting for the element to be hidden - completed (the element is displayed)", IMAGE_STATUS_FAILED);
                     TestStopAsync();
                 }
             }
             catch (Exception ex)
             {
-                EditMessageDebug(step, null, null, Tester.FAILED,
+                SendMessageDebug($"WaitNotVisibleElementByClassAsync('{_class}', {index}, {sec})", $"WaitNotVisibleElementByClassAsync('{_class}', {index}, {sec})", Tester.FAILED,
                     "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(),
                     "Error: " + ex.Message + Environment.NewLine + Environment.NewLine + "Full description of the error: " + ex.ToString(),
                     Tester.IMAGE_STATUS_FAILED);
@@ -1835,9 +1781,7 @@ namespace HatFrameworkDev
 
         public async Task WaitNotVisibleElementByNameAsync(string name, int index, int sec)
         {
-            int step = SendMessageDebug($"WaitNotVisibleElementByNameAsync('{name}', {index}, {sec})", $"WaitNotVisibleElementByNameAsync('{name}', {index}, {sec})",
-                PROCESS, $"Ожидание скрытия элемента {sec.ToString()} секунд", $"Waiting for the element to be hidden {sec.ToString()} seconds", IMAGE_STATUS_PROCESS);
-            if (DefineTestStop(step) == true) return;
+            if (DefineTestStop() == true) return;
             try
             {
                 bool found = true;
@@ -1848,16 +1792,16 @@ namespace HatFrameworkDev
                     await Task.Delay(1000);
                 }
 
-                if (found == false) EditMessageDebug(step, null, null, PASSED, $"Ожидание скрытия элемента - завершено (элемент не отображается)", $"Waiting for the element to be hidden - completed (the element is not displayed)", IMAGE_STATUS_PASSED);
+                if (found == false) SendMessageDebug($"WaitNotVisibleElementByNameAsync('{name}', {index}, {sec})", $"WaitNotVisibleElementByNameAsync('{name}', {index}, {sec})", PASSED, $"Ожидание скрытия элемента - завершено (элемент не отображается)", $"Waiting for the element to be hidden - completed (the element is not displayed)", IMAGE_STATUS_PASSED);
                 else
                 {
-                    EditMessageDebug(step, null, null, FAILED, $"Ожидание скрытия элемента - завершено (элемент отображается)", $"Waiting for the element to be hidden - completed (the element is displayed)", IMAGE_STATUS_FAILED);
+                    SendMessageDebug($"WaitNotVisibleElementByNameAsync('{name}', {index}, {sec})", $"WaitNotVisibleElementByNameAsync('{name}', {index}, {sec})", FAILED, $"Ожидание скрытия элемента - завершено (элемент отображается)", $"Waiting for the element to be hidden - completed (the element is displayed)", IMAGE_STATUS_FAILED);
                     TestStopAsync();
                 }
             }
             catch (Exception ex)
             {
-                EditMessageDebug(step, null, null, Tester.FAILED,
+                SendMessageDebug($"WaitNotVisibleElementByNameAsync('{name}', {index}, {sec})", $"WaitNotVisibleElementByNameAsync('{name}', {index}, {sec})", Tester.FAILED,
                     "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(),
                     "Error: " + ex.Message + Environment.NewLine + Environment.NewLine + "Full description of the error: " + ex.ToString(),
                     Tester.IMAGE_STATUS_FAILED);
@@ -1868,9 +1812,7 @@ namespace HatFrameworkDev
 
         public async Task WaitNotVisibleElementByTagAsync(string tag, int index, int sec)
         {
-            int step = SendMessageDebug($"WaitNotVisibleElementByTagAsync('{tag}', {index}, {sec})", $"WaitNotVisibleElementByTagAsync('{tag}', {index}, {sec})",
-                PROCESS, $"Ожидание скрытия элемента {sec.ToString()} секунд", $"Waiting for the element to be hidden {sec.ToString()} seconds", IMAGE_STATUS_PROCESS);
-            if (DefineTestStop(step) == true) return;
+            if (DefineTestStop() == true) return;
             try
             {
                 bool found = true;
@@ -1881,16 +1823,16 @@ namespace HatFrameworkDev
                     await Task.Delay(1000);
                 }
 
-                if (found == false) EditMessageDebug(step, null, null, PASSED, $"Ожидание скрытия элемента - завершено (элемент не отображается)", $"Waiting for the element to be hidden - completed (the element is not displayed)", IMAGE_STATUS_PASSED);
+                if (found == false) SendMessageDebug($"WaitNotVisibleElementByTagAsync('{tag}', {index}, {sec})", $"WaitNotVisibleElementByTagAsync('{tag}', {index}, {sec})", PASSED, $"Ожидание скрытия элемента - завершено (элемент не отображается)", $"Waiting for the element to be hidden - completed (the element is not displayed)", IMAGE_STATUS_PASSED);
                 else
                 {
-                    EditMessageDebug(step, null, null, FAILED, $"Ожидание скрытия элемента - завершено (элемент отображается)", $"Waiting for the element to be hidden - completed (the element is displayed)", IMAGE_STATUS_FAILED);
+                    SendMessageDebug($"WaitNotVisibleElementByTagAsync('{tag}', {index}, {sec})", $"WaitNotVisibleElementByTagAsync('{tag}', {index}, {sec})", FAILED, $"Ожидание скрытия элемента - завершено (элемент отображается)", $"Waiting for the element to be hidden - completed (the element is displayed)", IMAGE_STATUS_FAILED);
                     TestStopAsync();
                 }
             }
             catch (Exception ex)
             {
-                EditMessageDebug(step, null, null, Tester.FAILED,
+                SendMessageDebug($"WaitNotVisibleElementByTagAsync('{tag}', {index}, {sec})", $"WaitNotVisibleElementByTagAsync('{tag}', {index}, {sec})", Tester.FAILED,
                     "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(),
                     "Error: " + ex.Message + Environment.NewLine + Environment.NewLine + "Full description of the error: " + ex.ToString(),
                     Tester.IMAGE_STATUS_FAILED);
@@ -1901,9 +1843,7 @@ namespace HatFrameworkDev
 
         public async Task WaitNotVisibleElementAsync(string by, string locator, int sec)
         {
-            int step = SendMessageDebug($"WaitNotVisibleElementAsync(\"{by}\", \"{locator}\", {sec})", $"WaitNotVisibleElementAsync(\"{by}\", \"{locator}\", {sec})",
-                PROCESS, $"Ожидание скрытия элемента {sec} секунд", $"Waiting for the element to be hidden {sec.ToString()} seconds", IMAGE_STATUS_PROCESS);
-            if (DefineTestStop(step) == true) return;
+            if (DefineTestStop() == true) return;
             try
             {
                 bool found = true;
@@ -1915,16 +1855,16 @@ namespace HatFrameworkDev
                     await Task.Delay(1000);
                 }
 
-                if (found == false) EditMessageDebug(step, null, null, PASSED, $"Ожидание скрытия элемента - завершено (элемент не отображается)", $"Waiting for the element to be hidden - completed (the element is not displayed)", IMAGE_STATUS_PASSED);
+                if (found == false) SendMessageDebug($"WaitNotVisibleElementAsync(\"{by}\", \"{locator}\", {sec})", $"WaitNotVisibleElementAsync(\"{by}\", \"{locator}\", {sec})", PASSED, $"Ожидание скрытия элемента - завершено (элемент не отображается)", $"Waiting for the element to be hidden - completed (the element is not displayed)", IMAGE_STATUS_PASSED);
                 else
                 {
-                    EditMessageDebug(step, null, null, FAILED, $"Ожидание скрытия элемента - завершено (элемент отображается)", $"Waiting for the element to be hidden - completed (the element is displayed)", IMAGE_STATUS_FAILED);
+                    SendMessageDebug($"WaitNotVisibleElementAsync(\"{by}\", \"{locator}\", {sec})", $"WaitNotVisibleElementAsync(\"{by}\", \"{locator}\", {sec})", FAILED, $"Ожидание скрытия элемента - завершено (элемент отображается)", $"Waiting for the element to be hidden - completed (the element is displayed)", IMAGE_STATUS_FAILED);
                     TestStopAsync();
                 }
             }
             catch (Exception ex)
             {
-                EditMessageDebug(step, null, null, Tester.FAILED,
+                SendMessageDebug($"WaitNotVisibleElementAsync(\"{by}\", \"{locator}\", {sec})", $"WaitNotVisibleElementAsync(\"{by}\", \"{locator}\", {sec})", Tester.FAILED,
                     "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(),
                     "Error: " + ex.Message + Environment.NewLine + Environment.NewLine + "Full description of the error: " + ex.ToString(),
                     Tester.IMAGE_STATUS_FAILED);
@@ -1935,10 +1875,7 @@ namespace HatFrameworkDev
 
         public async Task WaitElementInDomAsync(string by, string locator, int sec)
         {
-            int step = SendMessageDebug($"WaitElementInDomAsync(\"{by}\", \"{locator}\", {sec})", $"WaitElementInDomAsync(\"{by}\", \"{locator}\", {sec})",
-                PROCESS, $"Ожидание присутствия элемента в DOM в течении {sec} секунд", $"Waiting for the presence of an element in the DOM for {sec} seconds", IMAGE_STATUS_PROCESS);
-            if (DefineTestStop(step) == true) return;
-
+            if (DefineTestStop() == true) return;
             try
             {
                 bool found = false;
@@ -1962,16 +1899,16 @@ namespace HatFrameworkDev
                     await Task.Delay(1000);
                 }
 
-                if (found == true) EditMessageDebug(step, null, null, PASSED, $"Ожидание элемента - завершено (элемент присутствует в DOM)", $"Waiting for the element - completed (the element is present in the DOM)", IMAGE_STATUS_PASSED);
+                if (found == true) SendMessageDebug($"WaitElementInDomAsync(\"{by}\", \"{locator}\", {sec})", $"WaitElementInDomAsync(\"{by}\", \"{locator}\", {sec})", PASSED, $"Ожидание элемента - завершено (элемент присутствует в DOM)", $"Waiting for the element - completed (the element is present in the DOM)", IMAGE_STATUS_PASSED);
                 else
                 {
-                    EditMessageDebug(step, null, null, FAILED, $"Ожидание элемента - завершено (элемент не присутствует в DOM)", $"Waiting for the element - completed (the element is not present in the DOM)", IMAGE_STATUS_FAILED);
+                    SendMessageDebug($"WaitElementInDomAsync(\"{by}\", \"{locator}\", {sec})", $"WaitElementInDomAsync(\"{by}\", \"{locator}\", {sec})", FAILED, $"Ожидание элемента - завершено (элемент не присутствует в DOM)", $"Waiting for the element - completed (the element is not present in the DOM)", IMAGE_STATUS_FAILED);
                     TestStopAsync();
                 }
             }
             catch (Exception ex)
             {
-                EditMessageDebug(step, null, null, Tester.FAILED,
+                SendMessageDebug($"WaitElementInDomAsync(\"{by}\", \"{locator}\", {sec})", $"WaitElementInDomAsync(\"{by}\", \"{locator}\", {sec})", Tester.FAILED,
                     "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(),
                     "Error: " + ex.Message + Environment.NewLine + Environment.NewLine + "Full description of the error: " + ex.ToString(),
                     Tester.IMAGE_STATUS_FAILED);
@@ -1982,9 +1919,7 @@ namespace HatFrameworkDev
 
         public async Task WaitElementNotDomAsync(string by, string locator, int sec)
         {
-            int step = SendMessageDebug($"WaitElementNotDomAsync(\"{by}\", \"{locator}\", {sec})", $"WaitElementNotDomAsync(\"{by}\", \"{locator}\", {sec})",
-                PROCESS, $"Ожидание отсутствия элемента в DOM в течении {sec} секунд", $"Waiting for the absence of an element in the DOM for {sec} seconds", IMAGE_STATUS_PROCESS);
-            if (DefineTestStop(step) == true) return;
+            if (DefineTestStop() == true) return;
 
             try
             {
@@ -2009,16 +1944,16 @@ namespace HatFrameworkDev
                     await Task.Delay(1000);
                 }
 
-                if (found == false) EditMessageDebug(step, null, null, PASSED, $"Ожидание отсутствия элемента - завершено (элемент отсутствует в DOM)", $"Waiting for the absence element - completed (the element is absence in the DOM)", IMAGE_STATUS_PASSED);
+                if (found == false) SendMessageDebug($"WaitElementNotDomAsync(\"{by}\", \"{locator}\", {sec})", $"WaitElementNotDomAsync(\"{by}\", \"{locator}\", {sec})", PASSED, $"Ожидание отсутствия элемента - завершено (элемент отсутствует в DOM)", $"Waiting for the absence element - completed (the element is absence in the DOM)", IMAGE_STATUS_PASSED);
                 else
                 {
-                    EditMessageDebug(step, null, null, FAILED, $"Ожидание отсутствия элемента - завершено (элемент присутствует в DOM)", $"Waiting for the absence of an element - completed (the element is present in the DOM)", IMAGE_STATUS_FAILED);
+                    SendMessageDebug($"WaitElementNotDomAsync(\"{by}\", \"{locator}\", {sec})", $"WaitElementNotDomAsync(\"{by}\", \"{locator}\", {sec})", FAILED, $"Ожидание отсутствия элемента - завершено (элемент присутствует в DOM)", $"Waiting for the absence of an element - completed (the element is present in the DOM)", IMAGE_STATUS_FAILED);
                     TestStopAsync();
                 }
             }
             catch (Exception ex)
             {
-                EditMessageDebug(step, null, null, Tester.FAILED,
+                SendMessageDebug($"WaitElementNotDomAsync(\"{by}\", \"{locator}\", {sec})", $"WaitElementNotDomAsync(\"{by}\", \"{locator}\", {sec})", Tester.FAILED,
                     "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(),
                     "Error: " + ex.Message + Environment.NewLine + Environment.NewLine + "Full description of the error: " + ex.ToString(),
                     Tester.IMAGE_STATUS_FAILED);
@@ -2029,9 +1964,7 @@ namespace HatFrameworkDev
 
         public async Task<bool> FindElementByIdAsync(string id, int sec)
         {
-            int step = SendMessageDebug($"FindElementByIdAsync('{id}', {sec})", $"FindElementByIdAsync('{id}', {sec})",
-                PROCESS, "Поиск элемента", "Element Search", IMAGE_STATUS_PROCESS);
-            if (DefineTestStop(step) == true) return false;
+            if (DefineTestStop() == true) return false;
 
             bool found = false;
             try
@@ -2054,12 +1987,12 @@ namespace HatFrameworkDev
                     await Task.Delay(1000);
                 }
 
-                if (found == true) EditMessageDebug(step, null, null, COMPLETED, "Поиск элемента - завершен (элемент найден)", "Element search - completed (element found)", IMAGE_STATUS_MESSAGE);
-                else EditMessageDebug(step, null, null, COMPLETED, "Поиск элемента - завершен (элемент не найден)", "Element search - completed (element not found)", IMAGE_STATUS_MESSAGE);
+                if (found == true) SendMessageDebug($"FindElementByIdAsync('{id}', {sec})", $"FindElementByIdAsync('{id}', {sec})", COMPLETED, "Поиск элемента - завершен (элемент найден)", "Element search - completed (element found)", IMAGE_STATUS_MESSAGE);
+                else SendMessageDebug($"FindElementByIdAsync('{id}', {sec})", $"FindElementByIdAsync('{id}', {sec})", COMPLETED, "Поиск элемента - завершен (элемент не найден)", "Element search - completed (element not found)", IMAGE_STATUS_MESSAGE);
             }
             catch (Exception ex)
             {
-                EditMessageDebug(step, null, null, Tester.FAILED,
+                SendMessageDebug($"FindElementByIdAsync('{id}', {sec})", $"FindElementByIdAsync('{id}', {sec})", Tester.FAILED,
                     "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(),
                     "Error: " + ex.Message + Environment.NewLine + Environment.NewLine + "Full description of the error: " + ex.ToString(),
                     Tester.IMAGE_STATUS_FAILED);
@@ -2071,9 +2004,7 @@ namespace HatFrameworkDev
 
         public async Task<bool> FindElementByClassAsync(string _class, int index, int sec)
         {
-            int step = SendMessageDebug($"FindElementByClassAsync('{_class}', {index}, {sec})", $"FindElementByClassAsync('{_class}', {index}, {sec})", 
-                PROCESS, "Поиск элемента", "Element Search", IMAGE_STATUS_PROCESS);
-            if (DefineTestStop(step) == true) return false;
+            if (DefineTestStop() == true) return false;
 
             bool found = false;
             try
@@ -2096,12 +2027,12 @@ namespace HatFrameworkDev
                     await Task.Delay(1000);
                 }
 
-                if (found == true) EditMessageDebug(step, null, null, COMPLETED, "Поиск элемента - завершен (элемент найден)", "Element search - completed (element found)", IMAGE_STATUS_MESSAGE);
-                else EditMessageDebug(step, null, null, COMPLETED, "Поиск элемента - завершен (элемент не найден)", "Element search - completed (element not found)", IMAGE_STATUS_MESSAGE);
+                if (found == true) SendMessageDebug($"FindElementByClassAsync('{_class}', {index}, {sec})", $"FindElementByClassAsync('{_class}', {index}, {sec})", COMPLETED, "Поиск элемента - завершен (элемент найден)", "Element search - completed (element found)", IMAGE_STATUS_MESSAGE);
+                else SendMessageDebug($"FindElementByClassAsync('{_class}', {index}, {sec})", $"FindElementByClassAsync('{_class}', {index}, {sec})", COMPLETED, "Поиск элемента - завершен (элемент не найден)", "Element search - completed (element not found)", IMAGE_STATUS_MESSAGE);
             }
             catch (Exception ex)
             {
-                EditMessageDebug(step, null, null, Tester.FAILED,
+                SendMessageDebug($"FindElementByClassAsync('{_class}', {index}, {sec})", $"FindElementByClassAsync('{_class}', {index}, {sec})", Tester.FAILED,
                     "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(),
                     "Error: " + ex.Message + Environment.NewLine + Environment.NewLine + "Full description of the error: " + ex.ToString(),
                     Tester.IMAGE_STATUS_FAILED);
@@ -2113,9 +2044,7 @@ namespace HatFrameworkDev
 
         public async Task<bool> FindElementByNameAsync(string name, int index, int sec)
         {
-            int step = SendMessageDebug($"FindElementByNameAsync('{name}', {index}, {sec})", $"FindElementByNameAsync('{name}', {index}, {sec})",
-                PROCESS, "Поиск элемента", "Element Search", IMAGE_STATUS_PROCESS);
-            if (DefineTestStop(step) == true) return false;
+            if (DefineTestStop() == true) return false;
 
             bool found = false;
             try
@@ -2138,12 +2067,12 @@ namespace HatFrameworkDev
                     await Task.Delay(1000);
                 }
 
-                if (found == true) EditMessageDebug(step, null, null, COMPLETED, "Поиск элемента - завершен (элемент найден)", "Element search - completed (element found)", IMAGE_STATUS_MESSAGE);
-                else EditMessageDebug(step, null, null, COMPLETED, "Поиск элемента - завершен (элемент не найден)", "Element search - completed (element not found)", IMAGE_STATUS_MESSAGE);
+                if (found == true) SendMessageDebug($"FindElementByNameAsync('{name}', {index}, {sec})", $"FindElementByNameAsync('{name}', {index}, {sec})", COMPLETED, "Поиск элемента - завершен (элемент найден)", "Element search - completed (element found)", IMAGE_STATUS_MESSAGE);
+                else SendMessageDebug($"FindElementByNameAsync('{name}', {index}, {sec})", $"FindElementByNameAsync('{name}', {index}, {sec})", COMPLETED, "Поиск элемента - завершен (элемент не найден)", "Element search - completed (element not found)", IMAGE_STATUS_MESSAGE);
             }
             catch (Exception ex)
             {
-                EditMessageDebug(step, null, null, Tester.FAILED,
+                SendMessageDebug($"FindElementByNameAsync('{name}', {index}, {sec})", $"FindElementByNameAsync('{name}', {index}, {sec})", Tester.FAILED,
                     "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(),
                     "Error: " + ex.Message + Environment.NewLine + Environment.NewLine + "Full description of the error: " + ex.ToString(),
                     Tester.IMAGE_STATUS_FAILED);
@@ -2155,9 +2084,7 @@ namespace HatFrameworkDev
 
         public async Task<bool> FindElementByTagAsync(string tag, int index, int sec)
         {
-            int step = SendMessageDebug($"FindElementByTagAsync('{tag}', {index}, {sec})", $"FindElementByTagAsync('{tag}', {index}, {sec})",
-                PROCESS, "Поиск элемента", "Element Search", IMAGE_STATUS_PROCESS);
-            if (DefineTestStop(step) == true) return false;
+            if (DefineTestStop() == true) return false;
 
             bool found = false;
             try
@@ -2180,12 +2107,12 @@ namespace HatFrameworkDev
                     await Task.Delay(1000);
                 }
 
-                if (found == true) EditMessageDebug(step, null, null, COMPLETED, "Поиск элемента - завершен (элемент найден)", "Element search - completed (element found)", IMAGE_STATUS_MESSAGE);
-                else EditMessageDebug(step, null, null, COMPLETED, "Поиск элемента - завершен (элемент не найден)", "Element search - completed (element not found)", IMAGE_STATUS_MESSAGE);
+                if (found == true) SendMessageDebug($"FindElementByTagAsync('{tag}', {index}, {sec})", $"FindElementByTagAsync('{tag}', {index}, {sec})", COMPLETED, "Поиск элемента - завершен (элемент найден)", "Element search - completed (element found)", IMAGE_STATUS_MESSAGE);
+                else SendMessageDebug($"FindElementByTagAsync('{tag}', {index}, {sec})", $"FindElementByTagAsync('{tag}', {index}, {sec})", COMPLETED, "Поиск элемента - завершен (элемент не найден)", "Element search - completed (element not found)", IMAGE_STATUS_MESSAGE);
             }
             catch (Exception ex)
             {
-                EditMessageDebug(step, null, null, Tester.FAILED,
+                SendMessageDebug($"FindElementByTagAsync('{tag}', {index}, {sec})", $"FindElementByTagAsync('{tag}', {index}, {sec})", Tester.FAILED,
                     "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(),
                     "Error: " + ex.Message + Environment.NewLine + Environment.NewLine + "Full description of the error: " + ex.ToString(),
                     Tester.IMAGE_STATUS_FAILED);
@@ -2197,9 +2124,7 @@ namespace HatFrameworkDev
 
         public async Task<bool> FindElementAsync(string by, string locator, int sec)
         {
-            int step = SendMessageDebug($"FindElementAsync(\"{by}\", \"{locator}\", {sec})", $"FindElementAsync(\"{by}\", \"{locator}\", {sec})",
-                PROCESS, "Поиск элемента", "Element Search", IMAGE_STATUS_PROCESS);
-            if (DefineTestStop(step) == true) return false;
+            if (DefineTestStop() == true) return false;
 
             bool found = false;
             try
@@ -2223,12 +2148,12 @@ namespace HatFrameworkDev
                     await Task.Delay(1000);
                 }
 
-                if (found == true) EditMessageDebug(step, null, null, COMPLETED, "Поиск элемента - завершен (элемент найден)", "Element search - completed (element found)", IMAGE_STATUS_MESSAGE);
-                else EditMessageDebug(step, null, null, COMPLETED, "Поиск элемента - завершен (элемент не найден)", "Element search - completed (element not found)", IMAGE_STATUS_MESSAGE);
+                if (found == true) SendMessageDebug($"FindElementAsync(\"{by}\", \"{locator}\", {sec})", $"FindElementAsync(\"{by}\", \"{locator}\", {sec})", COMPLETED, "Поиск элемента - завершен (элемент найден)", "Element search - completed (element found)", IMAGE_STATUS_MESSAGE);
+                else SendMessageDebug($"FindElementAsync(\"{by}\", \"{locator}\", {sec})", $"FindElementAsync(\"{by}\", \"{locator}\", {sec})", COMPLETED, "Поиск элемента - завершен (элемент не найден)", "Element search - completed (element not found)", IMAGE_STATUS_MESSAGE);
             }
             catch (Exception ex)
             {
-                EditMessageDebug(step, null, null, Tester.FAILED,
+                SendMessageDebug($"FindElementAsync(\"{by}\", \"{locator}\", {sec})", $"FindElementAsync(\"{by}\", \"{locator}\", {sec})", Tester.FAILED,
                     "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(),
                     "Error: " + ex.Message + Environment.NewLine + Environment.NewLine + "Full description of the error: " + ex.ToString(),
                     Tester.IMAGE_STATUS_FAILED);
@@ -2240,9 +2165,7 @@ namespace HatFrameworkDev
 
         public async Task<bool> FindVisibleElementByIdAsync(string id, int sec)
         {
-            int step = SendMessageDebug($"FindVisibleElementByIdAsync('{id}', {sec})", $"FindVisibleElementByIdAsync('{id}', {sec})",
-                PROCESS, "Поиск элемента", "Element Search", IMAGE_STATUS_PROCESS);
-            if (DefineTestStop(step) == true) return false;
+            if (DefineTestStop() == true) return false;
 
             bool found = false;
             try
@@ -2254,12 +2177,12 @@ namespace HatFrameworkDev
                     await Task.Delay(1000);
                 }
 
-                if (found == true) EditMessageDebug(step, null, null, PASSED, "Поиск элемента - завершен (элемент найден)", "Element search - completed (element found)", IMAGE_STATUS_PASSED);
-                else EditMessageDebug(step, null, null, WARNING, "Поиск элемента - завершен (элемент не найден)", "Element search - completed (element not found)", IMAGE_STATUS_WARNING);
+                if (found == true) SendMessageDebug($"FindVisibleElementByIdAsync('{id}', {sec})", $"FindVisibleElementByIdAsync('{id}', {sec})", PASSED, "Поиск элемента - завершен (элемент найден)", "Element search - completed (element found)", IMAGE_STATUS_PASSED);
+                else SendMessageDebug($"FindVisibleElementByIdAsync('{id}', {sec})", $"FindVisibleElementByIdAsync('{id}', {sec})", WARNING, "Поиск элемента - завершен (элемент не найден)", "Element search - completed (element not found)", IMAGE_STATUS_WARNING);
             }
             catch (Exception ex)
             {
-                EditMessageDebug(step, null, null, Tester.FAILED,
+                SendMessageDebug($"FindVisibleElementByIdAsync('{id}', {sec})", $"FindVisibleElementByIdAsync('{id}', {sec})", Tester.FAILED,
                     "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(),
                     "Error: " + ex.Message + Environment.NewLine + Environment.NewLine + "Full description of the error: " + ex.ToString(),
                     Tester.IMAGE_STATUS_FAILED);
@@ -2271,9 +2194,7 @@ namespace HatFrameworkDev
 
         public async Task<bool> FindVisibleElementByClassAsync(string _class, int index, int sec)
         {
-            int step = SendMessageDebug($"FindVisibleElementByClassAsync('{_class}', {index}, {sec})", $"FindVisibleElementByClassAsync('{_class}', {index}, {sec})",
-                PROCESS, "Поиск элемента", "Element Search", IMAGE_STATUS_PROCESS);
-            if (DefineTestStop(step) == true) return false;
+            if (DefineTestStop() == true) return false;
 
             bool found = false;
             try
@@ -2285,12 +2206,12 @@ namespace HatFrameworkDev
                     await Task.Delay(1000);
                 }
 
-                if (found == true) EditMessageDebug(step, null, null, PASSED, "Поиск элемента - завершен (элемент найден)", "Element search - completed (element found)", IMAGE_STATUS_PASSED);
-                else EditMessageDebug(step, null, null, WARNING, "Поиск элемента - завершен (элемент не найден)", "Element search - completed (element not found)", IMAGE_STATUS_WARNING);
+                if (found == true) SendMessageDebug($"FindVisibleElementByClassAsync('{_class}', {index}, {sec})", $"FindVisibleElementByClassAsync('{_class}', {index}, {sec})", PASSED, "Поиск элемента - завершен (элемент найден)", "Element search - completed (element found)", IMAGE_STATUS_PASSED);
+                else SendMessageDebug($"FindVisibleElementByClassAsync('{_class}', {index}, {sec})", $"FindVisibleElementByClassAsync('{_class}', {index}, {sec})", WARNING, "Поиск элемента - завершен (элемент не найден)", "Element search - completed (element not found)", IMAGE_STATUS_WARNING);
             }
             catch (Exception ex)
             {
-                EditMessageDebug(step, null, null, Tester.FAILED,
+                SendMessageDebug($"FindVisibleElementByClassAsync('{_class}', {index}, {sec})", $"FindVisibleElementByClassAsync('{_class}', {index}, {sec})", Tester.FAILED,
                     "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(),
                     "Error: " + ex.Message + Environment.NewLine + Environment.NewLine + "Full description of the error: " + ex.ToString(),
                     Tester.IMAGE_STATUS_FAILED);
@@ -2302,9 +2223,7 @@ namespace HatFrameworkDev
 
         public async Task<bool> FindVisibleElementByNameAsync(string name, int index, int sec)
         {
-            int step = SendMessageDebug($"FindVisibleElementByNameAsync('{name}', {index}, {sec})", $"FindVisibleElementByNameAsync('{name}', {index}, {sec})",
-                PROCESS, "Поиск элемента", "Element Search", IMAGE_STATUS_PROCESS);
-            if (DefineTestStop(step) == true) return false;
+            if (DefineTestStop() == true) return false;
 
             bool found = false;
             try
@@ -2316,12 +2235,12 @@ namespace HatFrameworkDev
                     await Task.Delay(1000);
                 }
 
-                if (found == true) EditMessageDebug(step, null, null, PASSED, "Поиск элемента - завершен (элемент найден)", "Element search - completed (element found)", IMAGE_STATUS_PASSED);
-                else EditMessageDebug(step, null, null, WARNING, "Поиск элемента - завершен (элемент не найден)", "Element search - completed (element not found)", IMAGE_STATUS_WARNING);
+                if (found == true) SendMessageDebug($"FindVisibleElementByNameAsync('{name}', {index}, {sec})", $"FindVisibleElementByNameAsync('{name}', {index}, {sec})", PASSED, "Поиск элемента - завершен (элемент найден)", "Element search - completed (element found)", IMAGE_STATUS_PASSED);
+                else SendMessageDebug($"FindVisibleElementByNameAsync('{name}', {index}, {sec})", $"FindVisibleElementByNameAsync('{name}', {index}, {sec})", WARNING, "Поиск элемента - завершен (элемент не найден)", "Element search - completed (element not found)", IMAGE_STATUS_WARNING);
             }
             catch (Exception ex)
             {
-                EditMessageDebug(step, null, null, Tester.FAILED,
+                SendMessageDebug($"FindVisibleElementByNameAsync('{name}', {index}, {sec})", $"FindVisibleElementByNameAsync('{name}', {index}, {sec})", Tester.FAILED,
                     "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(),
                     "Error: " + ex.Message + Environment.NewLine + Environment.NewLine + "Full description of the error: " + ex.ToString(),
                     Tester.IMAGE_STATUS_FAILED);
@@ -2333,9 +2252,7 @@ namespace HatFrameworkDev
 
         public async Task<bool> FindVisibleElementByTagAsync(string tag, int index, int sec)
         {
-            int step = SendMessageDebug($"FindVisibleElementByTagAsync('{tag}', {index}, {sec})", $"FindVisibleElementByTagAsync('{tag}', {index}, {sec})",
-                PROCESS, "Поиск элемента", "Element Search", IMAGE_STATUS_PROCESS);
-            if (DefineTestStop(step) == true) return false;
+            if (DefineTestStop() == true) return false;
 
             bool found = false;
             try
@@ -2347,12 +2264,12 @@ namespace HatFrameworkDev
                     await Task.Delay(1000);
                 }
 
-                if (found == true) EditMessageDebug(step, null, null, PASSED, "Поиск элемента - завершен (элемент найден)", "Element search - completed (element found)", IMAGE_STATUS_PASSED);
-                else EditMessageDebug(step, null, null, WARNING, "Поиск элемента - завершен (элемент не найден)", "Element search - completed (element not found)", IMAGE_STATUS_WARNING);
+                if (found == true) SendMessageDebug($"FindVisibleElementByTagAsync('{tag}', {index}, {sec})", $"FindVisibleElementByTagAsync('{tag}', {index}, {sec})", PASSED, "Поиск элемента - завершен (элемент найден)", "Element search - completed (element found)", IMAGE_STATUS_PASSED);
+                else SendMessageDebug($"FindVisibleElementByTagAsync('{tag}', {index}, {sec})", $"FindVisibleElementByTagAsync('{tag}', {index}, {sec})", WARNING, "Поиск элемента - завершен (элемент не найден)", "Element search - completed (element not found)", IMAGE_STATUS_WARNING);
             }
             catch (Exception ex)
             {
-                EditMessageDebug(step, null, null, Tester.FAILED,
+                SendMessageDebug($"FindVisibleElementByTagAsync('{tag}', {index}, {sec})", $"FindVisibleElementByTagAsync('{tag}', {index}, {sec})", Tester.FAILED,
                     "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(),
                     "Error: " + ex.Message + Environment.NewLine + Environment.NewLine + "Full description of the error: " + ex.ToString(),
                     Tester.IMAGE_STATUS_FAILED);
@@ -2364,9 +2281,7 @@ namespace HatFrameworkDev
 
         public async Task<bool> FindVisibleElementAsync(string by, string locator, int sec)
         {
-            int step = SendMessageDebug($"FindVisibleElementAsync(\"{by}\", \"{locator}\", {sec})", $"FindVisibleElementAsync(\"{by}\", \"{locator}\", {sec})",
-                PROCESS, "Поиск элемента", "Element Search", IMAGE_STATUS_PROCESS);
-            if (DefineTestStop(step) == true) return false;
+            if (DefineTestStop() == true) return false;
 
             bool found = false;
             try
@@ -2379,12 +2294,12 @@ namespace HatFrameworkDev
                     await Task.Delay(1000);
                 }
 
-                if (found == true) EditMessageDebug(step, null, null, PASSED, "Поиск элемента - завершен (элемент найден)", "Element search - completed (element found)", IMAGE_STATUS_PASSED);
-                else EditMessageDebug(step, null, null, WARNING, "Поиск элемента - завершен (элемент не найден)", "Element search - completed (element not found)", IMAGE_STATUS_WARNING);
+                if (found == true) SendMessageDebug($"FindVisibleElementAsync(\"{by}\", \"{locator}\", {sec})", $"FindVisibleElementAsync(\"{by}\", \"{locator}\", {sec})", PASSED, "Поиск элемента - завершен (элемент найден)", "Element search - completed (element found)", IMAGE_STATUS_PASSED);
+                else SendMessageDebug($"FindVisibleElementAsync(\"{by}\", \"{locator}\", {sec})", $"FindVisibleElementAsync(\"{by}\", \"{locator}\", {sec})", WARNING, "Поиск элемента - завершен (элемент не найден)", "Element search - completed (element not found)", IMAGE_STATUS_WARNING);
             }
             catch (Exception ex)
             {
-                EditMessageDebug(step, null, null, Tester.FAILED,
+                SendMessageDebug($"FindVisibleElementAsync(\"{by}\", \"{locator}\", {sec})", $"FindVisibleElementAsync(\"{by}\", \"{locator}\", {sec})", Tester.FAILED,
                     "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(),
                     "Error: " + ex.Message + Environment.NewLine + Environment.NewLine + "Full description of the error: " + ex.ToString(),
                     Tester.IMAGE_STATUS_FAILED);
@@ -2396,56 +2311,90 @@ namespace HatFrameworkDev
 
         public async Task ClickElementByIdAsync(string id)
         {
-            int step = SendMessageDebug($"ClickElementByIdAsync('{id}')", $"ClickElementByIdAsync('{id}')", PROCESS, "Нажатие на элемент", "Clicking on an element", IMAGE_STATUS_PROCESS);
-            if (DefineTestStop(step) == true) return;
+            if (DefineTestStop() == true) return;
 
             string script = "(function(){ var element = document.getElementById('" + id + "'); element.click(); return element; }());";
-            await execute(script, step, "Элемент нажат", "The element is pressed", $"Не удалось найти элемент с ID: {id}", $"Couldn't find an element with ID: {id}");
+            if (await execute(script, $"ClickElementByIdAsync('{id}')") == "null")
+            {
+                SendMessageDebug($"ClickElementByIdAsync('{id}')", $"ClickElementByIdAsync('{id}')", Tester.FAILED, $"Не удалось найти элемент с ID: {id}", $"Couldn't find an element with ID: {id}", Tester.IMAGE_STATUS_FAILED);
+                TestStopAsync();
+            }
+            else
+            {
+                SendMessageDebug($"ClickElementByIdAsync('{id}')", $"ClickElementByIdAsync('{id}')", PASSED, "Элемент нажат", "The element is pressed", IMAGE_STATUS_PASSED);
+            }
         }
 
         public async Task ClickElementByClassAsync(string _class, int index)
         {
-            int step = SendMessageDebug($"ClickElementByClassAsync('{_class}', {index})", $"ClickElementByClassAsync('{_class}', {index})", PROCESS, "Нажатие на элемент", "Clicking on an element", IMAGE_STATUS_PROCESS);
-            if (DefineTestStop(step) == true) return;
+            if (DefineTestStop() == true) return;
 
             string script = "(function(){ var element = document.getElementsByClassName('" + _class + "')[" + index + "]; element.click(); return element; }());";
-            await execute(script, step, "Элемент нажат", "The element is pressed", $"Не удалось найти элемент по Class: {_class} (Index: {index})", $"Couldn't find an element by Class: {_class} (Index: {index})");
+            if (await execute(script, $"ClickElementByClassAsync('{_class}', {index})") == "null")
+            {
+                SendMessageDebug($"ClickElementByClassAsync('{_class}', {index})", $"ClickElementByClassAsync('{_class}', {index})", Tester.FAILED, $"Не удалось найти элемент по Class: {_class} (Index: {index})", $"Couldn't find an element by Class: {_class} (Index: {index})", Tester.IMAGE_STATUS_FAILED);
+                TestStopAsync();
+            }
+            else
+            {
+                SendMessageDebug($"ClickElementByClassAsync('{_class}', {index})", $"ClickElementByClassAsync('{_class}', {index})", PASSED, "Элемент нажат", "The element is pressed", IMAGE_STATUS_PASSED);
+            }
         }
 
         public async Task ClickElementByNameAsync(string name, int index)
         {
-            int step = SendMessageDebug($"ClickElementByNameAsync('{name}', {index})", $"ClickElementByNameAsync('{name}', {index})", PROCESS, "Нажатие на элемент", "Clicking on an element", IMAGE_STATUS_PROCESS);
-            if (DefineTestStop(step) == true) return;
+            if (DefineTestStop() == true) return;
 
             string script = "(function(){ var element = document.getElementsByName('" + name + "')[" + index + "]; element.click(); return element; }());";
-            await execute(script, step, "Элемент нажат", "The element is pressed", $"Не удалось найти элемент по Name: {name} (Index: {index})", $"Couldn't find an element by Name: {name} (Index: {index})");
+            if (await execute(script, $"ClickElementByNameAsync('{name}', {index})") == "null")
+            {
+                SendMessageDebug($"ClickElementByNameAsync('{name}', {index})", $"ClickElementByNameAsync('{name}', {index})", Tester.FAILED, $"Не удалось найти элемент по Name: {name} (Index: {index})", $"Couldn't find an element by Name: {name} (Index: {index})", Tester.IMAGE_STATUS_FAILED);
+                TestStopAsync();
+            }
+            else
+            {
+                SendMessageDebug($"ClickElementByNameAsync('{name}', {index})", $"ClickElementByNameAsync('{name}', {index})", PASSED, "Элемент нажат", "The element is pressed", IMAGE_STATUS_PASSED);
+            }
         }
 
         public async Task ClickElementByTagAsync(string tag, int index)
         {
-            int step = SendMessageDebug($"ClickElementByTagAsync('{tag}', {index})", $"ClickElementByTagAsync('{tag}', {index})", PROCESS, "Нажатие на элемент", "Clicking on an element", IMAGE_STATUS_PROCESS);
-            if (DefineTestStop(step) == true) return;
+            if (DefineTestStop() == true) return;
 
             string script = "(function(){ var element = document.getElementsByTagName('" + tag + "')[" + index + "]; element.click(); return element; }());";
-            await execute(script, step, "Элемент нажат", "The element is pressed", $"Не удалось найти элемент по Tag: {tag} (Index: {index})", $"Couldn't find an element by Tag: {tag} (Index: {index})");
+            if (await execute(script, $"ClickElementByTagAsync('{tag}', {index})") == "null")
+            {
+                SendMessageDebug($"ClickElementByTagAsync('{tag}', {index})", $"ClickElementByTagAsync('{tag}', {index})", Tester.FAILED, $"Не удалось найти элемент по Tag: {tag} (Index: {index})", $"Couldn't find an element by Tag: {tag} (Index: {index})", Tester.IMAGE_STATUS_FAILED);
+                TestStopAsync();
+            }
+            else
+            {
+                SendMessageDebug($"ClickElementByTagAsync('{tag}', {index})", $"ClickElementByTagAsync('{tag}', {index})", PASSED, "Элемент нажат", "The element is pressed", IMAGE_STATUS_PASSED);
+            }
         }
 
         public async Task ClickElementAsync(string by, string locator)
         {
-            int step = SendMessageDebug($"ClickElementAsync(\"{by}\", \"{locator}\")", $"ClickElementAsync(\"{by}\", \"{locator}\")", PROCESS, "Нажатие на элемент", "Clicking on an element", IMAGE_STATUS_PROCESS);
-            if (DefineTestStop(step) == true) return;
+            if (DefineTestStop() == true) return;
 
             string script = "(function(){";
             if (by == BY_CSS) script += $"var element = document.querySelector(\"{locator}\"); element.click(); return element;";
             else if (by == BY_XPATH) script += $"var element = document.evaluate(\"{locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue; element.click(); return element;";
             script += "}());";
-            await execute(script, step, "Элемент нажат", "The element is pressed", $"Не удалось найти элемент по локатору: {locator}", $"The element could not be found by the locator: {locator}");
+            if (await execute(script, $"ClickElementAsync(\"{by}\", \"{locator}\")") == "null")
+            {
+                SendMessageDebug($"ClickElementAsync(\"{by}\", \"{locator}\")", $"ClickElementAsync(\"{by}\", \"{locator}\")", Tester.FAILED, $"Не удалось найти элемент по локатору: {locator}", $"The element could not be found by the locator: {locator}", Tester.IMAGE_STATUS_FAILED);
+                TestStopAsync();
+            }
+            else
+            {
+                SendMessageDebug($"ClickElementAsync(\"{by}\", \"{locator}\")", $"ClickElementAsync(\"{by}\", \"{locator}\")", PASSED, "Элемент нажат", "The element is pressed", IMAGE_STATUS_PASSED);
+            }
         }
 
         public async Task SetValueInElementByIdAsync(string id, string value)
         {
-            int step = SendMessageDebug($"SetValueInElementByIdAsync('{id}', '{value}')", $"SetValueInElementByIdAsync('{id}', '{value}')", PROCESS, "Ввод значения в элемент", "Entering a value into an element", IMAGE_STATUS_PROCESS);
-            if (DefineTestStop(step) == true) return;
+            if (DefineTestStop() == true) return;
 
             string script = "(function(){";
             script += "var element = document.getElementById('" + id + "');";
@@ -2457,13 +2406,20 @@ namespace HatFrameworkDev
             script += "element.dispatchEvent(new Event('change', { bubbles: true }));";
             script += "return element.value;";
             script += "}());";
-            await execute(script, step, "Значение введено в элемент", "The value was entered into the element", $"Не удалось найти или ввести значение в элемент с ID: {id}", $"Could not find or enter a value in an element with ID: {id}", true);
+            if (await execute(script, $"SetValueInElementByIdAsync('{id}', '{value}')") == "null")
+            {
+                SendMessageDebug($"SetValueInElementByIdAsync('{id}', '{value}')", $"SetValueInElementByIdAsync('{id}', '{value}')", Tester.FAILED, $"Не удалось найти или ввести значение в элемент с ID: {id}", $"Could not find or enter a value in an element with ID: {id}", Tester.IMAGE_STATUS_FAILED);
+                TestStopAsync();
+            }
+            else
+            {
+                SendMessageDebug($"SetValueInElementByIdAsync('{id}', '{value}')", $"SetValueInElementByIdAsync('{id}', '{value}')", PASSED, "Значение введено в элемент", "The value was entered into the element", IMAGE_STATUS_PASSED);
+            }
         }
 
         public async Task SetValueInElementByClassAsync(string _class, int index, string value)
         {
-            int step = SendMessageDebug($"SetValueInElementByClassAsync('{_class}', {index}, '{value}')", $"SetValueInElementByClassAsync('{_class}', {index}, '{value}')", PROCESS, "Ввод значения в элемент", "Entering a value into an element", IMAGE_STATUS_PROCESS);
-            if (DefineTestStop(step) == true) return;
+            if (DefineTestStop() == true) return;
 
             string script = "(function(){";
             script += "var element = document.getElementsByClassName('" + _class + "')[" + index + "];";
@@ -2475,13 +2431,20 @@ namespace HatFrameworkDev
             script += "element.dispatchEvent(new Event('change', { bubbles: true }));";
             script += "return element.value;";
             script += "}());";
-            await execute(script, step, "Значение введено в элемент", "The value was entered into the element", $"Не удалось найти или ввести значение в элемент по Class: {_class} (Index: {index})", $"Could not find or enter a value in the element by Class: {_class} (Index: {index})", true);
+            if (await execute(script, $"SetValueInElementByClassAsync('{_class}', {index}, '{value}')") == "null")
+            {
+                SendMessageDebug($"SetValueInElementByClassAsync('{_class}', {index}, '{value}')", $"SetValueInElementByClassAsync('{_class}', {index}, '{value}')", Tester.FAILED, $"Не удалось найти или ввести значение в элемент по Class: {_class} (Index: {index})", $"Could not find or enter a value in the element by Class: {_class} (Index: {index})", Tester.IMAGE_STATUS_FAILED);
+                TestStopAsync();
+            }
+            else
+            {
+                SendMessageDebug($"SetValueInElementByClassAsync('{_class}', {index}, '{value}')", $"SetValueInElementByClassAsync('{_class}', {index}, '{value}')", PASSED, "Значение введено в элемент", "The value was entered into the element", IMAGE_STATUS_PASSED);
+            }
         }
 
         public async Task SetValueInElementByNameAsync(string name, int index, string value)
         {
-            int step = SendMessageDebug($"SetValueInElementByNameAsync('{name}', {index}, '{value}')", $"SetValueInElementByNameAsync('{name}', {index}, '{value}')", PROCESS, "Ввод значения в элемент", "Entering a value into an element", IMAGE_STATUS_PROCESS);
-            if (DefineTestStop(step) == true) return;
+            if (DefineTestStop() == true) return;
 
             string script = "(function(){";
             script += "var element = document.getElementsByName('" + name + "')[" + index + "];";
@@ -2493,13 +2456,20 @@ namespace HatFrameworkDev
             script += "element.dispatchEvent(new Event('change', { bubbles: true }));";
             script += "return element.value;";
             script += "}());";
-            await execute(script, step, "Значение введено в элемент", "The value was entered into the element", $"Не удалось найти или ввести значение в элемент по Name: {name} (Index: {index})", $"Could not find or enter a value in the element by Name: {name} (Index: {index})", true);
+            if (await execute(script, $"SetValueInElementByNameAsync('{name}', {index}, '{value}')") == "null")
+            {
+                SendMessageDebug($"SetValueInElementByNameAsync('{name}', {index}, '{value}')", $"SetValueInElementByNameAsync('{name}', {index}, '{value}')", Tester.FAILED, $"Не удалось найти или ввести значение в элемент по Name: {name} (Index: {index})", $"Could not find or enter a value in the element by Name: {name} (Index: {index})", Tester.IMAGE_STATUS_FAILED);
+                TestStopAsync();
+            }
+            else
+            {
+                SendMessageDebug($"SetValueInElementByNameAsync('{name}', {index}, '{value}')", $"SetValueInElementByNameAsync('{name}', {index}, '{value}')", PASSED, "Значение введено в элемент", "The value was entered into the element", IMAGE_STATUS_PASSED);
+            }
         }
 
         public async Task SetValueInElementByTagAsync(string tag, int index, string value)
         {
-            int step = SendMessageDebug($"SetValueInElementByTagAsync('{tag}', {index}, '{value}')", $"SetValueInElementByTagAsync('{tag}', {index}, '{value}')", PROCESS, "Ввод значения в элемент", "Entering a value into an element", IMAGE_STATUS_PROCESS);
-            if (DefineTestStop(step) == true) return;
+            if (DefineTestStop() == true) return;
 
             string script = "(function(){";
             script += "var element = document.getElementsByTagName('" + tag + "')[" + index + "];";
@@ -2511,13 +2481,20 @@ namespace HatFrameworkDev
             script += "element.dispatchEvent(new Event('change', { bubbles: true }));";
             script += "return element.value;";
             script += "}());";
-            await execute(script, step, "Значение введено в элемент", "The value was entered into the element", $"Не удалось найти или ввести значение в элемент по Tag: {tag} (Index: {index})", $"Could not find or enter a value in the element by Tag: {tag} (Index: {index})", true);
+            if (await execute(script, $"SetValueInElementByTagAsync('{tag}', {index}, '{value}')") == "null")
+            {
+                SendMessageDebug($"SetValueInElementByTagAsync('{tag}', {index}, '{value}')", $"SetValueInElementByTagAsync('{tag}', {index}, '{value}')", Tester.FAILED, $"Не удалось найти или ввести значение в элемент по Tag: {tag} (Index: {index})", $"Could not find or enter a value in the element by Tag: {tag} (Index: {index})", Tester.IMAGE_STATUS_FAILED);
+                TestStopAsync();
+            }
+            else
+            {
+                SendMessageDebug($"SetValueInElementByTagAsync('{tag}', {index}, '{value}')", $"SetValueInElementByTagAsync('{tag}', {index}, '{value}')", PASSED, "Значение введено в элемент", "The value was entered into the element", IMAGE_STATUS_PASSED);
+            }
         }
 
         public async Task SetValueInElementAsync(string by, string locator, string value)
         {
-            int step = SendMessageDebug($"SetValueInElementAsync(\"{by}\", \"{locator}\", \"{value}\")", $"SetValueInElementAsync(\"{by}\", \"{locator}\", \"{value}\")", PROCESS, "Ввод значения в элемент", "Entering a value into an element", IMAGE_STATUS_PROCESS);
-            if (DefineTestStop(step) == true) return;
+            if (DefineTestStop() == true) return;
 
             string script = "(function(){";
             if (by == BY_CSS) script += $"var element = document.querySelector(\"{locator}\");";
@@ -2530,24 +2507,40 @@ namespace HatFrameworkDev
             script += "element.dispatchEvent(new Event('change', { bubbles: true }));";
             script += "return element.value;";
             script += "}());";
-            await execute(script, step, "Значение введено в элемент", "The value was entered into the element", $"Не удалось найти или ввести значение в элемент по локатору: {locator}", $"Could not find or enter a value in the element by locator: {locator}", true);
+            if (await execute(script, $"SetValueInElementAsync(\"{by}\", \"{locator}\", \"{value}\")") == "null")
+            {
+                SendMessageDebug($"SetValueInElementAsync(\"{by}\", \"{locator}\", \"{value}\")", $"SetValueInElementAsync(\"{by}\", \"{locator}\", \"{value}\")", Tester.FAILED, $"Не удалось найти или ввести значение в элемент по локатору: {locator}", $"Could not find or enter a value in the element by locator: {locator}", Tester.IMAGE_STATUS_FAILED);
+                TestStopAsync();
+            }
+            else
+            {
+                SendMessageDebug($"SetValueInElementAsync(\"{by}\", \"{locator}\", \"{value}\")", $"SetValueInElementAsync(\"{by}\", \"{locator}\", \"{value}\")", PASSED, "Значение введено в элемент", "The value was entered into the element", IMAGE_STATUS_PASSED);
+            }
         }
 
         public async Task<string> GetValueFromElementByIdAsync(string id)
         {
-            int step = SendMessageDebug($"GetValueFromElementByIdAsync('{id}')", $"GetValueFromElementByIdAsync('{id}')", PROCESS, "Получение значения из элемент", "Getting a value from an element", IMAGE_STATUS_PROCESS);
-            if (DefineTestStop(step) == true) return "";
+            if (DefineTestStop() == true) return "";
 
             string value = "";
             try
             {
                 string script = "(function(){ var element = document.getElementById('" + id + "'); return element.value; }());";
-                value = await execute(script, step, "Получено значение из элемента", "Got the value from the element", $"Не удалось найти или получить данные из элемента с ID: {id}", $"Could not find or get data from an element with ID: {id}", true);
-                if (value.Length > 1) value = value.Substring(1, value.Length - 2);
+                value = await execute(script, $"GetValueFromElementByIdAsync('{id}')");
+                if (value == "null" || value == null)
+                {
+                    SendMessageDebug($"GetValueFromElementByIdAsync('{id}')", $"GetValueFromElementByIdAsync('{id}')", Tester.FAILED, $"Не удалось найти или получить данные из элемента с ID: {id}", $"Could not find or get data from an element with ID: {id}", Tester.IMAGE_STATUS_FAILED);
+                    TestStopAsync();
+                }
+                else
+                {
+                    if (value.Length > 1) value = value.Substring(1, value.Length - 2);
+                    SendMessageDebug($"GetValueFromElementByIdAsync('{id}')", $"GetValueFromElementByIdAsync('{id}')", Tester.PASSED, "Получено значение из элемента | " + value, "Got the value from the element | " + value, Tester.IMAGE_STATUS_PASSED);
+                }
             }
             catch (Exception ex)
             {
-                EditMessageDebug(step, null, null, Tester.FAILED,
+                SendMessageDebug($"GetValueFromElementByIdAsync('{id}')", $"GetValueFromElementByIdAsync('{id}')", Tester.FAILED,
                     "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(),
                     "Error: " + ex.Message + Environment.NewLine + Environment.NewLine + "Full description of the error: " + ex.ToString(),
                     Tester.IMAGE_STATUS_FAILED);
@@ -2559,19 +2552,27 @@ namespace HatFrameworkDev
 
         public async Task<string> GetValueFromElementByClassAsync(string _class, int index)
         {
-            int step = SendMessageDebug($"GetValueFromElementByClassAsync('{_class}', {index})", $"GetValueFromElementByClassAsync('{_class}', {index})", PROCESS, "Получение значения из элемент", "Getting a value from an element", IMAGE_STATUS_PROCESS);
-            if (DefineTestStop(step) == true) return "";
+            if (DefineTestStop() == true) return "";
 
             string value = "";
             try
             {
                 string script = "(function(){ var element = document.getElementsByClassName('" + _class + "')[" + index + "]; return element.value; }());";
-                value = await execute(script, step, "Получено значение из элемента", "Got the value from the element", $"Не удалось найти или получить данные из элемента по Class: {_class} (Index: {index})", $"Could not find or get data from the element by Class: {_class} (Index: {index})", true);
-                if (value.Length > 1) value = value.Substring(1, value.Length - 2);
+                value = await execute(script, $"GetValueFromElementByClassAsync('{_class}', {index})");
+                if (value == "null" || value == null)
+                {
+                    SendMessageDebug($"GetValueFromElementByClassAsync('{_class}', {index})", $"GetValueFromElementByClassAsync('{_class}', {index})", Tester.FAILED, $"Не удалось найти или получить данные из элемента по Class: {_class} (Index: {index})", $"Could not find or get data from the element by Class: {_class} (Index: {index})", Tester.IMAGE_STATUS_FAILED);
+                    TestStopAsync();
+                }
+                else
+                {
+                    if (value.Length > 1) value = value.Substring(1, value.Length - 2);
+                    SendMessageDebug($"GetValueFromElementByClassAsync('{_class}', {index})", $"GetValueFromElementByClassAsync('{_class}', {index})", Tester.PASSED, "Получено значение из элемента | " + value, "Got the value from the element | " + value, Tester.IMAGE_STATUS_PASSED);
+                }
             }
             catch (Exception ex)
             {
-                EditMessageDebug(step, null, null, Tester.FAILED,
+                SendMessageDebug($"GetValueFromElementByClassAsync('{_class}', {index})", $"GetValueFromElementByClassAsync('{_class}', {index})", Tester.FAILED,
                      "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(),
                      "Error: " + ex.Message + Environment.NewLine + Environment.NewLine + "Full description of the error: " + ex.ToString(),
                      Tester.IMAGE_STATUS_FAILED);
@@ -2583,19 +2584,27 @@ namespace HatFrameworkDev
 
         public async Task<string> GetValueFromElementByNameAsync(string name, int index)
         {
-            int step = SendMessageDebug($"GetValueFromElementByNameAsync('{name}', {index})", $"GetValueFromElementByNameAsync('{name}', {index})", PROCESS, "Получение значения из элемент", "Getting a value from an element", IMAGE_STATUS_PROCESS);
-            if (DefineTestStop(step) == true) return "";
+            if (DefineTestStop() == true) return "";
 
             string value = "";
             try
             {
                 string script = "(function(){ var element = document.getElementsByName('" + name + "')[" + index + "]; return element.value; }());";
-                value = await execute(script, step, "Получено значение из элемента", "Got the value from the element", $"Не удалось найти или получить данные из элемента по Name: {name} (Index: {index})", $"Could not find or get data from the element by Name: {name} (Index: {index})", true);
-                if (value.Length > 1) value = value.Substring(1, value.Length - 2);
+                value = await execute(script, $"GetValueFromElementByNameAsync('{name}', {index})");
+                if (value == "null" || value == null)
+                {
+                    SendMessageDebug($"GetValueFromElementByNameAsync('{name}', {index})", $"GetValueFromElementByNameAsync('{name}', {index})", Tester.FAILED, $"Не удалось найти или получить данные из элемента по Name: {name} (Index: {index})", $"Could not find or get data from the element by Name: {name} (Index: {index})", Tester.IMAGE_STATUS_FAILED);
+                    TestStopAsync();
+                }
+                else
+                {
+                    if (value.Length > 1) value = value.Substring(1, value.Length - 2);
+                    SendMessageDebug($"GetValueFromElementByNameAsync('{name}', {index})", $"GetValueFromElementByNameAsync('{name}', {index})", Tester.PASSED, "Получено значение из элемента | " + value, "Got the value from the element | " + value, Tester.IMAGE_STATUS_PASSED);
+                }
             }
             catch (Exception ex)
             {
-                EditMessageDebug(step, null, null, Tester.FAILED,
+                SendMessageDebug($"GetValueFromElementByNameAsync('{name}', {index})", $"GetValueFromElementByNameAsync('{name}', {index})", Tester.FAILED,
                     "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(),
                     "Error: " + ex.Message + Environment.NewLine + Environment.NewLine + "Full description of the error: " + ex.ToString(),
                     Tester.IMAGE_STATUS_FAILED);
@@ -2607,19 +2616,27 @@ namespace HatFrameworkDev
 
         public async Task<string> GetValueFromElementByTagAsync(string tag, int index)
         {
-            int step = SendMessageDebug($"GetValueFromElementByTagAsync('{tag}', {index})", $"GetValueFromElementByTagAsync('{tag}', {index})", PROCESS, "Получение значения из элемент", "Getting a value from an element", IMAGE_STATUS_PROCESS);
-            if (DefineTestStop(step) == true) return "";
+            if (DefineTestStop() == true) return "";
 
             string value = "";
             try
             {
                 string script = "(function(){ var element = document.getElementsByTagName('" + tag + "')[" + index + "]; return element.value; }());";
-                value = await execute(script, step, "Получено значение из элемента", "Got the value from the element", $"Не удалось найти или получить данные из элемента по Tag: {tag} (Index: {index})", $"Could not find or get data from the element by Tag: {tag} (Index: {index})", true);
-                if (value.Length > 1) value = value.Substring(1, value.Length - 2);
+                value = await execute(script, $"GetValueFromElementByTagAsync('{tag}', {index})");
+                if (value == "null" || value == null)
+                {
+                    SendMessageDebug($"GetValueFromElementByTagAsync('{tag}', {index})", $"GetValueFromElementByTagAsync('{tag}', {index})", Tester.FAILED, $"Не удалось найти или получить данные из элемента по Tag: {tag} (Index: {index})", $"Could not find or get data from the element by Tag: {tag} (Index: {index})", Tester.IMAGE_STATUS_FAILED);
+                    TestStopAsync();
+                }
+                else
+                {
+                    if (value.Length > 1) value = value.Substring(1, value.Length - 2);
+                    SendMessageDebug($"GetValueFromElementByTagAsync('{tag}', {index})", $"GetValueFromElementByTagAsync('{tag}', {index})", Tester.PASSED, "Получено значение из элемента | " + value, "Got the value from the element | " + value, Tester.IMAGE_STATUS_PASSED);
+                }
             }
             catch (Exception ex)
             {
-                EditMessageDebug(step, null, null, Tester.FAILED,
+                SendMessageDebug($"GetValueFromElementByTagAsync('{tag}', {index})", $"GetValueFromElementByTagAsync('{tag}', {index})", Tester.FAILED,
                     "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(),
                     "Error: " + ex.Message + Environment.NewLine + Environment.NewLine + "Full description of the error: " + ex.ToString(),
                     Tester.IMAGE_STATUS_FAILED);
@@ -2631,8 +2648,7 @@ namespace HatFrameworkDev
 
         public async Task<string> GetValueFromElementAsync(string by, string locator)
         {
-            int step = SendMessageDebug($"GetValueFromElementAsync(\"{by}\", \"{locator}\")", $"GetValueFromElementAsync(\"{by}\", \"{locator}\")", PROCESS, "Получение значения из элемент", "Getting a value from an element", IMAGE_STATUS_PROCESS);
-            if (DefineTestStop(step) == true) return "";
+            if (DefineTestStop() == true) return "";
 
             string value = "";
             try
@@ -2641,12 +2657,21 @@ namespace HatFrameworkDev
                 if (by == BY_CSS) script += $"var element = document.querySelector(\"{locator}\"); return element.value;";
                 else if (by == BY_XPATH) script += $"var element = document.evaluate(\"{locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue; return element.value;";
                 script += "}());";
-                value = await execute(script, step, "Получено значение из элемента", "Got the value from the element", $"Не удалось найти или получить данные из элемента по локатору: {locator}", $"Could not find or get data from the element by Locator: {locator}", true);
-                if (value.Length > 1) value = value.Substring(1, value.Length - 2);
+                value = await execute(script, $"GetValueFromElementAsync(\"{by}\", \"{locator}\")");
+                if (value == "null" || value == null)
+                {
+                    SendMessageDebug($"GetValueFromElementAsync(\"{by}\", \"{locator}\")", $"GetValueFromElementAsync(\"{by}\", \"{locator}\")", Tester.FAILED, $"Не удалось найти или получить данные из элемента по локатору: {locator}", $"Could not find or get data from the element by Locator: {locator}", Tester.IMAGE_STATUS_FAILED);
+                    TestStopAsync();
+                }
+                else
+                {
+                    if (value.Length > 1) value = value.Substring(1, value.Length - 2);
+                    SendMessageDebug($"GetValueFromElementAsync(\"{by}\", \"{locator}\")", $"GetValueFromElementAsync(\"{by}\", \"{locator}\")", Tester.PASSED, "Получено значение из элемента | " + value, "Got the value from the element | " + value, Tester.IMAGE_STATUS_PASSED);
+                }
             }
             catch (Exception ex)
             {
-                EditMessageDebug(step, null, null, Tester.FAILED,
+                SendMessageDebug($"GetValueFromElementAsync(\"{by}\", \"{locator}\")", $"GetValueFromElementAsync(\"{by}\", \"{locator}\")", Tester.FAILED,
                     "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(),
                     "Error: " + ex.Message + Environment.NewLine + Environment.NewLine + "Full description of the error: " + ex.ToString(),
                     Tester.IMAGE_STATUS_FAILED);
@@ -2658,60 +2683,86 @@ namespace HatFrameworkDev
 
         public async Task SetTextInElementByIdAsync(string id, string text)
         {
-            int step = SendMessageDebug($"SetTextInElementByIdAsync('{id}', '{text}')", $"SetTextInElementByIdAsync('{id}', '{text}')", PROCESS, "Ввод текста в элемент", "Entering text into an element", IMAGE_STATUS_PROCESS);
-            if (DefineTestStop(step) == true) return;
+            if (DefineTestStop() == true) return;
 
             string script = "(function(){";
             script += $"var element = document.getElementById('{id}');";
             script += $"element.innerText = '{text}';";
             script += "return element.innerText;";
             script += "}());";
-            await execute(script, step, "Текст введен в элемент", "The text was entered into the element", $"Не удалось найти или ввести текст в элемент с ID: {id}", $"Could not find or enter text in the element with ID: {id}", true);
+            if (await execute(script, $"SetTextInElementByIdAsync('{id}', '{text}')") == "null")
+            {
+                SendMessageDebug($"SetTextInElementByIdAsync('{id}', '{text}')", $"SetTextInElementByIdAsync('{id}', '{text}')", Tester.FAILED, $"Не удалось найти или ввести текст в элемент с ID: {id}", $"Could not find or enter text in the element with ID: {id}", Tester.IMAGE_STATUS_FAILED);
+                TestStopAsync();
+            }
+            else
+            {
+                SendMessageDebug($"SetTextInElementByIdAsync('{id}', '{text}')", $"SetTextInElementByIdAsync('{id}', '{text}')", Tester.PASSED, "Текст введен в элемент", "The text was entered into the element", Tester.IMAGE_STATUS_PASSED);
+            }
         }
 
         public async Task SetTextInElementByClassAsync(string _class, int index, string text)
         {
-            int step = SendMessageDebug($"SetTextInElementByClassAsync('{_class}', {index}, '{text}')", $"SetTextInElementByClassAsync('{_class}', {index}, '{text}')", PROCESS, "Ввод текста в элемент", "Entering text into an element", IMAGE_STATUS_PROCESS);
-            if (DefineTestStop(step) == true) return;
+            if (DefineTestStop() == true) return;
 
             string script = "(function(){";
             script += $"var element = document.getElementsByClassName('{_class}')[{index}];";
             script += $"element.innerText = '{text}';";
             script += "return element.innerText;";
             script += "}());";
-            await execute(script, step, "Текст введен в элемент", "The text was entered into the element", $"Не удалось найти или ввести текст в элемент по Class: {_class} (Index: {index})", $"Could not find or enter text in the element by Class: {_class} (Index: {index})", true);
+            if (await execute(script, $"SetTextInElementByClassAsync('{_class}', {index}, '{text}')") == "null")
+            {
+                SendMessageDebug($"SetTextInElementByClassAsync('{_class}', {index}, '{text}')", $"SetTextInElementByClassAsync('{_class}', {index}, '{text}')", Tester.FAILED, $"Не удалось найти или ввести текст в элемент по Class: {_class} (Index: {index})", $"Could not find or enter text in the element by Class: {_class} (Index: {index})", Tester.IMAGE_STATUS_FAILED);
+                TestStopAsync();
+            }
+            else
+            {
+                SendMessageDebug($"SetTextInElementByClassAsync('{_class}', {index}, '{text}')", $"SetTextInElementByClassAsync('{_class}', {index}, '{text}')", Tester.PASSED, "Текст введен в элемент", "The text was entered into the element", Tester.IMAGE_STATUS_PASSED);
+            }
         }
 
         public async Task SetTextInElementByNameAsync(string name, int index, string text)
         {
-            int step = SendMessageDebug($"SetTextInElementByNameAsync('{name}', {index}, '{text}')", $"SetTextInElementByNameAsync('{name}', {index}, '{text}')", PROCESS, "Ввод текста в элемент", "Entering text into an element", IMAGE_STATUS_PROCESS);
-            if (DefineTestStop(step) == true) return;
+            if (DefineTestStop() == true) return;
 
             string script = "(function(){";
             script += $"var element = document.getElementsByName('{name}')[{index}];";
             script += $"element.innerText = '{text}';";
             script += "return element.innerText;";
             script += "}());";
-            await execute(script, step, "Текст введен в элемент", "The text was entered into the element", $"Не удалось найти или ввести текст в элемент по Name: {name} (Index: {index})", $"Could not find or enter text in the element by Name: {name} (Index: {index})", true);
+            if (await execute(script, $"SetTextInElementByNameAsync('{name}', {index}, '{text}')") == "null")
+            {
+                SendMessageDebug($"SetTextInElementByNameAsync('{name}', {index}, '{text}')", $"SetTextInElementByNameAsync('{name}', {index}, '{text}')", Tester.FAILED, $"Не удалось найти или ввести текст в элемент по Name: {name} (Index: {index})", $"Could not find or enter text in the element by Name: {name} (Index: {index})", Tester.IMAGE_STATUS_FAILED);
+                TestStopAsync();
+            }
+            else
+            {
+                SendMessageDebug($"SetTextInElementByNameAsync('{name}', {index}, '{text}')", $"SetTextInElementByNameAsync('{name}', {index}, '{text}')", Tester.PASSED, "Текст введен в элемент", "The text was entered into the element", Tester.IMAGE_STATUS_PASSED);
+            }
         }
 
         public async Task SetTextInElementByTagAsync(string tag, int index, string text)
         {
-            int step = SendMessageDebug($"SetTextInElementByTagAsync('{tag}', {index}, '{text}')", $"SetTextInElementByTagAsync('{tag}', {index}, '{text}')", PROCESS, "Ввод текста в элемент", "Entering text into an element", IMAGE_STATUS_PROCESS);
-            if (DefineTestStop(step) == true) return;
+            if (DefineTestStop() == true) return;
 
             string script = "(function(){";
             script += $"var element = document.getElementsByTagName('{tag}')[{index}];";
             script += $"element.innerText = '{text}';";
             script += "return element.innerText;";
             script += "}());";
-            await execute(script, step, "Текст введен в элемент", "The text was entered into the element", $"Не удалось найти или ввести текст в элемент по Tag: {tag} (Index: {index})", $"Could not find or enter text in the element by Tag: {tag} (Index: {index})", true);
+            if (await execute(script, $"SetTextInElementByTagAsync('{tag}', {index}, '{text}')") == "null")
+            {
+                SendMessageDebug($"SetTextInElementByTagAsync('{tag}', {index}, '{text}')", $"SetTextInElementByTagAsync('{tag}', {index}, '{text}')", Tester.FAILED, $"Не удалось найти или ввести текст в элемент по Tag: {tag} (Index: {index})", $"Could not find or enter text in the element by Tag: {tag} (Index: {index})", Tester.IMAGE_STATUS_FAILED);
+                TestStopAsync();
+            }
+            else
+            {
+                SendMessageDebug($"SetTextInElementByTagAsync('{tag}', {index}, '{text}')", $"SetTextInElementByTagAsync('{tag}', {index}, '{text}')", Tester.PASSED, "Текст введен в элемент", "The text was entered into the element", Tester.IMAGE_STATUS_PASSED);
+            }
         }
-
         public async Task SetTextInElementAsync(string by, string locator, string text)
         {
-            int step = SendMessageDebug($"SetTextInElementAsync(\"{by}\", \"{locator}\", \"{text}\")", $"SetTextInElementAsync(\"{by}\", \"{locator}\", \"{text}\")", PROCESS, "Ввод текста в элемент", "Entering text into an element", IMAGE_STATUS_PROCESS);
-            if (DefineTestStop(step) == true) return;
+            if (DefineTestStop() == true) return;
 
             string script = "(function(){";
             if (by == BY_CSS) script += $"var element = document.querySelector(\"{locator}\");";
@@ -2719,13 +2770,19 @@ namespace HatFrameworkDev
             script += $"element.innerText = '{text}';";
             script += "return element.innerText;";
             script += "}());";
-            await execute(script, step, "Текст введен в элемент", "The text was entered into the element", $"Не удалось найти или ввести текст в элемент по локатору: {locator}", $"Could not find or enter text in the element by locator: {locator}", true);
+            if (await execute(script, $"SetTextInElementAsync(\"{by}\", \"{locator}\", \"{text}\")") == "null")
+            {
+                SendMessageDebug($"SetTextInElementAsync(\"{by}\", \"{locator}\", \"{text}\")", $"SetTextInElementAsync(\"{by}\", \"{locator}\", \"{text}\")", Tester.FAILED, $"Не удалось найти или ввести текст в элемент по локатору: {locator}", $"Could not find or enter text in the element by locator: {locator}", Tester.IMAGE_STATUS_FAILED);
+                TestStopAsync();
+            }
+            else
+            {
+                SendMessageDebug($"SetTextInElementAsync(\"{by}\", \"{locator}\", \"{text}\")", $"SetTextInElementAsync(\"{by}\", \"{locator}\", \"{text}\")", Tester.PASSED, "Текст введен в элемент", "The text was entered into the element", Tester.IMAGE_STATUS_PASSED);
+            }
         }
-
         public async Task<string> GetTextFromElementByIdAsync(string id)
         {
-            int step = SendMessageDebug($"GetTextFromElementByIdAsync('{id}')", $"GetTextFromElementByIdAsync('{id}')", PROCESS, "Чтение текста из элемент", "Reading text from an element", IMAGE_STATUS_PROCESS);
-            if (DefineTestStop(step) == true) return "";
+            if (DefineTestStop() == true) return "";
 
             string value = "";
             try
@@ -2734,27 +2791,38 @@ namespace HatFrameworkDev
                 script += "if(element.innerText == '' && element.value != null) { return element.value; } ";
                 script += "else { return element.innerText; } ";
                 script += "}());";
-                value = await execute(script, step, "Прочитан текст из элемента", "The text from the element has been read", $"Не удалось найти или прочитать текст из элемента с ID: {id}", $"Could not find or read the text from the element with ID: {id}", true);
-                if (value.Length > 1 && value != "null") value = value.Substring(1, value.Length - 2);
+                value = await execute(script, $"GetTextFromElementByIdAsync('{id}')");
+                if (value == "null" || value == null)
+                {
+                    SendMessageDebug($"GetTextFromElementByIdAsync('{id}')", $"GetTextFromElementByIdAsync('{id}')", Tester.FAILED, $"Не удалось найти или прочитать текст из элемента с ID: {id}", $"Could not find or read the text from the element with ID: {id}", Tester.IMAGE_STATUS_FAILED);
+                    TestStopAsync();
+                }
+                else
+                {
+                    if (value == "") SendMessageDebug($"GetTextFromElementByIdAsync('{id}')", $"GetTextFromElementByIdAsync('{id}')", COMPLETED, "Не удалось получить текст из элемента", "Couldn't get the text from the element", IMAGE_STATUS_WARNING);
+                    else if (value.Length > 1)
+                    {
+                        value = value.Substring(1, value.Length - 2);
+                        SendMessageDebug($"GetTextFromElementByIdAsync('{id}')", $"GetTextFromElementByIdAsync('{id}')", Tester.PASSED, "Прочитан текст из элемента | " + value, "The text from the element has been read | " + value, Tester.IMAGE_STATUS_PASSED);
+                    }
+                }
             }
             catch (Exception ex)
             {
-                EditMessageDebug(step, null, null, Tester.FAILED,
+                SendMessageDebug($"GetTextFromElementByIdAsync('{id}')", $"GetTextFromElementByIdAsync('{id}')", Tester.FAILED,
                      "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(),
                      "Error: " + ex.Message + Environment.NewLine + Environment.NewLine + "Full description of the error: " + ex.ToString(),
                      Tester.IMAGE_STATUS_FAILED);
                 TestStopAsync();
                 ConsoleMsgError(ex.ToString());
             }
-
-            if (value == "") EditMessageDebug(step, null, null, COMPLETED, "Не удалось получить текст из элемента", "Couldn't get the text from the element", IMAGE_STATUS_WARNING);
+            
             return value;
         }
 
         public async Task<string> GetTextFromElementByClassAsync(string _class, int index)
         {
-            int step = SendMessageDebug($"GetTextFromElementByClassAsync('{_class}', {index})", $"GetTextFromElementByClassAsync('{_class}', {index})", PROCESS, "Чтение текста из элемент", "Reading text from an element", IMAGE_STATUS_PROCESS);
-            if (DefineTestStop(step) == true) return "";
+            if (DefineTestStop() == true) return "";
 
             string value = "";
             try
@@ -2763,12 +2831,25 @@ namespace HatFrameworkDev
                 script += "if(element.innerText == '' && element.value != null) { return element.value; } ";
                 script += "else { return element.innerText; } ";
                 script += "}());";
-                value = await execute(script, step, "Прочитан текст из элемента", "The text from the element has been read", $"Не удалось найти или прочитать текст из элемента по Class: {_class} (Index: {index})", $"Could not find or read the text from the element by Class: {_class} (Index: {index})", true);
-                if (value.Length > 1 && value != "null") value = value.Substring(1, value.Length - 2);
+                value = await execute(script, $"GetTextFromElementByClassAsync('{_class}', {index})");
+                if (value == "null" || value == null)
+                {
+                    SendMessageDebug($"GetTextFromElementByClassAsync('{_class}', {index})", $"GetTextFromElementByClassAsync('{_class}', {index})", Tester.FAILED, $"Не удалось найти или прочитать текст из элемента по Class: {_class} (Index: {index})", $"Could not find or read the text from the element by Class: {_class} (Index: {index})", Tester.IMAGE_STATUS_FAILED);
+                    TestStopAsync();
+                }
+                else
+                {
+                    if (value == "") SendMessageDebug($"GetTextFromElementByClassAsync('{_class}', {index})", $"GetTextFromElementByClassAsync('{_class}', {index})", COMPLETED, "Не удалось получить текст из элемента", "Couldn't get the text from the element", IMAGE_STATUS_WARNING);
+                    else if (value.Length > 1)
+                    {
+                        value = value.Substring(1, value.Length - 2);
+                        SendMessageDebug($"GetTextFromElementByClassAsync('{_class}', {index})", $"GetTextFromElementByClassAsync('{_class}', {index})", Tester.PASSED, "Прочитан текст из элемента | " + value, "The text from the element has been read | " + value, Tester.IMAGE_STATUS_PASSED);
+                    }
+                }
             }
             catch (Exception ex)
             {
-                EditMessageDebug(step, null, null, Tester.FAILED,
+                SendMessageDebug($"GetTextFromElementByClassAsync('{_class}', {index})", $"GetTextFromElementByClassAsync('{_class}', {index})", Tester.FAILED,
                     "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(),
                     "Error: " + ex.Message + Environment.NewLine + Environment.NewLine + "Full description of the error: " + ex.ToString(),
                     Tester.IMAGE_STATUS_FAILED);
@@ -2776,14 +2857,12 @@ namespace HatFrameworkDev
                 ConsoleMsgError(ex.ToString());
             }
 
-            if (value == "") EditMessageDebug(step, null, null, COMPLETED, "Не удалось получить текст из элемента", "Couldn't get the text from the element", IMAGE_STATUS_WARNING);
             return value;
         }
 
         public async Task<string> GetTextFromElementByNameAsync(string name, int index)
         {
-            int step = SendMessageDebug($"GetTextFromElementByNameAsync('{name}', {index})", $"GetTextFromElementByNameAsync('{name}', {index})", PROCESS, "Чтение текста из элемент", "Reading text from an element", IMAGE_STATUS_PROCESS);
-            if (DefineTestStop(step) == true) return "";
+            if (DefineTestStop() == true) return "";
 
             string value = "";
             try
@@ -2792,12 +2871,25 @@ namespace HatFrameworkDev
                 script += "if(element.innerText == '' && element.value != null) { return element.value; } ";
                 script += "else { return element.innerText; } ";
                 script += "}());";
-                value = await execute(script, step, "Прочитан текст из элемента", "The text from the element has been read", $"Не удалось найти или прочитать текст из элемента по Name: {name} (Index: {index})", $"Could not find or read the text from the element by Name: {name} (Index: {index})", true);
-                if (value.Length > 1 && value != "null") value = value.Substring(1, value.Length - 2);
+                value = await execute(script, $"GetTextFromElementByNameAsync('{name}', {index})");
+                if (value == "null" || value == null)
+                {
+                    SendMessageDebug($"GetTextFromElementByNameAsync('{name}', {index})", $"GetTextFromElementByNameAsync('{name}', {index})", Tester.FAILED, $"Не удалось найти или прочитать текст из элемента по Name: {name} (Index: {index})", $"Could not find or read the text from the element by Name: {name} (Index: {index})", Tester.IMAGE_STATUS_FAILED);
+                    TestStopAsync();
+                }
+                else
+                {
+                    if (value == "") SendMessageDebug($"GetTextFromElementByNameAsync('{name}', {index})", $"GetTextFromElementByNameAsync('{name}', {index})", COMPLETED, "Не удалось получить текст из элемента", "Couldn't get the text from the element", IMAGE_STATUS_WARNING);
+                    else if (value.Length > 1)
+                    {
+                        value = value.Substring(1, value.Length - 2);
+                        SendMessageDebug($"GetTextFromElementByNameAsync('{name}', {index})", $"GetTextFromElementByNameAsync('{name}', {index})", Tester.PASSED, "Прочитан текст из элемента | " + value, "The text from the element has been read | " + value, Tester.IMAGE_STATUS_PASSED);
+                    }
+                }
             }
             catch (Exception ex)
             {
-                EditMessageDebug(step, null, null, Tester.FAILED,
+                SendMessageDebug($"GetTextFromElementByNameAsync('{name}', {index})", $"GetTextFromElementByNameAsync('{name}', {index})", Tester.FAILED,
                     "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(),
                     "Error: " + ex.Message + Environment.NewLine + Environment.NewLine + "Full description of the error: " + ex.ToString(),
                     Tester.IMAGE_STATUS_FAILED);
@@ -2805,14 +2897,12 @@ namespace HatFrameworkDev
                 ConsoleMsgError(ex.ToString());
             }
 
-            if (value == "") EditMessageDebug(step, null, null, COMPLETED, "Не удалось получить текст из элемента", "Couldn't get the text from the element", IMAGE_STATUS_WARNING);
             return value;
         }
 
         public async Task<string> GetTextFromElementByTagAsync(string tag, int index)
         {
-            int step = SendMessageDebug($"GetTextFromElementByTagAsync('{tag}', {index})", $"GetTextFromElementByTagAsync('{tag}', {index})", PROCESS, "Чтение текста из элемент", "Reading text from an element", IMAGE_STATUS_PROCESS);
-            if (DefineTestStop(step) == true) return "";
+            if (DefineTestStop() == true) return "";
 
             string value = "";
             try
@@ -2821,12 +2911,25 @@ namespace HatFrameworkDev
                 script += "if(element.innerText == '' && element.value != null) { return element.value; } ";
                 script += "else { return element.innerText; } ";
                 script += "}());";
-                value = await execute(script, step, "Прочитан текст из элемента", "The text from the element has been read", $"Не удалось найти или прочитать текст из элемента по Tag: {tag} (Index: {index})", $"Could not find or read the text from the element by Tag: {tag} (Index: {index})", true);
-                if (value.Length > 1 && value != "null") value = value.Substring(1, value.Length - 2);
+                value = await execute(script, $"GetTextFromElementByTagAsync('{tag}', {index})");
+                if (value == "null" || value == null)
+                {
+                    SendMessageDebug($"GetTextFromElementByTagAsync('{tag}', {index})", $"GetTextFromElementByTagAsync('{tag}', {index})", Tester.FAILED, $"Не удалось найти или прочитать текст из элемента по Tag: {tag} (Index: {index})", $"Could not find or read the text from the element by Tag: {tag} (Index: {index})", Tester.IMAGE_STATUS_FAILED);
+                    TestStopAsync();
+                }
+                else
+                {
+                    if (value == "") SendMessageDebug($"GetTextFromElementByTagAsync('{tag}', {index})", $"GetTextFromElementByTagAsync('{tag}', {index})", COMPLETED, "Не удалось получить текст из элемента", "Couldn't get the text from the element", IMAGE_STATUS_WARNING);
+                    else if (value.Length > 1)
+                    {
+                        value = value.Substring(1, value.Length - 2);
+                        SendMessageDebug($"GetTextFromElementByTagAsync('{tag}', {index})", $"GetTextFromElementByTagAsync('{tag}', {index})", Tester.PASSED, "Прочитан текст из элемента | " + value, "The text from the element has been read | " + value, Tester.IMAGE_STATUS_PASSED);
+                    }
+                }
             }
             catch (Exception ex)
             {
-                EditMessageDebug(step, null, null, Tester.FAILED,
+                SendMessageDebug($"GetTextFromElementByTagAsync('{tag}', {index})", $"GetTextFromElementByTagAsync('{tag}', {index})", Tester.FAILED,
                     "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(),
                     "Error: " + ex.Message + Environment.NewLine + Environment.NewLine + "Full description of the error: " + ex.ToString(),
                     Tester.IMAGE_STATUS_FAILED);
@@ -2834,14 +2937,12 @@ namespace HatFrameworkDev
                 ConsoleMsgError(ex.ToString());
             }
 
-            if (value == "") EditMessageDebug(step, null, null, COMPLETED, "Не удалось получить текст из элемента", "Couldn't get the text from the element", IMAGE_STATUS_WARNING);
             return value;
         }
 
         public async Task<string> GetTextFromElementAsync(string by, string locator)
         {
-            int step = SendMessageDebug($"GetTextFromElementAsync(\"{by}\", \"{locator}\")", $"GetTextFromElementAsync(\"{by}\", \"{locator}\")", PROCESS, "Чтение текста из элемент", "Reading text from an element", IMAGE_STATUS_PROCESS);
-            if (DefineTestStop(step) == true) return "";
+            if (DefineTestStop() == true) return "";
 
             string value = "";
             try
@@ -2852,12 +2953,25 @@ namespace HatFrameworkDev
                 script += "if(element.innerText == '' && element.value != null) { return element.value; } ";
                 script += "else { return element.innerText; } ";
                 script += "}());";
-                value = await execute(script, step, "Прочитан текст из элемента", "The text from the element has been read", $"Не удалось найти или прочитать текст из элемента по локатору: {locator}", $"Could not find or read the text from the element by the locator: {locator}", true);
-                if (value.Length > 1 && value != "null") value = value.Substring(1, value.Length - 2);
+                value = await execute(script, $"GetTextFromElementAsync(\"{by}\", \"{locator}\")");
+                if (value == "null" || value == null)
+                {
+                    SendMessageDebug($"GetTextFromElementAsync(\"{by}\", \"{locator}\")", $"GetTextFromElementAsync(\"{by}\", \"{locator}\")", Tester.FAILED, $"Не удалось найти или прочитать текст из элемента по локатору: {locator}", $"Could not find or read the text from the element by the locator: {locator}", Tester.IMAGE_STATUS_FAILED);
+                    TestStopAsync();
+                }
+                else
+                {
+                    if (value == "") SendMessageDebug($"GetTextFromElementAsync(\"{by}\", \"{locator}\")", $"GetTextFromElementAsync(\"{by}\", \"{locator}\")", COMPLETED, "Не удалось получить текст из элемента", "Couldn't get the text from the element", IMAGE_STATUS_WARNING);
+                    else if (value.Length > 1)
+                    {
+                        value = value.Substring(1, value.Length - 2);
+                        SendMessageDebug($"GetTextFromElementAsync(\"{by}\", \"{locator}\")", $"GetTextFromElementAsync(\"{by}\", \"{locator}\")", Tester.PASSED, "Прочитан текст из элемента | " + value, "The text from the element has been read | " + value, Tester.IMAGE_STATUS_PASSED);
+                    }
+                }
             }
             catch (Exception ex)
             {
-                EditMessageDebug(step, null, null, Tester.FAILED,
+                SendMessageDebug($"GetTextFromElementAsync(\"{by}\", \"{locator}\")", $"GetTextFromElementAsync(\"{by}\", \"{locator}\")", Tester.FAILED,
                     "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(),
                     "Error: " + ex.Message + Environment.NewLine + Environment.NewLine + "Full description of the error: " + ex.ToString(),
                     Tester.IMAGE_STATUS_FAILED);
@@ -2865,81 +2979,91 @@ namespace HatFrameworkDev
                 ConsoleMsgError(ex.ToString());
             }
 
-            if (value == "") EditMessageDebug(step, null, null, COMPLETED, "Не удалось получить текст из элемента", "Couldn't get the text from the element", IMAGE_STATUS_WARNING);
             return value;
         }
 
         public async Task<int> GetCountElementsByClassAsync(string _class)
         {
-            int step = SendMessageDebug($"GetCountElementsByIdAsync('{_class}')", $"GetCountElementsByIdAsync('{_class}')", PROCESS, "Получение количества элементов", "Getting the amount of elements", IMAGE_STATUS_PROCESS);
-            if (DefineTestStop(step) == true) return -1;
+            if (DefineTestStop() == true) return -1;
 
             string script = "(function(){ var element = document.getElementsByClassName('" + _class + "'); return element.length; }());";
-            string result = await execute(script, step, "Получение количества элементов", "Getting the amount of elements", $"Не удалось найти или получить количество элементов по Class: {_class}", $"Could not find or get the amount of elements by Class: {_class}");
-            int value = -1;
+            string result = await execute(script, $"GetCountElementsByIdAsync('{_class}')");
             if (result != "null" && result != null && result != "")
             {
-                value = Int32.Parse(result);
-                EditMessageDebug(step, null, null, PASSED, $"Количество элементов {result}", $"Amount of elements {result}", IMAGE_STATUS_PASSED);
+                SendMessageDebug($"GetCountElementsByIdAsync('{_class}')", $"GetCountElementsByIdAsync('{_class}')", PASSED, $"Количество элементов {Int32.Parse(result)}", $"Amount of elements {Int32.Parse(result)}", IMAGE_STATUS_PASSED);
+                return Int32.Parse(result);
             }
-            return value;
+            else
+            {
+                SendMessageDebug($"GetCountElementsByIdAsync('{_class}')", $"GetCountElementsByIdAsync('{_class}')", FAILED, $"Не удалось найти или получить количество элементов по Class: {_class}", $"Could not find or get the amount of elements by Class: {_class}", IMAGE_STATUS_FAILED);
+                TestStopAsync();
+            }
+            return -1;
         }
 
         public async Task<int> GetCountElementsByNameAsync(string name)
         {
-            int step = SendMessageDebug($"GetCountElementsByNameAsync('{name}')", $"GetCountElementsByNameAsync('{name}')", PROCESS, "Получение количества элементов", "Getting the amount of elements", IMAGE_STATUS_PROCESS);
-            if (DefineTestStop(step) == true) return -1;
+            if (DefineTestStop() == true) return -1;
 
             string script = "(function(){ var element = document.getElementsByName('" + name + "'); return element.length; }());";
-            string result = await execute(script, step, "Получение количества элементов", "Getting the amount of elements", $"Не удалось найти или получить количество элементов по Name: {name}", $"Could not find or get the amount of elements by Name: {name}");
-            int value = -1;
+            string result = await execute(script, $"GetCountElementsByNameAsync('{name}')");
             if (result != "null" && result != null && result != "")
             {
-                value = Int32.Parse(result);
-                EditMessageDebug(step, null, null, PASSED, $"Количество элементов {result}", $"Amount of elements {result}", IMAGE_STATUS_PASSED);
+                SendMessageDebug($"GetCountElementsByNameAsync('{name}')", $"GetCountElementsByNameAsync('{name}')", PASSED, $"Количество элементов {Int32.Parse(result)}", $"Amount of elements {Int32.Parse(result)}", IMAGE_STATUS_PASSED);
+                return Int32.Parse(result);
             }
-            return value;
+            else
+            {
+                SendMessageDebug($"GetCountElementsByNameAsync('{name}')", $"GetCountElementsByNameAsync('{name}')", FAILED, $"Не удалось найти или получить количество элементов по Name: {name}", $"Could not find or get the amount of elements by Name: {name}", IMAGE_STATUS_FAILED);
+                TestStopAsync();
+            }
+            return -1;
         }
 
         public async Task<int> GetCountElementsByTagAsync(string tag)
         {
-            int step = SendMessageDebug($"GetCountElementsByTagAsync('{tag}')", $"GetCountElementsByTagAsync('{tag}')", PROCESS, "Получение количества элементов", "Getting the amount of elements", IMAGE_STATUS_PROCESS);
-            if (DefineTestStop(step) == true) return -1;
+            if (DefineTestStop() == true) return -1;
 
             string script = "(function(){ var element = document.getElementsByTagName('" + tag + "'); return element.length; }());";
-            string result = await execute(script, step, "Получение количества элементов", "Getting the amount of elements", $"Не удалось найти или получить количество элементов по Tag: {tag}", $"Could not find or get the amount of elements by Tag: {tag}");
-            int value = -1;
+            string result = await execute(script, $"GetCountElementsByTagAsync('{tag}')");
             if (result != "null" && result != null && result != "")
             {
-                value = Int32.Parse(result);
-                EditMessageDebug(step, null, null, PASSED, $"Количество элементов {result}", $"Amount of elements {result}", IMAGE_STATUS_PASSED);
+                SendMessageDebug($"GetCountElementsByTagAsync('{tag}')", $"GetCountElementsByTagAsync('{tag}')", PASSED, $"Количество элементов {Int32.Parse(result)}", $"Amount of elements {Int32.Parse(result)}", IMAGE_STATUS_PASSED);
+                return Int32.Parse(result);
             }
-            return value;
+            else
+            {
+                SendMessageDebug($"GetCountElementsByTagAsync('{tag}')", $"GetCountElementsByTagAsync('{tag}')", FAILED, $"Не удалось найти или получить количество элементов по Tag: {tag}", $"Could not find or get the amount of elements by Tag: {tag}", IMAGE_STATUS_FAILED);
+                TestStopAsync();
+            }
+            return -1;
         }
 
         public async Task<int> GetCountElementsAsync(string by, string locator)
         {
-            int step = SendMessageDebug($"GetCountElementsAsync(\"{by}\", \"{locator}\")", $"GetCountElementsAsync(\"{by}\", \"{locator}\")", PROCESS, "Получение количества элементов", "Getting the amount of elements", IMAGE_STATUS_PROCESS);
-            if (DefineTestStop(step) == true) return -1;
+            if (DefineTestStop() == true) return -1;
 
             string script = "(function(){";
             if (by == BY_CSS) script += "var element = document.querySelectorAll(\"" + locator + "\"); return element.length;";
             else if (by == BY_XPATH) script += $"var element = document.evaluate(\"{locator}\", document, null, XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null); return element.snapshotLength;";
             script += "}());";
-            string result = await execute(script, step, "Получение количества элементов", "Getting the amount of elements", $"Не удалось найти или получить количество элементов по локатору: {locator}", $"Couldn't find or get the amount of elements by locator: {locator}");
-            int value = -1;
+            string result = await execute(script, $"GetCountElementsAsync(\"{by}\", \"{locator}\")");
             if (result != "null" && result != null && result != "")
             {
-                value = Int32.Parse(result);
-                EditMessageDebug(step, null, null, PASSED, $"Количество элементов {result}", $"Amount of elements {result}", IMAGE_STATUS_PASSED);
+                SendMessageDebug($"GetCountElementsAsync(\"{by}\", \"{locator}\")", $"GetCountElementsAsync(\"{by}\", \"{locator}\")", PASSED, $"Количество элементов {Int32.Parse(result)}", $"Amount of elements {Int32.Parse(result)}", IMAGE_STATUS_PASSED);
+                return Int32.Parse(result);
             }
-            return value;
+            else
+            {
+                SendMessageDebug($"GetCountElementsAsync(\"{by}\", \"{locator}\")", $"GetCountElementsAsync(\"{by}\", \"{locator}\")", FAILED, $"Не удалось найти или получить количество элементов по локатору: {locator}", $"Couldn't find or get the amount of elements by locator: {locator}", IMAGE_STATUS_FAILED);
+                TestStopAsync();
+            }
+            return -1;
         }
 
         public async Task ScrollToElementAsync(string by, string locator, bool behaviorSmooth = false)
         {
-            int step = SendMessageDebug($"ScrollToElementAsync(\"{by}\", \"{locator}\", {behaviorSmooth})", $"ScrollToElementAsync(\"{by}\", \"{locator}\", {behaviorSmooth})", PROCESS, "Прокрутить к элементу", "Scrolling to the element", IMAGE_STATUS_PROCESS);
-            if (DefineTestStop(step) == true) return;
+            if (DefineTestStop() == true) return;
 
             try
             {
@@ -2957,12 +3081,12 @@ namespace HatFrameworkDev
                     else script += "element.scrollIntoView(); return element;";
                 }
                 script += "}());";
-                string result = await executeJS(script);
-                EditMessageDebug(step, null, null, PASSED, "Прокрутил к элементу - выполнена", "Scrolled to the element - completed", IMAGE_STATUS_PASSED);
+                string result = await execute(script, $"ScrollToElementAsync(\"{by}\", \"{locator}\", {behaviorSmooth})");
+                SendMessageDebug($"ScrollToElementAsync(\"{by}\", \"{locator}\", {behaviorSmooth})", $"ScrollToElementAsync(\"{by}\", \"{locator}\", {behaviorSmooth})", PASSED, "Прокрутка (scroll) к элементу - выполнен", "Scrolled to the element - completed", IMAGE_STATUS_PASSED);
             }
             catch (Exception ex)
             {
-                EditMessageDebug(step, null, null, Tester.FAILED,
+                SendMessageDebug($"ScrollToElementAsync(\"{by}\", \"{locator}\", {behaviorSmooth})", $"ScrollToElementAsync(\"{by}\", \"{locator}\", {behaviorSmooth})", Tester.FAILED,
                     "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(),
                     "Error: " + ex.Message + Environment.NewLine + Environment.NewLine + "Full description of the error: " + ex.ToString(),
                     Tester.IMAGE_STATUS_FAILED);

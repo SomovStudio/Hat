@@ -54,11 +54,13 @@ namespace Hat
                 ConsoleMsg("Кэш не очищен, произошла ошибка: " + Config.statucCacheClear);
             }
         }
-              
 
         private bool stopTest = false;
         private StepTestForm stepTestForm;
         private CodeEditorForm codeEditorForm;
+        private int step = 0;
+        private ListViewItem item;
+        private ListViewItem.ListViewSubItem subitem;
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -407,7 +409,40 @@ namespace Hat
             }
         }
 
-        public int SendMessageStep(string action, string status, string comment, int image, bool debug) // отправляет сообщение в таблицу "тест"
+        public void SendMessageStep(string action, string status, string comment, int image, bool debug) // отправляет сообщение в таблицу "тест"
+        {
+            if (debug == true)
+            {
+                if (Config.fullReport == true || status == Report.ERROR || status == Report.FAILED
+                    || action == "Testing has started" || action == "Testing completed"
+                    || action == "Тестирование началось" || action == "Тестирование завершено")
+                {
+                    Report.AddStep(status, action, comment);
+                }
+            }
+            else
+            {
+                Report.AddStep(status, action, comment);
+            }
+
+            this.item = new ListViewItem();
+            this.subitem = new ListViewItem.ListViewSubItem();
+            this.subitem.Text = action;
+            this.item.SubItems.Add(subitem);
+            this.subitem = new ListViewItem.ListViewSubItem();
+            this.subitem.Text = status;
+            this.item.SubItems.Add(subitem);
+            this.subitem = new ListViewItem.ListViewSubItem();
+            this.subitem.Text = comment;
+            this.item.SubItems.Add(this.subitem);
+            this.item.ImageIndex = image;
+            listViewTest.Items.Add(this.item);
+            this.step = listViewTest.Items.Count - 1;
+            listViewTest.Items[step].Selected = true;
+            listViewTest.Items[step].EnsureVisible();
+        }
+
+        private int SendMessageStepOLD(string action, string status, string comment, int image, bool debug) // отправляет сообщение в таблицу "тест" (не актуально)
         {
             if (debug == true)
             {
@@ -443,7 +478,7 @@ namespace Hat
             return index;
         }
 
-        public void EditMessageStep(int index, string action, string status, string comment, int image, bool debug) // изменить уже отправленное сообщение в таблице "тест"
+        private void EditMessageStepOLD(int index, string action, string status, string comment, int image, bool debug) // изменить уже отправленное сообщение в таблице "тест" (не актуально)
         {
             try
             {
