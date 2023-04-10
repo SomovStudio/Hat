@@ -4002,8 +4002,7 @@ namespace HatFrameworkDev
 
         public async Task<bool> IsClickableElementAsync(string by, string locator)
         {
-            int step = SendMessageDebug($"IsClickableElementAsync(\"{by}\", \"{locator}\")", $"IsClickableElementAsync(\"{by}\", \"{locator}\")", PROCESS, "Определяется кликабельность элемента", "The clickability of the element is determined", IMAGE_STATUS_PROCESS);
-            if (DefineTestStop(step) == true) return false;
+            if (DefineTestStop() == true) return false;
 
             bool clickable = false;
             try
@@ -4017,11 +4016,11 @@ namespace HatFrameworkDev
                 string result = await executeJS(script);
                 if (result != "null" && result != null && result == "true") clickable = true;
                 else clickable = false;
-                EditMessageDebug(step, null, null, PASSED, $"Определена кликадельность элемента: {result}", $"The clickability of the element was determined: {result}", IMAGE_STATUS_PASSED);
+                SendMessageDebug($"IsClickableElementAsync(\"{by}\", \"{locator}\")", $"IsClickableElementAsync(\"{by}\", \"{locator}\")", Tester.PASSED, $"Определена кликадельность элемента: {result}", $"The clickability of the element was determined: {result}", Tester.IMAGE_STATUS_PASSED);
             }
             catch (Exception ex)
             {
-                EditMessageDebug(step, null, null, Tester.FAILED,
+                SendMessageDebug($"IsClickableElementAsync(\"{by}\", \"{locator}\")", $"IsClickableElementAsync(\"{by}\", \"{locator}\")", Tester.FAILED,
                         "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(),
                         "Error: " + ex.Message + Environment.NewLine + Environment.NewLine + "Full description of the error: " + ex.ToString(),
                         Tester.IMAGE_STATUS_FAILED);
@@ -4045,8 +4044,7 @@ namespace HatFrameworkDev
          */
         public async Task<string> RestGetAsync(string url, TimeSpan timeout, string charset = "UTF-8")
         {
-            int step = SendMessageDebug($"RestGetAsync(\"{url}\", \"{timeout}\", \"{charset}\")", $"RestGetAsync(\"{url}\", \"{timeout}\", \"{charset}\")", PROCESS, "Выполнение Get Rest запроса " + url, "Executing a Get Rest request " + url, IMAGE_STATUS_PROCESS);
-            if (DefineTestStop(step) == true) return null;
+            if (DefineTestStop() == true) return null;
 
             string result = null;
             try
@@ -4066,11 +4064,11 @@ namespace HatFrameworkDev
                 if (response.IsSuccessStatusCode)
                 {
                     result = await response.Content.ReadAsStringAsync();
-                    EditMessageDebug(step, null, null, PASSED, "Get Rest запрос - успешно выполнен", "Get Rest request - completed successfully", IMAGE_STATUS_PASSED);
+                    SendMessageDebug($"RestGetAsync(\"{url}\", \"{timeout}\", \"{charset}\")", $"RestGetAsync(\"{url}\", \"{timeout}\", \"{charset}\")", PASSED, "Get Rest запрос - успешно выполнен", "Get Rest request - completed successfully", IMAGE_STATUS_PASSED);
                 }
                 else
                 {
-                    EditMessageDebug(step, null, null, FAILED, "Get Rest не выполнен " + Environment.NewLine + "Статус запроса: " + Environment.NewLine + response.StatusCode.ToString(),
+                    SendMessageDebug($"RestGetAsync(\"{url}\", \"{timeout}\", \"{charset}\")", $"RestGetAsync(\"{url}\", \"{timeout}\", \"{charset}\")", FAILED, "Get Rest не выполнен " + Environment.NewLine + "Статус запроса: " + Environment.NewLine + response.StatusCode.ToString(),
                         "Get Rest failed " + Environment.NewLine + "Request status: " + Environment.NewLine + response.StatusCode.ToString(),
                         IMAGE_STATUS_FAILED);
                     TestStopAsync();
@@ -4078,7 +4076,7 @@ namespace HatFrameworkDev
             }
             catch (Exception ex)
             {
-                EditMessageDebug(step, null, null, Tester.FAILED,
+                SendMessageDebug($"RestGetAsync(\"{url}\", \"{timeout}\", \"{charset}\")", $"RestGetAsync(\"{url}\", \"{timeout}\", \"{charset}\")", Tester.FAILED,
                         "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(),
                         "Error: " + ex.Message + Environment.NewLine + Environment.NewLine + "Full description of the error: " + ex.ToString(),
                         Tester.IMAGE_STATUS_FAILED);
@@ -4090,8 +4088,7 @@ namespace HatFrameworkDev
 
         public async Task<string> RestGetBasicAuthAsync(string login, string pass, string url, TimeSpan timeout, string charset = "UTF-8")
         {
-            int step = SendMessageDebug($"RestGetAuthAsync(\"{login}\", \"{pass}\", \"{url}\", \"{timeout}\", \"{charset}\")", $"RestGetAuthAsync(\"{login}\", \"{pass}\", \"{url}\", \"{timeout}\", \"{charset}\")", PROCESS, "Выполнение Get Rest запроса " + url, "Executing a Get Rest request " + url, IMAGE_STATUS_PROCESS);
-            if (DefineTestStop(step) == true) return null;
+            if (DefineTestStop() == true) return null;
 
             string result = null;
             try
@@ -4113,11 +4110,11 @@ namespace HatFrameworkDev
                 if (response.IsSuccessStatusCode)
                 {
                     result = await response.Content.ReadAsStringAsync();
-                    EditMessageDebug(step, null, null, PASSED, "Get Rest запрос - успешно выполнен", "Get Rest request - completed successfully", IMAGE_STATUS_PASSED);
+                    SendMessageDebug($"RestGetAuthAsync(\"{login}\", \"{pass}\", \"{url}\", \"{timeout}\", \"{charset}\")", $"RestGetAuthAsync(\"{login}\", \"{pass}\", \"{url}\", \"{timeout}\", \"{charset}\")", PASSED, "Get Rest запрос - успешно выполнен", "Get Rest request - completed successfully", IMAGE_STATUS_PASSED);
                 }
                 else
                 {
-                    EditMessageDebug(step, null, null, FAILED, "Get Rest не выполнен " + Environment.NewLine + "Статус запроса: " + Environment.NewLine + response.StatusCode.ToString(),
+                    SendMessageDebug($"RestGetAuthAsync(\"{login}\", \"{pass}\", \"{url}\", \"{timeout}\", \"{charset}\")", $"RestGetAuthAsync(\"{login}\", \"{pass}\", \"{url}\", \"{timeout}\", \"{charset}\")", FAILED, "Get Rest не выполнен " + Environment.NewLine + "Статус запроса: " + Environment.NewLine + response.StatusCode.ToString(),
                         "Get Rest failed " + Environment.NewLine + "Request status: " + Environment.NewLine + response.StatusCode.ToString(),
                         IMAGE_STATUS_FAILED);
                     TestStopAsync();
@@ -4125,7 +4122,7 @@ namespace HatFrameworkDev
             }
             catch (Exception ex)
             {
-                EditMessageDebug(step, null, null, Tester.FAILED,
+                SendMessageDebug($"RestGetAuthAsync(\"{login}\", \"{pass}\", \"{url}\", \"{timeout}\", \"{charset}\")", $"RestGetAuthAsync(\"{login}\", \"{pass}\", \"{url}\", \"{timeout}\", \"{charset}\")", Tester.FAILED,
                         "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(),
                         "Error: " + ex.Message + Environment.NewLine + Environment.NewLine + "Full description of the error: " + ex.ToString(),
                         Tester.IMAGE_STATUS_FAILED);
@@ -4138,9 +4135,7 @@ namespace HatFrameworkDev
         public async Task<int> RestGetStatusCodeAsync(string url)
         {
             int result = 0;
-
-            int step = SendMessageDebug($"RestGetStatusCodeAsync(\"{url}\")", $"RestGetStatusCodeAsync(\"{url}\")", PROCESS, "Выполнение Get Rest запроса и получение статуса " + url, "Executing a Get Rest request and getting the status " + url, IMAGE_STATUS_PROCESS);
-            if (DefineTestStop(step) == true) return result;
+            if (DefineTestStop() == true) return result;
             
             try
             {
@@ -4157,11 +4152,11 @@ namespace HatFrameworkDev
                 HttpResponseMessage response = await client.GetAsync(url);
                 result = (int)response.StatusCode;
 
-                EditMessageDebug(step, null, null, PASSED, "Get Rest запрос выполнен. Результат: " + result.ToString(), "Get Rest request completed. Result: " + result.ToString(), IMAGE_STATUS_PASSED);
+                SendMessageDebug($"RestGetStatusCodeAsync(\"{url}\")", $"RestGetStatusCodeAsync(\"{url}\")", PASSED, "Get Rest запрос выполнен. Результат: " + result.ToString(), "Get Rest request completed. Result: " + result.ToString(), IMAGE_STATUS_PASSED);
             }
             catch (Exception ex)
             {
-                EditMessageDebug(step, null, null, Tester.FAILED,
+                SendMessageDebug($"RestGetStatusCodeAsync(\"{url}\")", $"RestGetStatusCodeAsync(\"{url}\")", Tester.FAILED,
                         "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(),
                         "Error: " + ex.Message + Environment.NewLine + Environment.NewLine + "Full description of the error: " + ex.ToString(),
                         Tester.IMAGE_STATUS_FAILED);
@@ -4173,8 +4168,7 @@ namespace HatFrameworkDev
 
         public async Task<string> RestPostAsync(string url, string json, TimeSpan timeout, string charset = "UTF-8")
         {
-            int step = SendMessageDebug($"RestPostAsync(\"{url}\", \"JSON\", \"{timeout}\", \"{charset}\")", $"RestPostAsync(\"{url}\", \"JSON\", \"{timeout}\", \"{charset}\")", PROCESS, "Выполнение Post Rest запроса " + url, "Executing a Post Rest request " + url, IMAGE_STATUS_PROCESS);
-            if (DefineTestStop(step) == true) return null;
+            if (DefineTestStop() == true) return null;
 
             string result = null;
             try
@@ -4191,13 +4185,13 @@ namespace HatFrameworkDev
                 if (response.IsSuccessStatusCode)
                 {
                     result = await response.Content.ReadAsStringAsync();
-                    EditMessageDebug(step, null, null, PASSED, "Post Rest запрос успешно выполнен" + Environment.NewLine + "Статус запроса: " + Environment.NewLine + response.StatusCode.ToString(),
+                    SendMessageDebug($"RestPostAsync(\"{url}\", \"JSON\", \"{timeout}\", \"{charset}\")", $"RestPostAsync(\"{url}\", \"JSON\", \"{timeout}\", \"{charset}\")", PASSED, "Post Rest запрос успешно выполнен" + Environment.NewLine + "Статус запроса: " + Environment.NewLine + response.StatusCode.ToString(),
                         "Post Rest request completed successfully" + Environment.NewLine + "Request status: " + Environment.NewLine + response.StatusCode.ToString(),
                         IMAGE_STATUS_PASSED);
                 }
                 else
                 {
-                    EditMessageDebug(step, null, null, FAILED, "Post Rest не выполнен" + Environment.NewLine + "Статус запроса: " + Environment.NewLine + response.StatusCode.ToString(),
+                    SendMessageDebug($"RestPostAsync(\"{url}\", \"JSON\", \"{timeout}\", \"{charset}\")", $"RestPostAsync(\"{url}\", \"JSON\", \"{timeout}\", \"{charset}\")", FAILED, "Post Rest не выполнен" + Environment.NewLine + "Статус запроса: " + Environment.NewLine + response.StatusCode.ToString(),
                         "Post Rest failed" + Environment.NewLine + "Request status: " + Environment.NewLine + response.StatusCode.ToString(),
                         IMAGE_STATUS_FAILED);
                     TestStopAsync();
@@ -4205,7 +4199,7 @@ namespace HatFrameworkDev
             }
             catch (Exception ex)
             {
-                EditMessageDebug(step, null, null, Tester.FAILED,
+                SendMessageDebug($"RestPostAsync(\"{url}\", \"JSON\", \"{timeout}\", \"{charset}\")", $"RestPostAsync(\"{url}\", \"JSON\", \"{timeout}\", \"{charset}\")", Tester.FAILED,
                         "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(),
                         "Error: " + ex.Message + Environment.NewLine + Environment.NewLine + "Full description of the error: " + ex.ToString(),
                         Tester.IMAGE_STATUS_FAILED);
@@ -4219,16 +4213,15 @@ namespace HatFrameworkDev
         /* Методы для замера метрик ======================================================= */
         public async Task<DateTime> TimerStart()
         {
-            int step = SendMessageDebug("TimerStart()", "TimerStart()", PROCESS, "Запуск таймера", "Starting the timer", IMAGE_STATUS_PROCESS);
             DateTime start = default;
             try
             {
                 start = DateTime.Now;
-                EditMessageDebug(step, null, null, COMPLETED, $"Таймер запущен {start}", $"The timer is running {start}", IMAGE_STATUS_MESSAGE);
+                SendMessageDebug("TimerStart()", "TimerStart()", COMPLETED, $"Таймер запущен {start}", $"The timer is running {start}", IMAGE_STATUS_MESSAGE);
             }
             catch (Exception ex)
             {
-                EditMessageDebug(step, null, null, Tester.FAILED,
+                SendMessageDebug("TimerStart()", "TimerStart()", Tester.FAILED,
                         "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(),
                         "Error: " + ex.Message + Environment.NewLine + Environment.NewLine + "Full description of the error: " + ex.ToString(),
                         Tester.IMAGE_STATUS_FAILED);
@@ -4240,18 +4233,17 @@ namespace HatFrameworkDev
 
         public async Task<TimeSpan> TimerStop(DateTime start)
         {
-            int step = SendMessageDebug("TimerStop()", "TimerStop()", PROCESS, "Остановка таймера", "Stopping the timer", IMAGE_STATUS_PROCESS);
             DateTime stop = default;
             TimeSpan result = default;
             try
             {
                 stop = DateTime.Now;
                 result = (DateTime)stop - (DateTime)start;
-                EditMessageDebug(step, null, null, COMPLETED, $"Таймер остановлен {stop} (затраченное время: {result})", $"Timer stopped {stop} (elapsed time: {result})", IMAGE_STATUS_MESSAGE);
+                SendMessageDebug("TimerStop()", "TimerStop()", COMPLETED, $"Таймер остановлен {stop} (затраченное время: {result})", $"Timer stopped {stop} (elapsed time: {result})", IMAGE_STATUS_MESSAGE);
             }
             catch (Exception ex)
             {
-                EditMessageDebug(step, null, null, Tester.FAILED,
+                SendMessageDebug("TimerStop()", "TimerStop()", Tester.FAILED,
                         "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(),
                         "Error: " + ex.Message + Environment.NewLine + Environment.NewLine + "Full description of the error: " + ex.ToString(),
                         Tester.IMAGE_STATUS_FAILED);
@@ -4263,8 +4255,7 @@ namespace HatFrameworkDev
 
         public async Task<string> GetStyleFromElementAsync(string by, string locator, string property)
         {
-            int step = SendMessageDebug($"GetStyleFromElementAsync(\"{by}\", \"{locator}\", \"{property}\")", $"GetStyleFromElementAsync(\"{by}\", \"{locator}\")", PROCESS, "Получение стиля из элемента", "Getting a style from an element", IMAGE_STATUS_PROCESS);
-            if (DefineTestStop(step) == true) return "";
+            if (DefineTestStop() == true) return "";
 
             string value = "";
             try
@@ -4275,12 +4266,25 @@ namespace HatFrameworkDev
                 script += $"var style = window.getComputedStyle(element).getPropertyValue(\"{property}\"); ";
                 script += "return style; ";
                 script += "}());";
-                value = await execute(script, step, "Стиль из элемента прочитан", "Style from the read element", $"Не удалось прочитать стиль '{property}' из элемента по локатору: {locator}", $"Could not read the style '{property}' from the element by the locator: {locator}", true);
-                if (value.Length > 1 && value != "null") value = value.Substring(1, value.Length - 2);
+                value = await execute(script, $"GetStyleFromElementAsync(\"{by}\", \"{locator}\", \"{property}\")");
+                if (value == "null" || value == null)
+                {
+                    SendMessageDebug($"GetStyleFromElementAsync(\"{by}\", \"{locator}\", \"{property}\")", $"GetStyleFromElementAsync(\"{by}\", \"{locator}\")", Tester.FAILED, $"Не удалось прочитать стиль '{property}' из элемента по локатору: {locator}", $"Could not read the style '{property}' from the element by the locator: {locator}", Tester.IMAGE_STATUS_FAILED);
+                    TestStopAsync();
+                }
+                else
+                {
+                    if (value == "") SendMessageDebug($"GetStyleFromElementAsync(\"{by}\", \"{locator}\", \"{property}\")", $"GetStyleFromElementAsync(\"{by}\", \"{locator}\")", COMPLETED, "Пустое значение стиля из элемента", "Empty style value from the element", IMAGE_STATUS_WARNING);
+                    else if (value.Length > 1)
+                    {
+                        value = value.Substring(1, value.Length - 2);
+                        SendMessageDebug($"GetStyleFromElementAsync(\"{by}\", \"{locator}\", \"{property}\")", $"GetStyleFromElementAsync(\"{by}\", \"{locator}\")", Tester.PASSED, "Стиль из элемента прочитан | " + value, "Style from the read element | " + value, Tester.IMAGE_STATUS_PASSED);
+                    }
+                }
             }
             catch (Exception ex)
             {
-                EditMessageDebug(step, null, null, Tester.FAILED,
+                SendMessageDebug($"GetStyleFromElementAsync(\"{by}\", \"{locator}\", \"{property}\")", $"GetStyleFromElementAsync(\"{by}\", \"{locator}\")", Tester.FAILED,
                     "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(),
                     "Error: " + ex.Message + Environment.NewLine + Environment.NewLine + "Full description of the error: " + ex.ToString(),
                     Tester.IMAGE_STATUS_FAILED);
@@ -4288,14 +4292,12 @@ namespace HatFrameworkDev
                 ConsoleMsgError(ex.ToString());
             }
 
-            if (value == "") EditMessageDebug(step, null, null, COMPLETED, "Не удалось получить стиль из элемента", "Couldn't get the style from the element", IMAGE_STATUS_WARNING);
             return value;
         }
 
         public async Task<string> GetStyleFromElementByIdAsync(string id, string property)
         {
-            int step = SendMessageDebug($"GetStyleFromElementByIdAsync(\"{id}\", \"{property}\")", $"GetStyleFromElementByIdAsync(\"{id}\", \"{property}\")", PROCESS, "Получение стиля из элемента", "Getting a style from an element", IMAGE_STATUS_PROCESS);
-            if (DefineTestStop(step) == true) return "";
+            if (DefineTestStop() == true) return "";
 
             string value = "";
             try
@@ -4304,12 +4306,25 @@ namespace HatFrameworkDev
                 script += $"var style = window.getComputedStyle(element).getPropertyValue(\"{property}\"); ";
                 script += "return style; ";
                 script += "}());";
-                value = await execute(script, step, "Стиль из элемента прочитан", "Style from the read element", $"Не удалось найти или прочитать стиль '{property}' из элемента с ID: {id}", $"Could not find or read the style '{property}' from the element with ID: {id}", true);
-                if (value.Length > 1 && value != "null") value = value.Substring(1, value.Length - 2);
+                value = await execute(script, $"GetStyleFromElementByIdAsync(\"{id}\", \"{property}\")");
+                if (value == "null" || value == null)
+                {
+                    SendMessageDebug($"GetStyleFromElementByIdAsync(\"{id}\", \"{property}\")", $"GetStyleFromElementByIdAsync(\"{id}\", \"{property}\")", Tester.FAILED, $"Не удалось найти или прочитать стиль '{property}' из элемента с ID: {id}", $"Could not find or read the style '{property}' from the element with ID: {id}", Tester.IMAGE_STATUS_FAILED);
+                    TestStopAsync();
+                }
+                else
+                {
+                    if (value == "") SendMessageDebug($"GetStyleFromElementByIdAsync(\"{id}\", \"{property}\")", $"GetStyleFromElementByIdAsync(\"{id}\", \"{property}\")", COMPLETED, "Пустое значение стиля из элемента", "Empty style value from the element", IMAGE_STATUS_WARNING);
+                    else if (value.Length > 1)
+                    {
+                        value = value.Substring(1, value.Length - 2);
+                        SendMessageDebug($"GetStyleFromElementByIdAsync(\"{id}\", \"{property}\")", $"GetStyleFromElementByIdAsync(\"{id}\", \"{property}\")", Tester.PASSED, "Стиль из элемента прочитан | " + value, "Style from the read element | " + value, Tester.IMAGE_STATUS_PASSED);
+                    }
+                }
             }
             catch (Exception ex)
             {
-                EditMessageDebug(step, null, null, Tester.FAILED,
+                SendMessageDebug($"GetStyleFromElementByIdAsync(\"{id}\", \"{property}\")", $"GetStyleFromElementByIdAsync(\"{id}\", \"{property}\")", Tester.FAILED,
                      "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(),
                      "Error: " + ex.Message + Environment.NewLine + Environment.NewLine + "Full description of the error: " + ex.ToString(),
                      Tester.IMAGE_STATUS_FAILED);
@@ -4317,14 +4332,12 @@ namespace HatFrameworkDev
                 ConsoleMsgError(ex.ToString());
             }
 
-            if (value == "") EditMessageDebug(step, null, null, COMPLETED, "Не удалось получить стиль из элемента", "Couldn't get the style from the element", IMAGE_STATUS_WARNING);
             return value;
         }
 
         public async Task<string> GetStyleFromElementByClassAsync(string _class, int index, string property)
         {
-            int step = SendMessageDebug($"GetStyleFromElementByClassAsync('{_class}', {index}, \"{property}\")", $"GetStyleFromElementByClassAsync('{_class}', {index}, \"{property}\")", PROCESS, "Получение стиля из элемента", "Getting a style from an element", IMAGE_STATUS_PROCESS);
-            if (DefineTestStop(step) == true) return "";
+            if (DefineTestStop() == true) return "";
 
             string value = "";
             try
@@ -4333,12 +4346,25 @@ namespace HatFrameworkDev
                 script += $"var style = window.getComputedStyle(element).getPropertyValue(\"{property}\"); ";
                 script += "return style; ";
                 script += "}());";
-                value = await execute(script, step, "Стиль из элемента прочитан", "Style from the read element", $"Не удалось найти или прочитать стиль '{property}' из элемента по Class: {_class} (Index: {index})", $"Could not find or read the style '{property}' from the element by Class: {_class} (Index: {index})", true);
-                if (value.Length > 1 && value != "null") value = value.Substring(1, value.Length - 2);
+                value = await execute(script, $"GetStyleFromElementByClassAsync('{_class}', {index}, \"{property}\")");
+                if (value == "null" || value == null)
+                {
+                    SendMessageDebug($"GetStyleFromElementByClassAsync('{_class}', {index}, \"{property}\")", $"GetStyleFromElementByClassAsync('{_class}', {index}, \"{property}\")", Tester.FAILED, $"Не удалось найти или прочитать стиль '{property}' из элемента по Class: {_class} (Index: {index})", $"Could not find or read the style '{property}' from the element by Class: {_class} (Index: {index})", Tester.IMAGE_STATUS_FAILED);
+                    TestStopAsync();
+                }
+                else
+                {
+                    if (value == "") SendMessageDebug($"GetStyleFromElementByClassAsync('{_class}', {index}, \"{property}\")", $"GetStyleFromElementByClassAsync('{_class}', {index}, \"{property}\")", COMPLETED, "Пустое значение стиля из элемента", "Empty style value from the element", IMAGE_STATUS_WARNING);
+                    else if (value.Length > 1)
+                    {
+                        value = value.Substring(1, value.Length - 2);
+                        SendMessageDebug($"GetStyleFromElementByClassAsync('{_class}', {index}, \"{property}\")", $"GetStyleFromElementByClassAsync('{_class}', {index}, \"{property}\")", Tester.PASSED, "Стиль из элемента прочитан | " + value, "Style from the read element | " + value, Tester.IMAGE_STATUS_PASSED);
+                    }
+                }
             }
             catch (Exception ex)
             {
-                EditMessageDebug(step, null, null, Tester.FAILED,
+                SendMessageDebug($"GetStyleFromElementByClassAsync('{_class}', {index}, \"{property}\")", $"GetStyleFromElementByClassAsync('{_class}', {index}, \"{property}\")", Tester.FAILED,
                     "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(),
                     "Error: " + ex.Message + Environment.NewLine + Environment.NewLine + "Full description of the error: " + ex.ToString(),
                     Tester.IMAGE_STATUS_FAILED);
@@ -4346,14 +4372,12 @@ namespace HatFrameworkDev
                 ConsoleMsgError(ex.ToString());
             }
 
-            if (value == "") EditMessageDebug(step, null, null, COMPLETED, "Не удалось получить стиль из элемента", "Couldn't get the style from the element", IMAGE_STATUS_WARNING);
             return value;
         }
 
         public async Task<string> GetStyleFromElementByNameAsync(string name, int index, string property)
         {
-            int step = SendMessageDebug($"GetStyleFromElementByNameAsync('{name}', {index}, \"{property}\")", $"GetStyleFromElementByNameAsync('{name}', {index}, \"{property}\")", PROCESS, "Получение стиля из элемента", "Getting a style from an element", IMAGE_STATUS_PROCESS);
-            if (DefineTestStop(step) == true) return "";
+            if (DefineTestStop() == true) return "";
 
             string value = "";
             try
@@ -4362,12 +4386,25 @@ namespace HatFrameworkDev
                 script += $"var style = window.getComputedStyle(element).getPropertyValue(\"{property}\"); ";
                 script += "return style; ";
                 script += "}());";
-                value = await execute(script, step, "Стиль из элемента прочитан", "Style from the read element", $"Не удалось найти или прочитать стиль '{property}' из элемента по Name: {name} (Index: {index})", $"Could not find or read the style '{property}' from the element by Name: {name} (Index: {index})", true);
-                if (value.Length > 1 && value != "null") value = value.Substring(1, value.Length - 2);
+                value = await execute(script, $"GetStyleFromElementByNameAsync('{name}', {index}, \"{property}\")");
+                if (value == "null" || value == null)
+                {
+                    SendMessageDebug($"GetStyleFromElementByNameAsync('{name}', {index}, \"{property}\")", $"GetStyleFromElementByNameAsync('{name}', {index}, \"{property}\")", Tester.FAILED, $"Не удалось найти или прочитать стиль '{property}' из элемента по Name: {name} (Index: {index})", $"Could not find or read the style '{property}' from the element by Name: {name} (Index: {index})", Tester.IMAGE_STATUS_FAILED);
+                    TestStopAsync();
+                }
+                else
+                {
+                    if (value == "") SendMessageDebug($"GetStyleFromElementByNameAsync('{name}', {index}, \"{property}\")", $"GetStyleFromElementByNameAsync('{name}', {index}, \"{property}\")", COMPLETED, "Пустое значение стиля из элемента", "Empty style value from the element", IMAGE_STATUS_WARNING);
+                    else if (value.Length > 1)
+                    {
+                        value = value.Substring(1, value.Length - 2);
+                        SendMessageDebug($"GetStyleFromElementByNameAsync('{name}', {index}, \"{property}\")", $"GetStyleFromElementByNameAsync('{name}', {index}, \"{property}\")", Tester.PASSED, "Стиль из элемента прочитан | " + value, "Style from the read element | " + value, Tester.IMAGE_STATUS_PASSED);
+                    }
+                }
             }
             catch (Exception ex)
             {
-                EditMessageDebug(step, null, null, Tester.FAILED,
+                SendMessageDebug($"GetStyleFromElementByNameAsync('{name}', {index}, \"{property}\")", $"GetStyleFromElementByNameAsync('{name}', {index}, \"{property}\")", Tester.FAILED,
                     "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(),
                     "Error: " + ex.Message + Environment.NewLine + Environment.NewLine + "Full description of the error: " + ex.ToString(),
                     Tester.IMAGE_STATUS_FAILED);
@@ -4375,14 +4412,12 @@ namespace HatFrameworkDev
                 ConsoleMsgError(ex.ToString());
             }
 
-            if (value == "") EditMessageDebug(step, null, null, COMPLETED, "Не удалось получить стиль из элемента", "Couldn't get the style from the element", IMAGE_STATUS_WARNING);
             return value;
         }
 
         public async Task<string> GetStyleFromElementByTagAsync(string tag, int index, string property)
         {
-            int step = SendMessageDebug($"GetStyleFromElementByTagAsync('{tag}', {index}, \"{property}\")", $"GetStyleFromElementByTagAsync('{tag}', {index}, \"{property}\")", PROCESS, "Получение стиля из элемента", "Getting a style from an element", IMAGE_STATUS_PROCESS);
-            if (DefineTestStop(step) == true) return "";
+            if (DefineTestStop() == true) return "";
 
             string value = "";
             try
@@ -4391,12 +4426,25 @@ namespace HatFrameworkDev
                 script += $"var style = window.getComputedStyle(element).getPropertyValue(\"{property}\"); ";
                 script += "return style; ";
                 script += "}());";
-                value = await execute(script, step, "Стиль из элемента прочитан", "Style from the read element", $"Не удалось найти или прочитать стиль '{property}' из элемента по Tag: {tag} (Index: {index})", $"Could not find or read the style '{property}' from the element by Tag: {tag} (Index: {index})", true);
-                if (value.Length > 1 && value != "null") value = value.Substring(1, value.Length - 2);
+                value = await execute(script, $"GetStyleFromElementByTagAsync('{tag}', {index}, \"{property}\")");
+                if (value == "null" || value == null)
+                {
+                    SendMessageDebug($"GetStyleFromElementByTagAsync('{tag}', {index}, \"{property}\")", $"GetStyleFromElementByTagAsync('{tag}', {index}, \"{property}\")", Tester.FAILED, $"Не удалось найти или прочитать стиль '{property}' из элемента по Tag: {tag} (Index: {index})", $"Could not find or read the style '{property}' from the element by Tag: {tag} (Index: {index})", Tester.IMAGE_STATUS_FAILED);
+                    TestStopAsync();
+                }
+                else
+                {
+                    if (value == "") SendMessageDebug($"GetStyleFromElementByTagAsync('{tag}', {index}, \"{property}\")", $"GetStyleFromElementByTagAsync('{tag}', {index}, \"{property}\")", COMPLETED, "Пустое значение стиля из элемента", "Empty style value from the element", IMAGE_STATUS_WARNING);
+                    else if (value.Length > 1)
+                    {
+                        value = value.Substring(1, value.Length - 2);
+                        SendMessageDebug($"GetStyleFromElementByTagAsync('{tag}', {index}, \"{property}\")", $"GetStyleFromElementByTagAsync('{tag}', {index}, \"{property}\")", Tester.PASSED, "Стиль из элемента прочитан | " + value, "Style from the read element | " + value, Tester.IMAGE_STATUS_PASSED);
+                    }
+                }
             }
             catch (Exception ex)
             {
-                EditMessageDebug(step, null, null, Tester.FAILED,
+                SendMessageDebug($"GetStyleFromElementByTagAsync('{tag}', {index}, \"{property}\")", $"GetStyleFromElementByTagAsync('{tag}', {index}, \"{property}\")", Tester.FAILED,
                     "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(),
                     "Error: " + ex.Message + Environment.NewLine + Environment.NewLine + "Full description of the error: " + ex.ToString(),
                     Tester.IMAGE_STATUS_FAILED);
@@ -4404,14 +4452,12 @@ namespace HatFrameworkDev
                 ConsoleMsgError(ex.ToString());
             }
 
-            if (value == "") EditMessageDebug(step, null, null, COMPLETED, "Не удалось получить стиль из элемента", "Couldn't get the style from the element", IMAGE_STATUS_WARNING);
             return value;
         }
 
         public async Task SetStyleInElementAsync(string by, string locator, string cssText)
         {
-            int step = SendMessageDebug($"SetStyleInElementAsync(\"{by}\", \"{locator}\", \"{cssText}\")", $"SetStyleInElementAsync(\"{by}\", \"{locator}\", \"{cssText}\")", PROCESS, "Ввод стиля в элемент", "Entering style into an element", IMAGE_STATUS_PROCESS);
-            if (DefineTestStop(step) == true) return;
+            if (DefineTestStop() == true) return;
 
             string script = "(function(){";
             if (by == BY_CSS) script += $"var element = document.querySelector(\"{locator}\");";
@@ -4419,59 +4465,95 @@ namespace HatFrameworkDev
             script += $"element.style.cssText = '{cssText}';";
             script += "return element;";
             script += "}());";
-            await execute(script, step, "Стиль введен в элемент", "The style is entered in the element", $"Не удалось найти или ввести стиль в элемент по локатору: {locator}", $"Could not find or enter style in the element by locator: {locator}", true);
+            if (await execute(script, $"SetStyleInElementAsync(\"{by}\", \"{locator}\", \"{cssText}\")") == "null")
+            {
+                SendMessageDebug($"SetStyleInElementAsync(\"{by}\", \"{locator}\", \"{cssText}\")", $"SetStyleInElementAsync(\"{by}\", \"{locator}\", \"{cssText}\")", Tester.FAILED, $"Не удалось найти или ввести стиль в элемент по локатору: {locator}", $"Could not find or enter style in the element by locator: {locator}", Tester.IMAGE_STATUS_FAILED);
+                TestStopAsync();
+            }
+            else
+            {
+                SendMessageDebug($"SetStyleInElementAsync(\"{by}\", \"{locator}\", \"{cssText}\")", $"SetStyleInElementAsync(\"{by}\", \"{locator}\", \"{cssText}\")", PASSED, "Стиль введен в элемент", "The style is entered in the element", IMAGE_STATUS_PASSED);
+            }
         }
 
         public async Task SetStyleInElementByIdAsync(string id, string cssText)
         {
-            int step = SendMessageDebug($"SetStyleInElementByIdAsync(\"{id}\", \"{cssText}\")", $"SetStyleInElementByIdAsync(\"{id}\", \"{cssText}\")", PROCESS, "Ввод стиля в элемент", "Entering style into an element", IMAGE_STATUS_PROCESS);
-            if (DefineTestStop(step) == true) return;
+            if (DefineTestStop() == true) return;
 
             string script = "(function(){";
             script += $"var element = document.getElementById('{id}');";
             script += $"element.style.cssText = '{cssText}';";
             script += "return element;";
             script += "}());";
-            await execute(script, step, "Стиль введен в элемент", "The style is entered in the element", $"Не удалось найти или ввести стиль в элемент с ID: {id}", $"Could not find or enter style in the element with ID: {id}", true);
+            if (await execute(script, $"SetStyleInElementByIdAsync(\"{id}\", \"{cssText}\")") == "null")
+            {
+                SendMessageDebug($"SetStyleInElementByIdAsync(\"{id}\", \"{cssText}\")", $"SetStyleInElementByIdAsync(\"{id}\", \"{cssText}\")", Tester.FAILED, $"Не удалось найти или ввести стиль в элемент с ID: {id}", $"Could not find or enter style in the element with ID: {id}", Tester.IMAGE_STATUS_FAILED);
+                TestStopAsync();
+            }
+            else
+            {
+                SendMessageDebug($"SetStyleInElementByIdAsync(\"{id}\", \"{cssText}\")", $"SetStyleInElementByIdAsync(\"{id}\", \"{cssText}\")", PASSED, "Стиль введен в элемент", "The style is entered in the element", IMAGE_STATUS_PASSED);
+            }
         }
 
         public async Task SetStyleInElementByClassAsync(string _class, int index, string cssText)
         {
-            int step = SendMessageDebug($"SetStyleInElementByClassAsync(\"{_class}\", {index}, \"{cssText}\")", $"SetStyleInElementByClassAsync(\"{_class}\", {index}, \"{cssText}\")", PROCESS, "Ввод стиля в элемент", "Entering style into an element", IMAGE_STATUS_PROCESS);
-            if (DefineTestStop(step) == true) return;
+            if (DefineTestStop() == true) return;
 
             string script = "(function(){";
             script += $"var element = document.getElementsByClassName('{_class}')[{index}];";
             script += $"element.style.cssText = '{cssText}';";
             script += "return element;";
             script += "}());";
-            await execute(script, step, "Стиль введен в элемент", "The style is entered in the element", $"Не удалось найти или ввести стиль в элемент по Class: {_class} (Index: {index})", $"Could not find or enter style in the element by Class: {_class} (Index: {index})", true);
+            if (await execute(script, $"SetStyleInElementByClassAsync(\"{_class}\", {index}, \"{cssText}\")") == "null")
+            {
+                SendMessageDebug($"SetStyleInElementByClassAsync(\"{_class}\", {index}, \"{cssText}\")", $"SetStyleInElementByClassAsync(\"{_class}\", {index}, \"{cssText}\")", Tester.FAILED, $"Не удалось найти или ввести стиль в элемент по Class: {_class} (Index: {index})", $"Could not find or enter style in the element by Class: {_class} (Index: {index})", Tester.IMAGE_STATUS_FAILED);
+                TestStopAsync();
+            }
+            else
+            {
+                SendMessageDebug($"SetStyleInElementByClassAsync(\"{_class}\", {index}, \"{cssText}\")", $"SetStyleInElementByClassAsync(\"{_class}\", {index}, \"{cssText}\")", PASSED, "Стиль введен в элемент", "The style is entered in the element", IMAGE_STATUS_PASSED);
+            }
         }
 
         public async Task SetStyleInElementByNameAsync(string name, int index, string cssText)
         {
-            int step = SendMessageDebug($"SetStyleInElementByNameAsync(\"{name}\", {index}, \"{cssText}\")", $"SetStyleInElementByNameAsync(\"{name}\", {index}, \"{cssText}\")", PROCESS, "Ввод стиля в элемент", "Entering style into an element", IMAGE_STATUS_PROCESS);
-            if (DefineTestStop(step) == true) return;
+            if (DefineTestStop() == true) return;
 
             string script = "(function(){";
             script += $"var element = document.getElementsByName('{name}')[{index}];";
             script += $"element.style.cssText = '{cssText}';";
             script += "return element;";
             script += "}());";
-            await execute(script, step, "Стиль введен в элемент", "The style is entered in the element", $"Не удалось найти или ввести стиль в элемент по Name: {name} (Index: {index})", $"Could not find or enter style in the element by Name: {name} (Index: {index})", true);
+            if (await execute(script, $"SetStyleInElementByNameAsync(\"{name}\", {index}, \"{cssText}\")") == "null")
+            {
+                SendMessageDebug($"SetStyleInElementByNameAsync(\"{name}\", {index}, \"{cssText}\")", $"SetStyleInElementByNameAsync(\"{name}\", {index}, \"{cssText}\")", Tester.FAILED, $"Не удалось найти или ввести стиль в элемент по Name: {name} (Index: {index})", $"Could not find or enter style in the element by Name: {name} (Index: {index})", Tester.IMAGE_STATUS_FAILED);
+                TestStopAsync();
+            }
+            else
+            {
+                SendMessageDebug($"SetStyleInElementByNameAsync(\"{name}\", {index}, \"{cssText}\")", $"SetStyleInElementByNameAsync(\"{name}\", {index}, \"{cssText}\")", PASSED, "Стиль введен в элемент", "The style is entered in the element", IMAGE_STATUS_PASSED);
+            }
         }
 
         public async Task SetStyleInElementByTagAsync(string tag, int index, string cssText)
         {
-            int step = SendMessageDebug($"SetStyleInElementByTagAsync(\"{tag}\", {index}, \"{cssText}\")", $"SetStyleInElementByTagAsync(\"{tag}\", {index}, \"{cssText}\")", PROCESS, "Ввод стиля в элемент", "Entering style into an element", IMAGE_STATUS_PROCESS);
-            if (DefineTestStop(step) == true) return;
+            if (DefineTestStop() == true) return;
 
             string script = "(function(){";
             script += $"var element = document.getElementsByTagName('{tag}')[{index}];";
             script += $"element.style.cssText = '{cssText}';";
             script += "return element;";
             script += "}());";
-            await execute(script, step, "Стиль введен в элемент", "The style is entered in the element", $"Не удалось найти или ввести текст в элемент по Tag: {tag} (Index: {index})", $"Could not find or enter text in the element by Tag: {tag} (Index: {index})", true);
+            if (await execute(script, $"SetStyleInElementByTagAsync(\"{tag}\", {index}, \"{cssText}\")") == "null")
+            {
+                SendMessageDebug($"SetStyleInElementByTagAsync(\"{tag}\", {index}, \"{cssText}\")", $"SetStyleInElementByTagAsync(\"{tag}\", {index}, \"{cssText}\")", Tester.FAILED, $"Не удалось найти или ввести текст в элемент по Tag: {tag} (Index: {index})", $"Could not find or enter text in the element by Tag: {tag} (Index: {index})", Tester.IMAGE_STATUS_FAILED);
+                TestStopAsync();
+            }
+            else
+            {
+                SendMessageDebug($"SetStyleInElementByTagAsync(\"{tag}\", {index}, \"{cssText}\")", $"SetStyleInElementByTagAsync(\"{tag}\", {index}, \"{cssText}\")", PASSED, "Стиль введен в элемент", "The style is entered in the element", IMAGE_STATUS_PASSED);
+            }
         }
 
         /*
@@ -4480,8 +4562,7 @@ namespace HatFrameworkDev
 
         public async Task<string> FileReadAsync(string encoding, string filename)
         {
-            int step = SendMessageDebug($"FileReadAsync(\"{encoding}\"', \"{filename}\")", $"FileReadAsync(\"{encoding}\"', \"{filename}\")", PROCESS, "Чтение файла", "Reading a file", IMAGE_STATUS_PROCESS);
-            if (DefineTestStop(step) == true) return "";
+            if (DefineTestStop() == true) return "";
 
             string content = "";
             try
@@ -4512,7 +4593,7 @@ namespace HatFrameworkDev
             }
             catch (Exception ex)
             {
-                EditMessageDebug(step, null, null, Tester.FAILED,
+                SendMessageDebug($"FileReadAsync(\"{encoding}\"', \"{filename}\")", $"FileReadAsync(\"{encoding}\"', \"{filename}\")", Tester.FAILED,
                      "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(),
                      "Error: " + ex.Message + Environment.NewLine + Environment.NewLine + "Full description of the error: " + ex.ToString(),
                      Tester.IMAGE_STATUS_FAILED);
@@ -4520,17 +4601,15 @@ namespace HatFrameworkDev
                 ConsoleMsgError(ex.ToString());
             }
 
-            if (content == "") EditMessageDebug(step, null, null, WARNING, "Не удалось прочитать файл (или файл пустой)", "Could not read the file (or the file is empty)", IMAGE_STATUS_WARNING);
-            else EditMessageDebug(step, null, null, PASSED, "Файл прочитан", "The file has been read", IMAGE_STATUS_PASSED);
+            if (content == "") SendMessageDebug($"FileReadAsync(\"{encoding}\"', \"{filename}\")", $"FileReadAsync(\"{encoding}\"', \"{filename}\")", WARNING, "Не удалось прочитать файл (или файл пустой)", "Could not read the file (or the file is empty)", IMAGE_STATUS_WARNING);
+            else SendMessageDebug($"FileReadAsync(\"{encoding}\"', \"{filename}\")", $"FileReadAsync(\"{encoding}\"', \"{filename}\")", PASSED, "Файл прочитан", "The file has been read", IMAGE_STATUS_PASSED);
 
             return content;
         }
 
         public async Task FileWriteAsync(string content, string encoding, string filename)
         {
-            int step = SendMessageDebug($"FileWriteAsync(\"...\", \"{encoding}\"', \"{filename}\")", $"FileWriteAsync(\"...\", \"{encoding}\"', \"{filename}\")", PROCESS, "Сохранение файла", "Saving a file", IMAGE_STATUS_PROCESS);
-            if (DefineTestStop(step) == true) return;
-
+            if (DefineTestStop() == true) return;
             try
             {
                 StreamWriter writer;
@@ -4557,11 +4636,11 @@ namespace HatFrameworkDev
                 await writer.WriteAsync(content);
                 writer.Close();
 
-                EditMessageDebug(step, null, null, PASSED, "Файл сохранён", "File saved", IMAGE_STATUS_PASSED);
+                SendMessageDebug($"FileWriteAsync(\"...\", \"{encoding}\"', \"{filename}\")", $"FileWriteAsync(\"...\", \"{encoding}\"', \"{filename}\")", PASSED, "Файл сохранён", "File saved", IMAGE_STATUS_PASSED);
             }
             catch (Exception ex)
             {
-                EditMessageDebug(step, null, null, Tester.FAILED,
+                SendMessageDebug($"FileWriteAsync(\"...\", \"{encoding}\"', \"{filename}\")", $"FileWriteAsync(\"...\", \"{encoding}\"', \"{filename}\")", Tester.FAILED,
                      "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(),
                      "Error: " + ex.Message + Environment.NewLine + Environment.NewLine + "Full description of the error: " + ex.ToString(),
                      Tester.IMAGE_STATUS_FAILED);
@@ -4572,9 +4651,7 @@ namespace HatFrameworkDev
 
         public async Task FileDownloadAsync(string fileURL, string filename, int waitingSec = 60)
         {
-            int step = SendMessageDebug($"FileDownloadAsync(\"{fileURL}\"', \"{filename}\", {waitingSec.ToString()})", $"FileDownloadAsync(\"{fileURL}\"', \"{filename}\", {waitingSec.ToString()})", PROCESS, "Скачивание файла", "Downloading a file", IMAGE_STATUS_PROCESS);
-            if (DefineTestStop(step) == true) return;
-
+            if (DefineTestStop() == true) return;
             try
             {
                 int waiting = 0;
@@ -4585,25 +4662,25 @@ namespace HatFrameworkDev
                 {
                     waiting++;
                     await this.WaitAsync(1);
-                    if (this.DefineTestStop(step) == true) break;
+                    if (this.DefineTestStop() == true) break;
                     if (waiting == waitingSec) break;
                 }
 
-                if (DefineTestStop(step) == true) return;
+                if (DefineTestStop() == true) return;
 
                 if (File.Exists(filename) == true)
                 {
-                    EditMessageDebug(step, null, null, PASSED, "Скачивание файла - завершено", "File download - completed", IMAGE_STATUS_PASSED);
+                    SendMessageDebug($"FileDownloadAsync(\"{fileURL}\"', \"{filename}\", {waitingSec.ToString()})", $"FileDownloadAsync(\"{fileURL}\"', \"{filename}\", {waitingSec.ToString()})", PASSED, "Скачивание файла - завершено", "File download - completed", IMAGE_STATUS_PASSED);
                 }
                 else
                 {
-                    EditMessageDebug(step, null, null, FAILED, "Неудалось скачать файл", "Failed to download file", IMAGE_STATUS_FAILED);
+                    SendMessageDebug($"FileDownloadAsync(\"{fileURL}\"', \"{filename}\", {waitingSec.ToString()})", $"FileDownloadAsync(\"{fileURL}\"', \"{filename}\", {waitingSec.ToString()})", FAILED, "Неудалось скачать файл", "Failed to download file", IMAGE_STATUS_FAILED);
                     TestStopAsync();
                 }
             }
             catch (Exception ex)
             {
-                EditMessageDebug(step, null, null, Tester.FAILED,
+                SendMessageDebug($"FileDownloadAsync(\"{fileURL}\"', \"{filename}\", {waitingSec.ToString()})", $"FileDownloadAsync(\"{fileURL}\"', \"{filename}\", {waitingSec.ToString()})", Tester.FAILED,
                      "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(),
                      "Error: " + ex.Message + Environment.NewLine + Environment.NewLine + "Full description of the error: " + ex.ToString(),
                      Tester.IMAGE_STATUS_FAILED);
@@ -4614,8 +4691,7 @@ namespace HatFrameworkDev
 
         public async Task<string> FileGetHashMD5Async(string filename)
         {
-            int step = SendMessageDebug($"FileGetHashMD5Async(\"{filename}\")", $"FileGetHashMD5Async(\"{filename}\")", PROCESS, "Получение Hash кода файла", "Getting the Hash code of the file", IMAGE_STATUS_PROCESS);
-            if (DefineTestStop(step) == true) return "";
+            if (DefineTestStop() == true) return "";
 
             try
             {
@@ -4625,14 +4701,14 @@ namespace HatFrameworkDev
                     {
                         var hash = md5.ComputeHash(stream);
                         string result = BitConverter.ToString(hash).Replace("-", "");
-                        EditMessageDebug(step, null, null, PASSED, "Получен Hash код: " + result, "Got the hash code: " + result, IMAGE_STATUS_PASSED);
+                        SendMessageDebug($"FileGetHashMD5Async(\"{filename}\")", $"FileGetHashMD5Async(\"{filename}\")", PASSED, "Получен Hash код: " + result, "Got the hash code: " + result, IMAGE_STATUS_PASSED);
                         return result;
                     }
                 }
             }
             catch (Exception ex)
             {
-                EditMessageDebug(step, null, null, Tester.FAILED,
+                SendMessageDebug($"FileGetHashMD5Async(\"{filename}\")", $"FileGetHashMD5Async(\"{filename}\")", Tester.FAILED,
                      "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(),
                      "Error: " + ex.Message + Environment.NewLine + Environment.NewLine + "Full description of the error: " + ex.ToString(),
                      Tester.IMAGE_STATUS_FAILED);
@@ -4640,15 +4716,13 @@ namespace HatFrameworkDev
                 ConsoleMsgError(ex.ToString());
             }
 
-            EditMessageDebug(step, null, null, WARNING, "Не удалось получить Hash код", "Failed to get Hash code", IMAGE_STATUS_WARNING);
+            SendMessageDebug($"FileGetHashMD5Async(\"{filename}\")", $"FileGetHashMD5Async(\"{filename}\")", WARNING, "Не удалось получить Hash код", "Failed to get Hash code", IMAGE_STATUS_WARNING);
             return "";
         }
 
         public async Task<string> CreateHashMD5FromTextAsync(string text)
         {
-            int step = SendMessageDebug($"CreateHashMD5FromTextAsync(\"{text}\")", $"CreateHashMD5FromTextAsync(\"{text}\")", PROCESS, "Создается код Hash MD5 для указанного текста", "An MD5 Hash code is created for the text", IMAGE_STATUS_PROCESS);
-            if (DefineTestStop(step) == true) return "";
-
+            if (DefineTestStop() == true) return "";
             string result = "";
 
             try
@@ -4661,7 +4735,7 @@ namespace HatFrameworkDev
             }
             catch (Exception ex)
             {
-                EditMessageDebug(step, null, null, Tester.FAILED,
+                SendMessageDebug($"CreateHashMD5FromTextAsync(\"{text}\")", $"CreateHashMD5FromTextAsync(\"{text}\")", Tester.FAILED,
                      "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(),
                      "Error: " + ex.Message + Environment.NewLine + Environment.NewLine + "Full description of the error: " + ex.ToString(),
                      Tester.IMAGE_STATUS_FAILED);
@@ -4669,8 +4743,8 @@ namespace HatFrameworkDev
                 ConsoleMsgError(ex.ToString());
             }
 
-            if (result != "") EditMessageDebug(step, null, null, PASSED, "Код Hash MD5 создан " + result, "MD5 Hash code created " + result, IMAGE_STATUS_PASSED);
-            else EditMessageDebug(step, null, null, WARNING, "Не удалось создать Hash MD5 код", "Failed to create MD5 Hash code", IMAGE_STATUS_WARNING);
+            if (result != "") SendMessageDebug($"CreateHashMD5FromTextAsync(\"{text}\")", $"CreateHashMD5FromTextAsync(\"{text}\")", PASSED, "Код Hash MD5 создан " + result, "MD5 Hash code created " + result, IMAGE_STATUS_PASSED);
+            else SendMessageDebug($"CreateHashMD5FromTextAsync(\"{text}\")", $"CreateHashMD5FromTextAsync(\"{text}\")", WARNING, "Не удалось создать Hash MD5 код", "Failed to create MD5 Hash code", IMAGE_STATUS_WARNING);
             return result;
         }
 
