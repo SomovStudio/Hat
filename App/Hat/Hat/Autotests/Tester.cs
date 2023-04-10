@@ -4757,18 +4757,16 @@ namespace HatFrameworkDev
          * */
         public async Task<bool> AssertEqualsAsync(dynamic expected, dynamic actual)
         {
-            int step = SendMessageDebug("AssertEqualsAsync(" + expected + ", " + actual + ")", "AssertEqualsAsync(" + expected + ", " + actual + ")", PROCESS, "Проверка совпадения ожидаемого и актуального значения", "Checking whether the expected and actual values match", IMAGE_STATUS_PROCESS);
-            if (DefineTestStop(step) == true) return false;
-
+            if (DefineTestStop() == true) return false;
             if (expected == actual)
             {
-                EditMessageDebug(step, null, null, PASSED, "Ожидаемое и актуальное значение совпадают", "The expected and actual value are the same", IMAGE_STATUS_PASSED);
+                SendMessageDebug("AssertEqualsAsync(" + expected + ", " + actual + ")", "AssertEqualsAsync(" + expected + ", " + actual + ")", PASSED, "Ожидаемое и актуальное значение совпадают", "The expected and actual value are the same", IMAGE_STATUS_PASSED);
                 if (assertStatus == null || assertStatus == PASSED) assertStatus = PASSED;
                 return true;
             }
             else
             {
-                EditMessageDebug(step, null, null, FAILED, "Ожидаемое и актуальное значение не совпадают", "The expected and actual value do not match", IMAGE_STATUS_FAILED);
+                SendMessageDebug("AssertEqualsAsync(" + expected + ", " + actual + ")", "AssertEqualsAsync(" + expected + ", " + actual + ")", FAILED, "Ожидаемое и актуальное значение не совпадают", "The expected and actual value do not match", IMAGE_STATUS_FAILED);
                 if (assertStatus == null || assertStatus == PASSED) assertStatus = FAILED;
                 TestStopAsync();
                 return false;
@@ -4777,18 +4775,16 @@ namespace HatFrameworkDev
 
         public async Task<bool> AssertNotEqualsAsync(dynamic expected, dynamic actual)
         {
-            int step = SendMessageDebug("AssertNotEqualsAsync(" + expected + ", " + actual + ")", "AssertNotEqualsAsync(" + expected + ", " + actual + ")", PROCESS, "Проверка не совпадения ожидаемого и актуального значения", "Checking the discrepancy between the expected and actual values", IMAGE_STATUS_PROCESS);
-            if (DefineTestStop(step) == true) return false;
-
+            if (DefineTestStop() == true) return false;
             if (expected != actual)
             {
-                EditMessageDebug(step, null, null, PASSED, "Ожидаемое и актуальное значение не совпадают", "The expected and actual value do not match", IMAGE_STATUS_PASSED);
+                SendMessageDebug("AssertNotEqualsAsync(" + expected + ", " + actual + ")", "AssertNotEqualsAsync(" + expected + ", " + actual + ")", PASSED, "Ожидаемое и актуальное значение не совпадают", "The expected and actual value do not match", IMAGE_STATUS_PASSED);
                 if (assertStatus == null || assertStatus == PASSED) assertStatus = PASSED;
                 return true;
             }
             else
             {
-                EditMessageDebug(step, null, null, FAILED, "Ожидаемое и актуальное значение совпадают", "The expected and actual value are the same", IMAGE_STATUS_FAILED);
+                SendMessageDebug("AssertNotEqualsAsync(" + expected + ", " + actual + ")", "AssertNotEqualsAsync(" + expected + ", " + actual + ")", FAILED, "Ожидаемое и актуальное значение совпадают", "The expected and actual value are the same", IMAGE_STATUS_FAILED);
                 if (assertStatus == null || assertStatus == PASSED) assertStatus = FAILED;
                 TestStopAsync();
                 return false;
@@ -4797,18 +4793,16 @@ namespace HatFrameworkDev
 
         public async Task<bool> AssertTrueAsync(bool condition)
         {
-            int step = SendMessageDebug("AssertTrueAsync(" + condition.ToString() + ")", "AssertTrueAsync(" + condition.ToString() + ")", PROCESS, "Проверка значения которое должно быть true", "Checking the value that should be true", IMAGE_STATUS_PROCESS);
-            if (DefineTestStop(step) == true) return false;
-
+            if (DefineTestStop() == true) return false;
             if (condition == true)
             {
-                EditMessageDebug(step, null, null, PASSED, "Проверенное значение соответствует true", "The verified value corresponds to true", IMAGE_STATUS_PASSED);
+                SendMessageDebug("AssertTrueAsync(" + condition.ToString() + ")", "AssertTrueAsync(" + condition.ToString() + ")", PASSED, "Проверенное значение соответствует true", "The verified value corresponds to true", IMAGE_STATUS_PASSED);
                 if (assertStatus == null || assertStatus == PASSED) assertStatus = PASSED;
                 return true;
             }
             else
             {
-                EditMessageDebug(step, null, null, FAILED, "Проверенное значение соответствует false (должно быть true)", "The checked value corresponds to false (must be true)", IMAGE_STATUS_FAILED);
+                SendMessageDebug("AssertTrueAsync(" + condition.ToString() + ")", "AssertTrueAsync(" + condition.ToString() + ")", FAILED, "Проверенное значение соответствует false (должно быть true)", "The checked value corresponds to false (must be true)", IMAGE_STATUS_FAILED);
                 if (assertStatus == null || assertStatus == PASSED) assertStatus = FAILED;
                 TestStopAsync();
                 return false;
@@ -4817,18 +4811,16 @@ namespace HatFrameworkDev
 
         public async Task<bool> AssertFalseAsync(bool condition)
         {
-            int step = SendMessageDebug("AssertFalseAsync(" + condition.ToString() + ")", "AssertFalseAsync(" + condition.ToString() + ")", PROCESS, "Проверка значения которое должно быть false", "Checking the value that should be false", IMAGE_STATUS_PROCESS);
-            if (DefineTestStop(step) == true) return false;
-
+            if (DefineTestStop() == true) return false;
             if (condition == false)
             {
-                EditMessageDebug(step, null, null, PASSED, "Проверенное значение соответствует false", "The checked value corresponds to false", IMAGE_STATUS_PASSED);
+                SendMessageDebug("AssertFalseAsync(" + condition.ToString() + ")", "AssertFalseAsync(" + condition.ToString() + ")", PASSED, "Проверенное значение соответствует false", "The checked value corresponds to false", IMAGE_STATUS_PASSED);
                 if (assertStatus == null || assertStatus == PASSED) assertStatus = PASSED;
                 return true;
             }
             else
             {
-                EditMessageDebug(step, null, null, FAILED, "Проверенное значение соответствует true (должно быть false)", "The checked value corresponds to true (must be false)", IMAGE_STATUS_FAILED);
+                SendMessageDebug("AssertFalseAsync(" + condition.ToString() + ")", "AssertFalseAsync(" + condition.ToString() + ")", FAILED, "Проверенное значение соответствует true (должно быть false)", "The checked value corresponds to true (must be false)", IMAGE_STATUS_FAILED);
                 if (assertStatus == null || assertStatus == PASSED) assertStatus = FAILED;
                 TestStopAsync();
                 return false;
@@ -4839,19 +4831,17 @@ namespace HatFrameworkDev
         {
             string value = "null";
             if(obj != null) value = obj.ToString();
-            
-            int step = SendMessageDebug("AssertNotNull(" + value + ")", "AssertNotNull(" + value + ")", PROCESS, "Проверка значения которое не должно быть null", "Checking a value that should not be null", IMAGE_STATUS_PROCESS);
-            if (DefineTestStop(step) == true) return false;
+            if (DefineTestStop() == true) return false;
 
             if (obj != null)
             {
-                EditMessageDebug(step, null, null, PASSED, "Проверенное значение не null", "The checked value is not null", IMAGE_STATUS_PASSED);
+                SendMessageDebug("AssertNotNull(" + value + ")", "AssertNotNull(" + value + ")", PASSED, "Проверенное значение не null", "The checked value is not null", IMAGE_STATUS_PASSED);
                 if (assertStatus == null || assertStatus == PASSED) assertStatus = PASSED;
                 return true;
             }
             else
             {
-                EditMessageDebug(step, null, null, FAILED, "Проверенное значение null (должно быть не null)", "Checked value is null (must be non-null)", IMAGE_STATUS_FAILED);
+                SendMessageDebug("AssertNotNull(" + value + ")", "AssertNotNull(" + value + ")", FAILED, "Проверенное значение null (должно быть не null)", "Checked value is null (must be non-null)", IMAGE_STATUS_FAILED);
                 if (assertStatus == null || assertStatus == PASSED) assertStatus = FAILED;
                 TestStopAsync();
                 return false;
@@ -4862,19 +4852,17 @@ namespace HatFrameworkDev
         {
             string value = "null";
             if (obj != null) value = obj.ToString();
-
-            int step = SendMessageDebug("AssertNull(" + value + ")", "AssertNull(" + value + ")", PROCESS, "Проверка значения которое должно быть null", "Checking the value that should be null", IMAGE_STATUS_PROCESS);
-            if (DefineTestStop(step) == true) return false;
+            if (DefineTestStop() == true) return false;
 
             if (obj == null)
             {
-                EditMessageDebug(step, null, null, PASSED, "Проверенное значение null", "Verified value is null", IMAGE_STATUS_PASSED);
+                SendMessageDebug("AssertNull(" + value + ")", "AssertNull(" + value + ")", PASSED, "Проверенное значение null", "Verified value is null", IMAGE_STATUS_PASSED);
                 if (assertStatus == null || assertStatus == PASSED) assertStatus = PASSED;
                 return true;
             }
             else
             {
-                EditMessageDebug(step, null, null, FAILED, "Проверенное значение не null (должно быть null)", "The checked value is not null (must be null)", IMAGE_STATUS_FAILED);
+                SendMessageDebug("AssertNull(" + value + ")", "AssertNull(" + value + ")", FAILED, "Проверенное значение не null (должно быть null)", "The checked value is not null (must be null)", IMAGE_STATUS_FAILED);
                 if (assertStatus == null || assertStatus == PASSED) assertStatus = FAILED;
                 TestStopAsync();
                 return false;
@@ -4884,8 +4872,7 @@ namespace HatFrameworkDev
         public async Task<bool> AssertNoErrorsAsync(bool showListErrors = false, string[] listIgnored = null)
         {
             List<string> errors = await BrowserGetErrorsAsync();
-            int step = SendMessageDebug($"AssertNoErrors({showListErrors}, \"{listIgnored}\")", "AssertNoErrors()", PROCESS, "Проверка отсутствия ошибок в консоли", "Checking for errors in the console", IMAGE_STATUS_PROCESS); ; ;
-            if (DefineTestStop(step) == true) return false;
+            if (DefineTestStop() == true) return false;
 
             int countErrors = 0;
             string textErrors = "";
@@ -4925,14 +4912,14 @@ namespace HatFrameworkDev
                 if (showListErrors == true)
                 {
                     textErrors = textErrors.Replace("\n", "<br>" + Environment.NewLine);
-                    EditMessageDebug(step, null, null, FAILED, 
+                    SendMessageDebug($"AssertNoErrors({showListErrors}, \"{listIgnored}\")", $"AssertNoErrors({showListErrors}, \"{listIgnored}\")", FAILED, 
                         "В консоли присутствует " + countErrors.ToString() + " ошибок. <br>" + Environment.NewLine + textErrors,
                         "There are " + countErrors.ToString() + " errors in the console. <br>" + Environment.NewLine + textErrors,
                     Tester.IMAGE_STATUS_FAILED);
                 }
                 else
                 {
-                    EditMessageDebug(step, null, null, FAILED, 
+                    SendMessageDebug($"AssertNoErrors({showListErrors}, \"{listIgnored}\")", $"AssertNoErrors({showListErrors}, \"{listIgnored}\")", FAILED, 
                         "В консоли присутствует " + countErrors.ToString() + " ошибок.",
                         "There are " + countErrors.ToString() + " errors in the console.",
                         Tester.IMAGE_STATUS_FAILED);
@@ -4944,7 +4931,7 @@ namespace HatFrameworkDev
             }
             else
             {
-                EditMessageDebug(step, null, null, PASSED, "Проверка завершена - ошибок в консоли нет", "The check is completed - there are no errors in the console", Tester.IMAGE_STATUS_PASSED);
+                SendMessageDebug($"AssertNoErrors({showListErrors}, \"{listIgnored}\")", $"AssertNoErrors({showListErrors}, \"{listIgnored}\")", PASSED, "Проверка завершена - ошибок в консоли нет", "The check is completed - there are no errors in the console", Tester.IMAGE_STATUS_PASSED);
                 if (assertStatus == null || assertStatus == PASSED) assertStatus = PASSED;
                 result = true;
             }
@@ -4955,10 +4942,9 @@ namespace HatFrameworkDev
         public async Task<bool> AssertNetworkEventsAsync(bool presence, string[] events)
         {
             string network = await BrowserGetNetworkAsync();
-            int step = -1;
-            if (presence == true) step = SendMessageDebug("AssertNetworkEventsAsync(" + presence + ", [...])", "AssertNetworkEventsAsync(" + presence + ", [...])", PROCESS, "Проверка присутствия событий в Network", "Checking the presence of events in the Network", IMAGE_STATUS_PROCESS);
-            else step = SendMessageDebug("AssertNetworkEventsAsync(" + presence + ", [...])", "AssertNetworkEventsAsync(" + presence + ", [...])", PROCESS, "Проверка отсутствия событий в Network", "Checking the presence of events in the Network", IMAGE_STATUS_PROCESS);
-            if (DefineTestStop(step) == true) return false;
+            if (presence == true) SendMessageDebug("AssertNetworkEventsAsync(" + presence + ", [...])", "AssertNetworkEventsAsync(" + presence + ", [...])", PROCESS, "Проверка присутствия событий в Network", "Checking the presence of events in the Network", IMAGE_STATUS_PROCESS);
+            else SendMessageDebug("AssertNetworkEventsAsync(" + presence + ", [...])", "AssertNetworkEventsAsync(" + presence + ", [...])", PROCESS, "Проверка отсутствия событий в Network", "Checking the presence of events in the Network", IMAGE_STATUS_PROCESS);
+            if (DefineTestStop() == true) return false;
 
             bool actual;
             bool result = true;
@@ -4982,18 +4968,17 @@ namespace HatFrameworkDev
 
             if (result == true)
             {
-                if (presence == true) EditMessageDebug(step, null, null, PASSED, "Проверка завершена - все события присутствуют " + Environment.NewLine + reportRus, "Verification is complete - all events are present " + Environment.NewLine + reportEng, Tester.IMAGE_STATUS_PASSED);
-                else EditMessageDebug(step, null, null, PASSED, "Проверка завершена - все события отсутствуют " + Environment.NewLine + reportRus, "Verification completed - all events are missing " + Environment.NewLine + reportEng, Tester.IMAGE_STATUS_PASSED);
+                if (presence == true) SendMessageDebug("AssertNetworkEventsAsync(" + presence + ", [...])", "AssertNetworkEventsAsync(" + presence + ", [...])", PASSED, "Проверка завершена - все события присутствуют " + Environment.NewLine + reportRus, "Verification is complete - all events are present " + Environment.NewLine + reportEng, Tester.IMAGE_STATUS_PASSED);
+                else SendMessageDebug("AssertNetworkEventsAsync(" + presence + ", [...])", "AssertNetworkEventsAsync(" + presence + ", [...])", PASSED, "Проверка завершена - все события отсутствуют " + Environment.NewLine + reportRus, "Verification completed - all events are missing " + Environment.NewLine + reportEng, Tester.IMAGE_STATUS_PASSED);
                 if (assertStatus == null || assertStatus == PASSED) assertStatus = PASSED;
             }
             else
             {
-                if (presence == true) EditMessageDebug(step, null, null, FAILED, "В Network отсутствуют следующие события " + Environment.NewLine + reportRus, "The following events are missing in the Network " + Environment.NewLine + reportEng, Tester.IMAGE_STATUS_FAILED);
-                else EditMessageDebug(step, null, null, FAILED, "В Network присутствуют следующие события " + Environment.NewLine + reportRus, "The following events are present in the Network " + Environment.NewLine + reportEng, Tester.IMAGE_STATUS_FAILED);
+                if (presence == true) SendMessageDebug("AssertNetworkEventsAsync(" + presence + ", [...])", "AssertNetworkEventsAsync(" + presence + ", [...])", FAILED, "В Network отсутствуют следующие события " + Environment.NewLine + reportRus, "The following events are missing in the Network " + Environment.NewLine + reportEng, Tester.IMAGE_STATUS_FAILED);
+                else SendMessageDebug("AssertNetworkEventsAsync(" + presence + ", [...])", "AssertNetworkEventsAsync(" + presence + ", [...])", FAILED, "В Network присутствуют следующие события " + Environment.NewLine + reportRus, "The following events are present in the Network " + Environment.NewLine + reportEng, Tester.IMAGE_STATUS_FAILED);
                 if (assertStatus == null || assertStatus == PASSED) assertStatus = FAILED;
                 TestStopAsync();
             }
-
             return result;
         }
                 
