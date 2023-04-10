@@ -16,6 +16,7 @@ using HatFramework;
 using Newtonsoft.Json.Linq;
 using System.Security.Cryptography;
 using System.Xml.Linq;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace HatFrameworkDev
 {
@@ -2797,7 +2798,7 @@ namespace HatFrameworkDev
                 }
                 else
                 {
-                    if (value == "") SendMessageDebug($"GetTextFromElementByIdAsync('{id}')", $"GetTextFromElementByIdAsync('{id}')", COMPLETED, "Не удалось получить текст из элемента", "Couldn't get the text from the element", IMAGE_STATUS_WARNING);
+                    if (value == "") SendMessageDebug($"GetTextFromElementByIdAsync('{id}')", $"GetTextFromElementByIdAsync('{id}')", COMPLETED, "Пустой текст из элемента", "Empty text from element", IMAGE_STATUS_WARNING);
                     else if (value.Length > 1)
                     {
                         value = value.Substring(1, value.Length - 2);
@@ -2837,7 +2838,7 @@ namespace HatFrameworkDev
                 }
                 else
                 {
-                    if (value == "") SendMessageDebug($"GetTextFromElementByClassAsync('{_class}', {index})", $"GetTextFromElementByClassAsync('{_class}', {index})", COMPLETED, "Не удалось получить текст из элемента", "Couldn't get the text from the element", IMAGE_STATUS_WARNING);
+                    if (value == "") SendMessageDebug($"GetTextFromElementByClassAsync('{_class}', {index})", $"GetTextFromElementByClassAsync('{_class}', {index})", COMPLETED, "Пустой текст из элемента", "Empty text from element", IMAGE_STATUS_WARNING);
                     else if (value.Length > 1)
                     {
                         value = value.Substring(1, value.Length - 2);
@@ -2877,7 +2878,7 @@ namespace HatFrameworkDev
                 }
                 else
                 {
-                    if (value == "") SendMessageDebug($"GetTextFromElementByNameAsync('{name}', {index})", $"GetTextFromElementByNameAsync('{name}', {index})", COMPLETED, "Не удалось получить текст из элемента", "Couldn't get the text from the element", IMAGE_STATUS_WARNING);
+                    if (value == "") SendMessageDebug($"GetTextFromElementByNameAsync('{name}', {index})", $"GetTextFromElementByNameAsync('{name}', {index})", COMPLETED, "Пустой текст из элемента", "Empty text from element", IMAGE_STATUS_WARNING);
                     else if (value.Length > 1)
                     {
                         value = value.Substring(1, value.Length - 2);
@@ -2917,7 +2918,7 @@ namespace HatFrameworkDev
                 }
                 else
                 {
-                    if (value == "") SendMessageDebug($"GetTextFromElementByTagAsync('{tag}', {index})", $"GetTextFromElementByTagAsync('{tag}', {index})", COMPLETED, "Не удалось получить текст из элемента", "Couldn't get the text from the element", IMAGE_STATUS_WARNING);
+                    if (value == "") SendMessageDebug($"GetTextFromElementByTagAsync('{tag}', {index})", $"GetTextFromElementByTagAsync('{tag}', {index})", COMPLETED, "Пустой текст из элемента", "Empty text from element", IMAGE_STATUS_WARNING);
                     else if (value.Length > 1)
                     {
                         value = value.Substring(1, value.Length - 2);
@@ -2959,7 +2960,7 @@ namespace HatFrameworkDev
                 }
                 else
                 {
-                    if (value == "") SendMessageDebug($"GetTextFromElementAsync(\"{by}\", \"{locator}\")", $"GetTextFromElementAsync(\"{by}\", \"{locator}\")", COMPLETED, "Не удалось получить текст из элемента", "Couldn't get the text from the element", IMAGE_STATUS_WARNING);
+                    if (value == "") SendMessageDebug($"GetTextFromElementAsync(\"{by}\", \"{locator}\")", $"GetTextFromElementAsync(\"{by}\", \"{locator}\")", COMPLETED, "Пустой текст из элемента", "Empty text from element", IMAGE_STATUS_WARNING);
                     else if (value.Length > 1)
                     {
                         value = value.Substring(1, value.Length - 2);
@@ -3106,7 +3107,6 @@ namespace HatFrameworkDev
             }
             else
             {
-                if (value.Length > 1) value = value.Substring(1, value.Length - 2);
                 SendMessageDebug($"GetTitleAsync()", $"GetTitleAsync()", Tester.PASSED, "Прочитан текст из заголовка | " + value, "The text from the title has been read | " + value, Tester.IMAGE_STATUS_PASSED);
             }
             return value;
@@ -3114,19 +3114,31 @@ namespace HatFrameworkDev
 
         public async Task<string> GetAttributeFromElementByIdAsync(string id, string attribute)
         {
-            //int step = SendMessageDebug($"GetAttributeFromElementByIdAsync('{id}', '{attribute}')", $"GetAttributeFromElementByIdAsync('{id}', '{attribute}')", PROCESS, $"Получение аттрибута {attribute} из элемент", $"Getting an attribute {attribute} from elements", IMAGE_STATUS_PROCESS);
             if (DefineTestStop() == true) return "";
 
             string value = "";
             try
             {
                 string script = "(function(){ var element = document.getElementById('" + id + "'); return element.getAttribute('" + attribute + "'); }());";
-                value = await execute(script, step, $"Получено значение из аттрибута {attribute}", $"The value was obtained from the attribute {attribute}", $"Не удалось найти или получить аттрибут из элемента с ID: {id}", $"Couldn't find or get attribute from element with ID: {id}");
-                if (value.Length > 1) value = value.Substring(1, value.Length - 2);
+                value = await execute(script, $"GetAttributeFromElementByIdAsync('{id}', '{attribute}')");
+                if (value == "null" || value == null)
+                {
+                    SendMessageDebug($"GetAttributeFromElementByIdAsync('{id}', '{attribute}')", $"GetAttributeFromElementByIdAsync('{id}', '{attribute}')", Tester.FAILED, $"Не удалось найти или получить аттрибут из элемента с ID: {id}", $"Couldn't find or get attribute from element with ID: {id}", Tester.IMAGE_STATUS_FAILED);
+                    TestStopAsync();
+                }
+                else
+                {
+                    if (value == "") SendMessageDebug($"GetAttributeFromElementByIdAsync('{id}')", $"GetAttributeFromElementByIdAsync('{id}')", COMPLETED, "Пустое значение из аттрибута", "Empty value from attribute", IMAGE_STATUS_WARNING);
+                    else if (value.Length > 1)
+                    {
+                        value = value.Substring(1, value.Length - 2);
+                        SendMessageDebug($"GetAttributeFromElementByIdAsync('{id}', '{attribute}')", $"GetAttributeFromElementByIdAsync('{id}', '{attribute}')", Tester.PASSED, $"Получено значение из аттрибута '{attribute}' | {value}", $"The value was obtained from the attribute '{attribute}' | {value}", Tester.IMAGE_STATUS_PASSED);
+                    }
+                }
             }
             catch (Exception ex)
             {
-                EditMessageDebug(step, null, null, Tester.FAILED,
+                SendMessageDebug($"GetAttributeFromElementByIdAsync('{id}', '{attribute}')", $"GetAttributeFromElementByIdAsync('{id}', '{attribute}')", Tester.FAILED,
                      "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(),
                      "Error: " + ex.Message + Environment.NewLine + Environment.NewLine + "Full description of the error: " + ex.ToString(),
                      Tester.IMAGE_STATUS_FAILED);
@@ -3138,19 +3150,31 @@ namespace HatFrameworkDev
 
         public async Task<string> GetAttributeFromElementByClassAsync(string _class, int index, string attribute)
         {
-            int step = SendMessageDebug($"GetAttributeFromElementByClassAsync('{_class}', {index}, '{attribute}')", $"GetAttributeFromElementByClassAsync('{_class}', {index}, '{attribute}')", PROCESS, $"Получение аттрибута {attribute} из элемент", $"Getting an attribute {attribute} from elements", IMAGE_STATUS_PROCESS);
-            if (DefineTestStop(step) == true) return "";
+            if (DefineTestStop() == true) return "";
 
             string value = "";
             try
             {
                 string script = "(function(){ var element = document.getElementsByClassName('" + _class + "')[" + index + "]; return element.getAttribute('" + attribute + "'); }());";
-                value = await execute(script, step, $"Получено значение из аттрибута {attribute}", $"The value was obtained from the attribute {attribute}", $"Не удалось найти или получить аттрибут из элемента по Class: {_class} (Index: {index})", $"Could not find or get an attribute from an element by Class: {_class} (Index: {index})");
-                if (value.Length > 1) value = value.Substring(1, value.Length - 2);
+                value = await execute(script, $"GetAttributeFromElementByClassAsync('{_class}', {index}, '{attribute}')");
+                if (value == "null" || value == null)
+                {
+                    SendMessageDebug($"GetAttributeFromElementByClassAsync('{_class}', {index}, '{attribute}')", $"GetAttributeFromElementByClassAsync('{_class}', {index}, '{attribute}')", Tester.FAILED, $"Не удалось найти или получить аттрибут из элемента по Class: {_class} (Index: {index})", $"Could not find or get an attribute from an element by Class: {_class} (Index: {index})", Tester.IMAGE_STATUS_FAILED);
+                    TestStopAsync();
+                }
+                else
+                {
+                    if (value == "") SendMessageDebug($"GetAttributeFromElementByClassAsync('{_class}', {index}, '{attribute}')", $"GetAttributeFromElementByClassAsync('{_class}', {index}, '{attribute}')", COMPLETED, "Пустое значение из аттрибута", "Empty value from attribute", IMAGE_STATUS_WARNING);
+                    else if (value.Length > 1)
+                    {
+                        value = value.Substring(1, value.Length - 2);
+                        SendMessageDebug($"GetAttributeFromElementByClassAsync('{_class}', {index}, '{attribute}')", $"GetAttributeFromElementByClassAsync('{_class}', {index}, '{attribute}')", Tester.PASSED, $"Получено значение из аттрибута '{attribute}' | {value}", $"The value was obtained from the attribute '{attribute}' | {value}", Tester.IMAGE_STATUS_PASSED);
+                    }
+                }
             }
             catch (Exception ex)
             {
-                EditMessageDebug(step, null, null, Tester.FAILED,
+                SendMessageDebug($"GetAttributeFromElementByClassAsync('{_class}', {index}, '{attribute}')", $"GetAttributeFromElementByClassAsync('{_class}', {index}, '{attribute}')", Tester.FAILED,
                     "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(),
                     "Error: " + ex.Message + Environment.NewLine + Environment.NewLine + "Full description of the error: " + ex.ToString(),
                     Tester.IMAGE_STATUS_FAILED);
@@ -3162,19 +3186,31 @@ namespace HatFrameworkDev
 
         public async Task<string> GetAttributeFromElementByNameAsync(string name, int index, string attribute)
         {
-            int step = SendMessageDebug($"GetAttributeFromElementByNameAsync('{name}', {index}, '{attribute}')", $"GetAttributeFromElementByNameAsync('{name}', {index}, '{attribute}')", PROCESS, $"Получение аттрибута {attribute} из элемент", $"Getting an attribute {attribute} from elements", IMAGE_STATUS_PROCESS);
-            if (DefineTestStop(step) == true) return "";
+            if (DefineTestStop() == true) return "";
 
             string value = "";
             try
             {
                 string script = "(function(){ var element = document.getElementsByName('" + name + "')[" + index + "]; return element.getAttribute('" + attribute + "'); }());";
-                value = await execute(script, step, $"Получено значение из аттрибута {attribute}", $"The value was obtained from the attribute {attribute}", $"Не удалось найти или получить аттрибут из элемента по Name: {name} (Index: {index})", $"Could not find or get an attribute from an element by Name: {name} (Index: {index})");
-                if (value.Length > 1) value = value.Substring(1, value.Length - 2);
+                value = await execute(script, $"GetAttributeFromElementByNameAsync('{name}', {index}, '{attribute}')");
+                if (value == "null" || value == null)
+                {
+                    SendMessageDebug($"GetAttributeFromElementByNameAsync('{name}', {index}, '{attribute}')", $"GetAttributeFromElementByNameAsync('{name}', {index}, '{attribute}')", Tester.FAILED, $"Не удалось найти или получить аттрибут из элемента по Name: {name} (Index: {index})", $"Could not find or get an attribute from an element by Name: {name} (Index: {index})", Tester.IMAGE_STATUS_FAILED);
+                    TestStopAsync();
+                }
+                else
+                {
+                    if (value == "") SendMessageDebug($"GetAttributeFromElementByNameAsync('{name}', {index}, '{attribute}')", $"GetAttributeFromElementByNameAsync('{name}', {index}, '{attribute}')", COMPLETED, "Пустое значение из аттрибута", "Empty value from attribute", IMAGE_STATUS_WARNING);
+                    else if (value.Length > 1)
+                    {
+                        value = value.Substring(1, value.Length - 2);
+                        SendMessageDebug($"GetAttributeFromElementByNameAsync('{name}', {index}, '{attribute}')", $"GetAttributeFromElementByNameAsync('{name}', {index}, '{attribute}')", Tester.PASSED, $"Получено значение из аттрибута '{attribute}' | {value}", $"The value was obtained from the attribute '{attribute}' | {value}", Tester.IMAGE_STATUS_PASSED);
+                    }
+                }
             }
             catch (Exception ex)
             {
-                EditMessageDebug(step, null, null, Tester.FAILED,
+                SendMessageDebug($"GetAttributeFromElementByNameAsync('{name}', {index}, '{attribute}')", $"GetAttributeFromElementByNameAsync('{name}', {index}, '{attribute}')", Tester.FAILED,
                     "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(),
                     "Error: " + ex.Message + Environment.NewLine + Environment.NewLine + "Full description of the error: " + ex.ToString(),
                     Tester.IMAGE_STATUS_FAILED);
@@ -3186,19 +3222,31 @@ namespace HatFrameworkDev
 
         public async Task<string> GetAttributeFromElementByTagAsync(string tag, int index, string attribute)
         {
-            int step = SendMessageDebug($"GetAttributeFromElementByTagAsync('{tag}', {index}, '{attribute}')", $"GetAttributeFromElementByTagAsync('{tag}', {index}, '{attribute}')", PROCESS, $"Получение аттрибута {attribute} из элемент", $"Getting an attribute {attribute} from elements", IMAGE_STATUS_PROCESS);
-            if (DefineTestStop(step) == true) return "";
+            if (DefineTestStop() == true) return "";
 
             string value = "";
             try
             {
                 string script = "(function(){ var element = document.getElementsByTagName('" + tag + "')[" + index + "]; return element.getAttribute('" + attribute + "'); }());";
-                value = await execute(script, step, $"Получено значение из аттрибута {attribute}", $"The value was obtained from the attribute {attribute}", $"Не удалось найти или получить аттрибут из элемента по Tag: {tag} (Index: {index})", $"Could not find or get an attribute from an element by Tag: {tag} (Index: {index})");
-                if (value.Length > 1) value = value.Substring(1, value.Length - 2);
+                value = await execute(script, $"GetAttributeFromElementByTagAsync('{tag}', {index}, '{attribute}')");
+                if (value == "null" || value == null)
+                {
+                    SendMessageDebug($"GetAttributeFromElementByTagAsync('{tag}', {index}, '{attribute}')", $"GetAttributeFromElementByTagAsync('{tag}', {index}, '{attribute}')", Tester.FAILED, $"Не удалось найти или получить аттрибут из элемента по Tag: {tag} (Index: {index})", $"Could not find or get an attribute from an element by Tag: {tag} (Index: {index})", Tester.IMAGE_STATUS_FAILED);
+                    TestStopAsync();
+                }
+                else
+                {
+                    if (value == "") SendMessageDebug($"GetAttributeFromElementByTagAsync('{tag}', {index}, '{attribute}')", $"GetAttributeFromElementByTagAsync('{tag}', {index}, '{attribute}')", COMPLETED, "Пустое значение из аттрибута", "Empty value from attribute", IMAGE_STATUS_WARNING);
+                    else if (value.Length > 1)
+                    {
+                        value = value.Substring(1, value.Length - 2);
+                        SendMessageDebug($"GetAttributeFromElementByTagAsync('{tag}', {index}, '{attribute}')", $"GetAttributeFromElementByTagAsync('{tag}', {index}, '{attribute}')", Tester.PASSED, $"Получено значение из аттрибута '{attribute}' | {value}", $"The value was obtained from the attribute '{attribute}' | {value}", Tester.IMAGE_STATUS_PASSED);
+                    }
+                }
             }
             catch (Exception ex)
             {
-                EditMessageDebug(step, null, null, Tester.FAILED,
+                SendMessageDebug($"GetAttributeFromElementByTagAsync('{tag}', {index}, '{attribute}')", $"GetAttributeFromElementByTagAsync('{tag}', {index}, '{attribute}')", Tester.FAILED,
                     "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(),
                     "Error: " + ex.Message + Environment.NewLine + Environment.NewLine + "Full description of the error: " + ex.ToString(),
                     Tester.IMAGE_STATUS_FAILED);
@@ -3210,8 +3258,7 @@ namespace HatFrameworkDev
 
         public async Task<string> GetAttributeFromElementAsync(string by, string locator, string attribute)
         {
-            int step = SendMessageDebug($"GetAttributeFromElementAsync(\"{by}\", \"{locator}\", \"{attribute}\")", $"GetAttributeFromElementAsync(\"{by}\", \"{locator}\", \"{attribute}\")", PROCESS, $"Получение аттрибута {attribute} из элемент", $"Getting an attribute {attribute} from elements", IMAGE_STATUS_PROCESS);
-            if (DefineTestStop(step) == true) return "";
+            if (DefineTestStop() == true) return "";
 
             string value = "";
             try
@@ -3221,12 +3268,25 @@ namespace HatFrameworkDev
                 else if (by == BY_XPATH) script += $"var element = document.evaluate(\"{locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
                 script += $"return element.getAttribute('{attribute}');";
                 script += "}());";
-                value = await execute(script, step, $"Получено значение из аттрибута {attribute}", $"The value was obtained from the attribute {attribute}", $"Не удалось найти или получить аттрибут из элемента по локатору: {locator}", $"Couldn't find or get attribute from element by locator: {locator}");
-                if (value.Length > 1) value = value.Substring(1, value.Length - 2);
+                value = await execute(script, $"GetAttributeFromElementAsync(\"{by}\", \"{locator}\", \"{attribute}\")");
+                if (value == "null" || value == null)
+                {
+                    SendMessageDebug($"GetAttributeFromElementAsync(\"{by}\", \"{locator}\", \"{attribute}\")", $"GetAttributeFromElementAsync(\"{by}\", \"{locator}\", \"{attribute}\")", Tester.FAILED, $"Не удалось найти или получить аттрибут из элемента по локатору: {locator}", $"Couldn't find or get attribute from element by locator: {locator}", Tester.IMAGE_STATUS_FAILED);
+                    TestStopAsync();
+                }
+                else
+                {
+                    if (value == "") SendMessageDebug($"GetAttributeFromElementAsync(\"{by}\", \"{locator}\", \"{attribute}\")", $"GetAttributeFromElementAsync(\"{by}\", \"{locator}\", \"{attribute}\")", COMPLETED, "Пустое значение из аттрибута", "Empty value from attribute", IMAGE_STATUS_WARNING);
+                    else if (value.Length > 1)
+                    {
+                        value = value.Substring(1, value.Length - 2);
+                        SendMessageDebug($"GetAttributeFromElementAsync(\"{by}\", \"{locator}\", \"{attribute}\")", $"GetAttributeFromElementAsync(\"{by}\", \"{locator}\", \"{attribute}\")", Tester.PASSED, $"Получено значение из аттрибута '{attribute}' | {value}", $"The value was obtained from the attribute '{attribute}' | {value}", Tester.IMAGE_STATUS_PASSED);
+                    }
+                }
             }
             catch (Exception ex)
             {
-                EditMessageDebug(step, null, null, Tester.FAILED,
+                SendMessageDebug($"GetAttributeFromElementAsync(\"{by}\", \"{locator}\", \"{attribute}\")", $"GetAttributeFromElementAsync(\"{by}\", \"{locator}\", \"{attribute}\")", Tester.FAILED,
                     "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(),
                     "Error: " + ex.Message + Environment.NewLine + Environment.NewLine + "Full description of the error: " + ex.ToString(),
                     Tester.IMAGE_STATUS_FAILED);
@@ -3238,8 +3298,7 @@ namespace HatFrameworkDev
 
         public async Task<List<string>> GetAttributeFromElementsByClassAsync(string _class, string attribute)
         {
-            int step = SendMessageDebug($"GetAttributeFromElementsByClassAsync('{_class}', '{attribute}')", $"GetAttributeFromElementsByClassAsync('{_class}', '{attribute}')", PROCESS, $"Получение аттрибутов {attribute} из элементов", $"Getting attributes {attribute} from elements", IMAGE_STATUS_PROCESS);
-            if (DefineTestStop(step) == true) return null;
+            if (DefineTestStop() == true) return null;
 
             string script = "(function(){";
             script += $"var element = document.getElementsByClassName('{_class}');";
@@ -3253,7 +3312,7 @@ namespace HatFrameworkDev
             script += "json += ']';";
             script += "return json;";
             script += "}());";
-            string result = await execute(script, step, $"Получение json из аттрибутов {attribute}", $"Getting json from attributes {attribute}", $"Не удалось найти или получить аттрибуты из элементов по Class: {_class}", $"Could not find or get attributes from elements by Class: {_class}");
+            string result = await execute(script, $"GetAttributeFromElementsByClassAsync('{_class}', '{attribute}')");
             List<string> Json_Array = null;
             if (result != "null" && result != null)
             {
@@ -3261,11 +3320,11 @@ namespace HatFrameworkDev
                 {
                     result = JsonConvert.DeserializeObject(result).ToString();
                     Json_Array = JsonConvert.DeserializeObject<List<string>>(result);
-                    EditMessageDebug(step, null, null, PASSED, $"Получен json {result} из аттрибутов {attribute}", $"Received json {result} from attributes {attribute}", IMAGE_STATUS_PASSED);
+                    SendMessageDebug($"GetAttributeFromElementsByClassAsync('{_class}', '{attribute}')", $"GetAttributeFromElementsByClassAsync('{_class}', '{attribute}')", PASSED, $"Получен json {result} из аттрибутов {attribute}", $"Received json {result} from attributes {attribute}", IMAGE_STATUS_PASSED);
                 }
                 catch (Exception ex)
                 {
-                    EditMessageDebug(step, null, null, Tester.FAILED,
+                    SendMessageDebug($"GetAttributeFromElementsByClassAsync('{_class}', '{attribute}')", $"GetAttributeFromElementsByClassAsync('{_class}', '{attribute}')", Tester.FAILED,
                         "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(),
                         "Error: " + ex.Message + Environment.NewLine + Environment.NewLine + "Full description of the error: " + ex.ToString(),
                         Tester.IMAGE_STATUS_FAILED);
@@ -3273,13 +3332,17 @@ namespace HatFrameworkDev
                     ConsoleMsgError(ex.ToString());
                 }
             }
+            else
+            {
+                SendMessageDebug($"GetAttributeFromElementsByClassAsync('{_class}', '{attribute}')", $"GetAttributeFromElementsByClassAsync('{_class}', '{attribute}')", FAILED, $"Не удалось найти или получить аттрибуты из элементов по Class: {_class}", $"Could not find or get attributes from elements by Class: {_class}", IMAGE_STATUS_FAILED);
+                TestStopAsync();
+            }
             return Json_Array;
         }
 
         public async Task<List<string>> GetAttributeFromElementsByNameAsync(string name, string attribute)
         {
-            int step = SendMessageDebug($"GetAttributeFromElementsByNameAsync('{name}', '{attribute}')", $"GetAttributeFromElementsByNameAsync('{name}', '{attribute}')", PROCESS, $"Получение аттрибутов {attribute} из элементов", $"Getting attributes {attribute} from elements", IMAGE_STATUS_PROCESS);
-            if (DefineTestStop(step) == true) return null;
+            if (DefineTestStop() == true) return null;
 
             string script = "(function(){";
             script += $"var element = document.getElementsByName('{name}');";
@@ -3293,7 +3356,7 @@ namespace HatFrameworkDev
             script += "json += ']';";
             script += "return json;";
             script += "}());";
-            string result = await execute(script, step, $"Получение json из аттрибутов {attribute}", $"Getting json from attributes {attribute}", $"Не удалось найти или получить аттрибуты из элементов по Name: {name}", $"Could not find or get attributes from elements by Name: {name}");
+            string result = await execute(script, $"GetAttributeFromElementsByNameAsync('{name}', '{attribute}')");
             List<string> Json_Array = null;
             if (result != "null" && result != null)
             {
@@ -3301,11 +3364,11 @@ namespace HatFrameworkDev
                 {
                     result = JsonConvert.DeserializeObject(result).ToString();
                     Json_Array = JsonConvert.DeserializeObject<List<string>>(result);
-                    EditMessageDebug(step, null, null, PASSED, $"Получен json {result} из аттрибутов {attribute}", $"Received json {result} from attributes {attribute}", IMAGE_STATUS_PASSED);
+                    SendMessageDebug($"GetAttributeFromElementsByNameAsync('{name}', '{attribute}')", $"GetAttributeFromElementsByNameAsync('{name}', '{attribute}')", PASSED, $"Получен json {result} из аттрибутов {attribute}", $"Received json {result} from attributes {attribute}", IMAGE_STATUS_PASSED);
                 }
                 catch (Exception ex)
                 {
-                    EditMessageDebug(step, null, null, Tester.FAILED,
+                    SendMessageDebug($"GetAttributeFromElementsByNameAsync('{name}', '{attribute}')", $"GetAttributeFromElementsByNameAsync('{name}', '{attribute}')", Tester.FAILED,
                         "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(),
                         "Error: " + ex.Message + Environment.NewLine + Environment.NewLine + "Full description of the error: " + ex.ToString(),
                         Tester.IMAGE_STATUS_FAILED);
@@ -3313,13 +3376,17 @@ namespace HatFrameworkDev
                     ConsoleMsgError(ex.ToString());
                 }
             }
+            else
+            {
+                SendMessageDebug($"GetAttributeFromElementsByNameAsync('{name}', '{attribute}')", $"GetAttributeFromElementsByNameAsync('{name}', '{attribute}')", FAILED, $"Не удалось найти или получить аттрибуты из элементов по Name: {name}", $"Could not find or get attributes from elements by Name: {name}", IMAGE_STATUS_FAILED);
+                TestStopAsync();
+            }
             return Json_Array;
         }
 
         public async Task<List<string>> GetAttributeFromElementsByTagAsync(string tag, string attribute)
         {
-            int step = SendMessageDebug($"GetAttributeFromElementsByTagAsync('{tag}', '{attribute}')", $"GetAttributeFromElementsByTagAsync('{tag}', '{attribute}')", PROCESS, $"Получение аттрибутов {attribute} из элементов", $"Getting attributes {attribute} from elements", IMAGE_STATUS_PROCESS);
-            if (DefineTestStop(step) == true) return null;
+            if (DefineTestStop() == true) return null;
 
             string script = "(function(){";
             script += $"var element = document.getElementsByTagName('{tag}');";
@@ -3333,7 +3400,7 @@ namespace HatFrameworkDev
             script += "json += ']';";
             script += "return json;";
             script += "}());";
-            string result = await execute(script, step, $"Получение json из аттрибутов {attribute}", $"Getting json from attributes {attribute}", $"Не удалось найти или получить аттрибуты из элементов по Tag: {tag}", $"Could not find or get attributes from elements by Tag: {tag}");
+            string result = await execute(script, $"GetAttributeFromElementsByTagAsync('{tag}', '{attribute}')");
             List<string> Json_Array = null;
             if (result != "null" && result != null)
             {
@@ -3341,11 +3408,11 @@ namespace HatFrameworkDev
                 {
                     result = JsonConvert.DeserializeObject(result).ToString();
                     Json_Array = JsonConvert.DeserializeObject<List<string>>(result);
-                    EditMessageDebug(step, null, null, PASSED, $"Получен json {result} из аттрибутов {attribute}", $"Received json {result} from attributes {attribute}", IMAGE_STATUS_PASSED);
+                    SendMessageDebug($"GetAttributeFromElementsByTagAsync('{tag}', '{attribute}')", $"GetAttributeFromElementsByTagAsync('{tag}', '{attribute}')", PASSED, $"Получен json {result} из аттрибутов {attribute}", $"Received json {result} from attributes {attribute}", IMAGE_STATUS_PASSED);
                 }
                 catch (Exception ex)
                 {
-                    EditMessageDebug(step, null, null, Tester.FAILED,
+                    SendMessageDebug($"GetAttributeFromElementsByTagAsync('{tag}', '{attribute}')", $"GetAttributeFromElementsByTagAsync('{tag}', '{attribute}')", Tester.FAILED,
                         "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(),
                         "Error: " + ex.Message + Environment.NewLine + Environment.NewLine + "Full description of the error: " + ex.ToString(),
                         Tester.IMAGE_STATUS_FAILED);
@@ -3353,13 +3420,18 @@ namespace HatFrameworkDev
                     ConsoleMsgError(ex.ToString());
                 }
             }
+            else
+            {
+                SendMessageDebug($"GetAttributeFromElementsByTagAsync('{tag}', '{attribute}')", $"GetAttributeFromElementsByTagAsync('{tag}', '{attribute}')", FAILED, $"Не удалось найти или получить аттрибуты из элементов по Tag: {tag}", $"Could not find or get attributes from elements by Tag: {tag}", IMAGE_STATUS_FAILED);
+                TestStopAsync();
+            }
             return Json_Array;
         }
 
         public async Task<List<string>> GetAttributeFromElementsAsync(string by, string locator, string attribute)
         {
-            int step = SendMessageDebug($"GetAttributeFromElementsAsync(\"{by}\", \"{locator}\", \"{attribute}\")", $"GetAttributeFromElementsAsync(\"{by}\", \"{locator}\", \"{attribute}\")", PROCESS, $"Получение аттрибутов {attribute} из элементов", $"Getting attributes {attribute} from elements", IMAGE_STATUS_PROCESS);
-            if (DefineTestStop(step) == true) return null;
+            //int step = SendMessageDebug($"GetAttributeFromElementsAsync(\"{by}\", \"{locator}\", \"{attribute}\")", $"GetAttributeFromElementsAsync(\"{by}\", \"{locator}\", \"{attribute}\")", PROCESS, $"Получение аттрибутов {attribute} из элементов", $"Getting attributes {attribute} from elements", IMAGE_STATUS_PROCESS);
+            if (DefineTestStop() == true) return null;
 
             string script = "(function(){";
             if (by == BY_CSS)
@@ -3391,7 +3463,7 @@ namespace HatFrameworkDev
                 script += "return json;";
             }
             script += "}());";
-            string result = await execute(script, step, $"Получение json из аттрибутов {attribute}", $"Getting json from attributes {attribute}", $"Не удалось найти или получить аттрибуты из элементов по локатору: {locator}", $"Couldn't find or get attributes from elements by locator: {locator}");
+            string result = await execute(script, $"GetAttributeFromElementsAsync(\"{by}\", \"{locator}\", \"{attribute}\")");
             List<string> Json_Array = null;
             if (result != "null" && result != null)
             {
@@ -3399,17 +3471,22 @@ namespace HatFrameworkDev
                 {
                     result = JsonConvert.DeserializeObject(result).ToString();
                     Json_Array = JsonConvert.DeserializeObject<List<string>>(result);
-                    EditMessageDebug(step, null, null, PASSED, $"Получен json {result} из аттрибутов {attribute}", $"Received json {result} from attributes {attribute}", IMAGE_STATUS_PASSED);
+                    SendMessageDebug($"GetAttributeFromElementsAsync(\"{by}\", \"{locator}\", \"{attribute}\")", $"GetAttributeFromElementsAsync(\"{by}\", \"{locator}\", \"{attribute}\")", PASSED, $"Получен json {result} из аттрибутов {attribute}", $"Received json {result} from attributes {attribute}", IMAGE_STATUS_PASSED);
                 }
                 catch (Exception ex)
                 {
-                    EditMessageDebug(step, null, null, Tester.FAILED,
+                    SendMessageDebug($"GetAttributeFromElementsAsync(\"{by}\", \"{locator}\", \"{attribute}\")", $"GetAttributeFromElementsAsync(\"{by}\", \"{locator}\", \"{attribute}\")", Tester.FAILED,
                         "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(),
                         "Error: " + ex.Message + Environment.NewLine + Environment.NewLine + "Full description of the error: " + ex.ToString(),
                         Tester.IMAGE_STATUS_FAILED);
                     TestStopAsync();
                     ConsoleMsgError(ex.ToString());
                 }
+            }
+            else
+            {
+                SendMessageDebug($"GetAttributeFromElementsAsync(\"{by}\", \"{locator}\", \"{attribute}\")", $"GetAttributeFromElementsAsync(\"{by}\", \"{locator}\", \"{attribute}\")", FAILED, $"Не удалось найти или получить аттрибуты из элементов по локатору: {locator}", $"Couldn't find or get attributes from elements by locator: {locator}", IMAGE_STATUS_FAILED);
+                TestStopAsync();
             }
             return Json_Array;
         }
