@@ -3797,85 +3797,131 @@ namespace HatFrameworkDev
 
         public async Task<string> GetHtmlFromElementByClassAsync(string _class, int index)
         {
-            int step = SendMessageDebug($"GetHtmlFromElementByClassAsync('{_class}', '{index}')", $"GetHtmlFromElementByClassAsync('{_class}', '{index}')", PROCESS, "Получение html из элемент", "Getting html from an element", IMAGE_STATUS_PROCESS);
-            if (DefineTestStop(step) == true) return "";
+            if (DefineTestStop() == true) return "";
 
             string script = "(function(){ var element = document.getElementsByClassName('" + _class + "')[" + index + "]; return element.outerHTML; }());";
-            string value = await execute(script, step, "Получено html элемента", "The html of the element was received", $"Не удалось найти или получить html из элемента Class: {_class} (Index: {index})", $"Could not find or get html from the element by Class: {_class} (Index: {index})");
-            value = value.Replace("\\u003C", "<");
-            value = value.Replace("\\u003E", ">");
+            string value = await execute(script, $"GetHtmlFromElementByClassAsync('{_class}', '{index}')");
+            if (value == "null" || value == null)
+            {
+                SendMessageDebug($"GetHtmlFromElementByClassAsync('{_class}', '{index}')", $"GetHtmlFromElementByClassAsync('{_class}', '{index}')", Tester.FAILED, $"Не удалось найти или получить html из элемента Class: {_class} (Index: {index})", $"Could not find or get html from the element by Class: {_class} (Index: {index})", Tester.IMAGE_STATUS_FAILED);
+                TestStopAsync();
+            }
+            else
+            {
+                value = value.Replace("\\u003C", "<");
+                value = value.Replace("\\u003E", ">");
+                SendMessageDebug($"GetHtmlFromElementByClassAsync('{_class}', '{index}')", $"GetHtmlFromElementByClassAsync('{_class}', '{index}')", Tester.PASSED, "Получен html элемента", "The html of the element was received", Tester.IMAGE_STATUS_PASSED);
+            }
             return value;
         }
 
         public async Task<string> GetHtmlFromElementAsync(string by, string locator)
         {
-            int step = SendMessageDebug($"GetHtmlFromElementAsync(\"{by}\", \"{locator}\")", $"GetHtmlFromElementAsync(\"{by}\", \"{locator}\")", PROCESS, "Получение html из элемент", "Getting html from an element", IMAGE_STATUS_PROCESS);
-            if (DefineTestStop(step) == true) return "";
+            if (DefineTestStop() == true) return "";
 
             string script = "(function(){";
             if (by == BY_CSS) script += $"var element = document.querySelector(\"{locator}\"); return element.outerHTML;";
             else if (by == BY_XPATH) script += $"var element = document.evaluate(\"{locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
             script += "return element.outerHTML;";
             script += "}());";
-            string value = await execute(script, step, "Получено html элемента", "The html of the element was received", $"Не удалось найти или получить html из элемента по локатору: {locator}", $"Couldn't find or get html from the element by locator: {locator}");
-            value = value.Replace("\\u003C", "<");
-            value = value.Replace("\\u003E", ">");
+            string value = await execute(script, $"GetHtmlFromElementAsync(\"{by}\", \"{locator}\")");
+            if (value == "null" || value == null)
+            {
+                SendMessageDebug($"GetHtmlFromElementAsync(\"{by}\", \"{locator}\")", $"GetHtmlFromElementAsync(\"{by}\", \"{locator}\")", Tester.FAILED, $"Не удалось найти или получить html из элемента по локатору: {locator}", $"Couldn't find or get html from the element by locator: {locator}", Tester.IMAGE_STATUS_FAILED);
+                TestStopAsync();
+            }
+            else
+            {
+                value = value.Replace("\\u003C", "<");
+                value = value.Replace("\\u003E", ">");
+                SendMessageDebug($"GetHtmlFromElementAsync(\"{by}\", \"{locator}\")", $"GetHtmlFromElementAsync(\"{by}\", \"{locator}\")", Tester.PASSED, "Получен html элемента", "The html of the element was received", Tester.IMAGE_STATUS_PASSED);
+            }
             return value;
         }
 
         public async Task<string> GetHtmlFromElementByIdAsync(string id)
         {
-            int step = SendMessageDebug($"GetHtmlFromElementByIdAsync('{id}')", $"GetHtmlFromElementByIdAsync('{id}')", PROCESS, "Получение html из элемент", "Getting html from an element", IMAGE_STATUS_PROCESS);
-            if (DefineTestStop(step) == true) return "";
+            if (DefineTestStop() == true) return "";
 
             string script = "(function(){ var element = document.getElementById('" + id + "'); return element.outerHTML; }());";
-            string value = await execute(script, step, "Получено html элемента", "The html of the element was received", $"Не удалось найти или получить html из элемента с ID: {id}", $"Couldn't find or get html from an element with ID: {id}");
-            value = value.Replace("\\u003C", "<");
-            value = value.Replace("\\u003E", ">");
+            string value = await execute(script, $"GetHtmlFromElementByIdAsync('{id}')");
+            if (value == "null" || value == null)
+            {
+                SendMessageDebug($"GetHtmlFromElementByIdAsync('{id}')", $"GetHtmlFromElementByIdAsync('{id}')", Tester.FAILED, $"Не удалось найти или получить html из элемента с ID: {id}", $"Couldn't find or get html from an element with ID: {id}", Tester.IMAGE_STATUS_FAILED);
+                TestStopAsync();
+            }
+            else
+            {
+                value = value.Replace("\\u003C", "<");
+                value = value.Replace("\\u003E", ">");
+                SendMessageDebug($"GetHtmlFromElementByIdAsync('{id}')", $"GetHtmlFromElementByIdAsync('{id}')", Tester.PASSED, "Получен html элемента", "The html of the element was received", Tester.IMAGE_STATUS_PASSED);
+            }
             return value;
         }
 
         public async Task<string> GetHtmlFromElementByNameAsync(string name, int index)
         {
-            int step = SendMessageDebug($"GetHtmlFromElementByNameAsync('{name}', '{index}')", $"GetHtmlFromElementByNameAsync('{name}', '{index}')", PROCESS, "Получение html из элемент", "Getting html from an element", IMAGE_STATUS_PROCESS);
-            if (DefineTestStop(step) == true) return "";
+            if (DefineTestStop() == true) return "";
 
             string script = "(function(){ var element = document.getElementsByName('" + name + "')[" + index + "]; return element.outerHTML; }());";
-            string value = await execute(script, step, "Получено html элемента", "The html of the element was received", $"Не удалось найти или получить html из элемента Name: {name} (Index: {index})", $"Couldn't find or get html from the element by Name: {name} (Index: {index})");
-            value = value.Replace("\\u003C", "<");
-            value = value.Replace("\\u003E", ">");
+            string value = await execute(script, $"GetHtmlFromElementByNameAsync('{name}', '{index}')");
+            if (value == "null" || value == null)
+            {
+                SendMessageDebug($"GetHtmlFromElementByNameAsync('{name}', '{index}')", $"GetHtmlFromElementByNameAsync('{name}', '{index}')", Tester.FAILED, $"Не удалось найти или получить html из элемента Name: {name} (Index: {index})", $"Couldn't find or get html from the element by Name: {name} (Index: {index})", Tester.IMAGE_STATUS_FAILED);
+                TestStopAsync();
+            }
+            else
+            {
+                value = value.Replace("\\u003C", "<");
+                value = value.Replace("\\u003E", ">");
+                SendMessageDebug($"GetHtmlFromElementByNameAsync('{name}', '{index}')", $"GetHtmlFromElementByNameAsync('{name}', '{index}')", Tester.PASSED, "Получен html элемента", "The html of the element was received", Tester.IMAGE_STATUS_PASSED);
+            }
             return value;
         }
 
         public async Task<string> GetHtmlFromElementByTagAsync(string tag, int index)
         {
-            int step = SendMessageDebug($"GetHtmlFromElementByTagAsync('{tag}', '{index}')", $"GetHtmlFromElementByTagAsync('{tag}', '{index}')", PROCESS, "Получение html из элемент", "Getting html from an element", IMAGE_STATUS_PROCESS);
-            if (DefineTestStop(step) == true) return "";
+            if (DefineTestStop() == true) return "";
 
             string script = "(function(){ var element = document.getElementsByTagName('" + tag + "')[" + index + "]; return element.outerHTML; }());";
-            string value = await execute(script, step, "Получено html элемента", "The html of the element was received", $"Не удалось найти или получить html из элемента Tag: {tag} (Index: {index})", $"Couldn't find or get html from the element by Tag: {tag} (Index: {index})");
-            value = value.Replace("\\u003C", "<");
-            value = value.Replace("\\u003E", ">");
+            string value = await execute(script, $"GetHtmlFromElementByTagAsync('{tag}', '{index}')");
+            if (value == "null" || value == null)
+            {
+                SendMessageDebug($"GetHtmlFromElementByTagAsync('{tag}', '{index}')", $"GetHtmlFromElementByTagAsync('{tag}', '{index}')", Tester.FAILED, $"Не удалось найти или получить html из элемента Tag: {tag} (Index: {index})", $"Couldn't find or get html from the element by Tag: {tag} (Index: {index})", Tester.IMAGE_STATUS_FAILED);
+                TestStopAsync();
+            }
+            else
+            {
+                value = value.Replace("\\u003C", "<");
+                value = value.Replace("\\u003E", ">");
+                SendMessageDebug($"GetHtmlFromElementByTagAsync('{tag}', '{index}')", $"GetHtmlFromElementByTagAsync('{tag}', '{index}')", Tester.PASSED, "Получен html элемента", "The html of the element was received", Tester.IMAGE_STATUS_PASSED);
+            }
             return value;
         }
 
         public async Task SetHtmlInElementByClassAsync(string _class, int index, string html)
         {
-            int step = SendMessageDebug($"SetHtmlInElementByClassAsync('{_class}', {index}, '{html}')", $"SetHtmlInElementByClassAsync('{_class}', {index}, '{html}')", PROCESS, "Ввод html в элемент", "Entering html into an element", IMAGE_STATUS_PROCESS);
-            if (DefineTestStop(step) == true) return;
+            if (DefineTestStop() == true) return;
 
             string script = "(function(){";
             script += $"var element = document.getElementsByClassName('{_class}')[{index}];";
             script += $"element.innerHTML = '{html}';";
             script += $"return element.outerHTML;";
             script += "}());";
-            await execute(script, step, $"В элемент введен html {html}", $"Html {html} has been added to the element", $"Не удалось найти или ввести html в элемент по Class: {_class} (Index: {index})", $"Could not find or enter html in the element by Class: {_class} (Index: {index})");
+            if (await execute(script, $"SetHtmlInElementByClassAsync('{_class}', {index}, '{html}')") == "null")
+            {
+                SendMessageDebug($"SetHtmlInElementByClassAsync('{_class}', {index}, '{html}')", $"SetHtmlInElementByClassAsync('{_class}', {index}, '{html}')", Tester.FAILED, $"Не удалось найти или ввести html в элемент по Class: {_class} (Index: {index})", $"Could not find or enter html in the element by Class: {_class} (Index: {index})", Tester.IMAGE_STATUS_FAILED);
+                TestStopAsync();
+            }
+            else
+            {
+                SendMessageDebug($"SetHtmlInElementByClassAsync('{_class}', {index}, '{html}')", $"SetHtmlInElementByClassAsync('{_class}', {index}, '{html}')", Tester.PASSED, $"В элемент введен html {html}", $"Html {html} has been added to the element", Tester.IMAGE_STATUS_PASSED);
+            }
         }
 
         public async Task SetHtmlInElementAsync(string by, string locator, string html)
         {
-            int step = SendMessageDebug($"SetHtmlInElementAsync(\"{by}\", \"{locator}\", \"{html}\")", $"SetHtmlInElementAsync(\"{by}\", \"{locator}\", \"{html}\")", PROCESS, "Ввод html в элемент", "Entering html into an element", IMAGE_STATUS_PROCESS);
-            if (DefineTestStop(step) == true) return;
+            if (DefineTestStop() == true) return;
 
             string script = "(function(){";
             if (by == BY_CSS) script += $"var element = document.querySelector(\"{locator}\");";
@@ -3883,46 +3929,75 @@ namespace HatFrameworkDev
             script += $"element.innerHTML = '{html}';";
             script += $"return element.outerHTML;";
             script += "}());";
-            await execute(script, step, $"В элемент введен html {html}", $"Html {html} has been added to the element", $"Не удалось найти или ввести html в элемент по локатору: {locator}", $"Could not find or enter html into the element by locator: {locator}");
+            if (await execute(script, $"SetHtmlInElementAsync(\"{by}\", \"{locator}\", \"{html}\")") == "null")
+            {
+                SendMessageDebug($"SetHtmlInElementAsync(\"{by}\", \"{locator}\", \"{html}\")", $"SetHtmlInElementAsync(\"{by}\", \"{locator}\", \"{html}\")", Tester.FAILED, $"Не удалось найти или ввести html в элемент по локатору: {locator}", $"Could not find or enter html into the element by locator: {locator}", Tester.IMAGE_STATUS_FAILED);
+                TestStopAsync();
+            }
+            else
+            {
+                SendMessageDebug($"SetHtmlInElementAsync(\"{by}\", \"{locator}\", \"{html}\")", $"SetHtmlInElementAsync(\"{by}\", \"{locator}\", \"{html}\")", Tester.PASSED, $"В элемент введен html {html}", $"Html {html} has been added to the element", Tester.IMAGE_STATUS_PASSED);
+            }
         }
 
         public async Task SetHtmlInElementByIdAsync(string id, string html)
         {
-            int step = SendMessageDebug($"SetHtmlInElementByIdAsync('{id}', '{html}')", $"SetHtmlInElementByIdAsync('{id}', '{html}')", PROCESS, "Ввод html в элемент", "Entering html into an element", IMAGE_STATUS_PROCESS);
-            if (DefineTestStop(step) == true) return;
+            if (DefineTestStop() == true) return;
 
             string script = "(function(){";
             script += $"var element = document.getElementById('{id}');";
             script += $"element.innerHTML = '{html}';";
             script += $"return element.outerHTML;";
             script += "}());";
-            await execute(script, step, $"В элемент введен html {html}", $"Html {html} has been added to the element", $"Не удалось найти или ввести html в элемент с ID: {id}", $"Could not find or enter html in the element with ID: {id}");
+            if (await execute(script, $"SetHtmlInElementByIdAsync('{id}', '{html}')") == "null")
+            {
+                SendMessageDebug($"SetHtmlInElementByIdAsync('{id}', '{html}')", $"SetHtmlInElementByIdAsync('{id}', '{html}')", Tester.FAILED, $"Не удалось найти или ввести html в элемент с ID: {id}", $"Could not find or enter html in the element with ID: {id}", Tester.IMAGE_STATUS_FAILED);
+                TestStopAsync();
+            }
+            else
+            {
+                SendMessageDebug($"SetHtmlInElementByIdAsync('{id}', '{html}')", $"SetHtmlInElementByIdAsync('{id}', '{html}')", Tester.PASSED, $"В элемент введен html {html}", $"Html {html} has been added to the element", Tester.IMAGE_STATUS_PASSED);
+            }
         }
 
         public async Task SetHtmlInElementByNameAsync(string name, int index, string html)
         {
-            int step = SendMessageDebug($"SetHtmlInElementByNameAsync('{name}', {index}, '{html}')", $"SetHtmlInElementByNameAsync('{name}', {index}, '{html}')", PROCESS, "Ввод html в элемент", "Entering html into an element", IMAGE_STATUS_PROCESS);
-            if (DefineTestStop(step) == true) return;
+            if (DefineTestStop() == true) return;
 
             string script = "(function(){";
             script += $"var element = document.getElementsByName('{name}')[{index}];";
             script += $"element.innerHTML = '{html}';";
             script += $"return element.outerHTML;";
             script += "}());";
-            await execute(script, step, $"В элемент введен html {html}", $"Html {html} has been added to the element", $"Не удалось найти или ввести html в элемент по Name: {name} (Index: {index})", $"Could not find or enter html in the element by Name: {name} (Index: {index})");
+            if (await execute(script, $"SetHtmlInElementByNameAsync('{name}', {index}, '{html}')") == "null")
+            {
+                SendMessageDebug($"SetHtmlInElementByNameAsync('{name}', {index}, '{html}')", $"SetHtmlInElementByNameAsync('{name}', {index}, '{html}')", Tester.FAILED, $"Не удалось найти или ввести html в элемент по Name: {name} (Index: {index})", $"Could not find or enter html in the element by Name: {name} (Index: {index})", Tester.IMAGE_STATUS_FAILED);
+                TestStopAsync();
+            }
+            else
+            {
+                SendMessageDebug($"SetHtmlInElementByNameAsync('{name}', {index}, '{html}')", $"SetHtmlInElementByNameAsync('{name}', {index}, '{html}')", Tester.PASSED, $"В элемент введен html {html}", $"Html {html} has been added to the element", Tester.IMAGE_STATUS_PASSED);
+            }
         }
 
         public async Task SetHtmlInElementByTagAsync(string tag, int index, string html)
         {
-            int step = SendMessageDebug($"SetHtmlInElementByNameAsync('{tag}', {index}, '{html}')", $"SetHtmlInElementByNameAsync('{tag}', {index}, '{html}')", PROCESS, "Ввод html в элемент", "Entering html into an element", IMAGE_STATUS_PROCESS);
-            if (DefineTestStop(step) == true) return;
+            if (DefineTestStop() == true) return;
 
             string script = "(function(){";
             script += $"var element = document.getElementsByTagName('{tag}')[{index}];";
             script += $"element.innerHTML = '{html}';";
             script += $"return element.outerHTML;";
             script += "}());";
-            await execute(script, step, $"В элемент введен html {html}", $"Html {html} has been added to the element", $"Не удалось найти или ввести html в элемент по Tag: {tag} (Index: {index})", $"Could not find or enter html in the element by Tag: {tag} (Index: {index})");
+            if (await execute(script, $"SetHtmlInElementByNameAsync('{tag}', {index}, '{html}')") == "null")
+            {
+                SendMessageDebug($"SetHtmlInElementByNameAsync('{tag}', {index}, '{html}')", $"SetHtmlInElementByNameAsync('{tag}', {index}, '{html}')", Tester.FAILED, $"Не удалось найти или ввести html в элемент по Tag: {tag} (Index: {index})", $"Could not find or enter html in the element by Tag: {tag} (Index: {index})", Tester.IMAGE_STATUS_FAILED);
+                TestStopAsync();
+            }
+            else
+            {
+                SendMessageDebug($"SetHtmlInElementByNameAsync('{tag}', {index}, '{html}')", $"SetHtmlInElementByNameAsync('{tag}', {index}, '{html}')", Tester.PASSED, $"В элемент введен html {html}", $"Html {html} has been added to the element", Tester.IMAGE_STATUS_PASSED);
+            }
         }
 
         public async Task<bool> IsClickableElementAsync(string by, string locator)
