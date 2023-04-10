@@ -16,7 +16,6 @@ using HatFramework;
 using Newtonsoft.Json.Linq;
 using System.Security.Cryptography;
 using System.Xml.Linq;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace HatFrameworkDev
 {
@@ -3493,60 +3492,87 @@ namespace HatFrameworkDev
 
         public async Task SetAttributeInElementByIdAsync(string id, string attribute, string value)
         {
-            int step = SendMessageDebug($"SetAttributeInElementByIdAsync('{id}', '{attribute}', '{value}')", $"SetAttributeInElementByIdAsync('{id}', '{attribute}', '{value}')", PROCESS, "Добавление аттрибута в элемент", "Adding an attribute to an element", IMAGE_STATUS_PROCESS);
-            if (DefineTestStop(step) == true) return;
+            if (DefineTestStop() == true) return;
 
             string script = "(function(){";
             script += $"var element = document.getElementById('{id}');";
             script += $"element.setAttribute('{attribute}', '{value}');";
             script += $"return element.getAttribute('{attribute}');";
             script += "}());";
-            await execute(script, step, $"Аттрибут '{attribute}' добавлен в элемент", $"Attribute '{attribute}' added to the element", $"Не удалось найти или ввести аттрибут в элемент с ID: {id}", $"Could not find or enter attribute in element with ID: {id}");
+            if (await execute(script, $"SetAttributeInElementByIdAsync('{id}', '{attribute}', '{value}')") == "null")
+            {
+                SendMessageDebug($"SetAttributeInElementByIdAsync('{id}', '{attribute}', '{value}')", $"SetAttributeInElementByIdAsync('{id}', '{attribute}', '{value}')", Tester.FAILED, $"Не удалось найти или ввести аттрибут в элемент с ID: {id}", $"Could not find or enter attribute in element with ID: {id}", Tester.IMAGE_STATUS_FAILED);
+                TestStopAsync();
+            }
+            else
+            {
+                SendMessageDebug($"SetAttributeInElementByIdAsync('{id}', '{attribute}', '{value}')", $"SetAttributeInElementByIdAsync('{id}', '{attribute}', '{value}')", Tester.PASSED, $"Аттрибут '{attribute}' добавлен в элемент", $"Attribute '{attribute}' added to the element", Tester.IMAGE_STATUS_PASSED);
+            }
         }
 
         public async Task SetAttributeInElementByClassAsync(string _class, int index, string attribute, string value)
         {
-            int step = SendMessageDebug($"SetAttributeInElementByClassAsync('{_class}', {index}, '{attribute}', '{value}')", $"SetAttributeInElementByClassAsync('{_class}', {index}, '{attribute}', '{value}')", PROCESS, "Добавление аттрибута в элемент", "Adding an attribute to an element", IMAGE_STATUS_PROCESS);
-            if (DefineTestStop(step) == true) return;
+            if (DefineTestStop() == true) return;
 
             string script = "(function(){";
             script += $"var element = document.getElementsByClassName('{_class}')[{index}];";
             script += $"element.setAttribute('{attribute}', '{value}');";
             script += $"return element.getAttribute('{attribute}');";
             script += "}());";
-            await execute(script, step, $"Аттрибут '{attribute}' добавлен в элемент", $"Attribute '{attribute}' added to the element", $"Не удалось найти или ввести аттрибут в элемент по Class: {_class} (Index: {index})", $"Could not find or enter an attribute in an element by Class: {_class} (Index: {index})");
+            if (await execute(script, $"SetAttributeInElementByClassAsync('{_class}', {index}, '{attribute}', '{value}')") == "null")
+            {
+                SendMessageDebug($"SetAttributeInElementByClassAsync('{_class}', {index}, '{attribute}', '{value}')", $"SetAttributeInElementByClassAsync('{_class}', {index}, '{attribute}', '{value}')", Tester.FAILED, $"Не удалось найти или ввести аттрибут в элемент по Class: {_class} (Index: {index})", $"Could not find or enter an attribute in an element by Class: {_class} (Index: {index})", Tester.IMAGE_STATUS_FAILED);
+                TestStopAsync();
+            }
+            else
+            {
+                SendMessageDebug($"SetAttributeInElementByClassAsync('{_class}', {index}, '{attribute}', '{value}')", $"SetAttributeInElementByClassAsync('{_class}', {index}, '{attribute}', '{value}')", Tester.PASSED, $"Аттрибут '{attribute}' добавлен в элемент", $"Attribute '{attribute}' added to the element", Tester.IMAGE_STATUS_PASSED);
+            }
         }
 
         public async Task SetAttributeInElementByNameAsync(string name, int index, string attribute, string value)
         {
-            int step = SendMessageDebug($"SetAttributeInElementByNameAsync('{name}', {index}, '{attribute}', '{value}')", $"SetAttributeInElementByNameAsync('{name}', {index}, '{attribute}', '{value}')", PROCESS, "Добавление аттрибута в элемент", "Adding an attribute to an element", IMAGE_STATUS_PROCESS);
-            if (DefineTestStop(step) == true) return;
+            if (DefineTestStop() == true) return;
 
             string script = "(function(){";
             script += $"var element = document.getElementsByName('{name}')[{index}];";
             script += $"element.setAttribute('{attribute}', '{value}');";
             script += $"return element.getAttribute('{attribute}');";
             script += "}());";
-            await execute(script, step, $"Аттрибут '{attribute}' добавлен в элемент", $"Attribute '{attribute}' added to the element", $"Не удалось найти или ввести аттрибут в элемент по Name: {name} (Index: {index})", $"Could not find or enter an attribute in an element by Name: {name} (Index: {index})");
+            if (await execute(script, $"SetAttributeInElementByNameAsync('{name}', {index}, '{attribute}', '{value}')") == "null")
+            {
+                SendMessageDebug($"SetAttributeInElementByNameAsync('{name}', {index}, '{attribute}', '{value}')", $"SetAttributeInElementByNameAsync('{name}', {index}, '{attribute}', '{value}')", Tester.FAILED, $"Не удалось найти или ввести аттрибут в элемент по Name: {name} (Index: {index})", $"Could not find or enter an attribute in an element by Name: {name} (Index: {index})", Tester.IMAGE_STATUS_FAILED);
+                TestStopAsync();
+            }
+            else
+            {
+                SendMessageDebug($"SetAttributeInElementByNameAsync('{name}', {index}, '{attribute}', '{value}')", $"SetAttributeInElementByNameAsync('{name}', {index}, '{attribute}', '{value}')", Tester.PASSED, $"Аттрибут '{attribute}' добавлен в элемент", $"Attribute '{attribute}' added to the element", Tester.IMAGE_STATUS_PASSED);
+            }
         }
 
         public async Task SetAttributeInElementByTagAsync(string tag, int index, string attribute, string value)
         {
-            int step = SendMessageDebug($"SetAttributeInElementByTagAsync('{tag}', {index}, '{attribute}', '{value}')", $"SetAttributeInElementByTagAsync('{tag}', {index}, '{attribute}', '{value}')", PROCESS, "Добавление аттрибута в элемент", "Adding an attribute to an element", IMAGE_STATUS_PROCESS);
-            if (DefineTestStop(step) == true) return;
+            if (DefineTestStop() == true) return;
 
             string script = "(function(){";
             script += $"var element = document.getElementsByTagName('{tag}')[{index}];";
             script += $"element.setAttribute('{attribute}', '{value}');";
             script += $"return element.getAttribute('{attribute}');";
             script += "}());";
-            await execute(script, step, $"Аттрибут '{attribute}' добавлен в элемент", $"Attribute '{attribute}' added to the element", $"Не удалось найти или ввести аттрибут в элемент по Tag: {tag} (Index: {index})", $"Could not find or enter an attribute in an element by Tag: {tag} (Index: {index})");
+            if (await execute(script, $"SetAttributeInElementByTagAsync('{tag}', {index}, '{attribute}', '{value}')") == "null")
+            {
+                SendMessageDebug($"SetAttributeInElementByTagAsync('{tag}', {index}, '{attribute}', '{value}')", $"SetAttributeInElementByTagAsync('{tag}', {index}, '{attribute}', '{value}')", Tester.FAILED, $"Не удалось найти или ввести аттрибут в элемент по Tag: {tag} (Index: {index})", $"Could not find or enter an attribute in an element by Tag: {tag} (Index: {index})", Tester.IMAGE_STATUS_FAILED);
+                TestStopAsync();
+            }
+            else
+            {
+                SendMessageDebug($"SetAttributeInElementByTagAsync('{tag}', {index}, '{attribute}', '{value}')", $"SetAttributeInElementByTagAsync('{tag}', {index}, '{attribute}', '{value}')", Tester.PASSED, $"Аттрибут '{attribute}' добавлен в элемент", $"Attribute '{attribute}' added to the element", Tester.IMAGE_STATUS_PASSED);
+            }
         }
 
         public async Task SetAttributeInElementAsync(string by, string locator, string attribute, string value)
         {
-            int step = SendMessageDebug($"SetAttributeInElementAsync(\"{by}\", \"{locator}\", \"{attribute}\", \"{value}\")", $"SetAttributeInElementAsync(\"{by}\", \"{locator}\", \"{attribute}\", \"{value}\")", PROCESS, "Добавление аттрибута в элемент", "Adding an attribute to an element", IMAGE_STATUS_PROCESS);
-            if (DefineTestStop(step) == true) return;
+            if (DefineTestStop() == true) return;
 
             string script = "(function(){";
             if (by == BY_CSS) script += $"var element = document.querySelector(\"{locator}\");";
@@ -3554,13 +3580,20 @@ namespace HatFrameworkDev
             script += $"element.setAttribute('{attribute}', '{value}');";
             script += $"return element.getAttribute('{attribute}');";
             script += "}());";
-            await execute(script, step, $"Аттрибут '{attribute}' добавлен в элемент", $"Attribute '{attribute}' added to the element", $"Не удалось найти или ввести аттрибут в элемент по локатору: {locator}", $"Could not find or enter attribute in element by locator: {locator}");
+            if (await execute(script, $"SetAttributeInElementAsync(\"{by}\", \"{locator}\", \"{attribute}\", \"{value}\")") == "null")
+            {
+                SendMessageDebug($"SetAttributeInElementAsync(\"{by}\", \"{locator}\", \"{attribute}\", \"{value}\")", $"SetAttributeInElementAsync(\"{by}\", \"{locator}\", \"{attribute}\", \"{value}\")", Tester.FAILED, $"Не удалось найти или ввести аттрибут в элемент по локатору: {locator}", $"Could not find or enter attribute in element by locator: {locator}", Tester.IMAGE_STATUS_FAILED);
+                TestStopAsync();
+            }
+            else
+            {
+                SendMessageDebug($"SetAttributeInElementAsync(\"{by}\", \"{locator}\", \"{attribute}\", \"{value}\")", $"SetAttributeInElementAsync(\"{by}\", \"{locator}\", \"{attribute}\", \"{value}\")", Tester.PASSED, $"Аттрибут '{attribute}' добавлен в элемент", $"Attribute '{attribute}' added to the element", Tester.IMAGE_STATUS_PASSED);
+            }
         }
 
         public async Task<List<string>> SetAttributeInElementsByClassAsync(string _class, string attribute, string value)
         {
-            int step = SendMessageDebug($"SetAttributeInElementsByClassAsync('{_class}', '{attribute}', '{value}')", $"SetAttributeInElementsByClassAsync('{_class}', '{attribute}', '{value}')", PROCESS, "Добавление аттрибута в элементы", "Adding an attribute to an element", IMAGE_STATUS_PROCESS);
-            if (DefineTestStop(step) == true) return null;
+            if (DefineTestStop() == true) return null;
 
             string script = "(function(){";
             script += $"var element = document.getElementsByClassName('{_class}');";
@@ -3575,7 +3608,8 @@ namespace HatFrameworkDev
             script += "json += ']';";
             script += "return json;";
             script += "}());";
-            string result = await execute(script, step, $"Аттрибут '{attribute}' добавлен в элементы", $"Attribute '{attribute}' added to the element", $"Не удалось найти или добавить аттрибут в элементы по Class: {_class}", $"Could not find or add attribute to elements by Class: {_class}");
+
+            string result = await execute(script, $"SetAttributeInElementsByClassAsync('{_class}', '{attribute}', '{value}')");
             List<string> Json_Array = null;
             if (result != "null" && result != null)
             {
@@ -3583,11 +3617,11 @@ namespace HatFrameworkDev
                 {
                     result = JsonConvert.DeserializeObject(result).ToString();
                     Json_Array = JsonConvert.DeserializeObject<List<string>>(result);
-                    EditMessageDebug(step, null, null, PASSED, $"Аттрибут '{attribute}' со значением '{result}' - добавлен в элементы и получен json {result}", $"Attribute '{attribute}' with value '{result}' - added to the elements and received json {result}", IMAGE_STATUS_PASSED);
+                    SendMessageDebug($"SetAttributeInElementsByClassAsync('{_class}', '{attribute}', '{value}')", $"SetAttributeInElementsByClassAsync('{_class}', '{attribute}', '{value}')", PASSED, $"Аттрибут '{attribute}' со значением '{result}' - добавлен в элементы и получен json {result}", $"Attribute '{attribute}' with value '{result}' - added to the elements and received json {result}", IMAGE_STATUS_PASSED);
                 }
                 catch (Exception ex)
                 {
-                    EditMessageDebug(step, null, null, Tester.FAILED,
+                    SendMessageDebug($"SetAttributeInElementsByClassAsync('{_class}', '{attribute}', '{value}')", $"SetAttributeInElementsByClassAsync('{_class}', '{attribute}', '{value}')", Tester.FAILED,
                         "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(),
                         "Error: " + ex.Message + Environment.NewLine + Environment.NewLine + "Full description of the error: " + ex.ToString(),
                         Tester.IMAGE_STATUS_FAILED);
@@ -3595,13 +3629,19 @@ namespace HatFrameworkDev
                     ConsoleMsgError(ex.ToString());
                 }
             }
+            else
+            {
+                SendMessageDebug($"SetAttributeInElementsByClassAsync('{_class}', '{attribute}', '{value}')", $"SetAttributeInElementsByClassAsync('{_class}', '{attribute}', '{value}')", FAILED, $"Не удалось найти или добавить аттрибуты в элементы по Class: {_class}", $"Could not find or add attribute to elements by Class: {_class}", IMAGE_STATUS_FAILED);
+                TestStopAsync();
+            }
+
             return Json_Array;
         }
 
         public async Task<List<string>> SetAttributeInElementsByNameAsync(string name, string attribute, string value)
         {
-            int step = SendMessageDebug($"SetAttributeInElementsByNameAsync('{name}', '{attribute}', '{value}')", $"SetAttributeInElementsByNameAsync('{name}', '{attribute}', '{value}')", PROCESS, "Добавление аттрибута в элементы", "Adding an attribute to an element", IMAGE_STATUS_PROCESS);
-            if (DefineTestStop(step) == true) return null;
+            //int step = SendMessageDebug(, PROCESS, "Добавление аттрибута в элементы", "Adding an attribute to an element", IMAGE_STATUS_PROCESS);
+            if (DefineTestStop() == true) return null;
 
             string script = "(function(){";
             script += $"var element = document.getElementsByName('{name}');";
@@ -3616,7 +3656,7 @@ namespace HatFrameworkDev
             script += "json += ']';";
             script += "return json;";
             script += "}());";
-            string result = await execute(script, step, $"Аттрибут '{attribute}' добавлен в элементы", $"Attribute '{attribute}' added to the element", $"Не удалось найти или добавить аттрибут в элементы по Name: {name}", $"Could not find or add attribute to elements by Name: {name}");
+            string result = await execute(script, $"SetAttributeInElementsByNameAsync('{name}', '{attribute}', '{value}')");
             List<string> Json_Array = null;
             if (result != "null" && result != null)
             {
@@ -3624,11 +3664,11 @@ namespace HatFrameworkDev
                 {
                     result = JsonConvert.DeserializeObject(result).ToString();
                     Json_Array = JsonConvert.DeserializeObject<List<string>>(result);
-                    EditMessageDebug(step, null, null, PASSED, $"Аттрибут '{attribute}' со значением '{result}' - добавлен в элементы и получен json {result}", $"Attribute '{attribute}' with value '{result}' - added to the elements and received json {result}", IMAGE_STATUS_PASSED);
+                    SendMessageDebug($"SetAttributeInElementsByNameAsync('{name}', '{attribute}', '{value}')", $"SetAttributeInElementsByNameAsync('{name}', '{attribute}', '{value}')", PASSED, $"Аттрибут '{attribute}' со значением '{result}' - добавлен в элементы и получен json {result}", $"Attribute '{attribute}' with value '{result}' - added to the elements and received json {result}", IMAGE_STATUS_PASSED);
                 }
                 catch (Exception ex)
                 {
-                    EditMessageDebug(step, null, null, Tester.FAILED,
+                    SendMessageDebug($"SetAttributeInElementsByNameAsync('{name}', '{attribute}', '{value}')", $"SetAttributeInElementsByNameAsync('{name}', '{attribute}', '{value}')", Tester.FAILED,
                         "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(),
                         "Error: " + ex.Message + Environment.NewLine + Environment.NewLine + "Full description of the error: " + ex.ToString(),
                         Tester.IMAGE_STATUS_FAILED);
@@ -3636,13 +3676,18 @@ namespace HatFrameworkDev
                     ConsoleMsgError(ex.ToString());
                 }
             }
+            else
+            {
+                SendMessageDebug($"SetAttributeInElementsByNameAsync('{name}', '{attribute}', '{value}')", $"SetAttributeInElementsByNameAsync('{name}', '{attribute}', '{value}')", FAILED, $"Не удалось найти или добавить аттрибут в элементы по Name: {name}", $"Could not find or add attribute to elements by Name: {name}", IMAGE_STATUS_FAILED);
+                TestStopAsync();
+            }
+
             return Json_Array;
         }
 
         public async Task<List<string>> SetAttributeInElementsByTagAsync(string tag, string attribute, string value)
         {
-            int step = SendMessageDebug($"SetAttributeInElementsByTagAsync('{tag}', '{attribute}', '{value}')", $"SetAttributeInElementsByTagAsync('{tag}', '{attribute}', '{value}')", PROCESS, "Добавление аттрибута в элементы", "Adding an attribute to an element", IMAGE_STATUS_PROCESS);
-            if (DefineTestStop(step) == true) return null;
+            if (DefineTestStop() == true) return null;
 
             string script = "(function(){";
             script += $"var element = document.getElementsByTagName('{tag}');";
@@ -3657,7 +3702,7 @@ namespace HatFrameworkDev
             script += "json += ']';";
             script += "return json;";
             script += "}());";
-            string result = await execute(script, step, $"Аттрибут '{attribute}' добавлен в элементы", $"Attribute '{attribute}' added to the element", $"Не удалось найти или добавить аттрибут в элементы по Tag: {tag}", $"Could not find or add attribute to elements by Tag: {tag}");
+            string result = await execute(script, $"SetAttributeInElementsByTagAsync('{tag}', '{attribute}', '{value}')");
             List<string> Json_Array = null;
             if (result != "null" && result != null)
             {
@@ -3665,11 +3710,11 @@ namespace HatFrameworkDev
                 {
                     result = JsonConvert.DeserializeObject(result).ToString();
                     Json_Array = JsonConvert.DeserializeObject<List<string>>(result);
-                    EditMessageDebug(step, null, null, PASSED, $"Аттрибут '{attribute}' со значением '{result}' - добавлен в элементы и получен json {result}", $"Attribute '{attribute}' with value '{result}' - added to the elements and received json {result}", IMAGE_STATUS_PASSED);
+                    SendMessageDebug($"SetAttributeInElementsByTagAsync('{tag}', '{attribute}', '{value}')", $"SetAttributeInElementsByTagAsync('{tag}', '{attribute}', '{value}')", PASSED, $"Аттрибут '{attribute}' со значением '{result}' - добавлен в элементы и получен json {result}", $"Attribute '{attribute}' with value '{result}' - added to the elements and received json {result}", IMAGE_STATUS_PASSED);
                 }
                 catch (Exception ex)
                 {
-                    EditMessageDebug(step, null, null, Tester.FAILED,
+                    SendMessageDebug($"SetAttributeInElementsByTagAsync('{tag}', '{attribute}', '{value}')", $"SetAttributeInElementsByTagAsync('{tag}', '{attribute}', '{value}')", Tester.FAILED,
                         "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(),
                         "Error: " + ex.Message + Environment.NewLine + Environment.NewLine + "Full description of the error: " + ex.ToString(),
                         Tester.IMAGE_STATUS_FAILED);
@@ -3677,13 +3722,18 @@ namespace HatFrameworkDev
                     ConsoleMsgError(ex.ToString());
                 }
             }
+            else
+            {
+                SendMessageDebug($"SetAttributeInElementsByTagAsync('{tag}', '{attribute}', '{value}')", $"SetAttributeInElementsByTagAsync('{tag}', '{attribute}', '{value}')", FAILED, $"Не удалось найти или добавить аттрибут в элементы по Tag: {tag}", $"Could not find or add attribute to elements by Tag: {tag}", IMAGE_STATUS_FAILED);
+                TestStopAsync();
+            }
+
             return Json_Array;
         }
 
         public async Task<List<string>> SetAttributeInElementsAsync(string by, string locator, string attribute, string value)
         {
-            int step = SendMessageDebug($"SetAttributeInElementsAsync(\"{by}\", \"{locator}\", \"{attribute}\", \"{value}\")", $"SetAttributeInElementsAsync(\"{by}\", \"{locator}\", \"{attribute}\", \"{value}\")", PROCESS, "Добавление аттрибута в элементы", "Adding an attribute to elements", IMAGE_STATUS_PROCESS);
-            if (DefineTestStop(step) == true) return null;
+            if (DefineTestStop() == true) return null;
 
             string script = "(function(){";
             if (by == BY_CSS)
@@ -3716,7 +3766,7 @@ namespace HatFrameworkDev
                 script += "return json;";
             }
             script += "}());";
-            string result = await execute(script, step, $"Аттрибут '{attribute}' добавлен в элементы", $"Attribute '{attribute}'added to the elements", $"Не удалось найти или добавить аттрибут в элементы по локатору: {locator}", $"Couldn't find or add attribute to elements by locator: {locator}");
+            string result = await execute(script, $"SetAttributeInElementsAsync(\"{by}\", \"{locator}\", \"{attribute}\", \"{value}\")");
             List<string> Json_Array = null;
             if (result != "null" && result != null)
             {
@@ -3724,11 +3774,11 @@ namespace HatFrameworkDev
                 {
                     result = JsonConvert.DeserializeObject(result).ToString();
                     Json_Array = JsonConvert.DeserializeObject<List<string>>(result);
-                    EditMessageDebug(step, null, null, PASSED, $"Аттрибут '{attribute}' со значением '{result}' - добавлен в элементы и получен json {result}", $"Attribute '{attribute}' with value '{result}' - added to the elements and received json {result}", IMAGE_STATUS_PASSED);
+                    SendMessageDebug($"SetAttributeInElementsAsync(\"{by}\", \"{locator}\", \"{attribute}\", \"{value}\")", $"SetAttributeInElementsAsync(\"{by}\", \"{locator}\", \"{attribute}\", \"{value}\")", PASSED, $"Аттрибут '{attribute}' со значением '{result}' - добавлен в элементы и получен json {result}", $"Attribute '{attribute}' with value '{result}' - added to the elements and received json {result}", IMAGE_STATUS_PASSED);
                 }
                 catch (Exception ex)
                 {
-                    EditMessageDebug(step, null, null, Tester.FAILED,
+                    SendMessageDebug($"SetAttributeInElementsAsync(\"{by}\", \"{locator}\", \"{attribute}\", \"{value}\")", $"SetAttributeInElementsAsync(\"{by}\", \"{locator}\", \"{attribute}\", \"{value}\")", Tester.FAILED,
                         "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(),
                         "Error: " + ex.Message + Environment.NewLine + Environment.NewLine + "Full description of the error: " + ex.ToString(),
                         Tester.IMAGE_STATUS_FAILED);
@@ -3736,6 +3786,12 @@ namespace HatFrameworkDev
                     ConsoleMsgError(ex.ToString());
                 }
             }
+            else
+            {
+                SendMessageDebug($"SetAttributeInElementsAsync(\"{by}\", \"{locator}\", \"{attribute}\", \"{value}\")", $"SetAttributeInElementsAsync(\"{by}\", \"{locator}\", \"{attribute}\", \"{value}\")", FAILED, $"Не удалось найти или добавить аттрибут в элементы по локатору: {locator}", $"Couldn't find or add attribute to elements by locator: {locator}", IMAGE_STATUS_FAILED);
+                TestStopAsync();
+            }
+
             return Json_Array;
         }
 
