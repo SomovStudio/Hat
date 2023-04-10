@@ -57,7 +57,6 @@ namespace Hat
               
 
         private bool stopTest = false;
-        //private bool testSuccess = true;
         private StepTestForm stepTestForm;
         private CodeEditorForm codeEditorForm;
 
