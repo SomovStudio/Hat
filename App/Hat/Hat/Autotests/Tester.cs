@@ -83,8 +83,6 @@ namespace HatFrameworkDev
         private string assertStatus = null;         // флаг: рузельтат проверки
         private List<string> listRedirects;         // список редиректов
 
-        private string[] actions = new string[] { }; // список действияй (методы SendMessageDebug, EditMessageDebug, SendMessage, EditMessage)
-
         public Tester(Form browserForm)
         {
             try
@@ -340,7 +338,6 @@ namespace HatFrameworkDev
             try
             {
                 if (DefineTestStop() == true) return;
-                this.actions = new string[] { action };
                 
                 // вывод сообщения в системную консоль
                 string step = "";
@@ -413,8 +410,6 @@ namespace HatFrameworkDev
         {
             try
             {
-                this.actions = new string[] { actionRus, actionEng};
-
                 // вывод сообщения в системную консоль
                 string step = "";
                 if (assertStatus != FAILED)
