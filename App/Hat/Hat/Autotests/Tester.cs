@@ -55,7 +55,6 @@ namespace HatFrameworkDev
         private MethodInfo browserSystemConsoleMsg; // функция: SystemConsoleMsg - вывод сообщения в системную консоль
         private MethodInfo browserCleadMessageStep; // функция: CleadMessageStep - очистка всех шагов в таблице "тест"
         private MethodInfo browserSendMessageStep;  // функция: SendMessageStep - вывести сообщение в таблицу "тест"
-        // УДАЛИТЬ - private MethodInfo browserEditMessageStep;  // функция: EditMessageStep - изменить уже выведенное сообщение в таблице "тест"
         private MethodInfo browserResize;           // функция: BrowserResize - изменить размер браузера
         private MethodInfo browserUserAgent;        // функция: UserAgent - настройка user-agent параметра
         private MethodInfo browserGetErrors;        // Функция: GetBowserErrors - получить список ошибок и предупреждений браузера
@@ -95,7 +94,6 @@ namespace HatFrameworkDev
                 browserSystemConsoleMsg = BrowserWindow.GetType().GetMethod("SystemConsoleMsg");
                 browserCleadMessageStep = BrowserWindow.GetType().GetMethod("CleadMessageStep");
                 browserSendMessageStep = BrowserWindow.GetType().GetMethod("SendMessageStep");
-                // УДАЛИТЬ - browserEditMessageStep = BrowserWindow.GetType().GetMethod("EditMessageStep");
                 browserResize = BrowserWindow.GetType().GetMethod("BrowserResize");
                 browserUserAgent = BrowserWindow.GetType().GetMethod("UserAgent");
                 browserGetErrors = BrowserWindow.GetType().GetMethod("GetBowserErrors");
