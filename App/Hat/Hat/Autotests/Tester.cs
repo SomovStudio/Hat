@@ -1336,6 +1336,8 @@ namespace HatFrameworkDev
         public async Task WaitAsync(int sec)
         {
             if (DefineTestStop() == true) return;
+            SendMessageDebug($"WaitAsync({sec})", $"WaitAsync({sec})", PROCESS, $"Ожидание {sec.ToString()} секунд", $"Waiting {sec.ToString()} seconds", IMAGE_STATUS_MESSAGE);
+
             try
             {
                 await Task.Delay(sec * 1000);
@@ -1355,6 +1357,8 @@ namespace HatFrameworkDev
         public async Task WaitVisibleElementByIdAsync(string id, int sec)
         {
             if (DefineTestStop() == true) return;
+            SendMessageDebug($"WaitVisibleElementByIdAsync('{id}', {sec})", $"WaitVisibleElementByIdAsync('{id}', {sec})", PROCESS, $"Ожидание {sec.ToString()} секунд", $"Waiting {sec.ToString()} seconds", IMAGE_STATUS_MESSAGE);
+
             try
             {
                 bool found = false;
@@ -1387,6 +1391,8 @@ namespace HatFrameworkDev
         public async Task WaitVisibleElementByClassAsync(string _class, int index, int sec)
         {
             if (DefineTestStop() == true) return;
+            SendMessageDebug($"WaitVisibleElementByClassAsync('{_class}', {index}, {sec})", $"WaitVisibleElementByClassAsync('{_class}', {index}, {sec})", PROCESS, $"Ожидание {sec.ToString()} секунд", $"Waiting {sec.ToString()} seconds", IMAGE_STATUS_MESSAGE);
+
             try
             {
                 bool found = false;
@@ -1418,6 +1424,8 @@ namespace HatFrameworkDev
         public async Task WaitVisibleElementByNameAsync(string name, int index, int sec)
         {
             if (DefineTestStop() == true) return;
+            SendMessageDebug($"WaitVisibleElementByNameAsync('{name}', {index}, {sec})", $"WaitVisibleElementByNameAsync('{name}', {index}, {sec})", PROCESS, $"Ожидание {sec.ToString()} секунд", $"Waiting {sec.ToString()} seconds", IMAGE_STATUS_MESSAGE);
+
             try
             {
                 bool found = false;
@@ -1449,6 +1457,8 @@ namespace HatFrameworkDev
         public async Task WaitVisibleElementByTagAsync(string tag, int index, int sec)
         {
             if (DefineTestStop() == true) return;
+            SendMessageDebug($"WaitVisibleElementByTagAsync('{tag}', {index}, {sec})", $"WaitVisibleElementByTagAsync('{tag}', {index}, {sec})", PROCESS, $"Ожидание {sec.ToString()} секунд", $"Waiting {sec.ToString()} seconds", IMAGE_STATUS_MESSAGE);
+
             try
             {
                 bool found = false;
@@ -1480,6 +1490,8 @@ namespace HatFrameworkDev
         public async Task WaitVisibleElementAsync(string by, string locator, int sec)
         {
             if (DefineTestStop() == true) return;
+            SendMessageDebug($"WaitVisibleElementAsync(\"{by}\", \"{locator}\", {sec})", $"WaitVisibleElementAsync(\"{by}\", \"{locator}\", {sec})", PROCESS, $"Ожидание {sec.ToString()} секунд", $"Waiting {sec.ToString()} seconds", IMAGE_STATUS_MESSAGE);
+
             try
             {
                 bool found = false;
@@ -1512,6 +1524,8 @@ namespace HatFrameworkDev
         public async Task WaitNotVisibleElementByIdAsync(string id, int sec)
         {
             if (DefineTestStop() == true) return;
+            SendMessageDebug($"WaitNotVisibleElementByIdAsync('{id}', {sec})", $"WaitNotVisibleElementByIdAsync('{id}', {sec})", PROCESS, $"Ожидание {sec.ToString()} секунд", $"Waiting {sec.ToString()} seconds", IMAGE_STATUS_MESSAGE);
+
             try
             {
                 bool found = true;
@@ -1543,6 +1557,8 @@ namespace HatFrameworkDev
         public async Task WaitNotVisibleElementByClassAsync(string _class, int index, int sec)
         {
             if (DefineTestStop() == true) return;
+            SendMessageDebug($"WaitNotVisibleElementByClassAsync('{_class}', {index}, {sec})", $"WaitNotVisibleElementByClassAsync('{_class}', {index}, {sec})", PROCESS, $"Ожидание {sec.ToString()} секунд", $"Waiting {sec.ToString()} seconds", IMAGE_STATUS_MESSAGE);
+
             try
             {
                 bool found = true;
@@ -1574,6 +1590,8 @@ namespace HatFrameworkDev
         public async Task WaitNotVisibleElementByNameAsync(string name, int index, int sec)
         {
             if (DefineTestStop() == true) return;
+            SendMessageDebug($"WaitNotVisibleElementByNameAsync('{name}', {index}, {sec})", $"WaitNotVisibleElementByNameAsync('{name}', {index}, {sec})", PROCESS, $"Ожидание {sec.ToString()} секунд", $"Waiting {sec.ToString()} seconds", IMAGE_STATUS_MESSAGE);
+
             try
             {
                 bool found = true;
@@ -1605,6 +1623,8 @@ namespace HatFrameworkDev
         public async Task WaitNotVisibleElementByTagAsync(string tag, int index, int sec)
         {
             if (DefineTestStop() == true) return;
+            SendMessageDebug($"WaitNotVisibleElementByTagAsync('{tag}', {index}, {sec})", $"WaitNotVisibleElementByTagAsync('{tag}', {index}, {sec})", PROCESS, $"Ожидание {sec.ToString()} секунд", $"Waiting {sec.ToString()} seconds", IMAGE_STATUS_MESSAGE);
+
             try
             {
                 bool found = true;
@@ -1636,6 +1656,8 @@ namespace HatFrameworkDev
         public async Task WaitNotVisibleElementAsync(string by, string locator, int sec)
         {
             if (DefineTestStop() == true) return;
+            SendMessageDebug($"WaitNotVisibleElementAsync(\"{by}\", \"{locator}\", {sec})", $"WaitNotVisibleElementAsync(\"{by}\", \"{locator}\", {sec})", PROCESS, $"Ожидание {sec.ToString()} секунд", $"Waiting {sec.ToString()} seconds", IMAGE_STATUS_MESSAGE);
+
             try
             {
                 bool found = true;
@@ -1668,6 +1690,8 @@ namespace HatFrameworkDev
         public async Task WaitElementInDomAsync(string by, string locator, int sec)
         {
             if (DefineTestStop() == true) return;
+            SendMessageDebug($"WaitElementInDomAsync(\"{by}\", \"{locator}\", {sec})", $"WaitElementInDomAsync(\"{by}\", \"{locator}\", {sec})", PROCESS, $"Ожидание {sec.ToString()} секунд", $"Waiting {sec.ToString()} seconds", IMAGE_STATUS_MESSAGE);
+
             try
             {
                 bool found = false;
@@ -1712,6 +1736,7 @@ namespace HatFrameworkDev
         public async Task WaitElementNotDomAsync(string by, string locator, int sec)
         {
             if (DefineTestStop() == true) return;
+            SendMessageDebug($"WaitElementNotDomAsync(\"{by}\", \"{locator}\", {sec})", $"WaitElementNotDomAsync(\"{by}\", \"{locator}\", {sec})", PROCESS, $"Ожидание {sec.ToString()} секунд", $"Waiting {sec.ToString()} seconds", IMAGE_STATUS_MESSAGE);
 
             try
             {
@@ -1757,6 +1782,7 @@ namespace HatFrameworkDev
         public async Task<bool> FindElementByIdAsync(string id, int sec)
         {
             if (DefineTestStop() == true) return false;
+            SendMessageDebug($"FindElementByIdAsync('{id}', {sec})", $"FindElementByIdAsync('{id}', {sec})", PROCESS, $"Ожидание {sec.ToString()} секунд (поиск)", $"Waiting {sec.ToString()} seconds (search)", IMAGE_STATUS_MESSAGE);
 
             bool found = false;
             try
@@ -1797,6 +1823,7 @@ namespace HatFrameworkDev
         public async Task<bool> FindElementByClassAsync(string _class, int index, int sec)
         {
             if (DefineTestStop() == true) return false;
+            SendMessageDebug($"FindElementByClassAsync('{_class}', {index}, {sec})", $"FindElementByClassAsync('{_class}', {index}, {sec})", PROCESS, $"Ожидание {sec.ToString()} секунд (поиск)", $"Waiting {sec.ToString()} seconds (search)", IMAGE_STATUS_MESSAGE);
 
             bool found = false;
             try
@@ -1837,6 +1864,7 @@ namespace HatFrameworkDev
         public async Task<bool> FindElementByNameAsync(string name, int index, int sec)
         {
             if (DefineTestStop() == true) return false;
+            SendMessageDebug($"FindElementByNameAsync('{name}', {index}, {sec})", $"FindElementByNameAsync('{name}', {index}, {sec})", PROCESS, $"Ожидание {sec.ToString()} секунд (поиск)", $"Waiting {sec.ToString()} seconds (search)", IMAGE_STATUS_MESSAGE);
 
             bool found = false;
             try
@@ -1877,6 +1905,7 @@ namespace HatFrameworkDev
         public async Task<bool> FindElementByTagAsync(string tag, int index, int sec)
         {
             if (DefineTestStop() == true) return false;
+            SendMessageDebug($"FindElementByTagAsync('{tag}', {index}, {sec})", $"FindElementByTagAsync('{tag}', {index}, {sec})", PROCESS, $"Ожидание {sec.ToString()} секунд (поиск)", $"Waiting {sec.ToString()} seconds (search)", IMAGE_STATUS_MESSAGE);
 
             bool found = false;
             try
@@ -1917,6 +1946,7 @@ namespace HatFrameworkDev
         public async Task<bool> FindElementAsync(string by, string locator, int sec)
         {
             if (DefineTestStop() == true) return false;
+            SendMessageDebug($"FindElementAsync(\"{by}\", \"{locator}\", {sec})", $"FindElementAsync(\"{by}\", \"{locator}\", {sec})", PROCESS, $"Ожидание {sec.ToString()} секунд (поиск)", $"Waiting {sec.ToString()} seconds (search)", IMAGE_STATUS_MESSAGE);
 
             bool found = false;
             try
@@ -1958,6 +1988,7 @@ namespace HatFrameworkDev
         public async Task<bool> FindVisibleElementByIdAsync(string id, int sec)
         {
             if (DefineTestStop() == true) return false;
+            SendMessageDebug($"FindVisibleElementByIdAsync('{id}', {sec})", $"FindVisibleElementByIdAsync('{id}', {sec})", PROCESS, $"Ожидание {sec.ToString()} секунд (поиск)", $"Waiting {sec.ToString()} seconds (search)", IMAGE_STATUS_MESSAGE);
 
             bool found = false;
             try
@@ -1987,6 +2018,7 @@ namespace HatFrameworkDev
         public async Task<bool> FindVisibleElementByClassAsync(string _class, int index, int sec)
         {
             if (DefineTestStop() == true) return false;
+            SendMessageDebug($"FindVisibleElementByClassAsync('{_class}', {index}, {sec})", $"FindVisibleElementByClassAsync('{_class}', {index}, {sec})", PROCESS, $"Ожидание {sec.ToString()} секунд (поиск)", $"Waiting {sec.ToString()} seconds (search)", IMAGE_STATUS_MESSAGE);
 
             bool found = false;
             try
@@ -2016,6 +2048,7 @@ namespace HatFrameworkDev
         public async Task<bool> FindVisibleElementByNameAsync(string name, int index, int sec)
         {
             if (DefineTestStop() == true) return false;
+            SendMessageDebug($"FindVisibleElementByNameAsync('{name}', {index}, {sec})", $"FindVisibleElementByNameAsync('{name}', {index}, {sec})", PROCESS, $"Ожидание {sec.ToString()} секунд (поиск)", $"Waiting {sec.ToString()} seconds (search)", IMAGE_STATUS_MESSAGE);
 
             bool found = false;
             try
@@ -2045,6 +2078,7 @@ namespace HatFrameworkDev
         public async Task<bool> FindVisibleElementByTagAsync(string tag, int index, int sec)
         {
             if (DefineTestStop() == true) return false;
+            SendMessageDebug($"FindVisibleElementByTagAsync('{tag}', {index}, {sec})", $"FindVisibleElementByTagAsync('{tag}', {index}, {sec})", PROCESS, $"Ожидание {sec.ToString()} секунд (поиск)", $"Waiting {sec.ToString()} seconds (search)", IMAGE_STATUS_MESSAGE);
 
             bool found = false;
             try
@@ -2074,6 +2108,7 @@ namespace HatFrameworkDev
         public async Task<bool> FindVisibleElementAsync(string by, string locator, int sec)
         {
             if (DefineTestStop() == true) return false;
+            SendMessageDebug($"FindVisibleElementAsync(\"{by}\", \"{locator}\", {sec})", $"FindVisibleElementAsync(\"{by}\", \"{locator}\", {sec})", PROCESS, $"Ожидание {sec.ToString()} секунд (поиск)", $"Waiting {sec.ToString()} seconds (search)", IMAGE_STATUS_MESSAGE);
 
             bool found = false;
             try

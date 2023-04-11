@@ -530,6 +530,7 @@ namespace HatFramework
         public async Task WaitVisibleAsync(int sec)
         {
             if (_tester.DefineTestStop() == true) return;
+            _tester.SendMessageDebug($"WaitVisibleAsync({sec})", $"WaitVisibleAsync({sec})", Tester.PROCESS, $"Ожидание {sec.ToString()} секунд", $"Waiting {sec.ToString()} seconds", Tester.IMAGE_STATUS_MESSAGE);
 
             try
             {
@@ -562,6 +563,7 @@ namespace HatFramework
         public async Task WaitNotVisibleAsync(int sec)
         {
             if (_tester.DefineTestStop() == true) return;
+            _tester.SendMessageDebug($"WaitNotVisibleAsync({sec})", $"WaitNotVisibleAsync({sec})", Tester.PROCESS, $"Ожидание {sec.ToString()} секунд", $"Waiting {sec.ToString()} seconds", Tester.IMAGE_STATUS_MESSAGE);
 
             try
             {

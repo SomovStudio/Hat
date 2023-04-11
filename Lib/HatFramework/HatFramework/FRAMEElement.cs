@@ -518,6 +518,8 @@ namespace HatFramework
         public async Task WaitNotVisibleElementAsync(string by, string locator, int sec)
         {
             if (_tester.DefineTestStop() == true) return;
+            _tester.SendMessageDebug($"WaitNotVisibleElementAsync(\"{by}\", \"{locator}\", {sec})", $"WaitNotVisibleElementAsync(\"{by}\", \"{locator}\", {sec})", Tester.PROCESS, $"Ожидание {sec.ToString()} секунд", $"Waiting {sec.ToString()} seconds", Tester.IMAGE_STATUS_MESSAGE);
+
             try
             {
                 bool found = true;
@@ -550,6 +552,8 @@ namespace HatFramework
         public async Task WaitVisibleElementAsync(string by, string locator, int sec)
         {
             if (_tester.DefineTestStop() == true) return;
+            _tester.SendMessageDebug($"WaitVisibleElementAsync(\"{by}\", \"{locator}\", {sec})", $"WaitVisibleElementAsync(\"{by}\", \"{locator}\", {sec})", Tester.PROCESS, $"Ожидание {sec.ToString()} секунд", $"Waiting {sec.ToString()} seconds", Tester.IMAGE_STATUS_MESSAGE);
+
             try
             {
                 bool found = false;
@@ -582,6 +586,7 @@ namespace HatFramework
         public async Task<bool> FindElementAsync(string by, string locator, int sec)
         {
             if (_tester.DefineTestStop() == true) return false;
+            _tester.SendMessageDebug($"FindElementAsync(\"{by}\", \"{locator}\", {sec})", $"FindElementAsync(\"{by}\", \"{locator}\", {sec})", Tester.PROCESS, $"Ожидание {sec.ToString()} секунд (поиск)", $"Waiting {sec.ToString()} seconds (search)", Tester.IMAGE_STATUS_MESSAGE);
 
             bool found = false;
             try
@@ -626,6 +631,7 @@ namespace HatFramework
         public async Task<bool> FindVisibleElementAsync(string by, string locator, int sec)
         {
             if (_tester.DefineTestStop() == true) return false;
+            _tester.SendMessageDebug($"FindVisibleElementAsync(\"{by}\", \"{locator}\", {sec})", $"FindVisibleElementAsync(\"{by}\", \"{locator}\", {sec})", Tester.PROCESS, $"Ожидание {sec.ToString()} секунд (поиск)", $"Waiting {sec.ToString()} seconds (search)", Tester.IMAGE_STATUS_MESSAGE);
 
             bool found = false;
             try
