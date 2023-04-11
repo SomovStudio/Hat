@@ -8,7 +8,7 @@
 - Обновлены методы:
 	public void SendMessage(string action, string status, string comment)
 	public void SendMessageDebug(string actionRus, string actionEng, string status, string commentRus, string commentEng, int image)
-	private async Task<string> execute(string script)
+	private async Task<string> execute(string script, string action)
 	public bool DefineTestStop()
 
 -----------------------------

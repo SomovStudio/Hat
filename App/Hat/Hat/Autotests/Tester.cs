@@ -3079,8 +3079,15 @@ namespace HatFrameworkDev
                     else script += "element.scrollIntoView(); return element;";
                 }
                 script += "}());";
-                string result = await execute(script, $"ScrollToElementAsync(\"{by}\", \"{locator}\", {behaviorSmooth})");
-                SendMessageDebug($"ScrollToElementAsync(\"{by}\", \"{locator}\", {behaviorSmooth})", $"ScrollToElementAsync(\"{by}\", \"{locator}\", {behaviorSmooth})", PASSED, "Прокрутка (scroll) к элементу - выполнен", "Scrolled to the element - completed", IMAGE_STATUS_PASSED);
+                if (await execute(script, $"ScrollToElementAsync(\"{by}\", \"{locator}\", {behaviorSmooth})") == "null")
+                {
+                    SendMessageDebug($"ScrollToElementAsync(\"{by}\", \"{locator}\", {behaviorSmooth})", $"ScrollToElementAsync(\"{by}\", \"{locator}\", {behaviorSmooth})", Tester.FAILED, "Не удалось прокрутить к элементу", "Failed to fasten to the element", Tester.IMAGE_STATUS_FAILED);
+                    TestStopAsync();
+                }
+                else
+                {
+                    SendMessageDebug($"ScrollToElementAsync(\"{by}\", \"{locator}\", {behaviorSmooth})", $"ScrollToElementAsync(\"{by}\", \"{locator}\", {behaviorSmooth})", Tester.PASSED, "Прокрутка (scroll) к элементу - выполнен", "Scrolled to the element - completed", Tester.IMAGE_STATUS_PASSED);
+                }
             }
             catch (Exception ex)
             {

@@ -25,7 +25,7 @@ namespace HatFrameworkDev
             _index = index;
         }
 
-        private async Task<string> execute(string script, int step, string commentPassedRus, string commentPassedEng, string commentfailedRus, string commentfailedEng)
+        private async Task<string> execute(string script, string action)
         {
             string result = null;
             try
@@ -33,32 +33,26 @@ namespace HatFrameworkDev
                 if (_tester.Debug == true) _tester.ConsoleMsg($"[DEBUG] JS скрипт: {script}");
                 result = await _tester.BrowserView.CoreWebView2.ExecuteScriptAsync(script);
                 if (_tester.Debug == true) _tester.ConsoleMsg($"[DEBUG] JS результат: {result}");
-                if (result == null || result == "null")
+                if (result == "null" || result == null)
                 {
-                    _tester.EditMessageDebug(step, null, null, Tester.FAILED,
-                        $"{commentfailedRus} " + Environment.NewLine + $"Результат выполнения скрипта: {result}",
-                        $"{commentfailedEng} " + Environment.NewLine + $"The result of the script execution: {result}",
+                    _tester.SendMessageDebug(action, action, Tester.FAILED,
+                        $"В результате выполнения JavaScript получено NULL. Неудалось корректно выполнить JavaScript: {script}" + Environment.NewLine + $"Результат выполнения скрипта: {result}",
+                        $"The result of JavaScript execution is NULL. Failed to execute JavaScript correctly: {script}" + Environment.NewLine + $"The result of the script execution: {result}",
                         Tester.IMAGE_STATUS_FAILED);
                     _tester.TestStopAsync();
-                }
-                else
-                {
-                    _tester.EditMessageDebug(step, null, null, Tester.PASSED,
-                        $"{commentPassedRus} " + Environment.NewLine + $"Результат выполнения скрипта: {result}",
-                        $"{commentPassedEng} " + Environment.NewLine + $"The result of the script execution: {result}",
-                        Tester.IMAGE_STATUS_PASSED);
                 }
             }
             catch (Exception ex)
             {
-                _tester.EditMessageDebug(step, null, null, Tester.FAILED,
-                    "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(),
-                    "Error: " + ex.Message + Environment.NewLine + Environment.NewLine + "Full description of the error: " + ex.ToString(),
+                result = "null";
+                _tester.SendMessageDebug(action, action, Tester.FAILED,
+                    "Ошибка при выполнении JavaScript: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(),
+                    "Error when executing JavaScript: " + ex.Message + Environment.NewLine + Environment.NewLine + "Full description of the error: " + ex.ToString(),
                     Tester.IMAGE_STATUS_FAILED);
                 _tester.TestStopAsync();
                 _tester.ConsoleMsgError(ex.ToString());
             }
-            return result;
+            return result.ToString();
         }
 
         private async Task<bool> isVisible(string by, string locator)
