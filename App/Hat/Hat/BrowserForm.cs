@@ -423,22 +423,27 @@ namespace Hat
             {
                 Report.AddStep(status, action, comment);
             }
+            
+            if (Config.commandLineMode == false) // в консольном режиме выполнения автотеста - шаги в таблицу не добавляются
+            {
+                this.item = new ListViewItem();
+                this.subitem = new ListViewItem.ListViewSubItem();
+                this.subitem.Text = action;
+                this.item.SubItems.Add(subitem);
+                this.subitem = new ListViewItem.ListViewSubItem();
+                this.subitem.Text = status;
+                this.item.SubItems.Add(subitem);
+                this.subitem = new ListViewItem.ListViewSubItem();
+                this.subitem.Text = comment;
+                this.item.SubItems.Add(this.subitem);
+                this.item.ImageIndex = image;
+                listViewTest.Items.Add(this.item);
+                this.step = listViewTest.Items.Count - 1;
+                listViewTest.Items[step].Selected = true;
+                listViewTest.Items[step].EnsureVisible();
+            }
 
-            this.item = new ListViewItem();
-            this.subitem = new ListViewItem.ListViewSubItem();
-            this.subitem.Text = action;
-            this.item.SubItems.Add(subitem);
-            this.subitem = new ListViewItem.ListViewSubItem();
-            this.subitem.Text = status;
-            this.item.SubItems.Add(subitem);
-            this.subitem = new ListViewItem.ListViewSubItem();
-            this.subitem.Text = comment;
-            this.item.SubItems.Add(this.subitem);
-            this.item.ImageIndex = image;
-            listViewTest.Items.Add(this.item);
-            this.step = listViewTest.Items.Count - 1;
-            listViewTest.Items[step].Selected = true;
-            listViewTest.Items[step].EnsureVisible();
+            GC.Collect(); // очистка памяти
         }
 
         private int SendMessageStepOLD(string action, string status, string comment, int image, bool debug) // отправляет сообщение в таблицу "тест" (не актуально)
