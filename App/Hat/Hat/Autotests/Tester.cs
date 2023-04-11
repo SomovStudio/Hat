@@ -15,7 +15,6 @@ using Newtonsoft.Json;
 using HatFramework;
 using Newtonsoft.Json.Linq;
 using System.Security.Cryptography;
-using System.Xml.Linq;
 
 namespace HatFrameworkDev
 {
@@ -3436,7 +3435,6 @@ namespace HatFrameworkDev
 
         public async Task<List<string>> GetAttributeFromElementsAsync(string by, string locator, string attribute)
         {
-            //int step = SendMessageDebug($"GetAttributeFromElementsAsync(\"{by}\", \"{locator}\", \"{attribute}\")", $"GetAttributeFromElementsAsync(\"{by}\", \"{locator}\", \"{attribute}\")", PROCESS, $"Получение аттрибутов {attribute} из элементов", $"Getting attributes {attribute} from elements", IMAGE_STATUS_PROCESS);
             if (DefineTestStop() == true) return null;
 
             string script = "(function(){";
