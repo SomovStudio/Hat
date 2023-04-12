@@ -58,6 +58,7 @@ namespace HatFramework
         private MethodInfo browserResize;           // функция: BrowserResize - изменить размер браузера
         private MethodInfo browserUserAgent;        // функция: UserAgent - настройка user-agent параметра
         private MethodInfo browserGetErrors;        // Функция: GetBowserErrors - получить список ошибок и предупреждений браузера
+        private MethodInfo disableDebugInReport; // Функция: DisableDebugInReport - Отключен вывод отладочных сообщений SendMessageDebug в отчет
         private MethodInfo checkStopTest;           // функция: CheckStopTest - получить статус остановки процесса тестирования
         private MethodInfo resultAutotest;          // функция: ResultAutotest - устанавливает флаг общего результата выполнения теста
         private MethodInfo debugJavaScript;         // функция: GetStatusDebugJavaScript - возвращает статус отладки
@@ -97,6 +98,7 @@ namespace HatFramework
                 browserResize = BrowserWindow.GetType().GetMethod("BrowserResize");
                 browserUserAgent = BrowserWindow.GetType().GetMethod("UserAgent");
                 browserGetErrors = BrowserWindow.GetType().GetMethod("GetBowserErrors");
+                disableDebugInReport = BrowserWindow.GetType().GetMethod("DisableDebugInReport");
                 checkStopTest = BrowserWindow.GetType().GetMethod("CheckStopTest");
                 resultAutotest = BrowserWindow.GetType().GetMethod("ResultAutotest");
                 debugJavaScript = BrowserWindow.GetType().GetMethod("GetStatusDebugJavaScript");
@@ -488,6 +490,23 @@ namespace HatFramework
             }
             catch (Exception ex)
             {
+                ConsoleMsgError(ex.ToString());
+            }
+        }
+
+        public void DisableDebugInReport()
+        {
+            try
+            {
+                disableDebugInReport.Invoke(BrowserWindow, null);
+                SendMessageDebug("DisableDebugInReportAsync()", "DisableDebugInReportAsync()", COMPLETED, "Отключен вывод отладочных сообщений в отчет", "Disabled output of debugging messages to the report", IMAGE_STATUS_MESSAGE);
+            }
+            catch (Exception ex)
+            {
+                SendMessageDebug("DisableDebugInReportAsync()", "DisableDebugInReportAsync()", Tester.FAILED,
+                    "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(),
+                    "Error: " + ex.Message + Environment.NewLine + Environment.NewLine + "Full description of the error: " + ex.ToString(),
+                    Tester.IMAGE_STATUS_FAILED);
                 ConsoleMsgError(ex.ToString());
             }
         }
