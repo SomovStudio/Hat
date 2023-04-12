@@ -3079,7 +3079,17 @@ string hash = await tester.CreateHashMD5FromTextAsync(text);\par
 tester.ConsoleMsg(hash);\par
 }",
 
-@"",
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 DisableDebugInReport\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'ee\'f2\'ea\'eb\'fe\'f7\'e0\'e5\'f2 \'e2\'fb\'e2\'ee\'e4 \'ee\'f2\'eb\'e0\'e4\'ee\'f7\'ed\'fb\'f5 \'f1\'ee\'ee\'e1\'f9\'e5\'ed\'e8\'e9 SendMessageDebug \'e2 \'ee\'f2\'f7\'e5\'f2\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : DisableDebugInReport()\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0\f0\lang1033 tester.DisableDebugInReport();\par
+}",
+
 @"",
 @"",
 @"",
@@ -3280,6 +3290,7 @@ tester.ConsoleMsg(hash);\par
             data.Add(new CompletionData("DEFAULT", "DEFAULT"));
             data.Add(new CompletionData("DefineTestStop", "DefineTestStop()"));
             data.Add(new CompletionData("Description", "Description(string text)"));
+            data.Add(new CompletionData("DisableDebugInReport", "DisableDebugInReport()"));
             data.Add(new CompletionData("ExecuteJavaScriptAsync", "ExecuteJavaScriptAsync(string script)"));
             data.Add(new CompletionData("FAILED", "FAILED"));
             data.Add(new CompletionData("FindElementAsync", "FindElementAsync(string by, string locator, int sec)"));
@@ -3994,9 +4005,9 @@ tester.ConsoleMsg(hash);\par
                     if (value == "FileDownloadAsync" && tag == "Tester") richTextBox1.Rtf = handbook[222];
                     if (value == "FileGetHashMD5Async" && tag == "Tester") richTextBox1.Rtf = handbook[223];
                     if (value == "CreateHashMD5FromTextAsync" && tag == "Tester") richTextBox1.Rtf = handbook[224];
+                    if (value == "DisableDebugInReport" && tag == "Tester") richTextBox1.Rtf = handbook[225];
 
                     /*
-                    if (value == "" && tag == "") richTextBox1.Rtf = handbook[225];
                     if (value == "" && tag == "") richTextBox1.Rtf = handbook[226];
                     if (value == "" && tag == "") richTextBox1.Rtf = handbook[227];
                     if (value == "" && tag == "") richTextBox1.Rtf = handbook[228];
