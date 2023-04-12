@@ -446,71 +446,6 @@ namespace Hat
             GC.Collect(); // очистка памяти
         }
 
-        private int SendMessageStepOLD(string action, string status, string comment, int image, bool debug) // отправляет сообщение в таблицу "тест" (не актуально)
-        {
-            if (debug == true)
-            {
-                if (Config.fullReport == true || status == Report.ERROR || status == Report.FAILED 
-                    || action == "Testing has started" || action == "Testing completed"
-                    || action == "Тестирование началось" || action == "Тестирование завершено")
-                {
-                    Report.AddStep(status, action, comment);
-                }
-            }
-            else
-            {
-                Report.AddStep(status, action, comment);
-            }
-
-            ListViewItem item;
-            ListViewItem.ListViewSubItem subitem;
-            item = new ListViewItem();
-            subitem = new ListViewItem.ListViewSubItem();
-            subitem.Text = action;
-            item.SubItems.Add(subitem);
-            subitem = new ListViewItem.ListViewSubItem();
-            subitem.Text = status;
-            item.SubItems.Add(subitem);
-            subitem = new ListViewItem.ListViewSubItem();
-            subitem.Text = comment;
-            item.SubItems.Add(subitem);
-            item.ImageIndex = image;
-            listViewTest.Items.Add(item);
-            int index = listViewTest.Items.Count - 1;
-            listViewTest.Items[index].Selected = true;
-            listViewTest.Items[index].EnsureVisible();
-            return index;
-        }
-
-        private void EditMessageStepOLD(int index, string action, string status, string comment, int image, bool debug) // изменить уже отправленное сообщение в таблице "тест" (не актуально)
-        {
-            try
-            {
-                if (image != null) listViewTest.Items[index].ImageIndex = image;
-                if (action != null) listViewTest.Items[index].SubItems[1].Text = action;
-                if (status != null) listViewTest.Items[index].SubItems[2].Text = status;
-                if (comment != null) listViewTest.Items[index].SubItems[3].Text = comment;
-
-                if (debug == true)
-                {
-                    if (Config.fullReport == true || listViewTest.Items[index].SubItems[2].Text == Report.ERROR || listViewTest.Items[index].SubItems[2].Text == Report.FAILED 
-                        || listViewTest.Items[index].SubItems[1].Text == "Testing has started" || listViewTest.Items[index].SubItems[1].Text == "Testing completed" 
-                        || listViewTest.Items[index].SubItems[1].Text == "Тестирование началось" || listViewTest.Items[index].SubItems[1].Text == "Тестирование завершено")
-                    {
-                        Report.AddStep(listViewTest.Items[index].SubItems[2].Text, listViewTest.Items[index].SubItems[1].Text, listViewTest.Items[index].SubItems[3].Text);
-                    }
-                }
-                else
-                {
-                    Report.AddStep(listViewTest.Items[index].SubItems[2].Text, listViewTest.Items[index].SubItems[1].Text, listViewTest.Items[index].SubItems[3].Text);
-                }
-            }
-            catch (Exception ex)
-            {
-                ConsoleMsgError(ex.ToString());
-            }
-        }
-
         public void BrowserResize(int width, int height) // изменить размер браузера
         {
             try
@@ -525,6 +460,18 @@ namespace Hat
                 {
                     radioButton1.Checked = true;
                 }
+            }
+            catch (Exception ex)
+            {
+                ConsoleMsgError(ex.ToString());
+            }
+        }
+
+        public void DisableDebugInReport()
+        {
+            try
+            {
+                Config.fullReport = false;
             }
             catch (Exception ex)
             {

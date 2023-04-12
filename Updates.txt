@@ -8,7 +8,7 @@
 - Изменены методы ранее вызывающие утечку памяти: SendMessage, SendMessageDebug
 - Удалены методы ранее вызывающие утечку памяти: EditMessage, EditMessageDebug
 - Изменён метод DefineTestStop
-- Добавлен метод BrowserDisableDebugInReportAsync который запрещает вывод сообщений SendMessageDebug в отчет 
+- Добавлен метод DisableDebugInReportAsync который запрещает вывод сообщений SendMessageDebug в отчет 
 
 	public void SendMessage(string action, string status, string comment)
 	public void SendMessageDebug(string actionRus, string actionEng, string status, string commentRus, string commentEng, int image)
