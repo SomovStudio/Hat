@@ -1,11 +1,15 @@
-Обновление браузера Hat 1.2.4 (1.05.2023)
+Обновление браузера Hat 1.3 (1.05.2023)
 
 Список внесённых изменений:
 
 - Исправлена ошибка адреса в команде запуска
 - Добавлен вывод в консоль вводимых и получаемых данных из элементов
-- Оптимизация работы браузера
-- Обновлены методы:
+- Оптимизация работы браузера позволила устронить ошибку System.OutOfMemoryException
+- Изменены методы ранее вызывающие утечку памяти: SendMessage, SendMessageDebug
+- Удалены методы ранее вызывающие утечку памяти: EditMessage, EditMessageDebug
+- Изменён метод DefineTestStop
+- Добавлен метод BrowserDisableDebugInReportAsync который запрещает вывод сообщений SendMessageDebug в отчет 
+
 	public void SendMessage(string action, string status, string comment)
 	public void SendMessageDebug(string actionRus, string actionEng, string status, string commentRus, string commentEng, int image)
 	private async Task<string> execute(string script, string action)
