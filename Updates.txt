@@ -3,17 +3,13 @@
 Список внесённых изменений:
 
 - Исправлена ошибка адреса в команде запуска
-- Добавлен вывод в консоль вводимых и получаемых данных из элементов
 - Оптимизация работы браузера позволила устронить ошибку System.OutOfMemoryException
 - Изменены методы ранее вызывающие утечку памяти: SendMessage, SendMessageDebug
 - Удалены методы ранее вызывающие утечку памяти: EditMessage, EditMessageDebug
 - Изменён метод DefineTestStop
 - Добавлен метод DisableDebugInReportAsync который запрещает вывод сообщений SendMessageDebug в отчет 
-
-	public void SendMessage(string action, string status, string comment)
-	public void SendMessageDebug(string actionRus, string actionEng, string status, string commentRus, string commentEng, int image)
-	private async Task<string> execute(string script, string action)
-	public bool DefineTestStop()
+- Добавлен вывод в консоль вводимых и получаемых данных из элементов
+- Добавлены методы IsVisibleElement
 
 -----------------------------
 
