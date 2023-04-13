@@ -3081,6 +3081,16 @@ namespace Hat
             else Report.SaveResultReport();
         }
 
-        
+        private void updateToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                System.Diagnostics.Process.Start(@"https://github.com/SomovStudio/Hat/releases");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка");
+            }
+        }
     }
 }
