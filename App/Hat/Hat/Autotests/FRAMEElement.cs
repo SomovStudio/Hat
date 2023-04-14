@@ -94,7 +94,7 @@ namespace HatFrameworkDev
             return found;
         }
 
-        public async Task<bool> IsVisibleElement(string by, string locator)
+        public async Task<bool> IsVisibleElementAsync(string by, string locator)
         {
             bool found = false;
             try

@@ -1066,7 +1066,7 @@ namespace HatFrameworkDev
         /* 
          * Методы для выполнения действий ============================================================
          * */
-        public async Task<bool> IsVisibleElement(string by, string locator)
+        public async Task<bool> IsVisibleElementAsync(string by, string locator)
         {
             bool found = false;
             try

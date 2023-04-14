@@ -2323,10 +2323,10 @@ string value = await frame.GetValueFromElementAsync(Tester.BY_XPATH, ""//input[@
 \cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
 \cf0\f0\lang1033 FRAMEElement frame = await tester.GetFrameAsync(0);\par
 bool clickable = await frame.IsClickableElementAsync(Tester.BY_CSS, ""#buttonLogin"");\par
-await tester.AssertTrueAsync(clickable);\par
+await frame.AssertTrueAsync(clickable);\par
 \par
 bool clickable = await frame.IsClickableElementAsync(Tester.BY_XPATH, ""//*[@id='buttonLogin']"");\par
-await tester.AssertTrueAsync(clickable);\par
+await frame.AssertTrueAsync(clickable);\par
 \par
     }",
 
@@ -3090,6 +3090,38 @@ tester.ConsoleMsg(hash);\par
 \cf0\f0\lang1033 tester.DisableDebugInReport();\par
 }",
 
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 IsVisibleElementAsync\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'ee\'ef\'f0\'e5\'e4\'e5\'eb\'ff\'e5\'f2 \'e2\'e8\'e4\'e8\'ec\'ee\'f1\'f2\'fc \'fd\'eb\'e5\'ec\'e5\'ed\'f2\'e0 \'e8 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2 \'e7\'ed\'e0\'f7\'e5\'ed\'e8\'e5 \f0\lang1033 true \f1\lang1049\'e8\'eb\'e8 \f0\lang1033 false\f1\lang1049\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : IsVisibleElementAsync(string by, string locator)\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0\f0\lang1033 bool result = await tester.IsVisibleElementAsync(Tester.BY_XPATH, ""//*[@id='login']"");\par
+\par
+bool result = await tester.IsVisibleElementAsync(Tester.BY_CSS, ""#login"");\par
+}",
+
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 IsVisibleElementAsync\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'ee\'ef\'f0\'e5\'e4\'e5\'eb\'ff\'e5\'f2 \'e2\'e8\'e4\'e8\'ec\'ee\'f1\'f2\'fc \'fd\'eb\'e5\'ec\'e5\'ed\'f2\'e0 \'e8 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2 \'e7\'ed\'e0\'f7\'e5\'ed\'e8\'e5 \f0\lang1033 true \f1\lang1049\'e8\'eb\'e8 \f0\lang1033 false\f1\lang1049\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : IsVisibleElementAsync(string by, string locator)\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0\f0\lang1033 FRAMEElement frame = await tester.GetFrameAsync(0);\par
+\par
+bool result = await frame.IsVisibleElementAsync(Tester.BY_XPATH, ""//*[@id='login']"");\par
+\par
+bool result = await frame.IsVisibleElementAsync(Tester.BY_CSS, ""#login"");\par
+\par
+await frame.AssertTrueAsync(result);\par
+}",
+
+@"",
+@"",
 @"",
 @"",
 @"",
@@ -3365,6 +3397,7 @@ tester.ConsoleMsg(hash);\par
             data.Add(new CompletionData("Index", "int Index { get; set; }"));
             data.Add(new CompletionData("IsClickableAsync", "IsClickableAsync()"));
             data.Add(new CompletionData("IsClickableElementAsync", "IsClickableElementAsync(string by, string locator)"));
+            data.Add(new CompletionData("IsVisibleElementAsync", "IsVisibleElementAsync(string by, string locator)"));
             data.Add(new CompletionData("Name", "string Name { get; set; }"));
             data.Add(new CompletionData("PASSED", "PASSED"));
             data.Add(new CompletionData("PROCESS", "PROCESS"));
@@ -3980,7 +4013,6 @@ tester.ConsoleMsg(hash);\par
                     if (value == "Description" && tag == "Tester") richTextBox1.Rtf = handbook[199];
                     if (value == "SendMessageDebug" && tag == "Tester") richTextBox1.Rtf = handbook[200];
                     if (value == "EditMessageDebug" && tag == "Tester") richTextBox1.Rtf = handbook[201];
-
                     if (value == "GetStyleAsync" && tag == "HTMLElement") richTextBox1.Rtf = handbook[202];
                     if (value == "SetStyleAsync" && tag == "HTMLElement") richTextBox1.Rtf = handbook[203];
                     if (value == "GetStyleFromElementAsync" && tag == "FRAMEElement") richTextBox1.Rtf = handbook[204];
@@ -3995,7 +4027,6 @@ tester.ConsoleMsg(hash);\par
                     if (value == "SetStyleInElementByIdAsync" && tag == "Tester") richTextBox1.Rtf = handbook[213];
                     if (value == "SetStyleInElementByNameAsync" && tag == "Tester") richTextBox1.Rtf = handbook[214];
                     if (value == "SetStyleInElementByTagAsync" && tag == "Tester") richTextBox1.Rtf = handbook[215];
-
                     if (value == "DEFAULT" && tag == "Tester") richTextBox1.Rtf = handbook[216];
                     if (value == "UTF8" && tag == "Tester") richTextBox1.Rtf = handbook[217];
                     if (value == "UTF8BOM" && tag == "Tester") richTextBox1.Rtf = handbook[218];
@@ -4006,10 +4037,10 @@ tester.ConsoleMsg(hash);\par
                     if (value == "FileGetHashMD5Async" && tag == "Tester") richTextBox1.Rtf = handbook[223];
                     if (value == "CreateHashMD5FromTextAsync" && tag == "Tester") richTextBox1.Rtf = handbook[224];
                     if (value == "DisableDebugInReport" && tag == "Tester") richTextBox1.Rtf = handbook[225];
+                    if (value == "IsVisibleElementAsync" && tag == "Tester") richTextBox1.Rtf = handbook[226];
+                    if (value == "IsVisibleElementAsync" && tag == "FRAMEElement") richTextBox1.Rtf = handbook[227];
 
                     /*
-                    if (value == "" && tag == "") richTextBox1.Rtf = handbook[226];
-                    if (value == "" && tag == "") richTextBox1.Rtf = handbook[227];
                     if (value == "" && tag == "") richTextBox1.Rtf = handbook[228];
                     if (value == "" && tag == "") richTextBox1.Rtf = handbook[229];
                     if (value == "" && tag == "") richTextBox1.Rtf = handbook[230];
