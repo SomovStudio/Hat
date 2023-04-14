@@ -1066,6 +1066,57 @@ namespace HatFrameworkDev
         /* 
          * Методы для выполнения действий ============================================================
          * */
+        private async Task<bool> IsVisibleElement(string by, string locator)
+        {
+            bool found = false;
+            try
+            {
+                if (by == BY_CSS || by == BY_XPATH)
+                {
+                    string script = "";
+                    script += "(function(){ ";
+                    if (by == BY_CSS) script += $"var elem = document.querySelector(\"{locator}\");";
+                    if (by == BY_XPATH) script += $"var elem = document.evaluate(\"{locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
+                    script += "const style = getComputedStyle(elem);";
+                    script += "if (style.display === 'none') return false;";
+                    script += "if (style.visibility !== 'visible') return false;";
+                    script += "if (style.opacity < 0.1) return false;";
+                    script += "if (elem.offsetWidth + elem.offsetHeight + elem.getBoundingClientRect().height + elem.getBoundingClientRect().width === 0) return false;";
+                    script += "const elemCenter = {";
+                    script += "x: elem.getBoundingClientRect().left,";
+                    script += "y: elem.getBoundingClientRect().top";
+                    script += "};";
+                    script += "if (elemCenter.x < (elem.offsetWidth * -1)) return false;";
+                    script += "if (elemCenter.x > (document.documentElement.clientWidth || window.innerWidth)) return false;";
+                    script += "if (elemCenter.y < (elem.offsetHeight * -1)) return false;";
+                    script += "if (elemCenter.y > (document.documentElement.clientHeight || window.innerHeight)) return false;";
+                    script += "return true;";
+                    script += "}());";
+
+                    string result = await executeJS(script);
+                    if (result != "null" && result != null && result == "true") found = true;
+                    else found = false;
+
+                    SendMessageDebug($"IsVisibleElement(\"{by}\", \"{locator}\")", $"IsVisibleElement(\"{by}\", \"{locator}\")", FAILED, "Результат проверки отображения элемента: " + found.ToString(), "Result of checking the display of the element: " + found.ToString(), IMAGE_STATUS_FAILED);
+                }
+                else
+                {
+                    SendMessageDebug($"IsVisibleElement(\"{by}\", \"{locator}\")", $"IsVisibleElement(\"{by}\", \"{locator}\")", FAILED, "Неудалось проверить отображение элемента (некорректно указан тип локатора)", "Failed to check the display of the element (the locator type is specified incorrectly)", IMAGE_STATUS_FAILED);
+                    TestStopAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                SendMessageDebug($"IsVisibleElement(\"{by}\", \"{locator}\")", $"IsVisibleElement(\"{by}\", \"{locator}\")", Tester.FAILED,
+                    "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(),
+                    "Error: " + ex.Message + Environment.NewLine + Environment.NewLine + "Full description of the error: " + ex.ToString(),
+                    Tester.IMAGE_STATUS_FAILED);
+                TestStopAsync();
+                ConsoleMsgError(ex.ToString());
+            }
+            return found;
+        }
+
         public async Task<HTMLElement> GetElementAsync(string by, string locator)
         {
             int step;
