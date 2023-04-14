@@ -1066,7 +1066,7 @@ namespace HatFrameworkDev
         /* 
          * Методы для выполнения действий ============================================================
          * */
-        private async Task<bool> IsVisibleElement(string by, string locator)
+        public async Task<bool> IsVisibleElement(string by, string locator)
         {
             bool found = false;
             try
@@ -1097,7 +1097,7 @@ namespace HatFrameworkDev
                     if (result != "null" && result != null && result == "true") found = true;
                     else found = false;
 
-                    SendMessageDebug($"IsVisibleElement(\"{by}\", \"{locator}\")", $"IsVisibleElement(\"{by}\", \"{locator}\")", FAILED, "Результат проверки отображения элемента: " + found.ToString(), "Result of checking the display of the element: " + found.ToString(), IMAGE_STATUS_FAILED);
+                    SendMessageDebug($"IsVisibleElement(\"{by}\", \"{locator}\")", $"IsVisibleElement(\"{by}\", \"{locator}\")", Tester.COMPLETED, "Результат проверки отображения элемента: " + found.ToString(), "Result of checking the display of the element: " + found.ToString(), Tester.IMAGE_STATUS_MESSAGE);
                 }
                 else
                 {
