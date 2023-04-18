@@ -241,12 +241,11 @@ namespace HatFrameworkDev
             string result = null;
             try
             {
-                if (Debug == true) ConsoleMsg($"[DEBUG] JS скрипт: {script}");
                 result = await BrowserView.CoreWebView2.ExecuteScriptAsync(script);
-                if (Debug == true) ConsoleMsg($"[DEBUG] JS результат: {result}");
                 if (result == "null" || result == null)
                 {
-                    SendMessageDebug(action, action, Tester.FAILED, "В результате выполнения JavaScript получено NULL. Неудалось корректно выполнить JavaScript: " + script, "The result of JavaScript execution is NULL. Failed to execute JavaScript correctly: " + script, Tester.IMAGE_STATUS_FAILED);
+                    if (Debug == true) SendMessageDebug(action, action, Tester.FAILED, "В результате выполнения JavaScript получено NULL. Неудалось корректно выполнить JavaScript: " + script, "The result of JavaScript execution is NULL. Failed to execute JavaScript correctly: " + script, Tester.IMAGE_STATUS_FAILED);
+                    else SendMessageDebug(action, action, Tester.FAILED, "В результате выполнения JavaScript получено NULL", "The result of JavaScript execution is NULL", Tester.IMAGE_STATUS_FAILED);
                     TestStopAsync();
                 }
             }
@@ -1048,7 +1047,7 @@ namespace HatFrameworkDev
                 if (Debug == true) ConsoleMsg($"[DEBUG] JS скрипт: {script}");
                 result = await BrowserView.CoreWebView2.ExecuteScriptAsync(script);
                 if (Debug == true) ConsoleMsg($"[DEBUG] JS результат: {result}");
-                SendMessageDebug($"ExecuteJavaScriptAsync(\"{script}\")", $"ExecuteJavaScriptAsync(\"{script}\")", PASSED, "Скрипт выполнен", "The script is executed", IMAGE_STATUS_PASSED);
+                SendMessageDebug($"ExecuteJavaScriptAsync(\"{script}\")", $"ExecuteJavaScriptAsync(\"{script}\")", PASSED, "Скрипт выполнен. Результат: " + result, "The script is executed. Result: " + result, IMAGE_STATUS_PASSED);
             }
             catch (Exception ex)
             {
@@ -2985,7 +2984,7 @@ namespace HatFrameworkDev
                 }
                 else
                 {
-                    SendMessageDebug($"ScrollToElementAsync(\"{by}\", \"{locator}\", {behaviorSmooth})", $"ScrollToElementAsync(\"{by}\", \"{locator}\", {behaviorSmooth})", Tester.PASSED, "Прокрутка (scroll) к элементу - выполнен", "Scrolled to the element - completed", Tester.IMAGE_STATUS_PASSED);
+                    SendMessageDebug($"ScrollToElementAsync(\"{by}\", \"{locator}\", {behaviorSmooth})", $"ScrollToElementAsync(\"{by}\", \"{locator}\", {behaviorSmooth})", Tester.PASSED, "Выполнена прокрутка (scroll) к элементу", "Scrolled to the element - completed", Tester.IMAGE_STATUS_PASSED);
                 }
             }
             catch (Exception ex)
