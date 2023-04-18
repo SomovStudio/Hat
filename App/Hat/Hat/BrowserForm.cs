@@ -431,7 +431,13 @@ namespace Hat
                 this.subitem.Text = action;
                 this.item.SubItems.Add(subitem);
                 this.subitem = new ListViewItem.ListViewSubItem();
-                this.subitem.Text = status;
+                if (status == Tester.PASSED) this.subitem.Text = "Успешно";
+                else if (status == Tester.FAILED) this.subitem.Text = "Неудача";
+                else if (status == Tester.STOPPED) this.subitem.Text = "Остановлено";
+                else if (status == Tester.PROCESS) this.subitem.Text = "В процессе";
+                else if (status == Tester.COMPLETED) this.subitem.Text = "Выполнено";
+                else if (status == Tester.WARNING) this.subitem.Text = "Предупреждение";
+                else this.subitem.Text = "";
                 this.item.SubItems.Add(subitem);
                 this.subitem = new ListViewItem.ListViewSubItem();
                 this.subitem.Text = comment;
