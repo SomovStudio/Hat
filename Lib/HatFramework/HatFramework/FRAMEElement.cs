@@ -483,7 +483,7 @@ namespace HatFramework
                 if (_tester.Debug == true) _tester.ConsoleMsg($"[DEBUG] JS скрипт: {script}");
                 string result = await _tester.BrowserView.CoreWebView2.ExecuteScriptAsync(script);
                 if (_tester.Debug == true) _tester.ConsoleMsg($"[DEBUG] JS результат: {result}");
-                _tester.SendMessageDebug($"ScrollToElementAsync(\"{by}\", \"{locator}\", {behaviorSmooth})", $"ScrollToElementAsync(\"{by}\", \"{locator}\", {behaviorSmooth})", Tester.PASSED, "Прокрутил к элементу - выполнена", "Scrolled to the element - completed", Tester.IMAGE_STATUS_PASSED);
+                _tester.SendMessageDebug($"ScrollToElementAsync(\"{by}\", \"{locator}\", {behaviorSmooth})", $"ScrollToElementAsync(\"{by}\", \"{locator}\", {behaviorSmooth})", Tester.PASSED, "Выполнена прокрутка (scroll) к элементу", "Scrolled to the element - completed", Tester.IMAGE_STATUS_PASSED);
             }
             catch (Exception ex)
             {

@@ -494,7 +494,6 @@ namespace HatFramework
 
         public async Task ScrollToAsync(bool behaviorSmooth = false)
         {
-            //int step = _tester.SendMessageDebug($"ScrollToAsync(\"{behaviorSmooth}\")", $"ScrollToAsync(\"{behaviorSmooth}\")", Tester.PROCESS, "Прокрутить к элементу", "Fasten to the element", Tester.IMAGE_STATUS_PROCESS);
             if (_tester.DefineTestStop() == true) return;
 
             string script = null;
@@ -523,7 +522,7 @@ namespace HatFramework
             }
             else
             {
-                _tester.SendMessageDebug($"ScrollToAsync(\"{behaviorSmooth}\")", $"ScrollToAsync(\"{behaviorSmooth}\")", Tester.PASSED, "Прокрутка (scroll) к элементу - выполнен", "Scrolled to the element - completed", Tester.IMAGE_STATUS_PASSED);
+                _tester.SendMessageDebug($"ScrollToAsync(\"{behaviorSmooth}\")", $"ScrollToAsync(\"{behaviorSmooth}\")", Tester.PASSED, "Выполнена прокрутка (scroll) к элементу", "Scrolled to the element - completed", Tester.IMAGE_STATUS_PASSED);
             }
         }
 
