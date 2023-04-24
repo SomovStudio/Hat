@@ -241,11 +241,15 @@ namespace HatFramework
             string result = null;
             try
             {
+                if (Debug == true) ConsoleMsg($"[DEBUG] {action} - JS скрипт: {script}");
                 result = await BrowserView.CoreWebView2.ExecuteScriptAsync(script);
+                if (Debug == true) ConsoleMsg($"[DEBUG] {action} - JS результат: {result}");
                 if (result == "null" || result == null)
                 {
-                    if (Debug == true) SendMessageDebug(action, action, Tester.FAILED, "В результате выполнения JavaScript получено NULL. Неудалось корректно выполнить JavaScript: " + script, "The result of JavaScript execution is NULL. Failed to execute JavaScript correctly: " + script, Tester.IMAGE_STATUS_FAILED);
-                    else SendMessageDebug(action, action, Tester.FAILED, "В результате выполнения JavaScript получено NULL", "The result of JavaScript execution is NULL", Tester.IMAGE_STATUS_FAILED);
+                    if (Debug == true) SendMessageDebug(action, action, Tester.FAILED,
+                        "В результате выполнения JavaScript получено NULL. Неудалось корректно выполнить JavaScript: " + script,
+                        "The result of JavaScript execution is NULL. Failed to execute JavaScript correctly: " + script,
+                        Tester.IMAGE_STATUS_FAILED);
                     TestStopAsync();
                 }
             }

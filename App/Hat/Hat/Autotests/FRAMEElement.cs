@@ -30,14 +30,14 @@ namespace HatFrameworkDev
             string result = null;
             try
             {
-                if (_tester.Debug == true) _tester.ConsoleMsg($"[DEBUG] JS скрипт: {script}");
+                if (_tester.Debug == true) _tester.ConsoleMsg($"[DEBUG] {action} - JS скрипт: {script}");
                 result = await _tester.BrowserView.CoreWebView2.ExecuteScriptAsync(script);
-                if (_tester.Debug == true) _tester.ConsoleMsg($"[DEBUG] JS результат: {result}");
+                if (_tester.Debug == true) _tester.ConsoleMsg($"[DEBUG] {action} - JS результат: {result}");
                 if (result == "null" || result == null)
                 {
-                    _tester.SendMessageDebug(action, action, Tester.FAILED,
-                        $"В результате выполнения JavaScript получено NULL. Неудалось корректно выполнить JavaScript: {script}" + Environment.NewLine + $"Результат выполнения скрипта: {result}",
-                        $"The result of JavaScript execution is NULL. Failed to execute JavaScript correctly: {script}" + Environment.NewLine + $"The result of the script execution: {result}",
+                    if (_tester.Debug == true) _tester.SendMessageDebug(action, action, Tester.FAILED,
+                        $"В результате выполнения JavaScript получено NULL. Неудалось корректно выполнить JavaScript: {script}",
+                        $"The result of JavaScript execution is NULL. Failed to execute JavaScript correctly: {script}",
                         Tester.IMAGE_STATUS_FAILED);
                     _tester.TestStopAsync();
                 }
