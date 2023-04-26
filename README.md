@@ -43,7 +43,7 @@
 <br>
 Уроки:
 <ul>
-	<li><a href="https://youtu.be/4qyzbEASw3E" target="_blank">Урок №1</a>: Проекта под Visual Studio и пример описания демонстрационного автотеста</li>
+	<li><a href="https://youtu.be/4qyzbEASw3E" target="_blank">Урок №1</a>: Проект под Visual Studio и пример описания демонстрационного автотеста</li>
 	<li><a href="https://youtu.be/WdfLl0Ys8y0" target="_blank">Урок №2</a>: Выполнение JavaScript кода в теле автотеста</li>
 	<li><a href="https://youtu.be/dPRx4bqvZ4w" target="_blank">Урок №3</a>: Автотест для проверки API и обработки полученного результата в JSON формате</li>
 	<li><a href="https://youtu.be/bsQvmcQJ6Vg" target="_blank">Урок №4</a>: Автотест для проверки карты сайта (sitemap.xml)</li>
