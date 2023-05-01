@@ -320,10 +320,10 @@ catch (Exception ex)\par
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 SendMessage\cf0\par
 \cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'fb\'e2\'ee\'e4\'e8\'f2 \'f1\'ee\'ee\'e1\'f9\'e5\'ed\'e8\'ff \'e2 \'f2\'e0\'e1\'eb\'e8\'f6\'e5 \'ef\'f0\'ee\'f6\'e5\'f1\'f1\'e0 \'e2\'fb\'ef\'ee\'eb\'ed\'e5\'ed\'e8\'ff \'f2\'e5\'f1\'f2\'e0\par
-\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : SendMessage(string action, string status, string comment, int image)\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : SendMessage(string action, string status, string comment)\par
 \cf3\par
 \cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
-\cf0 int step = \f0\lang1033 tester.\f1\lang1049 SendMessage(""\'f2\'e5\'ea\'f1\'f2 \'e4\'e5\'e9\'f1\'f2\'e2\'e8\'ff"", \f0\lang1033 Tester.\f1\lang1049 PROCESS, ""\'f2\'e5\'ea\'f1\'f2 \'ea\'ee\'ec\'ec\'e5\'ed\'f2\'e0\'f0\'e8\'ff"", \f0\lang1033 Tester.\f1\lang1049 IMAGE_STATUS_PROCESS);\par
+\cf0 SendMessage(""\'f2\'e5\'ea\'f1\'f2 \'e4\'e5\'e9\'f1\'f2\'e2\'e8\'ff"", \f0\lang1033 Tester.\f1\lang1049 PROCESS, ""\'f2\'e5\'ea\'f1\'f2 \'ea\'ee\'ec\'ec\'e5\'ed\'f2\'e0\'f0\'e8\'ff"");\par
 }",
 
 @"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
@@ -378,10 +378,10 @@ catch (Exception ex)\par
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 DefineTestStop\cf0\par
 \cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'ef\'f0\'ee\'e2\'e5\'f0\'ff\'e5\'f2 \'f1\'f2\'e0\'f2\'f3\'f1 \'ef\'f0\'ee\'f6\'e5\'f1\'f1\'e0 (\'ee\'f1\'f2\'e0\'ed\'ee\'e2\'eb\'e5\'ed \'e8\'eb\'e8 \'ed\'e5\'f2)\par
-\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : DefineTestStop(int stepIndex)\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : DefineTestStop()\par
 \cf3\par
 \cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
-\cf0\f0\lang1033 if (tester.DefineTestStop(step) == true) return;\f1\lang1049\par
+\cf0\f0\lang1033 if (tester.DefineTestStop() == true) return;\f1\lang1049\par
 }",
 
 @"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
@@ -2323,10 +2323,10 @@ string value = await frame.GetValueFromElementAsync(Tester.BY_XPATH, ""//input[@
 \cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
 \cf0\f0\lang1033 FRAMEElement frame = await tester.GetFrameAsync(0);\par
 bool clickable = await frame.IsClickableElementAsync(Tester.BY_CSS, ""#buttonLogin"");\par
-await tester.AssertTrueAsync(clickable);\par
+await frame.AssertTrueAsync(clickable);\par
 \par
 bool clickable = await frame.IsClickableElementAsync(Tester.BY_XPATH, ""//*[@id='buttonLogin']"");\par
-await tester.AssertTrueAsync(clickable);\par
+await frame.AssertTrueAsync(clickable);\par
 \par
     }",
 
@@ -2787,7 +2787,7 @@ tester.ConsoleMsg(events);\par
 \cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : SendMessageDebug(string actionRus, string actionEng, string status,  string commentRus, string commentEng, int image)\par
 \cf3\par
 \cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
-\cf0 int step = \f0\lang1033 tester.\f1\lang1049 SendMessageDebug(""\'e4\'e5\'e9\'f1\'f2\'e2\'e8\'ff"", \f0\lang1033 ""action"",\f1\lang1049  \f0\lang1033 Tester.\f1\lang1049 PROCESS, ""\'ea\'ee\'ec\'ec\'e5\'ed\'f2\'e0\'f0\'e8\'e9"", \f0\lang1033 ""comment"", \f1\lang1049  \f0\lang1033 Tester.\f1\lang1049 IMAGE_STATUS_PROCESS);\par
+\cf0 SendMessageDebug(""\'e4\'e5\'e9\'f1\'f2\'e2\'e8\'ff"", \f0\lang1033 ""action"",\f1\lang1049  \f0\lang1033 Tester.\f1\lang1049 PROCESS, ""\'ea\'ee\'ec\'ec\'e5\'ed\'f2\'e0\'f0\'e8\'e9"", \f0\lang1033 ""comment"", \f1\lang1049  \f0\lang1033 Tester.\f1\lang1049 IMAGE_STATUS_PROCESS);\par
 
 \pard\sa200\sl276\slmult1\f0\fs22\lang9\par
 }",
@@ -3079,6 +3079,48 @@ string hash = await tester.CreateHashMD5FromTextAsync(text);\par
 tester.ConsoleMsg(hash);\par
 }",
 
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 DisableDebugInReport\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'ee\'f2\'ea\'eb\'fe\'f7\'e0\'e5\'f2 \'e2\'fb\'e2\'ee\'e4 \'ee\'f2\'eb\'e0\'e4\'ee\'f7\'ed\'fb\'f5 \'f1\'ee\'ee\'e1\'f9\'e5\'ed\'e8\'e9 SendMessageDebug \'e2 \'ee\'f2\'f7\'e5\'f2\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : DisableDebugInReport()\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0\f0\lang1033 tester.DisableDebugInReport();\par
+}",
+
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 IsVisibleElementAsync\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'ee\'ef\'f0\'e5\'e4\'e5\'eb\'ff\'e5\'f2 \'e2\'e8\'e4\'e8\'ec\'ee\'f1\'f2\'fc \'fd\'eb\'e5\'ec\'e5\'ed\'f2\'e0 \'e8 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2 \'e7\'ed\'e0\'f7\'e5\'ed\'e8\'e5 \f0\lang1033 true \f1\lang1049\'e8\'eb\'e8 \f0\lang1033 false\f1\lang1049\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : IsVisibleElementAsync(string by, string locator)\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0\f0\lang1033 bool result = await tester.IsVisibleElementAsync(Tester.BY_XPATH, ""//*[@id='login']"");\par
+\par
+bool result = await tester.IsVisibleElementAsync(Tester.BY_CSS, ""#login"");\par
+}",
+
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 IsVisibleElementAsync\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'ee\'ef\'f0\'e5\'e4\'e5\'eb\'ff\'e5\'f2 \'e2\'e8\'e4\'e8\'ec\'ee\'f1\'f2\'fc \'fd\'eb\'e5\'ec\'e5\'ed\'f2\'e0 \'e8 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2 \'e7\'ed\'e0\'f7\'e5\'ed\'e8\'e5 \f0\lang1033 true \f1\lang1049\'e8\'eb\'e8 \f0\lang1033 false\f1\lang1049\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : IsVisibleElementAsync(string by, string locator)\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0\f0\lang1033 FRAMEElement frame = await tester.GetFrameAsync(0);\par
+\par
+bool result = await frame.IsVisibleElementAsync(Tester.BY_XPATH, ""//*[@id='login']"");\par
+\par
+bool result = await frame.IsVisibleElementAsync(Tester.BY_CSS, ""#login"");\par
+\par
+await frame.AssertTrueAsync(result);\par
+}",
+
+@"",
 @"",
 @"",
 @"",
@@ -3278,10 +3320,9 @@ tester.ConsoleMsg(hash);\par
             data.Add(new CompletionData("ConsoleMsgError", "ConsoleMsgError(string message)"));
             data.Add(new CompletionData("CreateHashMD5FromTextAsync", "CreateHashMD5FromTextAsync(string text)"));
             data.Add(new CompletionData("DEFAULT", "DEFAULT"));
-            data.Add(new CompletionData("DefineTestStop", "DefineTestStop(int stepIndex)"));
+            data.Add(new CompletionData("DefineTestStop", "DefineTestStop()"));
             data.Add(new CompletionData("Description", "Description(string text)"));
-            data.Add(new CompletionData("EditMessage", "EditMessage(int index, string action, string status, string comment, int image)"));
-            data.Add(new CompletionData("EditMessageDebug", "EditMessageDebug(int index, string actionRus, string actionEng, string status, string commentRus, string commentEng, int image)"));
+            data.Add(new CompletionData("DisableDebugInReport", "DisableDebugInReport()"));
             data.Add(new CompletionData("ExecuteJavaScriptAsync", "ExecuteJavaScriptAsync(string script)"));
             data.Add(new CompletionData("FAILED", "FAILED"));
             data.Add(new CompletionData("FindElementAsync", "FindElementAsync(string by, string locator, int sec)"));
@@ -3356,6 +3397,7 @@ tester.ConsoleMsg(hash);\par
             data.Add(new CompletionData("Index", "int Index { get; set; }"));
             data.Add(new CompletionData("IsClickableAsync", "IsClickableAsync()"));
             data.Add(new CompletionData("IsClickableElementAsync", "IsClickableElementAsync(string by, string locator)"));
+            data.Add(new CompletionData("IsVisibleElementAsync", "IsVisibleElementAsync(string by, string locator)"));
             data.Add(new CompletionData("Name", "string Name { get; set; }"));
             data.Add(new CompletionData("PASSED", "PASSED"));
             data.Add(new CompletionData("PROCESS", "PROCESS"));
@@ -3366,7 +3408,7 @@ tester.ConsoleMsg(hash);\par
             data.Add(new CompletionData("ScrollToAsync", "ScrollToAsync(bool behaviorSmooth = false)"));
             data.Add(new CompletionData("ScrollToElementAsync", "ScrollToElementAsync(string by, string locator, bool behaviorSmooth = false)"));
             data.Add(new CompletionData("SelectOptionAsync", "SelectOptionAsync(string by, string value)"));
-            data.Add(new CompletionData("SendMessage", "SendMessage(string action, string status, string comment, int image)"));
+            data.Add(new CompletionData("SendMessage", "SendMessage(string action, string status, string comment)"));
             data.Add(new CompletionData("SendMessageDebug", "SendMessageDebug(string actionRus, string actionEng, string status,  string commentRus, string commentEng, int image)"));
             data.Add(new CompletionData("SendMsgToMailAsync", "SendMsgToMailAsync(string subject, string body, string filename = \"\", string addresses = \"\")"));
             data.Add(new CompletionData("SendMsgToTelegramAsync", "SendMsgToTelegramAsync(string botToken, string chatId, string text, string charset = \"UTF-8\")"));
@@ -3971,7 +4013,6 @@ tester.ConsoleMsg(hash);\par
                     if (value == "Description" && tag == "Tester") richTextBox1.Rtf = handbook[199];
                     if (value == "SendMessageDebug" && tag == "Tester") richTextBox1.Rtf = handbook[200];
                     if (value == "EditMessageDebug" && tag == "Tester") richTextBox1.Rtf = handbook[201];
-
                     if (value == "GetStyleAsync" && tag == "HTMLElement") richTextBox1.Rtf = handbook[202];
                     if (value == "SetStyleAsync" && tag == "HTMLElement") richTextBox1.Rtf = handbook[203];
                     if (value == "GetStyleFromElementAsync" && tag == "FRAMEElement") richTextBox1.Rtf = handbook[204];
@@ -3986,7 +4027,6 @@ tester.ConsoleMsg(hash);\par
                     if (value == "SetStyleInElementByIdAsync" && tag == "Tester") richTextBox1.Rtf = handbook[213];
                     if (value == "SetStyleInElementByNameAsync" && tag == "Tester") richTextBox1.Rtf = handbook[214];
                     if (value == "SetStyleInElementByTagAsync" && tag == "Tester") richTextBox1.Rtf = handbook[215];
-
                     if (value == "DEFAULT" && tag == "Tester") richTextBox1.Rtf = handbook[216];
                     if (value == "UTF8" && tag == "Tester") richTextBox1.Rtf = handbook[217];
                     if (value == "UTF8BOM" && tag == "Tester") richTextBox1.Rtf = handbook[218];
@@ -3996,11 +4036,11 @@ tester.ConsoleMsg(hash);\par
                     if (value == "FileDownloadAsync" && tag == "Tester") richTextBox1.Rtf = handbook[222];
                     if (value == "FileGetHashMD5Async" && tag == "Tester") richTextBox1.Rtf = handbook[223];
                     if (value == "CreateHashMD5FromTextAsync" && tag == "Tester") richTextBox1.Rtf = handbook[224];
+                    if (value == "DisableDebugInReport" && tag == "Tester") richTextBox1.Rtf = handbook[225];
+                    if (value == "IsVisibleElementAsync" && tag == "Tester") richTextBox1.Rtf = handbook[226];
+                    if (value == "IsVisibleElementAsync" && tag == "FRAMEElement") richTextBox1.Rtf = handbook[227];
 
                     /*
-                    if (value == "" && tag == "") richTextBox1.Rtf = handbook[225];
-                    if (value == "" && tag == "") richTextBox1.Rtf = handbook[226];
-                    if (value == "" && tag == "") richTextBox1.Rtf = handbook[227];
                     if (value == "" && tag == "") richTextBox1.Rtf = handbook[228];
                     if (value == "" && tag == "") richTextBox1.Rtf = handbook[229];
                     if (value == "" && tag == "") richTextBox1.Rtf = handbook[230];

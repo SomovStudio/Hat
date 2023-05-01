@@ -13,7 +13,6 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Microsoft.Web.WebView2.Core;
 using HatFramework;
-using System.Xml.Linq;
 
 namespace Hat
 {
@@ -30,7 +29,7 @@ namespace Hat
             Config.encoding = WorkOnFiles.UTF_8_BOM;
             toolStripStatusLabelFileEncoding.Text = Config.encoding;
             Config.browserForm = this;
-            ConsoleMsg($"Браузер Hat версия {Config.currentBrowserVersion} ({Config.dateBrowserUpdate})");
+            ConsoleMsg($"Браузер {AppDomain.CurrentDomain.FriendlyName} версия {Config.currentBrowserVersion} ({Config.dateBrowserUpdate})");
             SystemConsoleMsg("", default, default, default, true);
             if(Config.languageEngConsole == false) SystemConsoleMsg($"Браузер Hat версия {Config.currentBrowserVersion} ({Config.dateBrowserUpdate})", default, ConsoleColor.DarkGray, ConsoleColor.White, true);
             else SystemConsoleMsg($"Browser Hat version {Config.currentBrowserVersion} ({Config.dateBrowserUpdate})", default, ConsoleColor.DarkGray, ConsoleColor.White, true);
@@ -54,12 +53,13 @@ namespace Hat
                 ConsoleMsg("Кэш не очищен, произошла ошибка: " + Config.statucCacheClear);
             }
         }
-              
 
         private bool stopTest = false;
-        //private bool testSuccess = true;
         private StepTestForm stepTestForm;
         private CodeEditorForm codeEditorForm;
+        private int step = 0;
+        private ListViewItem item;
+        private ListViewItem.ListViewSubItem subitem;
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -77,9 +77,9 @@ namespace Hat
 
                 if (Config.commandLineMode == true)
                 {
-                    if (Config.languageEngConsole == false) SystemConsoleMsg("Запуск браузера...", default, ConsoleColor.DarkGray, ConsoleColor.White, true);
-                    else SystemConsoleMsg("Launching the browser...", default, ConsoleColor.DarkGray, ConsoleColor.White, true);
-                    ConsoleMsg("Запуск браузера Hat из командной строки");
+                    if (Config.languageEngConsole == false) SystemConsoleMsg($"Запуск браузера {AppDomain.CurrentDomain.FriendlyName} ...", default, ConsoleColor.DarkGray, ConsoleColor.White, true);
+                    else SystemConsoleMsg($"Launching the browser {AppDomain.CurrentDomain.FriendlyName} ...", default, ConsoleColor.DarkGray, ConsoleColor.White, true);
+                    ConsoleMsg($"Запуск браузера {AppDomain.CurrentDomain.FriendlyName} из командной строки");
                     toolStripStatusLabelProjectPath.Text = Config.projectPath;
                     // Строится дерево папок и файлов
                     treeViewProject.Nodes.Clear();
@@ -103,6 +103,11 @@ namespace Hat
             {
                 ConsoleMsgError(ex.ToString());
             }
+        }
+
+        private void BrowserForm_Resize(object sender, EventArgs e)
+        {
+            toolStripComboBoxUrl.Width = this.Width / 2;
         }
 
         private void закрытьToolStripMenuItem_Click(object sender, EventArgs e)
@@ -403,11 +408,11 @@ namespace Hat
             }
         }
 
-        public int SendMessageStep(string action, string status, string comment, int image, bool debug) // отправляет сообщение в таблицу "тест"
+        public void SendMessageStep(string action, string status, string comment, int image, bool debug) // отправляет сообщение в таблицу "тест"
         {
             if (debug == true)
             {
-                if (Config.fullReport == true || status == Report.ERROR || status == Report.FAILED 
+                if (Config.fullReport == true || status == Report.ERROR || status == Report.FAILED
                     || action == "Testing has started" || action == "Testing completed"
                     || action == "Тестирование началось" || action == "Тестирование завершено")
                 {
@@ -418,54 +423,33 @@ namespace Hat
             {
                 Report.AddStep(status, action, comment);
             }
-
-            ListViewItem item;
-            ListViewItem.ListViewSubItem subitem;
-            item = new ListViewItem();
-            subitem = new ListViewItem.ListViewSubItem();
-            subitem.Text = action;
-            item.SubItems.Add(subitem);
-            subitem = new ListViewItem.ListViewSubItem();
-            subitem.Text = status;
-            item.SubItems.Add(subitem);
-            subitem = new ListViewItem.ListViewSubItem();
-            subitem.Text = comment;
-            item.SubItems.Add(subitem);
-            item.ImageIndex = image;
-            listViewTest.Items.Add(item);
-            int index = listViewTest.Items.Count - 1;
-            listViewTest.Items[index].Selected = true;
-            listViewTest.Items[index].EnsureVisible();
-            return index;
-        }
-
-        public void EditMessageStep(int index, string action, string status, string comment, int image, bool debug) // изменить уже отправленное сообщение в таблице "тест"
-        {
-            try
+            
+            if (Config.commandLineMode == false) // в консольном режиме выполнения автотеста - шаги в таблицу не добавляются
             {
-                if (image != null) listViewTest.Items[index].ImageIndex = image;
-                if (action != null) listViewTest.Items[index].SubItems[1].Text = action;
-                if (status != null) listViewTest.Items[index].SubItems[2].Text = status;
-                if (comment != null) listViewTest.Items[index].SubItems[3].Text = comment;
+                this.item = new ListViewItem();
+                this.subitem = new ListViewItem.ListViewSubItem();
+                this.subitem.Text = action;
+                this.item.SubItems.Add(subitem);
+                this.subitem = new ListViewItem.ListViewSubItem();
+                if (status == Tester.PASSED) this.subitem.Text = "Успешно";
+                else if (status == Tester.FAILED) this.subitem.Text = "Неудача";
+                else if (status == Tester.STOPPED) this.subitem.Text = "Остановлено";
+                else if (status == Tester.PROCESS) this.subitem.Text = "В процессе";
+                else if (status == Tester.COMPLETED) this.subitem.Text = "Выполнено";
+                else if (status == Tester.WARNING) this.subitem.Text = "Предупреждение";
+                else this.subitem.Text = "";
+                this.item.SubItems.Add(subitem);
+                this.subitem = new ListViewItem.ListViewSubItem();
+                this.subitem.Text = comment;
+                this.item.SubItems.Add(this.subitem);
+                this.item.ImageIndex = image;
+                listViewTest.Items.Add(this.item);
+                this.step = listViewTest.Items.Count - 1;
+                listViewTest.Items[step].Selected = true;
+                listViewTest.Items[step].EnsureVisible();
+            }
 
-                if (debug == true)
-                {
-                    if (Config.fullReport == true || listViewTest.Items[index].SubItems[2].Text == Report.ERROR || listViewTest.Items[index].SubItems[2].Text == Report.FAILED 
-                        || listViewTest.Items[index].SubItems[1].Text == "Testing has started" || listViewTest.Items[index].SubItems[1].Text == "Testing completed" 
-                        || listViewTest.Items[index].SubItems[1].Text == "Тестирование началось" || listViewTest.Items[index].SubItems[1].Text == "Тестирование завершено")
-                    {
-                        Report.AddStep(listViewTest.Items[index].SubItems[2].Text, listViewTest.Items[index].SubItems[1].Text, listViewTest.Items[index].SubItems[3].Text);
-                    }
-                }
-                else
-                {
-                    Report.AddStep(listViewTest.Items[index].SubItems[2].Text, listViewTest.Items[index].SubItems[1].Text, listViewTest.Items[index].SubItems[3].Text);
-                }
-            }
-            catch (Exception ex)
-            {
-                ConsoleMsgError(ex.ToString());
-            }
+            GC.Collect(); // очистка памяти
         }
 
         public void BrowserResize(int width, int height) // изменить размер браузера
@@ -482,6 +466,18 @@ namespace Hat
                 {
                     radioButton1.Checked = true;
                 }
+            }
+            catch (Exception ex)
+            {
+                ConsoleMsgError(ex.ToString());
+            }
+        }
+
+        public void DisableDebugInReport()
+        {
+            try
+            {
+                Config.fullReport = false;
             }
             catch (Exception ex)
             {
@@ -1135,6 +1131,7 @@ namespace Hat
 
                     Config.projectPath += "\\Tests";
                     fileProject = "\\project.hat";
+                    toolStripStatusLabelProjectPath.Text = Config.projectPath;
 
                     // Строится дерево папок и файлов
                     treeViewProject.Nodes.Clear();
@@ -2796,6 +2793,7 @@ namespace Hat
             {
                 //menuStrip1.Visible = false;
                 //toolStrip1.Visible = false;
+                testingPanelToolStripMenuItem.Checked = false;
                 splitContainer1.Panel2Collapsed = true;
                 ConsoleMsg("Интерфейс браузера отключен");
             }
@@ -3088,6 +3086,18 @@ namespace Hat
         {
             if (Config.projectPath == "(не открыт)") ConsoleMsg("Проект не открыт! Невозможно сформировать отчет с результатами всех тестов");
             else Report.SaveResultReport();
+        }
+
+        private void updateToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                System.Diagnostics.Process.Start(@"https://github.com/SomovStudio/Hat/releases");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка");
+            }
         }
     }
 }

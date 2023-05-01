@@ -12,8 +12,11 @@
 Результат проверки формируется в отчет и отправляются на указаную почту. 
 Запуск автотестов возможен из командной строки операционной системы Windows это пригодится при использовании автотестов в популярных средствах непрерывной интеграции таких как: Jenkins, TeamCity, GitLab CI/CD.
 <br>
-<br>Скачать приложение: https://github.com/SomovStudio/Hat/releases/download/v1.2.3/Hat-1.2.3.zip
-<br>(последнее обновление 03.04.2023 версия 1.2.3)
+<br>Скачать браузер Hat: https://github.com/SomovStudio/Hat/releases/download/v1.3/Hat-1.3.zip
+<br>(новая оптимизированная версия 1.3 с изменениями в фреймворке)
+<br>
+<br>Скачать браузер Hat: https://github.com/SomovStudio/Hat/releases/download/v1.2.3/Hat-1.2.3.zip
+<br>(последняя версия 1.2.3 перед глобальными изменениями в фреймворке)
 <hr>
 
 <p align="center">
@@ -40,7 +43,7 @@
 <br>
 Уроки:
 <ul>
-	<li><a href="https://youtu.be/4qyzbEASw3E" target="_blank">Урок №1</a>: Проекта под Visual Studio и пример описания демонстрационного автотеста</li>
+	<li><a href="https://youtu.be/4qyzbEASw3E" target="_blank">Урок №1</a>: Проект под Visual Studio и пример описания демонстрационного автотеста</li>
 	<li><a href="https://youtu.be/WdfLl0Ys8y0" target="_blank">Урок №2</a>: Выполнение JavaScript кода в теле автотеста</li>
 	<li><a href="https://youtu.be/dPRx4bqvZ4w" target="_blank">Урок №3</a>: Автотест для проверки API и обработки полученного результата в JSON формате</li>
 	<li><a href="https://youtu.be/bsQvmcQJ6Vg" target="_blank">Урок №4</a>: Автотест для проверки карты сайта (sitemap.xml)</li>

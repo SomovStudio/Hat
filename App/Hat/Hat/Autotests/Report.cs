@@ -355,7 +355,7 @@ img { min-width: 700px; max-width: 700px; }
                             if (Config.languageEngReportMail == false)
                             {
                                 if (step[0] == Report.PASSED) content += $"<td class=\"table-status table-row status-passed\">Успешно</td>" + Environment.NewLine;
-                                if (step[0] == Report.FAILED) content += $"<td class=\"table-status table-row status-failed\">Провально</td>" + Environment.NewLine;
+                                if (step[0] == Report.FAILED) content += $"<td class=\"table-status table-row status-failed\">Неудача</td>" + Environment.NewLine;
                                 if (step[0] == Report.STOPPED) content += $"<td class=\"table-status table-row status-stopped\">Остановлен</td>" + Environment.NewLine;
                                 if (step[0] == Report.PROCESS) content += $"<td class=\"table-status table-row status-process\">В процессе</td>" + Environment.NewLine;
                                 if (step[0] == Report.COMPLETED) content += $"<td class=\"table-status table-row status-completed\">Выполнено</td>" + Environment.NewLine;
