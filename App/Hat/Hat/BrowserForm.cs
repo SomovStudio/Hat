@@ -29,7 +29,7 @@ namespace Hat
             Config.encoding = WorkOnFiles.UTF_8_BOM;
             toolStripStatusLabelFileEncoding.Text = Config.encoding;
             Config.browserForm = this;
-            ConsoleMsg($"Браузер Hat версия {Config.currentBrowserVersion} ({Config.dateBrowserUpdate})");
+            ConsoleMsg($"Браузер {AppDomain.CurrentDomain.FriendlyName} версия {Config.currentBrowserVersion} ({Config.dateBrowserUpdate})");
             SystemConsoleMsg("", default, default, default, true);
             if(Config.languageEngConsole == false) SystemConsoleMsg($"Браузер Hat версия {Config.currentBrowserVersion} ({Config.dateBrowserUpdate})", default, ConsoleColor.DarkGray, ConsoleColor.White, true);
             else SystemConsoleMsg($"Browser Hat version {Config.currentBrowserVersion} ({Config.dateBrowserUpdate})", default, ConsoleColor.DarkGray, ConsoleColor.White, true);
@@ -77,9 +77,9 @@ namespace Hat
 
                 if (Config.commandLineMode == true)
                 {
-                    if (Config.languageEngConsole == false) SystemConsoleMsg("Запуск браузера...", default, ConsoleColor.DarkGray, ConsoleColor.White, true);
-                    else SystemConsoleMsg("Launching the browser...", default, ConsoleColor.DarkGray, ConsoleColor.White, true);
-                    ConsoleMsg("Запуск браузера Hat из командной строки");
+                    if (Config.languageEngConsole == false) SystemConsoleMsg($"Запуск браузера {AppDomain.CurrentDomain.FriendlyName} ...", default, ConsoleColor.DarkGray, ConsoleColor.White, true);
+                    else SystemConsoleMsg($"Launching the browser {AppDomain.CurrentDomain.FriendlyName} ...", default, ConsoleColor.DarkGray, ConsoleColor.White, true);
+                    ConsoleMsg($"Запуск браузера {AppDomain.CurrentDomain.FriendlyName} из командной строки");
                     toolStripStatusLabelProjectPath.Text = Config.projectPath;
                     // Строится дерево папок и файлов
                     treeViewProject.Nodes.Clear();

@@ -36,9 +36,9 @@ namespace Hat
         public static string selectName = "";               // имя выбранного файла или папки
         public static string selectValue = "";              // полный путь к выбранному файлу или папке
         public static bool debugJavaScript = false;         // отладка javascript при выполнении автотеста
-        
+
         /* кэш браузера */
-        public static string cacheFolder = "Hat.exe.WebView2";  // кэш папка
+        public static string cacheFolder = AppDomain.CurrentDomain.FriendlyName + ".WebView2";  // кэш папка
         public static string statucCacheClear = "false";        // статус очистки кэша
 
         /* переменные для файла project.hat */
