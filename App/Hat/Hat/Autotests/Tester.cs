@@ -1221,8 +1221,8 @@ namespace HatFrameworkDev
             listRedirects.Clear();
             statusPageLoad = false;
             statusContentLoad = false;
-            if (DefineTestStop() == true) return;
 
+            if (DefineTestStop() == true) return;
             SendMessageDebug($"GoToUrlAsync('{url}', {sec}, {abortLoadAfterTime})", $"GoToUrlAsync('{url}', {sec}, {abortLoadAfterTime})", PROCESS, $"Загрузка страницы {url}", $"Page loading {url}", IMAGE_STATUS_MESSAGE);
 
             try
@@ -1278,8 +1278,8 @@ namespace HatFrameworkDev
             listRedirects.Clear();
             statusPageLoad = false;
             statusContentLoad = false;
-            if (DefineTestStop() == true) return;
 
+            if (DefineTestStop() == true) return;
             SendMessageDebug($"GoToUrlBaseAuthAsync('{url}', '{login}', '{pass}', {sec}, {abortLoadAfterTime})", $"GoToUrlBaseAuthAsync('{url}', '{login}', '{pass}', {sec}, {abortLoadAfterTime})", PROCESS, $"Загрузка страницы (базовая авторизация) {url}", $"Page loading (basic authorization) {url}", IMAGE_STATUS_MESSAGE);
 
             try
