@@ -297,7 +297,7 @@ img { min-width: 700px; max-width: 700px; }
                 content += $"<br><b>Файл: </b>{Report.TestFileName}" + Environment.NewLine;
                 content += $"<br><b>Дата: </b>{Report.Date}" + Environment.NewLine;
                 if (Report.TestSuccess == true) content += "<h3>Результат: <span class=\"result-passed\">Успешно</span></h3>" + Environment.NewLine;
-                else content += "<h3>Результат: <span class=\"result-failed\">Провально</span></h3>" + Environment.NewLine;
+                else content += "<h3>Результат: <span class=\"result-failed\">Неудачно</span></h3>" + Environment.NewLine;
                 content += "<table>" + Environment.NewLine;
                 content += "<thead>" + Environment.NewLine;
                 content += "<tr>" + Environment.NewLine;
@@ -554,7 +554,7 @@ html { margin: 0; padding: 0; border: 0;}
 body { background-color: #F9F7FF; font-family: ""Source Sans Pro"", Helvetica, sans-serif; font-size: 10pt; }
 .wrapper { margin-left: auto; margin-right: auto; position: relative; max-width: 1440px; }
 header { display: block; position: fixed; top: 0px; background-color: #F9F7FF; border-bottom: 1px solid #eaeff2; min-width: 1400px; max-width: 1400px; z-index: 1000; }
-#Hat { text-align: right;  margin-right: 80px; margin-top: 10px;}
+#Hat { text-align: right;  margin-right: 80px; margin-top: 10px; float: right;}
 #HatImage { display: block; margin: 0 auto; }
 #HatTitle { font-weight: bold; font-family: ""Arial"", sens-serif; font-size: 25px; margin-right: -40px; }
 #Diagram { float: left; box-shadow: 0 0 5px rgba(0,0,0,0.3); border: 1px solid #CCCCCC; padding: 10px; margin-bottom:10px; margin-left: 5px; min-width: 45%; min-height: 150px; background-color: #FFFFFF; }
@@ -565,7 +565,7 @@ section { display: block; position: relative; min-width: 1400px; max-width: 1400
 table { margin: 0px; min-width: 1400px; max-width: 1400px; }
 thead { background-color: #4d545d; color: #FFF; }
 tr:hover .content-hidden{  background: #EFF7FF; }
-.table { position: relative; top: 380px; z-index: 1; overflow: hidden; }
+.table { position: relative; top: 270px; z-index: 1; overflow: hidden; }
 .table-status { padding: 10px; min-width: 60px; max-width: 60px; }
 .table-description { padding: 10px; min-width: 350px; max-width: 350px; }
 .table-date { padding: 10px; min-width: 100px; max-width: 100px; }
@@ -599,7 +599,20 @@ img { min-width: 700px; max-width: 700px; }
             string content = Environment.NewLine + "<body>" + Environment.NewLine;
             content += "<div class=\"wrapper\">" + Environment.NewLine;
             content += "<header>" + Environment.NewLine;
-            content +=
+            if (Config.languageEngReportMail == false)
+            {
+                content += "<h2>Полный список результатов всех тестов</h2>" + Environment.NewLine;
+                content += "<div id=\"Diagram\">" + Environment.NewLine;
+                content += "<canvas id=\"DiagramCanvas\"></canvas>" + Environment.NewLine;
+                content += "<div id=\"DiagramDescription\">" + Environment.NewLine;
+                content += "<p>График результатов всех тестов в процентах:</p><br>" + Environment.NewLine;
+                content += $"<p>Успех: {successRate.ToString()}%</p>" + Environment.NewLine;
+                content += $"<p>Неудача: {failureRate.ToString()}%</p>" + Environment.NewLine;
+                content += $"<p>В работе: {workRate.ToString()}%</p>" + Environment.NewLine;
+                content += "</div>" + Environment.NewLine;
+                content += "</div>" + Environment.NewLine;
+                content += "<div id=\"Description\">" + Environment.NewLine;
+                content +=
 @"<div id=""Hat"">
 <svg version=""1.1"" id=""Layer_1"" xmlns=""http://www.w3.org/2000/svg"" xmlns:xlink=""http://www.w3.org/1999/xlink"" x=""0px"" y=""0px"" width=""64px"" height=""64px"" viewBox=""0 0 64 64"" enable-background=""new 0 0 64 64"" xml:space=""preserve""><image id=""HatImage"" width=""64"" height=""64"" x=""0"" y=""0""
 href=""data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAQAAAAAYLlVAAAABGdBTUEAALGPC/xhBQAAACBjSFJN
@@ -632,25 +645,13 @@ ZTptb2RpZnkAMjAyMy0wMi0yMVQxMDoxMzo0MSswMDowMN/S9FIAAAAASUVORK5CYII="" />
 </svg>
 <div id=""HatTitle"">Browser Hat</div>
 </div>" + Environment.NewLine;
-
-            if (Config.languageEngReportMail == false)
-            {
-                content += "<h2>Полный список результатов всех тестов</h2>" + Environment.NewLine;
-                content += "<div id=\"Diagram\">" + Environment.NewLine;
-                content += "<canvas id=\"DiagramCanvas\"></canvas>" + Environment.NewLine;
-                content += "<div id=\"DiagramDescription\">" + Environment.NewLine;
-                content += "<p>График результатов всех тестов в процентах:</p><br>" + Environment.NewLine;
-                content += $"<p>Успех: {successRate.ToString()}%</p>" + Environment.NewLine;
-                content += $"<p>Неудача: {failureRate.ToString()}%</p>" + Environment.NewLine;
-                content += $"<p>В работе: {workRate.ToString()}%</p>" + Environment.NewLine;
-                content += "</div>" + Environment.NewLine;
-                content += "</div>" + Environment.NewLine;
-                content += "<div id=\"Description\">" + Environment.NewLine;
+                content += "<div>" + Environment.NewLine;
                 content += $"<p><b>Всего тестов: </b>{amountTests.ToString()}</p>" + Environment.NewLine;
                 content += $"<p><b>Успешных тестов: </b>{amountSuccessTests.ToString()}</p>" + Environment.NewLine;
                 content += $"<p><b>Неудачных тестов: </b>{amountFailureTests.ToString()}</p>" + Environment.NewLine;
                 content += $"<p><b>Тесты в работе: </b>{amountWorkTests.ToString()}</p>" + Environment.NewLine;
                 content += $"<p><b>Дата отчета: </b>{DateTime.Now.ToString()}</p>" + Environment.NewLine;
+                content += "</div>" + Environment.NewLine;
                 content += "</div>" + Environment.NewLine;
 
                 content += "<table>" + Environment.NewLine;
@@ -680,11 +681,46 @@ ZTptb2RpZnkAMjAyMy0wMi0yMVQxMDoxMzo0MSswMDowMN/S9FIAAAAASUVORK5CYII="" />
                 content += "</div>" + Environment.NewLine;
                 content += "</div>" + Environment.NewLine;
                 content += "<div id=\"Description\">" + Environment.NewLine;
+                content +=
+@"<div id=""Hat"">
+<svg version=""1.1"" id=""Layer_1"" xmlns=""http://www.w3.org/2000/svg"" xmlns:xlink=""http://www.w3.org/1999/xlink"" x=""0px"" y=""0px"" width=""64px"" height=""64px"" viewBox=""0 0 64 64"" enable-background=""new 0 0 64 64"" xml:space=""preserve""><image id=""HatImage"" width=""64"" height=""64"" x=""0"" y=""0""
+href=""data:image/png;base64,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"" />
+</svg>
+<div id=""HatTitle"">Browser Hat</div>
+</div>" + Environment.NewLine;
+                content += "<div>" + Environment.NewLine;
                 content += $"<p><b>Total tests: </b>{(amountSuccessTests + amountFailureTests + amountWorkTests).ToString()}</p>" + Environment.NewLine;
                 content += $"<p><b>Successful tests: </b>{amountSuccessTests.ToString()}</p>" + Environment.NewLine;
                 content += $"<p><b>Failed tests: </b>{amountFailureTests.ToString()}</p>" + Environment.NewLine;
                 content += $"<p><b>Tests in progress: </b>{amountWorkTests.ToString()}</p>" + Environment.NewLine;
                 content += $"<p><b>Report date: </b>{DateTime.Now.ToString()}</p>" + Environment.NewLine;
+                content += "</div>" + Environment.NewLine;
                 content += "</div>" + Environment.NewLine;
 
                 content += "<table>" + Environment.NewLine;
