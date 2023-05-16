@@ -2321,7 +2321,7 @@ namespace HatFrameworkDev
             }
             else
             {
-                SendMessageDebug($"SetValueInElementByIdAsync('{id}', '{value}')", $"SetValueInElementByIdAsync('{id}', '{value}')", PASSED, "Значение введено в элемент", "The value was entered into the element", IMAGE_STATUS_PASSED);
+                SendMessageDebug($"SetValueInElementByIdAsync('{id}', '{value}')", $"SetValueInElementByIdAsync('{id}', '{value}')", PASSED, $"Значение '{value}' введено в элемент", $"The value '{value}' was entered into the element", IMAGE_STATUS_PASSED);
             }
         }
 
@@ -2346,7 +2346,7 @@ namespace HatFrameworkDev
             }
             else
             {
-                SendMessageDebug($"SetValueInElementByClassAsync('{_class}', {index}, '{value}')", $"SetValueInElementByClassAsync('{_class}', {index}, '{value}')", PASSED, "Значение введено в элемент", "The value was entered into the element", IMAGE_STATUS_PASSED);
+                SendMessageDebug($"SetValueInElementByClassAsync('{_class}', {index}, '{value}')", $"SetValueInElementByClassAsync('{_class}', {index}, '{value}')", PASSED, $"Значение '{value}' введено в элемент", $"The value '{value}' was entered into the element", IMAGE_STATUS_PASSED);
             }
         }
 
@@ -2371,7 +2371,7 @@ namespace HatFrameworkDev
             }
             else
             {
-                SendMessageDebug($"SetValueInElementByNameAsync('{name}', {index}, '{value}')", $"SetValueInElementByNameAsync('{name}', {index}, '{value}')", PASSED, "Значение введено в элемент", "The value was entered into the element", IMAGE_STATUS_PASSED);
+                SendMessageDebug($"SetValueInElementByNameAsync('{name}', {index}, '{value}')", $"SetValueInElementByNameAsync('{name}', {index}, '{value}')", PASSED, $"Значение '{value}' введено в элемент", $"The value '{value}' was entered into the element", IMAGE_STATUS_PASSED);
             }
         }
 
@@ -2396,7 +2396,7 @@ namespace HatFrameworkDev
             }
             else
             {
-                SendMessageDebug($"SetValueInElementByTagAsync('{tag}', {index}, '{value}')", $"SetValueInElementByTagAsync('{tag}', {index}, '{value}')", PASSED, "Значение введено в элемент", "The value was entered into the element", IMAGE_STATUS_PASSED);
+                SendMessageDebug($"SetValueInElementByTagAsync('{tag}', {index}, '{value}')", $"SetValueInElementByTagAsync('{tag}', {index}, '{value}')", PASSED, $"Значение '{value}' введено в элемент", $"The value '{value}' was entered into the element", IMAGE_STATUS_PASSED);
             }
         }
 
@@ -2422,7 +2422,7 @@ namespace HatFrameworkDev
             }
             else
             {
-                SendMessageDebug($"SetValueInElementAsync(\"{by}\", \"{locator}\", \"{value}\")", $"SetValueInElementAsync(\"{by}\", \"{locator}\", \"{value}\")", PASSED, "Значение введено в элемент", "The value was entered into the element", IMAGE_STATUS_PASSED);
+                SendMessageDebug($"SetValueInElementAsync(\"{by}\", \"{locator}\", \"{value}\")", $"SetValueInElementAsync(\"{by}\", \"{locator}\", \"{value}\")", PASSED, $"Значение '{value}' введено в элемент", $"The value '{value}' was entered into the element", IMAGE_STATUS_PASSED);
             }
         }
 
@@ -2605,7 +2605,7 @@ namespace HatFrameworkDev
             }
             else
             {
-                SendMessageDebug($"SetTextInElementByIdAsync('{id}', '{text}')", $"SetTextInElementByIdAsync('{id}', '{text}')", Tester.PASSED, "Текст введен в элемент", "The text was entered into the element", Tester.IMAGE_STATUS_PASSED);
+                SendMessageDebug($"SetTextInElementByIdAsync('{id}', '{text}')", $"SetTextInElementByIdAsync('{id}', '{text}')", Tester.PASSED, $"Текст '{text}' введен в элемент", $"The text '{text}' was entered into the element", Tester.IMAGE_STATUS_PASSED);
             }
         }
 
@@ -2625,7 +2625,7 @@ namespace HatFrameworkDev
             }
             else
             {
-                SendMessageDebug($"SetTextInElementByClassAsync('{_class}', {index}, '{text}')", $"SetTextInElementByClassAsync('{_class}', {index}, '{text}')", Tester.PASSED, "Текст введен в элемент", "The text was entered into the element", Tester.IMAGE_STATUS_PASSED);
+                SendMessageDebug($"SetTextInElementByClassAsync('{_class}', {index}, '{text}')", $"SetTextInElementByClassAsync('{_class}', {index}, '{text}')", Tester.PASSED, $"Текст '{text}' введен в элемент", $"The text '{text}' was entered into the element", Tester.IMAGE_STATUS_PASSED);
             }
         }
 
@@ -2645,7 +2645,7 @@ namespace HatFrameworkDev
             }
             else
             {
-                SendMessageDebug($"SetTextInElementByNameAsync('{name}', {index}, '{text}')", $"SetTextInElementByNameAsync('{name}', {index}, '{text}')", Tester.PASSED, "Текст введен в элемент", "The text was entered into the element", Tester.IMAGE_STATUS_PASSED);
+                SendMessageDebug($"SetTextInElementByNameAsync('{name}', {index}, '{text}')", $"SetTextInElementByNameAsync('{name}', {index}, '{text}')", Tester.PASSED, $"Текст '{text}' введен в элемент", $"The text '{text}' was entered into the element", Tester.IMAGE_STATUS_PASSED);
             }
         }
 
@@ -2665,7 +2665,7 @@ namespace HatFrameworkDev
             }
             else
             {
-                SendMessageDebug($"SetTextInElementByTagAsync('{tag}', {index}, '{text}')", $"SetTextInElementByTagAsync('{tag}', {index}, '{text}')", Tester.PASSED, "Текст введен в элемент", "The text was entered into the element", Tester.IMAGE_STATUS_PASSED);
+                SendMessageDebug($"SetTextInElementByTagAsync('{tag}', {index}, '{text}')", $"SetTextInElementByTagAsync('{tag}', {index}, '{text}')", Tester.PASSED, $"Текст '{text}' введен в элемент", $"The text '{text}' was entered into the element", Tester.IMAGE_STATUS_PASSED);
             }
         }
         public async Task SetTextInElementAsync(string by, string locator, string text)
@@ -2685,7 +2685,7 @@ namespace HatFrameworkDev
             }
             else
             {
-                SendMessageDebug($"SetTextInElementAsync(\"{by}\", \"{locator}\", \"{text}\")", $"SetTextInElementAsync(\"{by}\", \"{locator}\", \"{text}\")", Tester.PASSED, "Текст введен в элемент", "The text was entered into the element", Tester.IMAGE_STATUS_PASSED);
+                SendMessageDebug($"SetTextInElementAsync(\"{by}\", \"{locator}\", \"{text}\")", $"SetTextInElementAsync(\"{by}\", \"{locator}\", \"{text}\")", Tester.PASSED, $"Текст '{text}' введен в элемент", $"The text '{text}' was entered into the element", Tester.IMAGE_STATUS_PASSED);
             }
         }
         public async Task<string> GetTextFromElementByIdAsync(string id)
@@ -3422,7 +3422,7 @@ namespace HatFrameworkDev
             }
             else
             {
-                SendMessageDebug($"SetAttributeInElementByIdAsync('{id}', '{attribute}', '{value}')", $"SetAttributeInElementByIdAsync('{id}', '{attribute}', '{value}')", Tester.PASSED, $"Аттрибут '{attribute}' добавлен в элемент", $"Attribute '{attribute}' added to the element", Tester.IMAGE_STATUS_PASSED);
+                SendMessageDebug($"SetAttributeInElementByIdAsync('{id}', '{attribute}', '{value}')", $"SetAttributeInElementByIdAsync('{id}', '{attribute}', '{value}')", Tester.PASSED, $"Аттрибут '{attribute}' со значением '{value}' добавлен в элемент", $"Attribute '{attribute}' with a value of '{value}' added to the element", Tester.IMAGE_STATUS_PASSED);
             }
         }
 
@@ -3442,7 +3442,7 @@ namespace HatFrameworkDev
             }
             else
             {
-                SendMessageDebug($"SetAttributeInElementByClassAsync('{_class}', {index}, '{attribute}', '{value}')", $"SetAttributeInElementByClassAsync('{_class}', {index}, '{attribute}', '{value}')", Tester.PASSED, $"Аттрибут '{attribute}' добавлен в элемент", $"Attribute '{attribute}' added to the element", Tester.IMAGE_STATUS_PASSED);
+                SendMessageDebug($"SetAttributeInElementByClassAsync('{_class}', {index}, '{attribute}', '{value}')", $"SetAttributeInElementByClassAsync('{_class}', {index}, '{attribute}', '{value}')", Tester.PASSED, $"Аттрибут '{attribute}' со значением '{value}' добавлен в элемент", $"Attribute '{attribute}' with a value of '{value}' added to the element", Tester.IMAGE_STATUS_PASSED);
             }
         }
 
@@ -3462,7 +3462,7 @@ namespace HatFrameworkDev
             }
             else
             {
-                SendMessageDebug($"SetAttributeInElementByNameAsync('{name}', {index}, '{attribute}', '{value}')", $"SetAttributeInElementByNameAsync('{name}', {index}, '{attribute}', '{value}')", Tester.PASSED, $"Аттрибут '{attribute}' добавлен в элемент", $"Attribute '{attribute}' added to the element", Tester.IMAGE_STATUS_PASSED);
+                SendMessageDebug($"SetAttributeInElementByNameAsync('{name}', {index}, '{attribute}', '{value}')", $"SetAttributeInElementByNameAsync('{name}', {index}, '{attribute}', '{value}')", Tester.PASSED, $"Аттрибут '{attribute}' со значением '{value}' добавлен в элемент", $"Attribute '{attribute}' with a value of '{value}' added to the element", Tester.IMAGE_STATUS_PASSED);
             }
         }
 
@@ -3482,7 +3482,7 @@ namespace HatFrameworkDev
             }
             else
             {
-                SendMessageDebug($"SetAttributeInElementByTagAsync('{tag}', {index}, '{attribute}', '{value}')", $"SetAttributeInElementByTagAsync('{tag}', {index}, '{attribute}', '{value}')", Tester.PASSED, $"Аттрибут '{attribute}' добавлен в элемент", $"Attribute '{attribute}' added to the element", Tester.IMAGE_STATUS_PASSED);
+                SendMessageDebug($"SetAttributeInElementByTagAsync('{tag}', {index}, '{attribute}', '{value}')", $"SetAttributeInElementByTagAsync('{tag}', {index}, '{attribute}', '{value}')", Tester.PASSED, $"Аттрибут '{attribute}' со значением '{value}' добавлен в элемент", $"Attribute '{attribute}' with a value of '{value}' added to the element", Tester.IMAGE_STATUS_PASSED);
             }
         }
 
@@ -3503,7 +3503,7 @@ namespace HatFrameworkDev
             }
             else
             {
-                SendMessageDebug($"SetAttributeInElementAsync(\"{by}\", \"{locator}\", \"{attribute}\", \"{value}\")", $"SetAttributeInElementAsync(\"{by}\", \"{locator}\", \"{attribute}\", \"{value}\")", Tester.PASSED, $"Аттрибут '{attribute}' добавлен в элемент", $"Attribute '{attribute}' added to the element", Tester.IMAGE_STATUS_PASSED);
+                SendMessageDebug($"SetAttributeInElementAsync(\"{by}\", \"{locator}\", \"{attribute}\", \"{value}\")", $"SetAttributeInElementAsync(\"{by}\", \"{locator}\", \"{attribute}\", \"{value}\")", Tester.PASSED, $"Аттрибут '{attribute}' со значением '{value}' добавлен в элемент", $"Attribute '{attribute}' with a value of '{value}' added to the element", Tester.IMAGE_STATUS_PASSED);
             }
         }
 
@@ -3533,7 +3533,7 @@ namespace HatFrameworkDev
                 {
                     result = JsonConvert.DeserializeObject(result).ToString();
                     Json_Array = JsonConvert.DeserializeObject<List<string>>(result);
-                    SendMessageDebug($"SetAttributeInElementsByClassAsync('{_class}', '{attribute}', '{value}')", $"SetAttributeInElementsByClassAsync('{_class}', '{attribute}', '{value}')", PASSED, $"Аттрибут '{attribute}' со значением '{result}' - добавлен в элементы и получен json {result}", $"Attribute '{attribute}' with value '{result}' - added to the elements and received json {result}", IMAGE_STATUS_PASSED);
+                    SendMessageDebug($"SetAttributeInElementsByClassAsync('{_class}', '{attribute}', '{value}')", $"SetAttributeInElementsByClassAsync('{_class}', '{attribute}', '{value}')", PASSED, $"Аттрибут '{attribute}' со значением '{value}' - добавлен в элементы и получен json {result}", $"Attribute '{attribute}' with value '{value}' - added to the elements and received json {result}", IMAGE_STATUS_PASSED);
                 }
                 catch (Exception ex)
                 {
@@ -3580,7 +3580,7 @@ namespace HatFrameworkDev
                 {
                     result = JsonConvert.DeserializeObject(result).ToString();
                     Json_Array = JsonConvert.DeserializeObject<List<string>>(result);
-                    SendMessageDebug($"SetAttributeInElementsByNameAsync('{name}', '{attribute}', '{value}')", $"SetAttributeInElementsByNameAsync('{name}', '{attribute}', '{value}')", PASSED, $"Аттрибут '{attribute}' со значением '{result}' - добавлен в элементы и получен json {result}", $"Attribute '{attribute}' with value '{result}' - added to the elements and received json {result}", IMAGE_STATUS_PASSED);
+                    SendMessageDebug($"SetAttributeInElementsByNameAsync('{name}', '{attribute}', '{value}')", $"SetAttributeInElementsByNameAsync('{name}', '{attribute}', '{value}')", PASSED, $"Аттрибут '{attribute}' со значением '{value}' - добавлен в элементы и получен json {result}", $"Attribute '{attribute}' with value '{value}' - added to the elements and received json {result}", IMAGE_STATUS_PASSED);
                 }
                 catch (Exception ex)
                 {
@@ -3626,7 +3626,7 @@ namespace HatFrameworkDev
                 {
                     result = JsonConvert.DeserializeObject(result).ToString();
                     Json_Array = JsonConvert.DeserializeObject<List<string>>(result);
-                    SendMessageDebug($"SetAttributeInElementsByTagAsync('{tag}', '{attribute}', '{value}')", $"SetAttributeInElementsByTagAsync('{tag}', '{attribute}', '{value}')", PASSED, $"Аттрибут '{attribute}' со значением '{result}' - добавлен в элементы и получен json {result}", $"Attribute '{attribute}' with value '{result}' - added to the elements and received json {result}", IMAGE_STATUS_PASSED);
+                    SendMessageDebug($"SetAttributeInElementsByTagAsync('{tag}', '{attribute}', '{value}')", $"SetAttributeInElementsByTagAsync('{tag}', '{attribute}', '{value}')", PASSED, $"Аттрибут '{attribute}' со значением '{value}' - добавлен в элементы и получен json {result}", $"Attribute '{attribute}' with value '{value}' - added to the elements and received json {result}", IMAGE_STATUS_PASSED);
                 }
                 catch (Exception ex)
                 {
@@ -3690,7 +3690,7 @@ namespace HatFrameworkDev
                 {
                     result = JsonConvert.DeserializeObject(result).ToString();
                     Json_Array = JsonConvert.DeserializeObject<List<string>>(result);
-                    SendMessageDebug($"SetAttributeInElementsAsync(\"{by}\", \"{locator}\", \"{attribute}\", \"{value}\")", $"SetAttributeInElementsAsync(\"{by}\", \"{locator}\", \"{attribute}\", \"{value}\")", PASSED, $"Аттрибут '{attribute}' со значением '{result}' - добавлен в элементы и получен json {result}", $"Attribute '{attribute}' with value '{result}' - added to the elements and received json {result}", IMAGE_STATUS_PASSED);
+                    SendMessageDebug($"SetAttributeInElementsAsync(\"{by}\", \"{locator}\", \"{attribute}\", \"{value}\")", $"SetAttributeInElementsAsync(\"{by}\", \"{locator}\", \"{attribute}\", \"{value}\")", PASSED, $"Аттрибут '{attribute}' со значением '{value}' - добавлен в элементы и получен json {result}", $"Attribute '{attribute}' with value '{value}' - added to the elements and received json {result}", IMAGE_STATUS_PASSED);
                 }
                 catch (Exception ex)
                 {
@@ -4388,7 +4388,7 @@ namespace HatFrameworkDev
             }
             else
             {
-                SendMessageDebug($"SetStyleInElementAsync(\"{by}\", \"{locator}\", \"{cssText}\")", $"SetStyleInElementAsync(\"{by}\", \"{locator}\", \"{cssText}\")", PASSED, "Стиль введен в элемент", "The style is entered in the element", IMAGE_STATUS_PASSED);
+                SendMessageDebug($"SetStyleInElementAsync(\"{by}\", \"{locator}\", \"{cssText}\")", $"SetStyleInElementAsync(\"{by}\", \"{locator}\", \"{cssText}\")", PASSED, $"Стиль {cssText} введен в элемент", $"The style {cssText} is entered in the element", IMAGE_STATUS_PASSED);
             }
         }
 
@@ -4408,7 +4408,7 @@ namespace HatFrameworkDev
             }
             else
             {
-                SendMessageDebug($"SetStyleInElementByIdAsync(\"{id}\", \"{cssText}\")", $"SetStyleInElementByIdAsync(\"{id}\", \"{cssText}\")", PASSED, "Стиль введен в элемент", "The style is entered in the element", IMAGE_STATUS_PASSED);
+                SendMessageDebug($"SetStyleInElementByIdAsync(\"{id}\", \"{cssText}\")", $"SetStyleInElementByIdAsync(\"{id}\", \"{cssText}\")", PASSED, $"Стиль {cssText} введен в элемент", $"The style {cssText} is entered in the element", IMAGE_STATUS_PASSED);
             }
         }
 
@@ -4428,7 +4428,7 @@ namespace HatFrameworkDev
             }
             else
             {
-                SendMessageDebug($"SetStyleInElementByClassAsync(\"{_class}\", {index}, \"{cssText}\")", $"SetStyleInElementByClassAsync(\"{_class}\", {index}, \"{cssText}\")", PASSED, "Стиль введен в элемент", "The style is entered in the element", IMAGE_STATUS_PASSED);
+                SendMessageDebug($"SetStyleInElementByClassAsync(\"{_class}\", {index}, \"{cssText}\")", $"SetStyleInElementByClassAsync(\"{_class}\", {index}, \"{cssText}\")", PASSED, $"Стиль {cssText} введен в элемент", $"The style {cssText} is entered in the element", IMAGE_STATUS_PASSED);
             }
         }
 
@@ -4448,7 +4448,7 @@ namespace HatFrameworkDev
             }
             else
             {
-                SendMessageDebug($"SetStyleInElementByNameAsync(\"{name}\", {index}, \"{cssText}\")", $"SetStyleInElementByNameAsync(\"{name}\", {index}, \"{cssText}\")", PASSED, "Стиль введен в элемент", "The style is entered in the element", IMAGE_STATUS_PASSED);
+                SendMessageDebug($"SetStyleInElementByNameAsync(\"{name}\", {index}, \"{cssText}\")", $"SetStyleInElementByNameAsync(\"{name}\", {index}, \"{cssText}\")", PASSED, $"Стиль {cssText} введен в элемент", $"The style {cssText} is entered in the element", IMAGE_STATUS_PASSED);
             }
         }
 
@@ -4468,7 +4468,7 @@ namespace HatFrameworkDev
             }
             else
             {
-                SendMessageDebug($"SetStyleInElementByTagAsync(\"{tag}\", {index}, \"{cssText}\")", $"SetStyleInElementByTagAsync(\"{tag}\", {index}, \"{cssText}\")", PASSED, "Стиль введен в элемент", "The style is entered in the element", IMAGE_STATUS_PASSED);
+                SendMessageDebug($"SetStyleInElementByTagAsync(\"{tag}\", {index}, \"{cssText}\")", $"SetStyleInElementByTagAsync(\"{tag}\", {index}, \"{cssText}\")", PASSED, $"Стиль {cssText} введен в элемент", $"The style {cssText} is entered in the element", IMAGE_STATUS_PASSED);
             }
         }
 

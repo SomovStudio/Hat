@@ -4,7 +4,7 @@
 
 - Добавлен вывод адреса страницы в методах: GoToUrlAsync, GoToUrlBaseAuthAsync
 - Проверка ошибок при неудачной загрузке страницы в методах: GoToUrlAsync, GoToUrlBaseAuthAsync
-- Добавлен вывод 
+- Добавлен вывод значений в методах SetValueInElement, SetTextInElement, SetAttributeInElement, SetStyleInElement, SetHtmlInElement
 - Добавлен метод Screenshot
 - Добавлено логирование неудачных результатов при выполнении автотестов
 
