@@ -942,11 +942,18 @@ ZTptb2RpZnkAMjAyMy0wMi0yMVQxMDoxMzo0MSswMDowMN/S9FIAAAAASUVORK5CYII="" />
             }
         }
 
-        public static void SaveLogFailed()
+        public static void SaveLogFailed(string message)
         {
             try
             {
-                
+                if (Report.FolderName != "")
+                {
+                    if (!Directory.Exists(Report.FolderName)) Directory.CreateDirectory(Report.FolderName);
+                    if (File.Exists(Report.FolderName + "log.txt") == false)
+                    {
+                        File.AppendAllText(Report.FolderName + "log.txt", message);
+                    }
+                }
             }
             catch (Exception ex)
             {
