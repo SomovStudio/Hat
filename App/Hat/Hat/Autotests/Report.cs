@@ -41,6 +41,7 @@ namespace Hat
         public static int CountErrors;
         public static bool TestSuccess;
         public static List<string[]> Steps;
+        public static string Log;
 
         public static void Init()
         {
@@ -56,6 +57,7 @@ namespace Hat
                 Report.CountErrors = 0;
                 Report.TestSuccess = false;
                 Report.Steps = new List<string[]>();
+                Report.Log = "";
 
                 SaveReport(Report.TestSuccess, true);
             }
@@ -149,6 +151,8 @@ namespace Hat
                             else Config.browserForm.SystemConsoleMsg($"The report file is missing {Report.FileName} in the folder {Report.FolderName}" + Environment.NewLine, default, ConsoleColor.DarkGray, ConsoleColor.White, true);
                         }
                     }
+
+                    SaveLogFailed();
                 }
                 else
                 {
@@ -290,6 +294,8 @@ img { min-width: 700px; max-width: 700px; }
             content += "<div class=\"wrapper\">" + Environment.NewLine;
             content += "<header>" + Environment.NewLine;
 
+            Report.Log = $"[{Report.Date}][{Report.TestFileName}]: {Report.Description}" + Environment.NewLine;
+
             if (Config.languageEngReportMail == false)
             {
                 content += "<h2>Отчет о работе автотеста</h2>" + Environment.NewLine;
@@ -379,6 +385,8 @@ img { min-width: 700px; max-width: 700px; }
                             else content += $"<td class=\"table-comment table-row content-hidden\">{step[2]}</td>" + Environment.NewLine;
                             content += "</tr>" + Environment.NewLine;
                         }
+
+                        if (step[0] == Report.FAILED || step[0] == Report.ERROR) Report.Log += $"{step[0]}: {step[1]} - {step[2]}" + Environment.NewLine;
                     }
                 }
                 catch (Exception ex)
@@ -400,7 +408,6 @@ img { min-width: 700px; max-width: 700px; }
                 content += "</table>" + Environment.NewLine;
                 content += "</section>" + Environment.NewLine;
             }
-
             content += "</div>" + Environment.NewLine;
             content += "</body>" + Environment.NewLine;
             return content;
@@ -512,6 +519,7 @@ img { min-width: 700px; max-width: 700px; }
                         if (Config.languageEngConsole == false) Config.browserForm.SystemConsoleMsg($"Не удалось создать отчет с результатами всех тестов по адресу {Report.FolderName}/index.html" + Environment.NewLine, default, ConsoleColor.DarkGray, ConsoleColor.White, true);
                         else Config.browserForm.SystemConsoleMsg($"It was not possible to create a report with the results of all tests at folder {Report.FolderName}/index.html" + Environment.NewLine, default, ConsoleColor.DarkGray, ConsoleColor.White, true);
                     }
+
                     Config.browserForm.updateProjectTree();
                 }
                 else
@@ -942,23 +950,28 @@ ZTptb2RpZnkAMjAyMy0wMi0yMVQxMDoxMzo0MSswMDowMN/S9FIAAAAASUVORK5CYII="" />
             }
         }
 
-        public static void SaveLogFailed(string message)
+        public static void SaveLogFailed()
         {
             try
             {
+                if (Report.TestSuccess == true) return;
                 if (Report.FolderName != "")
                 {
                     if (!Directory.Exists(Report.FolderName)) Directory.CreateDirectory(Report.FolderName);
                     if (File.Exists(Report.FolderName + "log.txt") == false)
                     {
-                        File.AppendAllText(Report.FolderName + "log.txt", message);
+                        Report.Log += "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -";
+                        File.AppendAllText(Report.FolderName + "log.txt", Report.Log);
+                        if (Config.languageEngConsole == false) Config.browserForm.SystemConsoleMsg("Новая запись в файле log.txt" + Environment.NewLine, default, ConsoleColor.DarkGray, ConsoleColor.White, true);
+                        else Config.browserForm.SystemConsoleMsg("New entry in the file log.txt" + Environment.NewLine, default, ConsoleColor.DarkGray, ConsoleColor.White, true);
                     }
                 }
             }
             catch (Exception ex)
             {
                 Config.browserForm.ConsoleMsg("Сохранение log файла: " + Report.FolderName + "log.txt - неудалось сохранить из за ошибки: " + ex.Message);
-                Config.browserForm.SystemConsoleMsg("Сохранение log файла: " + Report.FolderName + "log.txt - неудалось сохранить из за ошибки: " + ex.Message, default, ConsoleColor.Black, ConsoleColor.DarkYellow, true);
+                //Config.browserForm.SystemConsoleMsg("Сохранение log файла: " + Report.FolderName + "log.txt - неудалось сохранить из за ошибки: " + ex.Message, default, ConsoleColor.Black, ConsoleColor.DarkYellow, true);
+                Report.ShowErrorInSystemConsole(ex.ToString());
             }
         }
 
