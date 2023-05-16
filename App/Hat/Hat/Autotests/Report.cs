@@ -942,6 +942,19 @@ ZTptb2RpZnkAMjAyMy0wMi0yMVQxMDoxMzo0MSswMDowMN/S9FIAAAAASUVORK5CYII="" />
             }
         }
 
+        public static void SaveLogFailed()
+        {
+            try
+            {
+                
+            }
+            catch (Exception ex)
+            {
+                Config.browserForm.ConsoleMsg("Сохранение log файла: " + Report.FolderName + "log.txt - неудалось сохранить из за ошибки: " + ex.Message);
+                Config.browserForm.SystemConsoleMsg("Сохранение log файла: " + Report.FolderName + "log.txt - неудалось сохранить из за ошибки: " + ex.Message, default, ConsoleColor.Black, ConsoleColor.DarkYellow, true);
+            }
+        }
+
     }
 }
 
