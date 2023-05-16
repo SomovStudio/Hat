@@ -1246,6 +1246,7 @@ namespace HatFrameworkDev
                     else
                     {
                         SendMessageDebug($"GoToUrlAsync('{url}', {sec}, {abortLoadAfterTime})", $"GoToUrlAsync('{url}', {sec}, {abortLoadAfterTime})", FAILED, "Страница не загружена", "The page is not loaded", IMAGE_STATUS_FAILED);
+                        await AssertNoErrorsAsync(true);
                         TestStopAsync();
                     }
                 }
@@ -1258,6 +1259,7 @@ namespace HatFrameworkDev
                     else
                     {
                         SendMessageDebug($"GoToUrlAsync('{url}', {sec}, {abortLoadAfterTime})", $"GoToUrlAsync('{url}', {sec}, {abortLoadAfterTime})", FAILED, "Страница не загружена", "The page is not loaded", IMAGE_STATUS_FAILED);
+                        await AssertNoErrorsAsync(true);
                         TestStopAsync();
                     }
                 }
@@ -1319,6 +1321,7 @@ namespace HatFrameworkDev
                     else
                     {
                         SendMessageDebug($"GoToUrlBaseAuthAsync('{url}', '{login}', '{pass}', {sec}, {abortLoadAfterTime})", $"GoToUrlBaseAuthAsync('{url}', '{login}', '{pass}', {sec}, {abortLoadAfterTime})", FAILED, "Страница не загружена (базовая авторизация)", "The page is not loaded (basic authorization)", IMAGE_STATUS_FAILED);
+                        await AssertNoErrorsAsync(true);
                         TestStopAsync();
                     }
                 }
@@ -1331,6 +1334,7 @@ namespace HatFrameworkDev
                     else
                     {
                         SendMessageDebug($"GoToUrlBaseAuthAsync('{url}', '{login}', '{pass}', {sec}, {abortLoadAfterTime})", $"GoToUrlBaseAuthAsync('{url}', '{login}', '{pass}', {sec}, {abortLoadAfterTime})", FAILED, "Страница не загружена (базовая авторизация)", "The page is not loaded (basic authorization)", IMAGE_STATUS_FAILED);
+                        await AssertNoErrorsAsync(true);
                         TestStopAsync();
                     }
                 }
