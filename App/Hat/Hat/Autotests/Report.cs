@@ -408,7 +408,7 @@ img { min-width: 700px; max-width: 700px; }
                             content += "</tr>" + Environment.NewLine;
                         }
 
-                        if (step[0] == Report.FAILED || step[0] == Report.ERROR) Report.Log += $"{step[0]} | {step[1]} - {step[2]}" + Environment.NewLine;
+                        if (step[0] == Report.FAILED || step[0] == Report.ERROR || step[0] == Report.WARNING) Report.Log += $"{step[0]} | {step[1]} - {step[2]}" + Environment.NewLine;
                     }
                 }
                 catch (Exception ex)
