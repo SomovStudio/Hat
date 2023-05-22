@@ -7,6 +7,7 @@
 - Добавлен вывод значений в методах SetValueInElement, SetTextInElement, SetAttributeInElement, SetStyleInElement, SetHtmlInElement
 - Добавлен метод BrowserScreenshotAsync
 - Добавлено логирование неудачных результатов при выполнении автотестов
+- В отчете добавлен вывод даты запуска и завершения автотеста
 
 
 -----------------------------

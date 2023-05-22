@@ -252,6 +252,7 @@ namespace Hat
             content += Report.TestFileName + Environment.NewLine;
             content += Report.Description + Environment.NewLine;
             content += Report.Date + Environment.NewLine;
+            content += DateTime.Now.ToString() + Environment.NewLine;
             content += "-->" + Environment.NewLine;
 
             if (Config.languageEngReportMail == false)
@@ -476,18 +477,19 @@ img { min-width: 700px; max-width: 700px; }
                          * 2    ExampleTest1.cs
                          * 3    Тест проверяет авторизацию на сайте
                          * 4    21.02.2023 10:32:11
-                         * 5    -->
+                         * 5    21.02.2023 10:35:45
+                         * 6    -->
                          */
 
                         if (File.Exists(filename) == false) continue;
 
                         lines = new List<string>();
-                        lines = Report.readFileLines(Report.UTF_8_BOM, filename, 6);
+                        lines = Report.readFileLines(Report.UTF_8_BOM, filename, 7);
                         if (lines.Count > 0)
                         {
-                            //Config.browserForm.ConsoleMsg($"{filename} | {lines[0]} | {lines[1]} | {lines[2]} | {lines[3]} | {lines[4]} | {lines[5]}");
+                            //Config.browserForm.ConsoleMsg($"{filename} | {lines[0]} | {lines[1]} | {lines[2]} | {lines[3]} | {lines[4]} | {lines[5]} | {lines[6]}");
 
-                            if (lines[0] == "<!--" && lines[5] == "-->")
+                            if (lines[0] == "<!--" && lines[6] == "-->")
                             {
                                 amountTests++;
                                 test = new List<string>();
@@ -513,7 +515,7 @@ img { min-width: 700px; max-width: 700px; }
                                 }
 
                                 test.Add(lines[3]); // Описание теста
-                                test.Add(lines[4]); // Дата завершения
+                                test.Add(lines[4] + "<br>" + lines[5]); // Дата запуска и завершения
                                 test.Add(lines[2]); // Файл
                                 test.Add(filename); // Отчет
                                 tests.Add(test);
@@ -689,7 +691,7 @@ ZTptb2RpZnkAMjAyMy0wMi0yMVQxMDoxMzo0MSswMDowMN/S9FIAAAAASUVORK5CYII="" />
                 content += "<tr>" + Environment.NewLine;
                 content += "<th class=\"table-status\">Статус теста</th>" + Environment.NewLine;
                 content += "<th class=\"table-description\">Описание теста</th>" + Environment.NewLine;
-                content += "<th class=\"table-date\">Дата завершения</th>" + Environment.NewLine;
+                content += "<th class=\"table-date\">Дата</th>" + Environment.NewLine;
                 content += "<th class=\"table-file\">Файл</th>" + Environment.NewLine;
                 content += "<th class=\"table-report\">Отчет</th>" + Environment.NewLine;
                 content += "</tr> " + Environment.NewLine;
