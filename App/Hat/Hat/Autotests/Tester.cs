@@ -1027,7 +1027,6 @@ namespace HatFrameworkDev
                         TestStopAsync();
                     }
                 }
-
                 
             }
             catch (Exception ex)
@@ -1039,6 +1038,40 @@ namespace HatFrameworkDev
                 TestStopAsync();
                 ConsoleMsgError(ex.ToString());
             }
+        }
+
+        public async Task<string> BrowserScreenshotAsync(string filename)
+        {
+            string screenshot = "";
+            try
+            {
+                if (filename == null || filename == "") screenshot = $"image-{DateTime.Now.ToString("dd-mm-yyyy-hh-mm-ss")}.jpeg";
+                else screenshot = filename;
+
+                using (System.IO.FileStream file = System.IO.File.Create(screenshot))
+                {
+                    
+                    await BrowserView.CoreWebView2.CapturePreviewAsync(CoreWebView2CapturePreviewImageFormat.Jpeg, file);
+                    if (File.Exists(screenshot))
+                    {
+                        SendMessageDebug($"BrowserScreenshotAsync({filename})", $"BrowserScreenshotAsync({filename})", COMPLETED, "Скриншот сохранён", "Screenshot saved", IMAGE_STATUS_MESSAGE);
+                    }
+                    else
+                    {
+                        SendMessageDebug($"BrowserScreenshotAsync({filename})", $"BrowserScreenshotAsync({filename})", FAILED, "Скриншот неудалось сохранить", "Screenshot could not be saved", IMAGE_STATUS_FAILED);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                SendMessageDebug($"BrowserScreenshotAsync({filename})", $"BrowserScreenshotAsync({filename})", Tester.FAILED,
+                    "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(),
+                    "Error: " + ex.Message + Environment.NewLine + Environment.NewLine + "Full description of the error: " + ex.ToString(),
+                    Tester.IMAGE_STATUS_FAILED);
+                TestStopAsync();
+                ConsoleMsgError(ex.ToString());
+            }
+            return screenshot;
         }
 
         public async Task<string> ExecuteJavaScriptAsync(string script)
