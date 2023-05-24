@@ -3120,7 +3120,23 @@ bool result = await frame.IsVisibleElementAsync(Tester.BY_CSS, ""#login"");\par
 await frame.AssertTrueAsync(result);\par
 }",
 
-@"",
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 BrowserScreenshotAsync\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e4\'e5\'eb\'e0\'e5\'f2 \'f1\'ed\'e8\'ec\'ee\'ea \'fd\'ea\'f0\'e0\'ed\'e0 \'e1\'f0\'e0\'f3\'e7\'e5\'f0\'e0\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : BrowserScreenshotAsync(string \f0\lang1033 filename\f1\lang1049 )\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0\f0\lang1033 string screenshot = await tester.BrowserScreenshotAsync(null);\par
+screenshot = await tester.BrowserScreenshotAsync("""");\par
+\par
+screenshot = await tester.BrowserScreenshotAsync(""screenshot.jpg"");\par
+screenshot = await tester.BrowserScreenshotAsync(""C:\\\\Users\\\\User\\\\Desktop\\\\MyTests\\\\reports\\\\screenshots\\\\test_screenshot.jpg"");\par
+\par
+tester.ConsoleMsg(screenshot);\par
+}",
+
 @"",
 @"",
 @"",
@@ -3298,6 +3314,7 @@ await frame.AssertTrueAsync(result);\par
             data.Add(new CompletionData("BrowserGoForwardAsync", "BrowserGoForwardAsync(int sec, bool abortLoadAfterTime = false)"));
             data.Add(new CompletionData("BrowserPageReloadAsync", "BrowserPageReloadAsync(int sec, bool abortLoadAfterTime = false)"));
             data.Add(new CompletionData("BrowserSetUserAgentAsync", "BrowserSetUserAgentAsync(string value)"));
+            data.Add(new CompletionData("BrowserScreenshotAsync", "BrowserScreenshotAsync(string filename)"));
             data.Add(new CompletionData("BrowserSizeAsync", "BrowserSizeAsync(int width, int height)"));
             data.Add(new CompletionData("BrowserView", "WebView2 BrowserView"));
             data.Add(new CompletionData("BrowserWindow", "Form BrowserWindow"));
@@ -4039,6 +4056,7 @@ await frame.AssertTrueAsync(result);\par
                     if (value == "DisableDebugInReport" && tag == "Tester") richTextBox1.Rtf = handbook[225];
                     if (value == "IsVisibleElementAsync" && tag == "Tester") richTextBox1.Rtf = handbook[226];
                     if (value == "IsVisibleElementAsync" && tag == "FRAMEElement") richTextBox1.Rtf = handbook[227];
+                    if (value == "BrowserScreenshotAsync" && tag == "Tester") richTextBox1.Rtf = handbook[228];
 
                     /*
                     if (value == "" && tag == "") richTextBox1.Rtf = handbook[228];
