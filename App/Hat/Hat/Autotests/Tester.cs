@@ -1045,8 +1045,22 @@ namespace HatFrameworkDev
             string screenshot = "";
             try
             {
-                if (filename == null || filename == "") screenshot = $"image-{DateTime.Now.ToString("dd-mm-yyyy-hh-mm-ss")}.jpeg";
-                else screenshot = filename;
+                if (filename == null || filename == "")
+                {
+                    screenshot = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\" + $"image-{DateTime.Now.ToString("dd-mm-yyyy-hh-mm-ss")}.jpeg";
+                }
+                else
+                {
+                    string folder = "";
+                    if (Path.GetDirectoryName(filename) == string.Empty) folder = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\";
+                    string file = "";
+                    if (Path.GetFileName(filename) == string.Empty) file = $"image-{DateTime.Now.ToString("dd-mm-yyyy-hh-mm-ss")}.jpeg";
+
+                    if (folder == "" && file == "") screenshot = filename;
+                    if (folder != "" && file == "") screenshot = folder + filename;
+                    if (folder == "" && file != "") screenshot = filename + file;
+                    if (folder != "" && file != "") screenshot = folder + file;
+                }
 
                 using (System.IO.FileStream file = System.IO.File.Create(screenshot))
                 {
@@ -1054,11 +1068,11 @@ namespace HatFrameworkDev
                     await BrowserView.CoreWebView2.CapturePreviewAsync(CoreWebView2CapturePreviewImageFormat.Jpeg, file);
                     if (File.Exists(screenshot))
                     {
-                        SendMessageDebug($"BrowserScreenshotAsync({filename})", $"BrowserScreenshotAsync({filename})", COMPLETED, "Скриншот сохранён", "Screenshot saved", IMAGE_STATUS_MESSAGE);
+                        SendMessageDebug($"BrowserScreenshotAsync({filename})", $"BrowserScreenshotAsync({filename})", COMPLETED, $"Скриншот сохранён по адресу {screenshot}", $"The screenshot is saved at {screenshot}", IMAGE_STATUS_MESSAGE);
                     }
                     else
                     {
-                        SendMessageDebug($"BrowserScreenshotAsync({filename})", $"BrowserScreenshotAsync({filename})", FAILED, "Скриншот неудалось сохранить", "Screenshot could not be saved", IMAGE_STATUS_FAILED);
+                        SendMessageDebug($"BrowserScreenshotAsync({filename})", $"BrowserScreenshotAsync({filename})", FAILED, $"Скриншот неудалось сохранить по адресу {screenshot}", $"The screenshot could not be saved at {screenshot}", IMAGE_STATUS_FAILED);
                     }
                 }
             }

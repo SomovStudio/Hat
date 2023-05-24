@@ -1028,7 +1028,6 @@ namespace HatFramework
                     }
                 }
 
-
             }
             catch (Exception ex)
             {
@@ -1039,6 +1038,54 @@ namespace HatFramework
                 TestStopAsync();
                 ConsoleMsgError(ex.ToString());
             }
+        }
+
+        public async Task<string> BrowserScreenshotAsync(string filename)
+        {
+            string screenshot = "";
+            try
+            {
+                if (filename == null || filename == "")
+                {
+                    screenshot = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\" + $"image-{DateTime.Now.ToString("dd-mm-yyyy-hh-mm-ss")}.jpeg";
+                }
+                else
+                {
+                    string folder = "";
+                    if (Path.GetDirectoryName(filename) == string.Empty) folder = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\";
+                    string file = "";
+                    if (Path.GetFileName(filename) == string.Empty) file = $"image-{DateTime.Now.ToString("dd-mm-yyyy-hh-mm-ss")}.jpeg";
+
+                    if (folder == "" && file == "") screenshot = filename;
+                    if (folder != "" && file == "") screenshot = folder + filename;
+                    if (folder == "" && file != "") screenshot = filename + file;
+                    if (folder != "" && file != "") screenshot = folder + file;
+                }
+
+                using (System.IO.FileStream file = System.IO.File.Create(screenshot))
+                {
+
+                    await BrowserView.CoreWebView2.CapturePreviewAsync(CoreWebView2CapturePreviewImageFormat.Jpeg, file);
+                    if (File.Exists(screenshot))
+                    {
+                        SendMessageDebug($"BrowserScreenshotAsync({filename})", $"BrowserScreenshotAsync({filename})", COMPLETED, $"Скриншот сохранён по адресу {screenshot}", $"The screenshot is saved at {screenshot}", IMAGE_STATUS_MESSAGE);
+                    }
+                    else
+                    {
+                        SendMessageDebug($"BrowserScreenshotAsync({filename})", $"BrowserScreenshotAsync({filename})", FAILED, $"Скриншот неудалось сохранить по адресу {screenshot}", $"The screenshot could not be saved at {screenshot}", IMAGE_STATUS_FAILED);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                SendMessageDebug($"BrowserScreenshotAsync({filename})", $"BrowserScreenshotAsync({filename})", Tester.FAILED,
+                    "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(),
+                    "Error: " + ex.Message + Environment.NewLine + Environment.NewLine + "Full description of the error: " + ex.ToString(),
+                    Tester.IMAGE_STATUS_FAILED);
+                TestStopAsync();
+                ConsoleMsgError(ex.ToString());
+            }
+            return screenshot;
         }
 
         public async Task<string> ExecuteJavaScriptAsync(string script)
