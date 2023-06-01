@@ -251,7 +251,7 @@ namespace HatFrameworkDev
             }
             else
             {
-                _tester.SendMessageDebug($"SetTextAsync(\"{text}\")", $"SetTextAsync(\"{text}\")", Tester.PASSED, "Текст введен в элемент", "The text was entered into the element", Tester.IMAGE_STATUS_PASSED);
+                _tester.SendMessageDebug($"SetTextAsync(\"{text}\")", $"SetTextAsync(\"{text}\")", Tester.PASSED, $"Текст '{text}' введен в элемент", $"The text '{text}' was entered into the element", Tester.IMAGE_STATUS_PASSED);
             }
         }
 
@@ -339,7 +339,7 @@ namespace HatFrameworkDev
             }
             else
             {
-                _tester.SendMessageDebug($"SetValueAsync(\"{value}\")", $"SetValueAsync(\"{value}\")", Tester.PASSED, "Значение введено в элемент", "The value was entered into the element", Tester.IMAGE_STATUS_PASSED);
+                _tester.SendMessageDebug($"SetValueAsync(\"{value}\")", $"SetValueAsync(\"{value}\")", Tester.PASSED, $"Значение '{value}' введено в элемент", $"The value '{value}' was entered into the element", Tester.IMAGE_STATUS_PASSED);
             }
         }
 
@@ -421,7 +421,7 @@ namespace HatFrameworkDev
             }
             else
             {
-                _tester.SendMessageDebug($"SetAttributeAsync(\"{name}\", \"{value}\")", $"SetAttributeAsync(\"{name}\", \"{value}\")", Tester.PASSED, $"Аттрибут '{name}' добавлен в элемент", $"Attribute '{name}' added to the element", Tester.IMAGE_STATUS_PASSED);
+                _tester.SendMessageDebug($"SetAttributeAsync(\"{name}\", \"{value}\")", $"SetAttributeAsync(\"{name}\", \"{value}\")", Tester.PASSED, $"Аттрибут '{name}' со значением '{value}' добавлен в элемент", $"Attribute '{name}' with a value of '{value}' added to the element", Tester.IMAGE_STATUS_PASSED);
             }
         }
 
@@ -488,7 +488,7 @@ namespace HatFrameworkDev
             }
             else
             {
-                _tester.SendMessageDebug($"SetHtmlAsync(\"{html}\")", $"SetHtmlAsync(\"{html}\")", Tester.PASSED, "В элемент введен html", "Html has been entered into the element", Tester.IMAGE_STATUS_PASSED);
+                _tester.SendMessageDebug($"SetHtmlAsync(\"{html}\")", $"SetHtmlAsync(\"{html}\")", Tester.PASSED, $"В элемент введен html {html}", $"Html {html} has been added to the element", Tester.IMAGE_STATUS_PASSED);
             }
         }
 
@@ -791,7 +791,7 @@ namespace HatFrameworkDev
             }
             else
             {
-                _tester.SendMessageDebug($"SetStyleAsync(\"{cssText}\")", $"SetStyleAsync(\"{cssText}\")", Tester.PASSED, "Стиль введен в элемент", "The style is entered in the element", Tester.IMAGE_STATUS_PASSED);
+                _tester.SendMessageDebug($"SetStyleAsync(\"{cssText}\")", $"SetStyleAsync(\"{cssText}\")", Tester.PASSED, $"Стиль {cssText} введен в элемент", $"The style {cssText} is entered in the element", Tester.IMAGE_STATUS_PASSED);
             }
         }
         

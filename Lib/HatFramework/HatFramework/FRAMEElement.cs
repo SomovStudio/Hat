@@ -272,7 +272,7 @@ namespace HatFramework
             }
             else
             {
-                _tester.SendMessageDebug($"SetAttributeInElementAsync(\"{by}\", \"{locator}\", \"{attribute}\", \"{value}\")", $"SetAttributeInElementAsync(\"{by}\", \"{locator}\", \"{attribute}\", \"{value}\")", Tester.PASSED, $"Аттрибут '{attribute}' добавлен в элемент", $"Attribute '{attribute}' added to the element", Tester.IMAGE_STATUS_PASSED);
+                _tester.SendMessageDebug($"SetAttributeInElementAsync(\"{by}\", \"{locator}\", \"{attribute}\", \"{value}\")", $"SetAttributeInElementAsync(\"{by}\", \"{locator}\", \"{attribute}\", \"{value}\")", Tester.PASSED, $"Аттрибут '{attribute}' со значением '{value}' добавлен в элемент", $"Attribute '{attribute}' with a value of '{value}' added to the element", Tester.IMAGE_STATUS_PASSED);
             }
         }
 
@@ -400,7 +400,7 @@ namespace HatFramework
             }
             else
             {
-                _tester.SendMessageDebug($"SetValueInElementAsync(\"{by}\", \"{locator}\", \"{value}\")", $"SetValueInElementAsync(\"{by}\", \"{locator}\", \"{value}\")", Tester.PASSED, "Значение введено в элемент", "The value was entered into the element", Tester.IMAGE_STATUS_PASSED);
+                _tester.SendMessageDebug($"SetValueInElementAsync(\"{by}\", \"{locator}\", \"{value}\")", $"SetValueInElementAsync(\"{by}\", \"{locator}\", \"{value}\")", Tester.PASSED, $"Значение '{value}' введено в элемент", $"The value '{value}' was entered into the element", Tester.IMAGE_STATUS_PASSED);
             }
         }
 
@@ -828,7 +828,7 @@ namespace HatFramework
             }
             else
             {
-                _tester.SendMessageDebug($"SetTextInElementAsync(\"{by}\", \"{locator}\", \"{text}\")", $"SetTextInElementAsync(\"{by}\", \"{locator}\", \"{text}\")", Tester.PASSED, "Текст введен в элемент", "The text was entered into the element", Tester.IMAGE_STATUS_PASSED);
+                _tester.SendMessageDebug($"SetTextInElementAsync(\"{by}\", \"{locator}\", \"{text}\")", $"SetTextInElementAsync(\"{by}\", \"{locator}\", \"{text}\")", Tester.PASSED, $"Текст '{text}' введен в элемент", $"The text '{text}' was entered into the element", Tester.IMAGE_STATUS_PASSED);
             }
         }
 
@@ -1001,7 +1001,7 @@ namespace HatFramework
             }
             else
             {
-                _tester.SendMessageDebug($"SetStyleInElementAsync(\"{by}\", \"{locator}\", \"{cssText}\")", $"SetStyleInElementAsync(\"{by}\", \"{locator}\", \"{cssText}\")", Tester.PASSED, "Стиль введен в элемент", "The style is entered in the element", Tester.IMAGE_STATUS_PASSED);
+                _tester.SendMessageDebug($"SetStyleInElementAsync(\"{by}\", \"{locator}\", \"{cssText}\")", $"SetStyleInElementAsync(\"{by}\", \"{locator}\", \"{cssText}\")", Tester.PASSED, $"Стиль {cssText} введен в элемент", $"The style {cssText} is entered in the element", Tester.IMAGE_STATUS_PASSED);
             }
         }
 
