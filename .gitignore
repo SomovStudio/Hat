@@ -2,6 +2,8 @@ App/Hat/Hat/bin/
 App/Hat/Hat/obj/
 App/Hat/.vs/
 App/Hat/.vs/Hat/v17/.suo
+App/HatRack/bin/
+App/HatRack/obj/
 Lib/HatFramework/HatFramework/obj/
 Lib/HatFramework/HatFramework/bin/Release/ICSharpCode.TextEditor.dll
 Lib/HatFramework/HatFramework/bin/Release/Microsoft.Web.WebView2.Core.dll
