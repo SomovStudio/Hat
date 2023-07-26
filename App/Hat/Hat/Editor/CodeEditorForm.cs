@@ -3141,6 +3141,21 @@ tester.ConsoleMsg(screenshot);\par
 @"",
 @"",
 @"",
+@"",
+@"",
+@"",
+@"",
+@"",
+@"",
+@"",
+@"",
+@"",
+@"",
+@"",
+@"",
+@"",
+@"",
+@"",
 @""
         };
 
@@ -3294,8 +3309,10 @@ tester.ConsoleMsg(screenshot);\par
         {
             completionWindow = new CompletionWindow(textArea);
             IList<ICompletionData> data = completionWindow.CompletionList.CompletionData;
+            data.Add(new CompletionData("AssertDontHaveInTableAsync", "AssertDontHaveInTableAsync(string tableName, string columnName, string value)"));
             data.Add(new CompletionData("AssertEqualsAsync", "AssertEqualsAsync(dynamic expected, dynamic actual)"));
             data.Add(new CompletionData("AssertFalseAsync", "AssertFalseAsync(bool condition)"));
+            data.Add(new CompletionData("AssertHaveInTableAsync", "AssertHaveInTableAsync(string tableName, string columnName, string value)"));
             data.Add(new CompletionData("AssertNetworkEventsAsync", "AssertNetworkEventsAsync(bool presence, string[] events)"));
             data.Add(new CompletionData("AssertNoErrorsAsync", "AssertNoErrorsAsync(bool showListErrors = false, string[] listIgnored = null)"));
             data.Add(new CompletionData("AssertNotEqualsAsync", "AssertNotEqualsAsync(dynamic expected, dynamic actual)"));
@@ -3333,6 +3350,8 @@ tester.ConsoleMsg(screenshot);\par
             data.Add(new CompletionData("ClickElementByTagAsync", "ClickElementByTagAsync(string tag, int index)"));
             data.Add(new CompletionData("ClickMouseAsync", "ClickMouseAsync()"));
             data.Add(new CompletionData("COMPLETED", "COMPLETED"));
+            data.Add(new CompletionData("ConnectionCloseAsync", "ConnectionCloseAsync()"));
+            data.Add(new CompletionData("ConnectionOpenAsync", "ConnectionOpenAsync(string connectionString)"));
             data.Add(new CompletionData("ConsoleMsg", "ConsoleMsg(string message)"));
             data.Add(new CompletionData("ConsoleMsgError", "ConsoleMsgError(string message)"));
             data.Add(new CompletionData("CreateHashMD5FromTextAsync", "CreateHashMD5FromTextAsync(string text)"));
@@ -3340,6 +3359,7 @@ tester.ConsoleMsg(screenshot);\par
             data.Add(new CompletionData("DefineTestStop", "DefineTestStop()"));
             data.Add(new CompletionData("Description", "Description(string text)"));
             data.Add(new CompletionData("DisableDebugInReport", "DisableDebugInReport()"));
+            data.Add(new CompletionData("EditEntryAsync", "EditEntryAsync(string sqlQuertUpdate)"));
             data.Add(new CompletionData("ExecuteJavaScriptAsync", "ExecuteJavaScriptAsync(string script)"));
             data.Add(new CompletionData("FAILED", "FAILED"));
             data.Add(new CompletionData("FindElementAsync", "FindElementAsync(string by, string locator, int sec)"));
@@ -3347,6 +3367,7 @@ tester.ConsoleMsg(screenshot);\par
             data.Add(new CompletionData("FindElementByIdAsync", "FindElementByIdAsync(string id, int sec)"));
             data.Add(new CompletionData("FindElementByNameAsync", "FindElementByNameAsync(string name, int index, int sec)"));
             data.Add(new CompletionData("FindElementByTagAsync", "FindElementByTagAsync(string tag, int index, int sec)"));
+            data.Add(new CompletionData("FindEntryAsync", "FindEntryAsync(string tableName, string columnName, string value)"));
             data.Add(new CompletionData("FindVisibleElementAsync", "FindVisibleElementAsync(string by, string locator, int sec)"));
             data.Add(new CompletionData("FindVisibleElementByClassAsync", "FindVisibleElementByClassAsync(string _class, int index, int sec)"));
             data.Add(new CompletionData("FindVisibleElementByIdAsync", "FindVisibleElementByIdAsync(string id, int sec)"));
@@ -3370,7 +3391,11 @@ tester.ConsoleMsg(screenshot);\par
             data.Add(new CompletionData("GetCountElementsByClassAsync", "GetCountElementsByClassAsync(string _class)"));
             data.Add(new CompletionData("GetCountElementsByNameAsync", "GetCountElementsByNameAsync(string name)"));
             data.Add(new CompletionData("GetCountElementsByTagAsync", "GetCountElementsByTagAsync(string tag)"));
+            data.Add(new CompletionData("GetCountEntriesAsync", "GetCountEntriesAsync(string sqlQuertSelect)"));
+            data.Add(new CompletionData("GetDataTableAsync", "GetDataTableAsync(string sqlQuertSelect)"));
             data.Add(new CompletionData("GetElementAsync", "GetElementAsync(string by, string locator)"));
+            data.Add(new CompletionData("GetEntriesAsync", "GetEntriesAsync(string sqlQuertSelect)"));
+            data.Add(new CompletionData("GetEntriesFromTableAsync", "GetEntriesFromTableAsync(string tableName)"));
             data.Add(new CompletionData("GetFrameAsync", "GetFrameAsync(int index)"));
             data.Add(new CompletionData("GetHtmlAsync", "GetHtmlAsync()"));
             data.Add(new CompletionData("GetHtmlFromElementAsync", "GetHtmlFromElementAsync(string by, string locator)"));
@@ -3418,6 +3443,7 @@ tester.ConsoleMsg(screenshot);\par
             data.Add(new CompletionData("Name", "string Name { get; set; }"));
             data.Add(new CompletionData("PASSED", "PASSED"));
             data.Add(new CompletionData("PROCESS", "PROCESS"));
+            data.Add(new CompletionData("RemoveEntryAsync", "RemoveEntryAsync(string sqlQuertDelete)"));
             data.Add(new CompletionData("RestGetAsync", "RestGetAsync(string url, TimeSpan timeout, string charset = \"UTF-8\")"));
             data.Add(new CompletionData("RestGetBasicAuthAsync", "RestGetBasicAuthAsync(string login, string pass, string url, TimeSpan timeout, string charset = \"UTF-8\")"));
             data.Add(new CompletionData("RestGetStatusCodeAsync", "RestGetStatusCodeAsync(string url)"));
@@ -3439,6 +3465,7 @@ tester.ConsoleMsg(screenshot);\par
             data.Add(new CompletionData("SetAttributeInElementsByClassAsync", "SetAttributeInElementsByClassAsync(string _class, string attribute, string value)"));
             data.Add(new CompletionData("SetAttributeInElementsByNameAsync", "SetAttributeInElementsByNameAsync(string name, string attribute, string value)"));
             data.Add(new CompletionData("SetAttributeInElementsByTagAsync", "SetAttributeInElementsByTagAsync(string tag, string attribute, string value)"));
+            data.Add(new CompletionData("SetEntryAsync", "SetEntryAsync(string sqlQuertInsert)"));
             data.Add(new CompletionData("SetHtmlAsync", "SetHtmlAsync(string html)"));
             data.Add(new CompletionData("SetHtmlInElementAsync", "SetHtmlInElementAsync(string by, string locator, string html)"));
             data.Add(new CompletionData("SetHtmlInElementByClassAsync", "SetHtmlInElementByClassAsync(string _class, int index, string html)"));
@@ -4058,10 +4085,32 @@ tester.ConsoleMsg(screenshot);\par
                     if (value == "IsVisibleElementAsync" && tag == "FRAMEElement") richTextBox1.Rtf = handbook[227];
                     if (value == "BrowserScreenshotAsync" && tag == "Tester") richTextBox1.Rtf = handbook[228];
 
+                    if (value == "" && tag == "TesterMySql") richTextBox1.Rtf = handbook[228];
+                    if (value == "" && tag == "TesterMySql") richTextBox1.Rtf = handbook[229];
+                    if (value == "" && tag == "TesterMySql") richTextBox1.Rtf = handbook[230];
+                    if (value == "" && tag == "TesterMySql") richTextBox1.Rtf = handbook[231];
+                    if (value == "" && tag == "TesterMySql") richTextBox1.Rtf = handbook[232];
+                    if (value == "" && tag == "TesterMySql") richTextBox1.Rtf = handbook[233];
+                    if (value == "" && tag == "TesterMySql") richTextBox1.Rtf = handbook[234];
+                    if (value == "" && tag == "TesterMySql") richTextBox1.Rtf = handbook[235];
+                    if (value == "" && tag == "TesterMySql") richTextBox1.Rtf = handbook[236];
+                    if (value == "" && tag == "TesterMySql") richTextBox1.Rtf = handbook[237];
+                    if (value == "" && tag == "TesterMySql") richTextBox1.Rtf = handbook[238];
+                    if (value == "" && tag == "TesterMySql") richTextBox1.Rtf = handbook[239];
+
+
                     /*
-                    if (value == "" && tag == "") richTextBox1.Rtf = handbook[228];
-                    if (value == "" && tag == "") richTextBox1.Rtf = handbook[229];
-                    if (value == "" && tag == "") richTextBox1.Rtf = handbook[230];
+                    if (value == "" && tag == "") richTextBox1.Rtf = handbook[240];
+                    if (value == "" && tag == "") richTextBox1.Rtf = handbook[241];
+                    if (value == "" && tag == "") richTextBox1.Rtf = handbook[242];
+                    if (value == "" && tag == "") richTextBox1.Rtf = handbook[243];
+                    if (value == "" && tag == "") richTextBox1.Rtf = handbook[244];
+                    if (value == "" && tag == "") richTextBox1.Rtf = handbook[245];
+                    if (value == "" && tag == "") richTextBox1.Rtf = handbook[246];
+                    if (value == "" && tag == "") richTextBox1.Rtf = handbook[247];
+                    if (value == "" && tag == "") richTextBox1.Rtf = handbook[248];
+                    if (value == "" && tag == "") richTextBox1.Rtf = handbook[249];
+                    if (value == "" && tag == "") richTextBox1.Rtf = handbook[250];
                     */
 
                 }
@@ -4111,6 +4160,7 @@ tester.ConsoleMsg(screenshot);\par
 
                     if (treeView1.SelectedNode.Text == "Класс: FRAMEElement") return;
                     if (treeView1.SelectedNode.Text == "Класс: HTMLElement") return;
+                    if (treeView1.SelectedNode.Text == "Класс: TesterMySql") return;
                     if (treeView1.SelectedNode.Text == "Конструктор") return;
                     if (treeView1.SelectedNode.Text == "Переменные") return;
                     if (treeView1.SelectedNode.Text == "Методы") return;
