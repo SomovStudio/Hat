@@ -549,6 +549,37 @@
             treeNode231,
             treeNode234,
             treeNode260});
+            System.Windows.Forms.TreeNode treeNode262 = new System.Windows.Forms.TreeNode("TesterMySql", 2, 5);
+            System.Windows.Forms.TreeNode treeNode263 = new System.Windows.Forms.TreeNode("Конструктор", new System.Windows.Forms.TreeNode[] {
+            treeNode262});
+            System.Windows.Forms.TreeNode treeNode264 = new System.Windows.Forms.TreeNode("ConnectionOpenAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode265 = new System.Windows.Forms.TreeNode("ConnectionCloseAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode266 = new System.Windows.Forms.TreeNode("GetCountEntriesAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode267 = new System.Windows.Forms.TreeNode("GetEntriesAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode268 = new System.Windows.Forms.TreeNode("GetEntriesFromTableAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode269 = new System.Windows.Forms.TreeNode("GetDataTableAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode270 = new System.Windows.Forms.TreeNode("SetEntryAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode271 = new System.Windows.Forms.TreeNode("EditEntryAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode272 = new System.Windows.Forms.TreeNode("RemoveEntryAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode273 = new System.Windows.Forms.TreeNode("FindEntryAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode274 = new System.Windows.Forms.TreeNode("AssertHaveInTableAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode275 = new System.Windows.Forms.TreeNode("AssertDontHaveInTableAsync", 2, 5);
+            System.Windows.Forms.TreeNode treeNode276 = new System.Windows.Forms.TreeNode("Методы", new System.Windows.Forms.TreeNode[] {
+            treeNode264,
+            treeNode265,
+            treeNode266,
+            treeNode267,
+            treeNode268,
+            treeNode269,
+            treeNode270,
+            treeNode271,
+            treeNode272,
+            treeNode273,
+            treeNode274,
+            treeNode275});
+            System.Windows.Forms.TreeNode treeNode277 = new System.Windows.Forms.TreeNode("Класс: TesterMySql", new System.Windows.Forms.TreeNode[] {
+            treeNode263,
+            treeNode276});
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.fileSaveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -2179,10 +2210,85 @@
             treeNode261.Name = "Узел1";
             treeNode261.Tag = "FRAMEElement";
             treeNode261.Text = "Класс: FRAMEElement";
+            treeNode262.ImageIndex = 2;
+            treeNode262.Name = "Узел3";
+            treeNode262.SelectedImageIndex = 5;
+            treeNode262.Tag = "TesterMySql";
+            treeNode262.Text = "TesterMySql";
+            treeNode263.Name = "Узел1";
+            treeNode263.Tag = "TesterMySql";
+            treeNode263.Text = "Конструктор";
+            treeNode264.ImageIndex = 2;
+            treeNode264.Name = "Узел4";
+            treeNode264.SelectedImageIndex = 5;
+            treeNode264.Tag = "TesterMySql";
+            treeNode264.Text = "ConnectionOpenAsync";
+            treeNode265.ImageIndex = 2;
+            treeNode265.Name = "Узел5";
+            treeNode265.SelectedImageIndex = 5;
+            treeNode265.Tag = "TesterMySql";
+            treeNode265.Text = "ConnectionCloseAsync";
+            treeNode266.ImageIndex = 2;
+            treeNode266.Name = "Узел13";
+            treeNode266.SelectedImageIndex = 5;
+            treeNode266.Tag = "TesterMySql";
+            treeNode266.Text = "GetCountEntriesAsync";
+            treeNode267.ImageIndex = 2;
+            treeNode267.Name = "Узел6";
+            treeNode267.SelectedImageIndex = 5;
+            treeNode267.Tag = "TesterMySql";
+            treeNode267.Text = "GetEntriesAsync";
+            treeNode268.ImageIndex = 2;
+            treeNode268.Name = "Узел7";
+            treeNode268.SelectedImageIndex = 5;
+            treeNode268.Tag = "TesterMySql";
+            treeNode268.Text = "GetEntriesFromTableAsync";
+            treeNode269.ImageIndex = 2;
+            treeNode269.Name = "Узел8";
+            treeNode269.SelectedImageIndex = 5;
+            treeNode269.Tag = "TesterMySql";
+            treeNode269.Text = "GetDataTableAsync";
+            treeNode270.ImageIndex = 2;
+            treeNode270.Name = "Узел9";
+            treeNode270.SelectedImageIndex = 5;
+            treeNode270.Tag = "TesterMySql";
+            treeNode270.Text = "SetEntryAsync";
+            treeNode271.ImageIndex = 2;
+            treeNode271.Name = "Узел10";
+            treeNode271.SelectedImageIndex = 5;
+            treeNode271.Tag = "TesterMySql";
+            treeNode271.Text = "EditEntryAsync";
+            treeNode272.ImageIndex = 2;
+            treeNode272.Name = "Узел11";
+            treeNode272.SelectedImageIndex = 5;
+            treeNode272.Tag = "TesterMySql";
+            treeNode272.Text = "RemoveEntryAsync";
+            treeNode273.ImageIndex = 2;
+            treeNode273.Name = "Узел12";
+            treeNode273.SelectedImageIndex = 5;
+            treeNode273.Tag = "TesterMySql";
+            treeNode273.Text = "FindEntryAsync";
+            treeNode274.ImageIndex = 2;
+            treeNode274.Name = "Узел14";
+            treeNode274.SelectedImageIndex = 5;
+            treeNode274.Tag = "TesterMySql";
+            treeNode274.Text = "AssertHaveInTableAsync";
+            treeNode275.ImageIndex = 2;
+            treeNode275.Name = "Узел15";
+            treeNode275.SelectedImageIndex = 5;
+            treeNode275.Tag = "TesterMySql";
+            treeNode275.Text = "AssertDontHaveInTableAsync";
+            treeNode276.Name = "Узел2";
+            treeNode276.Tag = "TesterMySql";
+            treeNode276.Text = "Методы";
+            treeNode277.Name = "Узел0";
+            treeNode277.Tag = "TesterMySql";
+            treeNode277.Text = "Класс: TesterMySql";
             this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
             treeNode193,
             treeNode225,
-            treeNode261});
+            treeNode261,
+            treeNode277});
             this.treeView1.SelectedImageIndex = 0;
             this.treeView1.Size = new System.Drawing.Size(219, 177);
             this.treeView1.TabIndex = 1;

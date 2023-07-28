@@ -152,6 +152,8 @@ namespace Hat
         {
             string content =
 @"using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using HatFramework;
 
 namespace Hat
