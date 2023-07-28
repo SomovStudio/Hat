@@ -23,7 +23,7 @@
   <img src="https://github.com/SomovStudio/Hat/blob/main/Img/screenshots/HatZionec.png">
 </p>
 
-Системные требования:
+<b>Системные требования:</b>
 1. Операционная система Windows 8, 8.1, 10, 11
 
 2. Microsoft .NET Framework 4.8
@@ -33,12 +33,19 @@
 <br>Скачать WebView2 Runtime по ссылке: https://developer.microsoft.com/en-us/microsoft-edge/webview2/
 
 <hr>
-Официальная страница приложения: https://somovstudio.github.io/hat.html
+<b>Плагины:</b>
+<br>Плагин HatPluginMySql для браузера Hat который позволяет выполнять автоматизированное тестирование данных в базе данных MySql
+<br>https://github.com/SomovStudio/HatPluginMySql
+
+<hr>
+<b>Документация:</b>
+<br>Официальная страница приложения: https://somovstudio.github.io/hat.html
 <br>Документация online:  https://somovstudio.github.io/help/Hat/index.html
 <br>Документация offline: <a href="https://github.com/SomovStudio/Hat/raw/main/Help/help.chm">help.chm</a>
 
 <hr>
-Видеообзор браузера Hat: https://youtu.be/Dn9UtrNj6EM
+<b>Видео:</b>
+<br>Видеообзор браузера Hat: https://youtu.be/Dn9UtrNj6EM
 <br>
 <br>
 Уроки:
