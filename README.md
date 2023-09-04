@@ -12,8 +12,8 @@
 Результат проверки формируется в отчет и отправляются на указаную почту. 
 Запуск автотестов возможен из командной строки операционной системы Windows это пригодится при использовании автотестов в популярных средствах непрерывной интеграции таких как: Jenkins, TeamCity, GitLab CI/CD.
 <br>
-<br>Скачать браузер Hat: https://github.com/SomovStudio/Hat/releases/download/v1.3.3/Hat-1.3.3.zip
-<br>(актуальная версия 1.3.3 от 1.08.2023)
+<br>Скачать браузер Hat: https://github.com/SomovStudio/Hat/releases/download/v1.3.4/Hat-1.3.4.zip
+<br>(актуальная версия 1.3.4 от 4.09.2023)
 <br>
 <br>Скачать браузер Hat: https://github.com/SomovStudio/Hat/releases/download/v1.2.3/Hat-1.2.3.zip
 <br>(последняя версия 1.2.3 перед глобальными изменениями фреймворка)
