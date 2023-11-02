@@ -14,9 +14,6 @@
 <br>
 <br>Скачать браузер Hat: https://github.com/SomovStudio/Hat/releases/download/v1.3.6/Hat-1.3.6.zip
 <br>(актуальная версия 1.3.6 от 2.11.2023)
-<br>
-<br>Скачать браузер Hat: https://github.com/SomovStudio/Hat/releases/download/v1.2.3/Hat-1.2.3.zip
-<br>(последняя версия 1.2.3 перед глобальными изменениями фреймворка)
 <hr>
 
 <p align="center">
