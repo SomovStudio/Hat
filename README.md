@@ -14,7 +14,7 @@
 <br>
 <br>Скачать браузер Hat: https://github.com/SomovStudio/Hat/releases/download/v1.3.6/Hat-1.3.6.zip
 <br>(актуальная версия 1.3.6 от 2.11.2023)
-<br>Все сборки можно скачать с <a target="_blank" href="https://drive.google.com/drive/folders/1X-dtbYdjTcpMsWYlUjUupl3PU0BuKCwK">Google Disk</>
+<br>Все сборки можно скачать с <a target="_blank" href="https://drive.google.com/drive/folders/1X-dtbYdjTcpMsWYlUjUupl3PU0BuKCwK">Google Disk</a>
 <hr>
 
 <p align="center">
