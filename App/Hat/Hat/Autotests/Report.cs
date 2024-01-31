@@ -197,7 +197,7 @@ namespace Hat
         {
             try
             {
-                string filename = $"image-{DateTime.Now.ToString("dd-mm-yyyy-hh-mm-ss")}.jpeg";
+                string filename = $"image-{DateTime.Now.ToString("dd-MM-yyyy-HH-mm-ss")}.jpeg";
                 if (Directory.Exists(Report.FolderImagesName) == false)
                 {
                     Directory.CreateDirectory(Report.FolderImagesName);
