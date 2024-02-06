@@ -534,7 +534,7 @@ namespace HatFrameworkDev
             }
         }
 
-        public async Task SendMsgToTelegramAsync(string botToken, string chatId, string text, string charset = "UTF-8")
+        public async Task SendMsgToTelegramAsync(string botToken, string chatId, string text, string charset = "UTF-8", int timeHourFrom = 0, int timeHourBefore = 0)
         {
             try
             {
@@ -547,20 +547,42 @@ namespace HatFrameworkDev
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                 client.DefaultRequestHeaders.Add("charset", charset);
-                HttpResponseMessage response = await client.GetAsync(url);
-                if (response.IsSuccessStatusCode)
+
+                if (timeHourFrom == 0 && timeHourBefore == 0)
                 {
-                    SendMessageDebug($"SendMsgToTelegramAsync(\"{botToken}\", \"{chatId}\", \"{text}\", \"{charset}\")",
-                        $"SendMsgToTelegramAsync(\"{botToken}\", \"{chatId}\", \"{text}\", \"{charset}\")",
-                        PASSED, "Сообщение отправлено в Телеграм", "The message was sent in a Telegram", IMAGE_STATUS_PASSED);
+                    HttpResponseMessage response = await client.GetAsync(url);
+                    if (response.IsSuccessStatusCode)
+                    {
+                        SendMessageDebug($"SendMsgToTelegramAsync(\"{botToken}\", \"{chatId}\", \"{text}\", \"{charset}\")",
+                            $"SendMsgToTelegramAsync(\"{botToken}\", \"{chatId}\", \"{text}\", \"{charset}\")",
+                            PASSED, "Сообщение отправлено в Телеграм", "The message was sent in a Telegram", IMAGE_STATUS_PASSED);
+                    }
+                    else
+                    {
+                        SendMessageDebug($"SendMsgToTelegramAsync(\"{botToken}\", \"{chatId}\", \"{text}\", \"{charset}\")",
+                            $"SendMsgToTelegramAsync(\"{botToken}\", \"{chatId}\", \"{text}\", \"{charset}\")", FAILED,
+                            "Не удалось отправить сообщение в Телеграм " + Environment.NewLine + "Статус запроса: " + Environment.NewLine + response.StatusCode.ToString(),
+                            "Failed to send message in Telegram " + Environment.NewLine + "Request status: " + Environment.NewLine + response.StatusCode.ToString(),
+                            IMAGE_STATUS_FAILED);
+                    }
                 }
-                else
+                else if (DateTime.Now.Hour >= timeHourFrom && DateTime.Now.Hour < timeHourBefore)
                 {
-                    SendMessageDebug($"SendMsgToTelegramAsync(\"{botToken}\", \"{chatId}\", \"{text}\", \"{charset}\")",
-                        $"SendMsgToTelegramAsync(\"{botToken}\", \"{chatId}\", \"{text}\", \"{charset}\")", FAILED,
-                        "Не удалось отправить сообщение в Телеграм " + Environment.NewLine + "Статус запроса: " + Environment.NewLine + response.StatusCode.ToString(),
-                        "Failed to send message in Telegram " + Environment.NewLine + "Request status: " + Environment.NewLine + response.StatusCode.ToString(),
-                        IMAGE_STATUS_FAILED);
+                    HttpResponseMessage response = await client.GetAsync(url);
+                    if (response.IsSuccessStatusCode)
+                    {
+                        SendMessageDebug($"SendMsgToTelegramAsync(\"{botToken}\", \"{chatId}\", \"{text}\", \"{charset}\")",
+                            $"SendMsgToTelegramAsync(\"{botToken}\", \"{chatId}\", \"{text}\", \"{charset}\")",
+                            PASSED, "Сообщение отправлено в Телеграм", "The message was sent in a Telegram", IMAGE_STATUS_PASSED);
+                    }
+                    else
+                    {
+                        SendMessageDebug($"SendMsgToTelegramAsync(\"{botToken}\", \"{chatId}\", \"{text}\", \"{charset}\")",
+                            $"SendMsgToTelegramAsync(\"{botToken}\", \"{chatId}\", \"{text}\", \"{charset}\")", FAILED,
+                            "Не удалось отправить сообщение в Телеграм " + Environment.NewLine + "Статус запроса: " + Environment.NewLine + response.StatusCode.ToString(),
+                            "Failed to send message in Telegram " + Environment.NewLine + "Request status: " + Environment.NewLine + response.StatusCode.ToString(),
+                            IMAGE_STATUS_FAILED);
+                    }
                 }
             }
             catch (Exception ex)

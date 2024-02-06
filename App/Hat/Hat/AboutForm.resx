@@ -121,7 +121,7 @@
   <data name="label11.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAKYAAAAqCAYAAAA5+iDUAAAABGdBTUEAALGOfPtRkwAAACBjSFJNAAB6
-        JQAAgIMAAPn/AACA6QAAdTAAAOpgAAA6mAAAF2+SX8VGAAAACXBIWXMAAAsPAAALDwGS+QOlAAASPElE
+        JQAAgIMAAPn/AACA6QAAdTAAAOpgAAA6mAAAF2+SX8VGAAAACXBIWXMAAAsOAAALDgFAvuFBAAASPElE
         QVR4Xu2be1iVVb7HB6foYpkn71ZqKCmgCCLiDTBExTt5Q8ALFwEvAZoKioIgIoKgKAKGogJdmDRQsDRD
         ksayU8dmnDnNeXpOdbKZes6Uz1GT1Ezb5/vdz17vs/bL2uyNythM+48Pe++1fuvy/tZ3rfVb7/vyG4PB
         YMfOLw5loh079xploh079xpl4p2QeqzK+4Xacl9Vnh07tqJMvF12nnrDwa8081zQvpwzFWcaHFQ2duzY
@@ -206,7 +206,7 @@
   <data name="richTextBox1.Text" xml:space="preserve">
     <value>MIT License
 
-Copyright (c) 2023 Somov Studio
+Copyright (c) 2024 Somov Studio
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

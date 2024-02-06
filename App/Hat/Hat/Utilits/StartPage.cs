@@ -344,7 +344,7 @@ namespace Hat
 			Благодарим вас за использование нашего приложения.
 		</p>
 		<h4>
-			Copyright © 2023 Somov Studio. All Rights Reserved.
+			Copyright © 2024 Somov Studio. All Rights Reserved.
 		</h4>
 	</div>
 </body>

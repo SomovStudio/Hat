@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Somov Studio")]
 [assembly: AssemblyProduct("Hat")]
-[assembly: AssemblyCopyright("Copyright © Somov Studio 2023")]
+[assembly: AssemblyCopyright("Copyright © Somov Studio 2024")]
 [assembly: AssemblyTrademark("Somov Studio")]
 [assembly: AssemblyCulture("")]
 
@@ -32,5 +32,5 @@ using System.Runtime.InteropServices;
 // Можно задать все значения или принять номера сборки и редакции по умолчанию 
 // используя "*", как показано ниже:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.3.8")]
-[assembly: AssemblyFileVersion("1.3.8")]
+[assembly: AssemblyVersion("1.3.9.0")]
+[assembly: AssemblyFileVersion("1.3.9.0")]
