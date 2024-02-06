@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Somov Studio")]
 [assembly: AssemblyProduct("HatFramework")]
-[assembly: AssemblyCopyright("Copyright © Somov Studio 2023")]
+[assembly: AssemblyCopyright("Copyright © Somov Studio 2024")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
