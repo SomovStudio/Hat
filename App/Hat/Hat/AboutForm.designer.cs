@@ -200,7 +200,7 @@
             // 
             this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(137, 14);
+            this.label6.Location = new System.Drawing.Point(112, 14);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(73, 13);
             this.label6.TabIndex = 10;
@@ -280,7 +280,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "AboutForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "О программе Hat | Copyright © 2023 Somov Studio. All Rights Reserved.";
+            this.Text = "О программе Hat | Copyright © 2024 Somov Studio. All Rights Reserved.";
             this.Load += new System.EventHandler(this.AboutForm_Load);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();

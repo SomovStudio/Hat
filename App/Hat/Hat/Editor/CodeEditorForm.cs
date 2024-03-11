@@ -2575,7 +2575,7 @@ if(tester.GetTestResult() == Tester.PASSED) \par
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 SendMsgToTelegramAsync\cf0\par
 \cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'ee\'f2\'ef\'f0\'e0\'e2\'eb\'ff\'e5\'f2 \'f1\'ee\'ee\'e1\'f9\'e5\'ed\'e8\'e5 \'e2 \'d2\'e5\'eb\'e5\'e3\'f0\'e0\'ec, \'e4\'eb\'ff \'fd\'f2\'ee\'e3\'ee \'ed\'f3\'e6\'ed\'ee \'f1\'ee\'e7\'e4\'e0\'f2\'fc \'e1\'ee\'f2\'e0 \'e4\'ee\'e1\'e0\'e2\'e8\'f2\'fc \'e5\'e3\'ee \'e2 \'f7\'e0\'f2 \'e8 \'e2 \'f4\'f3\'ed\'ea\'f6\'e8\'fe \'ef\'e5\'f0\'e5\'e4\'e0\'f2\'fc \'f2\'ee\'ea\'e5\'ed \'e1\'ee\'f2\'e0 (\f0\lang1033 botToken\f1\lang1049 ), \'e8\'e4\'e5\'ed\'f2\'e8\'f4\'e8\'ea\'e0\'f2\'ee\'f0 \'f7\'e0\'f2\'e0 \f0\lang1033 (chatId)\f1\lang1049 , \'f2\'e5\'ea\'f1\'f2 \'f1\'ee\'ee\'e1\'f9\'e5\'ed\'e8\'ff \f0\lang1033 (text) \f1\lang1049\'e8 \'ef\'f0\'e8 \'ed\'e5\'ee\'e1\'f5\'ee\'e4\'e8\'ec\'ee\'f1\'f2\'e8 \'f3\'ea\'e0\'e7\'e0\'f2\'fc \'ea\'ee\'e4\'e8\'f0\'ee\'e2\'ea\'f3 (\f0\lang1033 charset\f1\lang1049 )\par
-\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \f0\lang1033 SendMsgToTelegramAsync(string botToken, string chatId, string text, string charset = ""UTF-8"")\f1\lang1049\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \f0\lang1033 SendMsgToTelegramAsync(string botToken, string chatId, string text, string charset = ""UTF-8"", int timeHourFrom = 0, int timeHourBefore = 0)\f1\lang1049\par
 \cf3\par
 \cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
 \cf0\f0\lang1033 Tester tester = new Tester(browserForm);\par
@@ -2584,7 +2584,7 @@ await tester.TestBeginAsync();\par
 await tester.TestEndAsync();\par
 if(tester.GetTestResult() == Tester.FAILED) \par
 \{ \par
-\tab await tester.SendMsgToTelegramAsync(""0000000001:ABCDabcd123ABCDabcd123ABCDabcd123ZX"", ""-123456789"", ""\f1\lang1049\'d2\'e5\'f1\'f2\'ee\'e2\'ee\'e5 \'f1\'ee\'ee\'e1\'f9\'e5\'ed\'e8\'e5"");\par
+\tab await tester.SendMsgToTelegramAsync(""0000000001:ABCDabcd123ABCDabcd123ABCDabcd123ZX"", ""-123456789"", ""\f1\lang1049\'d2\'e5\'f1\'f2\'ee\'e2\'ee\'e5 \'f1\'ee\'ee\'e1\'f9\'e5\'ed\'e8\'e5"", ""UTF-8"", 9, 21);\par
 \}\f0\lang1033\par
 }",
 
@@ -3600,7 +3600,7 @@ foreach (DataRow row in dataTable.Rows)\par
             data.Add(new CompletionData("SendMessage", "SendMessage(string action, string status, string comment)"));
             data.Add(new CompletionData("SendMessageDebug", "SendMessageDebug(string actionRus, string actionEng, string status,  string commentRus, string commentEng, int image)"));
             data.Add(new CompletionData("SendMsgToMailAsync", "SendMsgToMailAsync(string subject, string body, string filename = \"\", string addresses = \"\")"));
-            data.Add(new CompletionData("SendMsgToTelegramAsync", "SendMsgToTelegramAsync(string botToken, string chatId, string text, string charset = \"UTF-8\")"));
+            data.Add(new CompletionData("SendMsgToTelegramAsync", "SendMsgToTelegramAsync(string botToken, string chatId, string text, string charset = \"UTF-8\", int timeHourFrom = 0, int timeHourBefore = 0)"));
             data.Add(new CompletionData("SetAttributeAsync", "GetAttributeAsync(string name)"));
             data.Add(new CompletionData("SetAttributeInElementAsync", "SetAttributeInElementAsync(string by, string locator, string attribute, string value)"));
             data.Add(new CompletionData("SetAttributeInElementByClassAsync", "SetAttributeInElementByClassAsync(string _class, int index, string attribute, string value)"));
