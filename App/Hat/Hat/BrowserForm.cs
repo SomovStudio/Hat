@@ -22,6 +22,8 @@ namespace Hat
         {
             InitializeComponent();
 
+
+            HatSettings.load();
             StartPage.createStartPage();
             toolStripComboBoxUrl.Text = "file:///" + StartPage.fileStartPage;
 
@@ -66,6 +68,7 @@ namespace Hat
             try
             {
                 initWebView();
+                BrowserLanguage();
 
                 this.Width = 1440;
                 this.Height = 900;
@@ -102,6 +105,36 @@ namespace Hat
             catch (Exception ex)
             {
                 ConsoleMsgError(ex.ToString());
+            }
+        }
+
+        private void BrowserLanguage()
+        {
+            if (HatSettings.language == HatSettings.RUS)
+            {
+                русскийToolStripMenuItem.Checked = true;
+                englishToolStripMenuItem.Checked = false;
+            }
+            else
+            {
+                englishToolStripMenuItem.Checked = true;
+                русскийToolStripMenuItem.Checked = false;
+
+                файлToolStripMenuItem.Text = "File";
+                сохранитьЛогиToolStripMenuItem.Text = "Save logs";
+                выводToolStripMenuItem.Text = "Output";
+                ошибкиНаСтраницеToolStripMenuItem.Text = "Errors on the page";
+                событияНаСтраницеToolStripMenuItem.Text = "Events on the page";
+                закрытьToolStripMenuItem.Text = "To close";
+                проектToolStripMenuItem.Text = "Project";
+                toolStripMenuItem7.Text = "Create a project";
+                createProjectToolStripMenuItem1.Text = "Create a simple project";
+                createProjectVSToolStripMenuItem1.Text = "Create a project compatible with Visual Studio";
+                создатьПроектToolStripMenuItem.Text = "Create a project";
+                открытьПроектToolStripMenuItem.Text = "Open a project";
+                запуститьТестToolStripMenuItem.Text = "Run the test";
+                остановитьТестToolStripMenuItem.Text = "Stop the test";
+                настройкиToolStripMenuItem.Text = "Settings";
             }
         }
 
@@ -3097,6 +3130,28 @@ namespace Hat
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Ошибка");
+            }
+        }
+
+        private void русскийToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            HatSettings.language = HatSettings.RUS;
+            if (HatSettings.save())
+            {
+                englishToolStripMenuItem.Checked = false;
+                русскийToolStripMenuItem.Checked = true;
+                BrowserLanguage();
+            }
+        }
+
+        private void englishToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            HatSettings.language = HatSettings.ENG;
+            if (HatSettings.save())
+            {
+                русскийToolStripMenuItem.Checked = false;
+                englishToolStripMenuItem.Checked = true;
+                BrowserLanguage();
             }
         }
     }

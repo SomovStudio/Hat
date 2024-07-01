@@ -109,6 +109,7 @@
       <DependentUpon>BrowserForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Config\Config.cs" />
+    <Compile Include="Config\HatSettings.cs" />
     <Compile Include="Editor\CompletionData.cs" />
     <Compile Include="Utilits\StartPage.cs" />
     <Compile Include="Utilits\WorkOnEmail.cs" />
