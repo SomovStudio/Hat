@@ -3240,6 +3240,27 @@ namespace Hat
                 groupBox4.Text = "Получатель:";
                 label12.Text = "Почта получателя:";
                 label15.Text = "(для перечисления нескольких почтовых адресов используйте пробел между ними)";
+                toolStripButton18.Text = "Очистить";
+                toolStripButton18.ToolTipText = "Очистить";
+                toolStripButton19.Text = "Сохранить";
+                toolStripButton19.ToolTipText = "Сохранить";
+                toolStripButton15.Text = "Поиск";
+                toolStripButton15.ToolTipText = "Поиск";
+                toolStripButton16.Text = "Выгрузить события";
+                toolStripButton16.ToolTipText = "Выгрузить события";
+                toolStripButton14.Text = "Очистить";
+                toolStripButton14.ToolTipText = "Очистить";
+                toolStripButton20.Text = "Сохранить";
+                toolStripButton20.ToolTipText = "Сохранить";
+                toolStripButton17.Text = "Поиск";
+                toolStripButton17.ToolTipText = "Поиск";
+                groupBox1.Text = "Настройки браузера";
+                checkBoxUserAgent.Text = "User-Agent по умолчанию";
+                groupBox2.Text = "Размер браузера";
+                radioButton1.Text = "На весь экран";
+                radioButton2.Text = "Выборочно";
+                label7.Text = "ширина:";
+                label8.Text = "высота:";
             }
             else
             {
@@ -3376,6 +3397,27 @@ namespace Hat
                 groupBox4.Text = "Recipient:";
                 label12.Text = "Recipient's email:";
                 label15.Text = "(to list multiple email addresses, use a space between them)";
+                toolStripButton18.Text = "Clear";
+                toolStripButton18.ToolTipText = "Clear";
+                toolStripButton19.Text = "Save";
+                toolStripButton19.ToolTipText = "Save";
+                toolStripButton15.Text = "Search";
+                toolStripButton15.ToolTipText = "Search";
+                toolStripButton16.Text = "Get events";
+                toolStripButton16.ToolTipText = "Get events";
+                toolStripButton14.Text = "Clear";
+                toolStripButton14.ToolTipText = "Clear";
+                toolStripButton20.Text = "Save";
+                toolStripButton20.ToolTipText = "Save";
+                toolStripButton17.Text = "Search";
+                toolStripButton17.ToolTipText = "Search";
+                groupBox1.Text = "Browser settings";
+                checkBoxUserAgent.Text = "User-Agent (default)";
+                groupBox2.Text = "Browser size";
+                radioButton1.Text = "Full screen";
+                radioButton2.Text = "Optional";
+                label7.Text = "width:";
+                label8.Text = "height:";
             }
         }
 
