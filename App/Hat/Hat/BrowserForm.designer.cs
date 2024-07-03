@@ -359,7 +359,7 @@
             this.событияНаСтраницеToolStripMenuItem});
             this.сохранитьЛогиToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("сохранитьЛогиToolStripMenuItem.Image")));
             this.сохранитьЛогиToolStripMenuItem.Name = "сохранитьЛогиToolStripMenuItem";
-            this.сохранитьЛогиToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.сохранитьЛогиToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
             this.сохранитьЛогиToolStripMenuItem.Text = "Сохранить логи";
             // 
             // выводToolStripMenuItem
@@ -386,12 +386,12 @@
             // toolStripSeparator16
             // 
             this.toolStripSeparator16.Name = "toolStripSeparator16";
-            this.toolStripSeparator16.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator16.Size = new System.Drawing.Size(159, 6);
             // 
             // закрытьToolStripMenuItem
             // 
             this.закрытьToolStripMenuItem.Name = "закрытьToolStripMenuItem";
-            this.закрытьToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.закрытьToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
             this.закрытьToolStripMenuItem.Text = "Закрыть";
             this.закрытьToolStripMenuItem.Click += new System.EventHandler(this.закрытьToolStripMenuItem_Click);
             // 
@@ -522,14 +522,14 @@
             // dEFAULTToolStripMenuItem
             // 
             this.dEFAULTToolStripMenuItem.Name = "dEFAULTToolStripMenuItem";
-            this.dEFAULTToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.dEFAULTToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.dEFAULTToolStripMenuItem.Text = "DEFAULT";
             this.dEFAULTToolStripMenuItem.Click += new System.EventHandler(this.dEFAULTToolStripMenuItem_Click);
             // 
             // uTF8ToolStripMenuItem
             // 
             this.uTF8ToolStripMenuItem.Name = "uTF8ToolStripMenuItem";
-            this.uTF8ToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.uTF8ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.uTF8ToolStripMenuItem.Text = "UTF-8";
             this.uTF8ToolStripMenuItem.Click += new System.EventHandler(this.uTF8ToolStripMenuItem_Click);
             // 
@@ -538,14 +538,14 @@
             this.uTF8BOMToolStripMenuItem.Checked = true;
             this.uTF8BOMToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.uTF8BOMToolStripMenuItem.Name = "uTF8BOMToolStripMenuItem";
-            this.uTF8BOMToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.uTF8BOMToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.uTF8BOMToolStripMenuItem.Text = "UTF-8 BOM";
             this.uTF8BOMToolStripMenuItem.Click += new System.EventHandler(this.uTF8BOMToolStripMenuItem_Click);
             // 
             // wINDOWS1251ToolStripMenuItem
             // 
             this.wINDOWS1251ToolStripMenuItem.Name = "wINDOWS1251ToolStripMenuItem";
-            this.wINDOWS1251ToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.wINDOWS1251ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.wINDOWS1251ToolStripMenuItem.Text = "WINDOWS-1251";
             this.wINDOWS1251ToolStripMenuItem.Click += new System.EventHandler(this.wINDOWS1251ToolStripMenuItem_Click);
             // 
@@ -593,15 +593,15 @@
             this.languageReportEmailRusToolStripMenuItem1.Checked = true;
             this.languageReportEmailRusToolStripMenuItem1.CheckState = System.Windows.Forms.CheckState.Checked;
             this.languageReportEmailRusToolStripMenuItem1.Name = "languageReportEmailRusToolStripMenuItem1";
-            this.languageReportEmailRusToolStripMenuItem1.Size = new System.Drawing.Size(141, 22);
+            this.languageReportEmailRusToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.languageReportEmailRusToolStripMenuItem1.Text = "Русский";
             this.languageReportEmailRusToolStripMenuItem1.Click += new System.EventHandler(this.languageReportEmailRusToolStripMenuItem1_Click);
             // 
             // languageReportEmailEngToolStripMenuItem1
             // 
             this.languageReportEmailEngToolStripMenuItem1.Name = "languageReportEmailEngToolStripMenuItem1";
-            this.languageReportEmailEngToolStripMenuItem1.Size = new System.Drawing.Size(141, 22);
-            this.languageReportEmailEngToolStripMenuItem1.Text = "Английский";
+            this.languageReportEmailEngToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.languageReportEmailEngToolStripMenuItem1.Text = "English";
             this.languageReportEmailEngToolStripMenuItem1.Click += new System.EventHandler(this.languageReportEmailEngToolStripMenuItem1_Click);
             // 
             // languageEngRusToolStripMenuItem1
@@ -616,7 +616,7 @@
             // languageRusToolStripMenuItem1
             // 
             this.languageRusToolStripMenuItem1.Name = "languageRusToolStripMenuItem1";
-            this.languageRusToolStripMenuItem1.Size = new System.Drawing.Size(141, 22);
+            this.languageRusToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.languageRusToolStripMenuItem1.Text = "Русский";
             this.languageRusToolStripMenuItem1.Click += new System.EventHandler(this.languageRusToolStripMenuItem1_Click);
             // 
@@ -625,8 +625,8 @@
             this.languageEngToolStripMenuItem1.Checked = true;
             this.languageEngToolStripMenuItem1.CheckState = System.Windows.Forms.CheckState.Checked;
             this.languageEngToolStripMenuItem1.Name = "languageEngToolStripMenuItem1";
-            this.languageEngToolStripMenuItem1.Size = new System.Drawing.Size(141, 22);
-            this.languageEngToolStripMenuItem1.Text = "Английский";
+            this.languageEngToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.languageEngToolStripMenuItem1.Text = "English";
             this.languageEngToolStripMenuItem1.Click += new System.EventHandler(this.languageEngToolStripMenuItem1_Click);
             // 
             // toolStripSeparator18
@@ -727,7 +727,7 @@
             this.englishToolStripMenuItem});
             this.языкToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("языкToolStripMenuItem.Image")));
             this.языкToolStripMenuItem.Name = "языкToolStripMenuItem";
-            this.языкToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.языкToolStripMenuItem.Size = new System.Drawing.Size(101, 22);
             this.языкToolStripMenuItem.Text = "Язык";
             // 
             // русскийToolStripMenuItem
@@ -735,14 +735,14 @@
             this.русскийToolStripMenuItem.Checked = true;
             this.русскийToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.русскийToolStripMenuItem.Name = "русскийToolStripMenuItem";
-            this.русскийToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.русскийToolStripMenuItem.Size = new System.Drawing.Size(119, 22);
             this.русскийToolStripMenuItem.Text = "Русский";
             this.русскийToolStripMenuItem.Click += new System.EventHandler(this.русскийToolStripMenuItem_Click);
             // 
             // englishToolStripMenuItem
             // 
             this.englishToolStripMenuItem.Name = "englishToolStripMenuItem";
-            this.englishToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.englishToolStripMenuItem.Size = new System.Drawing.Size(119, 22);
             this.englishToolStripMenuItem.Text = "English";
             this.englishToolStripMenuItem.Click += new System.EventHandler(this.englishToolStripMenuItem_Click);
             // 

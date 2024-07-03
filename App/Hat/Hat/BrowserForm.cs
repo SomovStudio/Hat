@@ -108,36 +108,6 @@ namespace Hat
             }
         }
 
-        private void BrowserLanguage()
-        {
-            if (HatSettings.language == HatSettings.RUS)
-            {
-                русскийToolStripMenuItem.Checked = true;
-                englishToolStripMenuItem.Checked = false;
-            }
-            else
-            {
-                englishToolStripMenuItem.Checked = true;
-                русскийToolStripMenuItem.Checked = false;
-
-                файлToolStripMenuItem.Text = "File";
-                сохранитьЛогиToolStripMenuItem.Text = "Save logs";
-                выводToolStripMenuItem.Text = "Output";
-                ошибкиНаСтраницеToolStripMenuItem.Text = "Errors on the page";
-                событияНаСтраницеToolStripMenuItem.Text = "Events on the page";
-                закрытьToolStripMenuItem.Text = "To close";
-                проектToolStripMenuItem.Text = "Project";
-                toolStripMenuItem7.Text = "Create a project";
-                createProjectToolStripMenuItem1.Text = "Create a simple project";
-                createProjectVSToolStripMenuItem1.Text = "Create a project compatible with Visual Studio";
-                создатьПроектToolStripMenuItem.Text = "Create a project";
-                открытьПроектToolStripMenuItem.Text = "Open a project";
-                запуститьТестToolStripMenuItem.Text = "Run the test";
-                остановитьТестToolStripMenuItem.Text = "Stop the test";
-                настройкиToolStripMenuItem.Text = "Settings";
-            }
-        }
-
         private void BrowserForm_Resize(object sender, EventArgs e)
         {
             toolStripComboBoxUrl.Width = this.Width / 2;
@@ -3130,6 +3100,108 @@ namespace Hat
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Ошибка");
+            }
+        }
+
+        private void BrowserLanguage()
+        {
+            if (HatSettings.language == HatSettings.RUS)
+            {
+                русскийToolStripMenuItem.Checked = true;
+                englishToolStripMenuItem.Checked = false;
+
+                файлToolStripMenuItem.Text = "Файл";
+                сохранитьЛогиToolStripMenuItem.Text = "Сохранить логи";
+                выводToolStripMenuItem.Text = "Вывод";
+                ошибкиНаСтраницеToolStripMenuItem.Text = "Ошибки на странице";
+                событияНаСтраницеToolStripMenuItem.Text = "События на странице";
+                закрытьToolStripMenuItem.Text = "Закрыть";
+
+                проектToolStripMenuItem.Text = "Проект";
+                toolStripMenuItem7.Text = "Создать проект";
+                createProjectToolStripMenuItem1.Text = "Создать простой проект";
+                createProjectVSToolStripMenuItem1.Text = "Создать проект совместимый с Visual Studio";
+                создатьПроектToolStripMenuItem.Text = "Создать проект";
+                открытьПроектToolStripMenuItem.Text = "Открыть проект";
+                запуститьТестToolStripMenuItem.Text = "Запустить тест";
+                остановитьТестToolStripMenuItem.Text = "Остановить тест";
+                настройкиToolStripMenuItem.Text = "Настройки";
+                toolStripMenuItem4.Text = "Окно редактора";
+                toolStripMenuItemEditorTopMost.Text = "Отображать поверх окон";
+                кодировкаФайловToolStripMenuItem.Text = "Кодировка файлов:";
+                toolStripMenuItem15.Text = "Отчет (настройка вывода сообщений)";
+                fullReportToolStripMenuItem1.Text = "Полный отчет (сообщения всех шагов)";
+                shortReportToolStripMenuItem1.Text = "Краткий отчет (только ошибки и пользовательские сообщения)";
+                languageReportMailToolStripMenuItem1.Text = "Язык вывода в отчете и письме";
+                languageEngRusToolStripMenuItem1.Text = "Язык вывода в командной строке (cmd):";
+                debugJavaScriptToolStripMenuItem.Text = "Отладка выполнения JavaScript";
+
+                браузерToolStripMenuItem.Text = "Браузер";
+                назадToolStripMenuItem.Text = "Назад";
+                впередToolStripMenuItem.Text = "Вперед";
+                перейтиToolStripMenuItem.Text = "Перейти";
+                обновитьToolStripMenuItem.Text = "Обновить";
+                средстваРазработкиToolStripMenuItem.Text = "Средства разработки";
+
+                настройкиToolStripMenuItem1.Text = "Настройки";
+                языкToolStripMenuItem.Text = "Язык";
+                окноToolStripMenuItem.Text = "Окно";
+                testingPanelToolStripMenuItem.Text = "Панель тестировщика";
+                projectToolStripMenuItem.Text = "Окно Проект";
+                systemToolStripMenuItem.Text = "Окно Система";
+                справкаToolStripMenuItem.Text = "Справка";
+                updateToolStripMenuItem.Text = "Проверить обновление";
+                documentationToolStripMenuItem.Text = "Документация";
+                оПрограммеCrackerToolStripMenuItem.Text = "О программе Hat";
+            }
+            else
+            {
+                englishToolStripMenuItem.Checked = true;
+                русскийToolStripMenuItem.Checked = false;
+
+                файлToolStripMenuItem.Text = "File";
+                сохранитьЛогиToolStripMenuItem.Text = "Save logs";
+                выводToolStripMenuItem.Text = "Output";
+                ошибкиНаСтраницеToolStripMenuItem.Text = "Errors on the page";
+                событияНаСтраницеToolStripMenuItem.Text = "Events on the page";
+                закрытьToolStripMenuItem.Text = "Close";
+
+                проектToolStripMenuItem.Text = "Project";
+                toolStripMenuItem7.Text = "Create a project";
+                createProjectToolStripMenuItem1.Text = "Create a simple project";
+                createProjectVSToolStripMenuItem1.Text = "Create a project compatible with Visual Studio";
+                создатьПроектToolStripMenuItem.Text = "Create a project";
+                открытьПроектToolStripMenuItem.Text = "Open a project";
+                запуститьТестToolStripMenuItem.Text = "Run the test";
+                остановитьТестToolStripMenuItem.Text = "Stop the test";
+                настройкиToolStripMenuItem.Text = "Settings";
+                toolStripMenuItem4.Text = "Editor Window";
+                toolStripMenuItemEditorTopMost.Text = "Display over windows (top most)";
+                кодировкаФайловToolStripMenuItem.Text = "Encoding of files:";
+                toolStripMenuItem15.Text = "Report (message output settings)";
+                fullReportToolStripMenuItem1.Text = "Full report (messages of all steps)";
+                shortReportToolStripMenuItem1.Text = "Short report (errors and user messages only)";
+                languageReportMailToolStripMenuItem1.Text = "The output language in the report and the letter";
+                languageEngRusToolStripMenuItem1.Text = "Command line output language (cmd):";
+                debugJavaScriptToolStripMenuItem.Text = "Debugging JavaScript execution";
+
+                браузерToolStripMenuItem.Text = "Browser";
+                назадToolStripMenuItem.Text = "Back";
+                впередToolStripMenuItem.Text = "Next";
+                перейтиToolStripMenuItem.Text = "Enter";
+                обновитьToolStripMenuItem.Text = "Update";
+                средстваРазработкиToolStripMenuItem.Text = "Development tools";
+
+                настройкиToolStripMenuItem1.Text = "Settings";
+                языкToolStripMenuItem.Text = "Language";
+                окноToolStripMenuItem.Text = "Window";
+                testingPanelToolStripMenuItem.Text = "Tester panel";
+                projectToolStripMenuItem.Text = "The Project window";
+                systemToolStripMenuItem.Text = "The System window";
+                справкаToolStripMenuItem.Text = "Help";
+                updateToolStripMenuItem.Text = "Check the update";
+                documentationToolStripMenuItem.Text = "Documentation";
+                оПрограммеCrackerToolStripMenuItem.Text = "About Hat";
             }
         }
 
