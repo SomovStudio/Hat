@@ -70,6 +70,9 @@ namespace Hat
                 initWebView();
                 BrowserLanguage();
 
+                if (HatSettings.language == HatSettings.RUS) Config.projectPath = "(не открыт)";
+                else Config.projectPath = "(not opened)";
+
                 this.Width = 1440;
                 this.Height = 900;
                 numericUpDownBrowserWidth.Value = panel1.Width;
@@ -1222,7 +1225,7 @@ namespace Hat
             {
                 List<string> saveExtensions = TreeViewExtensions.GetExpansionState(treeViewProject.Nodes);
                 treeViewProject.Nodes.Clear();
-                if (Config.projectPath != "(не открыт)")
+                if (Config.projectPath != "(не открыт)" && Config.projectPath != "(not opened)")
                 {
                     treeViewProject.Nodes.Add(Config.projectPath, getFolderName(Config.projectPath), 0, 0);
                     openProjectFolder(Config.projectPath, treeViewProject.Nodes);
@@ -1516,7 +1519,7 @@ namespace Hat
 
                 Config.encoding = WorkOnFiles.DEFAULT;
                 toolStripStatusLabelFileEncoding.Text = Config.encoding;
-                if (Config.projectPath != "(не открыт)") Config.saveConfigJson(Config.projectPath + "/project.hat");
+                if (Config.projectPath != "(не открыт)" && Config.projectPath != "(not opened)") Config.saveConfigJson(Config.projectPath + "/project.hat");
                 ConsoleMsg("Кодировка файлов - изменена");
             }
             catch (Exception ex)
@@ -1541,7 +1544,7 @@ namespace Hat
 
                 Config.encoding = WorkOnFiles.UTF_8;
                 toolStripStatusLabelFileEncoding.Text = Config.encoding;
-                if (Config.projectPath != "(не открыт)") Config.saveConfigJson(Config.projectPath + "/project.hat");
+                if (Config.projectPath != "(не открыт)" && Config.projectPath != "(not opened)") Config.saveConfigJson(Config.projectPath + "/project.hat");
                 ConsoleMsg("Кодировка файлов - изменена");
             }
             catch (Exception ex)
@@ -1566,7 +1569,7 @@ namespace Hat
 
                 Config.encoding = WorkOnFiles.UTF_8_BOM;
                 toolStripStatusLabelFileEncoding.Text = Config.encoding;
-                if (Config.projectPath != "(не открыт)") Config.saveConfigJson(Config.projectPath + "/project.hat");
+                if (Config.projectPath != "(не открыт)" && Config.projectPath != "(not opened)") Config.saveConfigJson(Config.projectPath + "/project.hat");
                 ConsoleMsg("Кодировка файлов - изменена");
             }
             catch (Exception ex)
@@ -1591,7 +1594,7 @@ namespace Hat
 
                 Config.encoding = WorkOnFiles.WINDOWS_1251;
                 toolStripStatusLabelFileEncoding.Text = Config.encoding;
-                if (Config.projectPath != "(не открыт)") Config.saveConfigJson(Config.projectPath + "/project.hat");
+                if (Config.projectPath != "(не открыт)" && Config.projectPath != "(not opened)") Config.saveConfigJson(Config.projectPath + "/project.hat");
                 ConsoleMsg("Кодировка файлов - изменена");
             }
             catch (Exception ex)
@@ -1618,7 +1621,7 @@ namespace Hat
         {
             try
             {
-                if (Config.projectPath != "(не открыт)") Process.Start(Config.projectPath);
+                if (Config.projectPath != "(не открыт)" && Config.projectPath != "(not opened)") Process.Start(Config.projectPath);
                 else ConsoleMsg("Проект не открыт");
             }
             catch (Exception ex)
@@ -1644,7 +1647,7 @@ namespace Hat
                 Config.encoding = WorkOnFiles.DEFAULT;
                 toolStripStatusLabelFileEncoding.Text = Config.encoding;
 
-                if (Config.projectPath != "(не открыт)") Config.saveConfigJson(Config.projectPath + "/project.hat");
+                if (Config.projectPath != "(не открыт)" && Config.projectPath != "(not opened)") Config.saveConfigJson(Config.projectPath + "/project.hat");
                 ConsoleMsg("Кодировка файлов - изменена");
             }
             catch (Exception ex)
@@ -1669,7 +1672,7 @@ namespace Hat
 
                 Config.encoding = WorkOnFiles.UTF_8;
                 toolStripStatusLabelFileEncoding.Text = Config.encoding;
-                if (Config.projectPath != "(не открыт)") Config.saveConfigJson(Config.projectPath + "/project.hat");
+                if (Config.projectPath != "(не открыт)" && Config.projectPath != "(not opened)") Config.saveConfigJson(Config.projectPath + "/project.hat");
                 ConsoleMsg("Кодировка файлов - изменена");
             }
             catch (Exception ex)
@@ -1694,7 +1697,7 @@ namespace Hat
 
                 Config.encoding = WorkOnFiles.UTF_8_BOM;
                 toolStripStatusLabelFileEncoding.Text = Config.encoding;
-                if (Config.projectPath != "(не открыт)") Config.saveConfigJson(Config.projectPath + "/project.hat");
+                if (Config.projectPath != "(не открыт)" && Config.projectPath != "(not opened)") Config.saveConfigJson(Config.projectPath + "/project.hat");
                 ConsoleMsg("Кодировка файлов - изменена");
             }
             catch (Exception ex)
@@ -1719,7 +1722,7 @@ namespace Hat
 
                 Config.encoding = WorkOnFiles.WINDOWS_1251;
                 toolStripStatusLabelFileEncoding.Text = Config.encoding;
-                if (Config.projectPath != "(не открыт)") Config.saveConfigJson(Config.projectPath + "/project.hat");
+                if (Config.projectPath != "(не открыт)" && Config.projectPath != "(not opened)") Config.saveConfigJson(Config.projectPath + "/project.hat");
                 ConsoleMsg("Кодировка файлов - изменена");
             }
             catch (Exception ex)
@@ -1766,7 +1769,7 @@ namespace Hat
         {
             try
             {
-                if (Config.projectPath != "(не открыт)")
+                if (Config.projectPath != "(не открыт)" && Config.projectPath != "(not opened)")
                 {
                     // Строится дерево папок и файлов
                     List<string> saveExtensions = TreeViewExtensions.GetExpansionState(treeViewProject.Nodes);
@@ -1800,7 +1803,7 @@ namespace Hat
         {
             try
             {
-                if (Config.projectPath != "(не открыт)")
+                if (Config.projectPath != "(не открыт)" && Config.projectPath != "(not opened)")
                 {
                     treeViewProject.ExpandAll();
                 }
@@ -1980,7 +1983,7 @@ namespace Hat
 
         private void создатьПапкуToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (Config.projectPath != "(не открыт)") createFolder();
+            if (Config.projectPath != "(не открыт)" && Config.projectPath != "(not opened)") createFolder();
             else ConsoleMsg("Проект не открыт");
         }
 
@@ -2020,7 +2023,7 @@ namespace Hat
         private void удалитьПапкуToolStripMenuItem_Click(object sender, EventArgs e)
         {
             
-            if (Config.projectPath != "(не открыт)") deleteFolder();
+            if (Config.projectPath != "(не открыт)" && Config.projectPath != "(not opened)") deleteFolder();
             else ConsoleMsg("Проект не открыт");
         }
 
@@ -2028,7 +2031,7 @@ namespace Hat
         {
             try
             {
-                if (Config.projectPath != "(не открыт)")
+                if (Config.projectPath != "(не открыт)" && Config.projectPath != "(not opened)")
                 {
                     if (File.Exists(Config.selectValue))
                     {
@@ -2082,7 +2085,7 @@ namespace Hat
 
         private void открытьФайлToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (Config.projectPath != "(не открыт)") fileOpen();
+            if (Config.projectPath != "(не открыт)" && Config.projectPath != "(not opened)") fileOpen();
             else ConsoleMsg("Проект не открыт");
         }
 
@@ -2090,7 +2093,7 @@ namespace Hat
         {
             try
             {
-                if (Config.projectPath != "(не открыт)")
+                if (Config.projectPath != "(не открыт)" && Config.projectPath != "(not opened)")
                 {
                     InputBoxForm inputBox = new InputBoxForm();
                     inputBox.label.Text = "Введите пожалуйста имя файла (расширение файла добавляется автоматически, его указывать специально не нужно)";
@@ -2147,43 +2150,43 @@ namespace Hat
 
         private void создатьФайлCToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (Config.projectPath != "(не открыт)") createFile("autotest");
+            if (Config.projectPath != "(не открыт)" && Config.projectPath != "(not opened)") createFile("autotest");
             else ConsoleMsg("Проект не открыт");
         }
 
         private void createFileAutotestToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (Config.projectPath != "(не открыт)") createFile("autotest");
+            if (Config.projectPath != "(не открыт)" && Config.projectPath != "(not opened)") createFile("autotest");
             else ConsoleMsg("Проект не открыт");
         }
 
         private void createFilePageObjectsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (Config.projectPath != "(не открыт)") createFile("page_objects");
+            if (Config.projectPath != "(не открыт)" && Config.projectPath != "(not opened)") createFile("page_objects");
             else ConsoleMsg("Проект не открыт");
         }
 
         private void createFileStepObjectToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (Config.projectPath != "(не открыт)") createFile("step_objects");
+            if (Config.projectPath != "(не открыт)" && Config.projectPath != "(not opened)") createFile("step_objects");
             else ConsoleMsg("Проект не открыт");
         }
 
         private void toolStripMenuItem12_Click(object sender, EventArgs e)
         {
-            if (Config.projectPath != "(не открыт)") createFile("autotest");
+            if (Config.projectPath != "(не открыт)" && Config.projectPath != "(not opened)") createFile("autotest");
             else ConsoleMsg("Проект не открыт");
         }
 
         private void toolStripMenuItem13_Click(object sender, EventArgs e)
         {
-            if (Config.projectPath != "(не открыт)") createFile("page_objects");
+            if (Config.projectPath != "(не открыт)" && Config.projectPath != "(not opened)") createFile("page_objects");
             else ConsoleMsg("Проект не открыт");
         }
 
         private void toolStripMenuItem14_Click(object sender, EventArgs e)
         {
-            if (Config.projectPath != "(не открыт)") createFile("step_objects");
+            if (Config.projectPath != "(не открыт)" && Config.projectPath != "(not opened)") createFile("step_objects");
             else ConsoleMsg("Проект не открыт");
         }
 
@@ -2196,7 +2199,7 @@ namespace Hat
         {
             try
             {
-                if (Config.projectPath != "(не открыт)")
+                if (Config.projectPath != "(не открыт)" && Config.projectPath != "(not opened)")
                 {
 
                     if (Directory.Exists(Config.selectValue) == true) return;
@@ -2234,7 +2237,7 @@ namespace Hat
 
         private void удалитьФайлToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (Config.projectPath != "(не открыт)") deleteFile();
+            if (Config.projectPath != "(не открыт)" && Config.projectPath != "(not opened)") deleteFile();
             else ConsoleMsg("Проект не открыт");
         }
 
@@ -2242,7 +2245,7 @@ namespace Hat
         {
             try
             {
-                if (Config.projectPath != "(не открыт)")
+                if (Config.projectPath != "(не открыт)" && Config.projectPath != "(not opened)")
                 {
                     string[] delimiter = { Environment.NewLine };
                     Config.libraries = textBoxLibs.Text.Split(delimiter, StringSplitOptions.None);
@@ -2273,7 +2276,7 @@ namespace Hat
                 }
                 Config.editorTopMost = editorTopMostToolStripMenuItem.Checked;
                 if (codeEditorForm != null) codeEditorForm.TopMost = Config.editorTopMost;
-                if (Config.projectPath != "(не открыт)") Config.saveConfigJson(Config.projectPath + "/project.hat");
+                if (Config.projectPath != "(не открыт)" && Config.projectPath != "(not opened)") Config.saveConfigJson(Config.projectPath + "/project.hat");
             }
             catch (Exception ex)
             {
@@ -2296,7 +2299,7 @@ namespace Hat
                     toolStripMenuItemEditorTopMost.Checked = true;
                 }
                 Config.editorTopMost = editorTopMostToolStripMenuItem.Checked;
-                if (Config.projectPath != "(не открыт)") Config.saveConfigJson(Config.projectPath + "/project.hat");
+                if (Config.projectPath != "(не открыт)" && Config.projectPath != "(not opened)") Config.saveConfigJson(Config.projectPath + "/project.hat");
             }
             catch (Exception ex)
             {
@@ -2386,31 +2389,31 @@ namespace Hat
 
         private void toolStripMenuItem9_Click(object sender, EventArgs e)
         {
-            if (Config.projectPath != "(не открыт)") fileOpen();
+            if (Config.projectPath != "(не открыт)" && Config.projectPath != "(not opened)") fileOpen();
             else ConsoleMsg("Проект не открыт");
         }
 
         private void toolStripMenuItem6_Click(object sender, EventArgs e)
         {
-            if (Config.projectPath != "(не открыт)") createFile("autotest");
+            if (Config.projectPath != "(не открыт)" && Config.projectPath != "(not opened)") createFile("autotest");
             else ConsoleMsg("Проект не открыт");
         }
 
         private void toolStripMenuItem8_Click(object sender, EventArgs e)
         {
-            if (Config.projectPath != "(не открыт)") deleteFile();
+            if (Config.projectPath != "(не открыт)" && Config.projectPath != "(not opened)") deleteFile();
             else ConsoleMsg("Проект не открыт");
         }
 
         private void toolStripMenuItem2_Click(object sender, EventArgs e)
         {
-            if (Config.projectPath != "(не открыт)") createFolder();
+            if (Config.projectPath != "(не открыт)" && Config.projectPath != "(not opened)") createFolder();
             else ConsoleMsg("Проект не открыт");
         }
 
         private void toolStripMenuItem5_Click(object sender, EventArgs e)
         {
-            if (Config.projectPath != "(не открыт)") deleteFolder();
+            if (Config.projectPath != "(не открыт)" && Config.projectPath != "(not opened)") deleteFolder();
             else ConsoleMsg("Проект не открыт");
         }
 
@@ -2700,7 +2703,7 @@ namespace Hat
         {
             try
             {
-                if (Config.projectPath != "(не открыт)")
+                if (Config.projectPath != "(не открыт)" && Config.projectPath != "(not opened)")
                 {
                     CreateCmdForm createCmdForm = new CreateCmdForm();
                     createCmdForm.textBox.Text = $"cd {Directory.GetCurrentDirectory()}" + Environment.NewLine;
@@ -2755,7 +2758,7 @@ namespace Hat
         {
             try
             {
-                if (Config.projectPath != "(не открыт)")
+                if (Config.projectPath != "(не открыт)" && Config.projectPath != "(not opened)")
                 {
                     Config.dataMail[0] = fromMailTextBox.Text;
                     Config.dataMail[1] = fromLoginTextBox.Text;
@@ -2866,7 +2869,7 @@ namespace Hat
                 languageEngToolStripMenuItem.Checked = false;
                 languageEngToolStripMenuItem1.Checked = false;
                 Config.languageEngConsole = false;
-                if (Config.projectPath != "(не открыт)") Config.saveConfigJson(Config.projectPath + "/project.hat");
+                if (Config.projectPath != "(не открыт)" && Config.projectPath != "(not opened)") Config.saveConfigJson(Config.projectPath + "/project.hat");
                 ConsoleMsg("Язык вывода в командной строке изменен на русский");
             }
             catch (Exception ex)
@@ -2885,7 +2888,7 @@ namespace Hat
                 languageEngToolStripMenuItem.Checked = false;
                 languageEngToolStripMenuItem1.Checked = false;
                 Config.languageEngConsole = false;
-                if (Config.projectPath != "(не открыт)") Config.saveConfigJson(Config.projectPath + "/project.hat");
+                if (Config.projectPath != "(не открыт)" && Config.projectPath != "(not opened)") Config.saveConfigJson(Config.projectPath + "/project.hat");
                 ConsoleMsg("Язык вывода в командной строке изменен на русский");
             }
             catch (Exception ex)
@@ -2904,7 +2907,7 @@ namespace Hat
                 languageEngToolStripMenuItem.Checked = true;
                 languageEngToolStripMenuItem1.Checked = true;
                 Config.languageEngConsole = true;
-                if (Config.projectPath != "(не открыт)") Config.saveConfigJson(Config.projectPath + "/project.hat");
+                if (Config.projectPath != "(не открыт)" && Config.projectPath != "(not opened)") Config.saveConfigJson(Config.projectPath + "/project.hat");
                 ConsoleMsg("Язык вывода в командной строке изменен на английский");
             }
             catch (Exception ex)
@@ -2924,7 +2927,7 @@ namespace Hat
                 languageEngToolStripMenuItem.Checked = true;
                 languageEngToolStripMenuItem1.Checked = true;
                 Config.languageEngConsole = true;
-                if (Config.projectPath != "(не открыт)") Config.saveConfigJson(Config.projectPath + "/project.hat");
+                if (Config.projectPath != "(не открыт)" && Config.projectPath != "(not opened)") Config.saveConfigJson(Config.projectPath + "/project.hat");
                 ConsoleMsg("Язык вывода в командной строке изменен на английский");
             }
             catch (Exception ex)
@@ -2943,7 +2946,7 @@ namespace Hat
                 languageReportEmailEngToolStripMenuItem.Checked = false;
                 languageReportEmailEngToolStripMenuItem1.Checked = false;
                 Config.languageEngReportMail = false;
-                if (Config.projectPath != "(не открыт)") Config.saveConfigJson(Config.projectPath + "/project.hat");
+                if (Config.projectPath != "(не открыт)" && Config.projectPath != "(not opened)") Config.saveConfigJson(Config.projectPath + "/project.hat");
                 ConsoleMsg("Язык вывода в отчет и письмо изменен на русский");
             }
             catch (Exception ex)
@@ -2962,7 +2965,7 @@ namespace Hat
                 languageReportEmailEngToolStripMenuItem.Checked = true;
                 languageReportEmailEngToolStripMenuItem1.Checked = true;
                 Config.languageEngReportMail = true;
-                if (Config.projectPath != "(не открыт)") Config.saveConfigJson(Config.projectPath + "/project.hat");
+                if (Config.projectPath != "(не открыт)" && Config.projectPath != "(not opened)") Config.saveConfigJson(Config.projectPath + "/project.hat");
                 ConsoleMsg("Язык вывода в отчет и письмо изменен на английский");
             }
             catch (Exception ex)
@@ -2981,7 +2984,7 @@ namespace Hat
                 languageReportEmailEngToolStripMenuItem.Checked = false;
                 languageReportEmailEngToolStripMenuItem1.Checked = false;
                 Config.languageEngReportMail = false;
-                if (Config.projectPath != "(не открыт)") Config.saveConfigJson(Config.projectPath + "/project.hat");
+                if (Config.projectPath != "(не открыт)" && Config.projectPath != "(not opened)") Config.saveConfigJson(Config.projectPath + "/project.hat");
                 ConsoleMsg("Язык вывода в отчет и письмо изменен на русский");
             }
             catch (Exception ex)
@@ -3000,7 +3003,7 @@ namespace Hat
                 languageReportEmailEngToolStripMenuItem.Checked = true;
                 languageReportEmailEngToolStripMenuItem1.Checked = true;
                 Config.languageEngReportMail = true;
-                if (Config.projectPath != "(не открыт)") Config.saveConfigJson(Config.projectPath + "/project.hat");
+                if (Config.projectPath != "(не открыт)" && Config.projectPath != "(not opened)") Config.saveConfigJson(Config.projectPath + "/project.hat");
                 ConsoleMsg("Язык вывода в отчет и письмо изменен на английский");
             }
             catch (Exception ex)
@@ -3019,7 +3022,7 @@ namespace Hat
                 shortReportToolStripMenuItem.Checked = false;
                 shortReportToolStripMenuItem1.Checked = false;
                 Config.fullReport = true;
-                if (Config.projectPath != "(не открыт)") Config.saveConfigJson(Config.projectPath + "/project.hat");
+                if (Config.projectPath != "(не открыт)" && Config.projectPath != "(not opened)") Config.saveConfigJson(Config.projectPath + "/project.hat");
                 ConsoleMsg("Режим вывода сообщений - полный отчет");
             }
             catch (Exception ex)
@@ -3038,7 +3041,7 @@ namespace Hat
                 shortReportToolStripMenuItem.Checked = true;
                 shortReportToolStripMenuItem1.Checked = true;
                 Config.fullReport = false;
-                if (Config.projectPath != "(не открыт)") Config.saveConfigJson(Config.projectPath + "/project.hat");
+                if (Config.projectPath != "(не открыт)" && Config.projectPath != "(not opened)") Config.saveConfigJson(Config.projectPath + "/project.hat");
                 ConsoleMsg("Режим вывода сообщений - краткий отчет");
             }
             catch (Exception ex)
@@ -3057,7 +3060,7 @@ namespace Hat
                 shortReportToolStripMenuItem.Checked = false;
                 shortReportToolStripMenuItem1.Checked = false;
                 Config.fullReport = true;
-                if (Config.projectPath != "(не открыт)") Config.saveConfigJson(Config.projectPath + "/project.hat");
+                if (Config.projectPath != "(не открыт)" && Config.projectPath != "(not opened)") Config.saveConfigJson(Config.projectPath + "/project.hat");
                 ConsoleMsg("Режим вывода сообщений - полный отчет");
             }
             catch (Exception ex)
@@ -3076,7 +3079,7 @@ namespace Hat
                 shortReportToolStripMenuItem.Checked = true;
                 shortReportToolStripMenuItem1.Checked = true;
                 Config.fullReport = false;
-                if (Config.projectPath != "(не открыт)") Config.saveConfigJson(Config.projectPath + "/project.hat");
+                if (Config.projectPath != "(не открыт)" && Config.projectPath != "(not opened)") Config.saveConfigJson(Config.projectPath + "/project.hat");
                 ConsoleMsg("Режим вывода сообщений - краткий отчет");
             }
             catch (Exception ex)
@@ -3087,7 +3090,7 @@ namespace Hat
 
         private void createResultReportToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (Config.projectPath == "(не открыт)") ConsoleMsg("Проект не открыт! Невозможно сформировать отчет с результатами всех тестов");
+            if (Config.projectPath == "(не открыт)" && Config.projectPath != "(not opened)") ConsoleMsg("Проект не открыт! Невозможно сформировать отчет с результатами всех тестов");
             else Report.SaveResultReport();
         }
 
@@ -3261,6 +3264,13 @@ namespace Hat
                 radioButton2.Text = "Выборочно";
                 label7.Text = "ширина:";
                 label8.Text = "высота:";
+
+                toolStripStatusLabel5.Text = "Кодировка:";
+                toolStripStatusLabelFileEncoding.Text = "(не выбрана)";
+                toolStripStatusLabel3.Text = "Проект:";
+                toolStripStatusLabelProjectPath.Text = "(не открыт)";
+                toolStripStatusLabel4.Text = "файл:";
+                toolStripStatusLabelProjectFolderFile.Text = "(не выбран)";
             }
             else
             {
@@ -3418,6 +3428,13 @@ namespace Hat
                 radioButton2.Text = "Optional";
                 label7.Text = "width:";
                 label8.Text = "height:";
+
+                toolStripStatusLabel5.Text = "Encoding:";
+                toolStripStatusLabelFileEncoding.Text = "(not selected)";
+                toolStripStatusLabel3.Text = "Project:";
+                toolStripStatusLabelProjectPath.Text = "(not opened)";
+                toolStripStatusLabel4.Text = "File:";
+                toolStripStatusLabelProjectFolderFile.Text = "(not selected)";
             }
         }
 
