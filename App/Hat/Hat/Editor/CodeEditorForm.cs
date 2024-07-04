@@ -3312,6 +3312,69 @@ foreach (DataRow row in dataTable.Rows)\par
                 files = new List<object[]>();
                 this.TopMost = Config.editorTopMost;
                 toolStripStatusLabel2.Text = Config.encoding;
+
+                if (HatSettings.language == HatSettings.RUS)
+                {
+                    this.Text = "Редактор кода";
+                    fileToolStripMenuItem.Text = "Файл";
+                    fileSaveToolStripMenuItem.Text = "Сохранить файл";
+                    fileSaveAsToolStripMenuItem.Text = "Сохранить файл как...";
+                    filesSaveAllToolStripMenuItem.Text = "Сохранить все файлы";
+                    fileCloseToolStripMenuItem.Text = "Закрыть файл";
+                    testToolStripMenuItem.Text = "Отладка";
+                    testPlayToolStripMenuItem.Text = "Запустить тест";
+                    testStopToolStripMenuItem.Text = "Остановить тест";
+                    serviceToolStripMenuItem.Text = "Сервис";
+                    commandToolStripMenuItem.Text = "Сформировать команду запуска";
+                    toolStripButton1.Text = "Сохранить файл";
+                    toolStripButton1.ToolTipText = "Сохранить файл";
+                    toolStripButton2.Text = "Сохранить файл как...";
+                    toolStripButton2.ToolTipText = "Сохранить файл как...";
+                    toolStripButton6.Text = "Сохранить все файлы";
+                    toolStripButton6.ToolTipText = "Сохранить все файлы";
+                    toolStripButton5.Text = "Сформировать команду запуска";
+                    toolStripButton5.ToolTipText = "Сформировать команду запуска";
+                    toolStripButton3.Text = "Запустить тест";
+                    toolStripButton3.ToolTipText = "Запустить тест";
+                    toolStripButton4.Text = "Остановить тест";
+                    toolStripButton4.ToolTipText = "Остановить тест";
+                    toolStripButton7.Text = "Поиск";
+                    toolStripButton7.ToolTipText = "Поиск";
+                    label4.Text = "Справочник";
+                    toolStripStatusLabel1.Text = "Кодировка:";
+                    toolStripStatusLabel4.Text = "Файл:";
+                }
+                else
+                {
+                    this.Text = "Code Editor";
+                    fileToolStripMenuItem.Text = "File";
+                    fileSaveToolStripMenuItem.Text = "Save the file";
+                    fileSaveAsToolStripMenuItem.Text = "Save the file as...";
+                    filesSaveAllToolStripMenuItem.Text = "Save all files";
+                    fileCloseToolStripMenuItem.Text = "Close the file";
+                    testToolStripMenuItem.Text = "Debugging";
+                    testPlayToolStripMenuItem.Text = "Run the test";
+                    testStopToolStripMenuItem.Text = "Stop the test";
+                    serviceToolStripMenuItem.Text = "Service";
+                    commandToolStripMenuItem.Text = "Create a launch command";
+                    toolStripButton1.Text = "Save the file";
+                    toolStripButton1.ToolTipText = "Save the file";
+                    toolStripButton2.Text = "Save the file as...";
+                    toolStripButton2.ToolTipText = "Save the file as...";
+                    toolStripButton6.Text = "Save all files";
+                    toolStripButton6.ToolTipText = "Save all files";
+                    toolStripButton5.Text = "Create a launch command";
+                    toolStripButton5.ToolTipText = "Create a launch command";
+                    toolStripButton3.Text = "Run the test";
+                    toolStripButton3.ToolTipText = "Run the test";
+                    toolStripButton4.Text = "Stop the test";
+                    toolStripButton4.ToolTipText = "Stop the test";
+                    toolStripButton7.Text = "Search";
+                    toolStripButton7.ToolTipText = "Search";
+                    label4.Text = "Help";
+                    toolStripStatusLabel1.Text = "Encoding:";
+                    toolStripStatusLabel4.Text = "File:";
+                }
             }
             catch (Exception ex)
             {
