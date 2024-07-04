@@ -71,6 +71,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Команда запуска";
             this.TopMost = true;
+            this.Load += new System.EventHandler(this.CreateCmdForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

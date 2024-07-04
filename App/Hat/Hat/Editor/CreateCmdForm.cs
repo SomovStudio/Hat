@@ -29,5 +29,19 @@ namespace Hat
                 Config.browserForm.ConsoleMsg(ex.Message);
             }
         }
+
+        private void CreateCmdForm_Load(object sender, EventArgs e)
+        {
+            if (HatSettings.language == HatSettings.RUS)
+            {
+                this.Text = "Команда запуска";
+                button1.Text = "Копировать в буфер";
+            }
+            else
+            {
+                this.Text = "The launch command";
+                button1.Text = "Copy to Clipboard";
+            }
+        }
     }
 }
