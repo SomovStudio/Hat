@@ -3271,6 +3271,22 @@ namespace Hat
                 toolStripStatusLabelProjectPath.Text = "(не открыт)";
                 toolStripStatusLabel4.Text = "файл:";
                 toolStripStatusLabelProjectFolderFile.Text = "(не выбран)";
+
+                очиститьToolStripMenuItem.Text = "Очистить";
+                запуститьТестToolStripMenuItem1.Text = "Запустить тест";
+                toolStripMenuItem9.Text = "Открыть файл";
+                toolStripMenuItem6.Text = "Создать файл автотеста";
+                toolStripMenuItem11.Text = "Создать файл";
+                toolStripMenuItem12.Text = "Создать файл Autotest";
+                toolStripMenuItem13.Text = "Создать файл Page Objects";
+                toolStripMenuItem14.Text = "Создать файл Step Objects";
+                toolStripMenuItem8.Text = "Удалить файл";
+                toolStripMenuItem2.Text = "Создать папку";
+                toolStripMenuItem5.Text = "Удалить папку";
+                подробнаяИнформацияОШагеToolStripMenuItem.Text = "Подробная информация о шаге";
+                toolStripMenuItem3.Text = "Запустить тест";
+                остановитьТестToolStripMenuItem1.Text = "Остановить тест";
+                testTableClearToolStripMenuItem.Text = "Очистить таблицу";
             }
             else
             {
@@ -3435,6 +3451,22 @@ namespace Hat
                 toolStripStatusLabelProjectPath.Text = "(not opened)";
                 toolStripStatusLabel4.Text = "File:";
                 toolStripStatusLabelProjectFolderFile.Text = "(not selected)";
+
+                очиститьToolStripMenuItem.Text = "Clear";
+                запуститьТестToolStripMenuItem1.Text = "Run the test";
+                toolStripMenuItem9.Text = "Open a file";
+                toolStripMenuItem6.Text = "Create a file - Autotest";
+                toolStripMenuItem11.Text = "Create a file";
+                toolStripMenuItem12.Text = "Create a file - Autotest";
+                toolStripMenuItem13.Text = "Create a file - Page Objects";
+                toolStripMenuItem14.Text = "Create a file - Step Objects";
+                toolStripMenuItem8.Text = "Delete a file";
+                toolStripMenuItem2.Text = "Create a folder";
+                toolStripMenuItem5.Text = "Delete a folder";
+                подробнаяИнформацияОШагеToolStripMenuItem.Text = "Detailed information about the step";
+                toolStripMenuItem3.Text = "Run the test";
+                остановитьТестToolStripMenuItem1.Text = "Stop the test";
+                testTableClearToolStripMenuItem.Text = "Clear the table";
             }
         }
 
