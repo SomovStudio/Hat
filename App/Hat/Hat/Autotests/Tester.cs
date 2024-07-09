@@ -224,7 +224,7 @@ namespace HatFrameworkDev
                 script += "}());";
 
                 string result = await executeJS(script);
-                if (Debug == true) ConsoleMsg($"[DEBUG] JS результат: {result}");
+                if (Debug == true) ConsoleMsg($"[DEBUG] JS результат: {result}", $"[DEBUG] JS result: {result}");
                 if (result != "null" && result != null && result == "true") found = true;
                 else found = false;
             }
@@ -241,9 +241,9 @@ namespace HatFrameworkDev
             string result = null;
             try
             {
-                if (Debug == true) ConsoleMsg($"[DEBUG] {action} - JS скрипт: {script}");
+                if (Debug == true) ConsoleMsg($"[DEBUG] {action} - JS скрипт: {script}", $"[DEBUG] {action} - JS script: {script}");
                 result = await BrowserView.CoreWebView2.ExecuteScriptAsync(script);
-                if (Debug == true) ConsoleMsg($"[DEBUG] {action} - JS результат: {result}");
+                if (Debug == true) ConsoleMsg($"[DEBUG] {action} - JS результат: {result}", $"[DEBUG] {action} - JS result: {result}");
                 if (result == "null" || result == null)
                 {
                     if (Debug == true) SendMessageDebug(action, action, Tester.FAILED, 
@@ -271,9 +271,9 @@ namespace HatFrameworkDev
             string result = null;
             try
             {
-                if (Debug == true) ConsoleMsg($"[DEBUG] JS скрипт: {script}");
+                if (Debug == true) ConsoleMsg($"[DEBUG] JS скрипт: {script}", $"[DEBUG] JS script: {script}");
                 result = await BrowserView.CoreWebView2.ExecuteScriptAsync(script);
-                if (Debug == true) ConsoleMsg($"[DEBUG] JS результат: {result}");
+                if (Debug == true) ConsoleMsg($"[DEBUG] JS результат: {result}", $"[DEBUG] JS result: {result}");
             }
             catch (Exception ex)
             {
@@ -300,11 +300,11 @@ namespace HatFrameworkDev
         /* 
          * Методы для вывода сообщений о ходе тестирования ==========================================
          * */
-        public void ConsoleMsg(string message)
+        public void ConsoleMsg(string messageRus, string messageEng)
         {
             try
             {
-                browserConsoleMsg.Invoke(BrowserWindow, new object[] { message });
+                browserConsoleMsg.Invoke(BrowserWindow, new object[] { messageRus, messageEng });
             }
             catch (Exception ex)
             {
@@ -610,7 +610,7 @@ namespace HatFrameworkDev
                 await BrowserView.EnsureCoreWebView2Async();
                 Debug = (bool)debugJavaScript.Invoke(BrowserWindow, null);
                 SendMessageDebug("Инициализация теста", "Initializing the test", COMPLETED, "Выполнена инициализация теста", "Initialization of the test has been performed", IMAGE_STATUS_MESSAGE);
-                ConsoleMsg("Тест начинается...");
+                ConsoleMsg("Тест начинается...", "The test begins...");
 
                 browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { "" + Environment.NewLine, default, default, default, false });
                 if (languageEngConsole == false) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { "-- Тест начинается ------------", default, ConsoleColor.White, ConsoleColor.DarkBlue, true });
@@ -628,7 +628,7 @@ namespace HatFrameworkDev
             {
                 if (assertStatus == FAILED)
                 {
-                    ConsoleMsg("Тест завершен - провально");
+                    ConsoleMsg("Тест завершен - провально", "The test is completed - failed");
                     SendMessageDebug("Тестирование завершено", "Testing completed", FAILED, "Тест завершен - шаги теста выполнены неуспешно", "Test completed - the test steps were executed unsuccessfully", IMAGE_STATUS_FAILED);
                     resultAutotestSuccess(false);
 
@@ -641,7 +641,7 @@ namespace HatFrameworkDev
                 }
                 else
                 {
-                    ConsoleMsg("Тест завершен - успешено");
+                    ConsoleMsg("Тест завершен - успешно", "The test is completed - successfully");
                     SendMessageDebug("Тестирование завершено", "Testing completed", PASSED, "Тест завершен - все шаги выполнены успешно", "The test is completed - all steps are completed successfully", IMAGE_STATUS_PASSED);
                     resultAutotestSuccess(true);
 
@@ -1117,9 +1117,9 @@ namespace HatFrameworkDev
 
             try
             {
-                if (Debug == true) ConsoleMsg($"[DEBUG] JS скрипт: {script}");
+                if (Debug == true) ConsoleMsg($"[DEBUG] JS скрипт: {script}", $"[DEBUG] JS script: {script}");
                 result = await BrowserView.CoreWebView2.ExecuteScriptAsync(script);
-                if (Debug == true) ConsoleMsg($"[DEBUG] JS результат: {result}");
+                if (Debug == true) ConsoleMsg($"[DEBUG] JS результат: {result}", $"[DEBUG] JS result: {result}");
                 SendMessageDebug($"ExecuteJavaScriptAsync(\"{script}\")", $"ExecuteJavaScriptAsync(\"{script}\")", PASSED, "Скрипт выполнен. Результат: " + result, "The script is executed. Result: " + result, IMAGE_STATUS_PASSED);
             }
             catch (Exception ex)

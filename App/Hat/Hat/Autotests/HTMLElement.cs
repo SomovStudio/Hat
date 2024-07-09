@@ -35,9 +35,9 @@ namespace HatFrameworkDev
             string result = null;
             try
             {
-                if (_tester.Debug == true) _tester.ConsoleMsg($"[DEBUG] {action} - JS скрипт: {script}");
+                if (_tester.Debug == true) _tester.ConsoleMsg($"[DEBUG] {action} - JS скрипт: {script}", $"[DEBUG] {action} - JS script: {script}");
                 result = await _tester.BrowserView.CoreWebView2.ExecuteScriptAsync(script);
-                if (_tester.Debug == true) _tester.ConsoleMsg($"[DEBUG] {action} - JS результат: {result}");
+                if (_tester.Debug == true) _tester.ConsoleMsg($"[DEBUG] {action} - JS результат: {result}", $"[DEBUG] {action} - JS result: {result}");
                 if (result == "null" || result == null)
                 {
 
@@ -87,7 +87,7 @@ namespace HatFrameworkDev
                 script += "}());";
 
                 string result = await _tester.BrowserView.CoreWebView2.ExecuteScriptAsync(script);
-                if (_tester.Debug == true) _tester.ConsoleMsg($"[DEBUG] JS результат: {result}");
+                if (_tester.Debug == true) _tester.ConsoleMsg($"[DEBUG] JS результат: {result}", $"[DEBUG] JS result: {result}");
                 if (result != "null" && result != null && result == "true") found = true;
                 else found = false;
             }
