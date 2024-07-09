@@ -19,7 +19,7 @@ namespace Hat
 
         public static void play(string testFilename)
         {
-            Config.browserForm.ConsoleMsg($"Запущен файл автотеста: {testFilename}");
+            Config.browserForm.ConsoleMsg($"Запущен файл автотеста: {testFilename}", $"The autotest file is running: {testFilename}");
             if (Config.languageEngConsole == false) Config.browserForm.SystemConsoleMsg($"Запущен файл автотеста: {testFilename}", default, ConsoleColor.DarkCyan, ConsoleColor.White, true);
             else Config.browserForm.SystemConsoleMsg($"The autotest file is running: {testFilename}", default, ConsoleColor.DarkCyan, ConsoleColor.White, true);
 

@@ -3448,7 +3448,7 @@ foreach (DataRow row in dataTable.Rows)\par
                     {
                         if (files[i][1].ToString() == path)
                         {
-                            parent.ConsoleMsg($"Файл {filename} уже открыт в редакторе");
+                            parent.ConsoleMsg($"Файл {filename} уже открыт в редакторе", $"File {filename} already open in the editor");
                             return;
                         }
                     }
@@ -3777,7 +3777,7 @@ foreach (DataRow row in dataTable.Rows)\par
                         {
                             tabControl1.TabPages.Remove(tabControl1.SelectedTab);
                             files.RemoveAt(index);
-                            parent.ConsoleMsg($"Файл {filename} - закрыт без сохранения");
+                            parent.ConsoleMsg($"Файл {filename} - закрыт без сохранения", $"File {filename} - closed without saving");
                             updateListFiles();
                         }
                         else if (dialogResult == DialogResult.Yes)
@@ -3786,20 +3786,20 @@ foreach (DataRow row in dataTable.Rows)\par
                             tabControl1.TabPages.Remove(tabControl1.SelectedTab);
                             files.RemoveAt(index);
                             updateListFiles();
-                            parent.ConsoleMsg($"Файл {filename} - закрыт");
+                            parent.ConsoleMsg($"Файл {filename} - закрыт", $"File {filename} - is closed");
                         }
                     }
                     else
                     {
                         tabControl1.TabPages.Remove(tabControl1.SelectedTab);
                         files.RemoveAt(index);
-                        parent.ConsoleMsg($"Файл {filename} - закрыт");
+                        parent.ConsoleMsg($"Файл {filename} - закрыт", $"File {filename} - is closed");
                         updateListFiles();
                     }
                 }
                 else
                 {
-                    parent.ConsoleMsg($"Файл {filename} - неудалось закрыть");
+                    parent.ConsoleMsg($"Файл {filename} - неудалось закрыть", $"File {filename} - failed to close");
                 }
             }
             catch (Exception ex)
@@ -3869,7 +3869,7 @@ foreach (DataRow row in dataTable.Rows)\par
                 (files[index][4] as TabPage).Text = filename;
                 files[index][2] = STATUS_SAVED;
 
-                parent.ConsoleMsg($"Файл {filename} - сохранён");
+                parent.ConsoleMsg($"Файл {filename} - сохранён", $"File {filename} - is saved");
             }
             catch (Exception ex)
             {
@@ -3899,7 +3899,7 @@ foreach (DataRow row in dataTable.Rows)\par
                     files[index][2] = STATUS_SAVED;
 
                     toolStripStatusLabel5.Text = path;
-                    Config.browserForm.ConsoleMsg($"Файл {filename} - сохранён");
+                    Config.browserForm.ConsoleMsg($"Файл {filename} - сохранён", $"File {filename} - is saved");
                     Config.browserForm.projectUpdate();
                 }
             }
@@ -3931,7 +3931,7 @@ foreach (DataRow row in dataTable.Rows)\par
                         (files[i][4] as TabPage).Text = filename;
                         files[i][2] = STATUS_SAVED;
 
-                        parent.ConsoleMsg($"Файл {filename} - сохранён");
+                        parent.ConsoleMsg($"Файл {filename} - сохранён", $"File {filename} - is saved");
                     }
                 }
 
@@ -3990,7 +3990,7 @@ foreach (DataRow row in dataTable.Rows)\par
                 }
                 else
                 {
-                    Config.browserForm.ConsoleMsg("Проект не открыт");
+                    Config.browserForm.ConsoleMsg("Проект не открыт", "The project is not open");
                 }
             }
             catch (Exception ex)

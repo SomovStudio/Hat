@@ -33,7 +33,8 @@ namespace Hat
                 string portServer = Config.dataMail[5];
                 string ssl = Config.dataMail[6];
 
-                Config.browserForm.ConsoleMsg($"Данные почты: {smtpServer} | {portServer} | {ssl} | {userFrom} | {passFrom}");
+                Config.browserForm.ConsoleMsg($"Данные почты: {smtpServer} | {portServer} | {ssl} | {userFrom} | {passFrom}",
+                    $"Mail data: {smtpServer} | {portServer} | {ssl} | {userFrom} | {passFrom}");
                 if (Config.languageEngConsole == false) Config.browserForm.SystemConsoleMsg($"Данные почты: SMTP: {smtpServer} | Port: {portServer} | SSL: {ssl} | Login: {userFrom} | Pass: *******", default, ConsoleColor.DarkGray, ConsoleColor.White, true);
                 else Config.browserForm.SystemConsoleMsg($"Mail Data: SMTP: {smtpServer} | Port: {portServer} | SSL: {ssl} | Login: {userFrom} | Pass: *******", default, ConsoleColor.DarkGray, ConsoleColor.White, true);
 
@@ -67,7 +68,7 @@ namespace Hat
                     file = file.Substring(1);                                   // коррекция имени файла
                     file = Report.FolderImagesName + file;                      // конечный путь к файлу
                     file = file.Replace("/", "\\");                             // коррекция пути
-                    Config.browserForm.ConsoleMsg($"Вложенный файл в письме: {file}");
+                    Config.browserForm.ConsoleMsg($"Вложенный файл в письме: {file}", $"The attached file in the email: {file}");
 
                     attachment = new Attachment(file, MediaTypeNames.Application.Octet);
                     ContentDisposition disposition = attachment.ContentDisposition;
@@ -107,7 +108,7 @@ namespace Hat
                 // отправка письма
                 smtp.Send(message);
 
-                Config.browserForm.ConsoleMsg($"Писем было отправлено: {count}");
+                Config.browserForm.ConsoleMsg($"Писем было отправлено: {count}", $"The emails were sent: {count}");
                 if (Config.languageEngConsole == false) Config.browserForm.SystemConsoleMsg("Писем было отправлено: " + count.ToString(), default, ConsoleColor.DarkGray, ConsoleColor.White, true);
                 else Config.browserForm.SystemConsoleMsg(count.ToString() + " emails were sent", default, ConsoleColor.DarkGray, ConsoleColor.White, true);
             }
