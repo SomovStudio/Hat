@@ -445,13 +445,26 @@ namespace Hat
                 this.subitem.Text = action;
                 this.item.SubItems.Add(subitem);
                 this.subitem = new ListViewItem.ListViewSubItem();
-                if (status == Tester.PASSED) this.subitem.Text = "Успешно";
-                else if (status == Tester.FAILED) this.subitem.Text = "Неудача";
-                else if (status == Tester.STOPPED) this.subitem.Text = "Остановлено";
-                else if (status == Tester.PROCESS) this.subitem.Text = "В процессе";
-                else if (status == Tester.COMPLETED) this.subitem.Text = "Выполнено";
-                else if (status == Tester.WARNING) this.subitem.Text = "Предупреждение";
-                else this.subitem.Text = "";
+                if (HatSettings.language == HatSettings.RUS)
+                {
+                    if (status == Tester.PASSED) this.subitem.Text = "Успешно";
+                    else if (status == Tester.FAILED) this.subitem.Text = "Неудача";
+                    else if (status == Tester.STOPPED) this.subitem.Text = "Остановлено";
+                    else if (status == Tester.PROCESS) this.subitem.Text = "В процессе";
+                    else if (status == Tester.COMPLETED) this.subitem.Text = "Выполнено";
+                    else if (status == Tester.WARNING) this.subitem.Text = "Предупреждение";
+                    else this.subitem.Text = "";
+                }
+                else
+                {
+                    if (status == Tester.PASSED) this.subitem.Text = "Passed";
+                    else if (status == Tester.FAILED) this.subitem.Text = "Failed";
+                    else if (status == Tester.STOPPED) this.subitem.Text = "Stopped";
+                    else if (status == Tester.PROCESS) this.subitem.Text = "In process";
+                    else if (status == Tester.COMPLETED) this.subitem.Text = "Complete";
+                    else if (status == Tester.WARNING) this.subitem.Text = "Warning";
+                    else this.subitem.Text = "";
+                }
                 this.item.SubItems.Add(subitem);
                 this.subitem = new ListViewItem.ListViewSubItem();
                 this.subitem.Text = comment;
@@ -3301,6 +3314,11 @@ namespace Hat
                 toolStripMenuItem3.Text = "Запустить тест";
                 остановитьТестToolStripMenuItem1.Text = "Остановить тест";
                 testTableClearToolStripMenuItem.Text = "Очистить таблицу";
+
+                columnHeader1.Text = "...";
+                columnHeader2.Text = "Действие";
+                columnHeader3.Text = "Статус";
+                columnHeader4.Text = "Комментарий";
             }
             else
             {
@@ -3481,6 +3499,11 @@ namespace Hat
                 toolStripMenuItem3.Text = "Run the test";
                 остановитьТестToolStripMenuItem1.Text = "Stop the test";
                 testTableClearToolStripMenuItem.Text = "Clear the table";
+
+                columnHeader1.Text = "...";
+                columnHeader2.Text = "Action";
+                columnHeader3.Text = "Status";
+                columnHeader4.Text = "Comment";
             }
         }
 
