@@ -847,11 +847,22 @@ ZTptb2RpZnkAMjAyMy0wMi0yMVQxMDoxMzo0MSswMDowMN/S9FIAAAAASUVORK5CYII="" />
             content += "ctx.stroke(); " + Environment.NewLine;
             content += "}" + Environment.NewLine;
             
-            content += "let labels = [\"Успех\", \"Неудача\", \"В работе\"];" + Environment.NewLine;
-            content += "for(var i=0; i<3; i++) { " + Environment.NewLine;
-            content += "ctx.fillText(labels[i], 50 + (i * 70), 148);" + Environment.NewLine;
-            content += "}" + Environment.NewLine;
-            
+            if (Config.languageEngReportMail == false)
+            {
+                content += "let labels = [\"Успех\", \"Неудача\", \"В работе\"];" + Environment.NewLine;
+                content += "for(var i=0; i<3; i++) { " + Environment.NewLine;
+                content += "ctx.fillText(labels[i], 50 + (i * 70), 148);" + Environment.NewLine;
+                content += "}" + Environment.NewLine;
+            }
+            else
+            {
+                content += "let labels = [\"Passed\", \"Failed\", \"At work\"];" + Environment.NewLine;
+                content += "for(var i=0; i<3; i++) { " + Environment.NewLine;
+                content += "ctx.fillText(labels[i], 50 + (i * 70), 148);" + Environment.NewLine;
+                content += "}" + Environment.NewLine;
+            }
+
+
             content += $"let dataValue = [ {successRate}, {failureRate}, {workRate} ];" + Environment.NewLine;
             content += "let dataColor = [ \"green\", \"red\", \"gray\" ];" + Environment.NewLine;
             content += "for(var i=0; i<dataValue.length; i++) {" + Environment.NewLine;

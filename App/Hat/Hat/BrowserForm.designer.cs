@@ -1573,7 +1573,7 @@
             // languageRusToolStripMenuItem
             // 
             this.languageRusToolStripMenuItem.Name = "languageRusToolStripMenuItem";
-            this.languageRusToolStripMenuItem.Size = new System.Drawing.Size(119, 22);
+            this.languageRusToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.languageRusToolStripMenuItem.Text = "Русский";
             this.languageRusToolStripMenuItem.Click += new System.EventHandler(this.languageRusToolStripMenuItem_Click);
             // 
@@ -1582,7 +1582,7 @@
             this.languageEngToolStripMenuItem.Checked = true;
             this.languageEngToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.languageEngToolStripMenuItem.Name = "languageEngToolStripMenuItem";
-            this.languageEngToolStripMenuItem.Size = new System.Drawing.Size(119, 22);
+            this.languageEngToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.languageEngToolStripMenuItem.Text = "English";
             this.languageEngToolStripMenuItem.Click += new System.EventHandler(this.languageEngToolStripMenuItem_Click);
             // 
@@ -1758,6 +1758,7 @@
             this.toolStripButton13.Name = "toolStripButton13";
             this.toolStripButton13.Size = new System.Drawing.Size(30, 22);
             this.toolStripButton13.Text = "test";
+            this.toolStripButton13.Visible = false;
             this.toolStripButton13.Click += new System.EventHandler(this.toolStripButton13_Click);
             // 
             // tabPage6
