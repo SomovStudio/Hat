@@ -3374,6 +3374,43 @@ foreach (DataRow row in dataTable.Rows)\par
                     label4.Text = "Help";
                     toolStripStatusLabel1.Text = "Encoding:";
                     toolStripStatusLabel4.Text = "File:";
+
+                    for(int i = 0; i < treeView1.Nodes.Count; i++)
+                    {
+                        if (treeView1.Nodes[i].Text == "Класс: Tester") treeView1.Nodes[i].Text = "Class: Tester";
+                        if (treeView1.Nodes[i].Text == "Класс: FRAMEElement") treeView1.Nodes[i].Text = "Class: FRAMEElement";
+                        if (treeView1.Nodes[i].Text == "Класс: HTMLElement") treeView1.Nodes[i].Text = "Class: HTMLElement";
+                        if (treeView1.Nodes[i].Text == "Класс: TesterMySql") treeView1.Nodes[i].Text = "Class: TesterMySql";
+
+                        if (treeView1.Nodes[i].Nodes.Count <= 0) continue;
+                        for (int j = 0; j < treeView1.Nodes[i].Nodes.Count; j++)
+                        {
+                            if (treeView1.Nodes[i].Nodes[j].Text == "Конструктор") treeView1.Nodes[i].Nodes[j].Text = "Constructor";
+                            if (treeView1.Nodes[i].Nodes[j].Text == "Константы") treeView1.Nodes[i].Nodes[j].Text = "Constants";
+                            if (treeView1.Nodes[i].Nodes[j].Text == "Переменные") treeView1.Nodes[i].Nodes[j].Text = "Variables";
+                            if (treeView1.Nodes[i].Nodes[j].Text == "Методы для работы с браузером") treeView1.Nodes[i].Nodes[j].Text = "Methods for working with the browser";
+                            if (treeView1.Nodes[i].Nodes[j].Text == "Методы для вывода сообщений") treeView1.Nodes[i].Nodes[j].Text = "Methods for displaying messages";
+                            if (treeView1.Nodes[i].Nodes[j].Text == "Методы для подготовки и завершения тестирования") treeView1.Nodes[i].Nodes[j].Text = "Methods for preparing and completing testing";
+                            if (treeView1.Nodes[i].Nodes[j].Text == "Методы для выполнения действий") treeView1.Nodes[i].Nodes[j].Text = "Methods for performing actions";
+                            if (treeView1.Nodes[i].Nodes[j].Text == "Нажатие") treeView1.Nodes[i].Nodes[j].Text = "Clicking";
+                            if (treeView1.Nodes[i].Nodes[j].Text == "Поиск") treeView1.Nodes[i].Nodes[j].Text = "Search";
+                            if (treeView1.Nodes[i].Nodes[j].Text == "Атрибуты") treeView1.Nodes[i].Nodes[j].Text = "Attributes";
+                            if (treeView1.Nodes[i].Nodes[j].Text == "Объекты") treeView1.Nodes[i].Nodes[j].Text = "Objects";
+                            if (treeView1.Nodes[i].Nodes[j].Text == "Текст") treeView1.Nodes[i].Nodes[j].Text = "Text";
+                            if (treeView1.Nodes[i].Nodes[j].Text == "Стили") treeView1.Nodes[i].Nodes[j].Text = "Styles";
+                            if (treeView1.Nodes[i].Nodes[j].Text == "Страница") treeView1.Nodes[i].Nodes[j].Text = "Page";
+                            if (treeView1.Nodes[i].Nodes[j].Text == "Значение") treeView1.Nodes[i].Nodes[j].Text = "Value";
+                            if (treeView1.Nodes[i].Nodes[j].Text == "Ожидание") treeView1.Nodes[i].Nodes[j].Text = "Waiting";
+                            if (treeView1.Nodes[i].Nodes[j].Text == "Методы для выполнения JavaScript") treeView1.Nodes[i].Nodes[j].Text = "Methods for executing JavaScript";
+                            if (treeView1.Nodes[i].Nodes[j].Text == "Методы для выполнения Rest запросов") treeView1.Nodes[i].Nodes[j].Text = "Methods for executing Rest requests";
+                            if (treeView1.Nodes[i].Nodes[j].Text == "Методы для замера затраченного времени") treeView1.Nodes[i].Nodes[j].Text = "Methods for measuring the time spent";
+                            if (treeView1.Nodes[i].Nodes[j].Text == "Методы для отправки email и message") treeView1.Nodes[i].Nodes[j].Text = "Methods for sending email and message";
+                            if (treeView1.Nodes[i].Nodes[j].Text == "Методы для проверки результата") treeView1.Nodes[i].Nodes[j].Text = "Methods for checking the result";
+                            if (treeView1.Nodes[i].Nodes[j].Text == "Методы для работы с файлами") treeView1.Nodes[i].Nodes[j].Text = "Methods for working with files";
+                            if (treeView1.Nodes[i].Nodes[j].Text == "Методы для разных задач") treeView1.Nodes[i].Nodes[j].Text = "Methods for different tasks";
+                            if (treeView1.Nodes[i].Nodes[j].Text == "Методы") treeView1.Nodes[i].Nodes[j].Text = "Methods";
+                        }
+                    }
                 }
             }
             catch (Exception ex)
@@ -4339,39 +4376,39 @@ foreach (DataRow row in dataTable.Rows)\par
 
                 if (treeView1.SelectedNode != null)
                 {
-                    if (treeView1.SelectedNode.Text == "Класс: Tester") return;
-                    if (treeView1.SelectedNode.Text == "Конструктор") return;
-                    if (treeView1.SelectedNode.Text == "Константы") return;
-                    if (treeView1.SelectedNode.Text == "Переменные") return;
-                    if (treeView1.SelectedNode.Text == "Методы для работы с браузером") return;
-                    if (treeView1.SelectedNode.Text == "Методы для вывода сообщений") return;
-                    if (treeView1.SelectedNode.Text == "Методы для подготовки и завершения тестирования") return;
+                    if (treeView1.SelectedNode.Text == "Класс: Tester" || treeView1.SelectedNode.Text == "Class: Tester") return;
+                    if (treeView1.SelectedNode.Text == "Конструктор" || treeView1.SelectedNode.Text == "Constructor") return;
+                    if (treeView1.SelectedNode.Text == "Константы" || treeView1.SelectedNode.Text == "Constants") return;
+                    if (treeView1.SelectedNode.Text == "Переменные" || treeView1.SelectedNode.Text == "Variables") return;
+                    if (treeView1.SelectedNode.Text == "Методы для работы с браузером" || treeView1.SelectedNode.Text == "Methods for working with the browser") return;
+                    if (treeView1.SelectedNode.Text == "Методы для вывода сообщений" || treeView1.SelectedNode.Text == "Methods for displaying messages") return;
+                    if (treeView1.SelectedNode.Text == "Методы для подготовки и завершения тестирования" || treeView1.SelectedNode.Text == "Methods for preparing and completing testing") return;
 
-                    if (treeView1.SelectedNode.Text == "Методы для выполнения действий") return;
-                    if (treeView1.SelectedNode.Text == "Нажатие") return;
-                    if (treeView1.SelectedNode.Text == "Поиск") return;
-                    if (treeView1.SelectedNode.Text == "Атрибуты") return;
-                    if (treeView1.SelectedNode.Text == "Объекты") return;
-                    if (treeView1.SelectedNode.Text == "Текст") return;
-                    if (treeView1.SelectedNode.Text == "Стили") return;
-                    if (treeView1.SelectedNode.Text == "Страница") return;
-                    if (treeView1.SelectedNode.Text == "Значение") return;
-                    if (treeView1.SelectedNode.Text == "Ожидание") return;
+                    if (treeView1.SelectedNode.Text == "Методы для выполнения действий" || treeView1.SelectedNode.Text == "Methods for performing actions") return;
+                    if (treeView1.SelectedNode.Text == "Нажатие" || treeView1.SelectedNode.Text == "Clicking") return;
+                    if (treeView1.SelectedNode.Text == "Поиск" || treeView1.SelectedNode.Text == "Search") return;
+                    if (treeView1.SelectedNode.Text == "Атрибуты" || treeView1.SelectedNode.Text == "Attributes") return;
+                    if (treeView1.SelectedNode.Text == "Объекты" || treeView1.SelectedNode.Text == "Objects") return;
+                    if (treeView1.SelectedNode.Text == "Текст" || treeView1.SelectedNode.Text == "Text") return;
+                    if (treeView1.SelectedNode.Text == "Стили" || treeView1.SelectedNode.Text == "Styles") return;
+                    if (treeView1.SelectedNode.Text == "Страница" || treeView1.SelectedNode.Text == "Page") return;
+                    if (treeView1.SelectedNode.Text == "Значение" || treeView1.SelectedNode.Text == "Value") return;
+                    if (treeView1.SelectedNode.Text == "Ожидание" || treeView1.SelectedNode.Text == "Waiting") return;
 
-                    if (treeView1.SelectedNode.Text == "Методы для выполнения JavaScript") return;
-                    if (treeView1.SelectedNode.Text == "Методы для выполнения Rest запросов") return;
-                    if (treeView1.SelectedNode.Text == "Методы для замера затраченного времени") return;
-                    if (treeView1.SelectedNode.Text == "Методы для отправки email и message") return;
-                    if (treeView1.SelectedNode.Text == "Методы для проверки результата") return;
-                    if (treeView1.SelectedNode.Text == "Методы для работы с файлами") return;
-                    if (treeView1.SelectedNode.Text == "Методы для разных задач") return;
+                    if (treeView1.SelectedNode.Text == "Методы для выполнения JavaScript" || treeView1.SelectedNode.Text == "Methods for executing JavaScript") return;
+                    if (treeView1.SelectedNode.Text == "Методы для выполнения Rest запросов" || treeView1.SelectedNode.Text == "Methods for executing Rest requests") return;
+                    if (treeView1.SelectedNode.Text == "Методы для замера затраченного времени" || treeView1.SelectedNode.Text == "Methods for measuring the time spent") return;
+                    if (treeView1.SelectedNode.Text == "Методы для отправки email и message" || treeView1.SelectedNode.Text == "Methods for sending email and message") return;
+                    if (treeView1.SelectedNode.Text == "Методы для проверки результата" || treeView1.SelectedNode.Text == "Methods for checking the result") return;
+                    if (treeView1.SelectedNode.Text == "Методы для работы с файлами" || treeView1.SelectedNode.Text == "Methods for working with files") return;
+                    if (treeView1.SelectedNode.Text == "Методы для разных задач" || treeView1.SelectedNode.Text == "Methods for different tasks") return;
 
-                    if (treeView1.SelectedNode.Text == "Класс: FRAMEElement") return;
-                    if (treeView1.SelectedNode.Text == "Класс: HTMLElement") return;
-                    if (treeView1.SelectedNode.Text == "Класс: TesterMySql") return;
-                    if (treeView1.SelectedNode.Text == "Конструктор") return;
-                    if (treeView1.SelectedNode.Text == "Переменные") return;
-                    if (treeView1.SelectedNode.Text == "Методы") return;
+                    if (treeView1.SelectedNode.Text == "Класс: FRAMEElement" || treeView1.SelectedNode.Text == "Class: FRAMEElement") return;
+                    if (treeView1.SelectedNode.Text == "Класс: HTMLElement" || treeView1.SelectedNode.Text == "Class: HTMLElement") return;
+                    if (treeView1.SelectedNode.Text == "Класс: TesterMySql" || treeView1.SelectedNode.Text == "Class: TesterMySql") return;
+                    if (treeView1.SelectedNode.Text == "Конструктор" || treeView1.SelectedNode.Text == "Constructor") return;
+                    if (treeView1.SelectedNode.Text == "Переменные" || treeView1.SelectedNode.Text == "Variables") return;
+                    if (treeView1.SelectedNode.Text == "Методы" || treeView1.SelectedNode.Text == "Methods") return;
 
                     Clipboard.SetText(treeView1.SelectedNode.Text);
                     (files[index][5] as TextEditor).Paste();
