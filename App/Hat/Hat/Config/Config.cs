@@ -121,8 +121,16 @@ namespace Hat
 
         public static void defaultFlags()
         {
-            Config.languageEngConsole = true;
-            Config.languageEngReportMail = false;
+            if (HatSettings.language == HatSettings.RUS)
+            {
+                Config.languageEngConsole = true;
+                Config.languageEngReportMail = false;
+            }
+            else
+            {
+                Config.languageEngConsole = true;
+                Config.languageEngReportMail = true;
+            }
             Config.fullReport = true;
         }
 

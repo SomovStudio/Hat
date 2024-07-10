@@ -71,8 +71,22 @@ namespace Hat
                 initWebView();
                 BrowserLanguage();
 
-                if (HatSettings.language == HatSettings.RUS) Config.projectPath = "(не открыт)";
-                else Config.projectPath = "(not opened)";
+                if (HatSettings.language == HatSettings.RUS)
+                {
+                    Config.projectPath = "(не открыт)";
+                    languageReportEmailRusToolStripMenuItem.Checked = true;
+                    languageReportEmailEngToolStripMenuItem.Checked = false;
+                    languageRusToolStripMenuItem.Checked = false;
+                    languageEngToolStripMenuItem.Checked = true;
+                }
+                else
+                {
+                    Config.projectPath = "(not opened)";
+                    languageReportEmailRusToolStripMenuItem.Checked = false;
+                    languageReportEmailEngToolStripMenuItem.Checked = true;
+                    languageRusToolStripMenuItem.Checked = false;
+                    languageEngToolStripMenuItem.Checked = true;
+                }
 
                 this.Width = 1440;
                 this.Height = 900;
