@@ -208,7 +208,7 @@ namespace Hat
 
                 webView2.CoreWebView2.Settings.AreDefaultScriptDialogsEnabled = false;
                 ConsoleMsg("Выполнена настройка WebView (отключаны alert, prompt, confirm)", "WebView has been configured (alert, prompt, confirm are disabled)");
-                ConsoleMsg("Инициализация WebView - завершена", "WebView initialization is complete");
+                ConsoleMsg("Инициализация WebView - завершена", "WebView initialization is completed");
             }
             catch (Exception ex)
             {
@@ -475,7 +475,7 @@ namespace Hat
                     else if (status == Tester.FAILED) this.subitem.Text = "Failed";
                     else if (status == Tester.STOPPED) this.subitem.Text = "Stopped";
                     else if (status == Tester.PROCESS) this.subitem.Text = "In process";
-                    else if (status == Tester.COMPLETED) this.subitem.Text = "Complete";
+                    else if (status == Tester.COMPLETED) this.subitem.Text = "Completed";
                     else if (status == Tester.WARNING) this.subitem.Text = "Warning";
                     else this.subitem.Text = "";
                 }
@@ -984,6 +984,23 @@ namespace Hat
         {
             try
             {
+                if (HatSettings.language == HatSettings.RUS)
+                {
+                    languageReportEmailRusToolStripMenuItem.Checked = true;
+                    languageReportEmailEngToolStripMenuItem.Checked = false;
+                    languageRusToolStripMenuItem.Checked = false;
+                    languageEngToolStripMenuItem.Checked = true;
+                    Config.defaultFlags();
+                }
+                else
+                {
+                    languageReportEmailRusToolStripMenuItem.Checked = false;
+                    languageReportEmailEngToolStripMenuItem.Checked = true;
+                    languageRusToolStripMenuItem.Checked = false;
+                    languageEngToolStripMenuItem.Checked = true;
+                    Config.defaultFlags();
+                }
+
                 if (folderBrowserDialogProjectCreate.ShowDialog() == DialogResult.OK)
                 {
                     Config.projectPath = folderBrowserDialogProjectCreate.SelectedPath;
@@ -1075,6 +1092,23 @@ namespace Hat
         {
             try
             {
+                if (HatSettings.language == HatSettings.RUS)
+                {
+                    languageReportEmailRusToolStripMenuItem.Checked = true;
+                    languageReportEmailEngToolStripMenuItem.Checked = false;
+                    languageRusToolStripMenuItem.Checked = false;
+                    languageEngToolStripMenuItem.Checked = true;
+                    Config.defaultFlags();
+                }
+                else
+                {
+                    languageReportEmailRusToolStripMenuItem.Checked = false;
+                    languageReportEmailEngToolStripMenuItem.Checked = true;
+                    languageRusToolStripMenuItem.Checked = false;
+                    languageEngToolStripMenuItem.Checked = true;
+                    Config.defaultFlags();
+                }
+
                 InputBoxForm inputBox = new InputBoxForm();
                 if (HatSettings.language == HatSettings.RUS) inputBox.label.Text = "Введите пожалуйста имя проекта (например HatTests)";
                 else inputBox.label.Text = "Please enter the name of the project (for example HatTests)";
@@ -1142,6 +1176,7 @@ namespace Hat
                     if (!File.Exists(Config.projectPath + fileProject))
                     {
                         Config.defaultDataMail();
+                        Config.defaultFlags();
                         writer.writeFile(Config.getConfig(), WorkOnFiles.UTF_8_BOM, Config.projectPath + fileProject);
                     }
                     if (!File.Exists(Config.projectPath + fileSupportHelper)) writer.writeFile(Autotests.getContentFileHelper(), Config.encoding, Config.projectPath + fileSupportHelper);
