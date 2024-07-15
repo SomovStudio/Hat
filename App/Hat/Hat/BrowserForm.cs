@@ -3182,6 +3182,18 @@ namespace Hat
             }
         }
 
+        private void pluginMySQLToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                System.Diagnostics.Process.Start(@"https://github.com/SomovStudio/HatPluginMySql");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка");
+            }
+        }
+
         private void BrowserLanguage()
         {
             if (HatSettings.language == HatSettings.RUS)
@@ -3227,6 +3239,7 @@ namespace Hat
                 systemToolStripMenuItem.Text = "Окно Система";
                 справкаToolStripMenuItem.Text = "Справка";
                 updateToolStripMenuItem.Text = "Проверить обновление";
+                pluginMySQLToolStripMenuItem.Text = "Плагин MySQL для браузера";
                 documentationToolStripMenuItem.Text = "Документация";
                 оПрограммеCrackerToolStripMenuItem.Text = "О программе Hat";
 
@@ -3412,6 +3425,7 @@ namespace Hat
                 systemToolStripMenuItem.Text = "The System window";
                 справкаToolStripMenuItem.Text = "Help";
                 updateToolStripMenuItem.Text = "Check the update";
+                pluginMySQLToolStripMenuItem.Text = "Plugin MySQL for browser";
                 documentationToolStripMenuItem.Text = "Documentation";
                 оПрограммеCrackerToolStripMenuItem.Text = "About Hat";
 
@@ -3577,5 +3591,7 @@ namespace Hat
                 BrowserLanguage();
             }
         }
+
+        
     }
 }
