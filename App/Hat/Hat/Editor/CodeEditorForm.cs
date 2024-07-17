@@ -3991,7 +3991,7 @@ await element.WaitNotVisibleAsync(2);\f0\lang1033\par
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 GetTextFromElementByClassAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2\f0\lang1033  \f1\lang1049\'f2\'e5\'ea\'f1\'f2 \'e8\'e7 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'ee\'e3\'ee \'fd\'eb\'e5\'ec\'e5\'ed\'f2\'e0\par
+\cf2\f1\lang1049 Description\cf0 : the method returns the text from the specified element\par
 \cf2 Syntax\cf0 : GetTextFromElementByClassAsync(string _class, int index)\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -4002,7 +4002,7 @@ await element.WaitNotVisibleAsync(2);\f0\lang1033\par
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 GetTextFromElementAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2 \'f2\'e5\'ea\'f1\'f2 \'e8\'e7 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'ee\'e3\'ee \'fd\'eb\'e5\'ec\'e5\'ed\'f2\'e0\par
+\cf2\f1\lang1049 Description\cf0 : the method returns the text from the specified element\par
 \cf2 Syntax\cf0 : \f0\lang1033 GetTextFromElementAsync(string by, string locator)\f1\lang1049\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -4015,7 +4015,7 @@ string text = await tester.GetTextFromElementAsync(Tester.BY_XPATH, ""//div[@id=
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 GetTextFromElementByIdAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2\f0\lang1033  \f1\lang1049\'f2\'e5\'ea\'f1\'f2 \'e8\'e7 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'ee\'e3\'ee \'fd\'eb\'e5\'ec\'e5\'ed\'f2\'e0\par
+\cf2\f1\lang1049 Description\cf0 : the method returns the text from the specified element\par
 \cf2 Syntax\cf0 : GetTextFromElementByIdAsync(string id)\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -4026,7 +4026,7 @@ string text = await tester.GetTextFromElementAsync(Tester.BY_XPATH, ""//div[@id=
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 GetTextFromElementByNameAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2\f0\lang1033  \f1\lang1049\'f2\'e5\'ea\'f1\'f2 \'e8\'e7 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'ee\'e3\'ee \'fd\'eb\'e5\'ec\'e5\'ed\'f2\'e0\par
+\cf2\f1\lang1049 Description\cf0 : the method returns the text from the specified element\par
 \cf2 Syntax\cf0 : GetTextFromElementByNameAsync(string name, int index)\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -4037,7 +4037,7 @@ string text = await tester.GetTextFromElementAsync(Tester.BY_XPATH, ""//div[@id=
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 GetTextFromElementByTagAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2\f0\lang1033  \f1\lang1049\'f2\'e5\'ea\'f1\'f2 \'e8\'e7 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'ee\'e3\'ee \'fd\'eb\'e5\'ec\'e5\'ed\'f2\'e0\par
+\cf2\f1\lang1049 Description\cf0 : the method returns the text from the specified element\par
 \cf2 Syntax\cf0 : GetTextFromElementByTagAsync(string tag, int index)\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -4048,7 +4048,7 @@ string text = await tester.GetTextFromElementAsync(Tester.BY_XPATH, ""//div[@id=
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 GetTitleAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2\f0\lang1033  \f1\lang1049\'e7\'e0\'e3\'ee\'eb\'ee\'e2\'ee\'ea \'f1\'f2\'f0\'e0\'ed\'e8\'f6\'fb\par
+\cf2\f1\lang1049 Description\cf0 : the method returns the page title\par
 \cf2 Syntax\cf0 : GetTitleAsync()\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -4059,7 +4059,7 @@ string text = await tester.GetTextFromElementAsync(Tester.BY_XPATH, ""//div[@id=
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 GetUrlAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2\f0\lang1033  \f1\lang1049\'f2\'e5\'ea\'f3\'f9\'e8\'e9 \f0\lang1033 URL\f1\lang1049\par
+\cf2\f1\lang1049 Description\cf0 : the method returns the current URL\par
 \cf2 Syntax\cf0 : GetUrlAsync()\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -4070,7 +4070,7 @@ string text = await tester.GetTextFromElementAsync(Tester.BY_XPATH, ""//div[@id=
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 GetValueFromElementByClassAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2\f0\lang1033  \f1\lang1049\'e7\'ed\'e0\'f7\'e5\'ed\'e8\'e5 \'e8\'e7 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'ee\'e3\'ee \'fd\'eb\'e5\'ec\'e5\'ed\'f2\'e0\par
+\cf2\f1\lang1049 Description\cf0 : the method returns the value from the specified element\par
 \cf2 Syntax\cf0 : GetValueFromElementByClassAsync(string _class, int index)\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -4081,7 +4081,7 @@ string text = await tester.GetTextFromElementAsync(Tester.BY_XPATH, ""//div[@id=
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 GetValueFromElementAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2 \'e7\'ed\'e0\'f7\'e5\'ed\'e8\'e5 \'e8\'e7 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'ee\'e3\'ee \'fd\'eb\'e5\'ec\'e5\'ed\'f2\'e0\par
+\cf2\f1\lang1049 Description\cf0 : the method returns the value from the specified element\par
 \cf2 Syntax\cf0 : \f0\lang1033 GetValueFromElementAsync(string by, string locator)\f1\lang1049\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -4094,7 +4094,7 @@ string value = await tester.GetValueFromElementAsync(Tester.BY_XPATH, ""//input[
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 GetValueFromElementByIdAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2\f0\lang1033  \f1\lang1049\'e7\'ed\'e0\'f7\'e5\'ed\'e8\'e5 \'e8\'e7 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'ee\'e3\'ee \'fd\'eb\'e5\'ec\'e5\'ed\'f2\'e0\par
+\cf2\f1\lang1049 Description\cf0 : the method returns the value from the specified element\par
 \cf2 Syntax\cf0 : GetValueFromElementByIdAsync(string id)\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -4105,7 +4105,7 @@ string value = await tester.GetValueFromElementAsync(Tester.BY_XPATH, ""//input[
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 GetValueFromElementByNameAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2\f0\lang1033  \f1\lang1049\'e7\'ed\'e0\'f7\'e5\'ed\'e8\'e5 \'e8\'e7 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'ee\'e3\'ee \'fd\'eb\'e5\'ec\'e5\'ed\'f2\'e0\par
+\cf2\f1\lang1049 Description\cf0 : the method returns the value from the specified element\par
 \cf2 Syntax\cf0 : GetValueFromElementByNameAsync(string name, int index)\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -4116,7 +4116,7 @@ string value = await tester.GetValueFromElementAsync(Tester.BY_XPATH, ""//input[
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 GetValueFromElementByTagAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2\f0\lang1033  \f1\lang1049\'e7\'ed\'e0\'f7\'e5\'ed\'e8\'e5 \'e8\'e7 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'ee\'e3\'ee \'fd\'eb\'e5\'ec\'e5\'ed\'f2\'e0\par
+\cf2\f1\lang1049 Description\cf0 : the method returns the value from the specified element\par
 \cf2 Syntax\cf0 : GetValueFromElementByTagAsync(string tag, int index)\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -4127,7 +4127,7 @@ string value = await tester.GetValueFromElementAsync(Tester.BY_XPATH, ""//input[
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 GoToUrlAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'fb\'ef\'ee\'eb\'ed\'ff\'e5\'f2 \'e7\'e0\'e3\'f0\'f3\'e7\'ea\'f3 \'e2\'e5\'e1 \'f1\'e0\'e9\'f2\'e0 \'ef\'ee \'f3\'ea\'e0\'e7\'e0\'ed\'ee\'ec\'f3 \f0\lang1033 URL \f1\lang1049\'f1 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'fb\'ec \'ee\'e6\'e8\'e4\'e0\'ed\'e8\'e5\'ec \'e2 \'f1\'e5\'ea\'f3\'ed\'e4\'e0\'f5\par
+\cf2\f1\lang1049 Description\cf0 :  the method loads the website at the specified URL with the specified wait in seconds. The abortLoadAfterTime flag automatically completes page loading after the timer is completed\par
 \cf2 Syntax\cf0 : GoToUrlAsync(string url, int sec, bool abortLoadAfterTime = false)\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -4138,7 +4138,7 @@ string value = await tester.GetValueFromElementAsync(Tester.BY_XPATH, ""//input[
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 ScrollToElementAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'fb\'ef\'ee\'eb\'ed\'ff\'e5\'f2 \'ef\'f0\'ee\'ea\'f0\'f3\'f2\'ea\'f3 \'ea \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'ee\'ec\'f3 \'fd\'eb\'e5\'ec\'e5\'ed\'f2\'f3 (\'ef\'e0\'f0\'e0\'ec\'e5\'f2\'f0 behaviorSmooth \'ee\'ef\'f0\'e5\'e4\'e5\'eb\'ff\'e5\'f2 \'ef\'eb\'e0\'e2\'ed\'ee\'f1\'f2\'fc \'ef\'f0\'ee\'ea\'f0\'f3\'f2\'ea\'e8)\par
+\cf2\f1\lang1049 Description\cf0 : the method scrolls to the specified element (the behaviorSmooth parameter determines the smoothness of scrolling)\par
 \cf2 Syntax\cf0 : \f0\lang1033 ScrollToElementAsync(string by, string locator, bool behaviorSmooth = false)\f1\lang1049\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -4151,7 +4151,7 @@ await tester.ScrollToElementAsync(Tester.BY_XPATH, ""/html/body/footer"", true);
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 SetAttributeInElementByClassAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'f1\'f2\'e0\'e2\'eb\'ff\'e5\'f2 \'e0\'f2\'f0\'e8\'e1\'f3\'f2 \'f1\'ee \'e7\'ed\'e0\'f7\'e5\'ed\'e8\'e5\'ec \'e2 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'fb\'e9 \'fd\'eb\'e5\'ec\'e5\'ed\'f2 \par
+\cf2\f1\lang1049 Description\cf0 : the method inserts an attribute with a value into the specified element \par
 \cf2 Syntax\cf0 : SetAttributeInElementByClassAsync(string _class, int index, string attribute, string value)\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -4162,7 +4162,7 @@ await tester.ScrollToElementAsync(Tester.BY_XPATH, ""/html/body/footer"", true);
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 SetAttributeInElementAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'f1\'f2\'e0\'e2\'eb\'ff\'e5\'f2 \'e0\'f2\'f0\'e8\'e1\'f3\'f2 \'f1\'ee \'e7\'ed\'e0\'f7\'e5\'ed\'e8\'e5\'ec \'e2 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'fb\'e9 \'fd\'eb\'e5\'ec\'e5\'ed\'f2\par
+\cf2\f1\lang1049 Description\cf0 : the method inserts an attribute with a value into the specified element \par
 \cf2 Syntax\cf0 : \f0\lang1033 SetAttributeInElementAsync(string by, string locator, string attribute, string value)\f1\lang1049\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -4175,7 +4175,7 @@ await tester.SetAttributeInElementAsync(Tester.BY_XPATH, ""//div[@id='auth']//h2
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 SetAttributeInElementByIdAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'f1\'f2\'e0\'e2\'eb\'ff\'e5\'f2 \'e0\'f2\'f0\'e8\'e1\'f3\'f2 \'f1\'ee \'e7\'ed\'e0\'f7\'e5\'ed\'e8\'e5\'ec \'e2 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'fb\'e9 \'fd\'eb\'e5\'ec\'e5\'ed\'f2 \par
+\cf2\f1\lang1049 Description\cf0 : the method inserts an attribute with a value into the specified element \par
 \cf2 Syntax\cf0 : SetAttributeInElementByIdAsync(string id, string attribute, string value)\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -4186,7 +4186,7 @@ await tester.SetAttributeInElementAsync(Tester.BY_XPATH, ""//div[@id='auth']//h2
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 SetAttributeInElementByNameAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'f1\'f2\'e0\'e2\'eb\'ff\'e5\'f2 \'e0\'f2\'f0\'e8\'e1\'f3\'f2 \'f1\'ee \'e7\'ed\'e0\'f7\'e5\'ed\'e8\'e5\'ec \'e2 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'fb\'e9 \'fd\'eb\'e5\'ec\'e5\'ed\'f2 \par
+\cf2\f1\lang1049 Description\cf0 : the method inserts an attribute with a value into the specified element \par
 \cf2 Syntax\cf0 : SetAttributeInElementByNameAsync(string name, int index, string attribute, string value)\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -4197,7 +4197,7 @@ await tester.SetAttributeInElementAsync(Tester.BY_XPATH, ""//div[@id='auth']//h2
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 SetAttributeInElementByTagAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'f1\'f2\'e0\'e2\'eb\'ff\'e5\'f2 \'e0\'f2\'f0\'e8\'e1\'f3\'f2 \'f1\'ee \'e7\'ed\'e0\'f7\'e5\'ed\'e8\'e5\'ec \'e2 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'fb\'e9 \'fd\'eb\'e5\'ec\'e5\'ed\'f2 \par
+\cf2\f1\lang1049 Description\cf0 : the method inserts an attribute with a value into the specified element \par
 \cf2 Syntax\cf0 : SetAttributeInElementByTagAsync(string tag, int index, string attribute, string value)\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -4208,7 +4208,7 @@ await tester.SetAttributeInElementAsync(Tester.BY_XPATH, ""//div[@id='auth']//h2
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 SetTextInElementByClassAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'f1\'f2\'e0\'e2\'eb\'ff\'e5\'f2 \'f2\'e5\'ea\'f1\'f2 \'e2 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'fb\'e9 \'fd\'eb\'e5\'ec\'e5\'ed\'f2 \par
+\cf2\f1\lang1049 Description\cf0 : the method inserts text into the specified element \par
 \cf2 Syntax\cf0 : SetTextInElementByClassAsync(string _class, int index, string text)\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -4219,7 +4219,7 @@ await tester.SetAttributeInElementAsync(Tester.BY_XPATH, ""//div[@id='auth']//h2
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 SetTextInElementAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'f1\'f2\'e0\'e2\'eb\'ff\'e5\'f2 \'f2\'e5\'ea\'f1\'f2 \'e2 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'fb\'e9 \'fd\'eb\'e5\'ec\'e5\'ed\'f2\par
+\cf2\f1\lang1049 Description\cf0 : the method inserts text into the specified element \par
 \cf2 Syntax\cf0 : \f0\lang1033 SetTextInElementAsync(string by, string locator, string text)\f1\lang1049\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -4232,7 +4232,7 @@ await tester.SetTextInElementAsync(Tester.BY_XPATH, ""//div[@id='auth']//h2"", "
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 SetTextInElementByIdAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'f1\'f2\'e0\'e2\'eb\'ff\'e5\'f2 \'f2\'e5\'ea\'f1\'f2 \'e2 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'fb\'e9 \'fd\'eb\'e5\'ec\'e5\'ed\'f2 \par
+\cf2\f1\lang1049 Description\cf0 : the method inserts text into the specified element \par
 \cf2 Syntax\cf0 : SetTextInElementByIdAsync(string id, string text)\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -4243,7 +4243,7 @@ await tester.SetTextInElementAsync(Tester.BY_XPATH, ""//div[@id='auth']//h2"", "
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 SetTextInElementByNameAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'f1\'f2\'e0\'e2\'eb\'ff\'e5\'f2 \'f2\'e5\'ea\'f1\'f2 \'e2 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'fb\'e9 \'fd\'eb\'e5\'ec\'e5\'ed\'f2 \par
+\cf2\f1\lang1049 Description\cf0 : the method inserts text into the specified element \par
 \cf2 Syntax\cf0 : SetTextInElementByNameAsync(string name, int index, string text)\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -4254,7 +4254,7 @@ await tester.SetTextInElementAsync(Tester.BY_XPATH, ""//div[@id='auth']//h2"", "
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 SetTextInElementByTagAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'f1\'f2\'e0\'e2\'eb\'ff\'e5\'f2 \'f2\'e5\'ea\'f1\'f2 \'e2 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'fb\'e9 \'fd\'eb\'e5\'ec\'e5\'ed\'f2 \par
+\cf2\f1\lang1049 Description\cf0 : the method inserts text into the specified element \par
 \cf2 Syntax\cf0 : SetTextInElementByTagAsync(string tag, int index, string text)\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -4265,7 +4265,7 @@ await tester.SetTextInElementAsync(Tester.BY_XPATH, ""//div[@id='auth']//h2"", "
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 SetValueInElementByClassAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'f1\'f2\'e0\'e2\'eb\'ff\'e5\'f2 \'f2\'e5\'ea\'f1\'f2 \'e2 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'fb\'e9 \'fd\'eb\'e5\'ec\'e5\'ed\'f2 \par
+\cf2\f1\lang1049 Description\cf0 : the method inserts value into the specified element \par
 \cf2 Syntax\cf0 : SetValueInElementByClassAsync(string _class, int index, string value)\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -4276,7 +4276,7 @@ await tester.SetTextInElementAsync(Tester.BY_XPATH, ""//div[@id='auth']//h2"", "
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 SetValueInElementAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'f1\'f2\'e0\'e2\'eb\'ff\'e5\'f2 \'e7\'ed\'e0\'f7\'e5\'ed\'e8\'e5 \'e2 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'fb\'e9 \'fd\'eb\'e5\'ec\'e5\'ed\'f2\par
+\cf2\f1\lang1049 Description\cf0 : the method inserts value into the specified element \par
 \cf2 Syntax\cf0 : \f0\lang1033 SetValueInElementAsync(string by, string locator, string value)\f1\lang1049\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -4291,7 +4291,7 @@ await tester.SetValueInElementAsync(Tester.BY_XPATH, ""//input[@id='pass']"", ""
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 SetValueInElementByIdAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'f1\'f2\'e0\'e2\'eb\'ff\'e5\'f2 \'f2\'e5\'ea\'f1\'f2 \'e2 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'fb\'e9 \'fd\'eb\'e5\'ec\'e5\'ed\'f2 \par
+\cf2\f1\lang1049 Description\cf0 : the method inserts value into the specified element \par
 \cf2 Syntax\cf0 : SetValueInElementByIdAsync(string id, string value)\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -4302,7 +4302,7 @@ await tester.SetValueInElementAsync(Tester.BY_XPATH, ""//input[@id='pass']"", ""
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 SetValueInElementByNameAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'f1\'f2\'e0\'e2\'eb\'ff\'e5\'f2 \'f2\'e5\'ea\'f1\'f2 \'e2 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'fb\'e9 \'fd\'eb\'e5\'ec\'e5\'ed\'f2 \par
+\cf2\f1\lang1049 Description\cf0 : the method inserts value into the specified element \par
 \cf2 Syntax\cf0 : SetValueInElementByNameAsync(string name, int index, string value)\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -4313,7 +4313,7 @@ await tester.SetValueInElementAsync(Tester.BY_XPATH, ""//input[@id='pass']"", ""
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 SetValueInElementByTagAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'f1\'f2\'e0\'e2\'eb\'ff\'e5\'f2 \'f2\'e5\'ea\'f1\'f2 \'e2 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'fb\'e9 \'fd\'eb\'e5\'ec\'e5\'ed\'f2 \par
+\cf2\f1\lang1049 Description\cf0 : the method inserts value into the specified element \par
 \cf2 Syntax\cf0 : SetValueInElementByTagAsync(string tag, int index, string value)\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -6669,6 +6669,22 @@ foreach (DataRow row in dataTable.Rows)\par
                             if (treeView1.Nodes[i].Nodes[j].Text == "Методы для работы с файлами") treeView1.Nodes[i].Nodes[j].Text = "Methods for working with files";
                             if (treeView1.Nodes[i].Nodes[j].Text == "Методы для разных задач") treeView1.Nodes[i].Nodes[j].Text = "Methods for different tasks";
                             if (treeView1.Nodes[i].Nodes[j].Text == "Методы") treeView1.Nodes[i].Nodes[j].Text = "Methods";
+
+                            if (treeView1.Nodes[i].Nodes[j].Nodes.Count > 0)
+                            {
+                                for (int k = 0; k < treeView1.Nodes[i].Nodes[j].Nodes.Count; k++)
+                                {
+                                    if (treeView1.Nodes[i].Nodes[j].Nodes[k].Text == "Атрибуты") treeView1.Nodes[i].Nodes[j].Nodes[k].Text = "Attributes";
+                                    if (treeView1.Nodes[i].Nodes[j].Nodes[k].Text == "Значение") treeView1.Nodes[i].Nodes[j].Nodes[k].Text = "Values";
+                                    if (treeView1.Nodes[i].Nodes[j].Nodes[k].Text == "Нажатие") treeView1.Nodes[i].Nodes[j].Nodes[k].Text = "Clicking";
+                                    if (treeView1.Nodes[i].Nodes[j].Nodes[k].Text == "Объекты") treeView1.Nodes[i].Nodes[j].Nodes[k].Text = "Objects";
+                                    if (treeView1.Nodes[i].Nodes[j].Nodes[k].Text == "Ожидание") treeView1.Nodes[i].Nodes[j].Nodes[k].Text = "Waiting";
+                                    if (treeView1.Nodes[i].Nodes[j].Nodes[k].Text == "Поиск") treeView1.Nodes[i].Nodes[j].Nodes[k].Text = "Search";
+                                    if (treeView1.Nodes[i].Nodes[j].Nodes[k].Text == "Стили") treeView1.Nodes[i].Nodes[j].Nodes[k].Text = "Styles";
+                                    if (treeView1.Nodes[i].Nodes[j].Nodes[k].Text == "Страница") treeView1.Nodes[i].Nodes[j].Nodes[k].Text = "Page";
+                                    if (treeView1.Nodes[i].Nodes[j].Nodes[k].Text == "Текст") treeView1.Nodes[i].Nodes[j].Nodes[k].Text = "Text";
+                                }
+                            }
                         }
                     }
                 }
