@@ -4324,7 +4324,7 @@ await tester.SetValueInElementAsync(Tester.BY_XPATH, ""//input[@id='pass']"", ""
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 WaitAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'fb\'ef\'ee\'eb\'ed\'ff\'e5\'f2 \'e2\'f0\'e5\'ec\'e5\'ed\'ed\'f3\'fe \'ee\'f1\'f2\'e0\'ed\'ee\'e2\'ea\'f3 \'e2\'fb\'ef\'ee\'eb\'ed\'e5\'ed\'e8\'ff \'f2\'e5\'f1\'f2\'e0 \'ed\'e0 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'ee\'e5 \'ea\'ee\'eb\'e8\'f7\'e5\'f1\'f2\'e2\'ee \'f1\'e5\'ea\'f3\'ed\'e4\par
+\cf2\f1\lang1049 Description\cf0 : the method temporarily stops the test execution for the specified number of seconds\par
 \cf2 Syntax\cf0 : WaitAsync(int sec)\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -4335,7 +4335,7 @@ await tester.SetValueInElementAsync(Tester.BY_XPATH, ""//input[@id='pass']"", ""
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 WaitNotVisibleElementByClassAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'fb\'ef\'ee\'eb\'ed\'ff\'e5\'f2 \'e2\'f0\'e5\'ec\'e5\'ed\'ed\'f3\'fe \'ee\'f1\'f2\'e0\'ed\'ee\'e2\'ea\'f3 \'e2\'fb\'ef\'ee\'eb\'ed\'e5\'ed\'e8\'ff \'f2\'e5\'f1\'f2\'e0 \'ed\'e0 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'ee\'e5 \'ea\'ee\'eb\'e8\'f7\'e5\'f1\'f2\'e2\'ee \'f1\'e5\'ea\'f3\'ed\'e4\f0\lang1033  \f1\lang1049\'e8 \'e6\'e4\'e5\'f2 \'ea\'ee\'e3\'e4\'e0  \'e7\'e0\'ef\'f0\'e0\'f8\'e8\'e2\'e0\'e5\'ec\'fb\'e9 \'fd\'eb\'e5\'ec\'e5\'ed\'f2 \'ef\'e5\'f0\'e5\'f1\'f2\'e0\'ed\'e5\'f2 \'ee\'f2\'ee\'e1\'f0\'e0\'e6\'e0\'e5\'f2\'fc\'f1\'ff \par
+\cf2\f1\lang1049 Description\cf0 : the method temporarily stops the test execution for the specified number of seconds and waits for the requested element to stop being displayed \par
 \cf2 Syntax\cf0 : WaitNotVisibleElementByClassAsync(string _class, int index, int sec)\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -4346,7 +4346,7 @@ await tester.SetValueInElementAsync(Tester.BY_XPATH, ""//input[@id='pass']"", ""
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 WaitNotVisibleElementAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'fb\'ef\'ee\'eb\'ed\'ff\'e5\'f2 \'e2\'f0\'e5\'ec\'e5\'ed\'ed\'f3\'fe \'ee\'f1\'f2\'e0\'ed\'ee\'e2\'ea\'f3 \'e2\'fb\'ef\'ee\'eb\'ed\'e5\'ed\'e8\'ff \'f2\'e5\'f1\'f2\'e0 \'ed\'e0 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'ee\'e5 \'ea\'ee\'eb\'e8\'f7\'e5\'f1\'f2\'e2\'ee \'f1\'e5\'ea\'f3\'ed\'e4 \'e8 \'e6\'e4\'e5\'f2 \'ea\'ee\'e3\'e4\'e0  \'e7\'e0\'ef\'f0\'e0\'f8\'e8\'e2\'e0\'e5\'ec\'fb\'e9 \'fd\'eb\'e5\'ec\'e5\'ed\'f2 \'ef\'e5\'f0\'e5\'f1\'f2\'e0\'ed\'e5\'f2 \'ee\'f2\'ee\'e1\'f0\'e0\'e6\'e0\'e5\'f2\'fc\'f1\'ff\par
+\cf2\f1\lang1049 Description\cf0 : the method temporarily stops the test execution for the specified number of seconds and waits for the requested element to stop being displayed \par
 \cf2 Syntax\cf0 : \f0\lang1033 WaitNotVisibleElementAsync(string by, string locator, int sec)\f1\lang1049\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -4359,7 +4359,7 @@ await tester.WaitNotVisibleElementAsync(Tester.BY_XPATH, ""//div[@id='result']""
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 WaitNotVisibleElementByIdAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'fb\'ef\'ee\'eb\'ed\'ff\'e5\'f2 \'e2\'f0\'e5\'ec\'e5\'ed\'ed\'f3\'fe \'ee\'f1\'f2\'e0\'ed\'ee\'e2\'ea\'f3 \'e2\'fb\'ef\'ee\'eb\'ed\'e5\'ed\'e8\'ff \'f2\'e5\'f1\'f2\'e0 \'ed\'e0 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'ee\'e5 \'ea\'ee\'eb\'e8\'f7\'e5\'f1\'f2\'e2\'ee \'f1\'e5\'ea\'f3\'ed\'e4\f0\lang1033  \f1\lang1049\'e8 \'e6\'e4\'e5\'f2 \'ea\'ee\'e3\'e4\'e0  \'e7\'e0\'ef\'f0\'e0\'f8\'e8\'e2\'e0\'e5\'ec\'fb\'e9 \'fd\'eb\'e5\'ec\'e5\'ed\'f2 \'ef\'e5\'f0\'e5\'f1\'f2\'e0\'ed\'e5\'f2 \'ee\'f2\'ee\'e1\'f0\'e0\'e6\'e0\'e5\'f2\'fc\'f1\'ff \par
+\cf2\f1\lang1049 Description\cf0 : the method temporarily stops the test execution for the specified number of seconds and waits for the requested element to stop being displayed \par
 \cf2 Syntax\cf0 : WaitNotVisibleElementByIdAsync(string id, int sec)\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -4370,7 +4370,7 @@ await tester.WaitNotVisibleElementAsync(Tester.BY_XPATH, ""//div[@id='result']""
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 WaitNotVisibleElementByNameAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'fb\'ef\'ee\'eb\'ed\'ff\'e5\'f2 \'e2\'f0\'e5\'ec\'e5\'ed\'ed\'f3\'fe \'ee\'f1\'f2\'e0\'ed\'ee\'e2\'ea\'f3 \'e2\'fb\'ef\'ee\'eb\'ed\'e5\'ed\'e8\'ff \'f2\'e5\'f1\'f2\'e0 \'ed\'e0 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'ee\'e5 \'ea\'ee\'eb\'e8\'f7\'e5\'f1\'f2\'e2\'ee \'f1\'e5\'ea\'f3\'ed\'e4\f0\lang1033  \f1\lang1049\'e8 \'e6\'e4\'e5\'f2 \'ea\'ee\'e3\'e4\'e0  \'e7\'e0\'ef\'f0\'e0\'f8\'e8\'e2\'e0\'e5\'ec\'fb\'e9 \'fd\'eb\'e5\'ec\'e5\'ed\'f2 \'ef\'e5\'f0\'e5\'f1\'f2\'e0\'ed\'e5\'f2 \'ee\'f2\'ee\'e1\'f0\'e0\'e6\'e0\'e5\'f2\'fc\'f1\'ff \par
+\cf2\f1\lang1049 Description\cf0 : the method temporarily stops the test execution for the specified number of seconds and waits for the requested element to stop being displayed \par
 \cf2 Syntax\cf0 : WaitNotVisibleElementByNameAsync(string name, int index, int sec)\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -4381,7 +4381,7 @@ await tester.WaitNotVisibleElementAsync(Tester.BY_XPATH, ""//div[@id='result']""
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 WaitNotVisibleElementByTagAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'fb\'ef\'ee\'eb\'ed\'ff\'e5\'f2 \'e2\'f0\'e5\'ec\'e5\'ed\'ed\'f3\'fe \'ee\'f1\'f2\'e0\'ed\'ee\'e2\'ea\'f3 \'e2\'fb\'ef\'ee\'eb\'ed\'e5\'ed\'e8\'ff \'f2\'e5\'f1\'f2\'e0 \'ed\'e0 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'ee\'e5 \'ea\'ee\'eb\'e8\'f7\'e5\'f1\'f2\'e2\'ee \'f1\'e5\'ea\'f3\'ed\'e4\f0\lang1033  \f1\lang1049\'e8 \'e6\'e4\'e5\'f2 \'ea\'ee\'e3\'e4\'e0  \'e7\'e0\'ef\'f0\'e0\'f8\'e8\'e2\'e0\'e5\'ec\'fb\'e9 \'fd\'eb\'e5\'ec\'e5\'ed\'f2 \'ef\'e5\'f0\'e5\'f1\'f2\'e0\'ed\'e5\'f2 \'ee\'f2\'ee\'e1\'f0\'e0\'e6\'e0\'e5\'f2\'fc\'f1\'ff \par
+\cf2\f1\lang1049 Description\cf0 : the method temporarily stops the test execution for the specified number of seconds and waits for the requested element to stop being displayed \par
 \cf2 Syntax\cf0 : WaitNotVisibleElementByTagAsync(string tag, int index, int sec)\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -4392,7 +4392,7 @@ await tester.WaitNotVisibleElementAsync(Tester.BY_XPATH, ""//div[@id='result']""
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 WaitVisibleElementByClassAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'fb\'ef\'ee\'eb\'ed\'ff\'e5\'f2 \'e2\'f0\'e5\'ec\'e5\'ed\'ed\'f3\'fe \'ee\'f1\'f2\'e0\'ed\'ee\'e2\'ea\'f3 \'e2\'fb\'ef\'ee\'eb\'ed\'e5\'ed\'e8\'ff \'f2\'e5\'f1\'f2\'e0 \'ed\'e0 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'ee\'e5 \'ea\'ee\'eb\'e8\'f7\'e5\'f1\'f2\'e2\'ee \'f1\'e5\'ea\'f3\'ed\'e4\f0\lang1033  \f1\lang1049\'e8 \'e6\'e4\'e5\'f2 \'ea\'ee\'e3\'e4\'e0  \'e7\'e0\'ef\'f0\'e0\'f8\'e8\'e2\'e0\'e5\'ec\'fb\'e9 \'fd\'eb\'e5\'ec\'e5\'ed\'f2 \'ee\'f2\'ee\'e1\'f0\'e0\'e7\'e8\'f2\'f1\'ff\par
+\cf2\f1\lang1049 Description\cf0 : the method temporarily stops the test execution for the specified number of seconds and waits for the requested element to be displayed\par
 \cf2 Syntax\cf0 : WaitVisibleElementByClassAsync(string _class, int index, int sec)\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -4403,7 +4403,7 @@ await tester.WaitNotVisibleElementAsync(Tester.BY_XPATH, ""//div[@id='result']""
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 WaitVisibleElementAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'fb\'ef\'ee\'eb\'ed\'ff\'e5\'f2 \'e2\'f0\'e5\'ec\'e5\'ed\'ed\'f3\'fe \'ee\'f1\'f2\'e0\'ed\'ee\'e2\'ea\'f3 \'e2\'fb\'ef\'ee\'eb\'ed\'e5\'ed\'e8\'ff \'f2\'e5\'f1\'f2\'e0 \'ed\'e0 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'ee\'e5 \'ea\'ee\'eb\'e8\'f7\'e5\'f1\'f2\'e2\'ee \'f1\'e5\'ea\'f3\'ed\'e4 \'e8 \'e6\'e4\'e5\'f2 \'ea\'ee\'e3\'e4\'e0  \'e7\'e0\'ef\'f0\'e0\'f8\'e8\'e2\'e0\'e5\'ec\'fb\'e9 \'fd\'eb\'e5\'ec\'e5\'ed\'f2 \'ee\'f2\'ee\'e1\'f0\'e0\'e7\'e8\'f2\'f1\'ff\par
+\cf2\f1\lang1049 Description\cf0 : the method temporarily stops the test execution for the specified number of seconds and waits for the requested element to be displayed\par
 \cf2 Syntax\cf0 : \f0\lang1033 WaitVisibleElementAsync(string by, string locator, int sec)\f1\lang1049\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -4416,7 +4416,7 @@ await tester.WaitVisibleElementAsync(Tester.BY_XPATH, ""//div[@id='result']"", 2
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 WaitVisibleElementByIdAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'fb\'ef\'ee\'eb\'ed\'ff\'e5\'f2 \'e2\'f0\'e5\'ec\'e5\'ed\'ed\'f3\'fe \'ee\'f1\'f2\'e0\'ed\'ee\'e2\'ea\'f3 \'e2\'fb\'ef\'ee\'eb\'ed\'e5\'ed\'e8\'ff \'f2\'e5\'f1\'f2\'e0 \'ed\'e0 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'ee\'e5 \'ea\'ee\'eb\'e8\'f7\'e5\'f1\'f2\'e2\'ee \'f1\'e5\'ea\'f3\'ed\'e4\f0\lang1033  \f1\lang1049\'e8 \'e6\'e4\'e5\'f2 \'ea\'ee\'e3\'e4\'e0  \'e7\'e0\'ef\'f0\'e0\'f8\'e8\'e2\'e0\'e5\'ec\'fb\'e9 \'fd\'eb\'e5\'ec\'e5\'ed\'f2 \'ee\'f2\'ee\'e1\'f0\'e0\'e7\'e8\'f2\'f1\'ff\par
+\cf2\f1\lang1049 Description\cf0 : the method temporarily stops the test execution for the specified number of seconds and waits for the requested element to be displayed\par
 \cf2 Syntax\cf0 : WaitVisibleElementByIdAsync(string id, int sec)\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -4427,7 +4427,7 @@ await tester.WaitVisibleElementAsync(Tester.BY_XPATH, ""//div[@id='result']"", 2
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 WaitVisibleElementByNameAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'fb\'ef\'ee\'eb\'ed\'ff\'e5\'f2 \'e2\'f0\'e5\'ec\'e5\'ed\'ed\'f3\'fe \'ee\'f1\'f2\'e0\'ed\'ee\'e2\'ea\'f3 \'e2\'fb\'ef\'ee\'eb\'ed\'e5\'ed\'e8\'ff \'f2\'e5\'f1\'f2\'e0 \'ed\'e0 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'ee\'e5 \'ea\'ee\'eb\'e8\'f7\'e5\'f1\'f2\'e2\'ee \'f1\'e5\'ea\'f3\'ed\'e4\f0\lang1033  \f1\lang1049\'e8 \'e6\'e4\'e5\'f2 \'ea\'ee\'e3\'e4\'e0  \'e7\'e0\'ef\'f0\'e0\'f8\'e8\'e2\'e0\'e5\'ec\'fb\'e9 \'fd\'eb\'e5\'ec\'e5\'ed\'f2 \'ee\'f2\'ee\'e1\'f0\'e0\'e7\'e8\'f2\'f1\'ff\par
+\cf2\f1\lang1049 Description\cf0 : the method temporarily stops the test execution for the specified number of seconds and waits for the requested element to be displayed\par
 \cf2 Syntax\cf0 : WaitVisibleElementByNameAsync(string name, int index, int sec)\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -4438,7 +4438,7 @@ await tester.WaitVisibleElementAsync(Tester.BY_XPATH, ""//div[@id='result']"", 2
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 WaitVisibleElementByTagAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'fb\'ef\'ee\'eb\'ed\'ff\'e5\'f2 \'e2\'f0\'e5\'ec\'e5\'ed\'ed\'f3\'fe \'ee\'f1\'f2\'e0\'ed\'ee\'e2\'ea\'f3 \'e2\'fb\'ef\'ee\'eb\'ed\'e5\'ed\'e8\'ff \'f2\'e5\'f1\'f2\'e0 \'ed\'e0 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'ee\'e5 \'ea\'ee\'eb\'e8\'f7\'e5\'f1\'f2\'e2\'ee \'f1\'e5\'ea\'f3\'ed\'e4\f0\lang1033  \f1\lang1049\'e8 \'e6\'e4\'e5\'f2 \'ea\'ee\'e3\'e4\'e0  \'e7\'e0\'ef\'f0\'e0\'f8\'e8\'e2\'e0\'e5\'ec\'fb\'e9 \'fd\'eb\'e5\'ec\'e5\'ed\'f2 \'ee\'f2\'ee\'e1\'f0\'e0\'e7\'e8\'f2\'f1\'ff\par
+\cf2\f1\lang1049 Description\cf0 : the method temporarily stops the test execution for the specified number of seconds and waits for the requested element to be displayed\par
 \cf2 Syntax\cf0 : WaitVisibleElementByTagAsync(string tag, int index, int sec)\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -4449,7 +4449,7 @@ await tester.WaitVisibleElementAsync(Tester.BY_XPATH, ""//div[@id='result']"", 2
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 ExecuteJavaScriptAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'fb\'ef\'ee\'eb\'ed\'ff\'e5\'f2 \f0\lang1033 JavaScript \f1\lang1049\'ea\'ee\'e4 \'e8 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2 \'f1\'f2\'f0\'ee\'ea\'f3 \'f1 \'f0\'e5\'e7\'f3\'eb\'fc\'f2\'e0\'f2\'ee\'ec \'e2\'fb\'ef\'ee\'eb\'ed\'e5\'ed\'e8\'ff\par
+\cf2\f1\lang1049 Description\cf0 : the method executes JavaScript code and returns a string with the result of execution\par
 \cf2 Syntax\cf0 : ExecuteJavaScriptAsync(string script)\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -4462,7 +4462,7 @@ string result = await tester.ExecuteJavaScriptAsync(script);\f1\lang1049\par
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 AssertEqualsAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'fb\'ef\'ee\'eb\'ed\'ff\'e5\'f2 \'ef\'f0\'ee\'e2\'e5\'f0\'ea\'f3 \'ec\'e5\'e6\'e4\'f3 \'f4\'e0\'ea\'f2\'e8\'f7\'e5\'f1\'ea\'e8\'ec \'e8 \'ee\'e6\'e8\'e4\'e0\'e5\'ec\'fb\'ec \'e7\'ed\'e0\'f7\'e5\'ed\'e8\'ff\'ec\'e8, \'e2 \'f1\'eb\'f3\'f7\'e0\'e5 \'ed\'e5\'f1\'ee\'e2\'ef\'e0\'e4\'e5\'ed\'e8\'ff \'ef\'f0\'ee\'e2\'e5\'f0\'ea\'e0 \'e1\'f3\'e4\'e5\'f2 \'f1\'f7\'e8\'f2\'e0\'f2\'fc\'f1\'ff \'ef\'f0\'ee\'e2\'e0\'eb\'fc\'ed\'ee\'e9\par
+\cf2\f1\lang1049 Description\cf0 : the method performs a check between the actual and expected values, in case of a mismatch, the check will be considered a failure\par
 \cf2 Syntax\cf0 : AssertEqualsAsync(dynamic expected, dynamic actual)\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -4475,7 +4475,7 @@ bool result = await tester.AssertEqualsAsync(expected, actual);\f1\lang1049\par
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 AssertNotEqualsAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'fb\'ef\'ee\'eb\'ed\'ff\'e5\'f2 \'ef\'f0\'ee\'e2\'e5\'f0\'ea\'f3 \'ec\'e5\'e6\'e4\'f3 \'f4\'e0\'ea\'f2\'e8\'f7\'e5\'f1\'ea\'e8\'ec \'e8 \'ee\'e6\'e8\'e4\'e0\'e5\'ec\'fb\'ec \'e7\'ed\'e0\'f7\'e5\'ed\'e8\'ff\'ec\'e8, \'e2 \'f1\'eb\'f3\'f7\'e0\'e5 \'f1\'ee\'e2\'ef\'e0\'e4\'e5\'ed\'e8\'ff \'ef\'f0\'ee\'e2\'e5\'f0\'ea\'e0 \'e1\'f3\'e4\'e5\'f2 \'f1\'f7\'e8\'f2\'e0\'f2\'fc\'f1\'ff \'ef\'f0\'ee\'e2\'e0\'eb\'fc\'ed\'ee\'e9\par
+\cf2\f1\lang1049 Description\cf0 : the method performs a check between the actual and expected values, in case of a match, the check will be considered a failure\par
 \cf2 Syntax\cf0 : AssertNotEqualsAsync(dynamic expected, dynamic actual)\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -4488,7 +4488,7 @@ bool result = await tester.AssertNotEqualsAsync(expected, actual);\f1\lang1049\p
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 AssertTrueAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'fb\'ef\'ee\'eb\'ed\'ff\'e5\'f2 \'ef\'f0\'ee\'e2\'e5\'f0\'ea\'f3 \'e7\'ed\'e0\'f7\'e5\'ed\'e8\'ff \f0\lang1033 true \f1\lang1049\'e8\'eb\'e8 \f0\lang1033 false\f1\lang1049 , \'e8 \'e2 \'f1\'eb\'f3\'f7\'e0\'e5 \'e5\'f1\'eb\'e8 \'e7\'ed\'e0\'f7\'e5\'ed\'e8\'e5\f0\lang1033  \f1\lang1049\'f0\'e0\'e2\'ed\'ee \f0\lang1033 false\f1\lang1049  \'ef\'f0\'ee\'e2\'e5\'f0\'ea\'e0 \'e1\'f3\'e4\'e5\'f2 \'f1\'f7\'e8\'f2\'e0\'f2\'fc\'f1\'ff \'ef\'f0\'ee\'e2\'e0\'eb\'fc\'ed\'ee\'e9\par
+\cf2\f1\lang1049 Description\cf0 : the method checks the value of true or false, and if the value is false, the check will be considered a failure\par
 \cf2 Syntax\cf0 : AssertTrueAsync(bool condition)\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -4500,7 +4500,7 @@ bool result = await tester.AssertTrueAsync(flag);\f1\lang1049\par
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 AssertFalseAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'fb\'ef\'ee\'eb\'ed\'ff\'e5\'f2 \'ef\'f0\'ee\'e2\'e5\'f0\'ea\'f3 \'e7\'ed\'e0\'f7\'e5\'ed\'e8\'ff \f0\lang1033 true \f1\lang1049\'e8\'eb\'e8 \f0\lang1033 false\f1\lang1049 , \'e8 \'e2 \'f1\'eb\'f3\'f7\'e0\'e5 \'e5\'f1\'eb\'e8 \'e7\'ed\'e0\'f7\'e5\'ed\'e8\'e5\f0\lang1033  \f1\lang1049\'f0\'e0\'e2\'ed\'ee \f0\lang1033 true\f1\lang1049  \'ef\'f0\'ee\'e2\'e5\'f0\'ea\'e0 \'e1\'f3\'e4\'e5\'f2 \'f1\'f7\'e8\'f2\'e0\'f2\'fc\'f1\'ff \'ef\'f0\'ee\'e2\'e0\'eb\'fc\'ed\'ee\'e9\par
+\cf2\f1\lang1049 Description\cf0 : the method checks the value of true or false, and if the value is true, the check will be considered a failure\par
 \cf2 Syntax\cf0 : AssertFalseAsync(bool condition)\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -4512,7 +4512,7 @@ bool result = await tester.AssertFalseAsync(flag);\f1\lang1049\par
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 BrowserGetErrorsAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2 \'f1\'ef\'e8\'f1\'ee\'ea \'ee\'f8\'e8\'e1\'ee\'ea \'e8 \'ef\'f0\'e5\'e4\'f3\'ef\'f0\'e5\'e6\'e4\'e5\'ed\'e8\'e9 \'e1\'f0\'e0\'f3\'e7\'e5\'f0\'e0\par
+\cf2\f1\lang1049 Description\cf0 : the method returns a list of browser errors and warnings\par
 \cf2 Syntax\cf0 : BrowserGetErrorsAsync()\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -4527,7 +4527,7 @@ foreach (string error in errors)\par
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 BrowserGetNetworkAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2 \'e2 \'f4\'ee\'f0\'ec\'e0\'f2\'e5 json \'e2\'f1\'e5 \'f2\'e5\'ea\'f3\'f9\'e8\'e5 \'f1\'ee\'ee\'e1\'f9\'e5\'ed\'e8\'ff \'e8\'e7 network\par
+\cf2\f1\lang1049 Description\cf0 : the method returns all current messages from the network in json format\par
 \cf2 Syntax\cf0 : BrowserGetNetworkAsync()\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -4539,7 +4539,7 @@ tester.ConsoleMsg(events);\par
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 GetAttributeFromElementsByClassAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2\f0\lang1033  \f1\lang1049\'f1\'ef\'e8\'f1\'ee\'ea \'e7\'ed\'e0\'f7\'e5\'ed\'e8\'e9 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'ee\'e3\'ee \'e0\'f2\'f0\'e8\'e1\'f3\'f2\'e0 \'e8\'e7 \'ec\'ed\'ee\'e6\'e5\'f1\'f2\'e2\'e0 \'fd\'eb\'e5\'ec\'e5\'ed\'f2\'ee\'e2\par
+\cf2\f1\lang1049 Description\cf0 : the method returns a list of values of the specified attribute from a set of elements\par
 \cf2 Syntax\cf0 : GetAttributeFromElementsByClassAsync(string _class, string attribute)\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -4555,7 +4555,7 @@ foreach (string value in values)\par
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 GetAttributeFromElementsByNameAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2\f0\lang1033  \f1\lang1049\'f1\'ef\'e8\'f1\'ee\'ea \'e7\'ed\'e0\'f7\'e5\'ed\'e8\'e9 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'ee\'e3\'ee \'e0\'f2\'f0\'e8\'e1\'f3\'f2\'e0 \'e8\'e7 \'ec\'ed\'ee\'e6\'e5\'f1\'f2\'e2\'e0 \'fd\'eb\'e5\'ec\'e5\'ed\'f2\'ee\'e2\par
+\cf2\f1\lang1049 Description\cf0 : the method returns a list of values of the specified attribute from a set of elements\par
 \cf2 Syntax\cf0 : GetAttributeFromElementsByNameAsync(string \f0\lang1033 name\f1\lang1049 , string attribute)\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -4571,7 +4571,7 @@ foreach (string value in values)\par
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 GetAttributeFromElementsByTagAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2\f0\lang1033  \f1\lang1049\'f1\'ef\'e8\'f1\'ee\'ea \'e7\'ed\'e0\'f7\'e5\'ed\'e8\'e9 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'ee\'e3\'ee \'e0\'f2\'f0\'e8\'e1\'f3\'f2\'e0 \'e8\'e7 \'ec\'ed\'ee\'e6\'e5\'f1\'f2\'e2\'e0 \'fd\'eb\'e5\'ec\'e5\'ed\'f2\'ee\'e2\par
+\cf2\f1\lang1049 Description\cf0 : the method returns a list of values of the specified attribute from a set of elements\par
 \cf2 Syntax\cf0 : GetAttributeFromElementsByTagAsync(string \f0\lang1033 tag\f1\lang1049 , string attribute)\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -4587,7 +4587,7 @@ foreach (string value in values)\par
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 SetAttributeInElementsByClassAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'f1\'f2\'e0\'e2\'e8\'f2\'fc \'e0\'f2\'f0\'e8\'e1\'f3\'f2 \'f1 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'fb\'ec \'e7\'ed\'e0\'f7\'e5\'ed\'e8\'e5\'ec \'e2 \'ec\'ed\'ee\'e6\'e5\'f1\'f2\'e2\'ee \'fd\'eb\'e5\'ec\'e5\'ed\'f2\'ee\'e2 \'e8 \'e2 \'f0\'e5\'e7\'f3\'eb\'fc\'f2\'e0\'f2\'e5 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2\f0\lang1033  \f1\lang1049\'f1\'ef\'e8\'f1\'ee\'ea\par
+\cf2\f1\lang1049 Description\cf0 : the method inserts an attribute with the specified value into a set of elements and returns a list as a result\par
 \cf2 Syntax\cf0 : \f0\lang1033 SetAttributeInElementsByClassAsync\f1\lang1049 (string \f0\lang1033 _class\f1\lang1049 , string attribute\f0\lang1033 , string value\f1\lang1049 )\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -4603,7 +4603,7 @@ foreach (string value in values)\par
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 SetAttributeInElementsAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'f1\'f2\'e0\'e2\'e8\'f2\'fc \'e0\'f2\'f0\'e8\'e1\'f3\'f2 \'f1 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'fb\'ec \'e7\'ed\'e0\'f7\'e5\'ed\'e8\'e5\'ec \'e2 \'ec\'ed\'ee\'e6\'e5\'f1\'f2\'e2\'ee \'fd\'eb\'e5\'ec\'e5\'ed\'f2\'ee\'e2 \'e8 \'e2 \'f0\'e5\'e7\'f3\'eb\'fc\'f2\'e0\'f2\'e5 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2 \'f1\'ef\'e8\'f1\'ee\'ea\par
+\cf2\f1\lang1049 Description\cf0 : the method inserts an attribute with the specified value into a set of elements and returns a list as a result\par
 \cf2 Syntax\cf0 : \f0\lang1033 SetAttributeInElementsAsync(string by, string locator, string attribute, string value)\f1\lang1049\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -4624,7 +4624,7 @@ foreach (string value in values)\par
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;\red0\green0\blue255;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 SetAttributeInElementsByNameAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'f1\'f2\'e0\'e2\'e8\'f2\'fc \'e0\'f2\'f0\'e8\'e1\'f3\'f2 \'f1 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'fb\'ec \'e7\'ed\'e0\'f7\'e5\'ed\'e8\'e5\'ec \'e2 \'ec\'ed\'ee\'e6\'e5\'f1\'f2\'e2\'ee \'fd\'eb\'e5\'ec\'e5\'ed\'f2\'ee\'e2 \'e8 \'e2 \'f0\'e5\'e7\'f3\'eb\'fc\'f2\'e0\'f2\'e5 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2\f0\lang1033  \f1\lang1049\'f1\'ef\'e8\'f1\'ee\'ea\par
+\cf2\f1\lang1049 Description\cf0 : the method inserts an attribute with the specified value into a set of elements and returns a list as a result\par
 \cf2 Syntax\cf0 : \f0\lang1033 SetAttributeInElementsByNameAsync\f1\lang1049 (string \f0\lang1033 name\f1\lang1049 , string attribute\f0\lang1033 , string value\f1\lang1049 )\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -4640,7 +4640,7 @@ foreach (string value in values)\par
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;\red0\green0\blue255;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 SetAttributeInElementsByTagAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'f1\'f2\'e0\'e2\'e8\'f2\'fc \'e0\'f2\'f0\'e8\'e1\'f3\'f2 \'f1 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'fb\'ec \'e7\'ed\'e0\'f7\'e5\'ed\'e8\'e5\'ec \'e2 \'ec\'ed\'ee\'e6\'e5\'f1\'f2\'e2\'ee \'fd\'eb\'e5\'ec\'e5\'ed\'f2\'ee\'e2 \'e8 \'e2 \'f0\'e5\'e7\'f3\'eb\'fc\'f2\'e0\'f2\'e5 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2\f0\lang1033  \f1\lang1049\'f1\'ef\'e8\'f1\'ee\'ea\par
+\cf2\f1\lang1049 Description\cf0 : the method inserts an attribute with the specified value into a set of elements and returns a list as a result\par
 \cf2 Syntax\cf0 : \f0\lang1033 SetAttributeInElementsByTagAsync\f1\lang1049 (string \f0\lang1033 tag\f1\lang1049 , string attribute\f0\lang1033 , string value\f1\lang1049 )\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -4656,7 +4656,7 @@ foreach (string value in values)\par
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 GetHtmlFromElementByClassAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2 \f0\lang1033 html \f1\lang1049\'ef\'f0\'e5\'e4\'f1\'f2\'e0\'e2\'eb\'e5\'ed\'e8\'e5 \'ee\'e1\'fa\'e5\'ea\'f2\'e0 \'e2 \'f1\'f2\'f0\'ee\'f7\'ed\'ee\'ec \'e2\'fb\'f0\'e0\'e6\'e5\'ed\'e8\'e8\par
+\cf2\f1\lang1049 Description\cf0 : the method returns the html representation of the object in a string expression\par
 \cf2 Syntax\cf0 : \f0\lang1033 GetHtmlFromElementByClassAsync\f1\lang1049 (string _class, int index)\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -4667,7 +4667,7 @@ foreach (string value in values)\par
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 GetHtmlFromElementAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2 html \'ef\'f0\'e5\'e4\'f1\'f2\'e0\'e2\'eb\'e5\'ed\'e8\'e5 \'ee\'e1\'fa\'e5\'ea\'f2\'e0 \'e2 \'f1\'f2\'f0\'ee\'f7\'ed\'ee\'ec \'e2\'fb\'f0\'e0\'e6\'e5\'ed\'e8\'e8\par
+\cf2\f1\lang1049 Description\cf0 : the method returns the html representation of the object in a string expression\par
 \cf2 Syntax\cf0 : \f0\lang1033 GetHtmlFromElementAsync(string by, string locator)\f1\lang1049\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -4680,7 +4680,7 @@ string html = await tester.GetHtmlFromElementAsync(Tester.BY_XPATH, ""//div[@id=
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 GetHtmlFromElementByIdAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2 \f0\lang1033 html \f1\lang1049\'ef\'f0\'e5\'e4\'f1\'f2\'e0\'e2\'eb\'e5\'ed\'e8\'e5 \'ee\'e1\'fa\'e5\'ea\'f2\'e0 \'e2 \'f1\'f2\'f0\'ee\'f7\'ed\'ee\'ec \'e2\'fb\'f0\'e0\'e6\'e5\'ed\'e8\'e8\par
+\cf2\f1\lang1049 Description\cf0 : the method returns the html representation of the object in a string expression\par
 \cf2 Syntax\cf0 : \f0\lang1033 GetHtmlFromElementByIdAsync(string id)\f1\lang1049\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -4691,7 +4691,7 @@ string html = await tester.GetHtmlFromElementAsync(Tester.BY_XPATH, ""//div[@id=
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 GetHtmlFromElementByNameAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2 \f0\lang1033 html \f1\lang1049\'ef\'f0\'e5\'e4\'f1\'f2\'e0\'e2\'eb\'e5\'ed\'e8\'e5 \'ee\'e1\'fa\'e5\'ea\'f2\'e0 \'e2 \'f1\'f2\'f0\'ee\'f7\'ed\'ee\'ec \'e2\'fb\'f0\'e0\'e6\'e5\'ed\'e8\'e8\par
+\cf2\f1\lang1049 Description\cf0 : the method returns the html representation of the object in a string expression\par
 \cf2 Syntax\cf0 : \f0\lang1033 GetHtmlFromElementByNameAsync(string name, int index)\f1\lang1049\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -4702,7 +4702,7 @@ string html = await tester.GetHtmlFromElementAsync(Tester.BY_XPATH, ""//div[@id=
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 GetHtmlFromElementByTagAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2 \f0\lang1033 html \f1\lang1049\'ef\'f0\'e5\'e4\'f1\'f2\'e0\'e2\'eb\'e5\'ed\'e8\'e5 \'ee\'e1\'fa\'e5\'ea\'f2\'e0 \'e2 \'f1\'f2\'f0\'ee\'f7\'ed\'ee\'ec \'e2\'fb\'f0\'e0\'e6\'e5\'ed\'e8\'e8\par
+\cf2\f1\lang1049 Description\cf0 : the method returns the html representation of the object in a string expression\par
 \cf2 Syntax\cf0 : \f0\lang1033 GetHtmlFromElementByTagAsync(string tag, int index)\f1\lang1049\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -4713,7 +4713,7 @@ string html = await tester.GetHtmlFromElementAsync(Tester.BY_XPATH, ""//div[@id=
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 SetHtmlInElementByClassAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'f1\'f2\'e0\'e2\'eb\'ff\'e5\'f2 \f0\lang1033 html \f1\lang1049\'ef\'f0\'e5\'e4\'f1\'f2\'e0\'e2\'eb\'e5\'ed\'e8\'e5 \'ee\'e1\'fa\'e5\'ea\'f2\'e0 \'e2 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'fb\'e9 \'fd\'eb\'e5\'ec\'e5\'ed\'f2\par
+\cf2\f1\lang1049 Description\cf0 : the method inserts the html representation of the object into the specified element\par
 \cf2 Syntax\cf0 : \f0\lang1033 SetHtmlInElementByClassAsync(string _class, int index, string html)\f1\lang1049\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -4724,7 +4724,7 @@ string html = await tester.GetHtmlFromElementAsync(Tester.BY_XPATH, ""//div[@id=
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 SetHtmlInElementAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'f1\'f2\'e0\'e2\'eb\'ff\'e5\'f2 html \'ef\'f0\'e5\'e4\'f1\'f2\'e0\'e2\'eb\'e5\'ed\'e8\'e5 \'ee\'e1\'fa\'e5\'ea\'f2\'e0 \'e2 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'fb\'e9 \'fd\'eb\'e5\'ec\'e5\'ed\'f2\par
+\cf2\f1\lang1049 Description\cf0 : the method inserts the html representation of the object into the specified element\par
 \cf2 Syntax\cf0 : \f0\lang1033 SetHtmlInElementAsync(string by, string locator, string html)\f1\lang1049\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -4737,7 +4737,7 @@ await tester.SetHtmlInElementAsync(Tester.BY_XPATH, ""//div[@id='auth']//h2"", "
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 SetHtmlInElementByIdAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'f1\'f2\'e0\'e2\'eb\'ff\'e5\'f2 \f0\lang1033 html \f1\lang1049\'ef\'f0\'e5\'e4\'f1\'f2\'e0\'e2\'eb\'e5\'ed\'e8\'e5 \'ee\'e1\'fa\'e5\'ea\'f2\'e0 \'e2 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'fb\'e9 \'fd\'eb\'e5\'ec\'e5\'ed\'f2\par
+\cf2\f1\lang1049 Description\cf0 : the method inserts the html representation of the object into the specified element\par
 \cf2 Syntax\cf0 : \f0\lang1033 SetHtmlInElementByIdAsync(string id, string html)\f1\lang1049\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -4748,7 +4748,7 @@ await tester.SetHtmlInElementAsync(Tester.BY_XPATH, ""//div[@id='auth']//h2"", "
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 SetHtmlInElementByNameAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'f1\'f2\'e0\'e2\'eb\'ff\'e5\'f2 \f0\lang1033 html \f1\lang1049\'ef\'f0\'e5\'e4\'f1\'f2\'e0\'e2\'eb\'e5\'ed\'e8\'e5 \'ee\'e1\'fa\'e5\'ea\'f2\'e0 \'e2 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'fb\'e9 \'fd\'eb\'e5\'ec\'e5\'ed\'f2\par
+\cf2\f1\lang1049 Description\cf0 : the method inserts the html representation of the object into the specified element\par
 \cf2 Syntax\cf0 : \f0\lang1033 SetHtmlInElementByNameAsync(string name, int index, string html)\f1\lang1049\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -4759,7 +4759,7 @@ await tester.SetHtmlInElementAsync(Tester.BY_XPATH, ""//div[@id='auth']//h2"", "
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 SetHtmlInElementByTagAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'f1\'f2\'e0\'e2\'eb\'ff\'e5\'f2 \f0\lang1033 html \f1\lang1049\'ef\'f0\'e5\'e4\'f1\'f2\'e0\'e2\'eb\'e5\'ed\'e8\'e5 \'ee\'e1\'fa\'e5\'ea\'f2\'e0 \'e2 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'fb\'e9 \'fd\'eb\'e5\'ec\'e5\'ed\'f2\par
+\cf2\f1\lang1049 Description\cf0 : the method inserts the html representation of the object into the specified element\par
 \cf2 Syntax\cf0 : \f0\lang1033 SetHtmlInElementByTagAsync(string tag, int index, string html)\f1\lang1049\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -4770,7 +4770,7 @@ await tester.SetHtmlInElementAsync(Tester.BY_XPATH, ""//div[@id='auth']//h2"", "
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 HTMLElement\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'e2\'f1\'ef\'ee\'ec\'ee\'e3\'e0\'f2\'e5\'eb\'fc\'ed\'fb\'e9 \'ea\'eb\'e0\'f1\'f1, \'ee\'e1\'fa\'e5\'ea\'f2 html \'fd\'eb\'e5\'ec\'e5\'ed\'f2\'e0\par
+\cf2\f1\lang1049 Description\cf0 : auxiliary class, an html element object\par
 \cf2 Syntax\cf0 : \f0\lang1033 HTMLElement(Tester tester, string by, string locator)\f1\lang1049\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -4786,7 +4786,7 @@ await element.ClickAsync();\par
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 Id\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ef\'e5\'f0\'e5\'ec\'e5\'ed\'ed\'e0\'ff \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2 \'e8\'eb\'e8 \'ef\'ee\'eb\'f3\'f7\'e0\'e5\'f2 \'e4\'e0\'ed\'ed\'fb\'e5 ID\par
+\cf2\f1\lang1049 Description\cf0 : the variable returns or receives the ID data\par
 \cf2 Syntax\cf0 : \f0\lang1033 string Id \{ get; set; \}\f1\lang1049\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -4798,7 +4798,7 @@ tester.ConsoleMsg(""ID: "" + element.Id);\par
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 Name\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ef\'e5\'f0\'e5\'ec\'e5\'ed\'ed\'e0\'ff \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2 \'e8\'eb\'e8 \'ef\'ee\'eb\'f3\'f7\'e0\'e5\'f2 \'e4\'e0\'ed\'ed\'fb\'e5 Name\par
+\cf2\f1\lang1049 Description\cf0 : the variable returns or receives the Name data\par
 \cf2 Syntax\cf0 : \f0\lang1033 string Name \{ get; set; \}\f1\lang1049\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -4810,7 +4810,7 @@ tester.ConsoleMsg(""NAME: "" + element.Name);\par
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 Class\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ef\'e5\'f0\'e5\'ec\'e5\'ed\'ed\'e0\'ff \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2 \'e8\'eb\'e8 \'ef\'ee\'eb\'f3\'f7\'e0\'e5\'f2 \'e4\'e0\'ed\'ed\'fb\'e5 Class\par
+\cf2\f1\lang1049 Description\cf0 : the variable returns or receives Class data\par
 \cf2 Syntax\cf0 : \f0\lang1033 string Class \{ get; set; \}\f1\lang1049\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -4822,7 +4822,7 @@ tester.ConsoleMsg(""CLASS: "" + element.Class);\par
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 Type\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ef\'e5\'f0\'e5\'ec\'e5\'ed\'ed\'e0\'ff \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2 \'e8\'eb\'e8 \'ef\'ee\'eb\'f3\'f7\'e0\'e5\'f2 \'e4\'e0\'ed\'ed\'fb\'e5 Type\par
+\cf2\f1\lang1049 Description\cf0 : the variable returns or receives Type data\par
 \cf2 Syntax\cf0 : \f0\lang1033 string Type \{ get; set; \}\f1\lang1049\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -4834,7 +4834,7 @@ tester.ConsoleMsg(""TYPE: "" + element.Type);\par
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 ClickAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'fb\'ef\'ee\'eb\'ed\'ff\'e5\'f2 \'ed\'e0\'e6\'e0\'f2\'e8\'e5 \'ed\'e0 \'fd\'eb\'e5\'ec\'e5\'ed\'f2\par
+\cf2\f1\lang1049 Description\cf0 : the method performs a click on the element\par
 \cf2 Syntax\cf0 : \f0\lang1033 ClickAsync()\f1\lang1049\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -4845,7 +4845,7 @@ tester.ConsoleMsg(""TYPE: "" + element.Type);\par
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 GetAttributeAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2 \'e7\'ed\'e0\'f7\'e5\'ed\'e8\'e5 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'ee\'e3\'ee \'e0\'f2\'f0\'e8\'e1\'f3\'f2\'e0 \'e8\'e7 \'fd\'eb\'e5\'ec\'e5\'ed\'f2\'e5\par
+\cf2\f1\lang1049 Description\cf0 : the method returns the value of the specified attribute from the element\par
 \cf2 Syntax\cf0 : \f0\lang1033 GetAttributeAsync(string name)\f1\lang1049\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -4856,7 +4856,7 @@ tester.ConsoleMsg(""TYPE: "" + element.Type);\par
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 GetHtmlAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2 html \'ef\'f0\'e5\'e4\'f1\'f2\'e0\'e2\'eb\'e5\'ed\'e8\'e5 \'fd\'eb\'e5\'ec\'e5\'ed\'f2\'e0 \'e2 \'f1\'f2\'f0\'ee\'f7\'ed\'ee\'ec \'e2\'fb\'f0\'e0\'e6\'e5\'ed\'e8\'e8\par
+\cf2\f1\lang1049 Description\cf0 : the method returns the html representation of the element in a string expression\par
 \cf2 Syntax\cf0 : \f0\lang1033 GetHtmlAsync()\f1\lang1049\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -4867,7 +4867,7 @@ tester.ConsoleMsg(""TYPE: "" + element.Type);\par
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 GetTextAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2 \'f2\'e5\'ea\'f1\'f2 \'e8\'e7 \'fd\'eb\'e5\'ec\'e5\'ed\'f2\'e0\par
+\cf2\f1\lang1049 Description\cf0 : the method returns the text from the element\par
 \cf2 Syntax\cf0 : \f0\lang1033 GetTextAsync()\f1\lang1049\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -4878,7 +4878,7 @@ tester.ConsoleMsg(""TYPE: "" + element.Type);\par
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 GetValueAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2 \'e7\'ed\'e0\'f7\'e5\'ed\'e8\'e5 \'e8\'e7 \'fd\'eb\'e5\'ec\'e5\'ed\'f2\'e0\par
+\cf2\f1\lang1049 Description\cf0 : the method returns the value from the element\par
 \cf2 Syntax\cf0 : \f0\lang1033 GetValueAsync()\f1\lang1049\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -4889,7 +4889,7 @@ tester.ConsoleMsg(""TYPE: "" + element.Type);\par
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 ScrollToAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'fb\'ef\'ee\'eb\'ed\'ff\'e5\'f2 \'ef\'f0\'ee\'ea\'f0\'f3\'f2\'ea\'f3 \'ea \'fd\'eb\'e5\'ec\'e5\'ed\'f2\'f3 (\'ef\'e0\'f0\'e0\'ec\'e5\'f2\'f0 behaviorSmooth \'ee\'ef\'f0\'e5\'e4\'e5\'eb\'ff\'e5\'f2 \'ef\'eb\'e0\'e2\'ed\'ee\'f1\'f2\'fc \'ef\'f0\'ee\'ea\'f0\'f3\'f2\'ea\'e8)\par
+\cf2\f1\lang1049 Description\cf0 : the method scrolls to the element (the behavior Smooth parameter determines the smoothness of scrolling)\par
 \cf2 Syntax\cf0 : \f0\lang1033 ScrollToAsync(bool behaviorSmooth = false)\f1\lang1049\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -4902,7 +4902,7 @@ await element.ScrollToAsync(false);\par
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 SetAttributeAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'f1\'f2\'e0\'e2\'eb\'ff\'e5\'f2 \'e7\'ed\'e0\'f7\'e5\'ed\'e8\'e5 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'ee\'e3\'ee \'e0\'f2\'f0\'e8\'e1\'f3\'f2\'e0 \'e2 \'fd\'eb\'e5\'ec\'e5\'ed\'f2\par
+\cf2\f1\lang1049 Description\cf0 : the method inserts the value of the specified attribute into the element \par
 \cf2 Syntax\cf0 : \f0\lang1033 SetAttributeAsync(string name, string value)\f1\lang1049\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -4913,7 +4913,7 @@ await element.ScrollToAsync(false);\par
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 SetHtmlAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'f1\'f2\'e0\'e2\'eb\'ff\'e5\'f2 html \'e2 \'fd\'eb\'e5\'ec\'e5\'ed\'f2\par
+\cf2\f1\lang1049 Description\cf0 : the method inserts html into the element \par
 \cf2 Syntax\cf0 : \f0\lang1033 SetHtmlAsync(string html)\f1\lang1049\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -4924,7 +4924,7 @@ await element.ScrollToAsync(false);\par
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 SetTextAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'f1\'f2\'e0\'e2\'eb\'ff\'e5\'f2 \'f2\'e5\'ea\'f1\'f2 \'e2 \'fd\'eb\'e5\'ec\'e5\'ed\'f2\par
+\cf2\f1\lang1049 Description\cf0 : the method inserts text into the element \par
 \cf2 Syntax\cf0 : \f0\lang1033 SetTextAsync(string text)\f1\lang1049\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -4935,7 +4935,7 @@ await element.ScrollToAsync(false);\par
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 SetValueAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'f1\'f2\'e0\'e2\'eb\'ff\'e5\'f2 \'e7\'ed\'e0\'f7\'e5\'ed\'e8\'e5 \'e2 \'fd\'eb\'e5\'ec\'e5\'ed\'f2\par
+\cf2\f1\lang1049 Description\cf0 : the method inserts a value into an element\par
 \cf2 Syntax\cf0 : \f0\lang1033 SetValueAsync(string value)\f1\lang1049\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -4946,7 +4946,7 @@ await element.ScrollToAsync(false);\par
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 WaitNotVisible\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e6\'e4\'e5\'f2 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'ee\'e5 \'ea\'ee\'eb\'e8\'f7\'e5\'f1\'f2\'e2\'ee \'f1\'e5\'ea\'f3\'ed\'e4 \'ef\'ee\'ea\'e0 \'fd\'eb\'e5\'ec\'e5\'ed\'f2 \'ef\'e5\'f0\'e5\'f1\'f2\'e0\'ed\'e5\'f2 \'ee\'f2\'ee\'e1\'f0\'e0\'e6\'e0\'f2\'fc\'f1\'ff\par
+\cf2\f1\lang1049 Description\cf0 : the method waits for the specified number of seconds until the element is no longer displayed\par
 \cf2 Syntax\cf0 : \f0\lang1033 WaitNotVisibleAsync(int sec)\f1\lang1049\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -4957,7 +4957,7 @@ await element.ScrollToAsync(false);\par
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 WaitVisibleAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e6\'e4\'e5\'f2 \'ee\'f2\'ee\'e1\'f0\'e0\'e6\'e5\'ed\'e8\'e5 \'fd\'eb\'e5\'ec\'e5\'ed\'f2\'e0 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'ee\'e5 \'ea\'ee\'eb\'e8\'f7\'e5\'f1\'f2\'e2\'ee \'f1\'e5\'ea\'f3\'ed\'e4\par
+\cf2\f1\lang1049 Description\cf0 : the method waits for the element to be displayed for the specified number of seconds\par
 \cf2 Syntax\cf0 : \f0\lang1033 WaitVisibleAsync(int sec)\f1\lang1049\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -4968,7 +4968,7 @@ await element.ScrollToAsync(false);\par
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 BY_CSS\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ea\'ee\'ed\'f1\'f2\'e0\'ed\'f2\'e0 \'ee\'e1\'ee\'e7\'ed\'e0\'f7\'e0\'e5\'f2 \'f2\'e8\'ef \'e2\'e2\'ee\'e4\'e8\'ec\'ee\'e3\'ee \'eb\'ee\'ea\'e0\'f2\'ee\'f0\'e0\par
+\cf2\f1\lang1049 Description\cf0 : the constant indicates the type of locator being entered\par
 \cf2 Syntax\cf0 : \f0\lang1033 BY_CSS = ""BY_CSS""\f1\lang1049\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -4979,7 +4979,7 @@ await element.ScrollToAsync(false);\par
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 BY_XPATH\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ea\'ee\'ed\'f1\'f2\'e0\'ed\'f2\'e0 \'ee\'e1\'ee\'e7\'ed\'e0\'f7\'e0\'e5\'f2 \'f2\'e8\'ef \'e2\'e2\'ee\'e4\'e8\'ec\'ee\'e3\'ee \'eb\'ee\'ea\'e0\'f2\'ee\'f0\'e0\par
+\cf2\f1\lang1049 Description\cf0 : the constant indicates the type of locator being entered\par
 \cf2 Syntax\cf0 : \f0\lang1033 BY_XPATH = ""BY_XPATH""\f1\lang1049\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -4990,7 +4990,7 @@ await element.ScrollToAsync(false);\par
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.19041}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 RestGetAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'fb\'ef\'ee\'eb\'ed\'ff\'e5\'f2 Get Rest \'e7\'e0\'ef\'f0\'ee\'f1 \'e8 \'ef\'ee\'eb\'f3\'f7\'e0\'e5\'f2 \'f0\'e5\'e7\'f3\'eb\'fc\'f2\'e0\'f2 \'e2 \'f4\'ee\'f0\'ec\'e0\'f2\'e5 json\par
+\cf2\f1\lang1049 Description\cf0 : the method executes a Get Rest request and gets the result in json format\par
 \cf2 Syntax\cf0 : \f0\lang1033 RestGetAsync(string url, TimeSpan timeout, string charset = ""UTF-8"")\f1\lang1049\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -5022,7 +5022,7 @@ if (response.IsSuccessStatusCode)\par
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;\red0\green0\blue255;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 RestGetBasicAuthAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'fb\'ef\'ee\'eb\'ed\'ff\'e5\'f2 \f0\lang1033 Get Rest \f1\lang1049\'e7\'e0\'ef\'f0\'ee\'f1 \'e8 \'ef\'ee\'eb\'f3\'f7\'e0\'e5\'f2 \'f0\'e5\'e7\'f3\'eb\'fc\'f2\'e0\'f2 \'e2 \'f4\'ee\'f0\'ec\'e0\'f2\'e5 \f0\lang1033 json\f1\lang1049\par
+\cf2\f1\lang1049 Description\cf0 : the method executes a Get Rest request and gets the result in json format\par
 \cf2 Syntax\cf0 : \f0\lang1033 RestGetBasicAuthAsync(string login, string pass, string url, TimeSpan timeout, string charset = ""UTF-8"")\f1\lang1049\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -5056,7 +5056,7 @@ if (response.IsSuccessStatusCode)\par
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 BrowserGoBackAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'ed\'e0\'e2\'e8\'e3\'e0\'f6\'e8\'e8 \'e1\'f0\'e0\'f3\'e7\'e5\'f0\'e0 \'e2\'fb\'ef\'ee\'eb\'ed\'ff\'e5\'f2 \'e4\'e5\'e9\'f1\'f2\'e2\'e8\'e5 \'ed\'e0\'e7\'e0\'e4 \'f1 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'fb\'ec \'ee\'e6\'e8\'e4\'e0\'ed\'e8\'e5\'ec \'e2 \'f1\'e5\'ea\'f3\'ed\'e4\'e0\'f5\par
+\cf2\f1\lang1049 Description\cf0 : the browser's navigation method performs the action backwards with the specified wait in seconds. The abortLoadAfterTime flag automatically completes page loading after the timer is completed\par
 \cf2 Syntax\cf0 : \f0\lang1033 BrowserGoBackAsync(int sec, bool abortLoadAfterTime = false)\f1\lang1049\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -5084,7 +5084,7 @@ await tester.TestEndAsync();\par
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 BrowserGoForwardAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'ed\'e0\'e2\'e8\'e3\'e0\'f6\'e8\'e8 \'e1\'f0\'e0\'f3\'e7\'e5\'f0\'e0 \'e2\'fb\'ef\'ee\'eb\'ed\'ff\'e5\'f2 \'e4\'e5\'e9\'f1\'f2\'e2\'e8\'e5 \'e2\'ef\'e5\'f0\'e5\'e4 \'f1 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'fb\'ec \'ee\'e6\'e8\'e4\'e0\'ed\'e8\'e5\'ec \'e2 \'f1\'e5\'ea\'f3\'ed\'e4\'e0\'f5\par
+\cf2\f1\lang1049 Description\cf0 : the browser's navigation method performs the forward action with the specified wait in seconds. The abortLoadAfterTime flag automatically completes page loading after the timer is completed\par
 \cf2 Syntax\cf0 : \f0\lang1033 BrowserGoForwardAsync(int sec, bool abortLoadAfterTime = false)\f1\lang1049\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -5112,7 +5112,7 @@ await tester.TestEndAsync();\par
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 BrowserBasicAuthenticationAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'ed\'e0\'e2\'e8\'e3\'e0\'f6\'e8\'e8 \'e1\'f0\'e0\'f3\'e7\'e5\'f0\'e0 \'e2\'fb\'ef\'ee\'eb\'ed\'ff\'e5\'f2 \'e4\'e5\'e9\'f1\'f2\'e2\'e8\'e5 \'e2\'ef\'e5\'f0\'e5\'e4 \'f1 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'fb\'ec \'ee\'e6\'e8\'e4\'e0\'ed\'e8\'e5\'ec \'e2 \'f1\'e5\'ea\'f3\'ed\'e4\'e0\'f5\par
+\cf2\f1\lang1049 Description\cf0 : the browser's navigation method performs the forward action with the specified wait in seconds\par
 \cf2 Syntax\cf0 : \f0\lang1033 BrowserBasicAuthenticationAsync(string user, string pass)\f1\lang1049\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -5127,7 +5127,7 @@ await tester.TestEndAsync();\par
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 BrowserEnableSendMailAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'ea\'eb\'fe\'f7\'e0\'e5\'f2 \'ee\'ef\'f6\'e8\'fe \'ee\'f2\'ef\'f0\'e0\'e2\'ea\'e8 \'ee\'f2\'f7\'e5\'f2\'e0 \'ed\'e0 \'ef\'ee\'f7\'f2\'f3 \'e2 \'f1\'eb\'f3\'f7\'e0\'e5 \'ef\'f0\'ee\'e2\'e0\'eb\'e0 \'e2 \'f0\'e0\'e1\'ee\'f2\'e5 \'e0\'e2\'f2\'ee\'f2\'e5\'f1\'f2\'e0\par
+\cf2\f1\lang1049 Description\cf0 : the method includes the option to send a report to the mail in case of failure of the autotest\par
 \cf2 Syntax\cf0 : \f0\lang1033 BrowserEnableSendMailAsync(bool byFailure = true, bool bySuccess = true)\f1\lang1049\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -5144,7 +5144,7 @@ await tester.TestEndAsync();\par
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 SelectOptionAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'fb\'e1\'e8\'f0\'e0\'e5\'f2 \f0\lang1033 option \f1\lang1049\'e8\'e7 \'fd\'eb\'e5\'ec\'e5\'ed\'f2\'e0 \f0\lang1033 select \f1\lang1049\'ef\'ee \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'ee\'ec\'f3 \'e8\'ed\'e4\'e5\'ea\'f1\'f3, \'f2\'e5\'ea\'f1\'f2\'f3 \'e8\'eb\'e8 \'e7\'ed\'e0\'f7\'e5\'ed\'e8\'fe. \par
+\cf2\f1\lang1049 Description\cf0 : the method selects an option from the select element by the specified index, text, or value\par
 \cf2 Syntax\cf0 : \f0\lang1033 SelectOptionAsync(string by, string value)\f1\lang1049\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -5166,7 +5166,7 @@ await tester.TestEndAsync();\par
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 GetOptionAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2 \'e8\'ed\'e4\'e5\'ea\'f1, \'f2\'e5\'ea\'f1\'f2 \'e8\'eb\'e8 \'e7\'ed\'e0\'f7\'e5\'ed\'e8\'e5 \'e2\'fb\'e1\'ee\'e0\'ed\'ed\'ee\'e9 \'ee\'ef\'f6\'e8\'e8\f0\lang1033  \f1\lang1049\'e2\'fb\'e1\'f0\'e0\'ed\'ed\'ee\'e9 \f0\lang1033 option \f1\lang1049\'e8\'e7 \'fd\'eb\'e5\'ec\'e5\'ed\'f2\'e0 \f0\lang1033 select\f1\lang1049\par
+\cf2\f1\lang1049 Description\cf0 : the method returns the index, text, or value of the selected option of the selected option from the select element\par
 \cf2 Syntax\cf0 : \f0\lang1033 GetOptionAsync(string by)\f1\lang1049\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -5188,7 +5188,7 @@ await tester.TestEndAsync();\par
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 BY_INDEX\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ea\'ee\'ed\'f1\'f2\'e0\'ed\'f2\'e0 \'ee\'e1\'ee\'e7\'ed\'e0\'f7\'e0\'e5\'f2 \'f2\'e8\'ef \'ee\'e1\'f0\'e0\'e1\'e0\'f2\'fb\'e2\'e0\'e5\'ec\'ee\'e3\'ee \'e7\'ed\'e0\'f7\'e5\'ed\'e8\'ff\par
+\cf2\f1\lang1049 Description\cf0 : the constant indicates the type of value being processed\par
 \cf2 Syntax\cf0 : \f0\lang1033 BY_INDEX = ""BY_INDEX""\f1\lang1049\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -5199,7 +5199,7 @@ await tester.TestEndAsync();\par
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 BY_TEXT\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ea\'ee\'ed\'f1\'f2\'e0\'ed\'f2\'e0 \'ee\'e1\'ee\'e7\'ed\'e0\'f7\'e0\'e5\'f2 \'f2\'e8\'ef \'ee\'e1\'f0\'e0\'e1\'e0\'f2\'fb\'e2\'e0\'e5\'ec\'ee\'e3\'ee \'e7\'ed\'e0\'f7\'e5\'ed\'e8\'ff\par
+\cf2\f1\lang1049 Description\cf0 : the constant indicates the type of value being processed\par
 \cf2 Syntax\cf0 : \f0\lang1033 BY_TEXT = ""BY_TEXT""\f1\lang1049\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -5211,7 +5211,7 @@ await tester.TestEndAsync();\par
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 BY_VALUE\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ea\'ee\'ed\'f1\'f2\'e0\'ed\'f2\'e0 \'ee\'e1\'ee\'e7\'ed\'e0\'f7\'e0\'e5\'f2 \'f2\'e8\'ef \'ee\'e1\'f0\'e0\'e1\'e0\'f2\'fb\'e2\'e0\'e5\'ec\'ee\'e3\'ee \'e7\'ed\'e0\'f7\'e5\'ed\'e8\'ff\par
+\cf2\f1\lang1049 Description\cf0 : the constant indicates the type of value being processed\par
 \cf2 Syntax\cf0 : \f0\lang1033 BY_VALUE = ""BY_VALUE""\f1\lang1049\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -5222,7 +5222,7 @@ await tester.TestEndAsync();\par
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 IsClickableAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'ee\'ef\'f0\'e5\'e4\'e5\'eb\'ff\'e5\'f2 \'ea\'eb\'e8\'ea\'e0\'e1\'e5\'eb\'fc\'ed\'ee\'f1\'f2\'fc \'fd\'eb\'e5\'ec\'e5\'ed\'f2\'e0 \'e8 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2 true \'e8\'eb\'e8 false\par
+\cf2\f1\lang1049 Description\cf0 : the method determines the clickability of the element and returns true or false\par
 \cf2 Syntax\cf0 : \f0\lang1033 IsClickableAsync()\f1\lang1049\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -5239,7 +5239,7 @@ await tester.TestEndAsync();\par
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 IsClickableElementAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'ee\'ef\'f0\'e5\'e4\'e5\'eb\'ff\'e5\'f2 \'ea\'eb\'e8\'ea\'e0\'e1\'e5\'eb\'fc\'ed\'ee\'f1\'f2\'fc \'fd\'eb\'e5\'ec\'e5\'ed\'f2\'e0 \'e8 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2 true \'e8\'eb\'e8 false\par
+\cf2\f1\lang1049 Description\cf0 : the method determines the clickability of the element and returns true or false\par
 \cf2 Syntax\cf0 : \f0\lang1033 IsClickableElementAsync(string by, string locator)\f1\lang1049\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -5255,7 +5255,7 @@ await tester.TestEndAsync();\par
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 GetFrameAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2 \'fd\'eb\'e5\'ec\'e5\'ed\'f2 \'e2 \'e2\'e8\'e4\'e5 \'ee\'e1\'fa\'e5\'ea\'f2 \'ea\'eb\'e0\'f1\'f1 \'ea\'ee\'f2\'ee\'f0\'ee\'e3\'ee FRAMEElement\par
+\cf2\f1\lang1049 Description\cf0 : the method returns an element in the form of an object whose class FRAMEElement\par
 \cf2 Syntax\cf0 : \f0\lang1033 GetFrameAsync(int index)\f1\lang1049\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -5324,7 +5324,7 @@ string text = await frame.GetOptionAsync(Tester.BY_XPATH, ""//*[@id='MySelect']"
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 FRAMEElement\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'e2\'f1\'ef\'ee\'ec\'ee\'e3\'e0\'f2\'e5\'eb\'fc\'ed\'fb\'e9 \'ea\'eb\'e0\'f1\'f1 \'e4\'eb\'ff \'f0\'e0\'e1\'ee\'f2\'fb \'f1 \'f4\'f0\'e5\'e9\'ec\'ee\'ec \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'ee\'e3\'ee \'e8\'ed\'e4\'e5\'ea\'f1\'e0\par
+\cf2\f1\lang1049 Description\cf0 : an auxiliary class for working with the frame of the specified index\par
 \cf2 Syntax\cf0 : \f0\lang1033 FRAMEElement(Tester tester, int index)\f1\lang1049\par
 \cf3\par
 \cf2 Example \'ef\'ee\'eb\'f3\'f7\'e5\'ed\'e8\'ff \'ee\'e1\'fa\'e5\'ea\'f2\'e0\cf3 :\par
@@ -5338,7 +5338,7 @@ tester.ConsoleMsg(""Name: "" + frame.Name);\par
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 BY_INDEX\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ea\'ee\'ed\'f1\'f2\'e0\'ed\'f2\'e0 \'ee\'e1\'ee\'e7\'ed\'e0\'f7\'e0\'e5\'f2 \'f2\'e8\'ef \'ee\'e1\'f0\'e0\'e1\'e0\'f2\'fb\'e2\'e0\'e5\'ec\'ee\'e3\'ee \'e7\'ed\'e0\'f7\'e5\'ed\'e8\'ff\par
+\cf2\f1\lang1049 Description\cf0 : the constant indicates the type of value being processed\par
 \cf2 Syntax\cf0 : \f0\lang1033 BY_INDEX = ""BY_INDEX""\f1\lang1049\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -5349,7 +5349,7 @@ tester.ConsoleMsg(""Name: "" + frame.Name);\par
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 BY_TEXT\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ea\'ee\'ed\'f1\'f2\'e0\'ed\'f2\'e0 \'ee\'e1\'ee\'e7\'ed\'e0\'f7\'e0\'e5\'f2 \'f2\'e8\'ef \'ee\'e1\'f0\'e0\'e1\'e0\'f2\'fb\'e2\'e0\'e5\'ec\'ee\'e3\'ee \'e7\'ed\'e0\'f7\'e5\'ed\'e8\'ff\par
+\cf2\f1\lang1049 Description\cf0 : the constant indicates the type of value being processed\par
 \cf2 Syntax\cf0 : \f0\lang1033 BY_TEXT = ""BY_TEXT""\f1\lang1049\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -5360,7 +5360,7 @@ tester.ConsoleMsg(""Name: "" + frame.Name);\par
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 BY_VALUE\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ea\'ee\'ed\'f1\'f2\'e0\'ed\'f2\'e0 \'ee\'e1\'ee\'e7\'ed\'e0\'f7\'e0\'e5\'f2 \'f2\'e8\'ef \'ee\'e1\'f0\'e0\'e1\'e0\'f2\'fb\'e2\'e0\'e5\'ec\'ee\'e3\'ee \'e7\'ed\'e0\'f7\'e5\'ed\'e8\'ff\par
+\cf2\f1\lang1049 Description\cf0 : the constant indicates the type of value being processed\par
 \cf2 Syntax\cf0 : \f0\lang1033 BY_VALUE = ""BY_VALUE""\f1\lang1049\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -5371,7 +5371,7 @@ tester.ConsoleMsg(""Name: "" + frame.Name);\par
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 Name\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ef\'e5\'f0\'e5\'ec\'e5\'ed\'ed\'e0\'ff \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2 \'e8\'eb\'e8 \'ef\'ee\'eb\'f3\'f7\'e0\'e5\'f2 \'e8\'ec\'ff (Name) \'f4\'f0\'e5\'e9\'ec\'e0\par
+\cf2\f1\lang1049 Description\cf0 : the variable returns or gets the name of the frame\par
 \cf2 Syntax\cf0 : \f0\lang1033 string Name \{ get; set; \}\f1\lang1049\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -5383,7 +5383,7 @@ tester.ConsoleMsg(""Name: "" + frame.Name);\par
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 Index\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ef\'e5\'f0\'e5\'ec\'e5\'ed\'ed\'e0\'ff \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2 \'e8\'eb\'e8 \'ef\'ee\'eb\'f3\'f7\'e0\'e5\'f2 \'e8\'ed\'e4\'e5\'ea\'f1 (Index) \'f4\'f0\'e5\'e9\'ec\'e0\par
+\cf2\f1\lang1049 Description\cf0 : the variable returns or receives the index of the frame\par
 \cf2 Syntax\cf0 : \f0\lang1033 int Index \{ get; set; \}\f1\lang1049\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -5395,7 +5395,7 @@ tester.ConsoleMsg(""Index: "" + frame.Index);\par
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 ClickElementAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'fb\'ef\'ee\'eb\'ed\'ff\'e5\'f2 \'ed\'e0\'e6\'e0\'f2\'e8\'e5 \'ed\'e0 \'fd\'eb\'e5\'ec\'e5\'ed\'f2\par
+\cf2\f1\lang1049 Description\cf0 : the method performs a click on the element\par
 \cf2 Syntax\cf0 : \f0\lang1033 ClickElementAsync(string by, string locator)\f1\lang1049\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -5409,7 +5409,7 @@ await frame.ClickElementAsync(Tester.BY_XPATH, ""//div[@id='auth']//input[@id='b
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 FindElementAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'fb\'ef\'ee\'eb\'ed\'ff\'e5\'f2 \'ef\'ee\'e8\'f1\'ea \'fd\'eb\'e5\'ec\'e5\'ed\'f2 \'e2 DOM \'f1 \'ee\'e6\'e8\'e4\'e0\'ed\'e8\'e5\'ec \'e2 \'f1\'e5\'ea\'f3\'ed\'e4\'e0\'f5 \'e8 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2 \'eb\'ee\'e3\'e8\'f7\'e5\'f1\'ea\'e8\'e9 \'f0\'e5\'e7\'f3\'eb\'fc\'f2\'e0\'f2 true \'e8\'eb\'e8 false\par
+\cf2\f1\lang1049 Description\cf0 : the method searches for an element in the DOM with a wait in seconds and returns a logical result true or false\par
 \cf2 Syntax\cf0 : \f0\lang1033 FindElementAsync(string by, string locator, int sec)\f1\lang1049\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -5423,7 +5423,7 @@ bool result = await frame.FindElementAsync(Tester.BY_XPATH, ""//div[@id='result'
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 FindVisibleElementAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'fb\'ef\'ee\'eb\'ed\'ff\'e5\'f2 \'ef\'ee\'e8\'f1\'ea \'e2\'e8\'e7\'f3\'e0\'eb\'fc\'ed\'ee \'ee\'f2\'ee\'e1\'f0\'e0\'e6\'e0\'e5\'ec\'ee\'e3\'ee \'fd\'eb\'e5\'ec\'e5\'ed\'f2\'e0 \'f1 \'ee\'e6\'e8\'e4\'e0\'ed\'e8\'e5\'ec \'e2 \'f1\'e5\'ea\'f3\'ed\'e4\'e0\'f5 \'e8 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2 \'eb\'ee\'e3\'e8\'f7\'e5\'f1\'ea\'e8\'e9 \'f0\'e5\'e7\'f3\'eb\'fc\'f2\'e0\'f2 true \'e8\'eb\'e8 false\par
+\cf2\f1\lang1049 Description\cf0 : the method searches for a visually displayed element with a wait in seconds and returns a logical result true or false\par
 \cf2 Syntax\cf0 : \f0\lang1033 FindVisibleElementAsync(string by, string locator, int sec)\f1\lang1049\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -5437,7 +5437,7 @@ bool result = await frame.FindVisibleElementAsync(Tester.BY_XPATH, ""//div[@id='
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 GetAttributeFromElementAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2 \'f1\'f2\'f0\'ee\'f7\'ed\'ee\'e5 \'e7\'ed\'e0\'f7\'e5\'ed\'e8\'e5 \'e8\'e7 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'ee\'e3\'ee \'e0\'f2\'f0\'e8\'e1\'f3\'f2\'e0 \'e2 \'e2\'fb\'e1\'f0\'e0\'ed\'ed\'ee\'ec \'fd\'eb\'e5\'ec\'e5\'ed\'f2\'e5\par
+\cf2\f1\lang1049 Description\cf0 : the method returns a lowercase value from the specified attribute in the selected element\par
 \cf2 Syntax\cf0 : \f0\lang1033 GetAttributeFromElementAsync(string by, string locator, string attribute)\f1\lang1049\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -5451,7 +5451,7 @@ string value = await frame.GetAttributeFromElementAsync(Tester.BY_XPATH, ""//inp
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 GetAttributeFromElementsAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2 \'f1\'ef\'e8\'f1\'ee\'ea \'e7\'ed\'e0\'f7\'e5\'ed\'e8\'e9 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'ee\'e3\'ee \'e0\'f2\'f0\'e8\'e1\'f3\'f2\'e0 \'e8\'e7 \'ec\'ed\'ee\'e6\'e5\'f1\'f2\'e2\'e0 \'fd\'eb\'e5\'ec\'e5\'ed\'f2\'ee\'e2\par
+\cf2\f1\lang1049 Description\cf0 : the method returns a list of values of the specified attribute from a set of elements\par
 \cf2 Syntax\cf0 : \f0\lang1033 GetAttributeFromElementsAsync(string by, string locator, string attribute)\f1\lang1049\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -5476,7 +5476,7 @@ if(values != null)\par
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 GetCountElementsAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2 \'ea\'ee\'eb\'e8\'f7\'e5\'f1\'f2\'e2\'ee \'ed\'e0\'e9\'e4\'e5\'ed\'ed\'fb\'f5 \'fd\'eb\'e5\'ec\'e5\'ed\'f2\'ee\'e2\par
+\cf2\f1\lang1049 Description\cf0 : the method returns the number of found items\par
 \cf2 Syntax\cf0 : \f0\lang1033 GetCountElementsAsync(string by, string locator)\f1\lang1049\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -5490,7 +5490,7 @@ int count = await frame.GetCountElementsAsync(Tester.BY_XPATH, ""//input"");\par
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 GetHtmlFromElementAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2 html \'ef\'f0\'e5\'e4\'f1\'f2\'e0\'e2\'eb\'e5\'ed\'e8\'e5 \'ee\'e1\'fa\'e5\'ea\'f2\'e0 \'e2 \'f1\'f2\'f0\'ee\'f7\'ed\'ee\'ec \'e2\'fb\'f0\'e0\'e6\'e5\'ed\'e8\'e8\par
+\cf2\f1\lang1049 Description\cf0 : the method returns the html representation of the object in a string expression\par
 \cf2 Syntax\cf0 : \f0\lang1033 GetHtmlFromElementAsync(string by, string locator)\f1\lang1049\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -5504,7 +5504,7 @@ string html = await frame.GetHtmlFromElementAsync(Tester.BY_XPATH, ""//div[@id='
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 GetOptionAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2 \'e8\'ed\'e4\'e5\'ea\'f1, \'f2\'e5\'ea\'f1\'f2 \'e8\'eb\'e8 \'e7\'ed\'e0\'f7\'e5\'ed\'e8\'e5 \'e2\'fb\'e1\'ee\'e0\'ed\'ed\'ee\'e9 \'ee\'ef\'f6\'e8\'e8 \'e2\'fb\'e1\'f0\'e0\'ed\'ed\'ee\'e9 option \'e8\'e7 \'fd\'eb\'e5\'ec\'e5\'ed\'f2\'e0 select\par
+\cf2\f1\lang1049 Description\cf0 : the method returns the index, text, or value of the selected option of the selected option from the select element\par
 \cf2 Syntax\cf0 : \f0\lang1033 GetOptionAsync(string by, string locator, string type)\f1\lang1049\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -5523,7 +5523,7 @@ string text = await frame.GetOptionAsync(Tester.BY_XPATH, ""//*[@id='MySelect']"
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 GetTextFromElementAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2 \'f2\'e5\'ea\'f1\'f2 \'e8\'e7 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'ee\'e3\'ee \'fd\'eb\'e5\'ec\'e5\'ed\'f2\'e0\par
+\cf2\f1\lang1049 Description\cf0 : the method returns the text from the specified element\par
 \cf2 Syntax\cf0 : \f0\lang1033 GetTextFromElementAsync(string by, string locator)\f1\lang1049\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -5537,7 +5537,7 @@ string text = await frame.GetTextFromElementAsync(Tester.BY_XPATH, ""//div[@id='
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 GetTitleAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2 \'e7\'e0\'e3\'ee\'eb\'ee\'e2\'ee\'ea \'f1\'f2\'f0\'e0\'ed\'e8\'f6\'fb\par
+\cf2\f1\lang1049 Description\cf0 : the method returns the page title\par
 \cf2 Syntax\cf0 : \f0\lang1033 GetTitleAsync()\f1\lang1049\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -5549,7 +5549,7 @@ string title = await frame.GetTitleAsync();\par
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 GetUrlAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2 \'f2\'e5\'ea\'f3\'f9\'e8\'e9 URL\par
+\cf2\f1\lang1049 Description\cf0 : the method returns the current URL\par
 \cf2 Syntax\cf0 : \f0\lang1033 GetUrlAsync()\f1\lang1049\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -5561,7 +5561,7 @@ string url = await frame.GetUrlAsync();\par
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 GetValueFromElementAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2 \'e7\'ed\'e0\'f7\'e5\'ed\'e8\'e5 \'e8\'e7 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'ee\'e3\'ee \'fd\'eb\'e5\'ec\'e5\'ed\'f2\'e0\par
+\cf2\f1\lang1049 Description\cf0 : the method returns the value from the specified element\par
 \cf2 Syntax\cf0 : \f0\lang1033 GetValueFromElementAsync(string by, string locator)\f1\lang1049\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -5575,7 +5575,7 @@ string value = await frame.GetValueFromElementAsync(Tester.BY_XPATH, ""//input[@
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 IsClickableElementAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'ee\'ef\'f0\'e5\'e4\'e5\'eb\'ff\'e5\'f2 \'ea\'eb\'e8\'ea\'e0\'e1\'e5\'eb\'fc\'ed\'ee\'f1\'f2\'fc \'fd\'eb\'e5\'ec\'e5\'ed\'f2\'e0 \'e8 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2 true \'e8\'eb\'e8 false\par
+\cf2\f1\lang1049 Description\cf0 : the method determines the clickability of the element and returns true or false\par
 \cf2 Syntax\cf0 : \f0\lang1033 IsClickableElementAsync(string by, string locator)\f1\lang1049\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -5592,7 +5592,7 @@ await frame.AssertTrueAsync(clickable);\par
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 ScrollToElementAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'fb\'ef\'ee\'eb\'ed\'ff\'e5\'f2 \'ef\'f0\'ee\'ea\'f0\'f3\'f2\'ea\'f3 \'ea \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'ee\'ec\'f3 \'fd\'eb\'e5\'ec\'e5\'ed\'f2\'f3 (\'ef\'e0\'f0\'e0\'ec\'e5\'f2\'f0 behaviorSmooth \'ee\'ef\'f0\'e5\'e4\'e5\'eb\'ff\'e5\'f2 \'ef\'eb\'e0\'e2\'ed\'ee\'f1\'f2\'fc \'ef\'f0\'ee\'ea\'f0\'f3\'f2\'ea\'e8)\par
+\cf2\f1\lang1049 Description\cf0 : the method scrolls to the specified element (the behavior Smooth parameter determines the smoothness of scrolling)\par
 \cf2 Syntax\cf0 : \f0\lang1033 ScrollToElementAsync(string by, string locator, bool behaviorSmooth = false)\f1\lang1049\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -5606,7 +5606,7 @@ await frame.ScrollToElementAsync(Tester.BY_XPATH, ""/html/body/footer"", true);\
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 SelectOptionAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'fb\'e1\'e8\'f0\'e0\'e5\'f2 option \'e8\'e7 \'fd\'eb\'e5\'ec\'e5\'ed\'f2\'e0 select \'ef\'ee \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'ee\'ec\'f3 \'e8\'ed\'e4\'e5\'ea\'f1\'f3, \'f2\'e5\'ea\'f1\'f2\'f3 \'e8\'eb\'e8 \'e7\'ed\'e0\'f7\'e5\'ed\'e8\'fe\par
+\cf2\f1\lang1049 Description\cf0 : the method selects an option from the select element by the specified index, text, or value\par
 \cf2 Syntax\cf0 : \f0\lang1033 SelectOptionAsync(string by, string locator, string type, string value)\f1\lang1049\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -5624,7 +5624,7 @@ await frame.SelectOptionAsync(Tester.BY_XPATH, ""//*[@id='MySelect']"", FRAMEEle
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 SetAttributeInElementAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'f1\'f2\'e0\'e2\'eb\'ff\'e5\'f2 \'e0\'f2\'f0\'e8\'e1\'f3\'f2 \'f1\'ee \'e7\'ed\'e0\'f7\'e5\'ed\'e8\'e5\'ec \'e2 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'fb\'e9 \'fd\'eb\'e5\'ec\'e5\'ed\'f2\par
+\cf2\f1\lang1049 Description\cf0 : the method inserts an attribute with a value into the specified element\par
 \cf2 Syntax\cf0 : \f0\lang1033 SetAttributeInElementAsync(string by, string locator, string attribute, string value)\f1\lang1049\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -5638,7 +5638,7 @@ await frame.SetAttributeInElementAsync(Tester.BY_XPATH, ""//div[@id='auth']//h2"
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 SetAttributeInElementsAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'f1\'f2\'e0\'e2\'e8\'f2\'fc \'e0\'f2\'f0\'e8\'e1\'f3\'f2 \'f1 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'fb\'ec \'e7\'ed\'e0\'f7\'e5\'ed\'e8\'e5\'ec \'e2 \'ec\'ed\'ee\'e6\'e5\'f1\'f2\'e2\'ee \'fd\'eb\'e5\'ec\'e5\'ed\'f2\'ee\'e2 \'e8 \'e2 \'f0\'e5\'e7\'f3\'eb\'fc\'f2\'e0\'f2\'e5 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2 \'f1\'ef\'e8\'f1\'ee\'ea\par
+\cf2\f1\lang1049 Description\cf0 : the method inserts an attribute with the specified value into a set of elements and returns a list as a result\par
 \cf2 Syntax\cf0 : \f0\lang1033 SetAttributeInElementsAsync(string by, string locator, string attribute, string value)\f1\lang1049\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -5661,7 +5661,7 @@ foreach (string value in values)\par
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 SetHtmlInElementAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'f1\'f2\'e0\'e2\'eb\'ff\'e5\'f2 html \'ef\'f0\'e5\'e4\'f1\'f2\'e0\'e2\'eb\'e5\'ed\'e8\'e5 \'ee\'e1\'fa\'e5\'ea\'f2\'e0 \'e2 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'fb\'e9 \'fd\'eb\'e5\'ec\'e5\'ed\'f2\par
+\cf2\f1\lang1049 Description\cf0 : the method inserts the html representation of the object into the specified element\par
 \cf2 Syntax\cf0 : \f0\lang1033 SetHtmlInElementAsync(string by, string locator, string html)\f1\lang1049\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -5675,7 +5675,7 @@ await \f0\lang1033 frame\f1\lang1049 .SetHtmlInElementAsync(Tester.BY_XPATH, ""/
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 SetTextInElementAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'f1\'f2\'e0\'e2\'eb\'ff\'e5\'f2 \'f2\'e5\'ea\'f1\'f2 \'e2 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'fb\'e9 \'fd\'eb\'e5\'ec\'e5\'ed\'f2\par
+\cf2\f1\lang1049 Description\cf0 : the method inserts text into the specified element\par
 \cf2 Syntax\cf0 : \f0\lang1033 SetTextInElementAsync(string by, string locator, string text)\f1\lang1049\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -5689,7 +5689,7 @@ await \f0\lang1033 frame\f1\lang1049 .SetTextInElementAsync(Tester.BY_XPATH, ""/
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 SetValueInElementAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'f1\'f2\'e0\'e2\'eb\'ff\'e5\'f2 \'e7\'ed\'e0\'f7\'e5\'ed\'e8\'e5 \'e2 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'fb\'e9 \'fd\'eb\'e5\'ec\'e5\'ed\'f2\par
+\cf2\f1\lang1049 Description\cf0 : the method inserts a value into the specified element\par
 \cf2 Syntax\cf0 : \f0\lang1033 SetValueInElementAsync(string by, string locator, string value)\f1\lang1049\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -5705,7 +5705,7 @@ await frame.SetValueInElementAsync(Tester.BY_XPATH, ""//input[@id='pass']"", ""0
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 WaitNotVisibleElementAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'fb\'ef\'ee\'eb\'ed\'ff\'e5\'f2 \'e2\'f0\'e5\'ec\'e5\'ed\'ed\'f3\'fe \'ee\'f1\'f2\'e0\'ed\'ee\'e2\'ea\'f3 \'e2\'fb\'ef\'ee\'eb\'ed\'e5\'ed\'e8\'ff \'f2\'e5\'f1\'f2\'e0 \'ed\'e0 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'ee\'e5 \'ea\'ee\'eb\'e8\'f7\'e5\'f1\'f2\'e2\'ee \'f1\'e5\'ea\'f3\'ed\'e4 \'e8 \'e6\'e4\'e5\'f2 \'ea\'ee\'e3\'e4\'e0  \'e7\'e0\'ef\'f0\'e0\'f8\'e8\'e2\'e0\'e5\'ec\'fb\'e9 \'fd\'eb\'e5\'ec\'e5\'ed\'f2 \'ef\'e5\'f0\'e5\'f1\'f2\'e0\'ed\'e5\'f2 \'ee\'f2\'ee\'e1\'f0\'e0\'e6\'e0\'e5\'f2\'fc\'f1\'ff \par
+\cf2\f1\lang1049 Description\cf0 : the method temporarily stops the test execution for the specified number of seconds and waits for the requested element to stop being displayed \par
 \cf2 Syntax\cf0 : \f0\lang1033 WaitNotVisibleElementAsync(string by, string locator, int sec)\f1\lang1049\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -5719,7 +5719,7 @@ await frame.WaitNotVisibleElementAsync(Tester.BY_XPATH, ""//div[@id='result']"",
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 WaitVisibleElementAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'fb\'ef\'ee\'eb\'ed\'ff\'e5\'f2 \'e2\'f0\'e5\'ec\'e5\'ed\'ed\'f3\'fe \'ee\'f1\'f2\'e0\'ed\'ee\'e2\'ea\'f3 \'e2\'fb\'ef\'ee\'eb\'ed\'e5\'ed\'e8\'ff \'f2\'e5\'f1\'f2\'e0 \'ed\'e0 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'ee\'e5 \'ea\'ee\'eb\'e8\'f7\'e5\'f1\'f2\'e2\'ee \'f1\'e5\'ea\'f3\'ed\'e4 \'e8 \'e6\'e4\'e5\'f2 \'ea\'ee\'e3\'e4\'e0  \'e7\'e0\'ef\'f0\'e0\'f8\'e8\'e2\'e0\'e5\'ec\'fb\'e9 \'fd\'eb\'e5\'ec\'e5\'ed\'f2 \'ee\'f2\'ee\'e1\'f0\'e0\'e7\'e8\'f2\'f1\'ff\par
+\cf2\f1\lang1049 Description\cf0 : the method temporarily stops the test execution for the specified number of seconds and waits for the requested element to be displayed\par
 \cf2 Syntax\cf0 : \f0\lang1033 WaitVisibleElementAsync(string by, string locator, int sec)\f1\lang1049\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -5733,7 +5733,7 @@ await frame.WaitVisibleElementAsync(Tester.BY_XPATH, ""//div[@id='result']"", 2)
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 GetTestResult\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2 \'f1\'f2\'e0\'f2\'f3\'f1 \'e2\'fb\'ef\'ee\'eb\'ed\'ff\'e5\'ec\'ee\'e3\'ee \'f2\'e5\'f1\'f2\'e0\par
+\cf2\f1\lang1049 Description\cf0 : the method returns the status of the test being performed\par
 \cf2 Syntax\cf0 : \f0\lang1033 GetTestResult()\f1\lang1049\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -5752,7 +5752,7 @@ if(tester.GetTestResult() == Tester.PASSED) \{ \}\par
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 TimerStart\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e7\'e0\'ef\'f3\'f1\'ea\'e0\'e5\'f2 \'ee\'f2\'f1\'f7\'e5\'f2 \'e2\'f0\'e5\'ec\'e5\'ed\'e8 \'e8 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2 \'e7\'ed\'e0\'f7\'e5\'ed\'e8\'e5 DateTime\par
+\cf2\f1\lang1049 Description\cf0 : the method starts the countdown and returns the value DateTime\par
 \cf2 Syntax\cf0 : \f0\lang1033 TimerStart()\f1\lang1049\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -5769,7 +5769,7 @@ tester.ConsoleMsg(""Time "" + result.TotalSeconds);\par
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 TimerStop\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e7\'e0\'e2\'e5\'f0\'f8\'e0\'e5\'f2 \'ee\'f2\'f1\'f7\'e5\'f2 \'e2\'f0\'e5\'ec\'e5\'ed\'e8 \'e8 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2 \'e7\'ed\'e0\'f7\'e5\'ed\'e8\'e5 TimeSpan \'f1 \'f0\'e5\'e7\'f3\'eb\'fc\'f2\'e0\'f2\'ee\'ec (\'ed\'e0\'ef\'f0\'e8\'ec\'e5\'f0 7,132157 \'f7\'f2\'ee \'e7\'ed\'e0\'f7\'e8\'f2 7 \'f1\'e5\'ea\'f3\'ed\'e4 \'e8 132157 \'ec\'e8\'eb\'eb\'e8\'f1\'e5\'ea\'f3\'ed\'e4)\par
+\cf2\f1\lang1049 Description\cf0 : the method completes the countdown and returns the TimeSpan value with the result (for example, 7,132157, which means 7 seconds and 132157 milliseconds)\par
 \cf2 Syntax\cf0 : \f0\lang1033 TimerStop(DateTime start)\f1\lang1049\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -5786,7 +5786,7 @@ tester.ConsoleMsg(""Time "" + result.TotalSeconds);\par
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 AssertNoErrorsAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'fb\'ef\'ee\'eb\'ed\'ff\'e5\'f2 \'ef\'f0\'ee\'e2\'e5\'f0\'ea\'f3 \'ee\'f2\'f1\'f3\'f2\'f1\'f2\'e2\'e8\'ff \'ee\'f8\'e8\'e1\'ee\'ea \'ed\'e0 \'f1\'f2\'f0\'e0\'ed\'e8\'f6\'e5 \'e8 \'e5\'f1\'eb\'e8 \'ee\'f8\'e8\'e1\'ea\'e8 \'ef\'f0\'e8\'f1\'f3\'f2\'f1\'f2\'e2\'f3\'fe\'f2 \'ef\'f0\'ee\'e2\'e5\'f0\'ea\'e0 \'e1\'f3\'e4\'e5\'f2 \'f1\'f7\'e8\'f2\'e0\'f2\'fc\'f1\'ff \'ef\'f0\'ee\'e2\'e0\'eb\'fc\'ed\'ee\'e9\par
+\cf2\f1\lang1049 Description\cf0 : the method checks for the absence of errors on the page and if errors are present, the check will be considered a failure\par
 \cf2 Syntax\cf0 : \f0\lang1033 AssertNoErrorsAsync(bool showListErrors = false, string[] listIgnored = null)\f1\lang1049\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -5801,7 +5801,7 @@ await tester.TestEndAsync();\par
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 AssertNetworkEventsAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'fb\'ef\'ee\'eb\'ed\'ff\'e5\'f2 \'ef\'f0\'ee\'e2\'e5\'f0\'ea\'f3 \'ef\'f0\'e8\'f1\'f3\'f2\'f1\'f2\'e2\'e8\'ff (presence \f0\lang1033 = true\f1\lang1049 )\f0\lang1033  \f1\lang1049\'e8\'eb\'e8 \'ee\'f2\'f1\'f3\'f2\'f1\'f2\'e2\'e8\'e5 (presence \f0\lang1033 = false\f1\lang1049 )\f0\lang1033  \f1\lang1049\'f3\'ea\'e0\'e7\'e0\'ed\'ed\'fb\'f5 \'f1\'ee\'e1\'fb\'f2\'e8\'e9 (events),\f0\lang1033  \f1\lang1049  \'e4\'e0\'ed\'ed\'fb\'e9 \'ec\'e5\'f2\'ee\'e4 \'f5\'ee\'f0\'ee\'f8\'ee \'e8\'f1\'ef\'ee\'eb\'fc\'e7\'ee\'e2\'e0\'f2\'fc \'ef\'f0\'e8 \'ef\'f0\'ee\'e2\'e5\'f0\'ea\'e5 \'f1\'ee\'e1\'fb\'f2\'e8\'e9 Google Analytics \'e8 \'df\'ed\'e4\'e5\'ea\'f1 \'cc\'e5\'f2\'f0\'e8\'ea\'e0\par
+\cf2\f1\lang1049 Description\cf0 : the method checks the presence (presence = true) or absence (presence = false) specified events (events), this method is good to use when checking the events Google Analytics and Yandex Metrika\par
 \cf2 Syntax\cf0 : \f0\lang1033 AssertNetworkEventsAsync(bool presence, string[] events)\f1\lang1049\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -5814,7 +5814,7 @@ await tester.TestEndAsync();\par
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 SendMsgToMailAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'ee\'f2\'ef\'f0\'e0\'e2\'eb\'ff\'e5\'f2 \'ef\'e8\'f1\'fc\'ec\'ee \'ed\'e0 \'ef\'ee\'f7\'f2\'f3\par
+\cf2\f1\lang1049 Description\cf0 : the method sends an email\par
 \cf2 Syntax\cf0 : \f0\lang1033 SendMsgToMailAsync(string subject, string body, string filename = """", string addresses = """")\f1\lang1049\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -5832,7 +5832,7 @@ if(tester.GetTestResult() == Tester.PASSED) \par
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 SendMsgToTelegramAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'ee\'f2\'ef\'f0\'e0\'e2\'eb\'ff\'e5\'f2 \'f1\'ee\'ee\'e1\'f9\'e5\'ed\'e8\'e5 \'e2 \'d2\'e5\'eb\'e5\'e3\'f0\'e0\'ec, \'e4\'eb\'ff \'fd\'f2\'ee\'e3\'ee \'ed\'f3\'e6\'ed\'ee \'f1\'ee\'e7\'e4\'e0\'f2\'fc \'e1\'ee\'f2\'e0 \'e4\'ee\'e1\'e0\'e2\'e8\'f2\'fc \'e5\'e3\'ee \'e2 \'f7\'e0\'f2 \'e8 \'e2 \'f4\'f3\'ed\'ea\'f6\'e8\'fe \'ef\'e5\'f0\'e5\'e4\'e0\'f2\'fc \'f2\'ee\'ea\'e5\'ed \'e1\'ee\'f2\'e0 (\f0\lang1033 botToken\f1\lang1049 ), \'e8\'e4\'e5\'ed\'f2\'e8\'f4\'e8\'ea\'e0\'f2\'ee\'f0 \'f7\'e0\'f2\'e0 \f0\lang1033 (chatId)\f1\lang1049 , \'f2\'e5\'ea\'f1\'f2 \'f1\'ee\'ee\'e1\'f9\'e5\'ed\'e8\'ff \f0\lang1033 (text) \f1\lang1049\'e8 \'ef\'f0\'e8 \'ed\'e5\'ee\'e1\'f5\'ee\'e4\'e8\'ec\'ee\'f1\'f2\'e8 \'f3\'ea\'e0\'e7\'e0\'f2\'fc \'ea\'ee\'e4\'e8\'f0\'ee\'e2\'ea\'f3 (\f0\lang1033 charset\f1\lang1049 )\par
+\cf2\f1\lang1049 Description\cf0 : the method sends a message to Telegram. To do this, you need to create a bot, add it to the chat and transfer the bot token (botToken), chat ID (chatId), message text (text) and, if necessary, specify the encoding (charset) to the function\par
 \cf2 Syntax\cf0 : \f0\lang1033 SendMsgToTelegramAsync(string botToken, string chatId, string text, string charset = ""UTF-8"", int timeHourFrom = 0, int timeHourBefore = 0)\f1\lang1049\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -5850,7 +5850,7 @@ if(tester.GetTestResult() == Tester.FAILED) \par
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 AssertNotNullAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'fb\'ef\'ee\'eb\'ed\'ff\'e5\'f2 \'ef\'f0\'ee\'e2\'e5\'f0\'ea\'f3 \'e7\'ed\'e0\'f7\'e5\'ed\'e8\'ff \'ea\'ee\'f2\'ee\'f0\'ee\'e5 \'ed\'e5 \'e4\'ee\'eb\'e6\'ed\'ee \'e1\'fb\'f2\'fc \f0\lang1033 null\f1\lang1049 , \'e8 \'e2 \'f1\'eb\'f3\'f7\'e0\'e5 \'e5\'f1\'eb\'e8 \'e7\'ed\'e0\'f7\'e5\'ed\'e8\'e5 \f0\lang1033 null \f1\lang1049\'ef\'f0\'ee\'e2\'e5\'f0\'ea\'e0 \'e1\'f3\'e4\'e5\'f2 \'f1\'f7\'e8\'f2\'e0\'f2\'fc\'f1\'ff \'ef\'f0\'ee\'e2\'e0\'eb\'fc\'ed\'ee\'e9\par
+\cf2\f1\lang1049 Description\cf0 : the method checks a value that should not be null, and if the value is null, the check will be considered a failure\par
 \cf2 Syntax\cf0 : \f0\lang1033 AssertNotNullAsync(dynamic obj)\f1\lang1049\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -5862,7 +5862,7 @@ await tester.AssertNotNullAsync(text);\f0\lang1033\par
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 AssertNullAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'fb\'ef\'ee\'eb\'ed\'ff\'e5\'f2 \'ef\'f0\'ee\'e2\'e5\'f0\'ea\'f3 \'e7\'ed\'e0\'f7\'e5\'ed\'e8\'ff \'ea\'ee\'f2\'ee\'f0\'ee\'e5 \'e4\'ee\'eb\'e6\'ed\'ee \'e1\'fb\'f2\'fc \f0\lang1033 null\f1\lang1049 , \'e8 \'e2 \'f1\'eb\'f3\'f7\'e0\'e5 \'e5\'f1\'eb\'e8 \'e7\'ed\'e0\'f7\'e5\'ed\'e8\'e5 \'ed\'e5 \f0\lang1033 null \f1\lang1049\'ef\'f0\'ee\'e2\'e5\'f0\'ea\'e0 \'e1\'f3\'e4\'e5\'f2 \'f1\'f7\'e8\'f2\'e0\'f2\'fc\'f1\'ff \'ef\'f0\'ee\'e2\'e0\'eb\'fc\'ed\'ee\'e9\par
+\cf2\f1\lang1049 Description\cf0 : the method checks the value that should be null, and if the value is not null, the check will be considered a failure\par
 \cf2 Syntax\cf0 : \f0\lang1033 AssertNullAsync(dynamic obj)\f1\lang1049\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -5874,7 +5874,7 @@ await tester.AssertNullAsync(text);\par
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 WaitElementInDomAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'fb\'ef\'ee\'eb\'ed\'ff\'e5\'f2 \'e2\'f0\'e5\'ec\'e5\'ed\'ed\'f3\'fe \'ee\'f1\'f2\'e0\'ed\'ee\'e2\'ea\'f3 \'e2\'fb\'ef\'ee\'eb\'ed\'e5\'ed\'e8\'ff \'f2\'e5\'f1\'f2\'e0 \'ed\'e0 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'ee\'e5 \'ea\'ee\'eb\'e8\'f7\'e5\'f1\'f2\'e2\'ee \'f1\'e5\'ea\'f3\'ed\'e4 \'e8 \'e6\'e4\'e5\'f2 \'ea\'ee\'e3\'e4\'e0 \'e7\'e0\'ef\'f0\'e0\'f8\'e8\'e2\'e0\'e5\'ec\'fb\'e9 \'fd\'eb\'e5\'ec\'e5\'ed\'f2 \'ef\'ee\'ff\'e2\'e8\'f2\'f1\'ff \'e2 DOM\par
+\cf2\f1\lang1049 Description\cf0 : the method temporarily stops the test execution for the specified number of seconds and waits for the requested element to appear in the DOM\par
 \cf2 Syntax\cf0 : \f0\lang1033 WaitElementInDomAsync(string by, string locator, int sec)\f1\lang1049\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -5886,7 +5886,7 @@ await tester.WaitElementInDomAsync(Tester.BY_CSS, ""#result"", 5);\par
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 WaitElementNotDomAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'fb\'ef\'ee\'eb\'ed\'ff\'e5\'f2 \'e2\'f0\'e5\'ec\'e5\'ed\'ed\'f3\'fe \'ee\'f1\'f2\'e0\'ed\'ee\'e2\'ea\'f3 \'e2\'fb\'ef\'ee\'eb\'ed\'e5\'ed\'e8\'ff \'f2\'e5\'f1\'f2\'e0 \'ed\'e0 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'ee\'e5 \'ea\'ee\'eb\'e8\'f7\'e5\'f1\'f2\'e2\'ee \'f1\'e5\'ea\'f3\'ed\'e4 \'e8 \'e6\'e4\'e5\'f2 \'ea\'ee\'e3\'e4\'e0 \'e7\'e0\'ef\'f0\'e0\'f8\'e8\'e2\'e0\'e5\'ec\'fb\'e9 \'fd\'eb\'e5\'ec\'e5\'ed\'f2 \'ef\'e5\'f0\'e5\'f1\'f2\'e0\'ed\'e5\'f2 \'ef\'f0\'e8\'f1\'f3\'f2\'f1\'f2\'e2\'ee\'e2\'e0\'f2\'fc \'e2 \f0\lang1033 DOM\f1\lang1049  \par
+\cf2\f1\lang1049 Description\cf0 : the method temporarily stops the test execution for the specified number of seconds and waits for the requested element to cease to be present in the DOM\par
 \cf2 Syntax\cf0 : \f0\lang1033 WaitElementNotDomAsync(string by, string locator, int sec)\f1\lang1049\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -5898,7 +5898,7 @@ await tester.WaitElementNotDomAsync(Tester.BY_CSS, ""#element"", 5);\par
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 GoToUrlBaseAuthAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'fb\'ef\'ee\'eb\'ed\'ff\'e5\'f2 \'e7\'e0\'e3\'f0\'f3\'e7\'ea\'f3 \'e2\'e5\'e1 \'f1\'e0\'e9\'f2\'e0 \'ef\'ee \'f3\'ea\'e0\'e7\'e0\'ed\'ee\'ec\'f3 URL \'ef\'f0\'e8 \'e1\'e0\'e7\'ee\'e2\'ee\'e9 \'e0\'e2\'f2\'ee\'f0\'e8\'e7\'e0\'f6\'e8\'e8 \'f1 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'fb\'ec \'ee\'e6\'e8\'e4\'e0\'ed\'e8\'e5\'ec \'e2 \'f1\'e5\'ea\'f3\'ed\'e4\'e0\'f5\par
+\cf2\f1\lang1049 Description\cf0 : the method loads the website at the specified URL during basic authorization with the specified wait in seconds\par
 \cf2 Syntax\cf0 : \f0\lang1033 GoToUrlBaseAuthAsync(string url, string login, string pass, int sec, bool abortLoadAfterTime = false)\f1\lang1049\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -5909,7 +5909,7 @@ await tester.WaitElementNotDomAsync(Tester.BY_CSS, ""#element"", 5);\par
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 BrowserPageReloadAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'fb\'ef\'ee\'eb\'ed\'ff\'e5\'f2 \'ef\'e5\'f0\'e5\'e7\'e0\'e3\'f0\'f3\'e7\'ea\'f3 \'ee\'f2\'ea\'f0\'fb\'f2\'ee\'e9 \'f1\'f2\'f0\'e0\'ed\'e8\'f6\'fb \'e2 \'e1\'f0\'e0\'f3\'e7\'e5\'f0\'e5\par
+\cf2\f1\lang1049 Description\cf0 : the method reloads the open page in the browser. The abortLoadAfterTime flag automatically completes page loading after the timer is completed\par
 \cf2 Syntax\cf0 : \f0\lang1033 BrowserPageReloadAsync(int sec, bool abortLoadAfterTime = false)\f1\lang1049\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -5920,7 +5920,7 @@ await tester.WaitElementNotDomAsync(Tester.BY_CSS, ""#element"", 5);\par
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 GetListRedirectUrlAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2 \'f1\'ef\'e8\'f1\'ee\'ea \'f0\'e5\'e4\'e8\'f0\'e5\'ea\'f2\'ee\'e2 \'ef\'f0\'ee\'e8\'e7\'ee\'f8\'e5\'e4\'f8\'e8\'f5 \'ef\'f0\'e8 \'e7\'e0\'e3\'f0\'f3\'e7\'ea\'e5 \'f1\'f2\'f0\'e0\'ed\'e8\'f6\'fb\par
+\cf2\f1\lang1049 Description\cf0 : the method returns a list of redirects that occurred when the page was loaded\par
 \cf2 Syntax\cf0 : \f0\lang1033 GetListRedirectUrlAsync()\f1\lang1049\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -5939,7 +5939,7 @@ foreach (string url in redirects)\par
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 GetUrlResponseAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2\f0\lang1033  \f1\lang1049 HTTP \'ee\'f2\'e2\'e5\'f2 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'ee\'e3\'ee URL\par
+\cf2\f1\lang1049 Description\cf0 : the method returns the HTTP response of the specified URL\par
 \cf2 Syntax\cf0 : \f0\lang1033 GetUrlResponseAsync(string url)\f1\lang1049\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -5951,7 +5951,7 @@ await tester.AssertEqualsAsync(200, response);\par
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.19041}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 RestPostAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'fb\'ef\'ee\'eb\'ed\'ff\'e5\'f2 \f0\lang1033 Post\f1\lang1049  Rest \'e7\'e0\'ef\'f0\'ee\'f1\f0\lang1033  \f1\lang1049\'f1 \'ee\'f2\'ef\'f0\'e0\'e2\'ea\'ee\'e9 \'e4\'e0\'ed\'ed\'fb\'f5 \'e2 \'f4\'ee\'f0\'ec\'e0\'f2\'e5 \f0\lang1033 json\f1\lang1049  \'e8 \'ef\'ee\'eb\'f3\'f7\'e0\'e5\'f2 \'f0\'e5\'e7\'f3\'eb\'fc\'f2\'e0\'f2 \'f2\'e0\'ea \'e6\'e5 \'e2 \'f4\'ee\'f0\'ec\'e0\'f2\'e5 json\par
+\cf2\f1\lang1049 Description\cf0 : the method executes a Post Rest request with sending data in json format and receives the result in the same way in json format\par
 \cf2 Syntax\cf0 : \f0\lang1033 RestPostAsync(string url, string json, TimeSpan timeout, string charset = ""UTF-8"")\f1\lang1049\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -5980,7 +5980,7 @@ if (response.IsSuccessStatusCode)\par
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.19041}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 GetLocatorAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2 \'eb\'ee\'ea\'e0\'f2\'ee\'f0 \'fd\'eb\'e5\'ec\'e5\'ed\'f2\'e0\par
+\cf2\f1\lang1049 Description\cf0 : the method returns the element's locator\par
 \cf2 Syntax\cf0 : \f0\lang1033 GetLocatorAsync()\f1\lang1049\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -5992,7 +5992,7 @@ tester.ConsoleMsg(locator);\cf2\f1\lang1049\par
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.19041}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 ClickMouseAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'fb\'ef\'ee\'eb\'ed\'ff\'e5\'f2 \'ed\'e0\'e6\'e0\'f2\'e8\'e5 \'ed\'e0 \'fd\'eb\'e5\'ec\'e5\'ed\'f2\f0\lang1033  \f1\lang1049\'fd\'ec\'f3\'eb\'e8\'f0\'f3\'ff \'ec\'fb\'f8\'ea\'f3\par
+\cf2\f1\lang1049 Description\cf0 : the method performs clicking on an element by emulating a mouse\par
 \cf2 Syntax\cf0 : \f0\lang1033 ClickMouseAsync()\f1\lang1049\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -6003,7 +6003,7 @@ tester.ConsoleMsg(locator);\cf2\f1\lang1049\par
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.19041}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 RestGetStatusCodeAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'fb\'ef\'ee\'eb\'ed\'ff\'e5\'f2 Get Rest \'e7\'e0\'ef\'f0\'ee\'f1 \'e8 \'e2 \'f0\'e5\'e7\'f3\'eb\'fc\'f2\'e0\'f2\'e5 \'ef\'ee\'eb\'f3\'f7\'e0\'e5\'f2 \'ea\'ee\'e4 \'f1\'f2\'e0\'f2\'f3\'f1\'e0\par
+\cf2\f1\lang1049 Description\cf0 : the method executes a Get Rest request and as a result receives a status code\par
 \cf2 Syntax\cf0 : \f0\lang1033 RestGetStatusCodeAsync(string url)\f1\lang1049\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -6015,7 +6015,7 @@ tester.ConsoleMsg(statusCode.ToString());\par
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.19041}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 BrowserClearNetworkAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'fb\'ef\'ee\'eb\'ed\'ff\'e5\'f2 \'ee\'f7\'e8\'f1\'f2\'ea\'f3 \'f1\'ee\'e1\'fb\'f2\'e8\'e9 network \'e2 \'e1\'f0\'e0\'f3\'e7\'e5\'f0\'e5\par
+\cf2\f1\lang1049 Description\cf0 : the method cleans network events in the browser\par
 \cf2 Syntax\cf0 : \f0\lang1033 BrowserClearNetworkAsync()\f1\lang1049\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -6027,7 +6027,7 @@ tester.ConsoleMsg(events);\par
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.19041}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 Description\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'f3\'f1\'f2\'e0\'ed\'e0\'e2\'eb\'e8\'e2\'e0\'e5\'f2 \'ee\'ef\'e8\'f1\'e0\'ed\'e8\'e5 \'f2\'e5\'f1\'f2\'e0 \'ea\'ee\'f2\'ee\'f0\'ee\'e5 \'ef\'ee\'f2\'ee\'ec \'e2\'fb\'e2\'ee\'e4\'e8\'f2\'ff \'e2 \'ee\'f2\'f7\'e5\'f2\'e5 \'e8 \'ef\'e8\'f1\'fc\'ec\'e5\par
+\cf2\f1\lang1049 Description\cf0 : the method sets the description of the test, which is then displayed in the report and letter\par
 \cf2 Syntax\cf0 : \f0\lang1033 Description(string text)\f1\lang1049\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -6041,7 +6041,7 @@ tester.ConsoleMsg(events);\par
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.19041}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 SendMessageDebug\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'fb\'e2\'ee\'e4\'e8\'f2 \'ee\'f2\'eb\'e0\'e4\'ee\'f7\'ed\'ee\'e5 \'f1\'ee\'ee\'e1\'f9\'e5\'ed\'e8\'e5 \'ea\'ee\'f2\'ee\'f0\'ee\'e5 \'ec\'ee\'e6\'e5\'f2 \'e1\'fb\'f2\'fc \'ee\'f2\'ea\'eb\'fe\'f7\'e5\'ed\'ee \'e4\'eb\'ff \'e2\'fb\'e2\'ee\'e4\'e0 \'e2 \'ee\'f2\'f7\'e5\'f2 \'e8 \'ef\'e8\'f1\'fc\'ec\'ee\par
+\cf2\f1\lang1049 Description\cf0 : the method outputs a debugging message that can be disabled for output to a report and an email. When executed, action is output to the system console if status is FAILED, WARNING, "", null, otherwise only status and comment are output (without action).\par
 \cf2 Syntax\cf0 : SendMessageDebug(string actionRus, string actionEng, string status,  string commentRus, string commentEng, int image)\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -6050,26 +6050,13 @@ tester.ConsoleMsg(events);\par
 \pard\sa200\sl276\slmult1\f0\fs22\lang9\par
 }",
 
-@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
-{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
-{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
-\pard\sl276\slmult1\cf1\f0\fs20\lang9 EditMessage\lang1033 Debug\cf0\lang9\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e8\'e7\'ec\'e5\'ed\'ff\'e5\'f2 \'f0\'e0\'ed\'e5\'e5 \'e2\'fb\'e2\'e5\'e4\'e5\'ed\'ed\'ee\'e5\f0\lang1033  \f1\lang1049\'ee\'f2\'eb\'e0\'e4\'ee\'f7\'ed\'ee\'e5 \'f1\'ee\'ee\'e1\'f9\'e5\'ed\'e8\'e5 \'ea\'ee\'f2\'ee\'f0\'ee\'e5 \'ec\'ee\'e6\'e5\'f2 \'e1\'fb\'f2\'fc \'ee\'f2\'ea\'eb\'fe\'f7\'e5\'ed\'ee \'e4\'eb\'ff \'e2\'fb\'e2\'ee\'e4\'e0 \'e2 \'ee\'f2\'f7\'e5\'f2 \'e8 \'ef\'e8\'f1\'fc\'ec\'ee\par
-\cf2 Syntax\cf0 : EditMessageDebug(int index, string actionRus, string actionEng, string status, string commentRus, string commentEng, int image)\par
-\cf3\par
-\cf2 Example\cf3 :\par
-\cf0\f0\lang1033 tester.\f1\lang1049 EditMessageDebug(step, ""\'e4\'e5\'e9\'f1\'f2\'e2\'e8\'ff"",\f0\lang1033  ""action"", Tester.\f1\lang1049 PASSED, ""\'ea\'ee\'ec\'ec\'e5\'ed\'f2\'e0\'f0\'e8\'e9"", \f0\lang1033 ""comment"", \f1\lang1049  \f0\lang1033 Tester.\f1\lang1049 IMAGE_STATUS_PASSED);\par
-\par
-\f0\lang1033 tester.\f1\lang1049 EditMessageDebug(step, \f0\lang1033 null\f1\lang1049 ,\f0\lang1033  null,\f1\lang1049  \f0\lang1033 Tester.\f1\lang1049 FAILED, ""\'ea\'ee\'ec\'ec\'e5\'ed\'f2\'e0\'f0\'e8\'e9"", \f0\lang1033 ""comment"",\f1\lang1049  \f0\lang1033 Tester.\f1\lang1049 IMAGE_STATUS_FAILED);\par
-\par
-\pard\sa200\sl276\slmult1\f0\fs22\lang9\par
-}",
+@"",
 
 @"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.19041}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 GetStyleAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2 \'f1\'f2\'e8\'eb\'fc \'fd\'eb\'e5\'ec\'e5\'ed\'f2\'e0 \'e8\'e7 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'ee\'e3\'ee \'f1\'e2\'ee\'e9\'f1\'f2\'e2\'e0\par
+\cf2\f1\lang1049 Description\cf0 : the method returns the style of the element from the specified property\par
 \cf2 Syntax\cf0 : GetStyleAsync(string property)\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -6081,7 +6068,7 @@ tester.ConsoleMsg(events);\par
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.19041}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 SetStyleAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'f3\'f1\'f2\'e0\'ed\'e0\'e2\'eb\'e8\'e2\'e0\'e5\'f2 \'f1\'f2\'e8\'eb\'fc \'fd\'eb\'e5\'ec\'e5\'ed\'f2\'e0\par
+\cf2\f1\lang1049 Description\cf0 : the method sets the style of the element\par
 \cf2 Syntax\cf0 : SetStyleAsync(string cssText)\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -6092,7 +6079,7 @@ tester.ConsoleMsg(events);\par
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.19041}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 GetStyleFromElementAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2 \'f1\'f2\'e8\'eb\'fc \'fd\'eb\'e5\'ec\'e5\'ed\'f2\'e0 \'e8\'e7 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'ee\'e3\'ee \'f1\'e2\'ee\'e9\'f1\'f2\'e2\'e0\par
+\cf2\f1\lang1049 Description\cf0 : the method returns the style of the element from the specified property\par
 \cf2 Syntax\cf0 : GetStyleFromElementAsync(string by, string locator, string property)\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -6106,21 +6093,21 @@ string style = await frame.GetStyleFromElementAsync(Tester.BY_CSS, ""#auth > h2"
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.19041}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 SetStyleInElementAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'f3\'f1\'f2\'e0\'ed\'e0\'e2\'eb\'e8\'e2\'e0\'e5\'f2 \'f1\'f2\'e8\'eb\'fc \'fd\'eb\'e5\'ec\'e5\'ed\'f2\'e0\par
+\cf2\f1\lang1049 Description\cf0 : the method sets the style of the element\par
 \cf2 Syntax\cf0 : SetStyleInElementAsync(string by, string locator, string cssText)\par
 \cf3\par
 \cf2 Example\cf3 :\par
 \cf0\f0\lang1033 FRAMEElement frame = await tester.GetFrameAsync(0);\par
-await frame .SetStyleInElementAsync(Tester.BY_XPATH, ""//div[@id='auth']"", ""background-color: #000000;"");\par
+await frame.SetStyleInElementAsync(Tester.BY_XPATH, ""//div[@id='auth']"", ""background-color: #000000;"");\par
 \par
-await frame .SetStyleInElementAsync(Tester.BY_CSS, ""#auth"", ""background-color: #000000;"");\par
+await frame.SetStyleInElementAsync(Tester.BY_CSS, ""#auth"", ""background-color: #000000;"");\par
 }",
 
 @"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.19041}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 GetStyleFromElementAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2 \'f1\'f2\'e8\'eb\'fc \'fd\'eb\'e5\'ec\'e5\'ed\'f2\'e0 \'e8\'e7 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'ee\'e3\'ee \'f1\'e2\'ee\'e9\'f1\'f2\'e2\'e0\par
+\cf2\f1\lang1049 Description\cf0 : the method returns the style of the element from the specified property\par
 \cf2 Syntax\cf0 : GetStyleFromElementAsync(string by, string locator, string property)\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -6133,7 +6120,7 @@ await frame .SetStyleInElementAsync(Tester.BY_CSS, ""#auth"", ""background-color
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.19041}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 GetStyleFromElementByClassAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2 \'f1\'f2\'e8\'eb\'fc \'fd\'eb\'e5\'ec\'e5\'ed\'f2\'e0 \'e8\'e7 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'ee\'e3\'ee \'f1\'e2\'ee\'e9\'f1\'f2\'e2\'e0\par
+\cf2\f1\lang1049 Description\cf0 : the method returns the style of the element from the specified property\par
 \cf2 Syntax\cf0 : GetStyleFromElementByClassAsync(string _class, int index, string property)\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -6144,7 +6131,7 @@ await frame .SetStyleInElementAsync(Tester.BY_CSS, ""#auth"", ""background-color
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.19041}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 GetStyleFromElementByIdAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2 \'f1\'f2\'e8\'eb\'fc \'fd\'eb\'e5\'ec\'e5\'ed\'f2\'e0 \'e8\'e7 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'ee\'e3\'ee \'f1\'e2\'ee\'e9\'f1\'f2\'e2\'e0\par
+\cf2\f1\lang1049 Description\cf0 : the method returns the style of the element from the specified property\par
 \cf2 Syntax\cf0 : GetStyleFromElementByIdAsync(string id, string property)\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -6155,7 +6142,7 @@ await frame .SetStyleInElementAsync(Tester.BY_CSS, ""#auth"", ""background-color
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.19041}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 GetStyleFromElementByNameAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2 \'f1\'f2\'e8\'eb\'fc \'fd\'eb\'e5\'ec\'e5\'ed\'f2\'e0 \'e8\'e7 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'ee\'e3\'ee \'f1\'e2\'ee\'e9\'f1\'f2\'e2\'e0\par
+\cf2\f1\lang1049 Description\cf0 : the method returns the style of the element from the specified property\par
 \cf2 Syntax\cf0 : GetStyleFromElementByNameAsync(string name, int index, string property)\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -6166,7 +6153,7 @@ await frame .SetStyleInElementAsync(Tester.BY_CSS, ""#auth"", ""background-color
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.19041}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 GetStyleFromElementByTagAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2 \'f1\'f2\'e8\'eb\'fc \'fd\'eb\'e5\'ec\'e5\'ed\'f2\'e0 \'e8\'e7 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'ee\'e3\'ee \'f1\'e2\'ee\'e9\'f1\'f2\'e2\'e0\par
+\cf2\f1\lang1049 Description\cf0 : the method returns the style of the element from the specified property\par
 \cf2 Syntax\cf0 : GetStyleFromElementByTagAsync(string tag, int index, string property)\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -6177,7 +6164,7 @@ await frame .SetStyleInElementAsync(Tester.BY_CSS, ""#auth"", ""background-color
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.19041}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 SetStyleInElementAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'f3\'f1\'f2\'e0\'ed\'e0\'e2\'eb\'e8\'e2\'e0\'e5\'f2 \'f1\'f2\'e8\'eb\'fc \'fd\'eb\'e5\'ec\'e5\'ed\'f2\'e0\par
+\cf2\f1\lang1049 Description\cf0 : the method sets the style of the element\par
 \cf2 Syntax\cf0 : SetStyleInElementAsync(string by, string locator, string cssText)\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -6190,7 +6177,7 @@ await tester.SetStyleInElementAsync(Tester.BY_CSS, ""#auth"", ""width: 250px; co
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.19041}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 SetStyleInElementByClassAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'f3\'f1\'f2\'e0\'ed\'e0\'e2\'eb\'e8\'e2\'e0\'e5\'f2 \'f1\'f2\'e8\'eb\'fc \'fd\'eb\'e5\'ec\'e5\'ed\'f2\'e0\par
+\cf2\f1\lang1049 Description\cf0 : the method sets the style of the element\par
 \cf2 Syntax\cf0 : SetStyleInElementByClassAsync(string _class, int index, string cssText)\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -6201,7 +6188,7 @@ await tester.SetStyleInElementAsync(Tester.BY_CSS, ""#auth"", ""width: 250px; co
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.19041}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 SetStyleInElementByIdAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'f3\'f1\'f2\'e0\'ed\'e0\'e2\'eb\'e8\'e2\'e0\'e5\'f2 \'f1\'f2\'e8\'eb\'fc \'fd\'eb\'e5\'ec\'e5\'ed\'f2\'e0\par
+\cf2\f1\lang1049 Description\cf0 : the method sets the style of the element\par
 \cf2 Syntax\cf0 : SetStyleInElementByIdAsync(string id, string cssText)\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -6212,7 +6199,7 @@ await tester.SetStyleInElementAsync(Tester.BY_CSS, ""#auth"", ""width: 250px; co
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.19041}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 SetStyleInElementByNameAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'f3\'f1\'f2\'e0\'ed\'e0\'e2\'eb\'e8\'e2\'e0\'e5\'f2 \'f1\'f2\'e8\'eb\'fc \'fd\'eb\'e5\'ec\'e5\'ed\'f2\'e0\par
+\cf2\f1\lang1049 Description\cf0 : the method sets the style of the element\par
 \cf2 Syntax\cf0 : SetStyleInElementByNameAsync(string name, int index, string cssText)\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -6223,7 +6210,7 @@ await tester.SetStyleInElementAsync(Tester.BY_CSS, ""#auth"", ""width: 250px; co
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.19041}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 SetStyleInElementByTagAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'f3\'f1\'f2\'e0\'ed\'e0\'e2\'eb\'e8\'e2\'e0\'e5\'f2 \'f1\'f2\'e8\'eb\'fc \'fd\'eb\'e5\'ec\'e5\'ed\'f2\'e0\par
+\cf2\f1\lang1049 Description\cf0 : the method sets the style of the element\par
 \cf2 Syntax\cf0 : SetStyleInElementByTagAsync(string tag, int index, string cssText)\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -6234,7 +6221,7 @@ await tester.SetStyleInElementAsync(Tester.BY_CSS, ""#auth"", ""width: 250px; co
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.19041}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 DEFAULT\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ea\'ee\'ed\'f1\'f2\'e0\'ed\'f2\'e0 \'ee\'e1\'ee\'e7\'ed\'e0\'f7\'e0\'e5\'f2 \'f2\'e8\'ef \'ea\'ee\'e4\'e8\'f0\'ee\'e2\'ea\'e8 \'e4\'eb\'ff \'f4\'e0\'e9\'eb\'e0\par
+\cf2\f1\lang1049 Description\cf0 : the constant indicates the encoding type for the file\par
 \cf2 Syntax\cf0 : DEFAULT = ""DEFAULT""\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -6246,7 +6233,7 @@ await tester.FileWriteAsync(text, Tester.\f1\lang1049 DEFAULT\f0\lang1033 , ""C:
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.19041}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 UTF8\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ea\'ee\'ed\'f1\'f2\'e0\'ed\'f2\'e0 \'ee\'e1\'ee\'e7\'ed\'e0\'f7\'e0\'e5\'f2 \'f2\'e8\'ef \'ea\'ee\'e4\'e8\'f0\'ee\'e2\'ea\'e8 \'e4\'eb\'ff \'f4\'e0\'e9\'eb\'e0\par
+\cf2\f1\lang1049 Description\cf0 : the constant indicates the encoding type for the file\par
 \cf2 Syntax\cf0 : UTF8 = ""UTF-8""\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -6258,7 +6245,7 @@ await tester.FileWriteAsync(text, Tester.\f1\lang1049 UTF8\f0\lang1033 , ""C:\\\
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.19041}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 UTF8BOM\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ea\'ee\'ed\'f1\'f2\'e0\'ed\'f2\'e0 \'ee\'e1\'ee\'e7\'ed\'e0\'f7\'e0\'e5\'f2 \'f2\'e8\'ef \'ea\'ee\'e4\'e8\'f0\'ee\'e2\'ea\'e8 \'e4\'eb\'ff \'f4\'e0\'e9\'eb\'e0\par
+\cf2\f1\lang1049 Description\cf0 : the constant indicates the encoding type for the file\par
 \cf2 Syntax\cf0 : UTF8BOM = ""UTF-8 BOM""\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -6270,7 +6257,7 @@ await tester.FileWriteAsync(text, Tester.\f1\lang1049 UTF8BOM\f0\lang1033 , ""C:
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.19041}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 WINDOWS1251\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ea\'ee\'ed\'f1\'f2\'e0\'ed\'f2\'e0 \'ee\'e1\'ee\'e7\'ed\'e0\'f7\'e0\'e5\'f2 \'f2\'e8\'ef \'ea\'ee\'e4\'e8\'f0\'ee\'e2\'ea\'e8 \'e4\'eb\'ff \'f4\'e0\'e9\'eb\'e0\par
+\cf2\f1\lang1049 Description\cf0 : the constant indicates the encoding type for the file\par
 \cf2 Syntax\cf0 : WINDOWS1251 = ""WINDOWS-1251""\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -6282,7 +6269,7 @@ await tester.FileWriteAsync(text, Tester.\f1\lang1049 WINDOWS1251\f0\lang1033 , 
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.19041}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 FileReadAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'fb\'ef\'ee\'eb\'ed\'ff\'e5\'f2 \'f7\'f2\'e5\'ed\'e8\'e5 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'ee\'e3\'ee \'f4\'e0\'e9\'eb\'e0\par
+\cf2\f1\lang1049 Description\cf0 : the method reads the specified file\par
 \cf2 Syntax\cf0 : FileReadAsync(string encoding, string filename)\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -6293,7 +6280,7 @@ await tester.FileWriteAsync(text, Tester.\f1\lang1049 WINDOWS1251\f0\lang1033 , 
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.19041}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 FileWriteAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'fb\'ef\'ee\'eb\'ed\'ff\'e5\'f2 \'e7\'e0\'ef\'e8\'f1\'fc \'f2\'e5\'ea\'f1\'f2\'e0 \'e2 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'fb\'e9 \'f4\'e0\'e9\'eb\'e0\par
+\cf2\f1\lang1049 Description\cf0 : the method writes text to the specified file\par
 \cf2 Syntax\cf0 : FileWriteAsync(string content, string encoding, string filename)\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -6305,7 +6292,7 @@ await tester.FileWriteAsync(text, Tester.UTF8, ""C:\\\\Hat\\\\file.txt"");\par
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.19041}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 FileDownloadAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'f1\'ea\'e0\'f7\'e8\'e2\'e0\'e5\'f2 \'f4\'e0\'e9\'eb\'e0 \'ef\'ee \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'ee\'ec\'f3 \f0\lang1033 URL\f1\lang1049\par
+\cf2\f1\lang1049 Description\cf0 : the method downloads the file at the specified URL\par
 \cf2 Syntax\cf0 : FileDownloadAsync(string fileURL, string filename, int waitingSec = 60)\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -6317,7 +6304,7 @@ await tester.FileWriteAsync(text, Tester.UTF8, ""C:\\\\Hat\\\\file.txt"");\par
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.19041}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 FileGetHashMD5Async\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'ee\'ef\'f0\'e5\'e4\'e5\'eb\'ff\'e5\'f2 \f0\lang1033 HashMD5 \f1\lang1049\'ea\'ee\'e4 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'ee\'e3\'ee \'f4\'e0\'e9\'eb\'e0\par
+\cf2\f1\lang1049 Description\cf0 : the method determines the MD5 Hash code of the specified file\par
 \cf2 Syntax\cf0 : FileGetHashMD5Async(string filename)\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -6328,7 +6315,7 @@ await tester.FileWriteAsync(text, Tester.UTF8, ""C:\\\\Hat\\\\file.txt"");\par
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.19041}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 CreateHashMD5FromTextAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'f1\'ee\'e7\'e4\'e0\'e5\'f2 \f0\lang1033 HashDM5 \f1\lang1049\'ea\'ee\'e4 \'e8\'e7 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'ee\'e3\'ee \'f2\'e5\'ea\'f1\'f2\'e0\par
+\cf2\f1\lang1049 Description\cf0 : the method creates a HashDM5 code from the specified text\par
 \cf2 Syntax\cf0 : CreateHashMD5FromTextAsync(string text)\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -6341,7 +6328,7 @@ tester.ConsoleMsg(hash);\par
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.19041}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 DisableDebugInReport\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'ee\'f2\'ea\'eb\'fe\'f7\'e0\'e5\'f2 \'e2\'fb\'e2\'ee\'e4 \'ee\'f2\'eb\'e0\'e4\'ee\'f7\'ed\'fb\'f5 \'f1\'ee\'ee\'e1\'f9\'e5\'ed\'e8\'e9 SendMessageDebug \'e2 \'ee\'f2\'f7\'e5\'f2\par
+\cf2\f1\lang1049 Description\cf0 : this method disables the output of SendMessageDebug debug messages to the report\par
 \cf2 Syntax\cf0 : DisableDebugInReport()\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -6352,7 +6339,7 @@ tester.ConsoleMsg(hash);\par
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.19041}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 IsVisibleElementAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'ee\'ef\'f0\'e5\'e4\'e5\'eb\'ff\'e5\'f2 \'e2\'e8\'e4\'e8\'ec\'ee\'f1\'f2\'fc \'fd\'eb\'e5\'ec\'e5\'ed\'f2\'e0 \'e8 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2 \'e7\'ed\'e0\'f7\'e5\'ed\'e8\'e5 \f0\lang1033 true \f1\lang1049\'e8\'eb\'e8 \f0\lang1033 false\f1\lang1049\par
+\cf2\f1\lang1049 Description\cf0 : the method determines the visibility of the element and returns the value true or false\par
 \cf2 Syntax\cf0 : IsVisibleElementAsync(string by, string locator)\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -6365,7 +6352,7 @@ bool result = await tester.IsVisibleElementAsync(Tester.BY_CSS, ""#login"");\par
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.19041}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 IsVisibleElementAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'ee\'ef\'f0\'e5\'e4\'e5\'eb\'ff\'e5\'f2 \'e2\'e8\'e4\'e8\'ec\'ee\'f1\'f2\'fc \'fd\'eb\'e5\'ec\'e5\'ed\'f2\'e0 \'e8 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2 \'e7\'ed\'e0\'f7\'e5\'ed\'e8\'e5 \f0\lang1033 true \f1\lang1049\'e8\'eb\'e8 \f0\lang1033 false\f1\lang1049\par
+\cf2\f1\lang1049 Description\cf0 : the method determines the visibility of the element and returns the value true or false\par
 \cf2 Syntax\cf0 : IsVisibleElementAsync(string by, string locator)\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -6382,7 +6369,7 @@ await frame.AssertTrueAsync(result);\par
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.19041}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 BrowserScreenshotAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e4\'e5\'eb\'e0\'e5\'f2 \'f1\'ed\'e8\'ec\'ee\'ea \'fd\'ea\'f0\'e0\'ed\'e0 \'e1\'f0\'e0\'f3\'e7\'e5\'f0\'e0\par
+\cf2\f1\lang1049 Description\cf0 : the method takes a screenshot of the browser screen\par
 \cf2 Syntax\cf0 : BrowserScreenshotAsync(string \f0\lang1033 filename\f1\lang1049 )\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -6399,7 +6386,7 @@ tester.ConsoleMsg(screenshot);\par
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.19041}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 TesterMySql\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ee\'f1\'ed\'ee\'e2\'ed\'ee\'e9 \'ea\'eb\'e0\'f1\'f1 \'f0\'e0\'e1\'ee\'f2\'fb \'f1 \'e1\'e0\'e7\'ee\'e9 \'e4\'e0\'ed\'ed\'fb\'f5 \f0\lang1033 MySql\f1\lang1049\par
+\cf2\f1\lang1049 Description\cf0 : the main class of working with a MySQL database\par
 \cf2 Syntax\cf0 : TesterMySql(Tester tester)\par
 \cf3\par
 \cf2 Example\cf3 :\par
