@@ -6398,7 +6398,7 @@ TesterMySql testerMySql = new TesterMySql(tester);\par
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.19041}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 ConnectionOpenAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'ee\'f2\'ea\'f0\'fb\'e2\'e0\'e5\'f2 \'f1\'ee\'e5\'e4\'e8\'ed\'e5\'ed\'e8\'e5 \'f1 \'e1\'e0\'e7\'ee\'e9 \'e4\'e0\'ed\'ed\'fb\'f5 \f0\lang1033 MySql\f1\lang1049\par
+\cf2\f1\lang1049 Description\cf0 : the method opens a connection to the MySQL database\par
 \cf2 Syntax\cf0 : ConnectionOpenAsync(string connectionString)\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -6409,7 +6409,7 @@ TesterMySql testerMySql = new TesterMySql(tester);\par
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.19041}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 ConnectionCloseAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e7\'e0\'ea\'f0\'fb\'e2\'e0\'e5\'f2 \'f1\'ee\'e5\'e4\'e8\'ed\'e5\'ed\'e8\'e5 \'f1 \'e1\'e0\'e7\'ee\'e9 \'e4\'e0\'ed\'ed\'fb\'f5 \f0\lang1033 MySql\f1\lang1049\par
+\cf2\f1\lang1049 Description\cf0 : the method closes the connection to the MySQL database\par
 \cf2 Syntax\cf0 : ConnectionCloseAsync()\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -6420,7 +6420,7 @@ TesterMySql testerMySql = new TesterMySql(tester);\par
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.19041}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 GetCountEntriesAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2 \'ea\'ee\'eb\'e8\'f7\'e5\'f1\'f2\'e2\'ee \'e7\'e0\'ef\'e8\'f1\'e5\'e9 \'e2 \'f2\'e0\'e1\'eb\'e8\'f6\'e5 \'ef\'ee\'f1\'eb\'e5 \'e2\'fb\'ef\'ee\'eb\'ed\'e5\'ed\'e8\'ff \'e7\'e0\'ef\'f0\'ee\'f1\'e0\par
+\cf2\f1\lang1049 Description\cf0 : the method returns the number of records in the table after executing the query\par
 \cf2 Syntax\cf0 : GetCountEntriesAsync(string sqlQuertSelect)\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -6431,7 +6431,7 @@ TesterMySql testerMySql = new TesterMySql(tester);\par
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.19041}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 GetEntriesAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2 \'f1\'ef\'e8\'f1\'ee\'ea \'e7\'e0\'ef\'e8\'f1\'e5\'e9 \'e8\'e7 \'f2\'e0\'e1\'eb\'e8\'f6\'fb \'ef\'ee\'f1\'eb\'e5 \'e2\'fb\'ef\'ee\'eb\'ed\'e5\'ed\'e8\'ff \'e7\'e0\'ef\'f0\'ee\'f1\'e0\par
+\cf2\f1\lang1049 Description\cf0 : the method returns a list of records from the table after executing the query\par
 \cf2 Syntax\cf0 : GetEntriesAsync(string sqlQuertSelect)\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -6447,7 +6447,7 @@ foreach(List<string> entry in entries)\par
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.19041}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 GetEntriesFromTableAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2 \'f1\'ef\'e8\'f1\'ee\'ea \'e7\'e0\'ef\'e8\'f1\'e5\'e9 \'e8\'e7 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'ee\'e9 \'f2\'e0\'e1\'eb\'e8\'f6\'fb \'e1\'e0\'e7\'fb \'e4\'e0\'ed\'ed\'fb\'f5\par
+\cf2\f1\lang1049 Description\cf0 : the method returns a list of records from the specified database table\par
 \cf2 Syntax\cf0 : GetEntriesFromTableAsync(string tableName)\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -6463,7 +6463,7 @@ foreach(List<string> entry in entries)\par
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.19041}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 GetDataTableAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2 \'f2\'e0\'e1\'eb\'e8\'f6\'f3 \'e7\'e0\'ef\'e8\'f1\'e5\'e9 \'e8\'e7 \'f2\'e0\'e1\'eb\'e8\'f6\'fb \'e1\'e0\'e7\'fb \'e4\'e0\'ed\'ed\'fb\'f5 \'ef\'ee\'f1\'eb\'e5 \'e2\'fb\'ef\'ee\'eb\'ed\'e5\'ed\'e8\'ff \'e7\'e0\'ef\'f0\'ee\'f1\'e0\par
+\cf2\f1\lang1049 Description\cf0 : the method returns a table of records from the database table after executing the query\par
 \cf2 Syntax\cf0 : GetDataTableAsync(string sqlQuertSelect)\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -6479,7 +6479,7 @@ foreach (DataRow row in dataTable.Rows)\par
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.19041}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 SetEntryAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'fb\'ef\'ee\'eb\'ed\'ff\'e5\'f2 \'e7\'e0\'ef\'f0\'ee\'f1 \'ea\'ee\'f2\'ee\'f0\'fb\'e9 \'e4\'ee\'e1\'e0\'e2\'eb\'ff\'e5\'f2 \'e4\'e0\'ed\'ed\'fb\'e5 \'e2 \'f2\'e0\'e1\'eb\'e8\'f6\'f3 \'e1\'e0\'e7\'fb \'e4\'e0\'ed\'ed\'fb\'f5 \'e8 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2 \'ed\'ee\'ec\'e5\'f0 \'e7\'e0\'ef\'e8\'f1\'e8\par
+\cf2\f1\lang1049 Description\cf0 : the method executes a query that adds data to the database table and returns the record number\par
 \cf2 Syntax\cf0 : SetEntryAsync(string sqlQuertInsert)\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -6490,7 +6490,7 @@ foreach (DataRow row in dataTable.Rows)\par
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.19041}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 EditEntryAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'fb\'ef\'ee\'eb\'ed\'ff\'e5\'f2 \'e7\'e0\'ef\'f0\'ee\'f1 \'ea\'ee\'f2\'ee\'f0\'fb\'e9 \'e8\'e7\'ec\'e5\'ed\'ff\'e5\'f2 \'e4\'e0\'ed\'ed\'fb\'e5 \'e2 \'f2\'e0\'e1\'eb\'e8\'f6\'f3 \'e1\'e0\'e7\'fb \'e4\'e0\'ed\'ed\'fb\'f5 \'e8 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2 \'ed\'ee\'ec\'e5\'f0 \'e7\'e0\'ef\'e8\'f1\'e8\par
+\cf2\f1\lang1049 Description\cf0 : the method executes a query that modifies the data in the database table and returns the record number\par
 \cf2 Syntax\cf0 : EditEntryAsync(string sqlQuertUpdate)\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -6501,7 +6501,7 @@ foreach (DataRow row in dataTable.Rows)\par
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.19041}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 RemoveEntryAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'fb\'ef\'ee\'eb\'ed\'ff\'e5\'f2 \'e7\'e0\'ef\'f0\'ee\'f1 \'ea\'ee\'f2\'ee\'f0\'fb\'e9 \'f3\'e4\'e0\'eb\'ff\'e5\'f2 \'e4\'e0\'ed\'ed\'fb\'e5 \'e2 \'f2\'e0\'e1\'eb\'e8\'f6\'f3 \'e1\'e0\'e7\'fb \'e4\'e0\'ed\'ed\'fb\'f5 \'e8 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2 \'ed\'ee\'ec\'e5\'f0 \'e7\'e0\'ef\'e8\'f1\'e8\par
+\cf2\f1\lang1049 Description\cf0 : the method executes a query that deletes the data in the database table and returns the record number\par
 \cf2 Syntax\cf0 : RemoveEntryAsync(string sqlQuertDelete)\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -6512,7 +6512,7 @@ foreach (DataRow row in dataTable.Rows)\par
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.19041}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 FindEntryAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'fb\'ef\'ee\'eb\'ed\'ff\'e5\'f2 \'ef\'ee\'e8\'f1\'ea \'e4\'e0\'ed\'ed\'fb\'e5 \'e2 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'ee\'e9 \'f2\'e0\'e1\'eb\'e8\'f6\'e5 \'e1\'e0\'e7\'fb \'e4\'e0\'ed\'ed\'fb\'f5 \'e8 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2 \'eb\'ee\'e3\'e8\'f7\'e5\'f1\'ea\'ee\'e5 \'e7\'ed\'e0\'f7\'e5\'ed\'e8\'e5 \'f0\'e5\'e7\'f3\'eb\'fc\'f2\'e0\'f2\'e0 \'ef\'ee\'e8\'f1\'ea\'e0\par
+\cf2\f1\lang1049 Description\cf0 : the method searches for data in the specified database table and returns the boolean value of the search result\par
 \cf2 Syntax\cf0 : FindEntryAsync(string tableName, string columnName, string value)\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -6523,7 +6523,7 @@ foreach (DataRow row in dataTable.Rows)\par
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.19041}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 AssertHaveInTableAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'fb\'ef\'ee\'eb\'ed\'ff\'e5\'f2 \'ef\'f0\'ee\'e2\'e5\'f0\'ea\'f3 \'e4\'e0\'ed\'ed\'fb\'e5 \'e2 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'ee\'e9 \'f2\'e0\'e1\'eb\'e8\'f6\'e5 \'e1\'e0\'e7\'fb \'e4\'e0\'ed\'ed\'fb\'f5 \'e8 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2 \'eb\'ee\'e3\'e8\'f7\'e5\'f1\'ea\'ee\'e5 \'e7\'ed\'e0\'f7\'e5\'ed\'e8\'e5 \'f0\'e5\'e7\'f3\'eb\'fc\'f2\'e0\'f2\'e0 \'ef\'ee\'e8\'f1\'ea\'e0, \'e2 \'f1\'eb\'f3\'f7\'e0\'e5 \'ee\'f2\'f0\'e8\'f6\'e0\'f2\'e5\'eb\'fc\'ed\'ee\'e3\'ee \'f0\'e5\'e7\'f3\'eb\'fc\'f2\'e0\'f2\'e0 \'ef\'f0\'ee\'e2\'e5\'f0\'ea\'e0 \'e1\'f3\'e4\'e5\'f2 \'f1\'f7\'e8\'f2\'e0\'f2\'fc\'f1\'ff \'ef\'f0\'ee\'e2\'e0\'eb\'fc\'ed\'ee\'e9\par
+\cf2\f1\lang1049 Description\cf0 : the method checks the data in the specified database table and returns the boolean value of the search result, in case of a negative result, the check will be considered a failure\par
 \cf2 Syntax\cf0 : AssertHaveInTableAsync(string tableName, string columnName, string value)\par
 \cf3\par
 \cf2 Example\cf3 :\par
@@ -6534,7 +6534,7 @@ foreach (DataRow row in dataTable.Rows)\par
 {\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
 {\*\generator Riched20 10.0.19041}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 AssertDontHaveInTableAsync\cf0\par
-\cf2\f1\lang1049 Description\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'fb\'ef\'ee\'eb\'ed\'ff\'e5\'f2 \'ef\'f0\'ee\'e2\'e5\'f0\'ea\'f3 \'e4\'e0\'ed\'ed\'fb\'e5 \'e2 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'ee\'e9 \'f2\'e0\'e1\'eb\'e8\'f6\'e5 \'e1\'e0\'e7\'fb \'e4\'e0\'ed\'ed\'fb\'f5 \'e8 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2 \'eb\'ee\'e3\'e8\'f7\'e5\'f1\'ea\'ee\'e5 \'e7\'ed\'e0\'f7\'e5\'ed\'e8\'e5 \'f0\'e5\'e7\'f3\'eb\'fc\'f2\'e0\'f2\'e0 \'ef\'ee\'e8\'f1\'ea\'e0, \'e2 \'f1\'eb\'f3\'f7\'e0\'e5 \'ef\'ee\'eb\'ee\'e6\'e8\'f2\'e5\'eb\'fc\'ed\'ee\'e3\'ee \'f0\'e5\'e7\'f3\'eb\'fc\'f2\'e0\'f2\'e0 \'ef\'f0\'ee\'e2\'e5\'f0\'ea\'e0 \'e1\'f3\'e4\'e5\'f2 \'f1\'f7\'e8\'f2\'e0\'f2\'fc\'f1\'ff \'ef\'f0\'ee\'e2\'e0\'eb\'fc\'ed\'ee\'e9\par
+\cf2\f1\lang1049 Description\cf0 : the method checks the data in the specified database table and returns the boolean value of the search result, in case of a positive result, the check will be considered a failure\par
 \cf2 Syntax\cf0 : AssertDontHaveInTableAsync(string tableName, string columnName, string value)\par
 \cf3\par
 \cf2 Example\cf3 :\par
