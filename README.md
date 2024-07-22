@@ -48,8 +48,8 @@ Jenkins, TeamCity, GitLab CI/CD.
 
 <hr>
 <b>Plugins (плагины):</b>
-<br>The HatPluginMySql plugin for the Hat browser that allows you to perform automated testing of data in a MySQL database
-<br>Плагин HatPluginMySql для браузера Hat который позволяет выполнять автоматизированное тестирование данных в базе данных MySql
+<br>The HatPluginMySql plugin for the Hat browser that allows you to perform automated testing of data in a MySQL database.
+<br>Плагин HatPluginMySql для браузера Hat который позволяет выполнять автоматизированное тестирование данных в базе данных MySql.
 <br>https://github.com/SomovStudio/HatPluginMySql
 
 <hr>
