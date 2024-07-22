@@ -21,7 +21,18 @@ namespace Hat
 
         private void InputBoxForm_Load(object sender, EventArgs e)
         {
-
+            if (HatSettings.language == HatSettings.RUS)
+            {
+                this.Text = "Ввод данных";
+                button1.Text = "ОК";
+                button2.Text = "Отмена";
+            }
+            else
+            {
+                this.Text = "Data input";
+                button1.Text = "OK";
+                button2.Text = "Cancel";
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)

@@ -30,9 +30,9 @@ namespace HatFrameworkDev
             string result = null;
             try
             {
-                if (_tester.Debug == true) _tester.ConsoleMsg($"[DEBUG] {action} - JS скрипт: {script}");
+                if (_tester.Debug == true) _tester.ConsoleMsg($"[DEBUG] {action} - JS скрипт: {script}", $"[DEBUG] {action} - JS script: {script}");
                 result = await _tester.BrowserView.CoreWebView2.ExecuteScriptAsync(script);
-                if (_tester.Debug == true) _tester.ConsoleMsg($"[DEBUG] {action} - JS результат: {result}");
+                if (_tester.Debug == true) _tester.ConsoleMsg($"[DEBUG] {action} - JS результат: {result}", $"[DEBUG] {action} - JS result: {result}");
                 if (result == "null" || result == null)
                 {
                     if (_tester.Debug == true) _tester.SendMessageDebug(action, action, Tester.FAILED,
@@ -82,7 +82,7 @@ namespace HatFrameworkDev
                 script += "}());";
 
                 string result = await _tester.BrowserView.CoreWebView2.ExecuteScriptAsync(script);
-                if (_tester.Debug == true) _tester.ConsoleMsg($"[DEBUG] JS результат: {result}");
+                if (_tester.Debug == true) _tester.ConsoleMsg($"[DEBUG] JS результат: {result}", $"[DEBUG] JS result: {result}");
                 if (result != "null" && result != null && result == "true") found = true;
                 else found = false;
             }
@@ -438,9 +438,9 @@ namespace HatFrameworkDev
                 script += "if((element.getAttribute('onclick')!=null)||(element.getAttribute('href')!=null)) return true;";
                 script += "return false;";
                 script += "}());";
-                if (_tester.Debug == true) _tester.ConsoleMsg($"[DEBUG] JS скрипт: {script}");
+                if (_tester.Debug == true) _tester.ConsoleMsg($"[DEBUG] JS скрипт: {script}", $"[DEBUG] JS script: {script}");
                 string result = await _tester.BrowserView.CoreWebView2.ExecuteScriptAsync(script);
-                if (_tester.Debug == true) _tester.ConsoleMsg($"[DEBUG] JS результат: {result}");
+                if (_tester.Debug == true) _tester.ConsoleMsg($"[DEBUG] JS результат: {result}", $"[DEBUG] JS result: {result}");
 
                 if (result != "null" && result != null && result == "true") clickable = true;
                 else clickable = false;
@@ -479,9 +479,9 @@ namespace HatFrameworkDev
                     else script += "element.scrollIntoView(); return element;";
                 }
                 script += "}());";
-                if (_tester.Debug == true) _tester.ConsoleMsg($"[DEBUG] JS скрипт: {script}");
+                if (_tester.Debug == true) _tester.ConsoleMsg($"[DEBUG] JS скрипт: {script}", $"[DEBUG] JS script: {script}");
                 string result = await _tester.BrowserView.CoreWebView2.ExecuteScriptAsync(script);
-                if (_tester.Debug == true) _tester.ConsoleMsg($"[DEBUG] JS результат: {result}");
+                if (_tester.Debug == true) _tester.ConsoleMsg($"[DEBUG] JS результат: {result}", $"[DEBUG] JS result: {result}");
                 _tester.SendMessageDebug($"ScrollToElementAsync(\"{by}\", \"{locator}\", {behaviorSmooth})", $"ScrollToElementAsync(\"{by}\", \"{locator}\", {behaviorSmooth})", Tester.PASSED, "Выполнена прокрутка (scroll) к элементу", "Scrolled to the element - completed", Tester.IMAGE_STATUS_PASSED);
             }
             catch (Exception ex)
@@ -652,9 +652,9 @@ namespace HatFrameworkDev
                 string result = null;
                 for (int i = 0; i < sec; i++)
                 {
-                    if (_tester.Debug == true) _tester.ConsoleMsg($"[DEBUG] JS скрипт: {script}");
+                    if (_tester.Debug == true) _tester.ConsoleMsg($"[DEBUG] JS скрипт: {script}", $"[DEBUG] JS script: {script}");
                     result = await _tester.BrowserView.CoreWebView2.ExecuteScriptAsync(script);
-                    if (_tester.Debug == true) _tester.ConsoleMsg($"[DEBUG] JS результат: {result}");
+                    if (_tester.Debug == true) _tester.ConsoleMsg($"[DEBUG] JS результат: {result}", $"[DEBUG] JS result: {result}");
                     if (result != "null" && result != null)
                     {
                         found = true;

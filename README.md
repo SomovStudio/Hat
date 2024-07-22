@@ -2,6 +2,25 @@
 
 [![License](http://img.shields.io/:license-mit-blue.svg)](https://github.com/SomovStudio/Hat/blob/main/LICENSE)
 
+A browser with built-in web application testing automation technology.
+<br>
+The peculiarity of the Hat browser is that autotests are performed directly in the browser without Selenium and WebDriver.
+<br>
+The built-in Net Framework contains a sufficient number of methods necessary to perform the basic 
+tasks of test automation. The C# programming language and the built-in code editor are used to 
+describe autotest scripts. You can also use Visual Studio as an editor. The user-friendly browser 
+interface displays all the steps of the test with the corresponding description of the sales. 
+The verification result is generated in a report and sent to the specified email address. 
+Autotests can be run from the command line of the Windows operating system. It's useful when 
+using autotests in popular continuous integration environments such as: 
+Jenkins, TeamCity, GitLab CI/CD.
+<br>
+<br>
+<br>Download: https://github.com/SomovStudio/Hat/releases/download/v1.4/Hat-1.4.zip
+<br>Current version (актуальная версия) 1.4 (22.07.2024)
+<br>All builds can be downloaded from (все сборки можно скачать с) <a target="_blank" href="https://drive.google.com/drive/folders/1X-dtbYdjTcpMsWYlUjUupl3PU0BuKCwK">Google Disk</a>
+<br>
+<br>
 Браузер со встроенной технологией автоматизации тестирования Web приложений.
 <br>
 Особенность браузера Hat в том что автотесты напрямую выполняются в браузере без Selenium и WebDriver.
@@ -12,37 +31,35 @@
 Результат проверки формируется в отчет и отправляются на указаную почту. 
 Запуск автотестов возможен из командной строки операционной системы Windows это пригодится при использовании автотестов в популярных средствах непрерывной интеграции таких как: Jenkins, TeamCity, GitLab CI/CD.
 <br>
-<br>Скачать браузер Hat: https://github.com/SomovStudio/Hat/releases/download/v1.3.13/Hat-1.3.13.zip
-<br>(актуальная версия 1.3.13 от 04.06.2024)
-<br>Все сборки можно скачать с <a target="_blank" href="https://drive.google.com/drive/folders/1X-dtbYdjTcpMsWYlUjUupl3PU0BuKCwK">Google Disk</a>
 <hr>
 
 <p align="center">
-  <img src="https://github.com/SomovStudio/Hat/blob/main/Img/screenshots/HatZionec.png">
+  <img src="https://github.com/SomovStudio/Hat/blob/main/Img/screenshots/HatZionecEng.png">
 </p>
 
-<b>Системные требования:</b>
-1. Операционная система Windows 8, 8.1, 10, 11
+<b>System requirements (системные требования):</b>
+1. Windows operating system 8, 8.1, 10, 11
 
 2. Microsoft .NET Framework 4.8
-<br>Скачать .NET Framework Runtime по ссылке: https://dotnet.microsoft.com/en-us/download/dotnet-framework/net48
+<br>Download .NET Framework Runtime: https://dotnet.microsoft.com/en-us/download/dotnet-framework/net48
 
 3. Microsoft Edge WebView2
-<br>Скачать WebView2 Runtime по ссылке: https://developer.microsoft.com/en-us/microsoft-edge/webview2/
+<br>Download WebView2 Runtime: https://developer.microsoft.com/en-us/microsoft-edge/webview2/
 
 <hr>
-<b>Плагины:</b>
-<br>Плагин HatPluginMySql для браузера Hat который позволяет выполнять автоматизированное тестирование данных в базе данных MySql
+<b>Plugins (плагины):</b>
+<br>The HatPluginMySql plugin for the Hat browser that allows you to perform automated testing of data in a MySQL database.
+<br>Плагин HatPluginMySql для браузера Hat который позволяет выполнять автоматизированное тестирование данных в базе данных MySql.
 <br>https://github.com/SomovStudio/HatPluginMySql
 
 <hr>
-<b>Документация:</b>
-<br>Официальная страница приложения: https://somovstudio.github.io/hat.html
-<br>Документация online:  https://somovstudio.github.io/help/Hat/index.html
-<br>Документация offline: <a href="https://github.com/SomovStudio/Hat/raw/main/Help/help.chm">help.chm</a>
+<b>Documentation (документация):</b>
+<br>The official page of the application: https://somovstudio.github.io/hat.html
+<br>Online documentation:  https://somovstudio.github.io/help/Hat/index.html
+<br>Offline documentation: <a href="https://github.com/SomovStudio/Hat/raw/main/Help/help.chm">help.chm</a>
 
 <hr>
-<b>Видео:</b>
+<b>Video (видео):</b>
 <br>Видеообзор браузера Hat: https://youtu.be/Dn9UtrNj6EM
 <br>
 <br>
@@ -57,6 +74,8 @@
 <br>
 
 <hr>
+<br>The program was developed with the support of the <b><a href="https://zionec.ru/">Zionek</a></b> company
+<br>The Zionec company develops "Online stores", "Corporate portals", "CRM systems" and its own solutions.
 <br>Программа разработана при поддержке компании "<b>Зионек</b>" https://zionec.ru/
 <br>Компания "<b>Зионек</b>" занимается разработкой "Интернет-магазинов", "Корпоративных порталов", "CRM-систем" и собственных решений.
 <br><br>

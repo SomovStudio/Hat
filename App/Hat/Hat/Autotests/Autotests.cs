@@ -19,7 +19,7 @@ namespace Hat
 
         public static void play(string testFilename)
         {
-            Config.browserForm.ConsoleMsg($"Запущен файл автотеста: {testFilename}");
+            Config.browserForm.ConsoleMsg($"Запущен файл автотеста: {testFilename}", $"The autotest file is running: {testFilename}");
             if (Config.languageEngConsole == false) Config.browserForm.SystemConsoleMsg($"Запущен файл автотеста: {testFilename}", default, ConsoleColor.DarkCyan, ConsoleColor.White, true);
             else Config.browserForm.SystemConsoleMsg($"The autotest file is running: {testFilename}", default, ConsoleColor.DarkCyan, ConsoleColor.White, true);
 
@@ -169,7 +169,10 @@ namespace Hat
 
         public static string getContentFileExamplePage()
         {
-            string content =
+            string content = "";
+            if (HatSettings.language == HatSettings.RUS)
+            {
+                content =
 @"using System;
 using HatFramework;
 
@@ -186,6 +189,27 @@ namespace Hat
     }
 }
 ";
+            }
+            else
+            {
+                content =
+@"using System;
+using HatFramework;
+
+namespace Hat
+{
+    public static class ExamplePage
+    {
+        public static string URL = @""https://somovstudio.github.io/test_eng.html"";        
+        public static string InputLogin = ""login"";
+        public static string InputPass = ""pass"";
+        public static string ButtonLogin = ""buttonLogin"";
+        public static string Result = ""result"";
+        public static string Textarea = ""textarea"";
+    }
+}
+";
+            }
             return content;
         }
 
@@ -233,7 +257,10 @@ namespace Hat
 
         public static string getContentFileExampleTest1()
         {
-            string content =
+            string content ="";
+            if (HatSettings.language == HatSettings.RUS)
+            {
+                content =
 @"using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -298,12 +325,84 @@ namespace Hat
     }
 }
 ";
+            }
+            else
+            {
+                content =
+@"using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Windows.Forms;
+using System.Threading;
+using System.Threading.Tasks;
+using System.IO;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Text.RegularExpressions;
+using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Reflection;
+using Newtonsoft.Json;
+using HatFramework;
+
+namespace Hat
+{
+    public class ExampleTest1
+    {
+        Tester tester;
+
+        public async void Main(Form browserWindow)
+        {
+            tester = new Tester(browserWindow);
+
+            await setUp();
+            await test();
+            await tearDown();
+        }
+
+        public async Task setUp()
+        {
+            tester.Description(""Test #1 checks the authorization on the site"");
+            await tester.BrowserFullScreenAsync();
+        }
+
+        public async Task test()
+        {
+            await tester.TestBeginAsync();
+            await tester.GoToUrlAsync(""https://somovstudio.github.io/test_eng.html"", 5);
+            await tester.WaitVisibleElementByIdAsync(""login"", 15);
+            await tester.SetValueInElementByIdAsync(""login"", ""admin"");
+            await tester.WaitAsync(2);
+            await tester.SetValueInElementByIdAsync(""pass"", ""0000"");
+            await tester.WaitAsync(2);
+            await tester.ClickElementByIdAsync(""buttonLogin"");
+            await tester.WaitVisibleElementByIdAsync(""result"", 5);
+            string actual = await tester.GetValueFromElementByIdAsync(""textarea"");
+            string expected = ""Authorization was successful"";
+            await tester.AssertEqualsAsync(expected, actual);
+            await tester.TestEndAsync();
+        }
+
+        public async Task tearDown()
+        {
+            // await tester.BrowserCloseAsync();
+        }
+    }
+}
+";
+            }
             return content;
         }
 
         public static string getContentFileExampleTest2()
         {
-            string content =
+            string content = "";
+            if (HatSettings.language == HatSettings.RUS)
+            {
+                content =
 @"using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -364,6 +463,71 @@ namespace Hat
     }
 }
 ";
+            }
+            else
+            {
+                content =
+@"using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Windows.Forms;
+using System.Threading;
+using System.Threading.Tasks;
+using System.IO;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Text.RegularExpressions;
+using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Reflection;
+using Newtonsoft.Json;
+using HatFramework;
+
+namespace Hat
+{
+    public class ExampleTest2
+    {
+        ExampleSteps tester;
+
+        public async void Main(Form browserWindow)
+        {
+            tester = new ExampleSteps(browserWindow);
+
+            await setUp();
+            await test();
+            await tearDown();
+        }
+
+        public async Task setUp()
+        {
+            tester.Description(""Test #2 checks the authorization on the site"");
+            await tester.BrowserFullScreenAsync();
+        }
+
+        public async Task test()
+        {
+            await tester.TestBeginAsync();
+            await tester.GoToUrlAsync(ExamplePage.URL, 5);
+            await tester.FillForm();
+            await tester.ClickElementByIdAsync(ExamplePage.ButtonLogin);
+            await tester.WaitVisibleElementByIdAsync(ExamplePage.Result, 5);
+            string actual = await tester.GetValueFromElementByIdAsync(ExamplePage.Textarea);
+            string expected = ""Authorization was successful"";
+            await tester.AssertEqualsAsync(expected, actual);
+            await tester.TestEndAsync();
+        }
+
+        public async Task tearDown()
+        {
+            // await tester.BrowserCloseAsync();
+        }
+    }
+}
+";
+            }
             return content;
         }
 
@@ -610,7 +774,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("""")]
 [assembly: AssemblyCompany("""")]
 [assembly: AssemblyProduct("""")]
-[assembly: AssemblyCopyright(""Copyright © 2022"")]
+[assembly: AssemblyCopyright(""Copyright © 2024"")]
 [assembly: AssemblyTrademark("""")]
 [assembly: AssemblyCulture("""")]
 [assembly: ComVisible(false)]
