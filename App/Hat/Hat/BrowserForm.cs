@@ -22,7 +22,6 @@ namespace Hat
         {
             InitializeComponent();
 
-
             HatSettings.load();
             StartPage.createStartPage();
             toolStripComboBoxUrl.Text = "file:///" + StartPage.fileStartPage;

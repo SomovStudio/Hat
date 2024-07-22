@@ -6590,6 +6590,8 @@ foreach (DataRow row in dataTable.Rows)\par
                     label4.Text = "Справочник";
                     toolStripStatusLabel1.Text = "Кодировка:";
                     toolStripStatusLabel4.Text = "Файл:";
+                    вставитьВКодToolStripMenuItem.Text = "Вставить в код";
+                    closeFileToolStripMenuItem.Text = "Закрыть файл";
                 }
                 else
                 {
@@ -6621,8 +6623,10 @@ foreach (DataRow row in dataTable.Rows)\par
                     label4.Text = "Help";
                     toolStripStatusLabel1.Text = "Encoding:";
                     toolStripStatusLabel4.Text = "File:";
+                    вставитьВКодToolStripMenuItem.Text = "Insert into the code";
+                    closeFileToolStripMenuItem.Text = "Close the file";
 
-                    for(int i = 0; i < treeView1.Nodes.Count; i++)
+                    for (int i = 0; i < treeView1.Nodes.Count; i++)
                     {
                         if (treeView1.Nodes[i].Text == "Класс: Tester") treeView1.Nodes[i].Text = "Class: Tester";
                         if (treeView1.Nodes[i].Text == "Класс: FRAMEElement") treeView1.Nodes[i].Text = "Class: FRAMEElement";
