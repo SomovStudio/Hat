@@ -73,7 +73,7 @@ namespace Hat
 
                 if (HatSettings.language == HatSettings.RUS)
                 {
-                    Config.projectPath = "(не открыт)";
+                    if (Config.commandLineMode == false) Config.projectPath = "(не открыт)";
                     languageReportEmailRusToolStripMenuItem.Checked = true;
                     languageReportEmailEngToolStripMenuItem.Checked = false;
                     languageRusToolStripMenuItem.Checked = false;
@@ -81,7 +81,7 @@ namespace Hat
                 }
                 else
                 {
-                    Config.projectPath = "(not opened)";
+                    if (Config.commandLineMode == false) Config.projectPath = "(not opened)";
                     languageReportEmailRusToolStripMenuItem.Checked = false;
                     languageReportEmailEngToolStripMenuItem.Checked = true;
                     languageRusToolStripMenuItem.Checked = false;
