@@ -2,18 +2,15 @@
 
 [![License](http://img.shields.io/:license-mit-blue.svg)](https://github.com/SomovStudio/Hat/blob/main/LICENSE)
 
-A browser with built-in web application testing automation technology.
+The browser has the technology of automated testing of Web applications.
 <br>
-The peculiarity of the Hat browser is that autotests are performed directly in the browser without Selenium and WebDriver.
+Autotests are performed in the browser "Hat" without Selenium and WebDriver.
 <br>
-The built-in Net Framework contains a sufficient number of methods necessary to perform the basic 
-tasks of test automation. The C# programming language and the built-in code editor are used to 
-describe autotest scripts. You can also use Visual Studio as an editor. The user-friendly browser 
-interface displays all the steps of the test with the corresponding description of the sales. 
+The browser has a code editor for creating autotest scripts in the C# programming language.
+You can also use Visual Studio as an editor.
+The user-friendly browser interface displays all the steps of the test with a detailed description of the events. 
 The verification result is generated in a report and sent to the specified email address. 
-Autotests can be run from the command line of the Windows operating system. It's useful when 
-using autotests in popular continuous integration environments such as: 
-Jenkins, TeamCity, GitLab CI/CD.
+Autotests can be run from the command line of the Windows operating system. This is useful when using autotests in popular continuous integration tools such as: Jenkins, TeamCity, GitLab CI/CD.
 <br>
 <br>
 <br>Download: https://github.com/SomovStudio/Hat/releases/download/v1.4/Hat-1.4.zip
