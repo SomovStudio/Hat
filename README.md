@@ -70,7 +70,7 @@ Autotests can be run from the command line of the Windows operating system. This
 <br>
 
 <hr>
-<br>The program was developed with the support of the <b><a href="https://zionec.ru/">Zionek</a></b> company
+<br>The program was developed with the support of the <b><a href="https://zionec.ru/">Zionec</a></b> company
 <br>The Zionec company develops "Online stores", "Corporate portals", "CRM systems" and its own solutions.
 <br><br>
 <p align="center">
