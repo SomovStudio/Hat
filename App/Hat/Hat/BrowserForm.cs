@@ -2814,14 +2814,7 @@ namespace Hat
 
         private void documentationToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            try
-            {
-                Process.Start("help.chm");
-            }
-            catch (Exception ex)
-            {
-                ConsoleMsgError(ex.ToString());
-            }
+            
         }
 
         private void testTableClearToolStripMenuItem_Click(object sender, EventArgs e)
@@ -3591,6 +3584,35 @@ namespace Hat
             }
         }
 
-        
+        private void offlineToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Process.Start("help.chm");
+            }
+            catch (Exception ex)
+            {
+                ConsoleMsgError(ex.ToString());
+            }
+        }
+
+        private void onlineToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (HatSettings.language == HatSettings.RUS)
+                {
+                    System.Diagnostics.Process.Start(@"https://somovstudio.github.io/help/Hat/index.html");
+                }
+                else
+                {
+                    System.Diagnostics.Process.Start(@"https://somovstudio.github.io/help/Hat/index.html?Description2.html");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка");
+            }
+        }
     }
 }
