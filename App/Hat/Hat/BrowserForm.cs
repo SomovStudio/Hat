@@ -2814,14 +2814,7 @@ namespace Hat
 
         private void documentationToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            try
-            {
-                Process.Start("help.chm");
-            }
-            catch (Exception ex)
-            {
-                ConsoleMsgError(ex.ToString());
-            }
+            
         }
 
         private void testTableClearToolStripMenuItem_Click(object sender, EventArgs e)
@@ -3354,11 +3347,11 @@ namespace Hat
                 label8.Text = "высота:";
 
                 toolStripStatusLabel5.Text = "Кодировка:";
-                toolStripStatusLabelFileEncoding.Text = "(не выбрана)";
+                if (toolStripStatusLabelFileEncoding.Text == "(not selected)") toolStripStatusLabelFileEncoding.Text = "(не выбрана)";
                 toolStripStatusLabel3.Text = "Проект:";
-                toolStripStatusLabelProjectPath.Text = "(не открыт)";
+                if (toolStripStatusLabelProjectPath.Text == "(not opened)") toolStripStatusLabelProjectPath.Text = "(не открыт)";
                 toolStripStatusLabel4.Text = "файл:";
-                toolStripStatusLabelProjectFolderFile.Text = "(не выбран)";
+                if (toolStripStatusLabelProjectFolderFile.Text == "(not selected)") toolStripStatusLabelProjectFolderFile.Text = "(не выбран)";
 
                 очиститьToolStripMenuItem.Text = "Очистить";
                 запуститьТестToolStripMenuItem1.Text = "Запустить тест";
@@ -3540,11 +3533,11 @@ namespace Hat
                 label8.Text = "height:";
 
                 toolStripStatusLabel5.Text = "Encoding:";
-                toolStripStatusLabelFileEncoding.Text = "(not selected)";
+                if (toolStripStatusLabelFileEncoding.Text == "(не выбрана)") toolStripStatusLabelFileEncoding.Text = "(not selected)";
                 toolStripStatusLabel3.Text = "Project:";
-                toolStripStatusLabelProjectPath.Text = "(not opened)";
+                if (toolStripStatusLabelProjectPath.Text == "(не открыт)") toolStripStatusLabelProjectPath.Text = "(not opened)";
                 toolStripStatusLabel4.Text = "File:";
-                toolStripStatusLabelProjectFolderFile.Text = "(not selected)";
+                if (toolStripStatusLabelProjectFolderFile.Text == "(не выбран)") toolStripStatusLabelProjectFolderFile.Text = "(not selected)";
 
                 очиститьToolStripMenuItem.Text = "Clear";
                 запуститьТестToolStripMenuItem1.Text = "Run the test";
@@ -3591,6 +3584,35 @@ namespace Hat
             }
         }
 
-        
+        private void offlineToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Process.Start("help.chm");
+            }
+            catch (Exception ex)
+            {
+                ConsoleMsgError(ex.ToString());
+            }
+        }
+
+        private void onlineToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (HatSettings.language == HatSettings.RUS)
+                {
+                    System.Diagnostics.Process.Start(@"https://somovstudio.github.io/help/Hat/index.html");
+                }
+                else
+                {
+                    System.Diagnostics.Process.Start(@"https://somovstudio.github.io/help/Hat/index.html?Description2.html");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка");
+            }
+        }
     }
 }

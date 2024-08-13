@@ -88,7 +88,10 @@
             this.systemToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.справкаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.updateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pluginMySQLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.documentationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.onlineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.offlineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator27 = new System.Windows.Forms.ToolStripSeparator();
             this.оПрограммеCrackerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
@@ -278,7 +281,6 @@
             this.folderBrowserDialogProjectCreate = new System.Windows.Forms.FolderBrowserDialog();
             this.openFileProjectDialog = new System.Windows.Forms.OpenFileDialog();
             this.saveFileLogDialog = new System.Windows.Forms.SaveFileDialog();
-            this.pluginMySQLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -809,12 +811,36 @@
             this.updateToolStripMenuItem.Text = "Проверить обновление";
             this.updateToolStripMenuItem.Click += new System.EventHandler(this.updateToolStripMenuItem_Click);
             // 
+            // pluginMySQLToolStripMenuItem
+            // 
+            this.pluginMySQLToolStripMenuItem.Name = "pluginMySQLToolStripMenuItem";
+            this.pluginMySQLToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
+            this.pluginMySQLToolStripMenuItem.Text = "Плагин MySQL для браузера";
+            this.pluginMySQLToolStripMenuItem.Click += new System.EventHandler(this.pluginMySQLToolStripMenuItem_Click);
+            // 
             // documentationToolStripMenuItem
             // 
+            this.documentationToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.onlineToolStripMenuItem,
+            this.offlineToolStripMenuItem});
             this.documentationToolStripMenuItem.Name = "documentationToolStripMenuItem";
             this.documentationToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
             this.documentationToolStripMenuItem.Text = "Документация";
             this.documentationToolStripMenuItem.Click += new System.EventHandler(this.documentationToolStripMenuItem_Click);
+            // 
+            // onlineToolStripMenuItem
+            // 
+            this.onlineToolStripMenuItem.Name = "onlineToolStripMenuItem";
+            this.onlineToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.onlineToolStripMenuItem.Text = "Online";
+            this.onlineToolStripMenuItem.Click += new System.EventHandler(this.onlineToolStripMenuItem_Click);
+            // 
+            // offlineToolStripMenuItem
+            // 
+            this.offlineToolStripMenuItem.Name = "offlineToolStripMenuItem";
+            this.offlineToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.offlineToolStripMenuItem.Text = "Offline";
+            this.offlineToolStripMenuItem.Click += new System.EventHandler(this.offlineToolStripMenuItem_Click);
             // 
             // toolStripSeparator27
             // 
@@ -2644,13 +2670,6 @@
             // 
             this.saveFileLogDialog.Filter = "*.txt|*.txt";
             // 
-            // pluginMySQLToolStripMenuItem
-            // 
-            this.pluginMySQLToolStripMenuItem.Name = "pluginMySQLToolStripMenuItem";
-            this.pluginMySQLToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
-            this.pluginMySQLToolStripMenuItem.Text = "Плагин MySQL для браузера";
-            this.pluginMySQLToolStripMenuItem.Click += new System.EventHandler(this.pluginMySQLToolStripMenuItem_Click);
-            // 
             // BrowserForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2991,6 +3010,8 @@
         private System.Windows.Forms.ToolStripMenuItem русскийToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem englishToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem pluginMySQLToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem onlineToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem offlineToolStripMenuItem;
     }
 }
 
