@@ -280,7 +280,9 @@ public async void Main(Form browserWindow)\par
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 ConsoleMsg\cf0\par
 \cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'fb\'e2\'ee\'e4\'e8\'f2 \'f1\'ee\'ee\'e1\'f9\'e5\'ed\'e8\'e5 \'e2 \'ea\'ee\'ed\'f1\'ee\'eb\'e8 \'e1\'f0\'e0\'f3\'e7\'e5\'f0\'e0\par
-\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : ConsoleMsg(string message)\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 :\par
+ConsoleMsg(string message)\par
+ConsoleMsg(string messageRus, string messageEng)\par
 \cf3\par
 \cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
 \cf0 tester.ConsoleMsg(\f0\lang1033 ""\f1\lang1049\'f2\'e5\'ea\'f1\'f2 \'f1\'ee\'ee\'e1\'f9\'e5\'ed\'e8\'ff\f0\lang1033 ""\f1\lang1049 );\par
@@ -3549,7 +3551,9 @@ public async void Main(Form browserWindow)\par
 {\*\generator Riched20 10.0.22000}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 ConsoleMsg\cf0\par
 \cf2\f1\lang1049 Description\cf0 : the method displays a message in the browser console\par
-\cf2 Syntax\cf0 : ConsoleMsg(string message)\par
+\cf2 Syntax\cf0 : \par
+ConsoleMsg(string message)\par
+ConsoleMsg(string messageRus, string messageEng)\par
 \cf3\par
 \cf2 Example\cf3 :\par
 \cf0 tester.ConsoleMsg(\f0\lang1033 ""\f1\lang1049\'f2\'e5\'ea\'f1\'f2 \'f1\'ee\'ee\'e1\'f9\'e5\'ed\'e8\'ff\f0\lang1033 ""\f1\lang1049 );\par
@@ -6866,6 +6870,7 @@ foreach (DataRow row in dataTable.Rows)\par
             data.Add(new CompletionData("ConnectionCloseAsync", "ConnectionCloseAsync()"));
             data.Add(new CompletionData("ConnectionOpenAsync", "ConnectionOpenAsync(string connectionString)"));
             data.Add(new CompletionData("ConsoleMsg", "ConsoleMsg(string message)"));
+            data.Add(new CompletionData("ConsoleMsg", "ConsoleMsg(string messageRus, string messageEng)"));
             data.Add(new CompletionData("ConsoleMsgError", "ConsoleMsgError(string message)"));
             data.Add(new CompletionData("CreateHashMD5FromTextAsync", "CreateHashMD5FromTextAsync(string text)"));
             data.Add(new CompletionData("DEFAULT", "DEFAULT"));

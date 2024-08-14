@@ -300,6 +300,18 @@ namespace HatFrameworkDev
         /* 
          * Методы для вывода сообщений о ходе тестирования ==========================================
          * */
+        public void ConsoleMsg(string message)
+        {
+            try
+            {
+                browserConsoleMsg.Invoke(BrowserWindow, new object[] { message, message });
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
         public void ConsoleMsg(string messageRus, string messageEng)
         {
             try
