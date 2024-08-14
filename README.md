@@ -17,7 +17,7 @@ Autotests can be run from the command line of the Windows operating system. This
 <br>All builds can be downloaded from (все сборки можно скачать с) <a target="_blank" href="https://drive.google.com/drive/folders/1X-dtbYdjTcpMsWYlUjUupl3PU0BuKCwK">Google Disk</a>
 <br>
 <br>
-Браузер со встроенной технологией автоматизации тестирования Web приложений.
+Браузер со встроенной технологией автоматизированного тестирования Web приложений.
 <br>
 Особенность браузера Hat в том что автотесты напрямую выполняются в браузере без Selenium и WebDriver.
 <br>
