@@ -12,8 +12,8 @@ The user-friendly browser interface displays all the steps of the test with a de
 The verification result is generated in a report and sent to the specified email address. 
 Autotests can be run from the command line of the Windows operating system. This is useful when using autotests in popular continuous integration tools such as: Jenkins, TeamCity, GitLab CI/CD.
 <br>
-<br>Download: https://github.com/SomovStudio/Hat/releases/download/v1.4/Hat-1.4.zip
-<br>Current version (актуальная версия) 1.4 (22.07.2024)
+<br>Download: https://github.com/SomovStudio/Hat/releases/download/v1.4.1/Hat-1.4.1.zip
+<br>Current version (актуальная версия) 1.4.1 (14.08.2024)
 <br>All builds can be downloaded from (все сборки можно скачать с) <a target="_blank" href="https://drive.google.com/drive/folders/1X-dtbYdjTcpMsWYlUjUupl3PU0BuKCwK">Google Disk</a>
 <br>
 <br>
