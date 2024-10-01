@@ -200,11 +200,11 @@
             // 
             this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(112, 14);
+            this.label6.Location = new System.Drawing.Point(100, 14);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(73, 13);
+            this.label6.Size = new System.Drawing.Size(31, 13);
             this.label6.TabIndex = 10;
-            this.label6.Text = "версия: 1.0.0";
+            this.label6.Text = "1.0.0";
             // 
             // linkLabel1
             // 

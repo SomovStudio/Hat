@@ -30,8 +30,8 @@ namespace Hat
             Config.encoding = WorkOnFiles.UTF_8_BOM;
             toolStripStatusLabelFileEncoding.Text = Config.encoding;
             Config.browserForm = this;
-            ConsoleMsg($"Браузер {AppDomain.CurrentDomain.FriendlyName} версия {Config.currentBrowserVersion} ({Config.dateBrowserUpdate})",
-                $"Browser {AppDomain.CurrentDomain.FriendlyName} version {Config.currentBrowserVersion} ({Config.dateBrowserUpdate})");
+            ConsoleMsg($"Браузер {AppDomain.CurrentDomain.FriendlyName} версия {Config.currentBrowserVersion} ({Config.dateBrowserUpdate}) | WebView версия {Config.browserForm.GetWebView().ProductVersion}",
+                $"Browser {AppDomain.CurrentDomain.FriendlyName} version {Config.currentBrowserVersion} ({Config.dateBrowserUpdate})  | WebView version {Config.browserForm.GetWebView().ProductVersion}");
             SystemConsoleMsg("", default, default, default, true);
             if(Config.languageEngConsole == false) SystemConsoleMsg($"Браузер Hat версия {Config.currentBrowserVersion} ({Config.dateBrowserUpdate})", default, ConsoleColor.DarkGray, ConsoleColor.White, true);
             else SystemConsoleMsg($"Browser Hat version {Config.currentBrowserVersion} ({Config.dateBrowserUpdate})", default, ConsoleColor.DarkGray, ConsoleColor.White, true);

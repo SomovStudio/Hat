@@ -70,7 +70,7 @@ namespace Hat
         {
             if (HatSettings.language == HatSettings.RUS)
             {
-                label6.Text = $"версия: {Config.currentBrowserVersion}";
+                label6.Text = $"{Config.currentBrowserVersion} ({Config.browserForm.GetWebView().ProductVersion})";
                 label7.Text = $"дата последнего обновления: {Config.dateBrowserUpdate}";
                 this.Text = "О программе Hat | Copyright © 2024 Somov Studio. All Rights Reserved.";
                 label3.Text = "Программа: Hat";
@@ -83,7 +83,7 @@ namespace Hat
             }
             else
             {
-                label6.Text = $"version: {Config.currentBrowserVersion}";
+                label6.Text = $"{Config.currentBrowserVersion} ({Config.browserForm.GetWebView().ProductVersion})";
                 label7.Text = $"date of last update: {Config.dateBrowserUpdate}";
                 this.Text = "About Hat | Copyright © 2024 Somov Studio. All Rights Reserved.";
                 label3.Text = "Program: Hat";
@@ -94,6 +94,9 @@ namespace Hat
                 label10.Text = "The program was developed with the support of the \"Zionec\"";
                 label12.Text = "The \"Zionec\" company develops \"Online stores\", \"Corporate portals\", \"CRM systems\" and its own solutions.";
             }
+
+            //label6.Text = Microsoft.Web.WebView2.Core.CoreWebView2Environment.GetAvailableBrowserVersionString();
+            //label6.Text = Config.browserForm.GetWebView().ProductVersion;
         }
     }
 }
