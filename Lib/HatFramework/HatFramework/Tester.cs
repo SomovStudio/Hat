@@ -272,7 +272,7 @@ namespace HatFramework
             try
             {
                 if (Debug == true) ConsoleMsg($"[DEBUG] JS скрипт: {script}", $"[DEBUG] JS script: {script}");
-                result = await BrowserView.CoreWebView2.ExecuteScriptAsync(script);
+                result = await BrowserView.CoreWebView2.ExecuteScriptAsync(script).ConfigureAwait(false);
                 if (Debug == true) ConsoleMsg($"[DEBUG] JS результат: {result}", $"[DEBUG] JS result: {result}");
             }
             catch (Exception ex)
