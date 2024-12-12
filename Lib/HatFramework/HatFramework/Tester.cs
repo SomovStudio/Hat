@@ -374,6 +374,8 @@ namespace HatFramework
                         else if (status == "") step += action + " ";
                         else if (status == FAILED && assertStatus != FAILED) step += action + " ";
                         else if (status == WARNING && assertStatus != FAILED) step += action + " ";
+                        else if (action.IndexOf("(") > 0) step += action.Substring(0, action.IndexOf("(")) + " - ";
+
                         step += comment;
 
                         if (status == null) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { step, default, default, default, true });
@@ -397,6 +399,8 @@ namespace HatFramework
                         else if (status == "") step += action + " ";
                         else if (status == FAILED && assertStatus != FAILED) step += action + " ";
                         else if (status == WARNING && assertStatus != FAILED) step += action + " ";
+                        else if (action.IndexOf("(") > 0) step += action.Substring(0, action.IndexOf("(")) + " - ";
+
                         step += comment;
 
                         if (status == null) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { step, default, default, default, true });
@@ -445,6 +449,8 @@ namespace HatFramework
                         else if (status == "") step += actionEng + " ";
                         else if (status == FAILED && assertStatus != FAILED) step += actionEng + " ";
                         else if (status == WARNING && assertStatus != FAILED) step += actionEng + " ";
+                        else if (actionEng.IndexOf("(") > 0) step += actionEng.Substring(0, actionEng.IndexOf("(")) + " - ";
+
                         step += commentEng;
 
                         if (status == null) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { step, default, default, default, true });
@@ -468,6 +474,8 @@ namespace HatFramework
                         else if (status == "") step += actionRus + " ";
                         else if (status == FAILED && assertStatus != FAILED) step += actionRus + " ";
                         else if (status == WARNING && assertStatus != FAILED) step += actionRus + " ";
+                        else if(actionRus.IndexOf("(") > 0) step += actionRus.Substring(0, actionRus.IndexOf("(")) + " - ";
+                        
                         step += commentRus;
 
                         if (status == null) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { step, default, default, default, true });
