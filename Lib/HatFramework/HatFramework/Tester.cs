@@ -4979,7 +4979,27 @@ namespace HatFramework
             return result;
         }
 
+        public async Task MakeElementVisibleAsync(string by, string locator, string visibility = "visible", int opacity = 1, int index = 1000)
+        {
+            if (DefineTestStop() == true) return;
 
+            string cssText = $"visibility: {visibility}; opacity: {opacity}; index: {index};";
+            string script = "(function(){";
+            if (by == BY_CSS) script += $"var element = document.querySelector(\"{locator}\");";
+            else if (by == BY_XPATH) script += $"var element = document.evaluate(\"{locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
+            script += $"element.style.cssText = '{cssText}';";
+            script += "return element;";
+            script += "}());";
+            if (await execute(script, $"MakeElementVisible(\"{by}\", \"{locator}\", \"{cssText}\")") == "null")
+            {
+                SendMessageDebug($"MakeElementVisible(\"{by}\", \"{locator}\", \"{cssText}\")", $"MakeElementVisible(\"{by}\", \"{locator}\", \"{cssText}\")", Tester.FAILED, $"Не удалось найти или ввести стиль в элемент по локатору: {locator}", $"Could not find or enter style in the element by locator: {locator}", Tester.IMAGE_STATUS_FAILED);
+                TestStopAsync();
+            }
+            else
+            {
+                SendMessageDebug($"MakeElementVisible(\"{by}\", \"{locator}\", \"{cssText}\")", $"MakeElementVisible(\"{by}\", \"{locator}\", \"{cssText}\")", Tester.PASSED, $"Стиль {cssText} введен в элемент", $"The style {cssText} is entered in the element", Tester.IMAGE_STATUS_PASSED);
+            }
+        }
 
     }
 }
