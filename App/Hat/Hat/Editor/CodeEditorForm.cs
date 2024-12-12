@@ -3298,6 +3298,48 @@ foreach (DataRow row in dataTable.Rows)\par
 \cf0\f0\lang1033 bool result = await testerMySql.AssertDontHaveInTableAsync(""test_table"", ""name"", ""'I am Tester'"");\par
 }",
 
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 MakeElementVisibleAsync\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e4\'e5\'eb\'e0\'e5\'f2 \'fd\'eb\'e5\'ec\'e5\'ed\'f2 \'e2\'e8\'e4\'e8\'ec\'fb\'ec \'ef\'f3\'f2\'e5\'ec \'e4\'ee\'e1\'e0\'e2\'eb\'e5\'ed\'e8\'ff \'f1\'f2\'e8\'eb\'e5\'e9\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : MakeElementVisibleAsync(string by, string locator, string visibility = ""visible"", int opacity = 1, int index = 1000)\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0\f0\lang1033 await tester.\f1\lang1049 MakeElementVisibleAsync\f0\lang1033 (Tester.BY_XPATH, ""//*[@id='button']"");\par
+\par
+await tester.\f1\lang1049 MakeElementVisibleAsync\f0\lang1033 (Tester.BY_BY_CSS, ""//*[@id='button']"");\par
+}",
+
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 MakeVisibleAsync\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e4\'e5\'eb\'e0\'e5\'f2 \'fd\'eb\'e5\'ec\'e5\'ed\'f2 \'e2\'e8\'e4\'e8\'ec\'fb\'ec \'ef\'f3\'f2\'e5\'ec \'e4\'ee\'e1\'e0\'e2\'eb\'e5\'ed\'e8\'ff \'f1\'f2\'e8\'eb\'e5\'e9\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : MakeVisibleAsync(string by, string locator, string visibility = ""visible"", int opacity = 1, int index = 1000)\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0\f0\lang1033 await tester.\f1\lang1049 MakeVisibleAsync\f0\lang1033 (Tester.BY_XPATH, ""//*[@id='button']"");\par
+\par
+await tester.\f1\lang1049 MakeVisibleAsync\f0\lang1033 (Tester.BY_BY_CSS, ""//*[@id='button']"");\par
+}",
+
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 MakeVisibleAsync\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e4\'e5\'eb\'e0\'e5\'f2 \'fd\'eb\'e5\'ec\'e5\'ed\'f2 \'e2\'e8\'e4\'e8\'ec\'fb\'ec \'ef\'f3\'f2\'e5\'ec \'e4\'ee\'e1\'e0\'e2\'eb\'e5\'ed\'e8\'ff \'f1\'f2\'e8\'eb\'e5\'e9\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : MakeVisibleAsync(string by, string locator, string visibility = ""visible"", int opacity = 1, int index = 1000)\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0\f0\lang1033 await tester.\f1\lang1049 MakeVisibleAsync\f0\lang1033 (Tester.BY_XPATH, ""//*[@id='button']"");\par
+\par
+await tester.\f1\lang1049 MakeVisibleAsync\f0\lang1033 (Tester.BY_BY_CSS, ""//*[@id='button']"");\par
+}",
+
+@"",
+@"",
+@"",
 @"",
 @"",
 @"",
@@ -6545,6 +6587,48 @@ foreach (DataRow row in dataTable.Rows)\par
 \cf0\f0\lang1033 bool result = await testerMySql.AssertDontHaveInTableAsync(""test_table"", ""name"", ""'I am Tester'"");\par
 }",
 
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 MakeElementVisibleAsync\cf0\par
+\cf2\f1\lang1049 Description\cf0 : the method makes the element visible by adding styles\par
+\cf2 Syntax\cf0 : MakeElementVisibleAsync(string by, string locator, string visibility = ""visible"", int opacity = 1, int index = 1000)\par
+\cf3\par
+\cf2 Example\cf3 :\par
+\cf0\f0\lang1033 await tester.\f1\lang1049 MakeElementVisibleAsync\f0\lang1033 (Tester.BY_XPATH, ""//*[@id='button']"");\par
+\par
+await tester.\f1\lang1049 MakeElementVisibleAsync\f0\lang1033 (Tester.BY_BY_CSS, ""//*[@id='button']"");\par
+}",
+
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 MakeVisibleAsync\cf0\par
+\cf2\f1\lang1049 Description\cf0 : the method makes the element visible by adding styles\par
+\cf2 Syntax\cf0 : MakeVisibleAsync(string by, string locator, string visibility = ""visible"", int opacity = 1, int index = 1000)\par
+\cf3\par
+\cf2 Example\cf3 :\par
+\cf0\f0\lang1033 await tester.\f1\lang1049 MakeVisibleAsync\f0\lang1033 (Tester.BY_XPATH, ""//*[@id='button']"");\par
+\par
+await tester.\f1\lang1049 MakeVisibleAsync\f0\lang1033 (Tester.BY_BY_CSS, ""//*[@id='button']"");\par
+}",
+
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 MakeVisibleAsync\cf0\par
+\cf2\f1\lang1049 Description\cf0 : the method makes the element visible by adding styles\par
+\cf2 Syntax\cf0 : MakeVisibleAsync(string by, string locator, string visibility = ""visible"", int opacity = 1, int index = 1000)\par
+\cf3\par
+\cf2 Example\cf3 :\par
+\cf0\f0\lang1033 await tester.\f1\lang1049 MakeVisibleAsync\f0\lang1033 (Tester.BY_XPATH, ""//*[@id='button']"");\par
+\par
+await tester.\f1\lang1049 MakeVisibleAsync\f0\lang1033 (Tester.BY_BY_CSS, ""//*[@id='button']"");\par
+}",
+
+@"",
+@"",
+@"",
 @"",
 @"",
 @"",
@@ -6958,6 +7042,8 @@ foreach (DataRow row in dataTable.Rows)\par
             data.Add(new CompletionData("IsClickableAsync", "IsClickableAsync()"));
             data.Add(new CompletionData("IsClickableElementAsync", "IsClickableElementAsync(string by, string locator)"));
             data.Add(new CompletionData("IsVisibleElementAsync", "IsVisibleElementAsync(string by, string locator)"));
+            data.Add(new CompletionData("MakeElementVisibleAsync", "MakeElementVisibleAsync(string by, string locator, string visibility = \"visible\", int opacity = 1, int index = 1000)"));
+            data.Add(new CompletionData("MakeVisibleAsync", "MakeElementVisibleAsync(string by, string locator, string visibility = \"visible\", int opacity = 1, int index = 1000)"));
             data.Add(new CompletionData("Name", "string Name { get; set; }"));
             data.Add(new CompletionData("PASSED", "PASSED"));
             data.Add(new CompletionData("PROCESS", "PROCESS"));
@@ -7619,6 +7705,10 @@ foreach (DataRow row in dataTable.Rows)\par
                         if (value == "FindEntryAsync" && tag == "TesterMySql") richTextBox1.Rtf = handbookRus[239];
                         if (value == "AssertHaveInTableAsync" && tag == "TesterMySql") richTextBox1.Rtf = handbookRus[240];
                         if (value == "AssertDontHaveInTableAsync" && tag == "TesterMySql") richTextBox1.Rtf = handbookRus[241];
+
+                        if (value == "MakeElementVisibleAsync" && tag == "Tester") richTextBox1.Rtf = handbookRus[242];
+                        if (value == "MakeVisibleAsync" && tag == "HTMLElement") richTextBox1.Rtf = handbookRus[243];
+                        if (value == "MakeVisibleAsync" && tag == "FRAMEElement") richTextBox1.Rtf = handbookRus[244];
                     }
                     else
                     {
@@ -7865,15 +7955,14 @@ foreach (DataRow row in dataTable.Rows)\par
                         if (value == "FindEntryAsync" && tag == "TesterMySql") richTextBox1.Rtf = handbookEng[239];
                         if (value == "AssertHaveInTableAsync" && tag == "TesterMySql") richTextBox1.Rtf = handbookEng[240];
                         if (value == "AssertDontHaveInTableAsync" && tag == "TesterMySql") richTextBox1.Rtf = handbookEng[241];
-                    }
 
-                    
+                        if (value == "MakeElementVisibleAsync" && tag == "Tester") richTextBox1.Rtf = handbookEng[242];
+                        if (value == "MakeVisibleAsync" && tag == "HTMLElement") richTextBox1.Rtf = handbookEng[243];
+                        if (value == "MakeVisibleAsync" && tag == "FRAMEElement") richTextBox1.Rtf = handbookEng[244];
+                    }
                     
 
                     /*
-                    if (value == "" && tag == "") richTextBox1.Rtf = handbookRus[242];
-                    if (value == "" && tag == "") richTextBox1.Rtf = handbookRus[243];
-                    if (value == "" && tag == "") richTextBox1.Rtf = handbookRus[244];
                     if (value == "" && tag == "") richTextBox1.Rtf = handbookRus[245];
                     if (value == "" && tag == "") richTextBox1.Rtf = handbookRus[246];
                     if (value == "" && tag == "") richTextBox1.Rtf = handbookRus[247];
