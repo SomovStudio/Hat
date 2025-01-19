@@ -39,6 +39,7 @@ namespace Hat
                 }
                 compilerParams.GenerateInMemory = true;
                 compilerParams.GenerateExecutable = false;
+                compilerParams.TreatWarningsAsErrors = false;
 
                 nodes = new List<TreeNode>();
                 readNodes(Config.browserForm.treeViewProject.Nodes);
