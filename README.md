@@ -2,7 +2,8 @@
 
 [![License](http://img.shields.io/:license-mit-blue.svg)](https://github.com/SomovStudio/Hat/blob/main/LICENSE)
 
-<h2>Development has been moved to another repository (Разработка перенесена в другой репозиторий):</h2>
+<h2>Development has been moved to another repository 
+<br>(Разработка перенесена в другой репозиторий)</h2>
 <a href="https://gitflic.ru/project/somovstudio/hat">https://gitflic.ru/project/somovstudio/hat</a>
 
 <hr>
