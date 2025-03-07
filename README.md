@@ -2,6 +2,11 @@
 
 [![License](http://img.shields.io/:license-mit-blue.svg)](https://github.com/SomovStudio/Hat/blob/main/LICENSE)
 
+<h2>Development has been moved to another repository (Разработка перенесена в другой репозиторий):</h2>
+<a href="https://gitflic.ru/project/somovstudio/hat">https://gitflic.ru/project/somovstudio/hat</a>
+
+<hr>
+
 The browser has the technology of automated testing of Web applications.
 <br>
 Autotests are performed in the browser "Hat" without Selenium and WebDriver.
