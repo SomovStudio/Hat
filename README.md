@@ -39,7 +39,7 @@ The chat with Gemini artificial intelligence will help you in your work.
 <hr>
 
 <p align="center">
-  <img src="https://github.com/SomovStudio/Hat/blob/main/Img/screenshots/HatZionecEng.png">
+  <img src="https://github.com/SomovStudio/Hat/blob/main/Img/screenshots/HatEng.png">
 </p>
 
 <b>System requirements (системные требования):</b>
