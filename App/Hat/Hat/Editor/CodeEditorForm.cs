@@ -3337,8 +3337,36 @@ await tester.\f1\lang1049 MakeVisibleAsync\f0\lang1033 (Tester.BY_BY_CSS, ""//*[
 await tester.\f1\lang1049 MakeVisibleAsync\f0\lang1033 (Tester.BY_BY_CSS, ""//*[@id='button']"");\par
 }",
 
-@"",
-@"",
+@"{\rtf1\ansi\ansicpg1252\deff0\nouicompat{\fonttbl{\f0\fswiss\fcharset0 Calibri;}{\f1\fswiss\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\nowidctlpar\sl276\slmult1\cf1\f0\fs20\lang9 LoadPageAsync\cf0\fs24\lang1033\par
+\cf2\f1\fs20\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'fb\'ef\'ee\'eb\'ed\'ff\'e5\'f2 \'e7\'e0\'e3\'f0\'f3\'e7\'ea\'f3 \'e2\'e5\'e1 \'f1\'f2\'f0\'e0\'ed\'e8\'f6\'fb \'ef\'ee \'f3\'ea\'e0\'e7\'e0\'ed\'ee\'ec\'f3 URL \'f1 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'fb\'ec \'ee\'e6\'e8\'e4\'e0\'ed\'e8\'e5\'ec \'e2 \'f1\'e5\'ea\'f3\'ed\'e4\'e0\'f5. \'d4\'eb\'e0\'e3 abortLoadAfterTime \'ef\'f0\'e8\'ed\'f3\'e4\'e8\'f2\'e5\'eb\'fc\'ed\'ee \'e7\'e0\'e2\'e5\'f0\'f8\'e0\'e5\'f2 \'e7\'e0\'e3\'f0\'f3\'e7\'ea\'f3 \'f1\'f2\'f0\'e0\'ed\'e8\'f6\'fb \'ef\'ee\'f1\'eb\'e5 \'e7\'e0\'e2\'e5\'f0\'f8\'e5\'ed\'e8\'ff \'f2\'e0\'e9\'ec\'e5\'f0\'e0. \'ce\'f8\'e8\'e1\'ea\'e8 \'ef\'f0\'e8 \'e7\'e0\'e3\'f0\'f3\'e7\'ea\'e5 \'f1\'f2\'f0\'e0\'ed\'e8\'f6\'fb \'e8\'e3\'ed\'ee\'f0\'e8\'f0\'f3\'fe\'f2\'f1\'ff \'e8 \'ed\'e5 \'ef\'f0\'e8\'e2\'ee\'e4\'ff\'f2 \'ea \'ef\'e0\'e4\'e5\'ed\'e8\'fe \'e0\'e2\'f2\'ee\'f2\'e5\'f1\'f2\'e0.\f0\fs24\lang1033\par
+\cf2\f1\fs20\lang1049\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : LoadPageAsync(string url, int sec, bool abortLoadAfterTime = false)\f0\fs24\lang1033\par
+\par
+\cf2\f1\fs20\lang1049\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\cf0\f0\fs24\lang1033\par
+\fs20 await tester.\f1\lang1049 LoadPageAsync \f0\lang1033 (@""https://www.google.com/"", 25, true);\fs24\par
+}",
+
+@"{\rtf1\ansi\ansicpg1252\deff0\nouicompat{\fonttbl{\f0\fswiss\fcharset0 Calibri;}{\f1\fswiss\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\nowidctlpar\sl276\slmult1\cf1\f0\fs20\lang9 GetCookiesAsync\cf0\fs24\lang1033\par
+\cf2\f1\fs20\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2 \'f1\'ef\'e8\'f1\'ee\'ea \'ea\'f3\'ea\'e8 (document.cookie).\f0\fs24\lang1033\par
+\cf2\f1\fs20\lang1049\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : GetCookiesAsync()\f0\fs24\lang1033\par
+\par
+\cf2\f1\fs20\lang1049\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\cf0\f0\fs24\lang1033\par
+\fs20 List<string> cookies = await tester.GetCookiesAsync();\par
+if (cookies.Count() > 0)\par
+\{\par
+\tab foreach (string cookie in cookies)\par
+\tab\{\par
+\tab\tab tester.ConsoleMsg(""COOKIE: "" + cookie);\par
+\tab\}\par
+\}\fs24\par
+}",
+
+
 @"",
 @"",
 @"",
@@ -6626,8 +6654,41 @@ await tester.\f1\lang1049 MakeVisibleAsync\f0\lang1033 (Tester.BY_BY_CSS, ""//*[
 await tester.\f1\lang1049 MakeVisibleAsync\f0\lang1033 (Tester.BY_BY_CSS, ""//*[@id='button']"");\par
 }",
 
-@"",
-@"",
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fswiss\fcharset0 Calibri;}{\f1\fnil\fcharset0 Calibri;}{\f2\fnil\fcharset204 Calibri;}{\f3\fswiss\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 LoadPageAsync\cf0\f1\par
+\cf2\f2\lang1049 Description\cf0 : \f1\lang1033 t\f2\lang1049 he method loads a web page at the specified URL with the specified wait time in seconds. The abort Load After Time flag forcibly terminates page loading after the timer ends. Errors when loading the page are ignored and do not cause the autotest to crash.\par
+\cf2 Syntax\cf0 : LoadPageAsync(string url, int sec, bool abortLoadAfterTime = false)\par
+\cf3\par
+\cf2 Example\cf3 :\par
+\cf0\f0\lang1033 await tester.\f3\lang1049 LoadPageAsync \f0\lang1033 (@""https://www.google.com/"", 25, true);\f1\par
+}",
+
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fswiss\fcharset0 Calibri;}{\f1\fnil\fcharset0 Calibri;}{\f2\fnil\fcharset204 Calibri;}{\f3\fswiss\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 GetCookiesAsync\cf0\f1\par
+\cf2\f2\lang1049 Description\cf0 : \f1\lang1033 the method returns a list of cookies (document.cookie).\f2\lang1049 .\par
+
+\pard\nowidctlpar\sl276\slmult1\cf2 Syntax\cf0 : \f3 GetCookiesAsync()\f0\fs24\lang1033\par
+
+\pard\sl276\slmult1\cf3\f2\fs20\lang1049\par
+\cf2 Example\cf3 :\par
+
+\pard\nowidctlpar\sl276\slmult1\cf0\f0\lang1033 List<string> cookies = await tester.GetCookiesAsync();\par
+if (cookies.Count() > 0)\par
+\{\par
+\tab foreach (string cookie in cookies)\par
+\tab\{\par
+\tab\tab tester.ConsoleMsg(""COOKIE: "" + cookie);\par
+\tab\}\par
+\}\fs24\par
+
+\pard\sl276\slmult1\f1\fs20\par
+}",
+
+
 @"",
 @"",
 @"",
@@ -6989,6 +7050,7 @@ await tester.\f1\lang1049 MakeVisibleAsync\f0\lang1033 (Tester.BY_BY_CSS, ""//*[
             data.Add(new CompletionData("GetAttributeFromElementsByClassAsync", "GetAttributeFromElementsByClassAsync(string _class, string attribute)"));
             data.Add(new CompletionData("GetAttributeFromElementsByNameAsync", "GetAttributeFromElementsByNameAsync(string name, string attribute)"));
             data.Add(new CompletionData("GetAttributeFromElementsByTagAsync", "GetAttributeFromElementsByTagAsync(string tag, string attribute)"));
+            data.Add(new CompletionData("GetCookiesAsync", "GetCookiesAsync()"));
             data.Add(new CompletionData("GetCountElementsAsync", "GetCountElementsAsync(string by, string locator)"));
             data.Add(new CompletionData("GetCountElementsByClassAsync", "GetCountElementsByClassAsync(string _class)"));
             data.Add(new CompletionData("GetCountElementsByNameAsync", "GetCountElementsByNameAsync(string name)"));
@@ -7042,6 +7104,7 @@ await tester.\f1\lang1049 MakeVisibleAsync\f0\lang1033 (Tester.BY_BY_CSS, ""//*[
             data.Add(new CompletionData("IsClickableAsync", "IsClickableAsync()"));
             data.Add(new CompletionData("IsClickableElementAsync", "IsClickableElementAsync(string by, string locator)"));
             data.Add(new CompletionData("IsVisibleElementAsync", "IsVisibleElementAsync(string by, string locator)"));
+            data.Add(new CompletionData("LoadPageAsync", "LoadPageAsync(string url, int sec, bool abortLoadAfterTime = false)"));
             data.Add(new CompletionData("MakeElementVisibleAsync", "MakeElementVisibleAsync(string by, string locator, string visibility = \"visible\", int opacity = 1, int index = 1000)"));
             data.Add(new CompletionData("MakeVisibleAsync", "MakeElementVisibleAsync(string by, string locator, string visibility = \"visible\", int opacity = 1, int index = 1000)"));
             data.Add(new CompletionData("Name", "string Name { get; set; }"));
@@ -7691,7 +7754,6 @@ await tester.\f1\lang1049 MakeVisibleAsync\f0\lang1033 (Tester.BY_BY_CSS, ""//*[
                         if (value == "IsVisibleElementAsync" && tag == "Tester") richTextBox1.Rtf = handbookRus[226];
                         if (value == "IsVisibleElementAsync" && tag == "FRAMEElement") richTextBox1.Rtf = handbookRus[227];
                         if (value == "BrowserScreenshotAsync" && tag == "Tester") richTextBox1.Rtf = handbookRus[228];
-
                         if (value == "TesterMySql" && tag == "TesterMySql") richTextBox1.Rtf = handbookRus[229];
                         if (value == "ConnectionOpenAsync" && tag == "TesterMySql") richTextBox1.Rtf = handbookRus[230];
                         if (value == "ConnectionCloseAsync" && tag == "TesterMySql") richTextBox1.Rtf = handbookRus[231];
@@ -7705,10 +7767,11 @@ await tester.\f1\lang1049 MakeVisibleAsync\f0\lang1033 (Tester.BY_BY_CSS, ""//*[
                         if (value == "FindEntryAsync" && tag == "TesterMySql") richTextBox1.Rtf = handbookRus[239];
                         if (value == "AssertHaveInTableAsync" && tag == "TesterMySql") richTextBox1.Rtf = handbookRus[240];
                         if (value == "AssertDontHaveInTableAsync" && tag == "TesterMySql") richTextBox1.Rtf = handbookRus[241];
-
                         if (value == "MakeElementVisibleAsync" && tag == "Tester") richTextBox1.Rtf = handbookRus[242];
                         if (value == "MakeVisibleAsync" && tag == "HTMLElement") richTextBox1.Rtf = handbookRus[243];
                         if (value == "MakeVisibleAsync" && tag == "FRAMEElement") richTextBox1.Rtf = handbookRus[244];
+                        if (value == "LoadPageAsync" && tag == "Tester") richTextBox1.Rtf = handbookRus[245];
+                        if (value == "GetCookiesAsync" && tag == "Tester") richTextBox1.Rtf = handbookRus[246];
                     }
                     else
                     {
@@ -7941,7 +8004,6 @@ await tester.\f1\lang1049 MakeVisibleAsync\f0\lang1033 (Tester.BY_BY_CSS, ""//*[
                         if (value == "IsVisibleElementAsync" && tag == "Tester") richTextBox1.Rtf = handbookEng[226];
                         if (value == "IsVisibleElementAsync" && tag == "FRAMEElement") richTextBox1.Rtf = handbookEng[227];
                         if (value == "BrowserScreenshotAsync" && tag == "Tester") richTextBox1.Rtf = handbookEng[228];
-
                         if (value == "TesterMySql" && tag == "TesterMySql") richTextBox1.Rtf = handbookEng[229];
                         if (value == "ConnectionOpenAsync" && tag == "TesterMySql") richTextBox1.Rtf = handbookEng[230];
                         if (value == "ConnectionCloseAsync" && tag == "TesterMySql") richTextBox1.Rtf = handbookEng[231];
@@ -7955,15 +8017,15 @@ await tester.\f1\lang1049 MakeVisibleAsync\f0\lang1033 (Tester.BY_BY_CSS, ""//*[
                         if (value == "FindEntryAsync" && tag == "TesterMySql") richTextBox1.Rtf = handbookEng[239];
                         if (value == "AssertHaveInTableAsync" && tag == "TesterMySql") richTextBox1.Rtf = handbookEng[240];
                         if (value == "AssertDontHaveInTableAsync" && tag == "TesterMySql") richTextBox1.Rtf = handbookEng[241];
-
                         if (value == "MakeElementVisibleAsync" && tag == "Tester") richTextBox1.Rtf = handbookEng[242];
                         if (value == "MakeVisibleAsync" && tag == "HTMLElement") richTextBox1.Rtf = handbookEng[243];
                         if (value == "MakeVisibleAsync" && tag == "FRAMEElement") richTextBox1.Rtf = handbookEng[244];
+                        if (value == "LoadPageAsync" && tag == "Tester") richTextBox1.Rtf = handbookEng[245];
+                        if (value == "GetCookiesAsync" && tag == "Tester") richTextBox1.Rtf = handbookEng[246];
                     }
                     
 
                     /*
-                    if (value == "" && tag == "") richTextBox1.Rtf = handbookRus[245];
                     if (value == "" && tag == "") richTextBox1.Rtf = handbookRus[246];
                     if (value == "" && tag == "") richTextBox1.Rtf = handbookRus[247];
                     if (value == "" && tag == "") richTextBox1.Rtf = handbookRus[248];

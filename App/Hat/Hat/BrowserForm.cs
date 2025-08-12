@@ -3166,7 +3166,7 @@ namespace Hat
         {
             try
             {
-                System.Diagnostics.Process.Start(@"https://github.com/SomovStudio/Hat/releases");
+                System.Diagnostics.Process.Start(@"https://gitflic.ru/project/somovstudio/hat/release?sort=TIME&direction=DESC");
             }
             catch (Exception ex)
             {
@@ -3178,7 +3178,7 @@ namespace Hat
         {
             try
             {
-                System.Diagnostics.Process.Start(@"https://github.com/SomovStudio/HatPluginMySql");
+                System.Diagnostics.Process.Start(@"https://gitflic.ru/project/somovstudio/hatpluginmysql");
             }
             catch (Exception ex)
             {
@@ -3608,6 +3608,18 @@ namespace Hat
                 {
                     System.Diagnostics.Process.Start(@"https://somovstudio.github.io/help/Hat/index.html?Description2.html");
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка");
+            }
+        }
+
+        private void gemeniToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                System.Diagnostics.Process.Start(Directory.GetCurrentDirectory() + "\\gemini\\ChatGemini.exe");
             }
             catch (Exception ex)
             {
