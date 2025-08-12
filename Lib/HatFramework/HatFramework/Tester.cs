@@ -1305,6 +1305,57 @@ namespace HatFramework
             return frameElement;
         }
 
+        public async Task LoadPageAsync(string url, int sec, bool abortLoadAfterTime = false)
+        {
+            listRedirects.Clear();
+            statusPageLoad = false;
+            statusContentLoad = false;
+            SendMessageDebug($"LoadPageAsync('{url}', {sec}, {abortLoadAfterTime})", $"LoadPageAsync('{url}', {sec}, {abortLoadAfterTime})", PROCESS, $"Загрузка страницы {url}", $"Page loading {url}", IMAGE_STATUS_MESSAGE);
+
+            try
+            {
+                BrowserView.CoreWebView2.Navigate(url);
+
+                for (int i = 0; i < sec; i++)
+                {
+                    await Task.Delay(1000);
+                    if (statusPageLoad == true) break;
+                }
+
+                if (abortLoadAfterTime == true && statusPageLoad == false)
+                {
+                    BrowserView.CoreWebView2.Stop();
+                    if (statusPageLoad == true || statusContentLoad == true)
+                    {
+                        SendMessageDebug($"LoadPageAsync('{url}', {sec}, {abortLoadAfterTime})", $"LoadPageAsync('{url}', {sec}, {abortLoadAfterTime})", WARNING, "Загрузка страницы остановлена", "Page loading stopped", IMAGE_STATUS_WARNING);
+                    }
+                    else
+                    {
+                        SendMessageDebug($"LoadPageAsync('{url}', {sec}, {abortLoadAfterTime})", $"LoadPageAsync('{url}', {sec}, {abortLoadAfterTime})", FAILED, "Страница не загружена", "The page is not loaded", IMAGE_STATUS_FAILED);
+                    }
+                }
+                else
+                {
+                    if (statusPageLoad == true)
+                    {
+                        SendMessageDebug($"LoadPageAsync('{url}', {sec}, {abortLoadAfterTime})", $"LoadPageAsync('{url}', {sec}, {abortLoadAfterTime})", PASSED, "Страница загружена", "Page loaded", IMAGE_STATUS_PASSED);
+                    }
+                    else
+                    {
+                        SendMessageDebug($"LoadPageAsync('{url}', {sec}, {abortLoadAfterTime})", $"LoadPageAsync('{url}', {sec}, {abortLoadAfterTime})", FAILED, "Страница не загружена", "The page is not loaded", IMAGE_STATUS_FAILED);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                SendMessageDebug($"LoadPageAsync('{url}', {sec}, {abortLoadAfterTime})", $"LoadPageAsync('{url}', {sec}, {abortLoadAfterTime})", Tester.FAILED,
+                    "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(),
+                    "Error: " + ex.Message + Environment.NewLine + Environment.NewLine + "Full description of the error: " + ex.ToString(),
+                    Tester.IMAGE_STATUS_FAILED);
+                ConsoleMsgError(ex.ToString());
+            }
+        }
+
         public async Task GoToUrlAsync(string url, int sec, bool abortLoadAfterTime = false)
         {
             listRedirects.Clear();
@@ -1501,6 +1552,43 @@ namespace HatFramework
                 ConsoleMsgError(ex.ToString());
             }
             return statusCode;
+        }
+
+        public async Task<List<string>> GetCookiesAsync()
+        {
+            if (DefineTestStop() == true) return null;
+
+            string script = "(function(){";
+            script += "const cookies = document.cookie.split(';');";
+            script += "let result = '';";
+            script += "for (let i = 0; i < cookies.length; i++) {";
+            script += "result += cookies[i] + ';';";
+            script += "}";
+            script += "return result;";
+            script += "}());";
+
+            string cookies = await execute(script, $"GetCookiesAsync()");
+            cookies = cookies.Replace("\"", "");
+            cookies = cookies.Replace(" ", "");
+
+            if (cookies == "null" || cookies == null)
+            {
+                SendMessageDebug($"GetCookiesAsync()", $"GetCookiesAsync()", Tester.FAILED, $"Не удалось получить Cookie", $"Failed to receive Cookie", Tester.IMAGE_STATUS_FAILED);
+                TestStopAsync();
+            }
+            else
+            {
+                List<string> list = new List<string>();
+                string[] array = cookies.Split(';');
+                foreach (string cookie in array)
+                {
+                    if (cookie != string.Empty) list.Add(cookie);
+                }
+                SendMessageDebug($"GetCookiesAsync()", $"GetCookiesAsync()", Tester.PASSED, "Cookie получены", "Cookies received", Tester.IMAGE_STATUS_PASSED);
+                return list;
+            }
+
+            return null;
         }
 
         public async Task WaitAsync(int sec)
@@ -5008,6 +5096,8 @@ namespace HatFramework
                 SendMessageDebug($"MakeElementVisible(\"{by}\", \"{locator}\", \"{cssText}\")", $"MakeElementVisible(\"{by}\", \"{locator}\", \"{cssText}\")", Tester.PASSED, $"Стиль {cssText} введен в элемент", $"The style {cssText} is entered in the element", Tester.IMAGE_STATUS_PASSED);
             }
         }
+
+        
 
     }
 }
