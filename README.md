@@ -17,9 +17,12 @@ You can also use Visual Studio as an editor.
 The user-friendly browser interface displays all the steps of the test with a detailed description of the events. 
 The verification result is generated in a report and sent to the specified email address. 
 Autotests can be run from the command line of the Windows operating system. This is useful when using autotests in popular continuous integration tools such as: Jenkins, TeamCity, GitLab CI/CD.
+The chat with Gemini artificial intelligence will help you in your work.
 <br>
 <br>Download:
-<br>All builds can be downloaded from (все сборки можно скачать с) <a target="_blank" href="https://drive.google.com/drive/folders/1X-dtbYdjTcpMsWYlUjUupl3PU0BuKCwK">Google Disk</a>
+<br>All builds can be downloaded from (все сборки можно скачать с диска) <a target="_blank" href="https://drive.google.com/drive/folders/1X-dtbYdjTcpMsWYlUjUupl3PU0BuKCwK">Google Disk</a>
+<br>
+<br>Current version (актуальная версия 11.08.2025) <a target="_blank" href="https://gitflic.ru/project/somovstudio/hat/release/dc8cb512-1ed0-429e-9d44-e127d9560f09/e4725ef7-7465-4d86-a444-a9f005a4c96a/download">Hat v1.4.13</a>
 <br>
 <br>
 Браузер со встроенной технологией автоматизированного тестирования Web приложений.
@@ -30,7 +33,8 @@ Autotests can be run from the command line of the Windows operating system. This
 Для описания скриптов автотестов используется язык программирования C# и встроенный редактор кода. Так же в качестве редактора можно воспользоваться Visual Studio.
 Удобный интерфейс браузера отображает все шаги выполнения теста с подробным описанием событий. 
 Результат проверки формируется в отчет и отправляются на указаную почту. 
-Запуск автотестов возможен из командной строки операционной системы Windows это пригодится при использовании автотестов в популярных средствах непрерывной интеграции таких как: Jenkins, TeamCity, GitLab CI/CD.
+Запуск автотестов возможен из командной строки операционной системы Windows это пригодится при использовании автотестов в популярных средствах непрерывной интеграции таких как: Jenkins, TeamCity, GitLab CI/CD. 
+В работе вам поможет встроенный чат с искуственным интелектом Gemini.
 <br>
 <hr>
 

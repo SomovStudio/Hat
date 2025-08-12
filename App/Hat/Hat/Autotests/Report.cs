@@ -290,7 +290,12 @@ thead { background-color: #4d545d; color: #FFF; }
 tr:hover .content-hidden{  background: #EFF7FF; }
 .content-hidden { overflow: hidden; }
 .content-scroll { overflow: scroll; }
-.table { position: relative; top: 180px; z-index: 1; overflow: hidden; }
+";
+
+        if (Report.TestSuccess == true) content += ".table { position: relative; top: 180px; z-index: 1; overflow: hidden; }";
+        else content += ".table { position: relative; top: 195px; z-index: 1; overflow: hidden; }";
+
+content += @"
 .table-status { padding: 10px; min-width: 100px; max-width: 100px; }
 .table-action { padding: 10px; min-width: 450px; max-width: 450px; }
 .table-comment { padding: 10px; min-width: 700px; max-width: 700px; }
@@ -472,6 +477,9 @@ img { min-width: 700px; max-width: 700px; }
                     double amountSuccessTests = 0;
                     double amountFailureTests = 0;
                     double amountWorkTests = 0;
+                    DateTime dateBegin = new DateTime();
+                    DateTime dateEnd = new DateTime();
+                    TimeSpan totalTime = new TimeSpan();
 
                     List<string> lines = new List<string>();
 
@@ -521,9 +529,13 @@ img { min-width: 700px; max-width: 700px; }
                                 }
 
                                 test.Add(lines[3]); // Описание теста
+                                dateBegin = DateTime.Parse(lines[4].ToString());
+                                dateEnd = DateTime.Parse(lines[5].ToString());
+                                totalTime = dateEnd.Subtract(dateBegin);
                                 test.Add(lines[4] + "<br>" + lines[5]); // Дата запуска и завершения
                                 test.Add(lines[2]); // Файл
                                 test.Add(filename); // Отчет
+                                test.Add(totalTime.ToString());
                                 tests.Add(test);
                             }
                         }
@@ -607,10 +619,15 @@ thead { background-color: #4d545d; color: #FFF; }
 tr:hover .content-hidden{  background: #EFF7FF; }
 .table { position: relative; top: 270px; z-index: 1; overflow: hidden; }
 .table-status { padding: 10px; min-width: 60px; max-width: 60px; }
+.table-status-2 { padding: 10px; min-width: 60px; max-width: 60px; padding-right: 20px; }
 .table-description { padding: 10px; min-width: 350px; max-width: 350px; }
+.table-description-2 { padding: 10px; min-width: 350px; max-width: 350px; padding-right: 60px; }
 .table-date { padding: 10px; min-width: 100px; max-width: 100px; }
+.table-date-2 { padding: 10px; min-width: 100px; max-width: 100px; padding-right: 25px; }
 .table-file { padding: 10px; min-width: 100px; max-width: 100px; overflow: hidden; }
+.table-file-2 { padding: 10px; min-width: 100px; max-width: 100px; overflow: hidden; padding-right: 25px; }
 .table-report { padding: 10px; min-width: 100px; max-width: 100px; overflow: hidden; }
+.table-report-2 { padding: 10px; min-width: 100px; max-width: 100px; overflow: hidden; padding-right: 0px; }
 .table-row { background-color: #FFF; border-bottom: 1px solid #eaeff2; }
 .table-row-empty { background-color: #F9F7FF;  }
 .status-passed { background-color: #98C900; color: #FFFFFF; }
@@ -699,7 +716,7 @@ ZTptb2RpZnkAMjAyMy0wMi0yMVQxMDoxMzo0MSswMDowMN/S9FIAAAAASUVORK5CYII="" />
                 content += "<tr>" + Environment.NewLine;
                 content += "<th class=\"table-status\">Статус теста</th>" + Environment.NewLine;
                 content += "<th class=\"table-description\">Описание теста</th>" + Environment.NewLine;
-                content += "<th class=\"table-date\">Дата</th>" + Environment.NewLine;
+                content += "<th class=\"table-date\">Затраченное время</th>" + Environment.NewLine;
                 content += "<th class=\"table-file\">Файл</th>" + Environment.NewLine;
                 content += "<th class=\"table-report\">Отчет</th>" + Environment.NewLine;
                 content += "</tr> " + Environment.NewLine;
@@ -768,7 +785,7 @@ ZTptb2RpZnkAMjAyMy0wMi0yMVQxMDoxMzo0MSswMDowMN/S9FIAAAAASUVORK5CYII="" />
                 content += "<tr>" + Environment.NewLine;
                 content += "<th class=\"table-status\">Test status</th>" + Environment.NewLine;
                 content += "<th class=\"table-description\">Test Description</th>" + Environment.NewLine;
-                content += "<th class=\"table-date\">Completion date</th>" + Environment.NewLine;
+                content += "<th class=\"table-date\">Time spent</th>" + Environment.NewLine;
                 content += "<th class=\"table-file\">File</th>" + Environment.NewLine;
                 content += "<th class=\"table-report\">Report</th>" + Environment.NewLine;
                 content += "</tr> " + Environment.NewLine;
@@ -791,20 +808,21 @@ ZTptb2RpZnkAMjAyMy0wMi0yMVQxMDoxMzo0MSswMDowMN/S9FIAAAAASUVORK5CYII="" />
                         content += "<tr>" + Environment.NewLine;
                         if (Config.languageEngReportMail == false)
                         {
-                            if (test[0] == Report.SUCCESS) content += $"<td class=\"table-status table-row status-passed\">Успех</td>" + Environment.NewLine;
-                            if (test[0] == Report.FAILURE) content += $"<td class=\"table-status table-row status-failed\">Неудача</td>" + Environment.NewLine;
-                            if (test[0] == Report.AT_WORK) content += $"<td class=\"table-status table-row status-process\">В работе</td>" + Environment.NewLine;
+                            if (test[0] == Report.SUCCESS) content += $"<td class=\"table-status-2 table-row status-passed\">Успех</td>" + Environment.NewLine;
+                            if (test[0] == Report.FAILURE) content += $"<td class=\"table-status-2 table-row status-failed\">Неудача</td>" + Environment.NewLine;
+                            if (test[0] == Report.AT_WORK) content += $"<td class=\"table-status-2 table-row status-process\">В работе</td>" + Environment.NewLine;
                         }
                         else
                         {
-                            if (test[0] == Report.SUCCESS) content += $"<td class=\"table-status table-row status-passed\">Success</td>" + Environment.NewLine;
-                            if (test[0] == Report.FAILURE) content += $"<td class=\"table-status table-row status-failed\">Failure</td>" + Environment.NewLine;
-                            if (test[0] == Report.AT_WORK) content += $"<td class=\"table-status table-row status-process\">At work</td>" + Environment.NewLine;
+                            if (test[0] == Report.SUCCESS) content += $"<td class=\"table-status-2 table-row status-passed\">Success</td>" + Environment.NewLine;
+                            if (test[0] == Report.FAILURE) content += $"<td class=\"table-status-2 table-row status-failed\">Failure</td>" + Environment.NewLine;
+                            if (test[0] == Report.AT_WORK) content += $"<td class=\"table-status-2 table-row status-process\">At work</td>" + Environment.NewLine;
                         }
-                        content += $"<td class=\"table-description table-row content-hidden\">{test[1]}</td>" + Environment.NewLine;
-                        content += $"<td class=\"table-date table-row content-hidden\">{test[2]}</td>" + Environment.NewLine;
-                        content += $"<td class=\"table-file table-row content-hidden\">{test[3]}</td>" + Environment.NewLine;
-                        content += $"<td class=\"table-report table-row content-hidden\"><a href=\"{test[4]}\">{Config.browserForm.getFolderName2(test[4])}</a></td>" + Environment.NewLine;
+                        content += $"<td class=\"table-description-2 table-row content-hidden\">{test[1]}</td>" + Environment.NewLine;
+                        if (Config.languageEngReportMail == false) content += $"<td class=\"table-date-2 table-row content-hidden\">{test[5]}<br><small style=\"color:gray;\">{test[2]}</small></td>" + Environment.NewLine;
+                        else content += $"<td class=\"table-date-2 table-row content-hidden\">{test[5]}<br><small style=\"color:gray;\">{test[2]}</small></td>" + Environment.NewLine;
+                        content += $"<td class=\"table-file-2 table-row content-hidden\">{test[3]}</td>" + Environment.NewLine;
+                        content += $"<td class=\"table-report-2 table-row content-hidden\"><a href=\"{test[4]}\">{Config.browserForm.getFolderName2(test[4])}</a></td>" + Environment.NewLine;
                         content += "</tr>" + Environment.NewLine;
                     }
                 }

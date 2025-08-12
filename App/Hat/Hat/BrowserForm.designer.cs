@@ -89,6 +89,7 @@
             this.справкаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.updateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pluginMySQLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator28 = new System.Windows.Forms.ToolStripSeparator();
             this.documentationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.onlineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.offlineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -111,6 +112,9 @@
             this.toolStripButtonUpdate = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator29 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripDropDownButton5 = new System.Windows.Forms.ToolStripDropDownButton();
+            this.gemeniToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -797,6 +801,7 @@
             this.справкаToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.updateToolStripMenuItem,
             this.pluginMySQLToolStripMenuItem,
+            this.toolStripSeparator28,
             this.documentationToolStripMenuItem,
             this.toolStripSeparator27,
             this.оПрограммеCrackerToolStripMenuItem});
@@ -817,6 +822,11 @@
             this.pluginMySQLToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
             this.pluginMySQLToolStripMenuItem.Text = "Плагин MySQL для браузера";
             this.pluginMySQLToolStripMenuItem.Click += new System.EventHandler(this.pluginMySQLToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator28
+            // 
+            this.toolStripSeparator28.Name = "toolStripSeparator28";
+            this.toolStripSeparator28.Size = new System.Drawing.Size(228, 6);
             // 
             // documentationToolStripMenuItem
             // 
@@ -929,6 +939,8 @@
             this.toolStripButtonGo,
             this.toolStripButtonUpdate,
             this.toolStripSeparator1,
+            this.toolStripDropDownButton5,
+            this.toolStripSeparator29,
             this.toolStripButton3});
             this.toolStrip1.Location = new System.Drawing.Point(0, 24);
             this.toolStrip1.Name = "toolStrip1";
@@ -999,6 +1011,30 @@
             this.toolStripButton3.Text = "О программе Hat";
             this.toolStripButton3.ToolTipText = "О программе Hat";
             this.toolStripButton3.Click += new System.EventHandler(this.toolStripButton3_Click);
+            // 
+            // toolStripSeparator29
+            // 
+            this.toolStripSeparator29.Name = "toolStripSeparator29";
+            this.toolStripSeparator29.Size = new System.Drawing.Size(6, 25);
+            // 
+            // toolStripDropDownButton5
+            // 
+            this.toolStripDropDownButton5.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripDropDownButton5.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.gemeniToolStripMenuItem});
+            this.toolStripDropDownButton5.Image = ((System.Drawing.Image)(resources.GetObject("toolStripDropDownButton5.Image")));
+            this.toolStripDropDownButton5.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripDropDownButton5.Name = "toolStripDropDownButton5";
+            this.toolStripDropDownButton5.Size = new System.Drawing.Size(29, 22);
+            this.toolStripDropDownButton5.Text = "AI";
+            // 
+            // gemeniToolStripMenuItem
+            // 
+            this.gemeniToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("gemeniToolStripMenuItem.Image")));
+            this.gemeniToolStripMenuItem.Name = "gemeniToolStripMenuItem";
+            this.gemeniToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.gemeniToolStripMenuItem.Text = "Gemini";
+            this.gemeniToolStripMenuItem.Click += new System.EventHandler(this.gemeniToolStripMenuItem_Click);
             // 
             // splitContainer1
             // 
@@ -3012,6 +3048,10 @@
         private System.Windows.Forms.ToolStripMenuItem pluginMySQLToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem onlineToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem offlineToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator28;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator29;
+        private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton5;
+        private System.Windows.Forms.ToolStripMenuItem gemeniToolStripMenuItem;
     }
 }
 
