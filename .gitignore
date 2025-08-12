@@ -1,11 +1,13 @@
+# ==Add==============================
+Add/ChatGemini/bin/
+Add/ChatGemini/obj/
+Add/ChatGemini/.vs/
+# ==App==============================
 App/Hat/Hat/bin/
 App/Hat/Hat/obj/
 App/Hat/.vs/
 App/Hat/.vs/Hat/v17/.suo
-App/HatRack/bin/
-App/HatRack/obj/
-App/HatRack/.vs/
-App/HatRack/.vs/HatRack/v17/.suo
+# ==Lib==============================
 Lib/HatFramework/HatFramework/obj/
 Lib/HatFramework/HatFramework/bin/Release/ICSharpCode.TextEditor.dll
 Lib/HatFramework/HatFramework/bin/Release/Microsoft.Web.WebView2.Core.dll
@@ -18,6 +20,3 @@ Lib/HatFramework/HatFramework/bin/Release/Newtonsoft.Json.dll
 Lib/HatFramework/HatFramework/bin/Release/Newtonsoft.Json.xml
 Lib/HatFramework/.vs/
 Lib/HatFramework/.vs/HatFramework/v17/.suo
-Jenkins/JenkinsAgentRun/.vs/
-Jenkins/JenkinsAgentRun/JenkinsAgentRun/bin/
-Jenkins/JenkinsAgentRun/JenkinsAgentRun/obj/
