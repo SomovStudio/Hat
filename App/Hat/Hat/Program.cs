@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -20,6 +21,15 @@ namespace Hat
         [STAThread]
         static void Main(String[] args)
         {
+            Console.OutputEncoding = System.Text.Encoding.UTF8;
+            Console.InputEncoding = System.Text.Encoding.UTF8;
+            Console.ResetColor();
+            Console.WriteLine("Browser Hat [License]: MIT License");
+            Console.WriteLine("Browser Hat [version]: " + Assembly.GetExecutingAssembly().GetName().Version.ToString());
+            Console.WriteLine("Browser Hat [update]: " + Config.dateBrowserUpdate);
+            Console.WriteLine("Browser Hat [author]: Evgeniy Somov");
+            Console.ResetColor();
+
             try {
                 // удаление папки с кэшом
                 if (Directory.Exists(Config.cacheFolder)) Directory.Delete(Config.cacheFolder, true);

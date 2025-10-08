@@ -72,7 +72,7 @@ namespace Hat
             {
                 label6.Text = $"{Config.currentBrowserVersion} ({Config.browserForm.GetWebView().ProductVersion})";
                 label7.Text = $"дата последнего обновления: {Config.dateBrowserUpdate}";
-                this.Text = "О программе Hat | Copyright © 2024 Somov Studio. All Rights Reserved.";
+                this.Text = "О программе Hat | Copyright © 2025 Somov Studio. All Rights Reserved.";
                 label3.Text = "Программа: Hat";
                 label4.Text = "Разработчик: Сомов Евгений Павлович";
                 label8.Text = "Почта:";
@@ -85,7 +85,7 @@ namespace Hat
             {
                 label6.Text = $"{Config.currentBrowserVersion} ({Config.browserForm.GetWebView().ProductVersion})";
                 label7.Text = $"date of last update: {Config.dateBrowserUpdate}";
-                this.Text = "About Hat | Copyright © 2024 Somov Studio. All Rights Reserved.";
+                this.Text = "About Hat | Copyright © 2025 Somov Studio. All Rights Reserved.";
                 label3.Text = "Program: Hat";
                 label4.Text = "Developer: Evgeniy Somov";
                 label8.Text = "Email:";

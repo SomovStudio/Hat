@@ -3626,5 +3626,23 @@ namespace Hat
                 MessageBox.Show(ex.Message, "Ошибка");
             }
         }
+
+        private void deepSeekToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DeepSeekForm ds = new DeepSeekForm();
+            ds.Show();
+        }
+
+        private void geminionlineToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            GeminiForm g = new GeminiForm();
+            g.Show();
+        }
+
+        private void aliceToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AliceForm a = new AliceForm();
+            a.Show();
+        }
     }
 }
