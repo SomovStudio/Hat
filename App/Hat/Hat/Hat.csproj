@@ -62,17 +62,17 @@
     <Reference Include="ICSharpCode.AvalonEdit, Version=6.3.1.120, Culture=neutral, PublicKeyToken=9cc39be672370310, processorArchitecture=MSIL">
       <HintPath>..\packages\AvalonEdit.6.3.1.120\lib\net462\ICSharpCode.AvalonEdit.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Web.WebView2.Core, Version=1.0.3405.78, Culture=neutral, PublicKeyToken=2a8ab48044d2601e, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Web.WebView2.1.0.3405.78\lib\net462\Microsoft.Web.WebView2.Core.dll</HintPath>
+    <Reference Include="Microsoft.Web.WebView2.Core, Version=1.0.3537.50, Culture=neutral, PublicKeyToken=2a8ab48044d2601e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.WebView2.1.0.3537.50\lib\net462\Microsoft.Web.WebView2.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Web.WebView2.WinForms, Version=1.0.3405.78, Culture=neutral, PublicKeyToken=2a8ab48044d2601e, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Web.WebView2.1.0.3405.78\lib\net462\Microsoft.Web.WebView2.WinForms.dll</HintPath>
+    <Reference Include="Microsoft.Web.WebView2.WinForms, Version=1.0.3537.50, Culture=neutral, PublicKeyToken=2a8ab48044d2601e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.WebView2.1.0.3537.50\lib\net462\Microsoft.Web.WebView2.WinForms.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Web.WebView2.Wpf, Version=1.0.3405.78, Culture=neutral, PublicKeyToken=2a8ab48044d2601e, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Web.WebView2.1.0.3405.78\lib\net462\Microsoft.Web.WebView2.Wpf.dll</HintPath>
+    <Reference Include="Microsoft.Web.WebView2.Wpf, Version=1.0.3537.50, Culture=neutral, PublicKeyToken=2a8ab48044d2601e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.WebView2.1.0.3537.50\lib\net462\Microsoft.Web.WebView2.Wpf.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\packages\Newtonsoft.Json.13.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -97,6 +97,12 @@
     <Compile Include="AboutForm.designer.cs">
       <DependentUpon>AboutForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="AI\AliceForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AI\AliceForm.Designer.cs">
+      <DependentUpon>AliceForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Autotests\Autotests.cs" />
     <Compile Include="Autotests\FRAMEElement.cs" />
     <Compile Include="Autotests\HTMLElement.cs" />
@@ -110,7 +116,19 @@
     </Compile>
     <Compile Include="Config\Config.cs" />
     <Compile Include="Config\HatSettings.cs" />
+    <Compile Include="AI\DeepSeekForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AI\DeepSeekForm.Designer.cs">
+      <DependentUpon>DeepSeekForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Editor\CompletionData.cs" />
+    <Compile Include="AI\GeminiForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AI\GeminiForm.Designer.cs">
+      <DependentUpon>GeminiForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Utilits\StartPage.cs" />
     <Compile Include="Utilits\WorkOnEmail.cs" />
     <Compile Include="Utilits\WorkOnFiles.cs" />
@@ -144,8 +162,17 @@
     <EmbeddedResource Include="AboutForm.resx">
       <DependentUpon>AboutForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="AI\AliceForm.resx">
+      <DependentUpon>AliceForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AI\GeminiForm.resx">
+      <DependentUpon>GeminiForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="BrowserForm.resx">
       <DependentUpon>BrowserForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AI\DeepSeekForm.resx">
+      <DependentUpon>DeepSeekForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Editor\CodeEditorForm.resx">
       <DependentUpon>CodeEditorForm.cs</DependentUpon>
@@ -198,11 +225,11 @@
     </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="..\packages\Microsoft.Web.WebView2.1.0.3405.78\build\Microsoft.Web.WebView2.targets" Condition="Exists('..\packages\Microsoft.Web.WebView2.1.0.3405.78\build\Microsoft.Web.WebView2.targets')" />
+  <Import Project="..\packages\Microsoft.Web.WebView2.1.0.3537.50\build\Microsoft.Web.WebView2.targets" Condition="Exists('..\packages\Microsoft.Web.WebView2.1.0.3537.50\build\Microsoft.Web.WebView2.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>Данный проект ссылается на пакеты NuGet, отсутствующие на этом компьютере. Используйте восстановление пакетов NuGet, чтобы скачать их.  Дополнительную информацию см. по адресу: http://go.microsoft.com/fwlink/?LinkID=322105. Отсутствует следующий файл: {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\Microsoft.Web.WebView2.1.0.3405.78\build\Microsoft.Web.WebView2.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Web.WebView2.1.0.3405.78\build\Microsoft.Web.WebView2.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.Web.WebView2.1.0.3537.50\build\Microsoft.Web.WebView2.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Web.WebView2.1.0.3537.50\build\Microsoft.Web.WebView2.targets'))" />
   </Target>
 </Project>
