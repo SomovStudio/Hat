@@ -79,11 +79,11 @@ The chat with Gemini artificial intelligence will help you in your work.
 <br>
 
 <hr>
-<br>The program was developed with the support of the <b><a href="https://zionec.ru/">Zionec</a></b> company
+<br>The program was developed with the non-commercial support of the <b><a href="https://zionec.ru/">Zionec</a></b> company
 <br>The Zionec company develops "Online stores", "Corporate portals", "CRM systems" and its own solutions.
 <br><br>
 <p align="center">
   <img src="https://github.com/SomovStudio/Hat/blob/main/Img/partners/companyzionec.png">
 </p>
-<br>Программа разработана при поддержке компании "<b>Зионек</b>" https://zionec.ru/
+<br>Программа разработана при некоммерческой поддержке компании "<b>Зионек</b>" https://zionec.ru/
 <br>Компания "<b>Зионек</b>" занимается разработкой "Интернет-магазинов", "Корпоративных порталов", "CRM-систем" и собственных решений.
