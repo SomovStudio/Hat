@@ -22,7 +22,7 @@ The chat with Gemini artificial intelligence will help you in your work.
 <br>Download:
 <br>All builds can be downloaded from (все сборки можно скачать с диска) <a target="_blank" href="https://drive.google.com/drive/folders/1X-dtbYdjTcpMsWYlUjUupl3PU0BuKCwK">Google Disk</a>
 <br>
-<br>Current version (актуальная версия 18.11.2025) <a target="_blank" href="https://github.com/SomovStudio/Hat/tree/main/Build">Hat v1.4.16</a>
+<br>Current version (актуальная версия 09.12.2025) <a target="_blank" href="https://github.com/SomovStudio/Hat/tree/main/Build">Hat v1.4.17</a>
 <br>
 <br>
 Браузер со встроенной технологией автоматизированного тестирования Web приложений.

@@ -39,8 +39,8 @@ namespace Hat
 			border-radius: 10px; 
 			padding: 15px; 
 			position: relative; 
-			min-width: 400px;
-			max-width: 400px; 
+			min-width: 435px;
+			max-width: 435px; 
 			margin-left: auto;
     		margin-right: auto;
     		margin-top: 5em;
@@ -147,7 +147,7 @@ namespace Hat
 			Встроенный фреймворк HatFramework содержит достаточное количество методов необходимых для выполнения основных задач автоматизации тестирования. Для описания скриптов автотестов используется язык программирования C# и встроенный редактор кода. Так же в качестве редактора можно воспользоваться Visual Studio. Удобный интерфейс браузера отображает все шаги выполнения теста с подробным описанием событий. Результат проверки формируется в отчет и отправляются на указаную почту. Запуск автотестов возможен из командной строки операционной системы Windows это пригодится при использовании автотестов в популярных средствах непрерывной интеграции таких как: Jenkins, TeamCity, GitLab CI/CD.
 		</p>
 		<p>
-			Программа разработана при поддержке компании <a href=""https://zionec.ru/"">Зионек</a>
+			Программа разработана при некоммерческой поддержке компании <a href=""https://zionec.ru/"">Зионек</a>
 		</p>
 
 		<a href=""https://somovstudio.github.io/"" class=""a_link"">
@@ -481,7 +481,7 @@ namespace Hat
 			The built-in Net Framework contains a sufficient number of methods necessary to perform the basic tasks of test automation. The C# programming language and the built-in code editor are used to describe autotest scripts. You can also use Visual Studio as an editor. The user-friendly browser interface displays all the steps of the test with the corresponding description of sales. The verification result is generated in a report and sent to the specified email address. Autotests can be run from the command line of the Windows operating system. This happens when using autotests in popular continuous integration environments such as: Jenkins, TeamCity, GitLab CI/CD.
 		</p>
 		<p>
-			The program was developed with the support of the company <a href=""https://zionec.ru/"">Zionec</a>
+			The program was developed with the non-commercial support of the company <a href=""https://zionec.ru/"">Zionec</a>
 		</p>
 
 		<a href=""https://somovstudio.github.io/"" class=""a_link"">
