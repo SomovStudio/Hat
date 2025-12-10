@@ -78,7 +78,7 @@ namespace Hat
                 label8.Text = "Почта:";
                 label5.Text = "Лицензия:";
                 label9.Text = "Website:";
-                label10.Text = "Программа разработана при поддержке компании \"Зионек\"";
+                label10.Text = "Программа разработана при некоммерческой поддержке компании \"Зионек\"";
                 label12.Text = "Компания \"Зионек\" занимается разработкой \"Интернет - магазинов\", \"Корпоративных порталов\", \"CRM - систем\" и собственных решений.";
             }
             else
@@ -91,12 +91,24 @@ namespace Hat
                 label8.Text = "Email:";
                 label5.Text = "License:";
                 label9.Text = "Website:";
-                label10.Text = "The program was developed with the support of the \"Zionec\"";
+                label10.Text = "The program was developed with the non-commercial support of the company \"Zionec\"";
                 label12.Text = "The \"Zionec\" company develops \"Online stores\", \"Corporate portals\", \"CRM systems\" and its own solutions.";
             }
 
             //label6.Text = Microsoft.Web.WebView2.Core.CoreWebView2Environment.GetAvailableBrowserVersionString();
             //label6.Text = Config.browserForm.GetWebView().ProductVersion;
+        }
+
+        private void label11_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                System.Diagnostics.Process.Start(@"https://zionec.ru/");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка");
+            }
         }
     }
 }

@@ -87,6 +87,7 @@
             // 
             // label11
             // 
+            this.label11.Cursor = System.Windows.Forms.Cursors.Hand;
             this.label11.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.label11.Image = ((System.Drawing.Image)(resources.GetObject("label11.Image")));
             this.label11.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -94,17 +95,19 @@
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(444, 60);
             this.label11.TabIndex = 20;
+            this.label11.Click += new System.EventHandler(this.label11_Click);
             // 
             // linkLabel4
             // 
             this.linkLabel4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.linkLabel4.AutoSize = true;
-            this.linkLabel4.Location = new System.Drawing.Point(330, 287);
+            this.linkLabel4.Location = new System.Drawing.Point(382, 287);
             this.linkLabel4.Name = "linkLabel4";
-            this.linkLabel4.Size = new System.Drawing.Size(91, 13);
+            this.linkLabel4.Size = new System.Drawing.Size(44, 13);
             this.linkLabel4.TabIndex = 19;
             this.linkLabel4.TabStop = true;
-            this.linkLabel4.Text = "https://zionec.ru/";
+            this.linkLabel4.Text = "Зионек";
+            this.linkLabel4.Visible = false;
             this.linkLabel4.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel4_LinkClicked);
             // 
             // label10
@@ -114,9 +117,9 @@
             this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label10.Location = new System.Drawing.Point(12, 287);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(317, 13);
+            this.label10.Size = new System.Drawing.Size(349, 13);
             this.label10.TabIndex = 18;
-            this.label10.Text = "Программа разработана при поддержке компании \"Зионек\"";
+            this.label10.Text = "Программа разработана при некомерческой поддержке компании";
             // 
             // groupBox1
             // 
