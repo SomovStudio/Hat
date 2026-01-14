@@ -2,12 +2,6 @@
 
 [![License](http://img.shields.io/:license-mit-blue.svg)](https://github.com/SomovStudio/Hat/blob/main/LICENSE)
 
-<h2>Development has been moved to another repository 
-<br>(Разработка перенесена в другой репозиторий)</h2>
-<a href="https://gitflic.ru/project/somovstudio/hat">https://gitflic.ru/project/somovstudio/hat</a>
-
-<hr>
-
 The browser has the technology of automated testing of Web applications.
 <br>
 Autotests are performed in the browser "Hat" without Selenium and WebDriver.
@@ -22,7 +16,7 @@ The chat with Gemini artificial intelligence will help you in your work.
 <br>Download:
 <br>All builds can be downloaded from (все сборки можно скачать с диска) <a target="_blank" href="https://drive.google.com/drive/folders/1X-dtbYdjTcpMsWYlUjUupl3PU0BuKCwK">Google Disk</a>
 <br>
-<br>Current version (актуальная версия 09.12.2025) <a target="_blank" href="https://github.com/SomovStudio/Hat/tree/main/Build">Hat v1.4.17</a>
+<br>Current version (актуальная версия 09.12.2025) <a target="_blank" href="https://github.com/SomovStudio/Hat/releases/download/v1.4.17/Hat-1.4.17.zip">Hat v1.4.17</a>
 <br>
 <br>
 Браузер со встроенной технологией автоматизированного тестирования Web приложений.
