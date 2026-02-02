@@ -22,9 +22,16 @@ namespace Hat
         {
             InitializeComponent();
 
-            HatSettings.load();
-            StartPage.createStartPage();
-            toolStripComboBoxUrl.Text = "file:///" + StartPage.fileStartPage;
+            if (Config.openHtmlFile == null)
+            {
+                HatSettings.load();
+                StartPage.createStartPage();
+                toolStripComboBoxUrl.Text = "file:///" + StartPage.fileStartPage;
+            }
+            else
+            {
+                toolStripComboBoxUrl.Text = "file:///" + Config.openHtmlFile;
+            }
 
             CheckForIllegalCrossThreadCalls = false;
             Config.encoding = WorkOnFiles.UTF_8_BOM;
@@ -33,7 +40,7 @@ namespace Hat
             ConsoleMsg($"Браузер {AppDomain.CurrentDomain.FriendlyName} версия {Config.currentBrowserVersion} ({Config.dateBrowserUpdate}) | WebView версия {Config.browserForm.GetWebView().ProductVersion}",
                 $"Browser {AppDomain.CurrentDomain.FriendlyName} version {Config.currentBrowserVersion} ({Config.dateBrowserUpdate})  | WebView version {Config.browserForm.GetWebView().ProductVersion}");
             SystemConsoleMsg("", default, default, default, true);
-            if(Config.languageEngConsole == false) SystemConsoleMsg($"Браузер Hat версия {Config.currentBrowserVersion} ({Config.dateBrowserUpdate})", default, ConsoleColor.DarkGray, ConsoleColor.White, true);
+            if (Config.languageEngConsole == false) SystemConsoleMsg($"Браузер Hat версия {Config.currentBrowserVersion} ({Config.dateBrowserUpdate})", default, ConsoleColor.DarkGray, ConsoleColor.White, true);
             else SystemConsoleMsg($"Browser Hat version {Config.currentBrowserVersion} ({Config.dateBrowserUpdate})", default, ConsoleColor.DarkGray, ConsoleColor.White, true);
 
             if (Config.statucCacheClear == "true")
@@ -2118,12 +2125,24 @@ namespace Hat
                         }
                         else if (Config.selectName.Contains(".jpeg") || 
                             Config.selectName.Contains(".jpg") || 
-                            Config.selectName.Contains(".png") || 
-                            Config.selectName.Contains(".html"))
+                            Config.selectName.Contains(".png"))
                         {
                             try
                             {
                                 Process.Start(Config.selectValue);
+                            }
+                            catch (Exception ex)
+                            {
+                                ConsoleMsg(ex.Message, ex.Message);
+                            }
+                        }
+                        else if (Config.selectName.Contains(".html"))
+                        {
+                            try
+                            {
+                                //Process.Start(Config.selectValue);
+                                webView2.CoreWebView2.Navigate(Config.selectValue);
+                                updateToolStripComboBoxUrl();
                             }
                             catch (Exception ex)
                             {

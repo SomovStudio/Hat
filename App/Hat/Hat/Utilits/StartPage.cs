@@ -344,7 +344,7 @@ namespace Hat
 			Благодарим вас за использование нашего приложения.
 		</p>
 		<h4>
-			Copyright © 2025 Somov Studio. All Rights Reserved.
+			Copyright © 2026 Somov Studio. All Rights Reserved.
 		</h4>
 	</div>
 </body>
@@ -678,7 +678,7 @@ namespace Hat
 			Thank you for using this application.
 		</p>
 		<h4>
-			Copyright © 2025 Somov Studio. All Rights Reserved.
+			Copyright © 2026 Somov Studio. All Rights Reserved.
 		</h4>
 	</div>
 </body>
