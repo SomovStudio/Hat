@@ -51,6 +51,8 @@ namespace Hat
                     foreach (var error in results.Errors)
                     {
                         Config.browserForm.ConsoleMsgErrorReport(error.ToString());
+                        if (error.ToString().Contains("warning") == true) Config.browserForm.SendMessageStep("WARNING", Tester.WARNING, error.ToString(), Tester.IMAGE_STATUS_WARNING, true);
+                        else Config.browserForm.SendMessageStep("ERROR", Tester.FAILED, error.ToString(), Tester.IMAGE_STATUS_FAILED, true);
                     }
                 }
                 else
@@ -72,6 +74,7 @@ namespace Hat
             catch (Exception ex)
             {
                 Config.browserForm.ConsoleMsgErrorReport(ex.Message);
+                Config.browserForm.SendMessageStep("ERROR", Tester.FAILED, ex.Message, Tester.IMAGE_STATUS_FAILED, true);
             }
         }
 

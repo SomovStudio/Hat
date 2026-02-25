@@ -473,6 +473,7 @@ namespace Hat
                     else if (status == Tester.PROCESS) this.subitem.Text = "В процессе";
                     else if (status == Tester.COMPLETED) this.subitem.Text = "Выполнено";
                     else if (status == Tester.WARNING) this.subitem.Text = "Предупреждение";
+                    else if (status == Tester.DEBUG) this.subitem.Text = "Отладка";
                     else this.subitem.Text = "";
                 }
                 else
@@ -483,6 +484,7 @@ namespace Hat
                     else if (status == Tester.PROCESS) this.subitem.Text = "In process";
                     else if (status == Tester.COMPLETED) this.subitem.Text = "Completed";
                     else if (status == Tester.WARNING) this.subitem.Text = "Warning";
+                    else if (status == Tester.DEBUG) this.subitem.Text = "Debug";
                     else this.subitem.Text = "";
                 }
                 this.item.SubItems.Add(subitem);
