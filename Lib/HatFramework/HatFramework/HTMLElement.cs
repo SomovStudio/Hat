@@ -2,9 +2,14 @@
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
+/**
+ * Текущая версия 1.4.19
+ */
 
 namespace HatFramework
 {
@@ -36,9 +41,17 @@ namespace HatFramework
             string result = null;
             try
             {
-                if (_tester.Debug == true) _tester.ConsoleMsg($"[DEBUG] {action} - JS скрипт: {script}", $"[DEBUG] {action} - JS script: {script}");
+                if (_tester.Debug == true)
+                {
+                    _tester.ConsoleMsg($"[DEBUG] {action} - JS скрипт: {script}", $"[DEBUG] {action} - JS script: {script}");
+                    _tester.SendMessageDebug("execute", "execute", Tester.DEBUG, $"Действие: {action} | Код JS: {script}", $"Action: {action} | The JS code: {script}", Tester.IMAGE_STATUS_DEBUG);
+                }
                 result = await _tester.BrowserView.CoreWebView2.ExecuteScriptAsync(script);
-                if (_tester.Debug == true) _tester.ConsoleMsg($"[DEBUG] {action} - JS результат: {result}", $"[DEBUG] {action} - JS result: {result}");
+                if (_tester.Debug == true)
+                {
+                    _tester.ConsoleMsg($"[DEBUG] {action} - JS результат: {result}", $"[DEBUG] {action} - JS result: {result}");
+                    _tester.SendMessageDebug("execute", "execute", Tester.DEBUG, $"Результат выполнения JS: {result}", $"The result of JS execution: {result}", Tester.IMAGE_STATUS_DEBUG);
+                }
                 if (result == "null" || result == null)
                 {
 
@@ -88,7 +101,11 @@ namespace HatFramework
                 script += "}());";
 
                 string result = await _tester.BrowserView.CoreWebView2.ExecuteScriptAsync(script);
-                if (_tester.Debug == true) _tester.ConsoleMsg($"[DEBUG] JS результат: {result}", $"[DEBUG] JS result: {result}");
+                if (_tester.Debug == true)
+                {
+                    _tester.ConsoleMsg($"[DEBUG] JS результат: {result}", $"[DEBUG] JS result: {result}");
+                    _tester.SendMessageDebug("isVisible", "isVisible", Tester.DEBUG, $"Результат выполнения JS: {result}", $"The result of JS execution: {result}", Tester.IMAGE_STATUS_DEBUG);
+                }
                 if (result != "null" && result != null && result == "true") found = true;
                 else found = false;
             }

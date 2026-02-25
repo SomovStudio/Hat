@@ -16,6 +16,10 @@ using HatFramework;
 using Newtonsoft.Json.Linq;
 using System.Security.Cryptography;
 
+/**
+ * Текущая версия 1.4.19
+ */
+
 namespace HatFramework
 {
     public class Tester
@@ -26,12 +30,14 @@ namespace HatFramework
         public const int IMAGE_STATUS_FAILED = 2;           // изображение "провально"
         public const int IMAGE_STATUS_MESSAGE = 3;          // изображение "сообщение"
         public const int IMAGE_STATUS_WARNING = 4;          // изображение "предупреждение"
+        public const int IMAGE_STATUS_DEBUG = 5;            // изображение "отладка"
         public const string PASSED = "PASSED";
         public const string FAILED = "FAILED";
         public const string STOPPED = "STOPPED";
         public const string PROCESS = "PROCESS";
         public const string COMPLETED = "COMPLETED";
         public const string WARNING = "WARNING";
+        public const string DEBUG = "DEBUG";
         public const string BY_CSS = "BY_CSS";     // тип локатора css
         public const string BY_XPATH = "BY_XPATH"; // тип локатора xpath
 
@@ -224,7 +230,11 @@ namespace HatFramework
                 script += "}());";
 
                 string result = await executeJS(script);
-                if (Debug == true) ConsoleMsg($"[DEBUG] JS результат: {result}", $"[DEBUG] JS result: {result}");
+                if (Debug == true)
+                {
+                    ConsoleMsg($"[DEBUG] JS результат: {result}", $"[DEBUG] JS result: {result}");
+                    SendMessageDebug("isVisible", "isVisible", DEBUG, $"Результат выполнения JS: {result}", $"The result of JS execution: {result}", IMAGE_STATUS_DEBUG);
+                }
                 if (result != "null" && result != null && result == "true") found = true;
                 else found = false;
             }
@@ -241,9 +251,17 @@ namespace HatFramework
             string result = null;
             try
             {
-                if (Debug == true) ConsoleMsg($"[DEBUG] {action} - JS скрипт: {script}", $"[DEBUG] {action} - JS script: {script}");
+                if (Debug == true)
+                {
+                    ConsoleMsg($"[DEBUG] {action} - JS скрипт: {script}", $"[DEBUG] {action} - JS script: {script}");
+                    SendMessageDebug("execute", "execute", DEBUG, $"Действие: {action} | Код JS: {script}", $"Action: {action} | The JS code: {script}", IMAGE_STATUS_DEBUG);
+                }
                 result = await BrowserView.CoreWebView2.ExecuteScriptAsync(script);
-                if (Debug == true) ConsoleMsg($"[DEBUG] {action} - JS результат: {result}", $"[DEBUG] {action} - JS result: {result}");
+                if (Debug == true)
+                {
+                    ConsoleMsg($"[DEBUG] {action} - JS результат: {result}", $"[DEBUG] {action} - JS result: {result}");
+                    SendMessageDebug("execute", "execute", DEBUG, $"Результат выполнения JS: {result}", $"The result of JS execution: {result}", IMAGE_STATUS_DEBUG);
+                }
                 if (result == "null" || result == null)
                 {
                     if (Debug == true) SendMessageDebug(action, action, Tester.FAILED,
@@ -271,9 +289,17 @@ namespace HatFramework
             string result = null;
             try
             {
-                if (Debug == true) ConsoleMsg($"[DEBUG] JS скрипт: {script}", $"[DEBUG] JS script: {script}");
+                if (Debug == true)
+                {
+                    ConsoleMsg($"[DEBUG] JS скрипт: {script}", $"[DEBUG] JS script: {script}");
+                    SendMessageDebug("executeJS", "executeJS", DEBUG, $"Код JS: {script}", $"The JS code: {script}", IMAGE_STATUS_DEBUG);
+                }
                 result = await BrowserView.CoreWebView2.ExecuteScriptAsync(script).ConfigureAwait(false);
-                if (Debug == true) ConsoleMsg($"[DEBUG] JS результат: {result}", $"[DEBUG] JS result: {result}");
+                if (Debug == true)
+                {
+                    ConsoleMsg($"[DEBUG] JS результат: {result}", $"[DEBUG] JS result: {result}");
+                    SendMessageDebug("executeJS", "executeJS", DEBUG, $"Результат выполнения JS: {result}", $"The result of JS execution: {result}", IMAGE_STATUS_DEBUG);
+                }
             }
             catch (Exception ex)
             {
@@ -360,22 +386,25 @@ namespace HatFramework
                 {
                     if (languageEngConsole == true)
                     {
-                        if (status == null) step += "";
-                        else if (status == "") step += "";
+                        if (status == null || status == "")
+                        {
+                            status = DEBUG;
+                            step += "Step[debug]: ";
+                        }
                         else if (status == PASSED) step += "Step[passed]: ";
                         else if (status == FAILED && assertStatus != FAILED) step += "Step[failed]: ";
                         else if (status == WARNING && assertStatus != FAILED) step += "Step[warning]: ";
+                        else if (status == DEBUG) step += "Step[debug]: ";
                         else if (status == PROCESS) step += "Step[process]: ";
                         else if (status == COMPLETED) step += "Step[completed]: ";
                         else if (status == STOPPED) step += "Step[stopped]: ";
-                        else step += status;
+                        else
+                        {
+                            status = DEBUG;
+                            step += "Step[debug]: ";
+                        }
 
-                        if (status == null) step += action + " ";
-                        else if (status == "") step += action + " ";
-                        else if (status == FAILED && assertStatus != FAILED) step += action + " ";
-                        else if (status == WARNING && assertStatus != FAILED) step += action + " ";
-                        else if (action.IndexOf("(") > 0) step += action.Substring(0, action.IndexOf("(")) + " - ";
-
+                        step += action + " ";
                         step += comment;
 
                         if (status == null) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { step, default, default, default, true });
@@ -385,22 +414,25 @@ namespace HatFramework
                     }
                     else
                     {
-                        if (status == null) step += "";
-                        else if (status == "") step += "";
+                        if (status == null || status == "")
+                        {
+                            status = DEBUG;
+                            step += "Шаг[отладка]: ";
+                        }
                         else if (status == PASSED) step += "Шаг[успешно]: ";
                         else if (status == FAILED && assertStatus != FAILED) step += "Шаг[неудача]: ";
                         else if (status == WARNING && assertStatus != FAILED) step += "Шаг[предупреждение]: ";
+                        else if (status == DEBUG) step += "Шаг[отладка]: ";
                         else if (status == PROCESS) step += "Шаг[в процессе]: ";
                         else if (status == COMPLETED) step += "Шаг[выполнено]: ";
                         else if (status == STOPPED) step += "Шаг[остановлено]: ";
-                        else step += status;
+                        else
+                        {
+                            status = DEBUG;
+                            step += "Шаг[отладка]: ";
+                        }
 
-                        if (status == null) step += action + " ";
-                        else if (status == "") step += action + " ";
-                        else if (status == FAILED && assertStatus != FAILED) step += action + " ";
-                        else if (status == WARNING && assertStatus != FAILED) step += action + " ";
-                        else if (action.IndexOf("(") > 0) step += action.Substring(0, action.IndexOf("(")) + " - ";
-
+                        step += action + " ";
                         step += comment;
 
                         if (status == null) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { step, default, default, default, true });
@@ -414,6 +446,7 @@ namespace HatFramework
                 if (status == PASSED) browserSendMessageStep.Invoke(BrowserWindow, new object[] { action, status, comment, IMAGE_STATUS_PASSED, false });
                 else if (status == FAILED) browserSendMessageStep.Invoke(BrowserWindow, new object[] { action, status, comment, IMAGE_STATUS_FAILED, false });
                 else if (status == WARNING) browserSendMessageStep.Invoke(BrowserWindow, new object[] { action, status, comment, IMAGE_STATUS_WARNING, false });
+                else if (status == DEBUG) browserSendMessageStep.Invoke(BrowserWindow, new object[] { action, status, comment, IMAGE_STATUS_DEBUG, false });
                 else if (status == STOPPED) browserSendMessageStep.Invoke(BrowserWindow, new object[] { action, status, comment, IMAGE_STATUS_WARNING, false });
                 else if (status == PROCESS) browserSendMessageStep.Invoke(BrowserWindow, new object[] { action, status, comment, IMAGE_STATUS_PROCESS, false });
                 else if (status == COMPLETED) browserSendMessageStep.Invoke(BrowserWindow, new object[] { action, status, comment, IMAGE_STATUS_MESSAGE, false });
@@ -435,21 +468,30 @@ namespace HatFramework
                 {
                     if (languageEngConsole == true)
                     {
-                        if (status == null) step += "";
-                        else if (status == "") step += "";
+                        if (status == null || status == "")
+                        {
+                            status = DEBUG;
+                            step += "Step[debug]: ";
+                        }
                         else if (status == PASSED) step += "Step[passed]: ";
                         else if (status == FAILED && assertStatus != FAILED) step += "Step[failed]: ";
                         else if (status == WARNING && assertStatus != FAILED) step += "Step[warning]: ";
+                        else if (status == DEBUG) step += "Step[debug]: ";
                         else if (status == PROCESS) step += "Step[process]: ";
                         else if (status == COMPLETED) step += "Step[completed]: ";
                         else if (status == STOPPED) step += "Step[stopped]: ";
-                        else step += status;
+                        else
+                        {
+                            status = DEBUG;
+                            step += "Step[debug]: ";
+                        }
 
                         if (status == null) step += actionEng + " ";
                         else if (status == "") step += actionEng + " ";
                         else if (status == FAILED && assertStatus != FAILED) step += actionEng + " ";
                         else if (status == WARNING && assertStatus != FAILED) step += actionEng + " ";
-                        else if (actionEng.IndexOf("(") > 0) step += actionEng.Substring(0, actionEng.IndexOf("(")) + " - ";
+                        else if (actionEng.Contains("(") == true && actionEng.Contains(")") == true) step += actionEng.Substring(0, actionEng.IndexOf("(")) + " - ";
+                        else step += actionEng + " ";
 
                         step += commentEng;
 
@@ -460,22 +502,31 @@ namespace HatFramework
                     }
                     else
                     {
-                        if (status == null) step += "";
-                        else if (status == "") step += "";
+                        if (status == null || status == "")
+                        {
+                            status = DEBUG;
+                            step += "Шаг[отладка]: ";
+                        }
                         else if (status == PASSED) step += "Шаг[успешно]: ";
                         else if (status == FAILED && assertStatus != FAILED) step += "Шаг[неудача]: ";
                         else if (status == WARNING && assertStatus != FAILED) step += "Шаг[предупреждение]: ";
+                        else if (status == DEBUG) step += "Шаг[отладка]: ";
                         else if (status == PROCESS) step += "Шаг[в процессе]: ";
                         else if (status == COMPLETED) step += "Шаг[выполнено]: ";
                         else if (status == STOPPED) step += "Шаг[остановлено]: ";
-                        else step += status;
+                        else
+                        {
+                            status = DEBUG;
+                            step += "Шаг[отладка]: ";
+                        }
 
                         if (status == null) step += actionRus + " ";
                         else if (status == "") step += actionRus + " ";
                         else if (status == FAILED && assertStatus != FAILED) step += actionRus + " ";
                         else if (status == WARNING && assertStatus != FAILED) step += actionRus + " ";
-                        else if(actionRus.IndexOf("(") > 0) step += actionRus.Substring(0, actionRus.IndexOf("(")) + " - ";
-                        
+                        else if (actionRus.Contains("(") == true && actionRus.Contains(")") == true) step += actionRus.Substring(0, actionRus.IndexOf("(")) + " - ";
+                        else step += actionRus + " ";
+
                         step += commentRus;
 
                         if (status == null) browserSystemConsoleMsg.Invoke(BrowserWindow, new object[] { step, default, default, default, true });
@@ -1137,9 +1188,17 @@ namespace HatFramework
 
             try
             {
-                if (Debug == true) ConsoleMsg($"[DEBUG] JS скрипт: {script}", $"[DEBUG] JS script: {script}");
+                if (Debug == true)
+                {
+                    ConsoleMsg($"[DEBUG] JS скрипт: {script}", $"[DEBUG] JS script: {script}");
+                    SendMessageDebug("ОТЛАДКА", "DEBUG", DEBUG, $"Код JS: {script}", $"The JS code: {script}", IMAGE_STATUS_DEBUG);
+                }
                 result = await BrowserView.CoreWebView2.ExecuteScriptAsync(script);
-                if (Debug == true) ConsoleMsg($"[DEBUG] JS результат: {result}", $"[DEBUG] JS result: {result}");
+                if (Debug == true)
+                {
+                    ConsoleMsg($"[DEBUG] JS результат: {result}", $"[DEBUG] JS result: {result}");
+                    SendMessageDebug("ОТЛАДКА", "DEBUG", DEBUG, $"Результат выполнения JS: {result}", $"The result of JS execution: {result}", IMAGE_STATUS_DEBUG);
+                }
                 SendMessageDebug($"ExecuteJavaScriptAsync(\"{script}\")", $"ExecuteJavaScriptAsync(\"{script}\")", PASSED, "Скрипт выполнен. Результат: " + result, "The script is executed. Result: " + result, IMAGE_STATUS_PASSED);
             }
             catch (Exception ex)
