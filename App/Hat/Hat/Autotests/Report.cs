@@ -19,6 +19,7 @@ namespace Hat
         public const string PROCESS = "PROCESS";
         public const string COMPLETED = "COMPLETED";
         public const string WARNING = "WARNING";
+        public const string DEBUG = "DEBUG";
 
         public const string ERROR = "ERROR";
         public const string SCREENSHOT = "SCREENSHOT";
@@ -307,6 +308,7 @@ content += @"
 .status-process { background-color: #FFFFFF; color: #222222; }
 .status-completed { background-color: #0094FF; color: #FFFFFF; }
 .status-warning { background-color: #FFE97F; color: #222222; }
+.status-debug { background-color: #333333; color: #FFFFFF; }
 .status-error { background-color: #F4CCCC; color: #FF0000; }
 .status-screenshot { background-color: #FFFFFF; color: #222222; }
 .table-footer { padding-top: 50px; padding-right: 10px; padding-bottom: 20px; float: right; }
@@ -400,6 +402,7 @@ img { min-width: 700px; max-width: 700px; }
                                 if (step[0] == Report.PROCESS) content += $"<td class=\"table-status table-row status-process\">В процессе</td>" + Environment.NewLine;
                                 if (step[0] == Report.COMPLETED) content += $"<td class=\"table-status table-row status-completed\">Выполнено</td>" + Environment.NewLine;
                                 if (step[0] == Report.WARNING) content += $"<td class=\"table-status table-row status-warning\">Предупреждение</td>" + Environment.NewLine;
+                                if (step[0] == Report.DEBUG) content += $"<td class=\"table-status table-row status-debug\">Отладка</td>" + Environment.NewLine;
                                 if (step[0] == Report.ERROR) content += $"<td class=\"table-status table-row status-error\">Ошибка</td>" + Environment.NewLine;
                                 if (step[0] == Report.SCREENSHOT) content += $"<td class=\"table-status table-row status-screenshot\">Скриншот</td>" + Environment.NewLine;
                             }
@@ -411,6 +414,7 @@ img { min-width: 700px; max-width: 700px; }
                                 if (step[0] == Report.PROCESS) content += $"<td class=\"table-status table-row status-process\">Process</td>" + Environment.NewLine;
                                 if (step[0] == Report.COMPLETED) content += $"<td class=\"table-status table-row status-completed\">Completed</td>" + Environment.NewLine;
                                 if (step[0] == Report.WARNING) content += $"<td class=\"table-status table-row status-warning\">Warning</td>" + Environment.NewLine;
+                                if (step[0] == Report.DEBUG) content += $"<td class=\"table-status table-row status-debug\">Debug</td>" + Environment.NewLine;
                                 if (step[0] == Report.ERROR) content += $"<td class=\"table-status table-row status-error\">Error</td>" + Environment.NewLine;
                                 if (step[0] == Report.SCREENSHOT) content += $"<td class=\"table-status table-row status-screenshot\">Screenshot</td>" + Environment.NewLine;
                             }
@@ -420,7 +424,7 @@ img { min-width: 700px; max-width: 700px; }
                             content += "</tr>" + Environment.NewLine;
                         }
 
-                        if (step[0] == Report.FAILED || step[0] == Report.ERROR || step[0] == Report.WARNING) Report.Log += $"{step[0]} | {step[1]} - {step[2]}" + Environment.NewLine;
+                        if (step[0] == Report.FAILED || step[0] == Report.ERROR || step[0] == Report.WARNING || step[0] == Report.DEBUG) Report.Log += $"{step[0]} | {step[1]} - {step[2]}" + Environment.NewLine;
                     }
                 }
                 catch (Exception ex)

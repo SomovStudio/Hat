@@ -1023,7 +1023,7 @@
             // 
             this.aliceToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("aliceToolStripMenuItem.Image")));
             this.aliceToolStripMenuItem.Name = "aliceToolStripMenuItem";
-            this.aliceToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.aliceToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
             this.aliceToolStripMenuItem.Text = "Alice (online)";
             this.aliceToolStripMenuItem.Click += new System.EventHandler(this.aliceToolStripMenuItem_Click);
             // 
@@ -1031,7 +1031,7 @@
             // 
             this.deepSeekToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("deepSeekToolStripMenuItem.Image")));
             this.deepSeekToolStripMenuItem.Name = "deepSeekToolStripMenuItem";
-            this.deepSeekToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.deepSeekToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
             this.deepSeekToolStripMenuItem.Text = "DeepSeek (online)";
             this.deepSeekToolStripMenuItem.Click += new System.EventHandler(this.deepSeekToolStripMenuItem_Click);
             // 
@@ -1039,21 +1039,21 @@
             // 
             this.geminionlineToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("geminionlineToolStripMenuItem.Image")));
             this.geminionlineToolStripMenuItem.Name = "geminionlineToolStripMenuItem";
-            this.geminionlineToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.geminionlineToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
             this.geminionlineToolStripMenuItem.Text = "Gemini (online)";
             this.geminionlineToolStripMenuItem.Click += new System.EventHandler(this.geminionlineToolStripMenuItem_Click);
             // 
             // toolStripSeparator30
             // 
             this.toolStripSeparator30.Name = "toolStripSeparator30";
-            this.toolStripSeparator30.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator30.Size = new System.Drawing.Size(166, 6);
             this.toolStripSeparator30.Visible = false;
             // 
             // gemeniToolStripMenuItem
             // 
             this.gemeniToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("gemeniToolStripMenuItem.Image")));
             this.gemeniToolStripMenuItem.Name = "gemeniToolStripMenuItem";
-            this.gemeniToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.gemeniToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
             this.gemeniToolStripMenuItem.Text = "Gemini";
             this.gemeniToolStripMenuItem.Visible = false;
             this.gemeniToolStripMenuItem.Click += new System.EventHandler(this.gemeniToolStripMenuItem_Click);
@@ -1984,6 +1984,7 @@
             this.imageListTest.Images.SetKeyName(2, "cancel.png");
             this.imageListTest.Images.SetKeyName(3, "comment.png");
             this.imageListTest.Images.SetKeyName(4, "error.png");
+            this.imageListTest.Images.SetKeyName(5, "page_white_code.png");
             // 
             // toolStripTest
             // 

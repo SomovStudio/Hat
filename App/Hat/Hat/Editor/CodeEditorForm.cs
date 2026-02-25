@@ -3366,9 +3366,28 @@ if (cookies.Count() > 0)\par
 \}\fs24\par
 }",
 
+@"{\rtf1\ansi\ansicpg1252\deff0\nouicompat{\fonttbl{\f0\fswiss\fcharset0 Calibri;}{\f1\fswiss\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\nowidctlpar\sl276\slmult1\cf1\f0\fs20\lang9 DEBUG\cf0\fs24\lang1033\par
+\cf2\f1\fs20\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ea\'ee\'ed\'f1\'f2\'e0\'ed\'f2\'e0 \'ee\'e1\'ee\'e7\'ed\'e0\'f7\'e0\'e5\'f2 \'f1\'f2\'e0\'f2\'f3\'f1 \'ee\'f2\'eb\'e0\'e4\'ea\'e8.\f0\fs24\lang1033\par
+\cf2\f1\fs20\lang1049\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \f0\lang1033 DEBUG = ""DEBUG""\fs24\par
+\par
+\cf2\f1\fs20\lang1049\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\cf0\f0\fs24\lang1033\par
+\fs20 Tester.DEBUG\par
+}",
 
-@"",
-@"",
+@"{\rtf1\ansi\ansicpg1252\deff0\nouicompat{\fonttbl{\f0\fswiss\fcharset0 Calibri;}{\f1\fswiss\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\nowidctlpar\sl276\slmult1\cf1\f0\fs20\lang9 IMAGE_STATUS_DEBUG\cf0\fs24\lang1033\par
+\cf2\f1\fs20\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'e8\'ed\'e4\'e5\'ea\'f1 \'ea\'e0\'f0\'f2\'e8\'ed\'ea\'e8 \'ea\'ee\'f2\'ee\'f0\'e0\'ff \'ee\'e1\'ee\'ed\'e0\'f7\'e0\'e5\'f2 \'f1\'f2\'e0\'f2\'f3\'f1 \'ee\'f2\'eb\'e0\'e4\'ea\'e8.\f0\fs24\lang1033\par
+\cf2\f1\fs20\lang1049\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \f0\lang1033 IMAGE_STATUS_DEBUG = 5\fs24\par
+\par
+\cf2\f1\fs20\lang1049\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\cf0\f0\fs24\lang1033\par
+\fs20 Tester.IMAGE_STATUS_DEBUG\par
+}",
+
 @"",
 @"",
 @"",
@@ -6688,9 +6707,38 @@ if (cookies.Count() > 0)\par
 \pard\sl276\slmult1\f1\fs20\par
 }",
 
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fswiss\fcharset0 Calibri;}{\f1\fnil\fcharset0 Calibri;}{\f2\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 DEBUG\cf0\f1\par
+\cf2\f2\lang1049 Description\cf0 : \f1\lang1033 the constant indicates the debug status\f2\lang1049 .\par
 
-@"",
-@"",
+\pard\nowidctlpar\sl276\slmult1\cf2 Syntax\cf0 : \f0\lang1033 DEBUG = ""DEBUG""\fs24\par
+
+\pard\sl276\slmult1\cf3\f2\fs20\lang1049\par
+\cf2 Example\cf3 :\par
+
+\pard\nowidctlpar\sl276\slmult1\cf0\f0\lang1033 Tester.DEBUG\fs24\par
+
+\pard\sl276\slmult1\f1\fs20\par
+}",
+
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fswiss\fcharset0 Calibri;}{\f1\fnil\fcharset0 Calibri;}{\f2\fnil\fcharset204 Calibri;}{\f3\fswiss\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 IMAGE_STATUS_DEBUG\cf0\f1\par
+\cf2\f2\lang1049 Description\cf0 : \f1\lang1033 the index of the image that indicates the debug status\f2\lang1049 .\par
+
+\pard\nowidctlpar\sl276\slmult1\cf2 Syntax\cf0 : \f0\lang1033 IMAGE_STATUS_DEBUG\f3\lang1049  \f0\lang1033 =\f3\lang1049  5\f0\fs24\lang1033\par
+
+\pard\sl276\slmult1\cf3\f2\fs20\lang1049\par
+\cf2 Example\cf3 :\par
+
+\pard\nowidctlpar\sl276\slmult1\cf0\f0\lang1033 Tester.IMAGE_STATUS_DEBUG\fs24\par
+
+\pard\sl276\slmult1\f1\fs20\par
+}",
+
 @"",
 @"",
 @"",
@@ -7018,6 +7066,7 @@ if (cookies.Count() > 0)\par
             data.Add(new CompletionData("ConsoleMsg", "ConsoleMsg(string messageRus, string messageEng)"));
             data.Add(new CompletionData("ConsoleMsgError", "ConsoleMsgError(string message)"));
             data.Add(new CompletionData("CreateHashMD5FromTextAsync", "CreateHashMD5FromTextAsync(string text)"));
+            data.Add(new CompletionData("DEBUG", "DEBUG"));
             data.Add(new CompletionData("DEFAULT", "DEFAULT"));
             data.Add(new CompletionData("DefineTestStop", "DefineTestStop()"));
             data.Add(new CompletionData("Description", "Description(string text)"));
@@ -7095,6 +7144,7 @@ if (cookies.Count() > 0)\par
             data.Add(new CompletionData("GoToUrlAsync", "GoToUrlAsync(string url, int sec, bool abortLoadAfterTime = false)"));
             data.Add(new CompletionData("GoToUrlBaseAuthAsync", "GoToUrlBaseAuthAsync(string url, string login, string pass, int sec, bool abortLoadAfterTime = false)"));
             data.Add(new CompletionData("Id", "string Id { get; set; }"));
+            data.Add(new CompletionData("IMAGE_STATUS_DEBUG", "IMAGE_STATUS_DEBUG"));
             data.Add(new CompletionData("IMAGE_STATUS_FAILED", "IMAGE_STATUS_FAILED"));
             data.Add(new CompletionData("IMAGE_STATUS_MESSAGE", "IMAGE_STATUS_MESSAGE"));
             data.Add(new CompletionData("IMAGE_STATUS_PASSED", "IMAGE_STATUS_PASSED"));
@@ -7772,6 +7822,8 @@ if (cookies.Count() > 0)\par
                         if (value == "MakeVisibleAsync" && tag == "FRAMEElement") richTextBox1.Rtf = handbookRus[244];
                         if (value == "LoadPageAsync" && tag == "Tester") richTextBox1.Rtf = handbookRus[245];
                         if (value == "GetCookiesAsync" && tag == "Tester") richTextBox1.Rtf = handbookRus[246];
+                        if (value == "DEBUG" && tag == "Tester") richTextBox1.Rtf = handbookRus[247];
+                        if (value == "IMAGE_STATUS_DEBUG" && tag == "Tester") richTextBox1.Rtf = handbookRus[248];
                     }
                     else
                     {
@@ -8022,13 +8074,11 @@ if (cookies.Count() > 0)\par
                         if (value == "MakeVisibleAsync" && tag == "FRAMEElement") richTextBox1.Rtf = handbookEng[244];
                         if (value == "LoadPageAsync" && tag == "Tester") richTextBox1.Rtf = handbookEng[245];
                         if (value == "GetCookiesAsync" && tag == "Tester") richTextBox1.Rtf = handbookEng[246];
+                        if (value == "DEBUG" && tag == "Tester") richTextBox1.Rtf = handbookEng[247];
+                        if (value == "IMAGE_STATUS_DEBUG" && tag == "Tester") richTextBox1.Rtf = handbookEng[248];
                     }
-                    
 
                     /*
-                    if (value == "" && tag == "") richTextBox1.Rtf = handbookRus[246];
-                    if (value == "" && tag == "") richTextBox1.Rtf = handbookRus[247];
-                    if (value == "" && tag == "") richTextBox1.Rtf = handbookRus[248];
                     if (value == "" && tag == "") richTextBox1.Rtf = handbookRus[249];
                     if (value == "" && tag == "") richTextBox1.Rtf = handbookRus[250];
                     if (value == "" && tag == "") richTextBox1.Rtf = handbookRus[251];
