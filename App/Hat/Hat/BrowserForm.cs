@@ -14,6 +14,7 @@ using Newtonsoft.Json;
 using Microsoft.Web.WebView2.Core;
 using HatFramework;
 
+
 namespace Hat
 {
     public partial class BrowserForm : Form
@@ -69,6 +70,12 @@ namespace Hat
         private int step = 0;
         private ListViewItem item;
         private ListViewItem.ListViewSubItem subitem;
+
+        private int rtbConsoleCount = 0;
+        private int rtbErrorsCount = 0;
+        private int rtbEventsCount = 0;
+        private int listviewTestCount = 0;
+
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -149,8 +156,6 @@ namespace Hat
 
         private void BrowserForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            //e.Cancel = true;
-
             if (codeEditorForm != null)
             {
                 e.Cancel = true;
@@ -303,6 +308,7 @@ namespace Hat
                 if (e.ParameterObjectAsJson.Contains("\"type\":\"verbose\"") == true) return;
                 if (e.ParameterObjectAsJson.Contains("\"subtype\":\"verbose\"") == true) return;
 
+                optimizationErrors();
                 richTextBoxErrors.AppendText(e.ParameterObjectAsJson + Environment.NewLine);
                 richTextBoxErrors.ScrollToCaret();
             }
@@ -321,6 +327,7 @@ namespace Hat
             if (e != null && e.ParameterObjectAsJson != null)
             {
                 // verbose, info, warning, error
+                optimizationErrors();
                 if (e.ParameterObjectAsJson.Contains("\"level\":\"error\"") == true) richTextBoxErrors.AppendText(e.ParameterObjectAsJson + Environment.NewLine);
                 else if (e.ParameterObjectAsJson.Contains("\"level\":\"warning\"") == true) richTextBoxErrors.AppendText(e.ParameterObjectAsJson + Environment.NewLine);
                 richTextBoxErrors.ScrollToCaret();
@@ -332,6 +339,7 @@ namespace Hat
             richTextBoxErrors.Text = "";
         }
 
+        
         /* |-----------------------------------------------------------------------------------------------------------|
          * |== ПУБЛИЧНЫЕ МЕТОДЫ ДЛЯ ФРЕЙМВОРКА ========================================================================|
          * |-----------------------------------------------------------------------------------------------------------|
@@ -345,6 +353,7 @@ namespace Hat
         {
             try
             {
+                optimizationConsole();
                 if (HatSettings.language == HatSettings.RUS)
                 {
                     richTextBoxConsole.AppendText("[" + DateTime.Now.ToString() + "] " + messageRus + Environment.NewLine);
@@ -365,6 +374,7 @@ namespace Hat
         {
             try
             {
+                optimizationConsole();
                 richTextBoxConsole.AppendText("[" + DateTime.Now.ToString() + "] ОШИБКА: " + message + Environment.NewLine);
                 richTextBoxConsole.ScrollToCaret();
                 SystemConsoleMsg("- - - - - - - - - - - - - - - - - - - - - - - - - - - -", default, default, default, true);
@@ -388,6 +398,7 @@ namespace Hat
             Report.AddStep(Report.ERROR, "", message);
             Report.SaveReport(Config.testSuccess);
 
+            optimizationConsole();
             richTextBoxConsole.AppendText("[" + DateTime.Now.ToString() + "] ОШИБКА: " + message + Environment.NewLine);
             richTextBoxConsole.ScrollToCaret();
 
@@ -460,6 +471,8 @@ namespace Hat
             
             if (Config.commandLineMode == false) // в консольном режиме выполнения автотеста - шаги в таблицу не добавляются
             {
+                optimizationListViewTest();
+
                 this.item = new ListViewItem();
                 this.subitem = new ListViewItem.ListViewSubItem();
                 this.subitem.Text = action;
@@ -1946,7 +1959,7 @@ namespace Hat
 
         private void очиститьToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            richTextBoxConsole.Text = "";
+            richTextBoxConsole.Clear();
         }
 
         private void toolStripButton9_Click(object sender, EventArgs e)
@@ -2650,7 +2663,7 @@ namespace Hat
 
         private void toolStripButton18_Click(object sender, EventArgs e)
         {
-            richTextBoxErrors.Text = "";
+            richTextBoxErrors.Clear();
         }
 
         private async void toolStripButton16_Click(object sender, EventArgs e)
@@ -2667,6 +2680,7 @@ namespace Hat
                 }());";
                 string jsonText = await webView2.CoreWebView2.ExecuteScriptAsync(script);
                 dynamic result = JsonConvert.DeserializeObject(jsonText);
+                optimizationEvents();
                 richTextBoxEvents.Text = result;
             }
             catch (Exception ex)
@@ -2682,7 +2696,7 @@ namespace Hat
 
         private void toolStripButton14_Click_1(object sender, EventArgs e)
         {
-            richTextBoxEvents.Text = "";
+            richTextBoxEvents.Clear();
         }
 
         private void выводToolStripMenuItem_Click(object sender, EventArgs e)
@@ -3664,6 +3678,46 @@ namespace Hat
         {
             AliceForm a = new AliceForm();
             a.Show();
+        }
+
+        private void optimizationConsole()
+        {
+            rtbConsoleCount++;
+            if (rtbConsoleCount > 500)
+            {
+                richTextBoxConsole.Clear();
+                rtbConsoleCount = 0;
+            }
+        }
+
+        private void optimizationErrors()
+        {
+            rtbErrorsCount++;
+            if (rtbErrorsCount > 500)
+            {
+                richTextBoxErrors.Clear();
+                rtbErrorsCount = 0;
+            }
+        }
+
+        private void optimizationEvents()
+        {
+            rtbEventsCount++;
+            if (rtbEventsCount > 500)
+            {
+                richTextBoxEvents.Clear();
+                rtbEventsCount = 0;
+            }
+        }
+
+        private void optimizationListViewTest()
+        {
+            listviewTestCount++;
+            if (listviewTestCount > 500)
+            {
+                listViewTest.Items.Clear();
+                listviewTestCount = 0;
+            }
         }
     }
 }

@@ -27,7 +27,7 @@ namespace Hat
             Console.WriteLine("Browser Hat [License]: MIT License");
             Console.WriteLine("Browser Hat [version]: " + Assembly.GetExecutingAssembly().GetName().Version.ToString());
             Console.WriteLine("Browser Hat [update]: " + Config.dateBrowserUpdate);
-            Console.WriteLine("Browser Hat [author]: Evgeniy Somov");
+            Console.WriteLine("Browser Hat [author]: Evgenii Somov");
             Console.ResetColor();
 
             try {

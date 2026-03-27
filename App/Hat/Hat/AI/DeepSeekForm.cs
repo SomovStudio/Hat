@@ -62,7 +62,7 @@ namespace Hat
         {
             try
             {
-                Process.Start(Directory.GetCurrentDirectory() + "\\runtimes");
+                Process.Start(Directory.GetCurrentDirectory() + "\\readme");
             }
             catch (Exception ex)
             {

@@ -3388,6 +3388,100 @@ if (cookies.Count() > 0)\par
 \fs20 Tester.IMAGE_STATUS_DEBUG\par
 }",
 
+@"{\rtf1\ansi\ansicpg1252\deff0\nouicompat{\fonttbl{\f0\fswiss\fcharset0 Calibri;}{\f1\fswiss\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\nowidctlpar\sl276\slmult1\cf1\f0\fs20\lang9 Locator\cf0\fs24\lang1033\par
+\cf2\f1\fs20\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'e2\'f1\'ef\'ee\'ec\'ee\'e3\'e0\'f2\'e5\'eb\'fc\'ed\'fb\'e9 \'ea\'eb\'e0\'f1\'f1 \'e4\'eb\'ff \'f1\'ee\'e7\'e4\'e0\'ed\'e8\'ff \'eb\'ee\'ea\'e0\'f2\'ee\'f0\'ee\'e2.\f0\fs24\lang1033\par
+\cf2\f1\fs20\lang1049\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \par
+\f0\lang1033 public class Locator\par
+\{\par
+\tab public string name \{ get; set; \}\par
+\tab public string description \{ get; set; \}\par
+\tab public string type \{ get; set; \}\par
+\tab public string value \{ get; set; \}\par
+\}\par
+\fs24\par
+\cf2\f1\fs20\lang1049\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\cf0\f0\fs24\lang1033\par
+\fs20 Locator locator = new Locator();\par
+locator.name = ""inputLogin"";\par
+locator.description = ""\f1\lang1049\'cf\'ee\'eb\'e5 \'e4\'eb\'ff \'e2\'e2\'ee\'e4\'e0 \'eb\'ee\'e3\'e8\'ed\'e0"";\par
+locator.type = Tester.BY_XPATH;\par
+locator.value = ""//input[@id='login']"";\f0\lang1033\par
+}",
+
+@"{\rtf1\ansi\ansicpg1252\deff0\nouicompat{\fonttbl{\f0\fswiss\fcharset0 Calibri;}{\f1\fswiss\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\nowidctlpar\sl276\slmult1\cf1\f0\fs20\lang9 AddLocator\cf0\fs24\lang1033\par
+\cf2\f1\fs20\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'f1\'ee\'e7\'e4\'e0\'e5\'f2 \'eb\'ee\'ea\'e0\'f2\'ee\'f0 \'e8 \'e4\'ee\'e1\'e0\'e2\'eb\'ff\'e5\'f2 \'e5\'e3\'ee \'e2 \'ee\'e1\'f9\'e5\'e5 \'f5\'f0\'e0\'ed\'e8\'eb\'e8\'f9\'e5 \'eb\'ee\'ea\'e0\'f2\'ee\'f0\'ee\'e2.\f0\fs24\lang1033\par
+\cf2\f1\fs20\lang1049\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \f0\lang1033 AddLocator(string name, string type, string value, string description)\fs24\par
+\cf2\f1\fs20\lang1049\'c2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'ec\'ee\'e5 \'e7\'ed\'e0\'f7\'e5\'ed\'e8\'e5\cf0 : \'ee\'f2\'f1\'f3\'f2\'f1\'f2\'e2\'f3\'e5\'f2\par
+\f0\fs24\lang1033\par
+\cf2\f1\fs20\lang1049\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\cf0\f0\fs24\lang1033\par
+\fs20 tester.AddLocator(""inputLogin"", Tester.BY_XPATH, ""//input[@id='login']"", ""\f1\lang1049\'cf\'ee\'eb\'e5 \'e4\'eb\'ff \'e2\'e2\'ee\'e4\'e0 \'eb\'ee\'e3\'e8\'ed\'e0"");\f0\lang1033\par
+}",
+
+@"{\rtf1\ansi\ansicpg1252\deff0\nouicompat{\fonttbl{\f0\fswiss\fcharset0 Calibri;}{\f1\fswiss\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\nowidctlpar\sl276\slmult1\cf1\f0\fs20\lang9 GetLocator\cf0\fs24\lang1033\par
+\cf2\f1\fs20\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2 \'eb\'ee\'ea\'e0\'f2\'ee\'f0 \'e8\'e7 \'f5\'f0\'e0\'ed\'e8\'eb\'e8\'f9\'e0 \'eb\'ee\'ea\'e0\'f2\'ee\'f0\'ee\'e2 \'e2 \'e2\'e8\'e4\'e5 \'ee\'e1\'fa\'e5\'ea\'f2\'e0 \'ea\'eb\'e0\'f1\'f1 \'ea\'ee\'f2\'ee\'f0\'ee\'e3\'ee Locator.\f0\fs24\lang1033\par
+\cf2\f1\fs20\lang1049\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \f0\lang1033 GetLocator(string name)\fs24\par
+\cf2\f1\fs20\lang1049\'c2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'ec\'ee\'e5 \'e7\'ed\'e0\'f7\'e5\'ed\'e8\'e5\cf0 : \'ee\'e1\'fa\'e5\'ea\'f2 (Locator)\par
+\f0\fs24\lang1033\par
+\cf2\f1\fs20\lang1049\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\cf0\f0\fs24\lang1033\par
+\fs20 await tester.WaitVisibleElementAsync(tester.GetLocator(""inputLogin""), 25);\par
+}",
+
+@"{\rtf1\ansi\ansicpg1252\deff0\nouicompat{\fonttbl{\f0\fswiss\fcharset0 Calibri;}{\f1\fswiss\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\nowidctlpar\sl276\slmult1\cf1\f0\fs20\lang9 GetLocatorValue\cf0\fs24\lang1033\par
+\cf2\f1\fs20\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2 \'e7\'ed\'e0\'f7\'e5\'ed\'e8\'e5 \'eb\'ee\'ea\'e0\'f2\'ee\'f0 \'e8\'e7 \'f5\'f0\'e0\'ed\'e8\'eb\'e8\'f9\'e0 \'eb\'ee\'ea\'e0\'f2\'ee\'f0\'ee\'e2.\f0\fs24\lang1033\par
+\cf2\f1\fs20\lang1049\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \f0\lang1033 GetLocatorValue(string name)\fs24\par
+\cf2\f1\fs20\lang1049\'c2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'ec\'ee\'e5 \'e7\'ed\'e0\'f7\'e5\'ed\'e8\'e5\cf0 : \'f1\'f2\'f0\'ee\'ea\'e0 (string)\par
+\f0\fs24\lang1033\par
+\cf2\f1\fs20\lang1049\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\cf0\f0\fs24\lang1033\par
+\fs20 string value = tester.GetLocatorValue(""inputLogin"");\par
+}",
+
+@"{\rtf1\ansi\ansicpg1252\deff0\nouicompat{\fonttbl{\f0\fswiss\fcharset0 Calibri;}{\f1\fswiss\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\nowidctlpar\sl276\slmult1\cf1\f0\fs20\lang9 GetCountLocators\cf0\fs24\lang1033\par
+\cf2\f1\fs20\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2 \'ea\'ee\'eb\'e8\'f7\'e5\'f1\'f2\'e2\'ee \'eb\'ee\'ea\'e0\'f2\'ee\'f0 \'e2 \'f5\'f0\'e0\'ed\'e8\'eb\'e8\'f9\'e5 \'eb\'ee\'ea\'e0\'f2\'ee\'f0\'ee\'e2\f0\fs24\lang1033\par
+\cf2\f1\fs20\lang1049\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \f0\lang1033 GetCountLocators()\fs24\par
+\cf2\f1\fs20\lang1049\'c2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'ec\'ee\'e5 \'e7\'ed\'e0\'f7\'e5\'ed\'e8\'e5\cf0 : \'f7\'e8\'f1\'eb\'ee (int)\par
+\f0\fs24\lang1033\par
+\cf2\f1\fs20\lang1049\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\cf0\f0\fs24\lang1033\par
+\fs20 int count = tester.GetCountLocators();\par
+}",
+
+@"{\rtf1\ansi\ansicpg1252\deff0\nouicompat{\fonttbl{\f0\fswiss\fcharset0 Calibri;}{\f1\fswiss\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\nowidctlpar\sl276\slmult1\cf1\f0\fs20\lang9 ClearLocators\cf0\fs24\lang1033\par
+\cf2\f1\fs20\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'ee\'f7\'e8\'f9\'e0\'e5\'f2 \'f5\'f0\'e0\'ed\'e8\'eb\'e8\'f9\'e5 \'eb\'ee\'ea\'e0\'f2\'ee\'f0\'ee\'e2\f0\fs24\lang1033\par
+\cf2\f1\fs20\lang1049\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \f0\lang1033 ClearLocators()\fs24\par
+\cf2\f1\fs20\lang1049\'c2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'ec\'ee\'e5 \'e7\'ed\'e0\'f7\'e5\'ed\'e8\'e5\cf0 : \'ee\'f2\'f1\'f3\'f2\'f1\'f2\'e2\'f3\'e5\'f2\par
+\f0\fs24\lang1033\par
+\cf2\f1\fs20\lang1049\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\cf0\f0\fs24\lang1033\par
+\fs20 tester.ClearLocators();\par
+}",
+
+@"{\rtf1\ansi\ansicpg1252\deff0\nouicompat{\fonttbl{\f0\fswiss\fcharset0 Calibri;}{\f1\fswiss\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\nowidctlpar\sl276\slmult1\cf1\f0\fs20\lang9 RemoveLocator\cf0\fs24\lang1033\par
+\cf2\f1\fs20\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'f3\'e4\'e0\'eb\'ff\'e5\'f2 \'eb\'ee\'ea\'e0\'f2\'ee\'f0\'e0 \'e8\'e7 \'f5\'f0\'e0\'ed\'e8\'eb\'e8\'f9\'e0 \'eb\'ee\'ea\'e0\'f2\'ee\'f0\'ee\'e2 \'e8 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2 \'eb\'ee\'e3\'e8\'f7\'e5\'f1\'ea\'e8\'e9 \'f0\'e5\'e7\'f3\'eb\'fc\'f2\'e0\'f2 true \'e8\'eb\'e8 false\f0\fs24\lang1033\par
+\cf2\f1\fs20\lang1049\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \f0\lang1033 RemoveLocator(string name)\fs24\par
+\cf2\f1\fs20\lang1049\'c2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'ec\'ee\'e5 \'e7\'ed\'e0\'f7\'e5\'ed\'e8\'e5\cf0 : \'eb\'ee\'e3\'e8\'f7\'e5\'f1\'ea\'ee\'e5 (true \'e8\'eb\'e8 false)\par
+\f0\fs24\lang1033\par
+\cf2\f1\fs20\lang1049\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\cf0\f0\fs24\lang1033\par
+\fs20 bool result = tester.RemoveLocator(""inputLogin"");\par
+}",
+
 @"",
 @"",
 @"",
@@ -6739,6 +6833,139 @@ if (cookies.Count() > 0)\par
 \pard\sl276\slmult1\f1\fs20\par
 }",
 
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fswiss\fcharset0 Calibri;}{\f1\fnil\fcharset0 Calibri;}{\f2\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 Locator\cf0\f1\par
+\cf2\f2\lang1049 Description\cf0 : \f1\lang1033 an additional class for creating locators\f2\lang1049\par
+
+\pard\nowidctlpar\sl276\slmult1\cf2 Syntax\cf0 : \par
+\f0\lang1033 public class Locator\par
+\{\par
+\tab public string name \{ get; set; \}\par
+\tab public string description \{ get; set; \}\par
+\tab public string type \{ get; set; \}\par
+\tab public string value \{ get; set; \}\par
+\}\fs24\par
+
+\pard\sl276\slmult1\cf3\f2\fs20\lang1049\par
+\cf2 Example\cf3 :\par
+
+\pard\nowidctlpar\sl276\slmult1\cf0\f0\lang1033 Locator locator = new Locator();\par
+locator.name = ""inputLogin"";\par
+locator.description = ""This is the login field"";\par
+locator.type = Tester.BY_XPATH;\par
+locator.value = ""//input[@id='login']"";\fs24\par
+
+\pard\sl276\slmult1\f1\fs20\par
+}",
+
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fswiss\fcharset0 Calibri;}{\f1\fnil\fcharset0 Calibri;}{\f2\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 AddLocator\cf0\f1\par
+\cf2\f2\lang1049 Description\cf0 : \f1\lang1033 the method creates a locator and adds it to the shared locator storage.\f2\lang1049\par
+
+\pard\nowidctlpar\sl276\slmult1\cf2 Syntax\cf0 : \f0\lang1033 AddLocator(string name, string type, string value, string description)\fs24\par
+
+\pard\sl276\slmult1\cf2\f2\fs20\lang1049 Return value\cf0 : no return value\cf3\par
+\par
+\cf2 Example\cf3 :\par
+
+\pard\nowidctlpar\sl276\slmult1\cf0\f0\lang1033 tester.AddLocator(""inputLogin"", Tester.BY_XPATH, ""//input[@id='login']"", ""This is the login field"");\fs24\par
+
+\pard\sl276\slmult1\f1\fs20\par
+}",
+
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fswiss\fcharset0 Calibri;}{\f1\fnil\fcharset0 Calibri;}{\f2\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 GetLocator\cf0\f1\par
+\cf2\f2\lang1049 Description\cf0 : \f1\lang1033 the method returns the locator from the locator storage as an object whose class is Locator\f2\lang1049\par
+
+\pard\nowidctlpar\sl276\slmult1\cf2 Syntax\cf0 : \f0\lang1033 GetLocator(string name)\fs24\par
+
+\pard\sl276\slmult1\cf2\f2\fs20\lang1049 Return value\cf0 : object (Locator)\cf3\par
+\par
+\cf2 Example\cf3 :\par
+
+\pard\nowidctlpar\sl276\slmult1\cf0\f0\lang1033 await tester.WaitVisibleElementAsync(tester.GetLocator(""inputLogin""), 25);\fs24\par
+
+\pard\sl276\slmult1\f1\fs20\par
+}",
+
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fswiss\fcharset0 Calibri;}{\f1\fnil\fcharset0 Calibri;}{\f2\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 GetLocatorValue\cf0\f1\par
+\cf2\f2\lang1049 Description\cf0 : \f1\lang1033 the method returns the locator value from the locator storage\f2\lang1049\par
+
+\pard\nowidctlpar\sl276\slmult1\cf2 Syntax\cf0 : \f0\lang1033 GetLocatorValue(string name)\fs24\par
+
+\pard\sl276\slmult1\cf2\f2\fs20\lang1049 Return value\cf0 : string\cf3\par
+\par
+\cf2 Example\cf3 :\par
+
+\pard\nowidctlpar\sl276\slmult1\cf0\f0\lang1033 string value = tester.GetLocatorValue(""inputLogin"");\fs24\par
+
+\pard\sl276\slmult1\f1\fs20\par
+}",
+
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fswiss\fcharset0 Calibri;}{\f1\fnil\fcharset0 Calibri;}{\f2\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 GetCountLocators\cf0\f1\par
+\cf2\f2\lang1049 Description\cf0 : \f1\lang1033 the method returns the number of locators in the locator storage\f2\lang1049\par
+
+\pard\nowidctlpar\sl276\slmult1\cf2 Syntax\cf0 : \f0\lang1033 GetCountLocators(string name)\fs24\par
+
+\pard\sl276\slmult1\cf2\f2\fs20\lang1049 Return value\cf0 : int\cf3\par
+\par
+\cf2 Example\cf3 :\par
+
+\pard\nowidctlpar\sl276\slmult1\cf0\f0\lang1033 int count = tester.GetCountLocators();\fs24\par
+
+\pard\sl276\slmult1\f1\fs20\par
+}",
+
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fswiss\fcharset0 Calibri;}{\f1\fnil\fcharset0 Calibri;}{\f2\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 ClearLocators\cf0\f1\par
+\cf2\f2\lang1049 Description\cf0 : \f1\lang1033 the method clears the locator storage\f2\lang1049\par
+
+\pard\nowidctlpar\sl276\slmult1\cf2 Syntax\cf0 : \f0\lang1033 ClearLocators()\fs24\par
+
+\pard\sl276\slmult1\cf2\f2\fs20\lang1049 Return value\cf0 : no return value\cf3\par
+\par
+\cf2 Example\cf3 :\par
+
+\pard\nowidctlpar\sl276\slmult1\cf0\f0\lang1033 tester.ClearLocators();\fs24\par
+
+\pard\sl276\slmult1\f1\fs20\par
+}",
+
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fswiss\fcharset0 Calibri;}{\f1\fnil\fcharset0 Calibri;}{\f2\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 RemoveLocator\cf0\f1\par
+\cf2\f2\lang1049 Description\cf0 : \f1\lang1033 the method removes the locator from the locator storage and returns a logical result true or false.\f2\lang1049\par
+
+\pard\nowidctlpar\sl276\slmult1\cf2 Syntax\cf0 : \f0\lang1033 RemoveLocator(string name)\fs24\par
+
+\pard\sl276\slmult1\cf2\f2\fs20\lang1049 Return value\cf0 : bool (true or false)\cf3\par
+\par
+\cf2 Example\cf3 :\par
+
+\pard\nowidctlpar\sl276\slmult1\cf0\f0\lang1033 bool result = tester.RemoveLocator(""inputLogin"");\fs24\par
+
+\pard\sl276\slmult1\f1\fs20\par
+}",
+
+
+@"",
+@"",
+@"",
 @"",
 @"",
 @"",
@@ -6857,6 +7084,7 @@ if (cookies.Count() > 0)\par
                             if (treeView1.Nodes[i].Nodes[j].Text == "Методы для работы с файлами") treeView1.Nodes[i].Nodes[j].Text = "Methods for working with files";
                             if (treeView1.Nodes[i].Nodes[j].Text == "Методы для разных задач") treeView1.Nodes[i].Nodes[j].Text = "Methods for different tasks";
                             if (treeView1.Nodes[i].Nodes[j].Text == "Методы") treeView1.Nodes[i].Nodes[j].Text = "Methods";
+                            if (treeView1.Nodes[i].Nodes[j].Text == "Локаторы") treeView1.Nodes[i].Nodes[j].Text = "Locators";
 
                             if (treeView1.Nodes[i].Nodes[j].Nodes.Count > 0)
                             {
@@ -7019,6 +7247,7 @@ if (cookies.Count() > 0)\par
         {
             completionWindow = new CompletionWindow(textArea);
             IList<ICompletionData> data = completionWindow.CompletionList.CompletionData;
+            data.Add(new CompletionData("AddLocator", "AddLocator(string name, string type, string value, string description)"));
             data.Add(new CompletionData("AssertDontHaveInTableAsync", "AssertDontHaveInTableAsync(string tableName, string columnName, string value)"));
             data.Add(new CompletionData("AssertEqualsAsync", "AssertEqualsAsync(dynamic expected, dynamic actual)"));
             data.Add(new CompletionData("AssertFalseAsync", "AssertFalseAsync(bool condition)"));
@@ -7051,9 +7280,11 @@ if (cookies.Count() > 0)\par
             data.Add(new CompletionData("BY_VALUE", "BY_VALUE"));
             data.Add(new CompletionData("BY_XPATH", "BY_XPATH"));
             data.Add(new CompletionData("Class", "string Class { get; set; }"));
+            data.Add(new CompletionData("ClearLocators", "ClearLocators()"));
             data.Add(new CompletionData("ClearMessage", "ClearMessage()"));
             data.Add(new CompletionData("ClickAsync", "ClickAsync()"));
             data.Add(new CompletionData("ClickElementAsync", "ClickElementAsync(string by, string locator)"));
+            data.Add(new CompletionData("ClickElementAsync", "ClickElementAsync(Locator locator)"));
             data.Add(new CompletionData("ClickElementByClassAsync", "ClickElementByClassAsync(string _class, int index);"));
             data.Add(new CompletionData("ClickElementByIdAsync", "ClickElementByIdAsync(string id)"));
             data.Add(new CompletionData("ClickElementByNameAsync", "ClickElementByNameAsync(string name, int index)"));
@@ -7075,12 +7306,14 @@ if (cookies.Count() > 0)\par
             data.Add(new CompletionData("ExecuteJavaScriptAsync", "ExecuteJavaScriptAsync(string script)"));
             data.Add(new CompletionData("FAILED", "FAILED"));
             data.Add(new CompletionData("FindElementAsync", "FindElementAsync(string by, string locator, int sec)"));
+            data.Add(new CompletionData("FindElementAsync", "FindElementAsync(Locator locator, int sec)"));
             data.Add(new CompletionData("FindElementByClassAsync", "FindElementByClassAsync(string _class, int index, int sec)"));
             data.Add(new CompletionData("FindElementByIdAsync", "FindElementByIdAsync(string id, int sec)"));
             data.Add(new CompletionData("FindElementByNameAsync", "FindElementByNameAsync(string name, int index, int sec)"));
             data.Add(new CompletionData("FindElementByTagAsync", "FindElementByTagAsync(string tag, int index, int sec)"));
             data.Add(new CompletionData("FindEntryAsync", "FindEntryAsync(string tableName, string columnName, string value)"));
             data.Add(new CompletionData("FindVisibleElementAsync", "FindVisibleElementAsync(string by, string locator, int sec)"));
+            data.Add(new CompletionData("FindVisibleElementAsync", "FindVisibleElementAsync(Locator locator, int sec)"));
             data.Add(new CompletionData("FindVisibleElementByClassAsync", "FindVisibleElementByClassAsync(string _class, int index, int sec)"));
             data.Add(new CompletionData("FindVisibleElementByIdAsync", "FindVisibleElementByIdAsync(string id, int sec)"));
             data.Add(new CompletionData("FindVisibleElementByNameAsync", "FindVisibleElementByNameAsync(string name, int index, int sec)"));
@@ -7091,36 +7324,44 @@ if (cookies.Count() > 0)\par
             data.Add(new CompletionData("FileWriteAsync", "FileWriteAsync(string content, string encoding, string filename)"));
             data.Add(new CompletionData("GetAttributeAsync", "GetAttributeAsync(string name)"));
             data.Add(new CompletionData("GetAttributeFromElementAsync", "GetAttributeFromElementAsync(string by, string locator, string attribute)"));
+            data.Add(new CompletionData("GetAttributeFromElementAsync", "GetAttributeFromElementAsync(Locator locator, string attribute)"));
             data.Add(new CompletionData("GetAttributeFromElementByClassAsync", "GetAttributeFromElementByClassAsync(string _class, int index, string attribute)"));
             data.Add(new CompletionData("GetAttributeFromElementByIdAsync", "GetAttributeFromElementByIdAsync(string id, string attribute)"));
             data.Add(new CompletionData("GetAttributeFromElementByNameAsync", "GetAttributeFromElementByNameAsync(string name, int index, string attribute)"));
             data.Add(new CompletionData("GetAttributeFromElementByTagAsync", "GetAttributeFromElementByTagAsync(string tag, int index, string attribute)"));
             data.Add(new CompletionData("GetAttributeFromElementsAsync", "GetAttributeFromElementsAsync(string by, string locator, string attribute)"));
+            data.Add(new CompletionData("GetAttributeFromElementsAsync", "GetAttributeFromElementsAsync(Locator locator, string attribute)"));
             data.Add(new CompletionData("GetAttributeFromElementsByClassAsync", "GetAttributeFromElementsByClassAsync(string _class, string attribute)"));
             data.Add(new CompletionData("GetAttributeFromElementsByNameAsync", "GetAttributeFromElementsByNameAsync(string name, string attribute)"));
             data.Add(new CompletionData("GetAttributeFromElementsByTagAsync", "GetAttributeFromElementsByTagAsync(string tag, string attribute)"));
             data.Add(new CompletionData("GetCookiesAsync", "GetCookiesAsync()"));
             data.Add(new CompletionData("GetCountElementsAsync", "GetCountElementsAsync(string by, string locator)"));
+            data.Add(new CompletionData("GetCountElementsAsync", "GetCountElementsAsync(Locator locator)"));
             data.Add(new CompletionData("GetCountElementsByClassAsync", "GetCountElementsByClassAsync(string _class)"));
             data.Add(new CompletionData("GetCountElementsByNameAsync", "GetCountElementsByNameAsync(string name)"));
             data.Add(new CompletionData("GetCountElementsByTagAsync", "GetCountElementsByTagAsync(string tag)"));
             data.Add(new CompletionData("GetCountEntriesAsync", "GetCountEntriesAsync(string sqlQuertSelect)"));
+            data.Add(new CompletionData("GetCountLocators", "GetCountLocators()"));
             data.Add(new CompletionData("GetDataTableAsync", "GetDataTableAsync(string sqlQuertSelect)"));
             data.Add(new CompletionData("GetElementAsync", "GetElementAsync(string by, string locator)"));
+            data.Add(new CompletionData("GetElementAsync", "GetElementAsync(Locator locator)"));
             data.Add(new CompletionData("GetEntriesAsync", "GetEntriesAsync(string sqlQuertSelect)"));
             data.Add(new CompletionData("GetEntriesFromTableAsync", "GetEntriesFromTableAsync(string tableName)"));
             data.Add(new CompletionData("GetFrameAsync", "GetFrameAsync(int index)"));
             data.Add(new CompletionData("GetHtmlAsync", "GetHtmlAsync()"));
             data.Add(new CompletionData("GetHtmlFromElementAsync", "GetHtmlFromElementAsync(string by, string locator)"));
+            data.Add(new CompletionData("GetHtmlFromElementAsync", "GetHtmlFromElementAsync(Locator locator)"));
             data.Add(new CompletionData("GetHtmlFromElementByClassAsync", "GetHtmlFromElementByClassAsync(string _class, int index)"));
             data.Add(new CompletionData("GetHtmlFromElementByIdAsync", "GetHtmlFromElementByIdAsync(string id)"));
             data.Add(new CompletionData("GetHtmlFromElementByNameAsync", "GetHtmlFromElementByNameAsync(string name, int index)"));
             data.Add(new CompletionData("GetHtmlFromElementByTagAsync", "GetHtmlFromElementByTagAsync(string tag, int index)"));
             data.Add(new CompletionData("GetListRedirectUrlAsync", "GetListRedirectUrlAsync()"));
-            data.Add(new CompletionData("GetLocatorAsync", "GetLocatorAsync()"));
+            data.Add(new CompletionData("GetLocator", "GetLocator(string name)"));
+            data.Add(new CompletionData("GetLocatorValue", "GetLocatorValue(string name)"));
             data.Add(new CompletionData("GetOptionAsync", "GetOptionAsync(string by)"));
             data.Add(new CompletionData("GetStyleAsync", "GetStyleAsync(string property)"));
             data.Add(new CompletionData("GetStyleFromElementAsync", "GetStyleFromElementAsync(string by, string locator, string property)"));
+            data.Add(new CompletionData("GetStyleFromElementAsync", "GetStyleFromElementAsync(Locator locator, string property)"));
             data.Add(new CompletionData("GetStyleFromElementByClassAsync", "GetStyleFromElementByClassAsync(string _class, int index, string property)"));
             data.Add(new CompletionData("GetStyleFromElementByIdAsync", "GetStyleFromElementByIdAsync(string id, string property)"));
             data.Add(new CompletionData("GetStyleFromElementByNameAsync", "GetStyleFromElementByNameAsync(string name, int index, string property)"));
@@ -7128,6 +7369,7 @@ if (cookies.Count() > 0)\par
             data.Add(new CompletionData("GetTestResult", "GetTestResult()"));
             data.Add(new CompletionData("GetTextAsync", "GetTextAsync()"));
             data.Add(new CompletionData("GetTextFromElementAsync", "GetTextFromElementAsync(string by, string locator)"));
+            data.Add(new CompletionData("GetTextFromElementAsync", "GetTextFromElementAsync(Locator locator)"));
             data.Add(new CompletionData("GetTextFromElementByClassAsync", "GetTextFromElementByClassAsync(string _class, int index)"));
             data.Add(new CompletionData("GetTextFromElementByIdAsync", "GetTextFromElementByIdAsync(string id)"));
             data.Add(new CompletionData("GetTextFromElementByNameAsync", "GetTextFromElementByNameAsync(string name, int index)"));
@@ -7137,6 +7379,7 @@ if (cookies.Count() > 0)\par
             data.Add(new CompletionData("GetUrlResponseAsync", "GetUrlResponseAsync(string url)"));
             data.Add(new CompletionData("GetValueAsync", "GetValueAsync()"));
             data.Add(new CompletionData("GetValueFromElementAsync", "GetValueFromElementAsync(string by, string locator)"));
+            data.Add(new CompletionData("GetValueFromElementAsync", "GetValueFromElementAsync(Locator locator)"));
             data.Add(new CompletionData("GetValueFromElementByClassAsync", "GetValueFromElementByClassAsync(string _class, int index)"));
             data.Add(new CompletionData("GetValueFromElementByIdAsync", "GetValueFromElementByIdAsync(string id)"));
             data.Add(new CompletionData("GetValueFromElementByNameAsync", "GetValueFromElementByNameAsync(string name, int index)"));
@@ -7153,20 +7396,26 @@ if (cookies.Count() > 0)\par
             data.Add(new CompletionData("Index", "int Index { get; set; }"));
             data.Add(new CompletionData("IsClickableAsync", "IsClickableAsync()"));
             data.Add(new CompletionData("IsClickableElementAsync", "IsClickableElementAsync(string by, string locator)"));
+            data.Add(new CompletionData("IsClickableElementAsync", "IsClickableElementAsync(Locator locator)"));
             data.Add(new CompletionData("IsVisibleElementAsync", "IsVisibleElementAsync(string by, string locator)"));
+            data.Add(new CompletionData("IsVisibleElementAsync", "IsVisibleElementAsync(Locator locator)"));
             data.Add(new CompletionData("LoadPageAsync", "LoadPageAsync(string url, int sec, bool abortLoadAfterTime = false)"));
+            data.Add(new CompletionData("Locator", "Locator"));
             data.Add(new CompletionData("MakeElementVisibleAsync", "MakeElementVisibleAsync(string by, string locator, string visibility = \"visible\", int opacity = 1, int index = 1000)"));
+            data.Add(new CompletionData("MakeElementVisibleAsync", "MakeElementVisibleAsync(Locator locator, string visibility = \"visible\", int opacity = 1, int index = 1000)"));
             data.Add(new CompletionData("MakeVisibleAsync", "MakeElementVisibleAsync(string by, string locator, string visibility = \"visible\", int opacity = 1, int index = 1000)"));
             data.Add(new CompletionData("Name", "string Name { get; set; }"));
             data.Add(new CompletionData("PASSED", "PASSED"));
             data.Add(new CompletionData("PROCESS", "PROCESS"));
             data.Add(new CompletionData("RemoveEntryAsync", "RemoveEntryAsync(string sqlQuertDelete)"));
+            data.Add(new CompletionData("RemoveLocator", "RemoveLocator(string name)"));
             data.Add(new CompletionData("RestGetAsync", "RestGetAsync(string url, TimeSpan timeout, string charset = \"UTF-8\")"));
             data.Add(new CompletionData("RestGetBasicAuthAsync", "RestGetBasicAuthAsync(string login, string pass, string url, TimeSpan timeout, string charset = \"UTF-8\")"));
             data.Add(new CompletionData("RestGetStatusCodeAsync", "RestGetStatusCodeAsync(string url)"));
             data.Add(new CompletionData("RestPostAsync", "RestPostAsync(string url, string json, TimeSpan timeout, string charset = \"UTF-8\")"));
             data.Add(new CompletionData("ScrollToAsync", "ScrollToAsync(bool behaviorSmooth = false)"));
             data.Add(new CompletionData("ScrollToElementAsync", "ScrollToElementAsync(string by, string locator, bool behaviorSmooth = false)"));
+            data.Add(new CompletionData("ScrollToElementAsync", "ScrollToElementAsync(Locator locator, bool behaviorSmooth = false)"));
             data.Add(new CompletionData("SelectOptionAsync", "SelectOptionAsync(string by, string value)"));
             data.Add(new CompletionData("SendMessage", "SendMessage(string action, string status, string comment)"));
             data.Add(new CompletionData("SendMessageDebug", "SendMessageDebug(string actionRus, string actionEng, string status,  string commentRus, string commentEng, int image)"));
@@ -7174,35 +7423,41 @@ if (cookies.Count() > 0)\par
             data.Add(new CompletionData("SendMsgToTelegramAsync", "SendMsgToTelegramAsync(string botToken, string chatId, string text, string charset = \"UTF-8\", int timeHourFrom = 0, int timeHourBefore = 0)"));
             data.Add(new CompletionData("SetAttributeAsync", "GetAttributeAsync(string name)"));
             data.Add(new CompletionData("SetAttributeInElementAsync", "SetAttributeInElementAsync(string by, string locator, string attribute, string value)"));
+            data.Add(new CompletionData("SetAttributeInElementAsync", "SetAttributeInElementAsync(Locator locator, string attribute, string value)"));
             data.Add(new CompletionData("SetAttributeInElementByClassAsync", "SetAttributeInElementByClassAsync(string _class, int index, string attribute, string value)"));
             data.Add(new CompletionData("SetAttributeInElementByIdAsync", "SetAttributeInElementByIdAsync(string id, string attribute, string value)"));
             data.Add(new CompletionData("SetAttributeInElementByNameAsync", "SetAttributeInElementByNameAsync(string name, int index, string attribute, string value)"));
             data.Add(new CompletionData("SetAttributeInElementByTagAsync", "SetAttributeInElementByTagAsync(string tag, int index, string attribute, string value)"));
             data.Add(new CompletionData("SetAttributeInElementsAsync", "SetAttributeInElementsAsync(string by, string locator, string attribute, string value)"));
+            data.Add(new CompletionData("SetAttributeInElementsAsync", "SetAttributeInElementsAsync(Locator locator, string attribute, string value)"));
             data.Add(new CompletionData("SetAttributeInElementsByClassAsync", "SetAttributeInElementsByClassAsync(string _class, string attribute, string value)"));
             data.Add(new CompletionData("SetAttributeInElementsByNameAsync", "SetAttributeInElementsByNameAsync(string name, string attribute, string value)"));
             data.Add(new CompletionData("SetAttributeInElementsByTagAsync", "SetAttributeInElementsByTagAsync(string tag, string attribute, string value)"));
             data.Add(new CompletionData("SetEntryAsync", "SetEntryAsync(string sqlQuertInsert)"));
             data.Add(new CompletionData("SetHtmlAsync", "SetHtmlAsync(string html)"));
             data.Add(new CompletionData("SetHtmlInElementAsync", "SetHtmlInElementAsync(string by, string locator, string html)"));
+            data.Add(new CompletionData("SetHtmlInElementAsync", "SetHtmlInElementAsync(Locator locator, string html)"));
             data.Add(new CompletionData("SetHtmlInElementByClassAsync", "SetHtmlInElementByClassAsync(string _class, int index, string html)"));
             data.Add(new CompletionData("SetHtmlInElementByIdAsync", "SetHtmlInElementByIdAsync(string id, string html)"));
             data.Add(new CompletionData("SetHtmlInElementByNameAsync", "SetHtmlInElementByNameAsync(string name, int index, string html)"));
             data.Add(new CompletionData("SetHtmlInElementByTagAsync", "SetHtmlInElementByTagAsync(string tag, int index, string html)"));
             data.Add(new CompletionData("SetStyleAsync", "SetStyleAsync(string cssText)"));
             data.Add(new CompletionData("SetStyleInElementAsync", "SetStyleInElementAsync(string by, string locator, string cssText)"));
+            data.Add(new CompletionData("SetStyleInElementAsync", "SetStyleInElementAsync(Locator locator, string cssText)"));
             data.Add(new CompletionData("SetStyleInElementByClassAsync", "SetStyleInElementByClassAsync(string _class, int index, string cssText)"));
             data.Add(new CompletionData("SetStyleInElementByIdAsync", "SetStyleInElementByIdAsync(string id, string cssText)"));
             data.Add(new CompletionData("SetStyleInElementByNameAsync", "SetStyleInElementByNameAsync(string name, int index, string cssText)"));
             data.Add(new CompletionData("SetStyleInElementByTagAsync", "SetStyleInElementByTagAsync(string tag, int index, string cssText)"));
             data.Add(new CompletionData("SetTextAsync", "SetTextAsync(string text)"));
             data.Add(new CompletionData("SetTextInElementAsync", "SetTextInElementAsync(string by, string locator, string text)"));
+            data.Add(new CompletionData("SetTextInElementAsync", "SetTextInElementAsync(Locator locator, string text)"));
             data.Add(new CompletionData("SetTextInElementByClassAsync", "SetTextInElementByClassAsync(string _class, int index, string text)"));
             data.Add(new CompletionData("SetTextInElementByIdAsync", "SetTextInElementByIdAsync(string id, string text)"));
             data.Add(new CompletionData("SetTextInElementByNameAsync", "SetTextInElementByNameAsync(string name, int index, string text)"));
             data.Add(new CompletionData("SetTextInElementByTagAsync", "SetTextInElementByTagAsync(string tag, int index, string text)"));
             data.Add(new CompletionData("SetValueAsync", "SetValueAsync(string value)"));
             data.Add(new CompletionData("SetValueInElementAsync", "SetValueInElementAsync(string by, string locator, string value)"));
+            data.Add(new CompletionData("SetValueInElementAsync", "SetValueInElementAsync(Locator locator, string value)"));
             data.Add(new CompletionData("SetValueInElementByClassAsync", "SetValueInElementByClassAsync(string _class, int index, string value)"));
             data.Add(new CompletionData("SetValueInElementByIdAsync", "SetValueInElementByIdAsync(string id, string value)"));
             data.Add(new CompletionData("SetValueInElementByNameAsync", "SetValueInElementByNameAsync(string name, int index, string value)"));
@@ -7218,15 +7473,19 @@ if (cookies.Count() > 0)\par
             data.Add(new CompletionData("UTF8BOM", "UTF-8 BOM"));
             data.Add(new CompletionData("WaitAsync", "WaitAsync(int sec)"));
             data.Add(new CompletionData("WaitElementInDomAsync", "WaitElementInDomAsync(string by, string locator, int sec)"));
+            data.Add(new CompletionData("WaitElementInDomAsync", "WaitElementInDomAsync(Locator locator, int sec)"));
             data.Add(new CompletionData("WaitElementNotDomAsync", "WaitElementNotDomAsync(string by, string locator, int sec)"));
+            data.Add(new CompletionData("WaitElementNotDomAsync", "WaitElementNotDomAsync(Locator locator, int sec)"));
             data.Add(new CompletionData("WaitNotVisibleAsync", "WaitNotVisibleAsync(int sec)"));
             data.Add(new CompletionData("WaitNotVisibleElementAsync", "WaitNotVisibleElementAsync(string by, string locator, int sec)"));
+            data.Add(new CompletionData("WaitNotVisibleElementAsync", "WaitNotVisibleElementAsync(Locator locator, int sec)"));
             data.Add(new CompletionData("WaitNotVisibleElementByClassAsync", "WaitNotVisibleElementByClassAsync(string _class, int index, int sec)"));
             data.Add(new CompletionData("WaitNotVisibleElementByIdAsync", "WaitNotVisibleElementByIdAsync(string id, int sec)"));
             data.Add(new CompletionData("WaitNotVisibleElementByNameAsync", "WaitNotVisibleElementByNameAsync(string name, int index, int sec)"));
             data.Add(new CompletionData("WaitNotVisibleElementByTagAsync", "WaitNotVisibleElementByTagAsync(string tag, int index, int sec)"));
             data.Add(new CompletionData("WaitVisibleAsync", "WaitVisibleAsync(int sec)"));
             data.Add(new CompletionData("WaitVisibleElementAsync", "WaitVisibleElementAsync(string by, string locator, int sec)"));
+            data.Add(new CompletionData("WaitVisibleElementAsync", "WaitVisibleElementAsync(Locator locator, int sec)"));
             data.Add(new CompletionData("WaitVisibleElementByClassAsync", "WaitVisibleElementByClassAsync(string _class, int index, int sec)"));
             data.Add(new CompletionData("WaitVisibleElementByIdAsync", "WaitVisibleElementByIdAsync(string id, int sec)"));
             data.Add(new CompletionData("WaitVisibleElementByNameAsync", "WaitVisibleElementByNameAsync(string name, int index, int sec)"));
@@ -7824,6 +8083,14 @@ if (cookies.Count() > 0)\par
                         if (value == "GetCookiesAsync" && tag == "Tester") richTextBox1.Rtf = handbookRus[246];
                         if (value == "DEBUG" && tag == "Tester") richTextBox1.Rtf = handbookRus[247];
                         if (value == "IMAGE_STATUS_DEBUG" && tag == "Tester") richTextBox1.Rtf = handbookRus[248];
+                        if (value == "Locator" && tag == "Tester") richTextBox1.Rtf = handbookRus[249];
+                        if (value == "AddLocator" && tag == "Tester") richTextBox1.Rtf = handbookRus[250];
+                        if (value == "GetLocator" && tag == "Tester") richTextBox1.Rtf = handbookRus[251];
+                        if (value == "GetLocatorValue" && tag == "Tester") richTextBox1.Rtf = handbookRus[252];
+                        if (value == "GetCountLocators" && tag == "Tester") richTextBox1.Rtf = handbookRus[253];
+                        if (value == "ClearLocators" && tag == "Tester") richTextBox1.Rtf = handbookRus[254];
+                        if (value == "RemoveLocator" && tag == "Tester") richTextBox1.Rtf = handbookRus[255];
+
                     }
                     else
                     {
@@ -8076,12 +8343,22 @@ if (cookies.Count() > 0)\par
                         if (value == "GetCookiesAsync" && tag == "Tester") richTextBox1.Rtf = handbookEng[246];
                         if (value == "DEBUG" && tag == "Tester") richTextBox1.Rtf = handbookEng[247];
                         if (value == "IMAGE_STATUS_DEBUG" && tag == "Tester") richTextBox1.Rtf = handbookEng[248];
+                        if (value == "Locator" && tag == "Tester") richTextBox1.Rtf = handbookEng[249];
+                        if (value == "AddLocator" && tag == "Tester") richTextBox1.Rtf = handbookEng[250];
+                        if (value == "GetLocator" && tag == "Tester") richTextBox1.Rtf = handbookEng[251];
+                        if (value == "GetLocatorValue" && tag == "Tester") richTextBox1.Rtf = handbookEng[252];
+                        if (value == "GetCountLocators" && tag == "Tester") richTextBox1.Rtf = handbookEng[253];
+                        if (value == "ClearLocators" && tag == "Tester") richTextBox1.Rtf = handbookEng[254];
+                        if (value == "RemoveLocator" && tag == "Tester") richTextBox1.Rtf = handbookEng[255];
+
                     }
 
                     /*
-                    if (value == "" && tag == "") richTextBox1.Rtf = handbookRus[249];
-                    if (value == "" && tag == "") richTextBox1.Rtf = handbookRus[250];
-                    if (value == "" && tag == "") richTextBox1.Rtf = handbookRus[251];
+                    if (value == "" && tag == "") richTextBox1.Rtf = handbookRus[256];
+                    if (value == "" && tag == "") richTextBox1.Rtf = handbookRus[257];
+                    if (value == "" && tag == "") richTextBox1.Rtf = handbookRus[258];
+                    if (value == "" && tag == "") richTextBox1.Rtf = handbookRus[259];
+                    if (value == "" && tag == "") richTextBox1.Rtf = handbookRus[260];
                     */
 
                 }
