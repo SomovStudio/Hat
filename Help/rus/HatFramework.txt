@@ -1,0 +1,2358 @@
+
+Встроенный фреймворк HatFramework версия 1.5.0.2
+
+
+Класс: Tester
+
+
+Конструктор
+
+
+Tester
+Tester
+Описание: основной класс работы автотестов
+Синтаксис: Tester(Form browserForm)
+Пример:
+Tester tester;
+public async void Main(Form browserWindow)
+{
+	tester = new Tester(browserWindow);
+}
+
+
+Константы
+
+
+BY_CSS
+BY_CSS
+Описание: константа обозначает тип вводимого локатора
+Синтаксис: BY_CSS = "BY_CSS"
+Пример:
+Tester.BY_CSS
+
+
+BY_XPATH
+BY_XPATH
+Описание: константа обозначает тип вводимого локатора
+Синтаксис: BY_XPATH = "BY_XPATH"
+Пример:
+Tester.BY_XPATH
+
+
+IMAGE_STATUS_PROCESS
+IMAGE_STATUS_PROCESS
+Описание: индекс картинки которая обозначает статус в процессе
+Синтаксис: IMAGE_STATUS_PROCESS =  0
+Пример:
+Tester.IMAGE_STATUS_PROCESS
+
+
+IMAGE_STATUS_PASSED
+IMAGE_STATUS_PASSED
+Описание: индекс картинки которая обозначает статус успешно
+Синтаксис: IMAGE_STATUS_PASSED =  1
+Пример:
+Tester.IMAGE_STATUS_PASSED
+
+
+IMAGE_STATUS_FAILED
+IMAGE_STATUS_FAILED
+Описание: индекс картинки которая обозначает статус провально
+Синтаксис: IMAGE_STATUS_FAILED =  2
+Пример:
+Tester.IMAGE_STATUS_FAILED
+
+
+IMAGE_STATUS_MESSAGE
+IMAGE_STATUS_MESSAGE
+Описание: индекс картинки которая обозначает статус сообщение
+Синтаксис: IMAGE_STATUS_MESSAGE =  3
+Пример:
+Tester.IMAGE_STATUS_MESSAGE
+
+
+IMAGE_STATUS_WARNING
+IMAGE_STATUS_WARNING
+Описание: индекс картинки которая обозначает статус предупреждение
+Синтаксис: IMAGE_STATUS_WARNING =  4
+Пример:
+Tester.IMAGE_STATUS_WARNING
+
+
+IMAGE_STATUS_DEBUG
+IMAGE_STATUS_DEBUG
+Описание: индекс картинки которая обозначает статус отладки
+Синтаксис: IMAGE_STATUS_DEBUG =  5
+Пример:
+Tester.IMAGE_STATUS_DEBUG
+
+
+COMPLETED
+COMPLETED
+Описание: константа обозначает статус выполнено
+Синтаксис: COMPLETED = "COMPLETED"
+Пример:
+Tester.COMPLETED
+
+
+FAILED
+FAILED
+Описание: константа обозначает статус провально
+Синтаксис: FAILED = "FAILED"
+Пример:
+Tester.FAILED
+
+
+PASSED
+PASSED
+Описание: константа обозначает статус успешно
+Синтаксис: PASSED = "PASSED"
+Пример:
+Tester.PASSED
+
+
+PROCESS
+PROCESS
+Описание: константа обозначает статус выполняется
+Синтаксис: PROCESS = "PROCESS"
+Пример:
+Tester.PROCESS
+
+
+STOPPED
+STOPPED
+Описание: константа обозначает статус остановлено
+Синтаксис: STOPPED = "STOPPED"
+Пример:
+Tester.STOPPED
+
+
+WARNING
+WARNING
+Описание: константа обозначает статус предупреждение
+Синтаксис: WARNING = "WARNING"
+Пример:
+Tester.WARNING
+
+
+DEBUG
+DEBUG
+Описание: константа обозначает статус отладка
+Синтаксис: DEBUG = "DEBUG"
+Пример:
+Tester.DEBUG
+
+
+DEFAULT
+DEFAULT
+Описание: константа обозначает тип кодировки для файла
+Синтаксис: DEFAULT = "DEFAULT"
+Пример:
+string text = await tester.FileReadAsync(Tester.DEFAULT, "C:\\Hat\\file.txt");
+await tester.FileWriteAsync(text, Tester.DEFAULT, "C:\\Hat\\file_copy.txt");
+
+
+
+UTF8
+UTF8
+Описание: константа обозначает тип кодировки для файла
+Синтаксис: UTF8 = "UTF-8"
+Пример:
+string text = await tester.FileReadAsync(Tester.UTF8, "C:\\Hat\\file.txt");
+await tester.FileWriteAsync(text, Tester.UTF8, "C:\\Hat\\file_copy.txt");
+
+
+
+UTF8BOM
+UTF8BOM
+Описание: константа обозначает тип кодировки для файла
+Синтаксис: UTF8BOM = "UTF-8 BOM"
+Пример:
+string text = await tester.FileReadAsync(Tester.UTF8BOM, "C:\\Hat\\file.txt");
+await tester.FileWriteAsync(text, Tester.UTF8BOM, "C:\\Hat\\file_copy.txt");
+
+
+
+WINDOWS1251
+WINDOWS1251
+Описание: константа обозначает тип кодировки для файла
+Синтаксис: WINDOWS1251 = "WINDOWS-1251"
+Пример:
+string text = await tester.FileReadAsync(Tester.WINDOWS1251, "C:\\Hat\\file.txt");
+await tester.FileWriteAsync(text, Tester.WINDOWS1251, "C:\\Hat\\file_copy.txt");
+
+
+
+Переменные
+
+
+BrowserView
+BrowserView
+Описание: переменная ссылается на объект представляющий область браузера
+Синтаксис: WebView2 BrowserView
+Пример:
+tester.BrowserView.Refresh();
+tester.BrowserView.Reload();
+tester.BrowserView.Source = new Uri(url);
+tester.BrowserView.Update();
+
+
+BrowserWindow
+BrowserWindow
+Описание: переменная ссылается на окно приложения
+Синтаксис: Form BrowserWindow
+Пример:
+Tester tester;
+public async void Main(Form browserWindow)
+{
+	tester = new Tester(browserWindow);
+	tester.BrowserWindow.Text = "Браузер Hat";
+	tester.BrowserWindow.Width = 800;
+	tester.BrowserWindow.Height = 600;
+	tester.BrowserWindow.Close();
+}
+
+
+
+Локаторы 
+
+
+Locator
+Locator
+Описание: вспомогательный класс для создания локаторов
+Синтаксис:
+public class Locator
+{
+public string name { get; set; }
+public string description { get; set; }
+public string type { get; set; }
+public string value { get; set; }
+}
+Пример:
+Locator locator = new Locator();
+locator.name = "inputLogin";
+locator.description = "Поле для ввода логина";
+locator.type = Tester.BY_XPATH;
+locator.value = "//input[@id='login']";
+
+
+
+AddLocator
+AddLocator
+Hat
+81 / 278
+Описание: метод создает локатор и добавляет его в общее хранилище локаторов
+Синтаксис: AddLocator(string name, string type, string value, string description)
+Возвращаемое значение: отсутствует
+Пример:
+tester.AddLocator("inputLogin", Tester.BY_XPATH, "//input[@id='login']", "Поле для ввода
+логина");
+
+
+
+GetLocator
+GetLocator
+Описание: метод возвращает локатор из хранилища локаторов в виде объекта класс
+которого Locator
+Синтаксис: GetLocator(string name)
+Возвращаемое значение: объект (Locator)
+Пример:
+await tester.WaitVisibleElementAsync(tester.GetLocator("inputLogin"), 25);
+
+
+
+GetLocatorValue
+GetLocatorValue
+Описание: метод возвращает значение локатор из хранилища локаторов
+Синтаксис: GetLocatorValue(string name)
+Возвращаемое значение: строка (string)
+Пример:
+string value = tester.GetLocatorValue("inputLogin");
+
+
+
+GetCountLocators
+GetCountLocators
+Описание: метод возвращает количество локатор в хранилище локаторов
+Синтаксис: GetCountLocators()
+Возвращаемое значение: число (int)
+Пример:
+int count = tester.GetCountLocators();
+
+
+
+ClearLocators
+ClearLocators
+Описание: метод очищает хранилище локаторов
+Синтаксис: ClearLocators()
+Возвращаемое значение: отсутствует
+Пример:
+tester.ClearLocators();
+
+
+
+RemoveLocator
+RemoveLocator
+Описание: метод удаляет локатора из хранилища локаторов и возвращает логический
+результат true или false
+Синтаксис: RemoveLocator(string name)
+Возвращаемое значение: логическое (true или false)
+Пример:
+bool result = tester.RemoveLocator("inputLogin");
+
+
+
+Методы для работы с браузером
+
+
+
+BrowserBasicAuthenticationAsync
+BrowserBasicAuthenticationAsync
+Описание: метод навигации браузера выполняет действие вперед с указанным ожиданием в секундах
+Синтаксис: BrowserBasicAuthenticationAsync(string user, string pass)
+Возвращаемое значение: отсутствует
+Пример:
+Tester tester = new Tester(browserForm);
+await tester.BrowserBasicAuthenticationAsync("user", "pass");
+await tester.TestBeginAsync();
+await tester.GoToUrlAsync("http://test.ru/basic_auth.html", 5);
+await tester.TestEndAsync();
+
+
+BrowserClearNetworkAsync
+BrowserClearNetworkAsync
+Описание: метод выполняет очистку событий network в браузере
+Синтаксис: BrowserClearNetworkAsync()
+Возвращаемое значение: строка (string)
+Пример:
+string events = await tester.BrowserClearNetworkAsync();
+tester.ConsoleMsg(events);
+
+
+
+BrowserCloseAsync
+BrowserCloseAsync
+Описание: метод закрывает окно браузера
+Синтаксис: BrowserCloseAsync()
+Возвращаемое значение: отсутствует
+Пример:
+await tester.BrowserCloseAsync();
+
+
+BrowserEnableSendMailAsync
+BrowserEnableSendMailAsync
+Описание: метод включает опцию отправки отчета на почту в случае провала в работе автотеста
+Синтаксис: BrowserEnableSendMailAsync(bool byFailure = true, bool bySuccess = true)
+Возвращаемое значение: отсутствует
+Пример:
+Tester tester = new Tester(browserForm);
+await tester.BrowserEnableSendMailAsync(true, false); // только в случае провала
+await tester.BrowserEnableSendMailAsync(false, true); // только в случае успеха
+await tester.BrowserEnableSendMailAsync(); // в обоих случаях
+await tester.TestBeginAsync();
+...
+await tester.TestEndAsync();
+
+
+BrowserFullScreenAsync
+BrowserFullScreenAsync
+Описание: метод устанавливает полноэкранный размер браузера
+Синтаксис: BrowserFullScreenAsync()
+Возвращаемое значение: отсутствует
+Пример:
+await tester.BrowserFullScreenAsync();
+
+
+BrowserScreenshotAsync
+BrowserScreenshotAsync
+Описание: метод делает снимок экрана браузера
+Синтаксис: BrowserScreenshotAsync(string filename)
+Возвращаемое значение: строка (string)
+Пример:
+string screenshot = await tester.BrowserScreenshotAsync(null);
+screenshot = await tester.BrowserScreenshotAsync("");
+screenshot = await tester.BrowserScreenshotAsync("screenshot.jpg");
+screenshot = await tester.BrowserScreenshotAsync("C:\\Users\\User\\Desktop\\MyTests\\reports\\screenshots\\test_screenshot.jpg");
+tester.ConsoleMsg(screenshot);
+
+
+
+BrowserSizeAsync
+BrowserSizeAsync
+Описание: метод устанавливает размер браузера
+Синтаксис: BrowserSizeAsync(int width, int height)
+Возвращаемое значение: отсутствует
+Пример:
+await tester.BrowserSizeAsync(800, 600);
+
+
+BrowserGetUserAgentAsync
+BrowserGetUserAgentAsync
+Описание: метод возвращает строчное значение User-Agent браузера
+Синтаксис: BrowserGetUserAgentAsync()
+Возвращаемое значение: строка (string)
+Пример:
+string ua = await tester.BrowserGetUserAgentAsync();
+
+
+BrowserSetUserAgentAsync
+BrowserSetUserAgentAsync
+Описание: метод устанавливает значение User-Agent для браузера
+Синтаксис: BrowserSetUserAgent(string value)
+Возвращаемое значение: отсутствует
+Пример:
+await tester.TestBeginAsync();
+await tester.BrowserSetUserAgent("my user-agent");
+await tester.TestEndAsync();
+
+
+BrowserGetErrorsAsync
+BrowserGetErrorsAsync
+Описание: метод возвращает список ошибок и предупреждений браузера
+Синтаксис: BrowserGetErrorsAsync()
+Возвращаемое значение: список (List)
+Пример:
+List<string> errors = await tester.BrowserGetErrorsAsync();
+foreach (string error in errors)
+{
+	tester.ConsoleMsg(error);
+}
+
+
+BrowserGetNetworkAsync
+BrowserGetNetworkAsync
+Описание: метод возвращает в формате json все текущие сообщения из network
+Синтаксис: BrowserGetNetworkAsync()
+Возвращаемое значение: строка (string)
+Пример:
+string events = await tester.BrowserGetNetworkAsync();
+tester.ConsoleMsg(events);
+
+
+BrowserGoBackAsync
+BrowserGoBackAsync
+Описание: метод навигации браузера выполняет действие назад с указанным ожиданием в секундах
+Флаг abortLoadAfterTime принудительно завершает загрузку страницы после завершения таймера
+Синтаксис: BrowserGoBackAsync(int sec, bool abortLoadAfterTime = false)
+Возвращаемое значение: отсутствует
+Пример:
+Tester tester = new Tester(browserForm);
+await tester.TestBeginAsync();
+await tester.GoToUrlAsync("https://www.yahoo.com/", 5);
+string currentUrl = await tester.GetUrlAsync();
+await tester.AssertEqualsAsync("https://www.yahoo.com/", currentUrl);
+await tester.GoToUrlAsync("https://yandex.ru/", 5);
+currentUrl = await tester.GetUrlAsync();
+await tester.AssertEqualsAsync("https://yandex.ru/", currentUrl);
+await tester.BrowserGoBackAsync(10);
+currentUrl = await tester.GetUrlAsync();
+await tester.AssertEqualsAsync("https://www.yahoo.com/", currentUrl);
+await tester.BrowserGoForwardAsync(10);
+currentUrl = await tester.GetUrlAsync();
+await tester.AssertEqualsAsync("https://yandex.ru/", currentUrl);
+await tester.TestEndAsync();
+
+
+BrowserGoForwardAsync
+BrowserGoForwardAsync
+Описание: метод навигации браузера выполняет действие вперед с указанным ожиданием в секундах
+Флаг abortLoadAfterTime принудительно завершает загрузку страницы после завершения таймера
+Синтаксис: BrowserGoForwardAsync(int sec, bool abortLoadAfterTime = false)
+Возвращаемое значение: отсутствует
+Пример:
+Tester tester = new Tester(browserForm);
+await tester.TestBeginAsync();
+await tester.GoToUrlAsync("https://www.yahoo.com/", 5);
+string currentUrl = await tester.GetUrlAsync();
+await tester.AssertEqualsAsync("https://www.yahoo.com/", currentUrl);
+await tester.GoToUrlAsync("https://yandex.ru/", 5);
+currentUrl = await tester.GetUrlAsync();
+await tester.AssertEqualsAsync("https://yandex.ru/", currentUrl);
+await tester.BrowserGoBackAsync(10);
+currentUrl = await tester.GetUrlAsync();
+await tester.AssertEqualsAsync("https://www.yahoo.com/", currentUrl);
+await tester.BrowserGoForwardAsync(10);
+currentUrl = await tester.GetUrlAsync();
+await tester.AssertEqualsAsync("https://yandex.ru/", currentUrl);
+await tester.TestEndAsync();
+
+
+BrowserPageReloadAsync
+BrowserPageReloadAsync
+Описание: метод выполняет перезагрузку открытой страницы в браузере
+Флаг abortLoadAfterTime принудительно завершает загрузку страницы после завершения таймера
+Синтаксис: BrowserPageReloadAsync(int sec, bool abortLoadAfterTime = false)
+Возвращаемое значение: отсутствует
+Пример:
+await tester.BrowserPageReloadAsync(25);
+
+
+Методы для вывода сообщений
+
+
+ConsoleMsg
+ConsoleMsg
+Описание: метод выводит сообщение в консоли браузера
+Синтаксис: 
+ConsoleMsg(string message)
+ConsoleMsg(string messageRus, string messageEng)
+Возвращаемое значение: отсутствует
+Пример:
+tester.ConsoleMsg("Текст на Русском языке", "The text is in English");
+
+
+ConsoleMsgError
+ConsoleMsgError
+Описание: метод выводит сообщение об ошибке в системную консоль и консоль браузера
+Синтаксис: ConsoleMsgError(string message)
+Возвращаемое значение: отсутствует
+Пример:
+try
+{
+	
+}
+catch (Exception ex)
+{
+	tester.ConsoleMsgError(ex.ToString());
+}
+
+
+
+ClearMessage
+ClearMessage
+Описание: метод очищает сообщения в таблице вывода процесса выполнения тесте
+Синтаксис: ClearMessage()
+Возвращаемое значение: отсутствует
+Пример:
+tester.ClearMessage();
+
+
+
+Description
+Description
+Описание: метод устанавливает описание теста которое потом выводитя в отчете и письме
+Синтаксис: Description(string text)
+Возвращаемое значение: отсутствует
+Пример:
+public async Task setUp()
+{
+	tester.Description("Тест проверяет авторизацию на сайте");
+}
+
+
+
+DisableDebugInReport
+DisableDebugInReport
+Описание: метод отключает вывод отладочных сообщений SendMessageDebug в отчет
+Синтаксис: DisableDebugInReport()
+Возвращаемое значение: отсутствует
+Пример:
+tester.DisableDebugInReport();
+
+
+
+SendMessage
+SendMessage
+Описание: метод выводит сообщения в таблице процесса выполнения теста
+При выполнении в системную консоль выводится action если status равен FAILED, WARNING, "" , null,
+в противном случае выводится только status и comment (без action).
+Синтаксис: SendMessage(string action, string status, string comment)
+Пример:
+tester.SendMessage("текст действия", Tester.PROCESS, "текст комментария");
+/* Примеры вывода в консоль */
+// действие комментарий
+tester.SendMessage("действия", null, "комментарий");
+tester.SendMessage("действия", "", "комментарий");
+// Шаг[в процессе]: комментарий
+tester.SendMessage("действия",Tester.PROCESS, "комментарий");
+// Шаг[успешно]: комментарий
+tester.SendMessage("действия",Tester.PASSED, "комментарий");
+// Шаг[выполнено]: комментарий
+tester.SendMessage("действия",Tester.COMPLETED, "комментарий");
+// Шаг[остановлено]: комментарий
+tester.SendMessage("действия",Tester.STOPPED, "комментарий");
+// Шаг[неудача]: действие комментарий
+tester.SendMessage("действия", Tester.FAILED, "комментарий");
+// Шаг[предупреждение]: действие комментарий
+tester.SendMessage("действия", Tester.WARNING, "комментарий");
+
+
+SendMessageDebug
+SendMessageDebug
+Описание: метод выводит отладочное сообщение которое может быть отключено для вывода в отчет и письмо
+При выполнении в системную консоль выводится action если status равен FAILED, WARNING, "" , null,  
+в противном случае выводится только status и comment (без action).
+Синтаксис: SendMessageDebug(string actionRus, string actionEng, string status,  string commentRus, string commentEng, int image)
+Пример:
+// Шаг[в процессе]: комментарий
+tester.SendMessageDebug("действия", "action",Tester.PROCESS, "комментарий", "comment", Tester.IMAGE_STATUS_PROCESS);
+// Шаг[успешно]: комментарий
+tester.SendMessageDebug("действия", "action",Tester.PASSED, "комментарий", "comment",Tester.IMAGE_STATUS_PASSED);
+// Шаг[выполнено]: комментарий
+tester.SendMessageDebug("действия", "action",Tester.COMPLETED, "комментарий", "comment",Tester.IMAGE_STATUS_MESSAGE);
+// Шаг[остановлено]: комментарий
+tester.SendMessageDebug("действия", "action",Tester.STOPPED, "комментарий", "comment",Tester.IMAGE_STATUS_WARNING);
+// Шаг[неудача]: действие комментарий
+tester.SendMessageDebug("действия", "action",Tester.FAILED, "комментарий", "comment", Tester.IMAGE_STATUS_FAILED);
+// Шаг[предупреждение]: действие комментарий
+tester.SendMessageDebug("действия", "action",Tester.WARNING, "комментарий", "comment", Tester.IMAGE_STATUS_WARNING);
+
+
+
+Методы для подготовки и завершения тестирования
+
+
+TestBeginAsync
+TestBeginAsync
+Описание: метод подготовки к тесту (каждый тест обязательно должен начинаться этим методом)
+Синтаксис: TestBeginAsync()
+Возвращаемое значение: отсутствует
+Пример:
+await tester.TestBeginAsync();
+
+
+
+TestEndAsync
+TestEndAsync
+Описание: метод завершения теста (каждый тест обязательно должен заканчиваться этим методом), именно этот метод выполняет сохранение отчета и отправку его по почте если такая опция будет настроена и включена.
+Синтаксис: TestEndAsync()
+Возвращаемое значение: отсутствует
+Пример:
+await tester.TestEndAsync();
+
+
+
+TestStopAsync
+TestStopAsync
+Описание: метод принудительно останавливает процесс тестирования
+Синтаксис: TestStopAsync()
+Возвращаемое значение: отсутствует
+Пример:
+await tester.TestStopAsync();
+
+
+
+GetTestResult
+GetTestResult
+Описание: метод возвращает статус выполняемого теста
+Синтаксис: GetTestResult()
+Возвращаемое значение: строка (string) значение которой проверяется константами: Tester.PASSED, Tester.FAILED, Tester.PROCESS.
+Пример:
+Tester tester = new Tester(browserForm);
+await tester.TestBeginAsync();
+...
+if(tester.GetTestResult() == Tester.PROCESS) { }
+...
+await tester.TestEndAsync();
+if(tester.GetTestResult() == Tester.FAILED) { }
+if(tester.GetTestResult() == Tester.PASSED) { }
+
+
+DefineTestStop
+DefineTestStop
+Описание: метод проверяет статус процесса (остановлен или нет)
+Синтаксис: DefineTestStop()
+Возвращаемое значение: логическое (true или false)
+Пример:
+if (tester.DefineTestStop() == true) return; // значит тест остановлен
+
+
+
+Методы для выполнения действий
+
+
+Атрибуты
+
+
+GetAttributeFromElementAsync
+GetAttributeFromElementAsync
+Описание: метод возвращает строчное значение из указанного атрибута в выбранном элементе
+Синтаксис: 
+GetAttributeFromElementAsync(string by, string locator, string attribute)
+GetAttributeFromElementAsync(Locator locator, string attribute)
+Возвращаемое значение: строка (string)
+Пример:
+string value = await tester.GetAttributeFromElementAsync(Tester.BY_CSS, "input", "name");
+string value = await tester.GetAttributeFromElementAsync(Tester.BY_XPATH, "//input", "name");
+await tester.GetAttributeFromElementAsync(tester.GetLocator("locatorName"), "name");
+
+
+
+
+GetAttributeFromElementByClassAsync
+GetAttributeFromElementByClassAsync
+Описание: метод возвращает строчное значение из указанного атрибута в выбранном элементе
+Синтаксис: GetAttributeFromElementByClassAsync(string _class, int index, string attribute)
+Возвращаемое значение: строка (string)
+Пример:
+string value = await tester.GetAttributeFromElementByClassAsync("my-element", 0, "href");
+
+
+
+
+GetAttributeFromElementByIdAsync
+GetAttributeFromElementByIdAsync
+Описание: метод возвращает строчное значение из указанного атрибута в выбранном элементе
+Синтаксис: GetAttributeFromElementByIdAsync(string id, string attribute)
+Возвращаемое значение: строка (string)
+Пример:
+string value = await tester.GetAttributeFromElementByIdAsync("MyElement", "href");
+
+
+
+
+GetAttributeFromElementByNameAsync
+GetAttributeFromElementByNameAsync
+Описание: метод возвращает строчное значение из указанного атрибута в выбранном элементе
+Синтаксис: GetAttributeFromElementByNameAsync(string name, int index, string attribute)
+Возвращаемое значение: строка (string)
+Пример:
+string value = await tester.GetAttributeFromElementByNameAsync("MyElement", 0, "href");
+
+
+
+
+GetAttributeFromElementByTagAsync
+GetAttributeFromElementByTagAsync
+Описание: метод возвращает строчное значение из указанного атрибута в выбранном элементе
+Синтаксис: GetAttributeFromElementByTagAsync(string tag, int index, string attribute)
+Возвращаемое значение: строка (string)
+Пример:
+string value = await tester.GetAttributeFromElementByTagAsync("a", 0, "href");
+
+
+
+
+GetAttributeFromElementsAsync
+GetAttributeFromElementsAsync
+Описание: метод возвращает список значений указанного атрибута из множества элементов
+Синтаксис: 
+GetAttributeFromElementsAsync(string by, string locator, string attribute)
+GetAttributeFromElementsAsync(Locator locator, string attribute)
+Возвращаемое значение: список (List)
+Пример:
+List<string> values = await tester.GetAttributeFromElementsAsync(Tester.BY_CSS, "input", "name");
+if(values != null) 
+{
+	foreach (string attr in values)
+		tester.ConsoleMsg(attr);
+}
+List<string> values = await tester.GetAttributeFromElementsAsync(Tester.BY_XPATH, "//input", "name");
+if(values != null)
+{
+	foreach (string attr in values)
+		tester.ConsoleMsg(attr);
+}
+List<string> values = await tester.GetAttributeFromElementsAsync(tester.GetLocator("locatorName"), "name");
+if(values != null)
+{
+	foreach (string attr in values)
+		tester.ConsoleMsg(attr);
+}
+
+
+
+
+GetAttributeFromElementsByClassAsync
+GetAttributeFromElementsByClassAsync
+Описание: метод возвращает список значений указанного атрибута из множества элементов
+Синтаксис: GetAttributeFromElementsByClassAsync(string _class, string attribute)
+Возвращаемое значение: список (List)
+Пример:
+List<string> values = await tester.GetAttributeFromElementsByClassAsync("text-field", "name");
+foreach (string value in values)
+{
+	tester.ConsoleMsg(value);
+}
+
+
+
+GetAttributeFromElementsByNameAsync
+GetAttributeFromElementsByNameAsync
+Описание: метод возвращает список значений указанного атрибута из множества элементов
+Синтаксис: GetAttributeFromElementsByNameAsync(string name, string attribute)
+Возвращаемое значение: список (List)
+Пример:
+List<string> values = await tester.GetAttributeFromElementsByNameAsync("link", "href");
+foreach (string value in values)
+{
+	tester.ConsoleMsg(value);
+}
+
+
+
+GetAttributeFromElementsByTagAsync
+GetAttributeFromElementsByTagAsync
+Описание: метод возвращает список значений указанного атрибута из множества элементов
+Синтаксис: GetAttributeFromElementsByTagAsync(string tag, string attribute)
+Возвращаемое значение: список (List)
+Пример:
+List<string> values = await tester.GetAttributeFromElementsByTagAsync("a", "href");
+foreach (string value in values)
+{
+	tester.ConsoleMsg(value);
+}
+
+
+
+SetAttributeInElementAsync
+SetAttributeInElementAsync
+Описание: метод вставляет атрибут со значением в указанный элемент 
+Синтаксис: 
+SetAttributeInElementAsync(string by, string locator, string attribute, string value)
+SetAttributeInElementAsync(Locator locator, string attribute, string value)
+Возвращаемое значение: отсутствует
+Пример:
+await tester.SetAttributeInElementAsync(Tester.BY_CSS, "#auth > h2", "name", "test");
+await tester.SetAttributeInElementAsync(Tester.BY_XPATH, "//div[@id='auth']//h2", "name", "test");
+await tester.SetAttributeInElementAsync(tester.GetLocator("locatorName"), "name", "test");
+
+
+
+
+SetAttributeInElementByClassAsync
+SetAttributeInElementByClassAsync
+Описание: метод вставляет атрибут со значением в указанный элемент 
+Синтаксис: SetAttributeInElementByClassAsync(string _class, int index, string attribute, string value)
+Возвращаемое значение: отсутствует
+Пример:
+await tester.SetAttributeInElementByClassAsync("my-element", 0, "value", "значение");
+
+
+
+
+SetAttributeInElementByIdAsync
+SetAttributeInElementByIdAsync
+Описание: метод вставляет атрибут со значением в указанный элемент 
+Синтаксис: SetAttributeInElementByIdAsync(string id, string attribute, string value)
+Возвращаемое значение: отсутствует
+Пример:
+await tester.SetAttributeInElementByIdAsync("MyElement", "value",  "значение");
+
+
+
+
+SetAttributeInElementByNameAsync
+SetAttributeInElementByNameAsync
+Описание: метод вставляет атрибут со значением в указанный элемент 
+Синтаксис: SetAttributeInElementByNameAsync(string name, int index, string attribute, string value)
+Возвращаемое значение: отсутствует
+Пример:
+await tester.SetAttributeInElementByNameAsync("MyElement", 0, "value",  "значение");
+
+
+
+
+SetAttributeInElementByTagAsync
+SetAttributeInElementByTagAsync
+Описание: метод вставляет атрибут со значением в указанный элемент 
+Синтаксис: SetAttributeInElementByTagAsync(string tag, int index, string attribute, string value)
+Возвращаемое значение: отсутствует
+Пример:
+await tester.SetAttributeInElementByTagAsync("input", 0, "value",  "значение");
+
+
+
+
+SetAttributeInElementsAsync
+SetAttributeInElementsAsync
+Описание: метод вставить атрибут с указанным значением в множество элементов и в результате возвращает список
+Синтаксис: 
+SetAttributeInElementsAsync(string by, string locator, string attribute, string value)
+SetAttributeInElementsAsync(Locator locator, string attribute, string value)
+Возвращаемое значение: список (List)
+Пример:
+List<string> values = await tester.SetAttributeInElementsAsync(Tester.BY_CSS, "input", "class", "test-class");
+foreach (string value in values)
+{
+	tester.ConsoleMsg(value);
+}
+List<string> values = await tester.SetAttributeInElementsAsync(Tester.BY_XPATH, "//input", "class", "test-class");
+foreach (string value in values)
+{
+	tester.ConsoleMsg(value);
+}
+List<string> values = await tester.SetAttributeInElementsAsync(tester.GetLocator("locatorName"), "class", "test-class");
+foreach (string value in values)
+{
+	tester.ConsoleMsg(value);
+}
+
+
+
+SetAttributeInElementsByClassAsync
+SetAttributeInElementsByClassAsync
+Описание: метод вставить атрибут с указанным значением в множество элементов и в результате возвращает список
+Синтаксис: SetAttributeInElementsByClassAsync(string _class, string attribute, string value)
+Возвращаемое значение: список (List)
+Пример:
+List<string> values = await tester.SetAttributeInElementsByClassAsync("text-field", "value", "test");
+foreach (string value in values)
+{
+	tester.ConsoleMsg(value);
+}
+
+
+
+SetAttributeInElementsByNameAsync
+SetAttributeInElementsByNameAsync
+Описание: метод вставить атрибут с указанным значением в множество элементов и в результате возвращает список
+Синтаксис: SetAttributeInElementsByNameAsync(string name, string attribute, string value)
+Возвращаемое значение: список (List)
+Пример:
+List<string> values = await tester.SetAttributeInElementsByNameAsync("link", "href", "www.test.ru");
+foreach (string value in values)
+{
+	tester.ConsoleMsg(value);
+}
+
+
+
+SetAttributeInElementsByTagAsync
+SetAttributeInElementsByTagAsync
+Описание: метод вставить атрибут с указанным значением в множество элементов и в результате возвращает список
+Синтаксис: SetAttributeInElementsByTagAsync(string tag, string attribute, string value)
+Возвращаемое значение: список (List)
+Пример:
+List<string> values = await tester.SetAttributeInElementsByTagAsync("a", "href", "www.test.ru");
+foreach (string value in values)
+{
+	tester.ConsoleMsg(value);
+}
+
+
+Значение
+
+
+
+GetValueFromElementAsync
+GetValueFromElementAsync
+Описание: метод возвращает значение из указанного элемента
+Синтаксис: 
+GetValueFromElementAsync(string by, string locator)
+GetValueFromElementAsync(Locator locator)
+Возвращаемое значение: строка (string)
+Пример:
+string value = await tester.GetValueFromElementAsync(Tester.BY_CSS, "input[id='login']");
+string value = await tester.GetValueFromElementAsync(Tester.BY_XPATH, "//input[@id='login']");
+string value = await tester.GetValueFromElementAsync(tester.GetLocator("locatorName"));
+
+
+
+
+GetValueFromElementByClassAsync
+GetValueFromElementByClassAsync
+Описание: метод возвращает значение из указанного элемента
+Синтаксис: GetValueFromElementByClassAsync(string _class, int index)
+Возвращаемое значение: строка (string)
+Пример:
+string value = await tester.GetValueFromElementByClassAsync("my-element", 0);
+
+
+
+
+GetValueFromElementByIdAsync
+GetValueFromElementByIdAsync
+Описание: метод возвращает значение из указанного элемента
+Синтаксис: GetValueFromElementByIdAsync(string id)
+Возвращаемое значение: строка (string)
+Пример:
+string value = await tester.GetValueFromElementByIdAsync("MyElement");
+
+
+
+
+GetValueFromElementByNameAsync
+GetValueFromElementByNameAsync
+Описание: метод возвращает значение из указанного элемента
+Синтаксис: GetValueFromElementByNameAsync(string name, int index)
+Возвращаемое значение: строка (string)
+Пример:
+string value = await tester.GetValueFromElementByNameAsync("MyElement", 0);
+
+
+
+
+GetValueFromElementByTagAsync
+GetValueFromElementByTagAsync
+Описание: метод возвращает значение из указанного элемента
+Синтаксис: GetValueFromElementByTagAsync(string tag, int index)
+Возвращаемое значение: строка (string)
+Пример:
+string value = await tester.GetValueFromElementByTagAsync("input", 0);
+
+
+
+
+SetValueInElementAsync
+SetValueInElementAsync
+Описание: метод вставляет значение в указанный элемент 
+Синтаксис: 
+SetValueInElementAsync(string by, string locator, string value)
+SetValueInElementAsync(Locator locator, string value)
+Возвращаемое значение: отсутствует
+Пример:
+await tester.SetValueInElementAsync(Tester.BY_CSS, "input[id='login']", "admin");
+await tester.SetValueInElementAsync(Tester.BY_CSS, "input[id='pass']", "0000");
+await tester.SetValueInElementAsync(Tester.BY_XPATH, "//input[@id='login']", "admin");
+await tester.SetValueInElementAsync(Tester.BY_XPATH, "//input[@id='pass']", "0000");
+await tester.SetValueInElementAsync(tester.GetLocator("locatorName"), "admin");
+
+
+
+
+SetValueInElementByClassAsync
+SetValueInElementByClassAsync
+Описание: метод вставляет значение в указанный элемент 
+Синтаксис: SetValueInElementByClassAsync(string _class, int index, string value)
+Возвращаемое значение: отсутствует
+Пример:
+await tester.SetValueInElementByClassAsync("my-element", 0, "значение");
+
+
+
+
+SetValueInElementByIdAsync
+SetValueInElementByIdAsync
+Описание: метод вставляет значение в указанный элемент 
+Синтаксис: SetValueInElementByIdAsync(string id, string value)
+Возвращаемое значение: отсутствует
+Пример:
+await tester.SetValueInElementByIdAsync("MyElement", "значение");
+
+
+
+
+SetValueInElementByNameAsync
+SetValueInElementByNameAsync
+Описание: метод вставляет значение в указанный элемент 
+Синтаксис: SetValueInElementByNameAsync(string name, int index, string value)
+Возвращаемое значение: отсутствует
+Пример:
+await tester.SetValueInElementByNameAsync("MyElement", 0, "значение");
+
+
+
+
+SetValueInElementByTagAsync
+SetValueInElementByTagAsync
+Описание: метод вставляет значение в указанный элемент 
+Синтаксис: SetValueInElementByTagAsync(string tag, int index, string value)
+Возвращаемое значение: отсутствует
+Пример:
+await tester.SetValueInElementByTagAsync("input", 0, "значение");
+
+
+
+Нажатие
+
+
+
+ClickElementAsync
+ClickElementAsync
+Описание: метод выполняет нажатие на элемент
+Синтаксис: 
+ClickElementAsync(string by, string locator)
+ClickElementAsync(Locator locator)
+Возвращаемое значение: отсутствует
+Пример:
+await tester.ClickElementAsync(Tester.BY_CSS, "#auth #buttonLogin");
+await tester.ClickElementAsync(Tester.BY_XPATH, "//div[@id='auth']//input[@id='buttonLogin']");
+await tester.ClickElementAsync(tester.GetLocator("locatorName"));
+
+
+
+
+ClickElementByClassAsync
+ClickElementByClassAsync
+Описание: метод выполняет нажатие на элемент
+Синтаксис: ClickElementByClassAsync(string _class, int index);
+Возвращаемое значение: отсутствует
+Пример:
+await tester.ClickElementByClassAsync("my-element", 0)
+
+
+
+
+ClickElementByIdAsync
+ClickElementByIdAsync
+Описание: метод выполняет нажатие на элемент
+Синтаксис: ClickElementByIdAsync(string id)
+Возвращаемое значение: отсутствует
+Пример:
+await tester.ClickElementByIdAsync("MyElement");
+
+
+
+
+ClickElementByNameAsync
+ClickElementByNameAsync
+Описание: метод выполняет нажатие на элемент
+Синтаксис: ClickElementByNameAsync(string name, int index)
+Возвращаемое значение: отсутствует
+Пример:
+await tester.ClickElementByNameAsync("MyElement", 0);
+
+
+
+
+ClickElementByTagAsync
+ClickElementByTagAsync
+Описание: метод выполняет нажатие на элемент
+Синтаксис: ClickElementByTagAsync(string tag, int index)
+Возвращаемое значение: отсутствует
+Пример:
+await tester.ClickElementByTagAsync("a", 0);
+
+
+
+
+IsClickableElementAsync
+IsClickableElementAsync
+Описание: метод определяет кликабельность элемента и возвращает true или false
+Синтаксис: 
+IsClickableElementAsync(string by, string locator)
+IsClickableElementAsync(Locator locator)
+Возвращаемое значение: логическое (true или false)
+Пример:
+Tester tester = new Tester(browserForm);
+await tester.TestBeginAsync();
+await tester.GoToUrlAsync("https://somovstudio.github.io/test.html", 5);
+bool clickable = await tester.IsClickableElementAsync(Tester.BY_XPATH, "//*[@id='buttonLogin']");
+bool clickable = await tester.IsClickableElementAsync(tester.GetLocator("locatorName"));
+await tester.AssertTrueAsync(clickable);
+await tester.TestEndAsync();
+
+
+
+
+ScrollToElementAsync
+ScrollToElementAsync
+Описание: метод выполняет прокрутку к указанному элементу (параметр behaviorSmooth определяет плавность прокрутки)
+Синтаксис: 
+ScrollToElementAsync(string by, string locator, bool behaviorSmooth = false)
+ScrollToElementAsync(Locator locator, bool behaviorSmooth = false)
+Возвращаемое значение: отсутствует
+Пример:
+await tester.ScrollToElementAsync(Tester.BY_CSS, "body > footer", true);
+await tester.ScrollToElementAsync(Tester.BY_XPATH, "/html/body/footer", true);
+await tester.ScrollToElementAsync(tester.GetLocator("locatorName"), true);
+
+
+
+Объекты
+
+
+
+GetElementAsync
+GetElementAsync
+Описание: метод возвращает элемент в виде объект класс которого HTMLElement
+Синтаксис: 
+GetElementAsync(string by, string locator)
+GetElementAsync(Locator locator)
+Возвращаемое значение: объект (HTMLElement)
+Примеры:
+HTMLElement element = await tester.GetElementAsync(tester.GetLocator("locatorName"));
+await element.ClickAsync();
+HTMLElement element = await tester.GetElementAsync(Tester.BY_CSS, "#auth #buttonLogin");
+await element.ClickAsync();
+HTMLElement element = await tester.GetElementAsync(Tester.BY_XPATH, "//div[@id='auth']//input[@id='buttonLogin']");
+await element.ClickAsync();
+
+
+
+GetFrameAsync
+GetFrameAsync
+Описание: метод возвращает элемент в виде объект класс которого FRAMEElement
+Синтаксис: GetFrameAsync(int index)
+Возвращаемое значение: объект (FRAMEElement)
+Пример:
+Tester tester = new Tester(browserForm);
+await tester.TestBeginAsync();
+await tester.GoToUrlAsync("https://somovstudio.github.io/test2.html", 5);
+FRAMEElement frame = await tester.GetFrameAsync(0);
+tester.ConsoleMsg("Index: " + frame.Index);
+tester.ConsoleMsg("Name: " + frame.Name);
+string name = await frame.GetAttributeFromElementAsync(Tester.BY_XPATH, "//input[@id='login']", "name");
+
+
+
+GetCountElementsAsync
+GetCountElementsAsync
+Описание: метод возвращает количество найденных элементов
+Синтаксис: 
+GetCountElementsAsync(string by, string locator)
+GetCountElementsAsync(Locator locator)
+Возвращаемое значение: целое число (int)
+Пример:
+int count = await tester.GetCountElementsAsync(Tester.BY_CSS, "input");
+int count = await tester.GetCountElementsAsync(Tester.BY_XPATH, "//input");
+int count = await tester.GetCountElementsAsync(tester.GetLocator("locatorName"));
+
+
+
+
+GetCountElementsByClassAsync
+GetCountElementsByClassAsync
+Описание: метод возвращает количество найденных элементов
+Синтаксис: GetCountElementsByClassAsync(string _class)
+Возвращаемое значение: целое число (int)
+Пример:
+int count = await tester.GetCountElementsByClassAsync("my-element");
+
+
+
+
+GetCountElementsByNameAsync
+GetCountElementsByNameAsync
+Описание: метод возвращает количество найденных элементов
+Синтаксис: GetCountElementsByNameAsync(string name)
+Возвращаемое значение: целое число (int)
+Пример:
+int count = await tester.GetCountElementsByNameAsync("MyElement");
+
+
+
+
+GetCountElementsByTagAsync
+GetCountElementsByTagAsync
+Описание: метод возвращает количество найденных элементов
+Синтаксис: GetCountElementsByTagAsync(string tag)
+Возвращаемое значение: целое число (int)
+Пример:
+int count = await tester.GetCountElementsByTagAsync("h2");
+
+
+
+
+GetHtmlFromElementAsync
+GetHtmlFromElementAsync
+Описание: метод возвращает html представление объекта в строчном выражении
+Синтаксис: 
+GetHtmlFromElementAsync(string by, string locator)
+GetHtmlFromElementAsync(Locator locator)
+Возвращаемое значение: строка (string)
+Пример:
+string html = await tester.GetHtmlFromElementAsync(Tester.BY_CSS, "#auth > h2");
+string html = await tester.GetHtmlFromElementAsync(Tester.BY_XPATH, "//div[@id='auth']//h2");
+string html = await tester.GetHtmlFromElementAsync(tester.GetLocator("locatorName"));
+
+
+
+
+GetHtmlFromElementByClassAsync
+GetHtmlFromElementByClassAsync
+Описание: метод возвращает html представление объекта в строчном выражении
+Синтаксис: GetHtmlFromElementByClassAsync(string _class, int index)
+Возвращаемое значение: строка (string)
+Пример:
+string html = await tester.GetHtmlFromElementByClassAsync("text-field", 0);
+
+
+
+GetHtmlFromElementByIdAsync
+GetHtmlFromElementByIdAsync
+Описание: метод возвращает html представление объекта в строчном выражении
+Синтаксис: GetHtmlFromElementByIdAsync(string id)
+Возвращаемое значение: строка (string)
+Пример:
+string html = await tester.GetHtmlFromElementByIdAsync("login");
+
+
+
+GetHtmlFromElementByNameAsync
+GetHtmlFromElementByNameAsync
+Описание: метод возвращает html представление объекта в строчном выражении
+Синтаксис: GetHtmlFromElementByNameAsync(string name, int index)
+Возвращаемое значение: строка (string)
+Пример:
+string html = await tester.GetHtmlFromElementByNameAsync("field", 0);
+
+
+
+GetHtmlFromElementByTagAsync
+GetHtmlFromElementByTagAsync
+Описание: метод возвращает html представление объекта в строчном выражении
+Синтаксис: GetHtmlFromElementByTagAsync(string tag, int index)
+Возвращаемое значение: строка (string)
+Пример:
+string html = await tester.GetHtmlFromElementByTagAsync("h1", 0);
+
+
+
+IsVisibleElementAsync
+IsVisibleElementAsync
+Описание: метод определяет видимость элемента и возвращает значение true или false
+Синтаксис: 
+IsVisibleElementAsync(string by, string locator)
+IsVisibleElementAsync(Locator locator)
+Возвращаемое значение: логическое (true или false)
+Пример:
+bool result = await tester.IsVisibleElementAsync(Tester.BY_XPATH, "//*[@id='login']");
+await tester.AssertTrueAsync(result);
+bool result = await tester.IsVisibleElementAsync(Tester.BY_CSS, "#login");
+await tester.AssertTrueAsync(result);
+bool result = await tester.IsVisibleElementAsync(tester.GetLocator("locatorName"));
+await tester.AssertTrueAsync(result);
+
+
+
+MakeElementVisibleAsync
+MakeElementVisibleAsync
+Описание: метод делает элемент видимым путем добавления стилей
+Синтаксис: 
+MakeElementVisibleAsync(string by, string locator, string visibility = "visible", int opacity = 1, int index = 1000)
+MakeElementVisibleAsync(Locator locator, string visibility = "visible", int opacity = 1, int index = 1000)
+Пример:
+await tester.MakeElementVisibleAsync(Tester.BY_XPATH, "//*[@id='button']");
+await tester.MakeElementVisibleAsync(Tester.BY_BY_CSS, "//*[@id='button']");
+await tester.MakeElementVisibleAsync(tester.GetLocator("locatorName"));
+
+
+
+
+SetHtmlInElementAsync
+SetHtmlInElementAsync
+Описание: метод вставляет html представление объекта в указанный элемент
+Синтаксис: 
+SetHtmlInElementAsync(string by, string locator, string html)
+SetHtmlInElementAsync(Locator locator, string html)
+Возвращаемое значение: отсутствует
+Пример:
+await tester.SetHtmlInElementAsync(Tester.BY_CSS, "#auth > h2", "<div>Тестовый блок</div>");
+await tester.SetHtmlInElementAsync(Tester.BY_XPATH, "//div[@id='auth']//h2", "<div>Тестовый блок</div>");
+await tester.SetHtmlInElementAsync(tester.GetLocator("locatorName"), "<div>Тестовый блок</div>");
+
+
+
+
+SetHtmlInElementByClassAsync
+SetHtmlInElementByClassAsync
+Описание: метод вставляет html представление объекта в указанный элемент
+Синтаксис: SetHtmlInElementByClassAsync(string _class, int index, string html)
+Возвращаемое значение: отсутствует
+Пример:
+await tester.SetHtmlInElementByClassAsync("text-field", 0, "<h1>это тест</h1>");
+
+
+
+SetHtmlInElementByIdAsync
+SetHtmlInElementByIdAsync
+Описание: метод вставляет html представление объекта в указанный элемент
+Синтаксис: SetHtmlInElementByIdAsync(string id, string html)
+Возвращаемое значение: отсутствует
+Пример:
+await tester.SetHtmlInElementByIdAsync("auth", "<h1>это тест</h1>");
+
+
+
+SetHtmlInElementByNameAsync
+SetHtmlInElementByNameAsync
+Описание: метод вставляет html представление объекта в указанный элемент
+Синтаксис: SetHtmlInElementByNameAsync(string name, int index, string html)
+Возвращаемое значение: отсутствует
+Пример:
+await tester.SetHtmlInElementByNameAsync("block", 0,  "<h1>это тест</h1>");
+
+
+
+SetHtmlInElementByTagAsync
+SetHtmlInElementByTagAsync
+Описание: метод вставляет html представление объекта в указанный элемент
+Синтаксис: SetHtmlInElementByTagAsync(string tag, int index, string html)
+Возвращаемое значение: отсутствует
+Пример:
+await tester.SetHtmlInElementByTagAsync("div", 0,  "<h1>это тест</h1>");
+
+
+Ожидание
+
+
+WaitAsync
+WaitAsync
+Описание: метод выполняет временную остановку выполнения теста на указанное количество секунд
+Синтаксис: WaitAsync(int sec)
+Возвращаемое значение: отсутствует
+Пример:
+await tester.WaitAsync(5);
+
+
+
+
+WaitElementInDomAsync
+WaitElementInDomAsync
+Описание: метод выполняет временную остановку выполнения теста на указанное количество секунд и ждет когда запрашиваемый элемент появится в DOM
+Синтаксис: 
+WaitElementInDomAsync(string by, string locator, int sec)
+WaitElementInDomAsync(Locator locator, int sec)
+Возвращаемое значение: отсутствует
+Пример:
+await tester.WaitElementInDomAsync(Tester.BY_XPATH, "//div[@id='result']", 5);
+await tester.WaitElementInDomAsync(Tester.BY_CSS, "#result", 5);
+await tester.WaitElementInDomAsync(tester.GetLocator("locatorName"), 5);
+
+
+
+
+WaitElementNotDomAsync
+WaitElementNotDomAsync
+Описание: метод выполняет временную остановку выполнения теста на указанное количество секунд и ждет когда запрашиваемый элемент перестанет присутствовать в DOM 
+Синтаксис: 
+WaitElementNotDomAsync(string by, string locator, int sec)
+WaitElementNotDomAsync(Locator locator, int sec)
+Возвращаемое значение: отсутствует
+Пример:
+await tester.WaitElementNotDomAsync(Tester.BY_XPATH, "//div[@id='element']", 5);
+await tester.WaitElementNotDomAsync(Tester.BY_CSS, "#element", 5);
+await tester.WaitElementNotDomAsync(tester.GetLocator("locatorName"), 5);
+
+
+
+
+WaitNotVisibleElementAsync
+WaitNotVisibleElementAsync
+Описание: метод выполняет временную остановку выполнения теста на указанное количество секунд и ждет когда  запрашиваемый элемент перестанет отображаеться 
+Синтаксис: 
+WaitNotVisibleElementAsync(string by, string locator, int sec)
+WaitNotVisibleElementAsync(Locator locator, int sec)
+Возвращаемое значение: отсутствует
+Пример:
+await tester.WaitNotVisibleElementAsync(Tester.BY_CSS, "div[id='result']", 2);
+await tester.WaitNotVisibleElementAsync(Tester.BY_XPATH, "//div[@id='result']", 2);
+await tester.WaitNotVisibleElementAsync(tester.GetLocator("locatorName"), 2);
+
+
+
+
+
+WaitNotVisibleElementByClassAsync
+WaitNotVisibleElementByClassAsync
+Описание: метод выполняет временную остановку выполнения теста на указанное количество секунд и ждет когда  запрашиваемый элемент перестанет отображаеться 
+Синтаксис: WaitNotVisibleElementByClassAsync(string _class, int index, int sec)
+Возвращаемое значение: отсутствует
+Пример:
+await tester.WaitNotVisibleElementByClassAsync("my-element", 0, 25);
+
+
+
+
+WaitNotVisibleElementByIdAsync
+WaitNotVisibleElementByIdAsync
+Описание: метод выполняет временную остановку выполнения теста на указанное количество секунд и ждет когда  запрашиваемый элемент перестанет отображаеться 
+Синтаксис: WaitNotVisibleElementByIdAsync(string id, int sec)
+Возвращаемое значение: отсутствует
+Пример:
+await tester.WaitNotVisibleElementByIdAsync("MyElement", 25);
+
+
+
+
+WaitNotVisibleElementByNameAsync
+WaitNotVisibleElementByNameAsync
+Описание: метод выполняет временную остановку выполнения теста на указанное количество секунд и ждет когда  запрашиваемый элемент перестанет отображаеться 
+Синтаксис: WaitNotVisibleElementByNameAsync(string name, int index, int sec)
+Возвращаемое значение: отсутствует
+Пример:
+await tester.WaitNotVisibleElementByNameAsync("MyElement", 0, 25);
+
+
+
+
+WaitNotVisibleElementByTagAsync
+WaitNotVisibleElementByTagAsync
+Описание: метод выполняет временную остановку выполнения теста на указанное количество секунд и ждет когда  запрашиваемый элемент перестанет отображаеться 
+Синтаксис: WaitNotVisibleElementByTagAsync(string tag, int index, int sec)
+Возвращаемое значение: отсутствует
+Пример:
+await tester.WaitNotVisibleElementByTagAsync("h1", 0, 25);
+
+
+
+
+WaitVisibleElementAsync
+WaitVisibleElementAsync
+Описание: метод выполняет временную остановку выполнения теста на указанное количество секунд и ждет когда  запрашиваемый элемент отобразится
+Синтаксис: 
+WaitVisibleElementAsync(string by, string locator, int sec)
+WaitVisibleElementAsync(Locator locator, int sec)
+Возвращаемое значение: отсутствует
+Пример:
+await tester.WaitVisibleElementAsync(Tester.BY_CSS, "div[id='result']", 2);
+await tester.WaitVisibleElementAsync(Tester.BY_XPATH, "//div[@id='result']", 2);
+await tester.WaitVisibleElementAsync(tester.GetLocator("locatorName"), 2);
+
+
+
+
+WaitVisibleElementByClassAsync
+WaitVisibleElementByClassAsync
+Описание: метод выполняет временную остановку выполнения теста на указанное количество секунд и ждет когда  запрашиваемый элемент отобразится
+Синтаксис: WaitVisibleElementByClassAsync(string _class, int index, int sec)
+Возвращаемое значение: отсутствует
+Пример:
+await tester.WaitVisibleElementByClassAsync("my-element", 0, 25);
+
+
+
+
+WaitVisibleElementByIdAsync
+WaitVisibleElementByIdAsync
+Описание: метод выполняет временную остановку выполнения теста на указанное количество секунд и ждет когда  запрашиваемый элемент отобразится
+Синтаксис: WaitVisibleElementByIdAsync(string id, int sec)
+Возвращаемое значение: отсутствует
+Пример:
+await tester.WaitVisibleElementByIdAsync("MyElement", 25);
+
+
+
+
+WaitVisibleElementByNameAsync
+WaitVisibleElementByNameAsync
+Описание: метод выполняет временную остановку выполнения теста на указанное количество секунд и ждет когда  запрашиваемый элемент отобразится
+Синтаксис: WaitVisibleElementByNameAsync(string name, int index, int sec)
+Возвращаемое значение: отсутствует
+Пример:
+await tester.WaitVisibleElementByNameAsync("MyElement", 25);
+
+
+
+
+WaitVisibleElementByTagAsync
+WaitVisibleElementByTagAsync
+Описание: метод выполняет временную остановку выполнения теста на указанное количество секунд и ждет когда  запрашиваемый элемент отобразится
+Синтаксис: WaitVisibleElementByTagAsync(string tag, int index, int sec)
+Возвращаемое значение: отсутствует
+Пример:
+await tester.WaitVisibleElementByTagAsync("h1", 25);
+
+
+
+Поиск
+
+
+
+FindElementAsync
+FindElementAsync
+Описание: метод выполняет поиск элемент в DOM с ожиданием в секундах и возвращает логический результат true или false
+Синтаксис: 
+FindElementAsync(string by, string locator, int sec)
+FindElementAsync(Locator locator, int sec)
+Возвращаемое значение: логическое (true или false)
+Пример:
+bool result = await tester.FindElementAsync(Tester.BY_CSS, "div[id='result']", 2);
+bool result = await tester.FindElementAsync(Tester.BY_XPATH, "//div[@id='result']", 2);
+bool result = await tester.FindElementAsync(tester.GetLocator("locatorName"), 2);
+
+
+
+
+FindElementByClassAsync
+FindElementByClassAsync
+Описание: метод выполняет поиск элемент в DOM с ожиданием в секундах и возвращает логический результат true или false
+Синтаксис: FindElementByClassAsync(string _class, int index, int sec)
+Возвращаемое значение: логическое (true или false)
+Пример:
+bool result = await tester.FindElementByClassAsync("my-element", 0, 5);
+
+
+
+
+FindElementByIdAsync
+FindElementByIdAsync
+Описание: метод выполняет поиск элемент в DOM с ожиданием в секундах и возвращает логический результат true или false
+Синтаксис: FindElementByIdAsync(string id, int sec)
+Возвращаемое значение: логическое (true или false)
+Пример:
+bool result = await tester.FindElementByIdAsync("MyElement", 5);
+
+
+
+
+FindElementByNameAsync
+FindElementByNameAsync
+Описание: метод выполняет поиск элемент в DOM с ожиданием в секундах и возвращает логический результат true или false
+Синтаксис: FindElementByNameAsync(string name, int index, int sec)
+Возвращаемое значение: логическое (true или false)
+Пример:
+bool result = await tester.FindElementByNameAsync("MyElement", 0, 5);
+
+
+
+
+FindElementByTagAsync
+FindElementByTagAsync
+Описание: метод выполняет поиск элемент в DOM с ожиданием в секундах и возвращает логический результат true или false
+Синтаксис: FindElementByTagAsync(string tag, int index, int sec)
+Возвращаемое значение: логическое (true или false)
+Пример:
+bool result = await tester.FindElementByTagAsync("h1", 0, 5);
+
+
+
+
+FindVisibleElementAsync
+FindVisibleElementAsync
+Описание: метод выполняет поиск визуально отображаемого элемента с ожиданием в секундах и возвращает логический результат true или false
+Синтаксис: 
+FindVisibleElementAsync(string by, string locator, int sec)
+FindVisibleElementAsync(Locator locator, int sec)
+Возвращаемое значение: логическое (true или false)
+Пример:
+bool result = await tester.FindVisibleElementAsync(Tester.BY_CSS, "#auth #buttonLogin", 2);
+bool result = await tester.FindVisibleElementAsync(Tester.BY_XPATH, "//div[@id='auth']//input[@id='buttonLogin']", 2);
+bool result = await tester.FindVisibleElementAsync(tester.GetLocator("locatorName"), 2);
+
+
+
+
+FindVisibleElementByClassAsync
+FindVisibleElementByClassAsync
+Описание: метод выполняет поиск визуально отображаемого элемента с ожиданием в секундах и возвращает логический результат true или false
+Синтаксис: FindVisibleElementByClassAsync(string _class, int index, int sec)
+Возвращаемое значение: логическое (true или false)
+Пример:
+bool result = await tester.FindVisibleElementByClassAsync("my-element", 0, 5);
+
+
+
+
+FindVisibleElementByIdAsync
+FindVisibleElementByIdAsync
+Описание: метод выполняет поиск визуально отображаемого элемента с ожиданием в секундах и возвращает логический результат true или false
+Синтаксис: FindVisibleElementByIdAsync(string id, int sec)
+Возвращаемое значение: логическое (true или false)
+Пример:
+bool result = await tester.FindVisibleElementByIdAsync("MyElement", 5);
+
+
+
+
+FindVisibleElementByNameAsync
+FindVisibleElementByNameAsync
+Описание: метод выполняет поиск визуально отображаемого элемента с ожиданием в секундах и возвращает логический результат true или false
+Синтаксис: FindVisibleElementByNameAsync(string name, int index, int sec)
+Возвращаемое значение: логическое (true или false)
+Пример:
+bool result = await tester.FindVisibleElementByNameAsync("MyElement", 0, 5);
+
+
+
+
+FindVisibleElementByTagAsync
+FindVisibleElementByTagAsync
+Описание: метод выполняет поиск визуально отображаемого элемента с ожиданием в секундах и возвращает логический результат true или false
+Синтаксис: FindVisibleElementByTagAsync(string tag, int index, int sec)
+Возвращаемое значение: логическое (true или false)
+Пример:
+bool result = await tester.FindVisibleElementByTagAsync("h1", 0, 5);
+
+
+
+Стили
+
+
+
+GetStyleFromElementAsync
+GetStyleFromElementAsync
+Описание: метод возвращает стиль элемента из указанного свойства
+Синтаксис: 
+GetStyleFromElementAsync(string by, string locator, string property)
+GetStyleFromElementAsync(Locator locator, string property)
+Возвращаемое значение: строка (string)
+Пример:
+string style = await tester.GetStyleFromElementAsync(Tester.BY_CSS, "#auth", "padding");
+string style = await tester.GetStyleFromElementAsync(Tester.BY_XPATH, "//div[@id='auth']", "position");
+string style = await tester.GetStyleFromElementAsync(tester.GetLocator("locatorName"), "position");
+
+
+
+
+GetStyleFromElementByClassAsync
+GetStyleFromElementByClassAsync
+Описание: метод возвращает стиль элемента из указанного свойства
+Синтаксис: GetStyleFromElementByClassAsync(string _class, int index, string property)
+Возвращаемое значение: строка (string)
+Пример:
+string style = await tester.GetStyleFromElementByClassAsync("text-field", 0, "border");
+
+
+
+
+GetStyleFromElementByIdAsync
+GetStyleFromElementByIdAsync
+Описание: метод возвращает стиль элемента из указанного свойства
+Синтаксис: GetStyleFromElementByIdAsync(string id, string property)
+Возвращаемое значение: строка (string)
+Пример:
+string style = await tester.GetStyleFromElementByIdAsync("buttonLogin", "background-color");
+
+
+
+
+GetStyleFromElementByNameAsync
+GetStyleFromElementByNameAsync
+Описание: метод возвращает стиль элемента из указанного свойства
+Синтаксис: GetStyleFromElementByNameAsync(string name, int index, string property)
+Возвращаемое значение: строка (string)
+Пример:
+string style = await tester.GetStyleFromElementByNameAsync("pass", 0, "height");
+
+
+
+
+GetStyleFromElementByTagAsync
+GetStyleFromElementByTagAsync
+Описание: метод возвращает стиль элемента из указанного свойства
+Синтаксис: GetStyleFromElementByTagAsync(string tag, int index, string property)
+Возвращаемое значение: строка (string)
+Пример:
+string style = await tester.GetStyleFromElementByTagAsync("h2", 0, "width");
+
+
+
+
+SetStyleInElementAsync
+SetStyleInElementAsync
+Описание: метод устанавливает стиль элемента
+Синтаксис: 
+SetStyleInElementAsync(string by, string locator, string cssText)
+SetStyleInElementAsync(Locator locator, string cssText)
+Возвращаемое значение: отсутствует
+Пример:
+await tester.SetStyleInElementAsync(Tester.BY_XPATH, "//div[@id='auth']", "width: 250px; color: white; background-color: #000000;");
+await tester.SetStyleInElementAsync(Tester.BY_CSS, "#auth", "width: 250px; color: white; background-color: #000000;");
+await tester.SetStyleInElementAsync(tester.GetLocator("locatorName"), "width: 250px; color: white; background-color: #000000;");
+
+
+
+
+SetStyleInElementByClassAsync
+SetStyleInElementByClassAsync
+Описание: метод устанавливает стиль элемента
+Синтаксис: SetStyleInElementByClassAsync(string _class, int index, string cssText)
+Возвращаемое значение: отсутствует
+Пример:
+await tester.SetStyleInElementByClassAsync("text-field", 0, "background-color: #123456;");
+
+
+
+
+SetStyleInElementByIdAsync
+SetStyleInElementByIdAsync
+Описание: метод устанавливает стиль элемента
+Синтаксис: SetStyleInElementByIdAsync(string id, string cssText)
+Возвращаемое значение: отсутствует
+Пример:
+await tester.SetStyleInElementByIdAsync("buttonLogin", "background-color: #123456;");
+
+
+
+
+SetStyleInElementByNameAsync
+SetStyleInElementByNameAsync
+Описание: метод устанавливает стиль элемента
+Синтаксис: SetStyleInElementByNameAsync(string name, int index, string cssText)
+Возвращаемое значение: отсутствует
+Пример:
+await tester.SetStyleInElementByNameAsync("pass", 0, "background-color: #123456;");
+
+
+
+
+SetStyleInElementByTagAsync
+SetStyleInElementByTagAsync
+Описание: метод устанавливает стиль элемента
+Синтаксис: SetStyleInElementByTagAsync(string tag, int index, string cssText)
+Возвращаемое значение: отсутствует
+Пример:
+await tester.SetStyleInElementByTagAsync("h2", 0, "background-color: #123456;");
+
+
+
+Страница
+
+
+
+GetCookiesAsync
+GetCookiesAsync
+Описание: метод возвращает список куки (document.cookie).
+Синтаксис: GetCookiesAsync()
+Пример:
+List<string> cookies = await tester.GetCookiesAsync();
+if (cookies.Count() > 0)
+{
+	foreach (string cookie in cookies)
+	{
+		tester.ConsoleMsg("COOKIE: " + cookie);
+	}
+}
+
+
+
+
+GetListRedirectUrlAsync
+GetListRedirectUrlAsync
+Описание: метод возвращает список редиректов произошедших при загрузке страницы
+Синтаксис: GetListRedirectUrlAsync()
+Возвращаемое значение: список (List)
+Пример:
+Tester tester = new Tester(browserForm);
+await tester.TestBeginAsync();
+await tester.GoToUrlAsync("https://yandex.ru/", 5);
+List<string> redirects = await tester.GetListRedirectUrlAsync();
+foreach (string url in redirects)
+{
+	tester.ConsoleMsg(url);
+}
+
+
+
+
+GetTitleAsync
+GetTitleAsync
+Описание: метод возвращает заголовок страницы
+Синтаксис: GetTitleAsync()
+Возвращаемое значение: строка (string)
+Пример:
+string text = await tester.GetTitleAsync();
+
+
+
+
+GetUrlAsync
+GetUrlAsync
+Описание: метод возвращает текущий URL
+Синтаксис: GetUrlAsync()
+Возвращаемое значение: строка (string)
+Пример:
+string text = await tester.GetUrlAsync();
+
+
+
+
+GetUrlResponseAsync
+GetUrlResponseAsync
+Описание: метод возвращаетHTTP ответ указанного URL
+Синтаксис: GetUrlResponseAsync(string url)
+Возвращаемое значение: целое число (int)
+Пример:
+int response = await tester.GetUrlResponseAsync("https://somovstudio.github.io/test.html");
+await tester.AssertEqualsAsync(200, response);
+
+
+
+
+GoToUrlAsync
+GoToUrlAsync
+Описание: метод выполняет загрузку веб сайта по указаному URL с указанным ожиданием в секундах
+Флаг abortLoadAfterTime принудительно завершает загрузку страницы после завершения таймера
+Синтаксис: GoToUrlAsync(string url, int sec, bool abortLoadAfterTime = false)
+Возвращаемое значение: отсутствует
+Пример:
+await tester.GoToUrlAsync(@"https://www.google.com/", 25);
+
+
+
+
+GoToUrlBaseAuthAsync
+GoToUrlBaseAuthAsync
+Описание: метод выполняет загрузку веб сайта по указаному URL при базовой авторизации с указанным ожиданием в секундах
+Флаг abortLoadAfterTime принудительно завершает загрузку страницы после завершения таймера
+Синтаксис: GoToUrlBaseAuthAsync(string url, string login, string pass, int sec, bool abortLoadAfterTime = false)
+Возвращаемое значение: отсутствует
+Пример:
+await tester.GoToUrlBaseAuthAsync("https://dev.site.com", "login", "pass", 25);
+
+
+
+LoadPageAsync
+LoadPageAsync
+Описание: метод выполняет загрузку веб страницы по указаному URL с указанным ожиданием в секундах. Флаг abortLoadAfterTime принудительно завершает загрузку страницы после завершения таймера. Ошибки при загрузке страницы игнорируются и не приводят к падению автотеста.
+Синтаксис: LoadPageAsync(string url, int sec, bool abortLoadAfterTime = false)
+Пример:
+await tester.LoadPageAsync (@"https://www.google.com/", 25, true);
+
+
+
+Текст
+
+
+
+GetTextFromElementAsync
+GetTextFromElementAsync
+Описание: метод возвращает текст из указанного элемента
+Синтаксис: 
+GetTextFromElementAsync(string by, string locator)
+GetTextFromElementAsync(Locator locator)
+Возвращаемое значение: строка (string)
+Пример:
+string text = await tester.GetTextFromElementAsync(Tester.BY_CSS, "#auth > h2");
+string text = await tester.GetTextFromElementAsync(Tester.BY_XPATH, "//div[@id='auth']//h2");
+string text = await tester.GetTextFromElementAsync(tester.GetLocator("locatorName"));
+
+
+
+
+GetTextFromElementByClassAsync
+GetTextFromElementByClassAsync
+Описание: метод возвращает текст из указанного элемента
+Синтаксис: GetTextFromElementByClassAsync(string _class, int index)
+Возвращаемое значение: строка (string)
+Пример:
+string text = await tester.GetTextFromElementByClassAsync("my-element", 0);
+
+
+
+
+GetTextFromElementByIdAsync
+GetTextFromElementByIdAsync
+Описание: метод возвращает текст из указанного элемента
+Синтаксис: GetTextFromElementByIdAsync(string id)
+Возвращаемое значение: строка (string)
+Пример:
+string text = await tester.GetTextFromElementByIdAsync("MyElement");
+
+
+
+
+GetTextFromElementByNameAsync
+GetTextFromElementByNameAsync
+Описание: метод возвращает текст из указанного элемента
+Синтаксис: GetTextFromElementByNameAsync(string name, int index)
+Возвращаемое значение: строка (string)
+Пример:
+string text = await tester.GetTextFromElementByNameAsync("MyElement", 0);
+
+
+
+
+GetTextFromElementByTagAsync
+GetTextFromElementByTagAsync
+Описание: метод возвращает текст из указанного элемента
+Синтаксис: GetTextFromElementByTagAsync(string tag, int index)
+Возвращаемое значение: строка (string)
+Пример:
+string text = await tester.GetTextFromElementByTagAsync("h1", 0);
+
+
+
+
+SetTextInElementAsync
+SetTextInElementAsync
+Описание: метод вставляет текст в указанный элемент 
+Синтаксис: 
+SetTextInElementAsync(string by, string locator, string text)
+SetTextInElementAsync(tester.GetLocator("locatorName"), string text)
+Возвращаемое значение: отсутствует
+Пример:
+await tester.SetTextInElementAsync(Tester.BY_CSS, "#auth > h2", "Тестовый заголовок");
+await tester.SetTextInElementAsync(Tester.BY_XPATH, "//div[@id='auth']//h2", "Тестовый заголовок");
+await tester.SetTextInElementAsync(tester.GetLocator("locatorName"), "Тестовый заголовок");
+
+
+
+
+SetTextInElementByClassAsync
+SetTextInElementByClassAsync
+Описание: метод вставляет текст в указанный элемент 
+Синтаксис: SetTextInElementByClassAsync(string _class, int index, string text)
+Возвращаемое значение: отсутствует
+Пример:
+await tester.SetTextInElementByClassAsync("my-element", 0, "текст");
+
+
+
+
+SetTextInElementByIdAsync
+SetTextInElementByIdAsync
+Описание: метод вставляет текст в указанный элемент 
+Синтаксис: SetTextInElementByIdAsync(string id, string text)
+Возвращаемое значение: отсутствует
+Пример:
+await tester.SetTextInElementByIdAsync("MyElement", "текст");
+
+
+
+
+SetTextInElementByNameAsync
+SetTextInElementByNameAsync
+Описание: метод вставляет текст в указанный элемент 
+Синтаксис: SetTextInElementByNameAsync(string name, int index, string text)
+Возвращаемое значение: отсутствует
+Пример:
+await tester.SetTextInElementByNameAsync("MyElement", 0, "текст");
+
+
+
+
+SetTextInElementByTagAsync
+SetTextInElementByTagAsync
+Описание: метод вставляет текст в указанный элемент 
+Синтаксис: SetTextInElementByTagAsync(string tag, int index, string text)
+Возвращаемое значение: отсутствует
+Пример:
+await tester.SetTextInElementByTagAsync("h1", 0, "текст");
+
+
+
+Методы для выполнения JavaScript
+
+
+ExecuteJavaScriptAsync
+ExecuteJavaScriptAsync
+Описание: метод выполняет JavaScript код и возвращает строку с результатом выполнения
+Синтаксис: ExecuteJavaScriptAsync(string script)
+Возвращаемое значение: строка (string)
+Пример:
+string script = "(function(){ var element = document.getElementById('MyElement'); return element.innerText; }());";
+string result = await tester.ExecuteJavaScriptAsync(script);
+
+
+
+Методы для выполнения Rest запросов
+
+
+RestGetAsync
+RestGetAsync
+Описание: метод выполняет Get Rest запрос и получает результат в формате json
+Синтаксис: RestGetAsync(string url, TimeSpan timeout, string charset = "UTF-8")
+Возвращаемое значение: строка (string)
+Пример:
+string result = await tester.RestGetAsync("https://jsonplaceholder.typicode.com/posts/1/", TimeSpan.FromDays(1), "UTF-8");
+tester.ConsoleMsg(result);
+
+
+
+
+RestGetBasicAuthAsync
+RestGetBasicAuthAsync
+Описание: метод выполняет Get Rest запрос и получает результат в формате json
+Синтаксис: RestGetBasicAuthAsync(string login, string pass, string url, string charset = "UTF-8")
+Возвращаемое значение: строка (string)
+Пример:
+string result = await tester.RestGetBasicAuthAsync("admin", "0000", "https://jsonplaceholder.typicode.com/posts/1/", TimeSpan timeout, "UTF-8");
+tester.ConsoleMsg(result);
+
+
+
+
+RestGetStatusCodeAsync
+RestGetStatusCodeAsync
+Описание: метод выполняет Get Rest запрос и в результате получает код статуса
+Синтаксис: RestGetStatusCodeAsync(string url)
+Возвращаемое значение: целое число (int)
+Пример:
+int statusCode = await tester.RestGetAsync("https://jsonplaceholder.typicode.com");
+tester.ConsoleMsg(statusCode.ToString());
+
+
+
+
+RestPostAsync
+RestPostAsync
+Описание: метод выполняет Post Rest запросс отправкой данных в формате json и получает результат так же в формате json
+Синтаксис: RestPostAsync(string url, string json, TimeSpan timeout, string charset = "UTF-8")
+Возвращаемое значение: строка (string)
+Пример:
+string result = await tester.RestPostAsync("https://jsonplaceholder.typicode.com/posts/1/","{}", TimeSpan.FromDays(1), "UTF-8");
+tester.ConsoleMsg(result);
+
+
+
+Методы для замера затраченного времени
+
+
+TimerStart
+TimerStart
+Описание: метод запускает отсчет времени и возвращает значение DateTime
+Синтаксис: TimerStart()
+Возвращаемое значение: дата и время (DateTime)
+Пример:
+Tester tester = new Tester(browserForm);
+DateTime start = await tester.TimerStart();
+await tester.TestBeginAsync();
+...
+await tester.TestEndAsync();
+TimeSpan result = await tester.TimerStop(start);
+tester.ConsoleMsg("Time " + result.TotalSeconds);
+
+
+
+TimerStop
+TimerStop
+Описание: метод завершает отсчет времени и возвращает значение TimeSpan с результатом (например 7,132157 что значит 7 секунд и 132157 миллисекунд)
+Синтаксис: TimerStop(DateTime start)
+Возвращаемое значение: время (TimeSpan)
+Пример:
+Tester tester = new Tester(browserForm);
+DateTime start = await tester.TimerStart();
+await tester.TestBeginAsync();
+...
+await tester.TestEndAsync();
+TimeSpan result = await tester.TimerStop(start);
+tester.ConsoleMsg("Time " + result.TotalSeconds);
+
+
+Методы для отправки email и message
+
+
+SendMsgToMailAsync
+SendMsgToMailAsync
+Описание: метод отправляет письмо на почту
+Синтаксис: SendMsgToMailAsync(string subject, string body, string filename = "")
+Возвращаемое значение: отсутствует
+Пример:
+Tester tester = new Tester(browserForm);
+await tester.TestBeginAsync();
+...
+await tester.TestEndAsync();
+if(tester.GetTestResult() == Tester.PASSED) 
+{ 
+	await tester.SendMsgToMailAsync("Тестовое сообщение", "Тест завершился успешно");
+}
+
+
+
+SendMsgToTelegramAsync
+SendMsgToTelegramAsync
+Описание: метод отправляет сообщение в Телеграм, для этого нужно создать бота добавить его в чат и в функцию передать токен бота (botToken), идентификатор чата (chatId), текст сообщения (text) и при необходимости указать кодировку (charset)
+Синтаксис: SendMsgToTelegramAsync(string botToken, string chatId, string text, string charset = "UTF-8", int timeHourFrom = 0, int timeHourBefore = 0)
+Возвращаемое значение: отсутствует
+Пример:
+Tester tester = new Tester(browserForm);
+await tester.TestBeginAsync();
+...
+await tester.TestEndAsync();
+if(tester.GetTestResult() == Tester.FAILED) 
+{ 
+	// сообщение будет отправлено только если текущее время отправки попадает в диапазон от 9:00 до 21:00 
+	// если указать 0, 0, в таком случае сообщение будет отправлено без учета текущего времени
+	await tester.SendMsgToTelegramAsync("0000000001:ABCDabcd123ABCDabcd123ABCDabcd123ZX", "-123456789", "Тестовое сообщение", "UTF-8", 9, 21);
+}
+
+
+
+Методы для проверки результата
+
+
+AssertEqualsAsync
+AssertEqualsAsync
+Описание: метод выполняет проверку между фактическим и ожидаемым значениями, в случае несовпадения проверка будет считаться провальной
+Синтаксис: AssertEqualsAsync(dynamic expected, dynamic actual)
+Возвращаемое значение: логическое (true или false)
+Пример:
+string expected = "xyz";
+string actual = "xyz";
+bool result = await tester.AssertEqualsAsync(expected, actual);
+
+
+
+AssertNotEqualsAsync
+AssertNotEqualsAsync
+Описание: метод выполняет проверку между фактическим и ожидаемым значениями, в случае совпадения проверка будет считаться провальной
+Синтаксис: AssertNotEqualsAsync(dynamic expected, dynamic actual)
+Возвращаемое значение: логическое (true или false)
+Пример:
+string expected = "abc";
+string actual = "xyz";
+bool result = await tester.AssertNotEqualsAsync(expected, actual);
+
+
+
+AssertTrueAsync
+AssertTrueAsync
+Описание: метод выполняет проверку значения true или false, и в случае если значение равно false проверка будет считаться провальной
+Синтаксис: AssertTrueAsync(bool condition)
+Возвращаемое значение: логическое (true или false)
+Пример:
+bool flag = true;
+bool result = await tester.AssertTrueAsync(flag);
+
+
+
+AssertFalseAsync
+AssertFalseAsync
+Описание: метод выполняет проверку значения true или false, и в случае если значение равно true проверка будет считаться провальной
+Синтаксис: AssertFalseAsync(bool condition)
+Возвращаемое значение: логическое (true или false)
+Пример:
+bool flag = false;
+bool result = await tester.AssertFalseAsync(flag);
+
+
+
+AssertNotNullAsync
+AssertNotNullAsync
+Описание: метод выполняет проверку значения которое не должно быть null, и в случае если значение null проверка будет считаться провальной
+Синтаксис: AssertNotNullAsync(dynamic obj)
+Возвращаемое значение: логическое (true или false)
+Пример:
+string text = "текст";
+await tester.AssertNotNullAsync(text);
+
+
+
+AssertNullAsync
+AssertNullAsync
+Описание: метод выполняет проверку значения которое должно быть null, и в случае если значение не null проверка будет считаться провальной
+Синтаксис: AssertNullAsync(dynamic obj)
+Возвращаемое значение: логическое (true или false)
+Пример:
+string text = null;
+await tester.AssertNullAsync(text);
+
+
+
+AssertNoErrorsAsync
+AssertNoErrorsAsync
+Описание: метод выполняет проверку отсутствия ошибок на странице и если ошибки присутствуют проверка будет считаться провальной
+Синтаксис: AssertNoErrorsAsync(bool showListErrors = false, string[] listIgnored = null)
+Возвращаемое значение: логическое (true или false)
+Пример:
+Tester tester = new Tester(browserForm);
+...
+await tester.TestBeginAsync();
+await tester.GoToUrlAsync("https://somovstudio.github.io/test_error.html", 25);
+await tester.AssertNoErrorsAsync(true, new string[1] { "stats.g.doubleclick.net" });
+await tester.TestEndAsync();
+
+
+
+AssertNetworkEventsAsync
+AssertNetworkEventsAsync
+Описание: метод выполняет проверку присутствия (presence = true) или отсутствие (presence = false) указанных событий (events),  данный метод хорошо использовать при проверке событий Google Analytics и Яндекс Метрика
+Синтаксис: AssertNetworkEventsAsync(bool presence, string[] events)
+Возвращаемое значение: логическое (true или false)
+Пример:
+await tester.AssertNetworkEventsAsync(true, new string[] { 
+	"ec=zayavka", "ea=b2c_new_main", "el=some_shpd_nm", "zayavka_shpd" 
+});
+
+
+
+Методы для работы с файлами
+
+
+FileDownloadAsync
+FileDownloadAsync
+Описание: метод скачивает файла по указанному URL
+Синтаксис: FileDownloadAsync(string fileURL, string filename, int waitingSec = 60)
+Возвращаемое значение: отсутствует
+Пример:
+await tester.FileDownloadAsync("https://somovstudio.github.io/img/logo.png", "C:\\download\\logo.png", 60);
+
+
+
+FileGetHashMD5Async
+FileGetHashMD5Async
+Описание: метод определяет HashMD5 код указанного файла
+Синтаксис: FileGetHashMD5Async(string filename)
+Возвращаемое значение: строка (string)
+Пример:
+string hash = await tester.FileGetHashMD5Async("C:\\download\\logo.png");
+
+
+
+FileReadAsync
+FileReadAsync
+Описание: метод выполняет чтение указанного файла
+Синтаксис: FileReadAsync(string encoding, string filename)
+Возвращаемое значение: строка (string)
+Пример:
+string text = await tester.FileReadAsync(Tester.UTF8, "C:\\Hat\\file.txt");
+
+
+
+FileWriteAsync
+FileWriteAsync
+Описание: метод выполняет запись текста в указанный файла
+Синтаксис: FileWriteAsync(string content, string encoding, string filename)
+Возвращаемое значение: отсутствует
+Пример:
+string text = "my text";
+await tester.FileWriteAsync(text, Tester.UTF8, "C:\\Hat\\file.txt");
+
+
+
+Методы для разных задач
+
+
+CreateHashMD5FromTextAsync
+CreateHashMD5FromTextAsync
+Описание: метод создает HashDM5 код из указанного текста
+Синтаксис: CreateHashMD5FromTextAsync(string text)
+Возвращаемое значение: строка (string)
+Пример:
+string text = "Hello World";
+string hash = await tester.CreateHashMD5FromTextAsync(text);
+tester.ConsoleMsg(hash);
+
+
+/*
+ * Autotest example
+ * Пример автотеста
+*/
+
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Windows.Forms;
+using System.Threading;
+using System.Threading.Tasks;
+using System.IO;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Text.RegularExpressions;
+using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Reflection;
+using Newtonsoft.Json;
+using HatFramework;
+
+namespace Hat
+{
+    public class ExampleTest1
+    {
+        Tester tester;
+
+        public async void Main(Form browserWindow)
+        {
+            tester = new Tester(browserWindow);
+
+            await setUp();
+            await test();
+            await tearDown();
+        }
+
+        public async Task setUp()
+        {
+            tester.Description("Описание автотеста");
+            await tester.BrowserFullScreenAsync();
+        }
+
+        public async Task test()
+        {
+            await tester.TestBeginAsync();
+            await tester.GoToUrlAsync("https://somovstudio.github.io/test.html", 5);
+            await tester.WaitVisibleElementByIdAsync("login", 15);
+            await tester.SetValueInElementByIdAsync("login", "admin");
+            await tester.WaitAsync(2);
+            await tester.SetValueInElementByIdAsync("pass", "0000");
+            await tester.WaitAsync(2);
+            await tester.ClickElementByIdAsync("buttonLogin");
+            await tester.WaitVisibleElementByIdAsync("result", 5);
+            string actual = await tester.GetValueFromElementByIdAsync("textarea");
+            string expected = "Вы успешно авторизованы";
+            await tester.AssertEqualsAsync(expected, actual);
+            await tester.TestEndAsync();
+        }
+
+        public async Task tearDown()
+        {
+            await tester.BrowserCloseAsync();
+        }
+    }
+}

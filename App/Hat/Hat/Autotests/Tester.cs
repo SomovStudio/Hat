@@ -15,9 +15,11 @@ using Newtonsoft.Json;
 using HatFramework;
 using Newtonsoft.Json.Linq;
 using System.Security.Cryptography;
+using System.Runtime.Remoting.Contexts;
+using System.Security.AccessControl;
 
 /**
- * Текущая версия 1.4.19
+ * Текущая версия 1.5.0.2
  */
 
 namespace HatFrameworkDev
@@ -88,6 +90,7 @@ namespace HatFrameworkDev
         private bool sendSuccessReportByMail = false;  // флаг: отправка Success отчета по почте
         private string assertStatus = null;         // флаг: рузельтат проверки
         private List<string> listRedirects;         // список редиректов
+        private Dictionary<string, Locator> locators; // список локаторов
 
         public Tester(Form browserForm)
         {
@@ -1268,6 +1271,59 @@ namespace HatFrameworkDev
             return found;
         }
 
+        public async Task<bool> IsVisibleElementAsync(Locator locator)
+        {
+            bool found = false;
+            try
+            {
+                if (locator.type == BY_CSS || locator.type == BY_XPATH)
+                {
+                    string script = "";
+                    script += "(function(){ ";
+                    if (locator.type == BY_CSS) script += $"var elem = document.querySelector(\"{locator.value}\");";
+                    if (locator.type == BY_XPATH) script += $"var elem = document.evaluate(\"{locator.value}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
+                    script += "const style = getComputedStyle(elem);";
+                    script += "if (style.display === 'none') return false;";
+                    script += "if (style.visibility !== 'visible') return false;";
+                    script += "if (style.opacity < 0.1) return false;";
+                    script += "if (elem.offsetWidth + elem.offsetHeight + elem.getBoundingClientRect().height + elem.getBoundingClientRect().width === 0) return false;";
+                    script += "const elemCenter = {";
+                    script += "x: elem.getBoundingClientRect().left,";
+                    script += "y: elem.getBoundingClientRect().top";
+                    script += "};";
+                    script += "if (elemCenter.x < (elem.offsetWidth * -1)) return false;";
+                    script += "if (elemCenter.x > (document.documentElement.clientWidth || window.innerWidth)) return false;";
+                    script += "if (elemCenter.y < (elem.offsetHeight * -1)) return false;";
+                    script += "if (elemCenter.y > (document.documentElement.clientHeight || window.innerHeight)) return false;";
+                    script += "return true;";
+                    script += "}());";
+
+                    string result = await executeJS(script);
+                    if (result != "null" && result != null && result == "true") found = true;
+                    else found = false;
+
+                    SendMessageDebug($"IsVisibleElement(\"{locator.name}\")", $"IsVisibleElement(\"{locator.name}\")", Tester.COMPLETED, "Результат проверки отображения элемента: " + found.ToString(), "Result of checking the display of the element: " + found.ToString(), Tester.IMAGE_STATUS_MESSAGE);
+                }
+                else
+                {
+                    SendMessageDebug($"IsVisibleElement(\"{locator.name}\")", $"IsVisibleElement(\"{locator.name}\")", FAILED, "Неудалось проверить отображение элемента (некорректно указан тип локатора)", "Failed to check the display of the element (the locator type is specified incorrectly)", IMAGE_STATUS_FAILED);
+                    SendMessageDebug($"IsVisibleElement(\"{locator.name}\")", $"IsVisibleElement(\"{locator.name}\")", Tester.FAILED, $"ЛОКАТОР: {locator.name} | {locator.type} | {locator.description} | {locator.value}", $"LOCATOR: {locator.name} | {locator.type} | {locator.description} | {locator.value}", IMAGE_STATUS_FAILED);
+                    TestStopAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                SendMessageDebug($"IsVisibleElement(\"{locator.name}\")", $"IsVisibleElement(\"{locator.name}\")", Tester.FAILED,
+                    "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(),
+                    "Error: " + ex.Message + Environment.NewLine + Environment.NewLine + "Full description of the error: " + ex.ToString(),
+                    Tester.IMAGE_STATUS_FAILED);
+                SendMessageDebug($"IsVisibleElement(\"{locator.name}\")", $"IsVisibleElement(\"{locator.name}\")", Tester.FAILED, $"ЛОКАТОР: {locator.name} | {locator.type} | {locator.description} | {locator.value}", $"LOCATOR: {locator.name} | {locator.type} | {locator.description} | {locator.value}", IMAGE_STATUS_FAILED);
+                TestStopAsync();
+                ConsoleMsgError(ex.ToString());
+            }
+            return found;
+        }
+
         public async Task<HTMLElement> GetElementAsync(string by, string locator)
         {
             int step;
@@ -1310,6 +1366,58 @@ namespace HatFrameworkDev
             catch (Exception ex)
             {
                 SendMessageDebug($"GetElementAsync(\"{by}\", \"{locator}\")", $"GetElementAsync(\"{by}\", \"{locator}\")", Tester.FAILED,
+                    "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(),
+                    "Error: " + ex.Message + Environment.NewLine + Environment.NewLine + "Full description of the error: " + ex.ToString(),
+                    Tester.IMAGE_STATUS_FAILED);
+                TestStopAsync();
+                ConsoleMsgError(ex.ToString());
+            }
+            return htmlElement;
+        }
+
+        public async Task<HTMLElement> GetElementAsync(Locator locator)
+        {
+            int step;
+            if (DefineTestStop() == true) return null;
+
+            HTMLElement htmlElement = new HTMLElement(this, locator.type, locator.value);
+            try
+            {
+                HTMLElement el = null;
+                string script = "";
+                script = "(function(locator = \"" + locator.value + "\"){";
+                if (locator.type == BY_CSS) script += "var el = document.querySelector(locator);";
+                else if (locator.type == BY_XPATH) script += "var el = document.evaluate(locator, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
+                script += "var obj = {";
+                script += "Id: el.id,";
+                script += "Class: el.getAttribute('class'),";
+                script += "Name: el.name,";
+                script += "Type: el.type";
+                script += "};";
+                script += "return obj;";
+                script += "}());";
+
+                var obj = await BrowserView.CoreWebView2.ExecuteScriptAsync(script);
+                el = JsonConvert.DeserializeObject<HTMLElement>(obj);
+                if (el == null)
+                {
+                    SendMessageDebug($"GetElementAsync(\"{locator.name}\")", $"GetElementAsync(\"{locator.name}\")", Tester.FAILED, $"Не удалось получить элемент {locator.value} ({locator.type})", $"Failed to get the element {locator.value} ({locator.type})", Tester.IMAGE_STATUS_FAILED);
+                    SendMessageDebug($"GetElementAsync(\"{locator.name}\")", $"GetElementAsync(\"{locator.name}\")", Tester.FAILED, $"ЛОКАТОР: {locator.name} | {locator.type} | {locator.description} | {locator.value}", $"LOCATOR: {locator.name} | {locator.type} | {locator.description} | {locator.value}", IMAGE_STATUS_FAILED);
+                    TestStopAsync();
+                }
+                else
+                {
+                    htmlElement = new HTMLElement(this, locator.type, locator.value);
+                    htmlElement.Id = el.Id;
+                    htmlElement.Name = el.Name;
+                    htmlElement.Class = el.Class;
+                    htmlElement.Type = el.Type;
+                    SendMessageDebug($"GetElementAsync(\"{locator.name}\")", $"GetElementAsync(\"{locator.name}\")", PASSED, "Элемент получен", "The element is received", IMAGE_STATUS_PASSED);
+                }
+            }
+            catch (Exception ex)
+            {
+                SendMessageDebug($"GetElementAsync(\"{locator.name}\")", $"GetElementAsync(\"{locator.name}\")", Tester.FAILED,
                     "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(),
                     "Error: " + ex.Message + Environment.NewLine + Environment.NewLine + "Full description of the error: " + ex.ToString(),
                     Tester.IMAGE_STATUS_FAILED);
@@ -1838,6 +1946,40 @@ namespace HatFrameworkDev
             }
         }
 
+        public async Task WaitVisibleElementAsync(Locator locator, int sec)
+        {
+            if (DefineTestStop() == true) return;
+            SendMessageDebug($"WaitVisibleElementAsync(\"{locator.name}\", {sec})", $"WaitVisibleElementAsync(\"{locator.name}\", {sec})", PROCESS, $"Ожидание {sec.ToString()} секунд", $"Waiting {sec.ToString()} seconds", IMAGE_STATUS_MESSAGE);
+
+            try
+            {
+                bool found = false;
+                for (int i = 0; i < sec; i++)
+                {
+                    found = await isVisible(locator.type, locator.value);
+                    if (found) break;
+                    await Task.Delay(1000);
+                }
+
+                if (found == true) SendMessageDebug($"WaitVisibleElementAsync(\"{locator.name}\", {sec})", $"WaitVisibleElementAsync(\"{locator.name}\", {sec})", PASSED, $"Ожидание элемента - завершено (элемент отображается)", $"Waiting for an element - completed (the element is displayed)", IMAGE_STATUS_PASSED);
+                else
+                {
+                    SendMessageDebug($"WaitVisibleElementAsync(\"{locator.name}\", {sec})", $"WaitVisibleElementAsync(\"{locator.name}\", {sec})", FAILED, $"Ожидание элемента - завершено (элемент не отображается)", $"Waiting for an element - completed (the element is not displayed)", IMAGE_STATUS_FAILED);
+                    SendMessageDebug($"WaitVisibleElementAsync(\"{locator.name}\", {sec})", $"WaitVisibleElementAsync(\"{locator.name}\", {sec})", FAILED, $"ЛОКАТОР: {locator.name} | {locator.type} | {locator.description} | {locator.value}", $"LOCATOR: {locator.name} | {locator.type} | {locator.description} | {locator.value}", IMAGE_STATUS_FAILED);
+                    TestStopAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                SendMessageDebug($"WaitVisibleElementAsync(\"{locator.name}\")", $"WaitVisibleElementAsync(\"{locator.name}\")", Tester.FAILED,
+                    "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(),
+                    "Error: " + ex.Message + Environment.NewLine + Environment.NewLine + "Full description of the error: " + ex.ToString(),
+                    Tester.IMAGE_STATUS_FAILED);
+                TestStopAsync();
+                ConsoleMsgError(ex.ToString());
+            }
+        }
+
         public async Task WaitNotVisibleElementByIdAsync(string id, int sec)
         {
             if (DefineTestStop() == true) return;
@@ -2004,6 +2146,41 @@ namespace HatFrameworkDev
             }
         }
 
+        public async Task WaitNotVisibleElementAsync(Locator locator, int sec)
+        {
+            if (DefineTestStop() == true) return;
+            SendMessageDebug($"WaitNotVisibleElementAsync(\"{locator.name}\", {sec})", $"WaitNotVisibleElementAsync(\"{locator.name}\", {sec})", PROCESS, $"Ожидание {sec.ToString()} секунд", $"Waiting {sec.ToString()} seconds", IMAGE_STATUS_MESSAGE);
+
+            try
+            {
+                bool found = true;
+                for (int i = 0; i < sec; i++)
+                {
+                    if (locator.type == BY_CSS) found = await isVisible(BY_CSS, locator.value);
+                    else if (locator.type == BY_XPATH) found = await isVisible(BY_XPATH, locator.value);
+                    if (found == false) break;
+                    await Task.Delay(1000);
+                }
+
+                if (found == false) SendMessageDebug($"WaitNotVisibleElementAsync(\"{locator.name}\", {sec})", $"WaitNotVisibleElementAsync(\"{locator.name}\", {sec})", PASSED, $"Ожидание скрытия элемента - завершено (элемент не отображается)", $"Waiting for the element to be hidden - completed (the element is not displayed)", IMAGE_STATUS_PASSED);
+                else
+                {
+                    SendMessageDebug($"WaitNotVisibleElementAsync(\"{locator.name}\", {sec})", $"WaitNotVisibleElementAsync(\"{locator.name}\", {sec})", FAILED, $"Ожидание скрытия элемента - завершено (элемент отображается)", $"Waiting for the element to be hidden - completed (the element is displayed)", IMAGE_STATUS_FAILED);
+                    SendMessageDebug($"WaitNotVisibleElementAsync(\"{locator.name}\", {sec})", $"WaitNotVisibleElementAsync(\"{locator.name}\", {sec})", Tester.FAILED, $"ЛОКАТОР: {locator.name} | {locator.type} | {locator.description} | {locator.value}", $"LOCATOR: {locator.name} | {locator.type} | {locator.description} | {locator.value}", IMAGE_STATUS_FAILED);
+                    TestStopAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                SendMessageDebug($"WaitNotVisibleElementAsync(\"{locator.name}\", {sec})", $"WaitNotVisibleElementAsync(\"{locator.name}\", {sec})", Tester.FAILED,
+                    "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(),
+                    "Error: " + ex.Message + Environment.NewLine + Environment.NewLine + "Full description of the error: " + ex.ToString(),
+                    Tester.IMAGE_STATUS_FAILED);
+                TestStopAsync();
+                ConsoleMsgError(ex.ToString());
+            }
+        }
+
         public async Task WaitElementInDomAsync(string by, string locator, int sec)
         {
             if (DefineTestStop() == true) return;
@@ -2050,6 +2227,53 @@ namespace HatFrameworkDev
             }
         }
 
+        public async Task WaitElementInDomAsync(Locator locator, int sec)
+        {
+            if (DefineTestStop() == true) return;
+            SendMessageDebug($"WaitElementInDomAsync(\"{locator.name}\", {sec})", $"WaitElementInDomAsync(\"{locator.name}\", {sec})", PROCESS, $"Ожидание {sec.ToString()} секунд", $"Waiting {sec.ToString()} seconds", IMAGE_STATUS_MESSAGE);
+
+            try
+            {
+                bool found = false;
+
+                string script = "";
+                script += "(function(){ ";
+                if (locator.type == BY_CSS) script += $"var elem = document.querySelector(\"{locator.value}\");";
+                else if (locator.type == BY_XPATH) script += $"var elem = document.evaluate(\"{locator.value}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
+                script += "return elem.innerHTML;";
+                script += "}());";
+
+                string result = null;
+                for (int i = 0; i < sec; i++)
+                {
+                    result = await executeJS(script);
+                    if (result != "null" && result != null)
+                    {
+                        found = true;
+                        break;
+                    }
+                    await Task.Delay(1000);
+                }
+
+                if (found == true) SendMessageDebug($"WaitElementInDomAsync(\"{locator.name}\", {sec})", $"WaitElementInDomAsync(\"{locator.name}\", {sec})", PASSED, $"Ожидание элемента - завершено (элемент присутствует в DOM)", $"Waiting for the element - completed (the element is present in the DOM)", IMAGE_STATUS_PASSED);
+                else
+                {
+                    SendMessageDebug($"WaitElementInDomAsync(\"{locator.name}\", {sec})", $"WaitElementInDomAsync(\"{locator.name}\", {sec})", Tester.FAILED, $"Ожидание элемента - завершено (элемент не присутствует в DOM)", $"Waiting for the element - completed (the element is not present in the DOM)", IMAGE_STATUS_FAILED);
+                    SendMessageDebug($"WaitElementInDomAsync(\"{locator.name}\", {sec})", $"WaitElementInDomAsync(\"{locator.name}\", {sec})", Tester.FAILED, $"ЛОКАТОР: {locator.name} | {locator.type} | {locator.description} | {locator.value}", $"LOCATOR: {locator.name} | {locator.type} | {locator.description} | {locator.value}", IMAGE_STATUS_FAILED);
+                    TestStopAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                SendMessageDebug($"WaitElementInDomAsync(\"{locator.name}\", {sec})", $"WaitElementInDomAsync(\"{locator.name}\", {sec})", Tester.FAILED,
+                    "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(),
+                    "Error: " + ex.Message + Environment.NewLine + Environment.NewLine + "Full description of the error: " + ex.ToString(),
+                    Tester.IMAGE_STATUS_FAILED);
+                TestStopAsync();
+                ConsoleMsgError(ex.ToString());
+            }
+        }
+
         public async Task WaitElementNotDomAsync(string by, string locator, int sec)
         {
             if (DefineTestStop() == true) return;
@@ -2088,6 +2312,53 @@ namespace HatFrameworkDev
             catch (Exception ex)
             {
                 SendMessageDebug($"WaitElementNotDomAsync(\"{by}\", \"{locator}\", {sec})", $"WaitElementNotDomAsync(\"{by}\", \"{locator}\", {sec})", Tester.FAILED,
+                    "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(),
+                    "Error: " + ex.Message + Environment.NewLine + Environment.NewLine + "Full description of the error: " + ex.ToString(),
+                    Tester.IMAGE_STATUS_FAILED);
+                TestStopAsync();
+                ConsoleMsgError(ex.ToString());
+            }
+        }
+
+        public async Task WaitElementNotDomAsync(Locator locator, int sec)
+        {
+            if (DefineTestStop() == true) return;
+            SendMessageDebug($"WaitElementNotDomAsync(\"{locator.name}\", {sec})", $"WaitElementNotDomAsync(\"{locator.name}\", {sec})", PROCESS, $"Ожидание {sec.ToString()} секунд", $"Waiting {sec.ToString()} seconds", IMAGE_STATUS_MESSAGE);
+
+            try
+            {
+                bool found = true;
+
+                string script = "";
+                script += "(function(){ ";
+                if (locator.type == BY_CSS) script += $"var elem = document.querySelector(\"{locator.value}\");";
+                else if (locator.type == BY_XPATH) script += $"var elem = document.evaluate(\"{locator.value}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
+                script += "return elem.innerHTML;";
+                script += "}());";
+
+                string result = null;
+                for (int i = 0; i < sec; i++)
+                {
+                    result = await executeJS(script);
+                    if (result == "null" || result == null)
+                    {
+                        found = false;
+                        break;
+                    }
+                    await Task.Delay(1000);
+                }
+
+                if (found == false) SendMessageDebug($"WaitElementNotDomAsync(\"{locator.name}\", {sec})", $"WaitElementNotDomAsync(\"{locator.name}\", {sec})", Tester.PASSED, $"Ожидание отсутствия элемента - завершено (элемент отсутствует в DOM)", $"Waiting for the absence element - completed (the element is absence in the DOM)", IMAGE_STATUS_PASSED);
+                else
+                {
+                    SendMessageDebug($"WaitElementNotDomAsync(\"{locator.name}\", {sec})", $"WaitElementNotDomAsync(\"{locator.name}\", {sec})", Tester.FAILED, $"Ожидание отсутствия элемента - завершено (элемент присутствует в DOM)", $"Waiting for the absence of an element - completed (the element is present in the DOM)", IMAGE_STATUS_FAILED);
+                    SendMessageDebug($"WaitElementNotDomAsync(\"{locator.name}\", {sec})", $"WaitElementNotDomAsync(\"{locator.name}\", {sec})", Tester.FAILED, $"ЛОКАТОР: {locator.name} | {locator.type} | {locator.description} | {locator.value}", $"LOCATOR: {locator.name} | {locator.type} | {locator.description} | {locator.value}", IMAGE_STATUS_FAILED);
+                    TestStopAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                SendMessageDebug($"WaitElementNotDomAsync(\"{locator.name}\", {sec})", $"WaitElementNotDomAsync(\"{locator.name}\", {sec})", Tester.FAILED,
                     "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(),
                     "Error: " + ex.Message + Environment.NewLine + Environment.NewLine + "Full description of the error: " + ex.ToString(),
                     Tester.IMAGE_STATUS_FAILED);
@@ -2302,6 +2573,53 @@ namespace HatFrameworkDev
             return found;
         }
 
+        public async Task<bool> FindElementAsync(Locator locator, int sec)
+        {
+            if (DefineTestStop() == true) return false;
+            SendMessageDebug($"FindElementAsync(\"{locator.name}\", {sec})", $"FindElementAsync(\"{locator.name}\", {sec})", PROCESS, $"Ожидание {sec.ToString()} секунд (поиск)", $"Waiting {sec.ToString()} seconds (search)", IMAGE_STATUS_MESSAGE);
+
+            bool found = false;
+            try
+            {
+                string script = "";
+                script += "(function(){ ";
+                if (locator.type == BY_CSS) script += $"var elem = document.querySelector(\"{locator.value}\");";
+                else if (locator.type == BY_XPATH) script += $"var elem = document.evaluate(\"{locator.value}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
+                script += "return elem.innerHTML;";
+                script += "}());";
+
+                string result = null;
+                for (int i = 0; i < sec; i++)
+                {
+                    result = await executeJS(script);
+                    if (result != "null" && result != null)
+                    {
+                        found = true;
+                        break;
+                    }
+                    await Task.Delay(1000);
+                }
+
+                if (found == true) SendMessageDebug($"FindElementAsync(\"{locator.name}\", {sec})", $"FindElementAsync(\"{locator.name}\", {sec})", Tester.COMPLETED, "Поиск элемента - завершен (элемент найден)", "Element search - completed (element found)", IMAGE_STATUS_MESSAGE);
+                else
+                {
+                    SendMessageDebug($"FindElementAsync(\"{locator.name}\", {sec})", $"FindElementAsync(\"{locator.name}\", {sec})", Tester.COMPLETED, "Поиск элемента - завершен (элемент не найден)", "Element search - completed (element not found)", IMAGE_STATUS_MESSAGE);
+                    SendMessageDebug($"FindElementAsync(\"{locator.name}\", {sec})", $"FindElementAsync(\"{locator.name}\", {sec})", Tester.COMPLETED, $"ЛОКАТОР: {locator.name} | {locator.type} | {locator.description} | {locator.value}", $"LOCATOR: {locator.name} | {locator.type} | {locator.description} | {locator.value}", IMAGE_STATUS_MESSAGE);
+                }
+            }
+            catch (Exception ex)
+            {
+                SendMessageDebug($"FindElementAsync(\"{locator.name}\", {sec})", $"FindElementAsync(\"{locator.name}\", {sec})", Tester.FAILED,
+                    "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(),
+                    "Error: " + ex.Message + Environment.NewLine + Environment.NewLine + "Full description of the error: " + ex.ToString(),
+                    Tester.IMAGE_STATUS_FAILED);
+                SendMessageDebug($"FindElementAsync(\"{locator.name}\", {sec})", $"FindElementAsync(\"{locator.name}\", {sec})", Tester.FAILED, $"ЛОКАТОР: {locator.name} | {locator.type} | {locator.description} | {locator.value}", $"LOCATOR: {locator.name} | {locator.type} | {locator.description} | {locator.value}", IMAGE_STATUS_FAILED);
+                TestStopAsync();
+                ConsoleMsgError(ex.ToString());
+            }
+            return found;
+        }
+
         public async Task<bool> FindVisibleElementByIdAsync(string id, int sec)
         {
             if (DefineTestStop() == true) return false;
@@ -2453,6 +2771,42 @@ namespace HatFrameworkDev
             return found;
         }
 
+        public async Task<bool> FindVisibleElementAsync(Locator locator, int sec)
+        {
+            if (DefineTestStop() == true) return false;
+            SendMessageDebug($"FindVisibleElementAsync(\"{locator.name}\", {sec})", $"FindVisibleElementAsync(\"{locator.name}\", {sec})", PROCESS, $"Ожидание {sec.ToString()} секунд (поиск)", $"Waiting {sec.ToString()} seconds (search)", IMAGE_STATUS_MESSAGE);
+
+            bool found = false;
+            try
+            {
+                for (int i = 0; i < sec; i++)
+                {
+                    if (locator.type == BY_CSS) found = await isVisible(BY_CSS, locator.value);
+                    else if (locator.type == BY_XPATH) found = await isVisible(BY_XPATH, locator.value);
+                    if (found) break;
+                    await Task.Delay(1000);
+                }
+
+                if (found == true) SendMessageDebug($"FindVisibleElementAsync(\"{locator.name}\", {sec})", $"FindVisibleElementAsync(\"{locator.name}\", {sec})", Tester.PASSED, "Поиск элемента - завершен (элемент найден)", "Element search - completed (element found)", IMAGE_STATUS_PASSED);
+                else
+                {
+                    SendMessageDebug($"FindVisibleElementAsync(\"{locator.name}\", {sec})", $"FindVisibleElementAsync(\"{locator.name}\", {sec})", Tester.WARNING, "Поиск элемента - завершен (элемент не найден)", "Element search - completed (element not found)", IMAGE_STATUS_WARNING);
+                    SendMessageDebug($"FindVisibleElementAsync(\"{locator.name}\", {sec})", $"FindVisibleElementAsync(\"{locator.name}\", {sec})", Tester.WARNING, $"ЛОКАТОР: {locator.name} | {locator.type} | {locator.description} | {locator.value}", $"LOCATOR: {locator.name} | {locator.type} | {locator.description} | {locator.value}", IMAGE_STATUS_WARNING);
+                }
+            }
+            catch (Exception ex)
+            {
+                SendMessageDebug($"FindVisibleElementAsync(\"{locator.name}\", {sec})", $"FindVisibleElementAsync(\"{locator.name}\", {sec})", Tester.FAILED,
+                    "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(),
+                    "Error: " + ex.Message + Environment.NewLine + Environment.NewLine + "Full description of the error: " + ex.ToString(),
+                    Tester.IMAGE_STATUS_FAILED);
+                SendMessageDebug($"FindVisibleElementAsync(\"{locator.name}\", {sec})", $"FindVisibleElementAsync(\"{locator.name}\", {sec})", Tester.WARNING, $"ЛОКАТОР: {locator.name} | {locator.type} | {locator.description} | {locator.value}", $"LOCATOR: {locator.name} | {locator.type} | {locator.description} | {locator.value}", IMAGE_STATUS_WARNING);
+                TestStopAsync();
+                ConsoleMsgError(ex.ToString());
+            }
+            return found;
+        }
+
         public async Task ClickElementByIdAsync(string id)
         {
             if (DefineTestStop() == true) return;
@@ -2533,6 +2887,26 @@ namespace HatFrameworkDev
             else
             {
                 SendMessageDebug($"ClickElementAsync(\"{by}\", \"{locator}\")", $"ClickElementAsync(\"{by}\", \"{locator}\")", PASSED, "Элемент нажат", "The element is pressed", IMAGE_STATUS_PASSED);
+            }
+        }
+
+        public async Task ClickElementAsync(Locator locator)
+        {
+            if (DefineTestStop() == true) return;
+
+            string script = "(function(){";
+            if (locator.type == BY_CSS) script += $"var element = document.querySelector(\"{locator.value}\"); element.click(); return element;";
+            else if (locator.type == BY_XPATH) script += $"var element = document.evaluate(\"{locator.value}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue; element.click(); return element;";
+            script += "}());";
+            if (await execute(script, $"ClickElementAsync(\"{locator.name}\")") == "null")
+            {
+                SendMessageDebug($"ClickElementAsync(\"{locator.name}\")", $"ClickElementAsync(\"{locator.name}\")", Tester.FAILED, $"Не удалось найти элемент по локатору: {locator.value}", $"The element could not be found by the locator: {locator.value}", Tester.IMAGE_STATUS_FAILED);
+                SendMessageDebug($"ClickElementAsync(\"{locator.name}\")", $"ClickElementAsync(\"{locator.name}\")", Tester.FAILED, $"ЛОКАТОР: {locator.name} | {locator.type} | {locator.description} | {locator.value}", $"LOCATOR: {locator.name} | {locator.type} | {locator.description} | {locator.value}", IMAGE_STATUS_FAILED);
+                TestStopAsync();
+            }
+            else
+            {
+                SendMessageDebug($"ClickElementAsync(\"{locator.name}\")", $"ClickElementAsync(\"{locator.name}\")", PASSED, "Элемент нажат", "The element is pressed", IMAGE_STATUS_PASSED);
             }
         }
 
@@ -2659,6 +3033,33 @@ namespace HatFrameworkDev
             else
             {
                 SendMessageDebug($"SetValueInElementAsync(\"{by}\", \"{locator}\", \"{value}\")", $"SetValueInElementAsync(\"{by}\", \"{locator}\", \"{value}\")", PASSED, $"Значение '{value}' введено в элемент", $"The value '{value}' was entered into the element", IMAGE_STATUS_PASSED);
+            }
+        }
+
+        public async Task SetValueInElementAsync(Locator locator, string value)
+        {
+            if (DefineTestStop() == true) return;
+
+            string script = "(function(){";
+            if (locator.type == BY_CSS) script += $"var element = document.querySelector(\"{locator.value}\");";
+            else if (locator.type == BY_XPATH) script += $"var element = document.evaluate(\"{locator.value}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
+            script += "element.value = '" + value + "';";
+            script += "element.dispatchEvent(new KeyboardEvent('keydown', { bubbles: true }));";
+            script += "element.dispatchEvent(new KeyboardEvent('keypress', { bubbles: true }));";
+            script += "element.dispatchEvent(new KeyboardEvent('keyup', { bubbles: true }));";
+            script += "element.dispatchEvent(new Event('input', { bubbles: true }));";
+            script += "element.dispatchEvent(new Event('change', { bubbles: true }));";
+            script += "return element.value;";
+            script += "}());";
+            if (await execute(script, $"SetValueInElementAsync(\"{locator.name}\", \"{value}\")") == "null")
+            {
+                SendMessageDebug($"SetValueInElementAsync(\"{locator.name}\", \"{value}\")", $"SetValueInElementAsync(\"{locator.name}\", \"{value}\")", Tester.FAILED, $"Не удалось найти или ввести значение в элемент по локатору: {locator.value}", $"Could not find or enter a value in the element by locator: {locator.value}", Tester.IMAGE_STATUS_FAILED);
+                SendMessageDebug($"SetValueInElementAsync(\"{locator.name}\", \"{value}\")", $"SetValueInElementAsync(\"{locator.name}\", \"{value}\")", Tester.FAILED, $"ЛОКАТОР: {locator.name} | {locator.type} | {locator.description} | {locator.value}", $"LOCATOR: {locator.name} | {locator.type} | {locator.description} | {locator.value}", IMAGE_STATUS_FAILED);
+                TestStopAsync();
+            }
+            else
+            {
+                SendMessageDebug($"SetValueInElementAsync(\"{locator.name}\", \"{value}\")", $"SetValueInElementAsync(\"{locator.name}\", \"{value}\")", PASSED, $"Значение '{value}' введено в элемент", $"The value '{value}' was entered into the element", IMAGE_STATUS_PASSED);
             }
         }
 
@@ -2825,6 +3226,42 @@ namespace HatFrameworkDev
             return value;
         }
 
+        public async Task<string> GetValueFromElementAsync(Locator locator)
+        {
+            if (DefineTestStop() == true) return "";
+
+            string value = "";
+            try
+            {
+                string script = "(function(){";
+                if (locator.type == BY_CSS) script += $"var element = document.querySelector(\"{locator.value}\"); return element.value;";
+                else if (locator.type == BY_XPATH) script += $"var element = document.evaluate(\"{locator.value}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue; return element.value;";
+                script += "}());";
+                value = await execute(script, $"GetValueFromElementAsync(\"{locator.name}\")");
+                if (value == "null" || value == null)
+                {
+                    SendMessageDebug($"GetValueFromElementAsync(\"{locator.name}\")", $"GetValueFromElementAsync(\"{locator.name}\")", Tester.FAILED, $"Не удалось найти или получить данные из элемента по локатору: {locator.value}", $"Could not find or get data from the element by Locator: {locator.value}", Tester.IMAGE_STATUS_FAILED);
+                    SendMessageDebug($"GetValueFromElementAsync(\"{locator.name}\")", $"GetValueFromElementAsync(\"{locator.name}\")", Tester.FAILED, $"ЛОКАТОР: {locator.name} | {locator.type} | {locator.description} | {locator.value}", $"LOCATOR: {locator.name} | {locator.type} | {locator.description} | {locator.value}", IMAGE_STATUS_FAILED);
+                    TestStopAsync();
+                }
+                else
+                {
+                    if (value.Length > 1) value = value.Substring(1, value.Length - 2);
+                    SendMessageDebug($"GetValueFromElementAsync(\"{locator.name}\")", $"GetValueFromElementAsync(\"{locator.name}\")", Tester.PASSED, "Получено значение из элемента | " + value, "Got the value from the element | " + value, Tester.IMAGE_STATUS_PASSED);
+                }
+            }
+            catch (Exception ex)
+            {
+                SendMessageDebug($"GetValueFromElementAsync(\"{locator.name}\")", $"GetValueFromElementAsync(\"{locator.name}\")", Tester.FAILED,
+                    "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(),
+                    "Error: " + ex.Message + Environment.NewLine + Environment.NewLine + "Full description of the error: " + ex.ToString(),
+                    Tester.IMAGE_STATUS_FAILED);
+                TestStopAsync();
+                ConsoleMsgError(ex.ToString());
+            }
+            return value;
+        }
+
         public async Task SetTextInElementByIdAsync(string id, string text)
         {
             if (DefineTestStop() == true) return;
@@ -2904,6 +3341,7 @@ namespace HatFrameworkDev
                 SendMessageDebug($"SetTextInElementByTagAsync('{tag}', {index}, '{text}')", $"SetTextInElementByTagAsync('{tag}', {index}, '{text}')", Tester.PASSED, $"Текст '{text}' введен в элемент", $"The text '{text}' was entered into the element", Tester.IMAGE_STATUS_PASSED);
             }
         }
+
         public async Task SetTextInElementAsync(string by, string locator, string text)
         {
             if (DefineTestStop() == true) return;
@@ -2924,6 +3362,29 @@ namespace HatFrameworkDev
                 SendMessageDebug($"SetTextInElementAsync(\"{by}\", \"{locator}\", \"{text}\")", $"SetTextInElementAsync(\"{by}\", \"{locator}\", \"{text}\")", Tester.PASSED, $"Текст '{text}' введен в элемент", $"The text '{text}' was entered into the element", Tester.IMAGE_STATUS_PASSED);
             }
         }
+
+        public async Task SetTextInElementAsync(Locator locator, string text)
+        {
+            if (DefineTestStop() == true) return;
+
+            string script = "(function(){";
+            if (locator.type == BY_CSS) script += $"var element = document.querySelector(\"{locator.value}\");";
+            else if (locator.type == BY_XPATH) script += $"var element = document.evaluate(\"{locator.value}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
+            script += $"element.innerText = '{text}';";
+            script += "return element.innerText;";
+            script += "}());";
+            if (await execute(script, $"SetTextInElementAsync(\"{locator.name}\", \"{text}\")") == "null")
+            {
+                SendMessageDebug($"SetTextInElementAsync(\"{locator.name}\", \"{text}\")", $"SetTextInElementAsync(\"{locator.name}\", \"{text}\")", Tester.FAILED, $"Не удалось найти или ввести текст в элемент по локатору: {locator.value}", $"Could not find or enter text in the element by locator: {locator.value}", Tester.IMAGE_STATUS_FAILED);
+                SendMessageDebug($"SetTextInElementAsync(\"{locator.name}\",  \"{text}\")", $"SetTextInElementAsync(\"{locator.name}\",  \"{text}\")", Tester.FAILED, $"ЛОКАТОР: {locator.name} | {locator.type} | {locator.description} | {locator.value}", $"LOCATOR: {locator.name} | {locator.type} | {locator.description} | {locator.value}", IMAGE_STATUS_FAILED);
+                TestStopAsync();
+            }
+            else
+            {
+                SendMessageDebug($"SetTextInElementAsync(\"{locator.name}\", \"{text}\")", $"SetTextInElementAsync(\"{locator.name}\", \"{text}\")", Tester.PASSED, $"Текст '{text}' введен в элемент", $"The text '{text}' was entered into the element", Tester.IMAGE_STATUS_PASSED);
+            }
+        }
+
         public async Task<string> GetTextFromElementByIdAsync(string id)
         {
             if (DefineTestStop() == true) return "";
@@ -3126,6 +3587,49 @@ namespace HatFrameworkDev
             return value;
         }
 
+        public async Task<string> GetTextFromElementAsync(Locator locator)
+        {
+            if (DefineTestStop() == true) return "";
+
+            string value = "";
+            try
+            {
+                string script = "(function(){";
+                if (locator.type == BY_CSS) script += "var element = document.querySelector(\"" + locator.value + "\"); ";
+                else if (locator.type == BY_XPATH) script += $"var element = document.evaluate(\"{locator.value}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue; ";
+                script += "if(element.innerText == '' && element.value != null) { return element.value; } ";
+                script += "else { return element.innerText; } ";
+                script += "}());";
+                value = await execute(script, $"GetTextFromElementAsync(\"{locator.name}\")");
+                if (value == "null" || value == null)
+                {
+                    SendMessageDebug($"GetTextFromElementAsync(\"{locator.name}\")", $"GetTextFromElementAsync(\"{locator.name}\")", Tester.FAILED, $"Не удалось найти или прочитать текст из элемента по локатору: {locator.value}", $"Could not find or read the text from the element by the locator: {locator.value}", Tester.IMAGE_STATUS_FAILED);
+                    SendMessageDebug($"GetTextFromElementAsync(\"{locator.name}\")", $"GetTextFromElementAsync(\"{locator.name}\")", Tester.FAILED, $"ЛОКАТОР: {locator.name} | {locator.type} | {locator.description} | {locator.value}", $"LOCATOR: {locator.name} | {locator.type} | {locator.description} | {locator.value}", IMAGE_STATUS_FAILED);
+                    TestStopAsync();
+                }
+                else
+                {
+                    if (value == "") SendMessageDebug($"GetTextFromElementAsync(\"{locator.name}\")", $"GetTextFromElementAsync(\"{locator.name}\")", COMPLETED, "Пустой текст из элемента", "Empty text from element", IMAGE_STATUS_WARNING);
+                    else if (value.Length > 1)
+                    {
+                        value = value.Substring(1, value.Length - 2);
+                        SendMessageDebug($"GetTextFromElementAsync(\"{locator.name}\")", $"GetTextFromElementAsync(\"{locator.name}\")", Tester.PASSED, "Прочитан текст из элемента | " + value, "The text from the element has been read | " + value, Tester.IMAGE_STATUS_PASSED);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                SendMessageDebug($"GetTextFromElementAsync(\"{locator.name}\")", $"GetTextFromElementAsync(\"{locator.name}\")", Tester.FAILED,
+                    "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(),
+                    "Error: " + ex.Message + Environment.NewLine + Environment.NewLine + "Full description of the error: " + ex.ToString(),
+                    Tester.IMAGE_STATUS_FAILED);
+                TestStopAsync();
+                ConsoleMsgError(ex.ToString());
+            }
+
+            return value;
+        }
+
         public async Task<int> GetCountElementsByClassAsync(string _class)
         {
             if (DefineTestStop() == true) return -1;
@@ -3205,6 +3709,29 @@ namespace HatFrameworkDev
             return -1;
         }
 
+        public async Task<int> GetCountElementsAsync(Locator locator)
+        {
+            if (DefineTestStop() == true) return -1;
+
+            string script = "(function(){";
+            if (locator.type == BY_CSS) script += "var element = document.querySelectorAll(\"" + locator.value + "\"); return element.length;";
+            else if (locator.type == BY_XPATH) script += $"var element = document.evaluate(\"{locator.value}\", document, null, XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null); return element.snapshotLength;";
+            script += "}());";
+            string result = await execute(script, $"GetCountElementsAsync(\"{locator.name}\")");
+            if (result != "null" && result != null && result != "")
+            {
+                SendMessageDebug($"GetCountElementsAsync(\"{locator.name}\")", $"GetCountElementsAsync(\"{locator.name}\")", PASSED, $"Количество элементов {Int32.Parse(result)}", $"Amount of elements {Int32.Parse(result)}", IMAGE_STATUS_PASSED);
+                return Int32.Parse(result);
+            }
+            else
+            {
+                SendMessageDebug($"GetCountElementsAsync(\"{locator.name}\")", $"GetCountElementsAsync(\"{locator.name}\")", FAILED, $"Не удалось найти или получить количество элементов по локатору: {locator.value}", $"Couldn't find or get the amount of elements by locator: {locator.value}", IMAGE_STATUS_FAILED);
+                SendMessageDebug($"GetCountElementsAsync(\"{locator.name}\")", $"GetCountElementsAsync(\"{locator.name}\")", Tester.FAILED, $"ЛОКАТОР: {locator.name} | {locator.type} | {locator.description} | {locator.value}", $"LOCATOR: {locator.name} | {locator.type} | {locator.description} | {locator.value}", IMAGE_STATUS_FAILED);
+                TestStopAsync();
+            }
+            return -1;
+        }
+
         public async Task ScrollToElementAsync(string by, string locator, bool behaviorSmooth = false)
         {
             if (DefineTestStop() == true) return;
@@ -3238,6 +3765,48 @@ namespace HatFrameworkDev
             catch (Exception ex)
             {
                 SendMessageDebug($"ScrollToElementAsync(\"{by}\", \"{locator}\", {behaviorSmooth})", $"ScrollToElementAsync(\"{by}\", \"{locator}\", {behaviorSmooth})", Tester.FAILED,
+                    "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(),
+                    "Error: " + ex.Message + Environment.NewLine + Environment.NewLine + "Full description of the error: " + ex.ToString(),
+                    Tester.IMAGE_STATUS_FAILED);
+                TestStopAsync();
+                ConsoleMsgError(ex.ToString());
+            }
+        }
+
+        public async Task ScrollToElementAsync(Locator locator, bool behaviorSmooth = false)
+        {
+            if (DefineTestStop() == true) return;
+
+            try
+            {
+                string script = "(function(){";
+                if (locator.type == BY_CSS)
+                {
+                    script += $"var element = document.querySelector(\"{locator.value}\");";
+                    if (behaviorSmooth == true) script += "element.scrollIntoView({behavior: 'smooth'}); return element;";
+                    else script += "element.scrollIntoView(); return element;";
+                }
+                else if (locator.type == BY_XPATH)
+                {
+                    script += $"var element = document.evaluate(\"{locator.value}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
+                    if (behaviorSmooth == true) script += "element.scrollIntoView({behavior: 'smooth'}); return element;";
+                    else script += "element.scrollIntoView(); return element;";
+                }
+                script += "}());";
+                if (await execute(script, $"ScrollToElementAsync(\"{locator.name}\", {behaviorSmooth})") == "null")
+                {
+                    SendMessageDebug($"ScrollToElementAsync(\"{locator.name}\", {behaviorSmooth})", $"ScrollToElementAsync(\"{locator.name}\", {behaviorSmooth})", Tester.FAILED, "Не удалось прокрутить к элементу", "Failed to fasten to the element", Tester.IMAGE_STATUS_FAILED);
+                    SendMessageDebug($"ScrollToElementAsync(\"{locator.name}\", {behaviorSmooth})", $"ScrollToElementAsync(\"{locator.name}\", {behaviorSmooth})", Tester.FAILED, $"ЛОКАТОР: {locator.name} | {locator.type} | {locator.description} | {locator.value}", $"LOCATOR: {locator.name} | {locator.type} | {locator.description} | {locator.value}", IMAGE_STATUS_FAILED);
+                    TestStopAsync();
+                }
+                else
+                {
+                    SendMessageDebug($"ScrollToElementAsync(\"{locator.name}\", {behaviorSmooth})", $"ScrollToElementAsync(\"{locator.name}\", {behaviorSmooth})", Tester.PASSED, "Выполнена прокрутка (scroll) к элементу", "Scrolled to the element - completed", Tester.IMAGE_STATUS_PASSED);
+                }
+            }
+            catch (Exception ex)
+            {
+                SendMessageDebug($"ScrollToElementAsync(\"{locator.name}\", {behaviorSmooth})", $"ScrollToElementAsync(\"{locator.name}\", {behaviorSmooth})", Tester.FAILED,
                     "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(),
                     "Error: " + ex.Message + Environment.NewLine + Environment.NewLine + "Full description of the error: " + ex.ToString(),
                     Tester.IMAGE_STATUS_FAILED);
@@ -3448,6 +4017,47 @@ namespace HatFrameworkDev
             return value;
         }
 
+        public async Task<string> GetAttributeFromElementAsync(Locator locator, string attribute)
+        {
+            if (DefineTestStop() == true) return "";
+
+            string value = "";
+            try
+            {
+                string script = "(function(){";
+                if (locator.type == BY_CSS) script += $"var element = document.querySelector(\"{locator.value}\");";
+                else if (locator.type == BY_XPATH) script += $"var element = document.evaluate(\"{locator.value}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
+                script += $"return element.getAttribute('{attribute}');";
+                script += "}());";
+                value = await execute(script, $"GetAttributeFromElementAsync(\"{locator.name}\", \"{attribute}\")");
+                if (value == "null" || value == null)
+                {
+                    SendMessageDebug($"GetAttributeFromElementAsync(\"{locator.name}\", \"{attribute}\")", $"GetAttributeFromElementAsync(\"{locator.name}\", \"{attribute}\")", Tester.FAILED, $"Не удалось найти или получить аттрибут из элемента по локатору: {locator.value}", $"Couldn't find or get attribute from element by locator: {locator.value}", Tester.IMAGE_STATUS_FAILED);
+                    SendMessageDebug($"GetAttributeFromElementAsync(\"{locator.name}\", \"{attribute}\")", $"GetAttributeFromElementAsync(\"{locator.name}\", \"{attribute}\")", Tester.FAILED, $"ЛОКАТОР: {locator.name} | {locator.type} | {locator.description} | {locator.value}", $"LOCATOR: {locator.name} | {locator.type} | {locator.description} | {locator.value}", IMAGE_STATUS_FAILED);
+                    TestStopAsync();
+                }
+                else
+                {
+                    if (value == "") SendMessageDebug($"GetAttributeFromElementAsync(\"{locator.name}\", \"{attribute}\")", $"GetAttributeFromElementAsync(\"{locator.name}\", \"{attribute}\")", COMPLETED, "Пустое значение из аттрибута", "Empty value from attribute", IMAGE_STATUS_WARNING);
+                    else if (value.Length > 1)
+                    {
+                        value = value.Substring(1, value.Length - 2);
+                        SendMessageDebug($"GetAttributeFromElementAsync(\"{locator.name}\", \"{attribute}\")", $"GetAttributeFromElementAsync(\"{locator.name}\", \"{attribute}\")", Tester.PASSED, $"Получено значение из аттрибута '{attribute}' | {value}", $"The value was obtained from the attribute '{attribute}' | {value}", Tester.IMAGE_STATUS_PASSED);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                SendMessageDebug($"GetAttributeFromElementAsync(\"{locator.name}\", \"{attribute}\")", $"GetAttributeFromElementAsync(\"{locator.name}\", \"{attribute}\")", Tester.FAILED,
+                    "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(),
+                    "Error: " + ex.Message + Environment.NewLine + Environment.NewLine + "Full description of the error: " + ex.ToString(),
+                    Tester.IMAGE_STATUS_FAILED);
+                TestStopAsync();
+                ConsoleMsgError(ex.ToString());
+            }
+            return value;
+        }
+
         public async Task<List<string>> GetAttributeFromElementsByClassAsync(string _class, string attribute)
         {
             if (DefineTestStop() == true) return null;
@@ -3642,6 +4252,70 @@ namespace HatFrameworkDev
             return Json_Array;
         }
 
+        public async Task<List<string>> GetAttributeFromElementsAsync(Locator locator, string attribute)
+        {
+            if (DefineTestStop() == true) return null;
+
+            string script = "(function(){";
+            if (locator.type == BY_CSS)
+            {
+                script += $"var element = document.querySelectorAll(\"{locator.value}\");";
+                script += "var json = '[';";
+                script += "var attr = '';";
+                script += "var count = element.length;";
+                script += "for (var i = 0; i < count; i++){";
+                script += $"attr = element[i].getAttribute('{attribute}');";
+                script += "json += '\"' + attr + '\",';";
+                script += "}";
+                script += "json = json.slice(0, -1);";
+                script += "json += ']';";
+                script += "return json;";
+            }
+            else if (locator.type == BY_XPATH)
+            {
+                script += $"var element = document.evaluate(\"{locator.value}\", document, null, XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);";
+                script += "var json = '[';";
+                script += "var attr = '';";
+                script += "var count = element.snapshotLength;";
+                script += "for (var i = 0; i < count; i++){";
+                script += $"attr = element.snapshotItem(i).getAttribute('{attribute}');";
+                script += "json += '\"' + attr + '\",';";
+                script += "}";
+                script += "json = json.slice(0, -1);";
+                script += "json += ']';";
+                script += "return json;";
+            }
+            script += "}());";
+            string result = await execute(script, $"GetAttributeFromElementsAsync(\"{locator.name}\", \"{attribute}\")");
+            List<string> Json_Array = null;
+            if (result != "null" && result != null)
+            {
+                try
+                {
+                    result = JsonConvert.DeserializeObject(result).ToString();
+                    Json_Array = JsonConvert.DeserializeObject<List<string>>(result);
+                    SendMessageDebug($"GetAttributeFromElementsAsync(\"{locator.name}\", \"{attribute}\")", $"GetAttributeFromElementsAsync(\"{locator.name}\", \"{attribute}\")", Tester.PASSED, $"Получен json {result} из аттрибутов {attribute}", $"Received json {result} from attributes {attribute}", IMAGE_STATUS_PASSED);
+                }
+                catch (Exception ex)
+                {
+                    SendMessageDebug($"GetAttributeFromElementsAsync(\"{locator.name}\", \"{attribute}\")", $"GetAttributeFromElementsAsync( \"{locator.name}\", \"{attribute}\")", Tester.FAILED,
+                        "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(),
+                        "Error: " + ex.Message + Environment.NewLine + Environment.NewLine + "Full description of the error: " + ex.ToString(),
+                        Tester.IMAGE_STATUS_FAILED);
+                    SendMessageDebug($"GetAttributeFromElementsAsync(\"{locator.name}\", {attribute})", $"GetAttributeFromElementsAsync(\"{locator.name}\", {attribute})", Tester.FAILED, $"ЛОКАТОР: {locator.name} | {locator.type} | {locator.description} | {locator.value}", $"LOCATOR: {locator.name} | {locator.type} | {locator.description} | {locator.value}", IMAGE_STATUS_FAILED);
+                    TestStopAsync();
+                    ConsoleMsgError(ex.ToString());
+                }
+            }
+            else
+            {
+                SendMessageDebug($"GetAttributeFromElementsAsync(\"{locator.name}\", \"{attribute}\")", $"GetAttributeFromElementsAsync(\"{locator.name}\", \"{attribute}\")", FAILED, $"Не удалось найти или получить аттрибуты из элементов по локатору: {locator.value}", $"Couldn't find or get attributes from elements by locator: {locator.value}", IMAGE_STATUS_FAILED);
+                SendMessageDebug($"GetAttributeFromElementsAsync(\"{locator.name}\", {attribute})", $"GetAttributeFromElementsAsync(\"{locator.name}\", {attribute})", Tester.FAILED, $"ЛОКАТОР: {locator.name} | {locator.type} | {locator.description} | {locator.value}", $"LOCATOR: {locator.name} | {locator.type} | {locator.description} | {locator.value}", IMAGE_STATUS_FAILED);
+                TestStopAsync();
+            }
+            return Json_Array;
+        }
+
         public async Task SetAttributeInElementByIdAsync(string id, string attribute, string value)
         {
             if (DefineTestStop() == true) return;
@@ -3740,6 +4414,28 @@ namespace HatFrameworkDev
             else
             {
                 SendMessageDebug($"SetAttributeInElementAsync(\"{by}\", \"{locator}\", \"{attribute}\", \"{value}\")", $"SetAttributeInElementAsync(\"{by}\", \"{locator}\", \"{attribute}\", \"{value}\")", Tester.PASSED, $"Аттрибут '{attribute}' со значением '{value}' добавлен в элемент", $"Attribute '{attribute}' with a value of '{value}' added to the element", Tester.IMAGE_STATUS_PASSED);
+            }
+        }
+
+        public async Task SetAttributeInElementAsync(Locator locator, string attribute, string value)
+        {
+            if (DefineTestStop() == true) return;
+
+            string script = "(function(){";
+            if (locator.type == BY_CSS) script += $"var element = document.querySelector(\"{locator.value}\");";
+            else if (locator.type == BY_XPATH) script += $"var element = document.evaluate(\"{locator.value}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
+            script += $"element.setAttribute('{attribute}', '{value}');";
+            script += $"return element.getAttribute('{attribute}');";
+            script += "}());";
+            if (await execute(script, $"SetAttributeInElementAsync(\"{locator.name}\", \"{attribute}\", \"{value}\")") == "null")
+            {
+                SendMessageDebug($"SetAttributeInElementAsync(\"{locator.name}\", \"{attribute}\", \"{value}\")", $"SetAttributeInElementAsync(\"{locator.name}\", \"{attribute}\", \"{value}\")", Tester.FAILED, $"Не удалось найти или ввести аттрибут в элемент по локатору: {locator.value}", $"Could not find or enter attribute in element by locator: {locator.value}", Tester.IMAGE_STATUS_FAILED);
+                SendMessageDebug($"SetAttributeInElementAsync(\"{locator.name}\", \"{attribute}\", \"{value}\")", $"SetAttributeInElementAsync(\"{locator.name}\", \"{attribute}\", \"{value}\")", Tester.FAILED, $"ЛОКАТОР: {locator.name} | {locator.type} | {locator.description} | {locator.value}", $"LOCATOR: {locator.name} | {locator.type} | {locator.description} | {locator.value}", IMAGE_STATUS_FAILED);
+                TestStopAsync();
+            }
+            else
+            {
+                SendMessageDebug($"SetAttributeInElementAsync(\"{locator.name}\", \"{attribute}\", \"{value}\")", $"SetAttributeInElementAsync(\"{locator.name}\", \"{attribute}\", \"{value}\")", Tester.PASSED, $"Аттрибут '{attribute}' со значением '{value}' добавлен в элемент", $"Attribute '{attribute}' with a value of '{value}' added to the element", Tester.IMAGE_STATUS_PASSED);
             }
         }
 
@@ -3947,6 +4643,72 @@ namespace HatFrameworkDev
             return Json_Array;
         }
 
+        public async Task<List<string>> SetAttributeInElementsAsync(Locator locator, string attribute, string value)
+        {
+            if (DefineTestStop() == true) return null;
+
+            string script = "(function(){";
+            if (locator.type == BY_CSS)
+            {
+                script += $"var element = document.querySelectorAll(\"{locator.value}\");";
+                script += "var json = '[';";
+                script += "var attr = '';";
+                script += "for (var i = 0; i < element.length; i++){";
+                script += $"element[i].setAttribute('{attribute}', '{value}');";
+                script += $"attr = element[i].getAttribute('{attribute}');";
+                script += "json += '\"' + attr + '\",';";
+                script += "}";
+                script += "json = json.slice(0, -1);";
+                script += "json += ']';";
+                script += "return json;";
+            }
+            else if (locator.type == BY_XPATH)
+            {
+                script += $"var element = document.evaluate(\"{locator.value}\", document, null, XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);";
+                script += "var json = '[';";
+                script += "var attr = '';";
+                script += "var count = element.snapshotLength;";
+                script += "for (var i = 0; i < count; i++){";
+                script += $"element.snapshotItem(i).setAttribute('{attribute}', '{value}');";
+                script += $"attr = element.snapshotItem(i).getAttribute('{attribute}');";
+                script += "json += '\"' + attr + '\",';";
+                script += "}";
+                script += "json = json.slice(0, -1);";
+                script += "json += ']';";
+                script += "return json;";
+            }
+            script += "}());";
+            string result = await execute(script, $"SetAttributeInElementsAsync(\"{locator.name}\", \"{attribute}\", \"{value}\")");
+            List<string> Json_Array = null;
+            if (result != "null" && result != null)
+            {
+                try
+                {
+                    result = JsonConvert.DeserializeObject(result).ToString();
+                    Json_Array = JsonConvert.DeserializeObject<List<string>>(result);
+                    SendMessageDebug($"SetAttributeInElementsAsync(\"{locator.name}\", \"{attribute}\", \"{value}\")", $"SetAttributeInElementsAsync(\"{locator.name}\", \"{attribute}\", \"{value}\")", Tester.PASSED, $"Аттрибут '{attribute}' со значением '{value}' - добавлен в элементы и получен json {result}", $"Attribute '{attribute}' with value '{value}' - added to the elements and received json {result}", IMAGE_STATUS_PASSED);
+                }
+                catch (Exception ex)
+                {
+                    SendMessageDebug($"SetAttributeInElementsAsync(\"{locator.name}\", \"{attribute}\", \"{value}\")", $"SetAttributeInElementsAsync(\"{locator.name}\", \"{attribute}\", \"{value}\")", Tester.FAILED,
+                        "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(),
+                        "Error: " + ex.Message + Environment.NewLine + Environment.NewLine + "Full description of the error: " + ex.ToString(),
+                        Tester.IMAGE_STATUS_FAILED);
+                    SendMessageDebug($"SetAttributeInElementsAsync(\"{locator.name}\", \"{attribute}\", \"{value}\")", $"SetAttributeInElementsAsync(\"{locator.name}\", \"{attribute}\", \"{value}\")", Tester.FAILED, $"ЛОКАТОР: {locator.name} | {locator.type} | {locator.description} | {locator.value}", $"LOCATOR: {locator.name} | {locator.type} | {locator.description} | {locator.value}", IMAGE_STATUS_FAILED);
+                    TestStopAsync();
+                    ConsoleMsgError(ex.ToString());
+                }
+            }
+            else
+            {
+                SendMessageDebug($"SetAttributeInElementsAsync(\"{locator.name}\", \"{attribute}\", \"{value}\")", $"SetAttributeInElementsAsync(\"{locator.name}\", \"{attribute}\", \"{value}\")", Tester.FAILED, $"Не удалось найти или добавить аттрибут в элементы по локатору: {locator.value}", $"Couldn't find or add attribute to elements by locator: {locator.value}", IMAGE_STATUS_FAILED);
+                SendMessageDebug($"SetAttributeInElementsAsync(\"{locator.name}\", \"{attribute}\", \"{value}\")", $"SetAttributeInElementsAsync(\"{locator.name}\", \"{attribute}\", \"{value}\")", Tester.FAILED, $"ЛОКАТОР: {locator.name} | {locator.type} | {locator.description} | {locator.value}", $"LOCATOR: {locator.name} | {locator.type} | {locator.description} | {locator.value}", IMAGE_STATUS_FAILED);
+                TestStopAsync();
+            }
+
+            return Json_Array;
+        }
+
         public async Task<string> GetHtmlFromElementByClassAsync(string _class, int index)
         {
             if (DefineTestStop() == true) return "";
@@ -3987,6 +4749,31 @@ namespace HatFrameworkDev
                 value = value.Replace("\\u003C", "<");
                 value = value.Replace("\\u003E", ">");
                 SendMessageDebug($"GetHtmlFromElementAsync(\"{by}\", \"{locator}\")", $"GetHtmlFromElementAsync(\"{by}\", \"{locator}\")", Tester.PASSED, "Получен html элемента", "The html of the element was received", Tester.IMAGE_STATUS_PASSED);
+            }
+            return value;
+        }
+
+        public async Task<string> GetHtmlFromElementAsync(Locator locator)
+        {
+            if (DefineTestStop() == true) return "";
+
+            string script = "(function(){";
+            if (locator.type == BY_CSS) script += $"var element = document.querySelector(\"{locator.value}\"); return element.outerHTML;";
+            else if (locator.type == BY_XPATH) script += $"var element = document.evaluate(\"{locator.value}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
+            script += "return element.outerHTML;";
+            script += "}());";
+            string value = await execute(script, $"GetHtmlFromElementAsync(\"{locator.name}\")");
+            if (value == "null" || value == null)
+            {
+                SendMessageDebug($"GetHtmlFromElementAsync(\"{locator.name}\")", $"GetHtmlFromElementAsync(\"{locator.name}\")", Tester.FAILED, $"Не удалось найти или получить html из элемента по локатору: {locator.value}", $"Couldn't find or get html from the element by locator: {locator.value}", Tester.IMAGE_STATUS_FAILED);
+                SendMessageDebug($"GetHtmlFromElementAsync(\"{locator.name}\")", $"GetHtmlFromElementAsync(\"{locator.name}\")", Tester.FAILED, $"ЛОКАТОР: {locator.name} | {locator.type} | {locator.description} | {locator.value}", $"LOCATOR: {locator.name} | {locator.type} | {locator.description} | {locator.value}", IMAGE_STATUS_FAILED);
+                TestStopAsync();
+            }
+            else
+            {
+                value = value.Replace("\\u003C", "<");
+                value = value.Replace("\\u003E", ">");
+                SendMessageDebug($"GetHtmlFromElementAsync(\"{locator.name}\")", $"GetHtmlFromElementAsync(\"{locator.name}\")", Tester.PASSED, "Получен html элемента", "The html of the element was received", Tester.IMAGE_STATUS_PASSED);
             }
             return value;
         }
@@ -4071,24 +4858,25 @@ namespace HatFrameworkDev
             }
         }
 
-        public async Task SetHtmlInElementAsync(string by, string locator, string html)
+        public async Task SetHtmlInElementAsync(Locator locator, string html)
         {
             if (DefineTestStop() == true) return;
 
             string script = "(function(){";
-            if (by == BY_CSS) script += $"var element = document.querySelector(\"{locator}\");";
-            else if (by == BY_XPATH) script += $"var element = document.evaluate(\"{locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
+            if (locator.type == BY_CSS) script += $"var element = document.querySelector(\"{locator.value}\");";
+            else if (locator.type == BY_XPATH) script += $"var element = document.evaluate(\"{locator.value}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
             script += $"element.innerHTML = '{html}';";
             script += $"return element.outerHTML;";
             script += "}());";
-            if (await execute(script, $"SetHtmlInElementAsync(\"{by}\", \"{locator}\", \"{html}\")") == "null")
+            if (await execute(script, $"SetHtmlInElementAsync(\"{locator.name}\", \"{html}\")") == "null")
             {
-                SendMessageDebug($"SetHtmlInElementAsync(\"{by}\", \"{locator}\", \"{html}\")", $"SetHtmlInElementAsync(\"{by}\", \"{locator}\", \"{html}\")", Tester.FAILED, $"Не удалось найти или ввести html в элемент по локатору: {locator}", $"Could not find or enter html into the element by locator: {locator}", Tester.IMAGE_STATUS_FAILED);
+                SendMessageDebug($"SetHtmlInElementAsync(\"{locator.name}\", \"{html}\")", $"SetHtmlInElementAsync(\"{locator.name}\", \"{html}\")", Tester.FAILED, $"Не удалось найти или ввести html в элемент по локатору: {locator.value}", $"Could not find or enter html into the element by locator: {locator.value}", Tester.IMAGE_STATUS_FAILED);
+                SendMessageDebug($"SetHtmlInElementAsync(\"{locator.name}\", \"{html}\")", $"SetHtmlInElementAsync(\"{locator.name}\", \"{html}\")", Tester.FAILED, $"ЛОКАТОР: {locator.name} | {locator.type} | {locator.description} | {locator.value}", $"LOCATOR: {locator.name} | {locator.type} | {locator.description} | {locator.value}", IMAGE_STATUS_FAILED);
                 TestStopAsync();
             }
             else
             {
-                SendMessageDebug($"SetHtmlInElementAsync(\"{by}\", \"{locator}\", \"{html}\")", $"SetHtmlInElementAsync(\"{by}\", \"{locator}\", \"{html}\")", Tester.PASSED, $"В элемент введен html {html}", $"Html {html} has been added to the element", Tester.IMAGE_STATUS_PASSED);
+                SendMessageDebug($"SetHtmlInElementAsync(\"{locator.name}\", \"{html}\")", $"SetHtmlInElementAsync(\"{locator.name}\", \"{html}\")", Tester.PASSED, $"В элемент введен html {html}", $"Html {html} has been added to the element", Tester.IMAGE_STATUS_PASSED);
             }
         }
 
@@ -4182,6 +4970,36 @@ namespace HatFrameworkDev
             return clickable;
         }
 
+        public async Task<bool> IsClickableElementAsync(Locator locator)
+        {
+            if (DefineTestStop() == true) return false;
+
+            bool clickable = false;
+            try
+            {
+                string script = "(function(){";
+                if (locator.type == BY_CSS) script += $"var element = document.querySelector(\"{locator.value}\");";
+                else if (locator.type == BY_XPATH) script += $"var element = document.evaluate(\"{locator.value}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
+                script += "if((element.getAttribute('onclick')!=null)||(element.getAttribute('href')!=null)) return true;";
+                script += "return false;";
+                script += "}());";
+                string result = await executeJS(script);
+                if (result != "null" && result != null && result == "true") clickable = true;
+                else clickable = false;
+                SendMessageDebug($"IsClickableElementAsync(\"{locator.name}\")", $"IsClickableElementAsync(\"{locator.name}\")", Tester.PASSED, $"Определена кликадельность элемента: {result}", $"The clickability of the element was determined: {result}", Tester.IMAGE_STATUS_PASSED);
+            }
+            catch (Exception ex)
+            {
+                SendMessageDebug($"IsClickableElementAsync(\"{locator.name}\")", $"IsClickableElementAsync(\"{locator.name}\")", Tester.FAILED,
+                        "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(),
+                        "Error: " + ex.Message + Environment.NewLine + Environment.NewLine + "Full description of the error: " + ex.ToString(),
+                        Tester.IMAGE_STATUS_FAILED);
+                SendMessageDebug($"IsClickableElementAsync(\"{locator.name}\")", $"IsClickableElementAsync(\"{locator.name}\")", Tester.FAILED, $"ЛОКАТОР: {locator.name} | {locator.type} | {locator.description} | {locator.value}", $"LOCATOR: {locator.name} | {locator.type} | {locator.description} | {locator.value}", IMAGE_STATUS_FAILED);
+                TestStopAsync();
+                ConsoleMsgError(ex.ToString());
+            }
+            return clickable;
+        }
 
 
 
@@ -4447,6 +5265,49 @@ namespace HatFrameworkDev
             return value;
         }
 
+        public async Task<string> GetStyleFromElementAsync(Locator locator, string property)
+        {
+            if (DefineTestStop() == true) return "";
+
+            string value = "";
+            try
+            {
+                string script = "(function(){";
+                if (locator.type == BY_CSS) script += "var element = document.querySelector(\"" + locator.value + "\"); ";
+                else if (locator.type == BY_XPATH) script += $"var element = document.evaluate(\"{locator.value}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue; ";
+                script += $"var style = window.getComputedStyle(element).getPropertyValue(\"{property}\"); ";
+                script += "return style; ";
+                script += "}());";
+                value = await execute(script, $"GetStyleFromElementAsync(\"{locator.name}\", \"{property}\")");
+                if (value == "null" || value == null)
+                {
+                    SendMessageDebug($"GetStyleFromElementAsync(\"{locator.name}\", \"{property}\")", $"GetStyleFromElementAsync(\"{locator.name}\")", Tester.FAILED, $"Не удалось прочитать стиль '{property}' из элемента по локатору: {locator.value}", $"Could not read the style '{property}' from the element by the locator: {locator.value}", Tester.IMAGE_STATUS_FAILED);
+                    SendMessageDebug($"GetStyleFromElementAsync(\"{locator.name}\", \"{property}\")", $"GetStyleFromElementAsync(\"{locator.name}\", \"{property}\")", Tester.FAILED, $"ЛОКАТОР: {locator.name} | {locator.type} | {locator.description} | {locator.value}", $"LOCATOR: {locator.name} | {locator.type} | {locator.description} | {locator.value}", IMAGE_STATUS_FAILED);
+                    TestStopAsync();
+                }
+                else
+                {
+                    if (value == "") SendMessageDebug($"GetStyleFromElementAsync(\"{locator.name}\", \"{property}\")", $"GetStyleFromElementAsync(\"{locator.name}\")", COMPLETED, "Пустое значение стиля из элемента", "Empty style value from the element", IMAGE_STATUS_WARNING);
+                    else if (value.Length > 1)
+                    {
+                        value = value.Substring(1, value.Length - 2);
+                        SendMessageDebug($"GetStyleFromElementAsync(\"{locator.name}\", \"{property}\")", $"GetStyleFromElementAsync(\"{locator.name}\")", Tester.PASSED, "Стиль из элемента прочитан | " + value, "Style from the read element | " + value, Tester.IMAGE_STATUS_PASSED);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                SendMessageDebug($"GetStyleFromElementAsync(\"{locator.name}\", \"{property}\")", $"GetStyleFromElementAsync(\"{locator.name}\")", Tester.FAILED,
+                    "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(),
+                    "Error: " + ex.Message + Environment.NewLine + Environment.NewLine + "Full description of the error: " + ex.ToString(),
+                    Tester.IMAGE_STATUS_FAILED);
+                TestStopAsync();
+                ConsoleMsgError(ex.ToString());
+            }
+
+            return value;
+        }
+
         public async Task<string> GetStyleFromElementByIdAsync(string id, string property)
         {
             if (DefineTestStop() == true) return "";
@@ -4625,6 +5486,28 @@ namespace HatFrameworkDev
             else
             {
                 SendMessageDebug($"SetStyleInElementAsync(\"{by}\", \"{locator}\", \"{cssText}\")", $"SetStyleInElementAsync(\"{by}\", \"{locator}\", \"{cssText}\")", PASSED, $"Стиль {cssText} введен в элемент", $"The style {cssText} is entered in the element", IMAGE_STATUS_PASSED);
+            }
+        }
+
+        public async Task SetStyleInElementAsync(Locator locator, string cssText)
+        {
+            if (DefineTestStop() == true) return;
+
+            string script = "(function(){";
+            if (locator.type == BY_CSS) script += $"var element = document.querySelector(\"{locator.value}\");";
+            else if (locator.type == BY_XPATH) script += $"var element = document.evaluate(\"{locator.value}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
+            script += $"element.style.cssText = '{cssText}';";
+            script += "return element;";
+            script += "}());";
+            if (await execute(script, $"SetStyleInElementAsync(\"{locator.name}\", \"{cssText}\")") == "null")
+            {
+                SendMessageDebug($"SetStyleInElementAsync(\"{locator.name}\", \"{cssText}\")", $"SetStyleInElementAsync(\"{locator.name}\", \"{cssText}\")", Tester.FAILED, $"Не удалось найти или ввести стиль в элемент по локатору: {locator.name}", $"Could not find or enter style in the element by locator: {locator.name}", Tester.IMAGE_STATUS_FAILED);
+                SendMessageDebug($"SetStyleInElementAsync(\"{locator.name}\", \"{cssText}\")", $"SetStyleInElementAsync(\"{locator.name}\", \"{cssText}\")", Tester.FAILED, $"ЛОКАТОР: {locator.name} | {locator.type} | {locator.description} | {locator.value}", $"LOCATOR: {locator.name} | {locator.type} | {locator.description} | {locator.value}", IMAGE_STATUS_FAILED);
+                TestStopAsync();
+            }
+            else
+            {
+                SendMessageDebug($"SetStyleInElementAsync(\"{locator.name}\", \"{cssText}\")", $"SetStyleInElementAsync(\"{locator.name}\", \"{cssText}\")", PASSED, $"Стиль {cssText} введен в элемент", $"The style {cssText} is entered in the element", IMAGE_STATUS_PASSED);
             }
         }
 
@@ -5156,7 +6039,145 @@ namespace HatFrameworkDev
             }
         }
 
+        public async Task MakeElementVisibleAsync(Locator locator, string visibility = "visible", int opacity = 1, int index = 1000)
+        {
+            if (DefineTestStop() == true) return;
 
+            string cssText = $"visibility: {visibility}; opacity: {opacity}; index: {index};";
+            string script = "(function(){";
+            if (locator.type == BY_CSS) script += $"var element = document.querySelector(\"{locator.value}\");";
+            else if (locator.type == BY_XPATH) script += $"var element = document.evaluate(\"{locator.value}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
+            script += $"element.style.cssText = '{cssText}';";
+            script += "return element;";
+            script += "}());";
+            if (await execute(script, $"MakeElementVisible(\"{locator.name}\", \"{cssText}\")") == "null")
+            {
+                SendMessageDebug($"MakeElementVisible(\"{locator.name}\", \"{cssText}\")", $"MakeElementVisible(\"{locator.name}\", \"{cssText}\")", Tester.FAILED, $"Не удалось найти или ввести стиль в элемент по локатору: {locator.value}", $"Could not find or enter style in the element by locator: {locator.value}", Tester.IMAGE_STATUS_FAILED);
+                SendMessageDebug($"MakeElementVisible(\"{locator.name}\", \"{cssText}\")", $"MakeElementVisible(\"{locator.name}\", \"{cssText}\")", Tester.FAILED, $"ЛОКАТОР: {locator.name} | {locator.type} | {locator.description} | {locator.value}", $"LOCATOR: {locator.name} | {locator.type} | {locator.description} | {locator.value}", IMAGE_STATUS_FAILED);
+                TestStopAsync();
+            }
+            else
+            {
+                SendMessageDebug($"MakeElementVisible(\"{locator.name}\", \"{cssText}\")", $"MakeElementVisible(\"{locator.name}\", \"{cssText}\")", Tester.PASSED, $"Стиль {cssText} введен в элемент", $"The style {cssText} is entered in the element", Tester.IMAGE_STATUS_PASSED);
+            }
+        }
+
+        /* Методы для работы с массивом локаторов */
+
+        public void AddLocator(string name, string type, string value, string description)
+        {
+            if (DefineTestStop() == true) return;
+
+            try
+            {
+                if (locators == null) locators = new Dictionary<string, Locator>();
+                Locator locator = new Locator();
+                locator.name = name;
+                locator.type = type;
+                locator.value = value;
+                locator.description = description;
+                locators.Add(name, locator);
+                SendMessageDebug("Локаторы", "Locators", Tester.COMPLETED, $"Добавлен локатор: {name}", $"Added a locator: {name}", Tester.IMAGE_STATUS_MESSAGE);
+            }
+            catch (Exception ex)
+            {
+                SendMessageDebug($"AddLocator(\"{name}\", \"{type}\", \"{value}\", \"{description}\")", $"AddLocator(\"{name}\", \"{type}\", \"{value}\", \"{description}\")", Tester.FAILED, $"Произошла ошибка: {ex.Message}", $"An error has occurred: {ex.Message}", Tester.IMAGE_STATUS_FAILED);
+                TestStopAsync();
+            }
+        }
+
+        public Locator GetLocator(string name)
+        {
+            try
+            {
+                if (locators != null)
+                {
+                    SendMessageDebug($"Локатор [имя / описание]: {locators[name].name}", $"Locator [name / description]: {locators[name].name}", Tester.COMPLETED, locators[name].description, locators[name].description, Tester.IMAGE_STATUS_MESSAGE);
+                    SendMessageDebug($"Локатор [тип / значение]: {locators[name].type}", $"Locator [type / value]: {locators[name].type}", Tester.COMPLETED, locators[name].value, locators[name].value, Tester.IMAGE_STATUS_MESSAGE);
+                    return locators[name];
+                }
+            }
+            catch (Exception ex)
+            {
+                SendMessageDebug($"GetLocator(\"{name}\")", $"GetLocator(\"{name}\")", Tester.FAILED, $"Произошла ошибка: {ex.Message}", $"An error has occurred: {ex.Message}", Tester.IMAGE_STATUS_FAILED);
+                TestStopAsync();
+            }
+            return null;
+        }
+
+        public string GetLocatorValue(string name)
+        {
+            try
+            {
+                if (locators != null)
+                {
+                    SendMessageDebug($"Локатор [имя / описание]: {locators[name].name}", $"Locator [name / description]: {locators[name].name}", Tester.COMPLETED, locators[name].description, locators[name].description, Tester.IMAGE_STATUS_MESSAGE);
+                    SendMessageDebug($"Локатор [тип / значение]: {locators[name].type}", $"Locator [type / value]: {locators[name].type}", Tester.COMPLETED, locators[name].value, locators[name].value, Tester.IMAGE_STATUS_MESSAGE);
+                    return locators[name].value;
+                }
+            }
+            catch (Exception ex)
+            {
+                SendMessageDebug($"GetLocatorValue(\"{name}\")", $"GetLocatorValue(\"{name}\")", Tester.FAILED, $"Произошла ошибка: {ex.Message}", $"An error has occurred: {ex.Message}", Tester.IMAGE_STATUS_FAILED);
+                TestStopAsync();
+            }
+            return null;
+        }
+
+        public int GetCountLocators()
+        {
+            try
+            {
+                if (locators != null)
+                {
+                    SendMessageDebug("Локаторы", "Locators", Tester.COMPLETED, $"Количество локаторов: {locators.Count()}", $"Number of locators: {locators.Count()}", Tester.IMAGE_STATUS_MESSAGE);
+                    return locators.Count();
+                }
+            }
+            catch (Exception ex)
+            {
+                SendMessageDebug($"GetCountLocators()", $"GetCountLocators()", Tester.FAILED, $"Произошла ошибка: {ex.Message}", $"An error has occurred: {ex.Message}", Tester.IMAGE_STATUS_FAILED);
+                TestStopAsync();
+            }
+            return -1;
+        }
+
+        public void ClearLocators()
+        {
+            try
+            {
+                if (locators != null)
+                {
+                    locators.Clear();
+                    SendMessageDebug("Очистка локаторов", "Clearing locators", Tester.COMPLETED, $"Количество локаторов: {locators.Count()}", $"Number of locators: {locators.Count()}", Tester.IMAGE_STATUS_MESSAGE);
+                }
+            }
+            catch (Exception ex)
+            {
+                SendMessageDebug($"ClearLocators()", $"ClearLocators()", Tester.FAILED, $"Произошла ошибка: {ex.Message}", $"An error has occurred: {ex.Message}", Tester.IMAGE_STATUS_FAILED);
+                TestStopAsync();
+            }
+        }
+
+        public bool RemoveLocator(string name)
+        {
+            bool result = false;
+            try
+            {
+                if (locators != null)
+                {
+                    result = locators.Remove(name);
+                    if (result) SendMessageDebug("Локаторы", "Locators", Tester.COMPLETED, $"Удален локатор: {name}", $"The locator named '{name}' has been removed", Tester.IMAGE_STATUS_MESSAGE);
+                    else SendMessageDebug("Локаторы", "Locators", Tester.FAILED, $"Неудалось удалить локатор: {name}", $"Couldn't delete the locator named '{name}'", Tester.IMAGE_STATUS_FAILED);
+                }
+            }
+            catch (Exception ex)
+            {
+                SendMessageDebug($"ClearLocators()", $"ClearLocators()", Tester.FAILED, $"Произошла ошибка: {ex.Message}", $"An error has occurred: {ex.Message}", Tester.IMAGE_STATUS_FAILED);
+                TestStopAsync();
+            }
+            return result;
+        }
 
     }
 }

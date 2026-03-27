@@ -1,3 +1,47 @@
+Обновление браузера Hat 1.5.0 (27.03.2026)
+
+Список внесённых изменений:
+
+- Обновлен плагин WebView 2 до версии 1.0.3856.49
+- Проверка переполненности журнала вывода
+- Обновлена документация
+- Добавлено хранилище локаторов и отдельный класс Locator
+- Добавлены методы для работы с хранилищем локаторов
+	AddLocator
+	GetLocator
+	GetLocatorValue
+	GetCountLocators
+	ClearLocators
+	RemoveLocator
+- Добавлена поддержка новой системы хранения локаторов в существующих методах
+	GetAttributeFromElementAsync
+	GetAttributeFromElementsAsync
+	SetAttributeInElementAsync
+	SetAttributeInElementsAsync
+	GetValueFromElementAsync
+	SetValueInElementAsync
+	ClickElementAsync
+	IsClickableElementAsync
+	ScrollToElementAsync
+	GetElementAsync
+	GetCountElementsAsync
+	GetHtmlFromElementAsync
+	IsVisibleElementAsync
+	MakeElementVisibleAsync
+	SetHtmlInElementAsync
+	WaitElementInDomAsync
+	WaitElementNotDomAsync
+	WaitNotVisibleElementAsync
+	WaitVisibleElementAsync
+	FindElementAsync
+	FindVisibleElementAsync
+	GetStyleFromElementAsync
+	SetStyleInElementAsync
+	GetTextFromElementAsync
+	SetTextInElementAsync
+
+-----------------------------
+
 Обновление браузера Hat 1.4.19 (25.02.2026)
 
 Список внесённых изменений:
