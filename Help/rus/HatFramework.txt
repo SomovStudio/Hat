@@ -1,5 +1,5 @@
 
-Встроенный фреймворк HatFramework версия 1.5.0.2
+Встроенный фреймворк HatFramework версия 1.5.0.3
 
 
 Класс: Tester
@@ -247,6 +247,16 @@ Hat
 Пример:
 tester.AddLocator("inputLogin", Tester.BY_XPATH, "//input[@id='login']", "Поле для ввода
 логина");
+
+
+
+GetLocators
+GetLocators
+Описание: метод возвращает хранилища локаторов
+Синтаксис: GetLocators()
+Возвращаемое значение: Dictionary<string, Locator>
+Пример:
+Dictionary<string, Locator> locators = tester.GetLocators();
 
 
 
