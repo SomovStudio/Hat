@@ -3482,7 +3482,18 @@ locator.value = ""//input[@id='login']"";\f0\lang1033\par
 \fs20 bool result = tester.RemoveLocator(""inputLogin"");\par
 }",
 
-@"",
+@"{\rtf1\ansi\ansicpg1252\deff0\nouicompat{\fonttbl{\f0\fswiss\fcharset0 Calibri;}{\f1\fswiss\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\nowidctlpar\sl276\slmult1\cf1\f0\fs20\lang9 GetLocators\cf0\fs24\lang1033\par
+\cf2\f1\fs20\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2 \'f5\'f0\'e0\'ed\'e8\'eb\'e8\'f9\'e0 \'eb\'ee\'ea\'e0\'f2\'ee\'f0\'ee\'e2\f0\fs24\lang1033\par
+\cf2\f1\fs20\lang1049\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \f0\lang1033 GetLocators()\fs24\par
+\cf2\f1\fs20\lang1049\'c2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'ec\'ee\'e5 \'e7\'ed\'e0\'f7\'e5\'ed\'e8\'e5\cf0 : Dictionary<string, Locator>\par
+\f0\fs24\lang1033\par
+\cf2\f1\fs20\lang1049\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\cf0\f0\fs24\lang1033\par
+\fs20 Dictionary<string, Locator> locators = tester.GetLocators();\par
+}",
+
 @"",
 @"",
 @"",
@@ -6962,8 +6973,24 @@ locator.value = ""//input[@id='login']"";\fs24\par
 \pard\sl276\slmult1\f1\fs20\par
 }",
 
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fswiss\fcharset0 Calibri;}{\f1\fnil\fcharset0 Calibri;}{\f2\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 GetLocators\cf0\f1\par
+\cf2\f2\lang1049 Description\cf0 : \f1\lang1033 the method returns the repositories of locators\f2\lang1049\par
 
-@"",
+\pard\nowidctlpar\sl276\slmult1\cf2 Syntax\cf0 : \f0\lang1033 GetLocators()\fs24\par
+
+\pard\sl276\slmult1\cf2\f2\fs20\lang1049 Return value\cf0 : Dictionary<string, Locator>\cf3\par
+\par
+\cf2 Example\cf3 :\par
+
+\pard\nowidctlpar\sl276\slmult1\cf0\f0\lang1033 Dictionary<string, Locator> locators = tester.GetLocators();\fs24\par
+
+\pard\sl276\slmult1\f1\fs20\par
+}",
+
+
 @"",
 @"",
 @"",
@@ -7357,6 +7384,7 @@ locator.value = ""//input[@id='login']"";\fs24\par
             data.Add(new CompletionData("GetHtmlFromElementByTagAsync", "GetHtmlFromElementByTagAsync(string tag, int index)"));
             data.Add(new CompletionData("GetListRedirectUrlAsync", "GetListRedirectUrlAsync()"));
             data.Add(new CompletionData("GetLocator", "GetLocator(string name)"));
+            data.Add(new CompletionData("GetLocators", "GetLocators()"));
             data.Add(new CompletionData("GetLocatorValue", "GetLocatorValue(string name)"));
             data.Add(new CompletionData("GetOptionAsync", "GetOptionAsync(string by)"));
             data.Add(new CompletionData("GetStyleAsync", "GetStyleAsync(string property)"));
@@ -8090,7 +8118,7 @@ locator.value = ""//input[@id='login']"";\fs24\par
                         if (value == "GetCountLocators" && tag == "Tester") richTextBox1.Rtf = handbookRus[253];
                         if (value == "ClearLocators" && tag == "Tester") richTextBox1.Rtf = handbookRus[254];
                         if (value == "RemoveLocator" && tag == "Tester") richTextBox1.Rtf = handbookRus[255];
-
+                        if (value == "GetLocators" && tag == "Tester") richTextBox1.Rtf = handbookRus[256];
                     }
                     else
                     {
@@ -8350,11 +8378,10 @@ locator.value = ""//input[@id='login']"";\fs24\par
                         if (value == "GetCountLocators" && tag == "Tester") richTextBox1.Rtf = handbookEng[253];
                         if (value == "ClearLocators" && tag == "Tester") richTextBox1.Rtf = handbookEng[254];
                         if (value == "RemoveLocator" && tag == "Tester") richTextBox1.Rtf = handbookEng[255];
-
+                        if (value == "GetLocators" && tag == "Tester") richTextBox1.Rtf = handbookEng[256];
                     }
 
                     /*
-                    if (value == "" && tag == "") richTextBox1.Rtf = handbookRus[256];
                     if (value == "" && tag == "") richTextBox1.Rtf = handbookRus[257];
                     if (value == "" && tag == "") richTextBox1.Rtf = handbookRus[258];
                     if (value == "" && tag == "") richTextBox1.Rtf = handbookRus[259];

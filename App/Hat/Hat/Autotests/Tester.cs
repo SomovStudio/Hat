@@ -19,7 +19,7 @@ using System.Runtime.Remoting.Contexts;
 using System.Security.AccessControl;
 
 /**
- * Текущая версия 1.5.0.2
+ * Текущая версия 1.5.0.3
  */
 
 namespace HatFrameworkDev
@@ -6084,6 +6084,23 @@ namespace HatFrameworkDev
                 SendMessageDebug($"AddLocator(\"{name}\", \"{type}\", \"{value}\", \"{description}\")", $"AddLocator(\"{name}\", \"{type}\", \"{value}\", \"{description}\")", Tester.FAILED, $"Произошла ошибка: {ex.Message}", $"An error has occurred: {ex.Message}", Tester.IMAGE_STATUS_FAILED);
                 TestStopAsync();
             }
+        }
+
+        public Dictionary<string, Locator> GetLocators()
+        {
+            if (DefineTestStop() == true) return null;
+
+            try
+            {
+                SendMessageDebug("Локаторы", "Locators", Tester.COMPLETED, $"Получено хранилище локаторов", $"Storage of locators has been received", Tester.IMAGE_STATUS_MESSAGE);
+                return locators;
+            }
+            catch (Exception ex)
+            {
+                SendMessageDebug($"GetLocators()", $"GetLocators()", Tester.FAILED, $"Произошла ошибка: {ex.Message}", $"An error has occurred: {ex.Message}", Tester.IMAGE_STATUS_FAILED);
+                TestStopAsync();
+            }
+            return null;
         }
 
         public Locator GetLocator(string name)
