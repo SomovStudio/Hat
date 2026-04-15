@@ -7,7 +7,7 @@ using HatFramework;
 using Newtonsoft.Json;
 
 /**
- * Текущая версия 1.4.19
+ * Текущая версия 1.5.1.3
  */
 
 namespace HatFrameworkDev

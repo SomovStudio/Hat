@@ -591,6 +591,11 @@ namespace Hat
             return Config.selectName; // Возвращает имя автотеста
         }
 
+        public string GetProjectPath()
+        {
+            return Config.projectPath; // Возвращает путь к проекту
+        }
+
         public bool GetlanguageEngConsole()
         {
             return Config.languageEngConsole; // Возвращает выбранный язык вывода в командной строке

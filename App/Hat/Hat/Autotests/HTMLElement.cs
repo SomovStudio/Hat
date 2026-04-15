@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 /**
- * Текущая версия 1.4.19
+ * Текущая версия 1.5.1.3
  */
 
 namespace HatFrameworkDev
@@ -814,25 +814,56 @@ namespace HatFrameworkDev
             }
         }
 
-        public async Task MakeVisibleAsync(string by, string locator, string visibility = "visible", int opacity = 1, int index = 1000)
+        public async Task MakeVisibleAsync(string visibility = "visible", int opacity = 1, int index = 1000)
         {
             if (_tester.DefineTestStop() == true) return;
 
             string cssText = $"visibility: {visibility}; opacity: {opacity}; index: {index};";
             string script = "(function(){";
-            if (_by == Tester.BY_CSS) script += $"var element = document.querySelector(\"{locator}\");";
-            else if (_by == Tester.BY_XPATH) script += $"var element = document.evaluate(\"{locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
+            if (_by == Tester.BY_CSS) script += $"var element = document.querySelector(\"{_locator}\");";
+            else if (_by == Tester.BY_XPATH) script += $"var element = document.evaluate(\"{_locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
             script += $"element.style.cssText = '{cssText}';";
             script += "return element;";
             script += "}());";
-            if (await execute(script, $"MakeVisibleAsync(\"{by}\", \"{locator}\", \"{cssText}\")") == "null")
+            if (await execute(script, $"MakeVisibleAsync({cssText})") == "null")
             {
-                _tester.SendMessageDebug($"MakeVisibleAsync(\"{by}\", \"{locator}\", \"{cssText}\")", $"MakeVisibleAsync(\"{by}\", \"{locator}\", \"{cssText}\")", Tester.FAILED, $"Не удалось найти или ввести стиль в элемент по локатору: {locator}", $"Could not find or enter style in the element by locator: {locator}", Tester.IMAGE_STATUS_FAILED);
+                _tester.SendMessageDebug($"MakeVisibleAsync({cssText})", $"MakeVisibleAsync( {cssText} )", Tester.FAILED, $"Не удалось найти или ввести стиль в элемент", $"Could not find or enter style in the element", Tester.IMAGE_STATUS_FAILED);
                 _tester.TestStopAsync();
             }
             else
             {
-                _tester.SendMessageDebug($"MakeVisibleAsync(\"{by}\", \"{locator}\", \"{cssText}\")", $"MakeVisibleAsync(\"{by}\", \"{locator}\", \"{cssText}\")", Tester.PASSED, $"Стиль {cssText} введен в элемент", $"The style {cssText} is entered in the element", Tester.IMAGE_STATUS_PASSED);
+                _tester.SendMessageDebug($"MakeVisibleAsync({cssText})", $"MakeVisibleAsync( {cssText} )", Tester.PASSED, $"Стиль {cssText} введен в элемент", $"The style {cssText} is entered in the element", Tester.IMAGE_STATUS_PASSED);
+            }
+        }
+
+        public async Task FocusAsync()
+        {
+            if (_tester.DefineTestStop() == true) return;
+
+            string script = "(function(){";
+            if (_by == Tester.BY_CSS) script += $"var element = document.querySelector(\"{_locator}\");";
+            else if (_by == Tester.BY_XPATH) script += $"var element = document.evaluate(\"{_locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
+            script += "element.focus();";
+            script += "element.dispatchEvent(new Event('focus', { bubbles: true, cancelable: true }));";
+            script += "element.dispatchEvent(new Event('focusin', { bubbles: true, cancelable: true }));";
+            script += "element.dispatchEvent(new Event('click', { bubbles: true, cancelable: true }));";
+            script += "element.dispatchEvent(new Event('mousedown', { bubbles: true, cancelable: true }));";
+            script += "element.dispatchEvent(new Event('mouseup', { bubbles: true, cancelable: true }));";
+            script += "element.dispatchEvent(new Event('input', { bubbles: true, cancelable: true }));";
+            script += "element.dispatchEvent(new Event('change', { bubbles: true, cancelable: true }));";
+            script += "element.dispatchEvent(new Event('keydown', { bubbles: true, cancelable: true }));";
+            script += "var inputEvent = new InputEvent('input', { bubbles: true, cancelable: true, inputType: 'insertText', data: ' ' });";
+            script += "element.dispatchEvent(inputEvent);";
+            script += "return element;";
+            script += "}());";
+            if (await execute(script, $"FocusAsync()") == "null")
+            {
+                _tester.SendMessageDebug($"FocusAsync()", $"FocusAsync()", Tester.FAILED, $"Не удалось найти элемент", $"Could not find the element", Tester.IMAGE_STATUS_FAILED);
+                _tester.TestStopAsync();
+            }
+            else
+            {
+                _tester.SendMessageDebug($"FocusAsync()", $"FocusAsync()", Tester.PASSED, "Элемент получил фокус", "The element has received focus", Tester.IMAGE_STATUS_PASSED);
             }
         }
 

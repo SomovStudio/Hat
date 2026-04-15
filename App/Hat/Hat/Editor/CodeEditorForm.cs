@@ -2743,16 +2743,19 @@ tester.ConsoleMsg(locator);\cf2\f1\lang1049\par
 \cf0\f0\lang1033 await element.ClickMouseAsync();\par
 }",
 
-@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
-{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+@"{\rtf1\ansi\ansicpg1252\deff0\nouicompat{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;\red0\green0\blue255;}
 {\*\generator Riched20 10.0.19041}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 RestGetStatusCodeAsync\cf0\par
 \cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'fb\'ef\'ee\'eb\'ed\'ff\'e5\'f2 Get Rest \'e7\'e0\'ef\'f0\'ee\'f1 \'e8 \'e2 \'f0\'e5\'e7\'f3\'eb\'fc\'f2\'e0\'f2\'e5 \'ef\'ee\'eb\'f3\'f7\'e0\'e5\'f2 \'ea\'ee\'e4 \'f1\'f2\'e0\'f2\'f3\'f1\'e0\par
-\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \f0\lang1033 RestGetStatusCodeAsync(string url)\f1\lang1049\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \par
+\f0\lang1033 RestGetStatusCodeAsync(string url)\par
+RestGetStatusCodeAsync(string login, string pass, string url)\f1\lang1049\par
+\cf2\'c2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'ec\'ee\'e5 \'e7\'ed\'e0\'f7\'e5\'ed\'e8\'e5\cf0 : \'f6\'e5\'eb\'ee\'e5 \'f7\'e8\'f1\'eb\'ee (int)\par
 \cf3\par
 \cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
-\cf0\f0\lang1033 int statusCode = await tester.RestGetAsync(""https://jsonplaceholder.typicode.com"");\par
-tester.ConsoleMsg(statusCode.ToString());\par
+\cf0\f0\lang1033 int statusCode = await tester.RestGetAsync(""{{\field{\*\fldinst{HYPERLINK https://jsonplaceholder.typicode.com }}{\fldrslt{https://jsonplaceholder.typicode.com\ul0\cf0}}}}\f0\fs20 "");\par
+tester.ConsoleMsg(statusCode.ToString());\fs22\par
 }",
 
 @"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
@@ -3494,6 +3497,59 @@ locator.value = ""//input[@id='login']"";\f0\lang1033\par
 \fs20 Dictionary<string, Locator> locators = tester.GetLocators();\par
 }",
 
+@"{\rtf1\ansi\ansicpg1252\deff0\nouicompat{\fonttbl{\f0\fswiss\fcharset0 Calibri;}{\f1\fswiss\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\nowidctlpar\sl276\slmult1\cf1\f0\fs20\lang9 FocusElementAsync\cf0\fs24\lang1033\par
+\cf2\f1\fs20\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'ef\'e5\'f0\'e5\'ea\'eb\'fe\'f7\'e0\'e5\'f2 \'f4\'ee\'ea\'f3\'f1 \'ed\'e0 \'f3\'ea\'e0\'e7\'e0\'ed\'ed\'fb\'e9 \'fd\'eb\'e5\'ec\'e5\'ed\'f2\f0\fs24\lang1033\par
+\cf2\f1\fs20\lang1049\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \par
+\f0\lang1033 FocusElementAsync(string by, string locator)\par
+FocusElementAsync(Locator locator)\fs24\par
+\cf2\f1\fs20\lang1049\'c2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'ec\'ee\'e5 \'e7\'ed\'e0\'f7\'e5\'ed\'e8\'e5\cf0 : \'ee\'f2\'f1\'f3\'f2\'f1\'f2\'e2\'f3\'e5\'f2\par
+\f0\fs24\lang1033\par
+\cf2\f1\fs20\lang1049\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\cf0\f0\fs24\lang1033\par
+\fs20 await tester.FocusElementAsync(Tester.BY_CSS, ""input[id='login']"");\par
+await tester.SetValueInElementAsync(Tester.BY_CSS, ""input[id='login']"", ""admin"");\par
+\par
+await tester.FocusElementAsync(Tester.BY_XPATH, ""//input[@id='login']"");\par
+await tester.SetValueInElementAsync(Tester.BY_XPATH, ""//input[@id='login']"", ""admin"");\par
+\par
+await tester.FocusElementAsync(tester.GetLocatorValue(""locatorName""));\par
+await tester.SetValueInElementAsync(tester.GetLocator(""locatorName""), ""admin"");\par
+}",
+
+@"{\rtf1\ansi\ansicpg1252\deff0\nouicompat{\fonttbl{\f0\fswiss\fcharset0 Calibri;}{\f1\fswiss\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\nowidctlpar\sl276\slmult1\cf1\f0\fs20\lang9 FocusAsync\cf0\fs24\lang1033\par
+\cf2\f1\fs20\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'ef\'e5\'f0\'e5\'ea\'eb\'fe\'f7\'e0\'e5\'f2 \'f4\'ee\'ea\'f3\'f1 \'ed\'e0 \'fd\'eb\'e5\'ec\'e5\'ed\'f2\f0\fs24\lang1033\par
+\cf2\f1\fs20\lang1049\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \f0\lang1033 FocusAsync()\fs24\par
+\cf2\f1\fs20\lang1049\'c2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'ec\'ee\'e5 \'e7\'ed\'e0\'f7\'e5\'ed\'e8\'e5\cf0 : \'ee\'f2\'f1\'f3\'f2\'f1\'f2\'e2\'f3\'e5\'f2\par
+\f0\fs24\lang1033\par
+\cf2\f1\fs20\lang1049\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\cf0\f0\fs24\lang1033\par
+\fs20 await element.FocusAsync();\par
+}",
+
+@"{\rtf1\ansi\ansicpg1252\deff0\nouicompat{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 GetProjectPath\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'e2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'f2 \'ef\'f3\'f2\'fc \'ea \'ef\'e0\'ef\'ea\'e5 \'ef\'f0\'ee\'e5\'ea\'f2\'e0\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \f0\lang1033 GetProjectPath()\par
+\cf2\f1\lang1049\'c2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'ec\'ee\'e5 \'e7\'ed\'e0\'f7\'e5\'ed\'e8\'e5\cf0 : \'f1\'f2\'f0\'ee\'ea\'e0 (string)\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+\cf0\f0\lang1033 string path = tester.GetProjectPath();\par
+tester.ConsoleMsg(path);\par
+}",
+
+@"",
+@"",
+@"",
+@"",
+@"",
+@"",
+@"",
 @"",
 @"",
 @"",
@@ -6202,7 +6258,10 @@ tester.ConsoleMsg(locator);\cf2\f1\lang1049\par
 {\*\generator Riched20 10.0.19041}\viewkind4\uc1 
 \pard\sl276\slmult1\cf1\f0\fs20\lang9 RestGetStatusCodeAsync\cf0\par
 \cf2\f1\lang1049 Description\cf0 : the method executes a Get Rest request and as a result receives a status code\par
-\cf2 Syntax\cf0 : \f0\lang1033 RestGetStatusCodeAsync(string url)\f1\lang1049\par
+\cf2 Syntax\cf0 : \par
+\f0\lang1033 RestGetStatusCodeAsync(string url)\par
+RestGetStatusCodeAsync(string login, string pass, string url)\f1\lang1049\par
+\cf2 Return value\cf0 : int\par
 \cf3\par
 \cf2 Example\cf3 :\par
 \cf0\f0\lang1033 int statusCode = await tester.RestGetAsync(""https://jsonplaceholder.typicode.com"");\par
@@ -6991,6 +7050,66 @@ locator.value = ""//input[@id='login']"";\fs24\par
 }",
 
 
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fswiss\fcharset0 Calibri;}{\f1\fnil\fcharset0 Calibri;}{\f2\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 FocusElementAsync\cf0\f1\par
+\cf2\f2\lang1049 Description\cf0 : \f1\lang1033 the method switches focus to the specified element\f2\lang1049\par
+
+\pard\nowidctlpar\sl276\slmult1\cf2 Syntax\cf0 : \par
+\f0\lang1033 FocusElementAsync(string by, string locator)\par
+FocusElementAsync(Locator locator)\fs24\par
+
+\pard\sl276\slmult1\cf2\f2\fs20\lang1049 Return value\cf0 : no return value\cf3\par
+\par
+\cf2 Example\cf3 :\par
+
+\pard\nowidctlpar\sl276\slmult1\cf0\f0\lang1033 await tester.FocusElementAsync(Tester.BY_CSS, ""input[id='login']"");\par
+await tester.SetValueInElementAsync(Tester.BY_CSS, ""input[id='login']"", ""admin"");\par
+\par
+await tester.FocusElementAsync(Tester.BY_XPATH, ""//input[@id='login']"");\par
+await tester.SetValueInElementAsync(Tester.BY_XPATH, ""//input[@id='login']"", ""admin"");\par
+\par
+await tester.FocusElementAsync(tester.GetLocatorValue(""locatorName""));\par
+await tester.SetValueInElementAsync(tester.GetLocator(""locatorName""), ""admin"");\fs24\par
+
+\pard\sl276\slmult1\f1\fs20\par
+}",
+
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fswiss\fcharset0 Calibri;}{\f1\fnil\fcharset0 Calibri;}{\f2\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 FocusAsync\cf0\f1\par
+\cf2\f2\lang1049 Description\cf0 : \f1\lang1033 the method switches the focus to the element\f2\lang1049\par
+
+\pard\nowidctlpar\sl276\slmult1\cf2 Syntax\cf0 : \f0\lang1033 FocusAsync()\fs24\par
+
+\pard\sl276\slmult1\cf2\f2\fs20\lang1049 Return value\cf0 : no return value\cf3\par
+\par
+\cf2 Example\cf3 :\par
+
+\pard\nowidctlpar\sl276\slmult1\cf0\f0\lang1033 await element.FocusAsync();\fs24\par
+
+\pard\sl276\slmult1\f1\fs20\par
+}",
+
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 GetProjectPath\cf0\par
+\cf2\f1\lang1049 Description\cf0 : the method returns the path to the project folder\par
+\cf2 Syntax\cf0 : \f0\lang1033 GetProjectPath()\par
+\cf2\f1\lang1049 Return value\cf0 : string\par
+\cf3\par
+\cf2 Example\cf3 :\par
+\cf0\f0\lang1033 string path = tester.GetProjectPath();\par
+tester.ConsoleMsg(path);\par
+}",
+
+@"",
+@"",
+@"",
+@"",
 @"",
 @"",
 @"",
@@ -7349,6 +7468,9 @@ locator.value = ""//input[@id='login']"";\fs24\par
             data.Add(new CompletionData("FileGetHashMD5Async", "FileGetHashMD5Async(string filename)"));
             data.Add(new CompletionData("FileReadAsync", "FileReadAsync(string encoding, string filename)"));
             data.Add(new CompletionData("FileWriteAsync", "FileWriteAsync(string content, string encoding, string filename)"));
+            data.Add(new CompletionData("FocusAsync", "FocusAsync()"));
+            data.Add(new CompletionData("FocusElementAsync", "FocusElementAsync(string by, string locator)"));
+            data.Add(new CompletionData("FocusElementAsync", "FocusElementAsync(Locator locator)"));
             data.Add(new CompletionData("GetAttributeAsync", "GetAttributeAsync(string name)"));
             data.Add(new CompletionData("GetAttributeFromElementAsync", "GetAttributeFromElementAsync(string by, string locator, string attribute)"));
             data.Add(new CompletionData("GetAttributeFromElementAsync", "GetAttributeFromElementAsync(Locator locator, string attribute)"));
@@ -7387,6 +7509,7 @@ locator.value = ""//input[@id='login']"";\fs24\par
             data.Add(new CompletionData("GetLocators", "GetLocators()"));
             data.Add(new CompletionData("GetLocatorValue", "GetLocatorValue(string name)"));
             data.Add(new CompletionData("GetOptionAsync", "GetOptionAsync(string by)"));
+            data.Add(new CompletionData("GetProjectPath", "GetProjectPath()"));
             data.Add(new CompletionData("GetStyleAsync", "GetStyleAsync(string property)"));
             data.Add(new CompletionData("GetStyleFromElementAsync", "GetStyleFromElementAsync(string by, string locator, string property)"));
             data.Add(new CompletionData("GetStyleFromElementAsync", "GetStyleFromElementAsync(Locator locator, string property)"));
@@ -7439,6 +7562,7 @@ locator.value = ""//input[@id='login']"";\fs24\par
             data.Add(new CompletionData("RemoveLocator", "RemoveLocator(string name)"));
             data.Add(new CompletionData("RestGetAsync", "RestGetAsync(string url, TimeSpan timeout, string charset = \"UTF-8\")"));
             data.Add(new CompletionData("RestGetBasicAuthAsync", "RestGetBasicAuthAsync(string login, string pass, string url, TimeSpan timeout, string charset = \"UTF-8\")"));
+            data.Add(new CompletionData("RestGetStatusCodeAsync", "RestGetStatusCodeAsync(string login, string pass, string url)"));
             data.Add(new CompletionData("RestGetStatusCodeAsync", "RestGetStatusCodeAsync(string url)"));
             data.Add(new CompletionData("RestPostAsync", "RestPostAsync(string url, string json, TimeSpan timeout, string charset = \"UTF-8\")"));
             data.Add(new CompletionData("ScrollToAsync", "ScrollToAsync(bool behaviorSmooth = false)"));
@@ -8119,6 +8243,9 @@ locator.value = ""//input[@id='login']"";\fs24\par
                         if (value == "ClearLocators" && tag == "Tester") richTextBox1.Rtf = handbookRus[254];
                         if (value == "RemoveLocator" && tag == "Tester") richTextBox1.Rtf = handbookRus[255];
                         if (value == "GetLocators" && tag == "Tester") richTextBox1.Rtf = handbookRus[256];
+                        if (value == "FocusElementAsync" && tag == "Tester") richTextBox1.Rtf = handbookRus[257];
+                        if (value == "FocusAsync" && tag == "HTMLElement") richTextBox1.Rtf = handbookRus[258];
+                        if (value == "GetProjectPath" && tag == "Tester") richTextBox1.Rtf = handbookRus[259];
                     }
                     else
                     {
@@ -8379,13 +8506,23 @@ locator.value = ""//input[@id='login']"";\fs24\par
                         if (value == "ClearLocators" && tag == "Tester") richTextBox1.Rtf = handbookEng[254];
                         if (value == "RemoveLocator" && tag == "Tester") richTextBox1.Rtf = handbookEng[255];
                         if (value == "GetLocators" && tag == "Tester") richTextBox1.Rtf = handbookEng[256];
+                        if (value == "FocusElementAsync" && tag == "Tester") richTextBox1.Rtf = handbookEng[257];
+                        if (value == "FocusAsync" && tag == "HTMLElement") richTextBox1.Rtf = handbookEng[258];
+                        if (value == "GetProjectPath" && tag == "Tester") richTextBox1.Rtf = handbookEng[259];
                     }
 
                     /*
-                    if (value == "" && tag == "") richTextBox1.Rtf = handbookRus[257];
-                    if (value == "" && tag == "") richTextBox1.Rtf = handbookRus[258];
-                    if (value == "" && tag == "") richTextBox1.Rtf = handbookRus[259];
                     if (value == "" && tag == "") richTextBox1.Rtf = handbookRus[260];
+                    if (value == "" && tag == "") richTextBox1.Rtf = handbookRus[261];
+                    if (value == "" && tag == "") richTextBox1.Rtf = handbookRus[262];
+                    if (value == "" && tag == "") richTextBox1.Rtf = handbookRus[263];
+                    if (value == "" && tag == "") richTextBox1.Rtf = handbookRus[264];
+                    if (value == "" && tag == "") richTextBox1.Rtf = handbookRus[265];
+                    if (value == "" && tag == "") richTextBox1.Rtf = handbookRus[266];
+                    if (value == "" && tag == "") richTextBox1.Rtf = handbookRus[267];
+                    if (value == "" && tag == "") richTextBox1.Rtf = handbookRus[268];
+                    if (value == "" && tag == "") richTextBox1.Rtf = handbookRus[269];
+                    if (value == "" && tag == "") richTextBox1.Rtf = handbookRus[270];
                     */
 
                 }

@@ -154,7 +154,10 @@ namespace Hat
 
         public static string getContentFileHelper()
         {
-            string content =
+            string content = "";
+            if (HatSettings.language == HatSettings.RUS)
+            {
+                content =
 @"using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -164,32 +167,7 @@ namespace Hat
 {
     public static class Helper
     {
-
-    }
-}
-";
-            return content;
-        }
-
-        public static string getContentFileExamplePage()
-        {
-            string content = "";
-            if (HatSettings.language == HatSettings.RUS)
-            {
-                content =
-@"using System;
-using HatFramework;
-
-namespace Hat
-{
-    public static class ExamplePage
-    {
-        public static string URL = @""https://somovstudio.github.io/test.html"";        
-        public static string InputLogin = ""login"";
-        public static string InputPass = ""pass"";
-        public static string ButtonLogin = ""buttonLogin"";
-        public static string Result = ""result"";
-        public static string Textarea = ""textarea"";
+		public static string URL = @""https://somovstudio.github.io/test.html"";
     }
 }
 ";
@@ -198,18 +176,15 @@ namespace Hat
             {
                 content =
 @"using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using HatFramework;
 
 namespace Hat
 {
-    public static class ExamplePage
+    public static class Helper
     {
-        public static string URL = @""https://somovstudio.github.io/test_eng.html"";        
-        public static string InputLogin = ""login"";
-        public static string InputPass = ""pass"";
-        public static string ButtonLogin = ""buttonLogin"";
-        public static string Result = ""result"";
-        public static string Textarea = ""textarea"";
+		public static string URL = @""https://somovstudio.github.io/test_eng.html"";
     }
 }
 ";
@@ -217,9 +192,33 @@ namespace Hat
             return content;
         }
 
+        public static string getContentFileExamplePage()
+        {
+            string content = 
+@"using System;
+using HatFramework;
+
+namespace Hat
+{
+    public static class ExamplePage
+    {
+        public static string InputLogin = ""//input[@id='login']"";
+        public static string InputPass = ""//input[@id='pass']"";
+        public static string ButtonLogin = ""//input[@id='buttonLogin']"";
+        public static string Result = ""//div[@id='result']"";
+        public static string Textarea = ""//textarea[@id='textarea']"";
+    }
+}
+";
+            return content;
+        }
+
         public static string getContentFileExampleSteps()
         {
-            string content =
+            string content = "";
+            if (HatSettings.language == HatSettings.RUS)
+            {
+                content =
 @"using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -245,17 +244,106 @@ namespace Hat
     {
         public ExampleSteps(Form browserWindow): base(browserWindow) {}
 
-        public async Task FillForm()
+        public async Task VerifyElementInDOM()
+		{
+			Locator locator;
+            foreach(var item in this.GetLocators())
+            {
+                locator = item.Value;
+                await this.WaitElementInDomAsync(locator, 5);
+            }
+		}
+
+        public void initLocators(bool clear = true)
+		{
+			if (clear == true) this.ClearLocators();
+			AddLocator(""InputLogin"", Tester.BY_XPATH, ExamplePage.InputLogin, ""Поле для ввода логина"");
+			AddLocator(""InputPass"", Tester.BY_XPATH, ExamplePage.InputPass, ""Поле для ввода пароля"");
+			AddLocator(""ButtonLogin"", Tester.BY_XPATH, ExamplePage.ButtonLogin, ""Кнопка отправляет форму"");
+			AddLocator(""Result"", Tester.BY_XPATH, ExamplePage.Result, ""Результат авторизации"");
+			AddLocator(""Textarea"", Tester.BY_XPATH, ExamplePage.Textarea, ""Текст сообщения"");
+		}
+
+        public async Task SendForm()
         {
-            await this.WaitVisibleElementByIdAsync(ExamplePage.InputLogin, 15);
-            await this.SetValueInElementByIdAsync(ExamplePage.InputLogin, ""admin"");
+            await this.WaitVisibleElementAsync(this.GetLocator(""InputLogin""), 5);
+            await this.SetValueInElementAsync(this.GetLocator(""InputLogin""), ""admin"");
             await this.WaitAsync(2);
-            await this.SetValueInElementByIdAsync(ExamplePage.InputPass, ""0000"");
+            await this.WaitVisibleElementAsync(this.GetLocator(""InputPass""), 5);
+            await this.SetValueInElementAsync(this.GetLocator(""InputPass""), ""0000"");
+            await this.WaitAsync(2);
+            await this.WaitVisibleElementAsync(this.GetLocator(""ButtonLogin""), 5);
+            await this.ClickElementAsync(this.GetLocator(""ButtonLogin""));
             await this.WaitAsync(2);
         }
     }
 }
 ";
+            }
+            else
+            {
+                content =
+@"using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Windows.Forms;
+using System.Threading;
+using System.Threading.Tasks;
+using System.IO;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Text.RegularExpressions;
+using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Reflection;
+using Newtonsoft.Json;
+using HatFramework;
+
+namespace Hat
+{
+    public class ExampleSteps : Tester
+    {
+        public ExampleSteps(Form browserWindow): base(browserWindow) {}
+
+        public async Task VerifyElementInDOM()
+		{
+			Locator locator;
+            foreach(var item in this.GetLocators())
+            {
+                locator = item.Value;
+                await this.WaitElementInDomAsync(locator, 5);
+            }
+		}
+
+        public void initLocators(bool clear = true)
+		{
+			if (clear == true) this.ClearLocators();
+			AddLocator(""InputLogin"", Tester.BY_XPATH, ExamplePage.InputLogin, ""Login field"");
+			AddLocator(""InputPass"", Tester.BY_XPATH, ExamplePage.InputPass, ""Password entry field"");
+			AddLocator(""ButtonLogin"", Tester.BY_XPATH, ExamplePage.ButtonLogin, ""The button submits the form"");
+			AddLocator(""Result"", Tester.BY_XPATH, ExamplePage.Result, ""Authorization result"");
+			AddLocator(""Textarea"", Tester.BY_XPATH, ExamplePage.Textarea, ""Message text"");
+		}
+
+        public async Task SendForm()
+        {
+            await this.WaitVisibleElementAsync(this.GetLocator(""InputLogin""), 5);
+            await this.SetValueInElementAsync(this.GetLocator(""InputLogin""), ""admin"");
+            await this.WaitAsync(2);
+            await this.WaitVisibleElementAsync(this.GetLocator(""InputPass""), 5);
+            await this.SetValueInElementAsync(this.GetLocator(""InputPass""), ""0000"");
+            await this.WaitAsync(2);
+            await this.WaitVisibleElementAsync(this.GetLocator(""ButtonLogin""), 5);
+            await this.ClickElementAsync(this.GetLocator(""ButtonLogin""));
+            await this.WaitAsync(2);
+        }
+    }
+}
+";
+            }
             return content;
         }
 
@@ -444,17 +532,18 @@ namespace Hat
         public async Task setUp()
         {
             tester.Description(""Тест #2 проверяет авторизацию на сайте"");
+            tester.initLocators();
             await tester.BrowserFullScreenAsync();
         }
 
         public async Task test()
         {
             await tester.TestBeginAsync();
-            await tester.GoToUrlAsync(ExamplePage.URL, 5);
-            await tester.FillForm();
-            await tester.ClickElementByIdAsync(ExamplePage.ButtonLogin);
-            await tester.WaitVisibleElementByIdAsync(ExamplePage.Result, 5);
-            string actual = await tester.GetValueFromElementByIdAsync(ExamplePage.Textarea);
+            await tester.GoToUrlAsync(Helper.URL, 5);
+            await tester.VerifyElementInDOM();
+            await tester.SendForm();
+            await tester.WaitVisibleElementAsync(tester.GetLocator(""Result""), 5);
+            string actual = await tester.GetValueFromElementAsync(tester.GetLocator(""Textarea""));
             string expected = ""Вы успешно авторизованы"";
             await tester.AssertEqualsAsync(expected, actual);
             await tester.TestEndAsync();
@@ -508,17 +597,18 @@ namespace Hat
         public async Task setUp()
         {
             tester.Description(""Test #2 checks the authorization on the site"");
+            tester.initLocators();
             await tester.BrowserFullScreenAsync();
         }
 
         public async Task test()
         {
             await tester.TestBeginAsync();
-            await tester.GoToUrlAsync(ExamplePage.URL, 5);
-            await tester.FillForm();
-            await tester.ClickElementByIdAsync(ExamplePage.ButtonLogin);
-            await tester.WaitVisibleElementByIdAsync(ExamplePage.Result, 5);
-            string actual = await tester.GetValueFromElementByIdAsync(ExamplePage.Textarea);
+            await tester.GoToUrlAsync(Helper.URL, 5);
+            await tester.VerifyElementInDOM();
+            await tester.SendForm();
+            await tester.WaitVisibleElementAsync(tester.GetLocator(""Result""), 5);
+            string actual = await tester.GetValueFromElementAsync(tester.GetLocator(""Textarea""));
             string expected = ""Authorization was successful"";
             await tester.AssertEqualsAsync(expected, actual);
             await tester.TestEndAsync();
@@ -778,7 +868,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("""")]
 [assembly: AssemblyCompany("""")]
 [assembly: AssemblyProduct("""")]
-[assembly: AssemblyCopyright(""Copyright © 2025"")]
+[assembly: AssemblyCopyright(""Copyright © 2026"")]
 [assembly: AssemblyTrademark("""")]
 [assembly: AssemblyCulture("""")]
 [assembly: ComVisible(false)]

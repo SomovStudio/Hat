@@ -17,9 +17,10 @@ using Newtonsoft.Json.Linq;
 using System.Security.Cryptography;
 using System.Runtime.Remoting.Contexts;
 using System.Security.AccessControl;
+using System.Xml.Linq;
 
 /**
- * Текущая версия 1.5.0.3
+ * Текущая версия 1.5.1.3
  */
 
 namespace HatFrameworkDev
@@ -71,6 +72,7 @@ namespace HatFrameworkDev
         private MethodInfo resultAutotest;          // функция: ResultAutotest - устанавливает флаг общего результата выполнения теста
         private MethodInfo debugJavaScript;         // функция: GetStatusDebugJavaScript - возвращает статус отладки
         private MethodInfo getNameAutotest;         // Функция: GetNameAutotest - возвращает имя запущенного автотеста
+        private MethodInfo getProjectPath;         // Функция: GetProjectPath - возвращает путь к папке проекта
         private MethodInfo getlanguageEngConsole;   // Функция: GetlanguageEngConsole - возвращает статус английского языка для вывода в командную строку (true/false)
         private MethodInfo getlanguageEngReportMail;// Функция: GetlanguageEngReportMail - возвращает статус английского языка для вывода в отчет и письмо (true/false)
         private MethodInfo saveReport;              // функция: SaveReport - вызывает метод сохранения отчета
@@ -112,6 +114,7 @@ namespace HatFrameworkDev
                 resultAutotest = BrowserWindow.GetType().GetMethod("ResultAutotest");
                 debugJavaScript = BrowserWindow.GetType().GetMethod("GetStatusDebugJavaScript");
                 getNameAutotest = BrowserWindow.GetType().GetMethod("GetNameAutotest");
+                getProjectPath = BrowserWindow.GetType().GetMethod("GetProjectPath");
                 getlanguageEngConsole = BrowserWindow.GetType().GetMethod("GetlanguageEngConsole");
                 getlanguageEngReportMail = BrowserWindow.GetType().GetMethod("GetlanguageEngReportMail");
                 saveReport = BrowserWindow.GetType().GetMethod("SaveReport");
@@ -668,6 +671,142 @@ namespace HatFrameworkDev
                     Tester.IMAGE_STATUS_FAILED);
                 ConsoleMsgError(ex.Message);
             }
+        }
+
+        /* 
+         * Методы для работы с хранилищем локаторов
+         * */
+
+        public void AddLocator(string name, string type, string value, string description)
+        {
+            if (DefineTestStop() == true) return;
+
+            try
+            {
+                if (locators == null) locators = new Dictionary<string, Locator>();
+                Locator locator = new Locator();
+                locator.name = name;
+                locator.type = type;
+                locator.value = value;
+                locator.description = description;
+                locators.Add(name, locator);
+                SendMessageDebug("Локаторы", "Locators", Tester.COMPLETED, $"Добавлен локатор: {name}", $"Added a locator: {name}", Tester.IMAGE_STATUS_MESSAGE);
+            }
+            catch (Exception ex)
+            {
+                SendMessageDebug($"AddLocator(\"{name}\", \"{type}\", \"{value}\", \"{description}\")", $"AddLocator(\"{name}\", \"{type}\", \"{value}\", \"{description}\")", Tester.FAILED, $"Произошла ошибка: {ex.Message}", $"An error has occurred: {ex.Message}", Tester.IMAGE_STATUS_FAILED);
+                TestStopAsync();
+            }
+        }
+
+        public Dictionary<string, Locator> GetLocators()
+        {
+            if (DefineTestStop() == true) return null;
+
+            try
+            {
+                SendMessageDebug("Локаторы", "Locators", Tester.COMPLETED, $"Получено хранилище локаторов", $"Storage of locators has been received", Tester.IMAGE_STATUS_MESSAGE);
+                return locators;
+            }
+            catch (Exception ex)
+            {
+                SendMessageDebug($"GetLocators()", $"GetLocators()", Tester.FAILED, $"Произошла ошибка: {ex.Message}", $"An error has occurred: {ex.Message}", Tester.IMAGE_STATUS_FAILED);
+                TestStopAsync();
+            }
+            return null;
+        }
+
+        public Locator GetLocator(string name)
+        {
+            try
+            {
+                if (locators != null)
+                {
+                    SendMessageDebug($"Локатор [имя / описание]: {locators[name].name}", $"Locator [name / description]: {locators[name].name}", Tester.COMPLETED, locators[name].description, locators[name].description, Tester.IMAGE_STATUS_MESSAGE);
+                    SendMessageDebug($"Локатор [тип / значение]: {locators[name].type}", $"Locator [type / value]: {locators[name].type}", Tester.COMPLETED, locators[name].value, locators[name].value, Tester.IMAGE_STATUS_MESSAGE);
+                    return locators[name];
+                }
+            }
+            catch (Exception ex)
+            {
+                SendMessageDebug($"GetLocator(\"{name}\")", $"GetLocator(\"{name}\")", Tester.FAILED, $"Произошла ошибка: {ex.Message}", $"An error has occurred: {ex.Message}", Tester.IMAGE_STATUS_FAILED);
+                TestStopAsync();
+            }
+            return null;
+        }
+
+        public string GetLocatorValue(string name)
+        {
+            try
+            {
+                if (locators != null)
+                {
+                    SendMessageDebug($"Локатор [имя / описание]: {locators[name].name}", $"Locator [name / description]: {locators[name].name}", Tester.COMPLETED, locators[name].description, locators[name].description, Tester.IMAGE_STATUS_MESSAGE);
+                    SendMessageDebug($"Локатор [тип / значение]: {locators[name].type}", $"Locator [type / value]: {locators[name].type}", Tester.COMPLETED, locators[name].value, locators[name].value, Tester.IMAGE_STATUS_MESSAGE);
+                    return locators[name].value;
+                }
+            }
+            catch (Exception ex)
+            {
+                SendMessageDebug($"GetLocatorValue(\"{name}\")", $"GetLocatorValue(\"{name}\")", Tester.FAILED, $"Произошла ошибка: {ex.Message}", $"An error has occurred: {ex.Message}", Tester.IMAGE_STATUS_FAILED);
+                TestStopAsync();
+            }
+            return null;
+        }
+
+        public int GetCountLocators()
+        {
+            try
+            {
+                if (locators != null)
+                {
+                    SendMessageDebug("Локаторы", "Locators", Tester.COMPLETED, $"Количество локаторов: {locators.Count()}", $"Number of locators: {locators.Count()}", Tester.IMAGE_STATUS_MESSAGE);
+                    return locators.Count();
+                }
+            }
+            catch (Exception ex)
+            {
+                SendMessageDebug($"GetCountLocators()", $"GetCountLocators()", Tester.FAILED, $"Произошла ошибка: {ex.Message}", $"An error has occurred: {ex.Message}", Tester.IMAGE_STATUS_FAILED);
+                TestStopAsync();
+            }
+            return -1;
+        }
+
+        public void ClearLocators()
+        {
+            try
+            {
+                if (locators != null)
+                {
+                    locators.Clear();
+                    SendMessageDebug("Очистка локаторов", "Clearing locators", Tester.COMPLETED, $"Количество локаторов: {locators.Count()}", $"Number of locators: {locators.Count()}", Tester.IMAGE_STATUS_MESSAGE);
+                }
+            }
+            catch (Exception ex)
+            {
+                SendMessageDebug($"ClearLocators()", $"ClearLocators()", Tester.FAILED, $"Произошла ошибка: {ex.Message}", $"An error has occurred: {ex.Message}", Tester.IMAGE_STATUS_FAILED);
+                TestStopAsync();
+            }
+        }
+
+        public bool RemoveLocator(string name)
+        {
+            bool result = false;
+            try
+            {
+                if (locators != null)
+                {
+                    result = locators.Remove(name);
+                    if (result) SendMessageDebug("Локаторы", "Locators", Tester.COMPLETED, $"Удален локатор: {name}", $"The locator named '{name}' has been removed", Tester.IMAGE_STATUS_MESSAGE);
+                    else SendMessageDebug("Локаторы", "Locators", Tester.FAILED, $"Неудалось удалить локатор: {name}", $"Couldn't delete the locator named '{name}'", Tester.IMAGE_STATUS_FAILED);
+                }
+            }
+            catch (Exception ex)
+            {
+                SendMessageDebug($"ClearLocators()", $"ClearLocators()", Tester.FAILED, $"Произошла ошибка: {ex.Message}", $"An error has occurred: {ex.Message}", Tester.IMAGE_STATUS_FAILED);
+                TestStopAsync();
+            }
+            return result;
         }
 
 
@@ -5136,6 +5275,42 @@ namespace HatFrameworkDev
             return result;
         }
 
+        public async Task<int> RestGetStatusCodeAsync(string login, string pass, string url)
+        {
+            int result = 0;
+            if (DefineTestStop() == true) return result;
+
+            try
+            {
+                var handler = new HttpClientHandler();
+                handler.Credentials = new NetworkCredential(login, pass);
+                string userAgent = BrowserView.CoreWebView2.Settings.UserAgent;
+
+                Uri uri = new Uri(url);
+                HttpClient client = new HttpClient(handler);
+                client.BaseAddress = uri;
+                client.DefaultRequestHeaders.Clear();
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                client.DefaultRequestHeaders.Add("charset", "UTF-8");
+                client.DefaultRequestHeaders.Add("User-Agent", userAgent);
+                HttpResponseMessage response = await client.GetAsync(url);
+                result = (int)response.StatusCode;
+
+                SendMessageDebug($"RestGetStatusCodeAsync(\"{login}\", \"{pass}\", \"{url}\")", $"RestGetStatusCodeAsync(\"{login}\", \"{pass}\", \"{url}\")", PASSED, "Get Rest запрос выполнен. Результат: " + result.ToString(), "Get Rest request completed. Result: " + result.ToString(), IMAGE_STATUS_PASSED);
+            }
+            catch (Exception ex)
+            {
+                SendMessageDebug($"RestGetStatusCodeAsync(\"{login}\", \"{pass}\", \"{url}\")", $"RestGetStatusCodeAsync(\"{login}\", \"{pass}\", \"{url}\")", Tester.FAILED,
+                        "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(),
+                        "Error: " + ex.Message + Environment.NewLine + Environment.NewLine + "Full description of the error: " + ex.ToString(),
+                        Tester.IMAGE_STATUS_FAILED);
+                TestStopAsync();
+                ConsoleMsgError(ex.ToString());
+            }
+            return result;
+        }
+
         public async Task<string> RestPostAsync(string url, string json, TimeSpan timeout, string charset = "UTF-8")
         {
             if (DefineTestStop() == true) return null;
@@ -6062,139 +6237,89 @@ namespace HatFrameworkDev
             }
         }
 
-        /* Методы для работы с массивом локаторов */
-
-        public void AddLocator(string name, string type, string value, string description)
+        public async Task FocusElementAsync(string by, string locator)
         {
             if (DefineTestStop() == true) return;
 
-            try
+            string script = "(function(){";
+            if (by == BY_CSS) script += $"var element = document.querySelector(\"{locator}\");";
+            else if (by == BY_XPATH) script += $"var element = document.evaluate(\"{locator}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
+            script += "element.focus();";
+            script += "element.dispatchEvent(new Event('focus', { bubbles: true, cancelable: true }));";
+            script += "element.dispatchEvent(new Event('focusin', { bubbles: true, cancelable: true }));";
+            script += "element.dispatchEvent(new Event('click', { bubbles: true, cancelable: true }));";
+            script += "element.dispatchEvent(new Event('mousedown', { bubbles: true, cancelable: true }));";
+            script += "element.dispatchEvent(new Event('mouseup', { bubbles: true, cancelable: true }));";
+            script += "element.dispatchEvent(new Event('input', { bubbles: true, cancelable: true }));";
+            script += "element.dispatchEvent(new Event('change', { bubbles: true, cancelable: true }));";
+            script += "element.dispatchEvent(new Event('keydown', { bubbles: true, cancelable: true }));";
+            script += "var inputEvent = new InputEvent('input', { bubbles: true, cancelable: true, inputType: 'insertText', data: ' ' });";
+            script += "element.dispatchEvent(inputEvent);";
+            script += "return element;";
+            script += "}());";
+            if (await execute(script, $"FocusElementAsync(\"{by}\", \"{locator}\")") == "null")
             {
-                if (locators == null) locators = new Dictionary<string, Locator>();
-                Locator locator = new Locator();
-                locator.name = name;
-                locator.type = type;
-                locator.value = value;
-                locator.description = description;
-                locators.Add(name, locator);
-                SendMessageDebug("Локаторы", "Locators", Tester.COMPLETED, $"Добавлен локатор: {name}", $"Added a locator: {name}", Tester.IMAGE_STATUS_MESSAGE);
-            }
-            catch (Exception ex)
-            {
-                SendMessageDebug($"AddLocator(\"{name}\", \"{type}\", \"{value}\", \"{description}\")", $"AddLocator(\"{name}\", \"{type}\", \"{value}\", \"{description}\")", Tester.FAILED, $"Произошла ошибка: {ex.Message}", $"An error has occurred: {ex.Message}", Tester.IMAGE_STATUS_FAILED);
+                SendMessageDebug($"FocusElementAsync(\"{by}\", \"{locator}\")", $"FocusElementAsync(\"{by}\", \"{locator}\")", Tester.FAILED, $"Не удалось найти элемент по локатору: {locator}", $"Could not find the element by locator: {locator}", Tester.IMAGE_STATUS_FAILED);
                 TestStopAsync();
+            }
+            else
+            {
+                SendMessageDebug($"FocusElementAsync(\"{by}\", \"{locator}\")", $"FocusElementAsync(\"{by}\", \"{locator}\")", PASSED, "Элемент получил фокус", "The element has received focus", IMAGE_STATUS_PASSED);
             }
         }
 
-        public Dictionary<string, Locator> GetLocators()
+        public async Task FocusElementAsync(Locator locator)
         {
-            if (DefineTestStop() == true) return null;
+            if (DefineTestStop() == true) return;
 
-            try
+            string script = "(function(){";
+            if (locator.type == BY_CSS) script += $"var element = document.querySelector(\"{locator.value}\");";
+            else if (locator.type == BY_XPATH) script += $"var element = document.evaluate(\"{locator.value}\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
+            script += "element.focus();";
+            script += "element.dispatchEvent(new Event('focus', { bubbles: true, cancelable: true }));";
+            script += "element.dispatchEvent(new Event('focusin', { bubbles: true, cancelable: true }));";
+            script += "element.dispatchEvent(new Event('click', { bubbles: true, cancelable: true }));";
+            script += "element.dispatchEvent(new Event('mousedown', { bubbles: true, cancelable: true }));";
+            script += "element.dispatchEvent(new Event('mouseup', { bubbles: true, cancelable: true }));";
+            script += "element.dispatchEvent(new Event('input', { bubbles: true, cancelable: true }));";
+            script += "element.dispatchEvent(new Event('change', { bubbles: true, cancelable: true }));";
+            script += "element.dispatchEvent(new Event('keydown', { bubbles: true, cancelable: true }));";
+            script += "var inputEvent = new InputEvent('input', { bubbles: true, cancelable: true, inputType: 'insertText', data: ' ' });";
+            script += "element.dispatchEvent(inputEvent);";
+            script += "return element;";
+            script += "}());";
+            if (await execute(script, $"FocusElementAsync(\"{locator.name}\")") == "null")
             {
-                SendMessageDebug("Локаторы", "Locators", Tester.COMPLETED, $"Получено хранилище локаторов", $"Storage of locators has been received", Tester.IMAGE_STATUS_MESSAGE);
-                return locators;
-            }
-            catch (Exception ex)
-            {
-                SendMessageDebug($"GetLocators()", $"GetLocators()", Tester.FAILED, $"Произошла ошибка: {ex.Message}", $"An error has occurred: {ex.Message}", Tester.IMAGE_STATUS_FAILED);
+                SendMessageDebug($"FocusElementAsync(\"{locator.name}\")", $"FocusElementAsync(\"{locator.name}\")", Tester.FAILED, $"Не удалось найти элемент по локатору: {locator.value}", $"Could not find the element by locator: {locator.value}", Tester.IMAGE_STATUS_FAILED);
                 TestStopAsync();
             }
-            return null;
+            else
+            {
+                SendMessageDebug($"FocusElementAsync(\"{locator.name}\")", $"FocusElementAsync(\"{locator.name}\")", Tester.PASSED, "Элемент получил фокус", "The element has received focus", Tester.IMAGE_STATUS_PASSED);
+            }
         }
 
-        public Locator GetLocator(string name)
+        public string GetProjectPath()
         {
+            if (DefineTestStop() == true) return "";
+
+            string path = "";
             try
             {
-                if (locators != null)
-                {
-                    SendMessageDebug($"Локатор [имя / описание]: {locators[name].name}", $"Locator [name / description]: {locators[name].name}", Tester.COMPLETED, locators[name].description, locators[name].description, Tester.IMAGE_STATUS_MESSAGE);
-                    SendMessageDebug($"Локатор [тип / значение]: {locators[name].type}", $"Locator [type / value]: {locators[name].type}", Tester.COMPLETED, locators[name].value, locators[name].value, Tester.IMAGE_STATUS_MESSAGE);
-                    return locators[name];
-                }
+                path = (string)getProjectPath.Invoke(BrowserWindow, null);
+                SendMessageDebug("GetProjectPath()", "GetProjectPath()", COMPLETED, $"Получен адрес папки проекта: {path}", $"The address of the project folder has been received: {path}", IMAGE_STATUS_MESSAGE);
             }
             catch (Exception ex)
             {
-                SendMessageDebug($"GetLocator(\"{name}\")", $"GetLocator(\"{name}\")", Tester.FAILED, $"Произошла ошибка: {ex.Message}", $"An error has occurred: {ex.Message}", Tester.IMAGE_STATUS_FAILED);
-                TestStopAsync();
+                SendMessageDebug("GetProjectPath()", "GetProjectPath()", Tester.FAILED,
+                    "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(),
+                    "Error: " + ex.Message + Environment.NewLine + Environment.NewLine + "Full description of the error: " + ex.ToString(),
+                    Tester.IMAGE_STATUS_FAILED);
+                ConsoleMsgError(ex.ToString());
             }
-            return null;
+            return path;
         }
 
-        public string GetLocatorValue(string name)
-        {
-            try
-            {
-                if (locators != null)
-                {
-                    SendMessageDebug($"Локатор [имя / описание]: {locators[name].name}", $"Locator [name / description]: {locators[name].name}", Tester.COMPLETED, locators[name].description, locators[name].description, Tester.IMAGE_STATUS_MESSAGE);
-                    SendMessageDebug($"Локатор [тип / значение]: {locators[name].type}", $"Locator [type / value]: {locators[name].type}", Tester.COMPLETED, locators[name].value, locators[name].value, Tester.IMAGE_STATUS_MESSAGE);
-                    return locators[name].value;
-                }
-            }
-            catch (Exception ex)
-            {
-                SendMessageDebug($"GetLocatorValue(\"{name}\")", $"GetLocatorValue(\"{name}\")", Tester.FAILED, $"Произошла ошибка: {ex.Message}", $"An error has occurred: {ex.Message}", Tester.IMAGE_STATUS_FAILED);
-                TestStopAsync();
-            }
-            return null;
-        }
-
-        public int GetCountLocators()
-        {
-            try
-            {
-                if (locators != null)
-                {
-                    SendMessageDebug("Локаторы", "Locators", Tester.COMPLETED, $"Количество локаторов: {locators.Count()}", $"Number of locators: {locators.Count()}", Tester.IMAGE_STATUS_MESSAGE);
-                    return locators.Count();
-                }
-            }
-            catch (Exception ex)
-            {
-                SendMessageDebug($"GetCountLocators()", $"GetCountLocators()", Tester.FAILED, $"Произошла ошибка: {ex.Message}", $"An error has occurred: {ex.Message}", Tester.IMAGE_STATUS_FAILED);
-                TestStopAsync();
-            }
-            return -1;
-        }
-
-        public void ClearLocators()
-        {
-            try
-            {
-                if (locators != null)
-                {
-                    locators.Clear();
-                    SendMessageDebug("Очистка локаторов", "Clearing locators", Tester.COMPLETED, $"Количество локаторов: {locators.Count()}", $"Number of locators: {locators.Count()}", Tester.IMAGE_STATUS_MESSAGE);
-                }
-            }
-            catch (Exception ex)
-            {
-                SendMessageDebug($"ClearLocators()", $"ClearLocators()", Tester.FAILED, $"Произошла ошибка: {ex.Message}", $"An error has occurred: {ex.Message}", Tester.IMAGE_STATUS_FAILED);
-                TestStopAsync();
-            }
-        }
-
-        public bool RemoveLocator(string name)
-        {
-            bool result = false;
-            try
-            {
-                if (locators != null)
-                {
-                    result = locators.Remove(name);
-                    if (result) SendMessageDebug("Локаторы", "Locators", Tester.COMPLETED, $"Удален локатор: {name}", $"The locator named '{name}' has been removed", Tester.IMAGE_STATUS_MESSAGE);
-                    else SendMessageDebug("Локаторы", "Locators", Tester.FAILED, $"Неудалось удалить локатор: {name}", $"Couldn't delete the locator named '{name}'", Tester.IMAGE_STATUS_FAILED);
-                }
-            }
-            catch (Exception ex)
-            {
-                SendMessageDebug($"ClearLocators()", $"ClearLocators()", Tester.FAILED, $"Произошла ошибка: {ex.Message}", $"An error has occurred: {ex.Message}", Tester.IMAGE_STATUS_FAILED);
-                TestStopAsync();
-            }
-            return result;
-        }
 
     }
 }
