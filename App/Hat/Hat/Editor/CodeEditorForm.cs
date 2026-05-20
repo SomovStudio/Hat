@@ -3543,7 +3543,25 @@ await tester.SetValueInElementAsync(tester.GetLocator(""locatorName""), ""admin"
 tester.ConsoleMsg(path);\par
 }",
 
-@"",
+@"{\rtf1\ansi\ansicpg1252\deff0\nouicompat{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 SendMsgToBitrixChatAsync\cf0\par
+\cf2\f1\lang1049\'ce\'ef\'e8\'f1\'e0\'ed\'e8\'e5\cf0 : \'ec\'e5\'f2\'ee\'e4 \'ee\'f2\'ef\'f0\'e0\'e2\'eb\'ff\'e5\'f2 \'f1\'ee\'ee\'e1\'f9\'e5\'ed\'e8\'e5 \'e2 \'f7\'e0\'f2 \f0\lang1033 CRM \f1\lang1049\'c1\'e8\'f2\'f0\'e8\'ea\'f1\f0\lang1033  24\f1\lang1049\par
+\cf2\'d1\'e8\'ed\'f2\'e0\'ea\'f1\'e8\'f1\cf0 : \f0\lang1033 SendMsgToBitrixChatAsync(string webhookUrl, string chatId, string messageText, string system = ""N"")\par
+\cf2\f1\lang1049\'c2\'ee\'e7\'e2\'f0\'e0\'f9\'e0\'e5\'ec\'ee\'e5 \'e7\'ed\'e0\'f7\'e5\'ed\'e8\'e5\cf0 : \'f1\'f2\'f0\'ee\'ea\'e0 (string)\par
+\cf3\par
+\cf2\'cf\'f0\'e8\'ec\'e5\'f0\cf3 :\par
+if(tester.GetTestResult() == Tester.FAILED)\par
+\f0\lang1033\{\par
+\f1\lang1049\tab\f0\lang1033 if (DateTime.Now.Hour >= 9 && DateTime.Now.Hour < 21)\par
+\f1\lang1049\tab\f0\lang1033\{\f1\lang1049\par
+\cf0\tab\tab\f0\lang1033 string result = await tester.SendMsgToBitrixChatAsync(""https://bitrix/rest/123/abcd/im.message.add"", ""chat10"", ""\f1\lang1049\'d2\'e5\'ea\'f1\'f2\'ee\'e2\'ee\'e5 \'f1\'ee\'ee\'e1\'f9\'e5\'ed\'e8\'e5"");\par
+                    \tab tester.SendMessage(""BITRIX result: "", Tester.DEBUG, result);\par
+\tab\f0\lang1033\}\par
+\}\par
+}",
+
 @"",
 @"",
 @"",
@@ -7106,7 +7124,25 @@ await tester.SetValueInElementAsync(tester.GetLocator(""locatorName""), ""admin"
 tester.ConsoleMsg(path);\par
 }",
 
-@"",
+@"{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset204 Calibri;}}
+{\colortbl ;\red0\green77\blue187;\red155\green0\blue211;\red0\green0\blue0;}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\sl276\slmult1\cf1\f0\fs20\lang9 SendMsgToBitrixChatAsync\cf0\par
+\cf2\f1\lang1049 Description\cf0 : the method sends a message to the CRM Bitrix 24 chat\par
+\cf2 Syntax\cf0 : \f0\lang1033 SendMsgToBitrixChatAsync(string webhookUrl, string chatId, string messageText, string system = ""N"")\par
+\cf2\f1\lang1049 Return value\cf0 : string\par
+\cf3\par
+\cf2 Example\cf3 :\par
+\cf0\f0\lang1033 if(tester.GetTestResult() == Tester.FAILED)\par
+\{\par
+\tab if (DateTime.Now.Hour >= 9 && DateTime.Now.Hour < 21)\par
+\tab\{\par
+\tab\tab string result = await tester.SendMsgToBitrixChatAsync(""https://bitrix/rest/123/abcd/im.message.add"", ""chat10"", ""text"");\par
+                    \tab tester.SendMessage(""BITRIX result: "", Tester.DEBUG, result);\par
+\tab\}\par
+\}\par
+}",
+
 @"",
 @"",
 @"",
@@ -7571,6 +7607,7 @@ tester.ConsoleMsg(path);\par
             data.Add(new CompletionData("SelectOptionAsync", "SelectOptionAsync(string by, string value)"));
             data.Add(new CompletionData("SendMessage", "SendMessage(string action, string status, string comment)"));
             data.Add(new CompletionData("SendMessageDebug", "SendMessageDebug(string actionRus, string actionEng, string status,  string commentRus, string commentEng, int image)"));
+            data.Add(new CompletionData("SendMsgToBitrixChatAsync", "SendMsgToBitrixChatAsync(string webhookUrl, string chatId, string messageText, string system = \"N\")"));
             data.Add(new CompletionData("SendMsgToMailAsync", "SendMsgToMailAsync(string subject, string body, string filename = \"\", string addresses = \"\")"));
             data.Add(new CompletionData("SendMsgToTelegramAsync", "SendMsgToTelegramAsync(string botToken, string chatId, string text, string charset = \"UTF-8\", int timeHourFrom = 0, int timeHourBefore = 0)"));
             data.Add(new CompletionData("SetAttributeAsync", "GetAttributeAsync(string name)"));
@@ -8246,6 +8283,7 @@ tester.ConsoleMsg(path);\par
                         if (value == "FocusElementAsync" && tag == "Tester") richTextBox1.Rtf = handbookRus[257];
                         if (value == "FocusAsync" && tag == "HTMLElement") richTextBox1.Rtf = handbookRus[258];
                         if (value == "GetProjectPath" && tag == "Tester") richTextBox1.Rtf = handbookRus[259];
+                        if (value == "SendMsgToBitrixChatAsync" && tag == "Tester") richTextBox1.Rtf = handbookRus[260];
                     }
                     else
                     {
@@ -8509,10 +8547,10 @@ tester.ConsoleMsg(path);\par
                         if (value == "FocusElementAsync" && tag == "Tester") richTextBox1.Rtf = handbookEng[257];
                         if (value == "FocusAsync" && tag == "HTMLElement") richTextBox1.Rtf = handbookEng[258];
                         if (value == "GetProjectPath" && tag == "Tester") richTextBox1.Rtf = handbookEng[259];
+                        if (value == "SendMsgToBitrixChatAsync" && tag == "Tester") richTextBox1.Rtf = handbookEng[260];
                     }
 
                     /*
-                    if (value == "" && tag == "") richTextBox1.Rtf = handbookRus[260];
                     if (value == "" && tag == "") richTextBox1.Rtf = handbookRus[261];
                     if (value == "" && tag == "") richTextBox1.Rtf = handbookRus[262];
                     if (value == "" && tag == "") richTextBox1.Rtf = handbookRus[263];
