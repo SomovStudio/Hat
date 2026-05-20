@@ -18,9 +18,10 @@ using System.Security.Cryptography;
 using System.Runtime.Remoting.Contexts;
 using System.Security.AccessControl;
 using System.Xml.Linq;
+using System.Runtime.InteropServices;
 
 /**
- * Текущая версия 1.5.1.3
+ * Последние изменения в версии 1.5.2.4
  */
 
 namespace HatFramework
@@ -671,6 +672,46 @@ namespace HatFramework
                     Tester.IMAGE_STATUS_FAILED);
                 ConsoleMsgError(ex.Message);
             }
+        }
+
+        public async Task<string> SendMsgToBitrixChatAsync(string webhookUrl, string chatId, string messageText, string system = "N")
+        {
+            /* 
+             * Внутренний чат Битрикс24
+             * DIALOG_ID - ID чата или ID пользователя для личного диалога
+             * MESSAGE - Текст сообщения
+             * SYSTEM - для системного сообщения ("N" или "Y")
+             */
+
+            string responseBody = "";
+
+            try
+            {
+                HttpClient client = new HttpClient();
+                var requestBody = new
+                {
+                    DIALOG_ID = chatId,
+                    MESSAGE = messageText,
+                    SYSTEM = system
+                };
+
+                var json = JsonConvert.SerializeObject(requestBody);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+                HttpResponseMessage response = await client.PostAsync(webhookUrl, content);
+                responseBody = await response.Content.ReadAsStringAsync();
+            }
+            catch (Exception ex)
+            {
+                SendMessageDebug($"SendMsgToBitrixChatAsync(\"{webhookUrl}\", \"{chatId}\", \"{messageText}\", \"{system}\")",
+                $"SendMsgToTelegramAsync(\"{webhookUrl}\", \"{chatId}\", \"{messageText}\", \"{system}\")", Tester.FAILED,
+                    "Произошла ошибка: " + ex.Message + Environment.NewLine + Environment.NewLine + "Полное описание ошибка: " + ex.ToString(),
+                    "Error: " + ex.Message + Environment.NewLine + Environment.NewLine + "Full description of the error: " + ex.ToString(),
+                    Tester.IMAGE_STATUS_FAILED);
+                ConsoleMsgError(ex.Message);
+            }
+
+            return responseBody;
         }
 
         /* 

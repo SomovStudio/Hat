@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 /**
- * Текущая версия 1.5.1.3
+ * Последние изменения в версии 1.5.1
  */
 
 namespace HatFramework

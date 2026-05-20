@@ -83,8 +83,8 @@
             // 
             this.hatFrameworkToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("hatFrameworkToolStripMenuItem.Image")));
             this.hatFrameworkToolStripMenuItem.Name = "hatFrameworkToolStripMenuItem";
-            this.hatFrameworkToolStripMenuItem.Size = new System.Drawing.Size(294, 22);
-            this.hatFrameworkToolStripMenuItem.Text = "Открыть папку с файлом HatFramework";
+            this.hatFrameworkToolStripMenuItem.Size = new System.Drawing.Size(318, 22);
+            this.hatFrameworkToolStripMenuItem.Text = "Открыть папку Skill с файлом HatFramework";
             this.hatFrameworkToolStripMenuItem.Click += new System.EventHandler(this.hatFrameworkToolStripMenuItem_Click);
             // 
             // settingsToolStripMenuItem
