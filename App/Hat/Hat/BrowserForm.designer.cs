@@ -111,13 +111,6 @@
             this.toolStripButtonGo = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonUpdate = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripDropDownButton5 = new System.Windows.Forms.ToolStripDropDownButton();
-            this.aliceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.deepSeekToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.geminionlineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator30 = new System.Windows.Forms.ToolStripSeparator();
-            this.gemeniToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator29 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -943,8 +936,6 @@
             this.toolStripButtonGo,
             this.toolStripButtonUpdate,
             this.toolStripSeparator1,
-            this.toolStripDropDownButton5,
-            this.toolStripSeparator29,
             this.toolStripButton3});
             this.toolStrip1.Location = new System.Drawing.Point(0, 24);
             this.toolStrip1.Name = "toolStrip1";
@@ -1004,64 +995,6 @@
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
-            // 
-            // toolStripDropDownButton5
-            // 
-            this.toolStripDropDownButton5.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.aliceToolStripMenuItem,
-            this.deepSeekToolStripMenuItem,
-            this.geminionlineToolStripMenuItem,
-            this.toolStripSeparator30,
-            this.gemeniToolStripMenuItem});
-            this.toolStripDropDownButton5.Image = ((System.Drawing.Image)(resources.GetObject("toolStripDropDownButton5.Image")));
-            this.toolStripDropDownButton5.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripDropDownButton5.Name = "toolStripDropDownButton5";
-            this.toolStripDropDownButton5.Size = new System.Drawing.Size(47, 22);
-            this.toolStripDropDownButton5.Text = "AI";
-            // 
-            // aliceToolStripMenuItem
-            // 
-            this.aliceToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("aliceToolStripMenuItem.Image")));
-            this.aliceToolStripMenuItem.Name = "aliceToolStripMenuItem";
-            this.aliceToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
-            this.aliceToolStripMenuItem.Text = "Alice (online)";
-            this.aliceToolStripMenuItem.Click += new System.EventHandler(this.aliceToolStripMenuItem_Click);
-            // 
-            // deepSeekToolStripMenuItem
-            // 
-            this.deepSeekToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("deepSeekToolStripMenuItem.Image")));
-            this.deepSeekToolStripMenuItem.Name = "deepSeekToolStripMenuItem";
-            this.deepSeekToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
-            this.deepSeekToolStripMenuItem.Text = "DeepSeek (online)";
-            this.deepSeekToolStripMenuItem.Click += new System.EventHandler(this.deepSeekToolStripMenuItem_Click);
-            // 
-            // geminionlineToolStripMenuItem
-            // 
-            this.geminionlineToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("geminionlineToolStripMenuItem.Image")));
-            this.geminionlineToolStripMenuItem.Name = "geminionlineToolStripMenuItem";
-            this.geminionlineToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
-            this.geminionlineToolStripMenuItem.Text = "Gemini (online)";
-            this.geminionlineToolStripMenuItem.Click += new System.EventHandler(this.geminionlineToolStripMenuItem_Click);
-            // 
-            // toolStripSeparator30
-            // 
-            this.toolStripSeparator30.Name = "toolStripSeparator30";
-            this.toolStripSeparator30.Size = new System.Drawing.Size(166, 6);
-            this.toolStripSeparator30.Visible = false;
-            // 
-            // gemeniToolStripMenuItem
-            // 
-            this.gemeniToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("gemeniToolStripMenuItem.Image")));
-            this.gemeniToolStripMenuItem.Name = "gemeniToolStripMenuItem";
-            this.gemeniToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
-            this.gemeniToolStripMenuItem.Text = "Gemini";
-            this.gemeniToolStripMenuItem.Visible = false;
-            this.gemeniToolStripMenuItem.Click += new System.EventHandler(this.gemeniToolStripMenuItem_Click);
-            // 
-            // toolStripSeparator29
-            // 
-            this.toolStripSeparator29.Name = "toolStripSeparator29";
-            this.toolStripSeparator29.Size = new System.Drawing.Size(6, 25);
             // 
             // toolStripButton3
             // 
@@ -3088,13 +3021,6 @@
         private System.Windows.Forms.ToolStripMenuItem onlineToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem offlineToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator28;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator29;
-        private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton5;
-        private System.Windows.Forms.ToolStripMenuItem gemeniToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem deepSeekToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator30;
-        private System.Windows.Forms.ToolStripMenuItem geminionlineToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem aliceToolStripMenuItem;
     }
 }
 
