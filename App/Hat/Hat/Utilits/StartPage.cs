@@ -86,9 +86,7 @@ namespace Hat
 		</svg>
 		<h2>Browser Hat</h2>
         <p>
-			Браузер со встроенной технологией автоматизированного тестирования Web приложений.
-			<br>
-            Особенность браузера в том что автотесты напрямую выполняются в браузере без Selenium и WebDriver.
+			Браузер со встроенной технологией автоматизированного тестирования Web приложений. Особенность браузера в том что автотесты напрямую выполняются в браузере.
 			<br><br>
 			Встроенный фреймворк HatFramework содержит достаточное количество методов необходимых для выполнения основных задач автоматизации тестирования. Для описания скриптов автотестов используется язык программирования C# и встроенный редактор кода. Так же в качестве редактора можно воспользоваться Visual Studio. Удобный интерфейс браузера отображает все шаги выполнения теста с подробным описанием событий. Результат проверки формируется в отчет и отправляются на указаную почту. Запуск автотестов возможен из командной строки операционной системы Windows это пригодится при использовании автотестов в популярных средствах непрерывной интеграции таких как: Jenkins, TeamCity, GitLab CI/CD.
 		</p>
@@ -366,9 +364,7 @@ namespace Hat
 		</svg>
 		<h2>Browser Hat</h2>
         <p>
-			A browser with built-in technology for automated testing of Web applications.
-			<br>
-            The peculiarity of the browser is that autotests are performed directly in the browser without Selenium and WebDriver.
+			A browser with built-in technology for automated testing of Web applications. A special feature of the browser is that autotests are performed directly in the browser.
 			<br><br>
 			The built-in Net Framework contains a sufficient number of methods necessary to perform the basic tasks of test automation. The C# programming language and the built-in code editor are used to describe autotest scripts. You can also use Visual Studio as an editor. The user-friendly browser interface displays all the steps of the test with the corresponding description of sales. The verification result is generated in a report and sent to the specified email address. Autotests can be run from the command line of the Windows operating system. This happens when using autotests in popular continuous integration environments such as: Jenkins, TeamCity, GitLab CI/CD.
 		</p>
